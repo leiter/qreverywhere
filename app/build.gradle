@@ -45,7 +45,20 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
 
 
-    implementation 'com.google.zxing:core:3.2.1'
+    implementation 'com.google.zxing:core:3.4.0'
+//    implementation 'com.journeyapps:zxing-android-embedded:3.2.0@aar'
+//    implementation 'com.google.zxing:android-integration:3.5.1-SNAPSHOT'
+    implementation 'com.dlazaro66.qrcodereaderview:qrcodereaderview:2.0.1'
+//    implementation 'me.dm7.barcodescanner:zxing:1.9'
+//    implementation 'com.journeyapps:zxing-android-embedded:4.1.0'
+
+
+    implementation 'com.google.android.gms:play-services-mlkit-barcode-scanning:18.0.0'
+
+    def camerax_version = "1.0.1"
+    implementation "androidx.camera:camera-camera2+:$camerax_version"
+    implementation "androidx.camera:camera-lifecycle:$camerax_version"
+    implementation "androidx.camera:camera-view:1.2.0-alpha02"
 
 
     // Dagger - Hilt

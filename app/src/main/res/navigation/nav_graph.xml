@@ -3,26 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/FirstFragment">
+    app:startDestination="@id/homeFragment">
 
     <fragment
         android:id="@+id/FirstFragment"
         android:name="cut.the.crap.qreverywhere.create.qrcode.CreateQrCodeFragment"
         android:label="@string/first_fragment_label"
         tools:layout="@layout/fragment_create_qr_code">
-
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_FirstFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/SecondFragment"
-        android:name="cut.the.crap.qreverywhere.SecondFragment"
+        android:name="cut.the.crap.qreverywhere.ReadResultFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_read_result">
 
         <action
-            android:id="@+id/action_SecondFragment_to_FirstFragment"
-            app:destination="@id/FirstFragment" />
+            android:id="@+id/action_SecondFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="cut.the.crap.qreverywhere.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </fragment>
+
 </navigation>

@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory
 import android.media.MediaScannerConnection
 import android.os.Environment
 import android.util.Log
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModel
 import com.google.zxing.*
 import com.google.zxing.Reader
@@ -33,7 +34,7 @@ class CreateQrCodeViewModel @Inject constructor() : ViewModel() {
         val bytes = ByteArrayOutputStream()
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
         val wallpaperDirectory = File(
-            Environment.getExternalStorageDirectory() , IMAGE_DIRECTORY
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), IMAGE_DIRECTORY
         )
         // have the object build the directory structure, if needed.
         if (!wallpaperDirectory.exists()) {
@@ -43,7 +44,7 @@ class CreateQrCodeViewModel @Inject constructor() : ViewModel() {
         try {
             val f = File(
                 wallpaperDirectory, Calendar.getInstance()
-                    .getTimeInMillis().toString() + ".jpg"
+                    .timeInMillis.toString() + ".jpg"
             )
             f.createNewFile() //give read write permission
             val fo = FileOutputStream(f)
@@ -64,22 +65,22 @@ class CreateQrCodeViewModel @Inject constructor() : ViewModel() {
         return BitmapFactory.decodeStream(inputStream)
     }
 
-    fun scanQrImage(bitmap: Bitmap): String? {
+    fun scanQrImage(sourceBitmap: Bitmap): String? {
         var contents: String? = null
 
-        val intArray = IntArray(bitmap.getWidth() * bitmap.getHeight())
+        val intArray = IntArray(sourceBitmap.width * sourceBitmap.height)
         //copy pixel data from the Bitmap into the 'intArray' array
         //copy pixel data from the Bitmap into the 'intArray' array
-        bitmap.getPixels(intArray, 0, bitmap.getWidth(), 0, 0, bitmap.getWidth(), bitmap.getHeight())
+        sourceBitmap.getPixels(intArray, 0, sourceBitmap.width, 0, 0, sourceBitmap.width, sourceBitmap.height)
 
         val source: LuminanceSource =
-            RGBLuminanceSource(bitmap.getWidth(), bitmap.getHeight(), intArray)
+            RGBLuminanceSource(sourceBitmap.width, sourceBitmap.height, intArray)
         val bitmap = BinaryBitmap(HybridBinarizer(source))
 
         val reader: Reader = MultiFormatReader()
         try {
             val result: Result = reader.decode(bitmap)
-            contents = result.getText()
+            contents = result.text
         } catch (e: Exception) {
             Log.e("QrTest", "Error decoding barcode", e)
         }
@@ -89,6 +90,8 @@ class CreateQrCodeViewModel @Inject constructor() : ViewModel() {
 
     @Throws(WriterException::class)
     fun textToImageEncode(Value: String, resources: Resources): Bitmap? {
+        // todo 2953  chars are fine
+
         val bitMatrix: BitMatrix = try {
             MultiFormatWriter().encode(
                 Value,
@@ -105,12 +108,11 @@ class CreateQrCodeViewModel @Inject constructor() : ViewModel() {
             val offset = y * bitMatrixWidth
             for (x in 0 until bitMatrixWidth) {
                 pixels[offset + x] =
-                    if (bitMatrix[x, y]) resources.getColor(R.color.black) else resources.getColor(
-                        R.color.white
-                    )
+                    if (bitMatrix[x, y]) ResourcesCompat.getColor(resources, R.color.black, null)
+                    else ResourcesCompat.getColor(resources, R.color.white,null)
             }
         }
-        val bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_4444)
+        val bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_8888)
         bitmap.setPixels(pixels, 0, 500, 0, 0, bitMatrixWidth, bitMatrixHeight)
         return bitmap
     }

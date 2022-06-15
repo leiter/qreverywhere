@@ -1,6 +1,7 @@
 package cut.the.crap.qreverywhere.create.qrcode
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -11,6 +12,8 @@ import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentCreateQrCodeBinding
 import cut.the.crap.qreverywhere.viewBinding
 
+//  createQREmail    createQRUrl    createPhoneCall     readFromFile    readWithCamera
+
 
 class CreateQrCodeFragment : Fragment(R.layout.fragment_create_qr_code) {
 
@@ -19,14 +22,6 @@ class CreateQrCodeFragment : Fragment(R.layout.fragment_create_qr_code) {
     private val viewBinding: FragmentCreateQrCodeBinding by viewBinding {
         FragmentCreateQrCodeBinding.bind(requireView())
     }
-
-
-//    Bitmap bitmap ;
-//    private EditText etqr;
-//    private ImageView iv;
-//    private Button btn;
-
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,6 +34,7 @@ class CreateQrCodeFragment : Fragment(R.layout.fragment_create_qr_code) {
                     Toast.makeText(requireContext(), "Enter String!", Toast.LENGTH_SHORT).show()
                 } else {
                     try {
+                        Log.e("TEXTLENGTH", "${etqr.text.length}")
                         val bitmap = viewModel.textToImageEncode(etqr.text.toString(), resources)!!
                         iv.setImageBitmap(bitmap)
                         val path: String? = viewModel.saveImage(bitmap, requireContext()) //give read write permission
@@ -53,19 +49,12 @@ class CreateQrCodeFragment : Fragment(R.layout.fragment_create_qr_code) {
                 }
             }
 
-
             buttonFirst.setOnClickListener {
-                findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
+//                findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
             }
         }
 
 
-
     }
-
-
-
-
-
 
 }

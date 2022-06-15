@@ -1,15 +1,18 @@
 package cut.the.crap.qreverywhere
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
+import android.view.Menu
+import android.view.MenuItem
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import android.view.Menu
-import android.view.MenuItem
 import cut.the.crap.qreverywhere.databinding.ActivityMainBinding
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,11 +31,49 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
 
-        binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+        with(binding) {
+
+
+            fab.setOnClickListener { view ->
+
+                readBarcode()
+
+//                val intent = Intent("com.google.zxing.client.android.SCAN")
+//                intent.putExtra("SCAN_MODE", "QR_CODE_MODE")
+//                startActivityForResult(intent,0)
+//
+//                val intentIntegrator = IntentIntegrator(this@MainActivity)
+//                intentIntegrator.setPrompt("Scan a barcode or QR Code")
+//                intentIntegrator.setOrientationLocked(true)
+//                intentIntegrator.initiateScan()
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                    .setAction("Action", null).show()
+            }
+
+        }
+
+
+    }
+
+
+    private val barcodeScannerLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ){ result ->
+
+        if( result.resultCode == Activity.RESULT_OK ){
+
+            val barcodeRawValue = result.data?.getStringExtra(
+                BarCodeScannerActivity.RESULT_BARCODE_RAW_VALUE
+            ) ?: ""
+
         }
     }
+
+    private fun readBarcode(){
+        val intent = Intent(this, BarCodeScannerActivity::class.java)
+        barcodeScannerLauncher.launch(intent)
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
