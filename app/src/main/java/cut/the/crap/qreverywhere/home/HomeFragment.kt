@@ -6,10 +6,10 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentHomeBinding
-import cut.the.crap.qreverywhere.stuff.CameraReadDelegate
-import cut.the.crap.qreverywhere.stuff.CameraReadDelegateImpl
-import cut.the.crap.qreverywhere.stuff.PickQrCodeDelegate
-import cut.the.crap.qreverywhere.stuff.PickQrCodeDelegateImpl
+import cut.the.crap.qreverywhere.qrdelegates.CameraReadDelegate
+import cut.the.crap.qreverywhere.qrdelegates.CameraReadDelegateImpl
+import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegate
+import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegateImpl
 import cut.the.crap.qreverywhere.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 

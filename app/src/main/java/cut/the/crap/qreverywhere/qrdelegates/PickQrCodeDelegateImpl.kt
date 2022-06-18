@@ -1,7 +1,9 @@
-package cut.the.crap.qreverywhere.stuff
+package cut.the.crap.qreverywhere.qrdelegates
 
 import android.content.Intent
 import androidx.fragment.app.Fragment
+import cut.the.crap.qreverywhere.stuff.hasPermission
+import cut.the.crap.qreverywhere.stuff.scanQrImage
 
 class PickQrCodeDelegateImpl : PickQrCodeDelegate {
 
@@ -28,16 +30,12 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
             if (result.resultCode == android.app.Activity.RESULT_OK) {
                 val uri = result.data?.data
                 uri?.let {
-                    val g = scanQrImage(it, fragment.requireContext())
+                    val g = scanQrImage(it, fragment.requireContext())  // todo use coroutine
                     g?.let {  android.widget.Toast.makeText(fragment.requireContext(),g,
                         android.widget.Toast.LENGTH_LONG).show() }
                 }
             }
         }
-
-
-
-
     }
 
 
