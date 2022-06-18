@@ -3,22 +3,18 @@ package cut.the.crap.qreverywhere.create.qrcode
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.media.MediaScannerConnection
 import android.os.Environment
 import android.util.Log
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModel
 import com.google.zxing.*
-import com.google.zxing.Reader
 import com.google.zxing.common.BitMatrix
-import com.google.zxing.common.HybridBinarizer
 import cut.the.crap.qreverywhere.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.io.*
 import java.util.*
 import javax.inject.Inject
-import kotlin.Exception
 import kotlin.IllegalArgumentException
 import kotlin.IntArray
 import kotlin.String
@@ -33,20 +29,20 @@ class CreateQrCodeViewModel @Inject constructor() : ViewModel() {
     fun saveImage(myBitmap: Bitmap, context: Context): String? {
         val bytes = ByteArrayOutputStream()
         myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
-        val wallpaperDirectory = File(
-            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), IMAGE_DIRECTORY
+        val directory = File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+            IMAGE_DIRECTORY
         )
-        // have the object build the directory structure, if needed.
-        if (!wallpaperDirectory.exists()) {
-            Log.d("dirrrrrr", "" + wallpaperDirectory.mkdirs())
-            wallpaperDirectory.mkdirs()
+
+        if (!directory.exists()) {
+            directory.mkdirs()
         }
         try {
             val f = File(
-                wallpaperDirectory, Calendar.getInstance()
+                directory, Calendar.getInstance()
                     .timeInMillis.toString() + ".jpg"
             )
-            f.createNewFile() //give read write permission
+            f.createNewFile() // todo give read write permission
             val fo = FileOutputStream(f)
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(context, arrayOf(f.getPath()), arrayOf("image/jpeg"), null)
@@ -59,35 +55,6 @@ class CreateQrCodeViewModel @Inject constructor() : ViewModel() {
         return ""
     }
 
-
-    fun loadBitmap(file: File) : Bitmap {
-        val inputStream = BufferedInputStream(FileInputStream(file))
-        return BitmapFactory.decodeStream(inputStream)
-    }
-
-    fun scanQrImage(sourceBitmap: Bitmap): String? {
-        var contents: String? = null
-
-        val intArray = IntArray(sourceBitmap.width * sourceBitmap.height)
-        //copy pixel data from the Bitmap into the 'intArray' array
-        //copy pixel data from the Bitmap into the 'intArray' array
-        sourceBitmap.getPixels(intArray, 0, sourceBitmap.width, 0, 0, sourceBitmap.width, sourceBitmap.height)
-
-        val source: LuminanceSource =
-            RGBLuminanceSource(sourceBitmap.width, sourceBitmap.height, intArray)
-        val bitmap = BinaryBitmap(HybridBinarizer(source))
-
-        val reader: Reader = MultiFormatReader()
-        try {
-            val result: Result = reader.decode(bitmap)
-            contents = result.text
-        } catch (e: Exception) {
-            Log.e("QrTest", "Error decoding barcode", e)
-        }
-        return contents
-    }
-
-
     @Throws(WriterException::class)
     fun textToImageEncode(Value: String, resources: Resources): Bitmap? {
         // todo 2953  chars are fine
@@ -98,7 +65,7 @@ class CreateQrCodeViewModel @Inject constructor() : ViewModel() {
                 BarcodeFormat.QR_CODE,
                 QRcodeWidth, QRcodeWidth, null
             )
-        } catch (Illegalargumentexception: IllegalArgumentException) {
+        } catch (e: IllegalArgumentException) {
             return null
         }
         val bitMatrixWidth = bitMatrix.width
@@ -118,8 +85,8 @@ class CreateQrCodeViewModel @Inject constructor() : ViewModel() {
     }
 
     companion object {
-        const val QRcodeWidth = 500
-        const val IMAGE_DIRECTORY = "/QRcodeDemonuts";
+        const val QRcodeWidth = 500 // should be calculated
+        const val IMAGE_DIRECTORY = "QrEveryWhere";
     }
 
 

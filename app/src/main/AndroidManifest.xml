@@ -7,7 +7,16 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+        </intent>
+    </queries>
+
     <application
+        android:name=".QrApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -20,12 +29,6 @@
         <activity
             android:name=".QrReaderActivity"
             android:exported="false" />
-        <activity
-            android:name=".BarCodeScannerActivity"
-            android:exported="false"
-            android:label="@string/title_activity_bar_code_scanner"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.QrEveryWhere.NoActionBar" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

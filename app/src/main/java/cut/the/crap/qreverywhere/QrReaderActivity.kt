@@ -25,7 +25,7 @@ class QrReaderActivity : AppCompatActivity(), QRCodeReaderView.OnQRCodeReadListe
 
     override fun onQRCodeRead(text: String?, points: Array<out PointF>?) {
             val data = Intent()
-            data.putExtra("qr_data", text)
+            data.putExtra(EXTRA_QR_DATA, text)
             setResult(RESULT_OK, data)
             finish()
 
@@ -39,5 +39,9 @@ class QrReaderActivity : AppCompatActivity(), QRCodeReaderView.OnQRCodeReadListe
     override fun onResume() {
         super.onResume()
         mDecoderView.startCamera()
+    }
+
+    companion object {
+        const val EXTRA_QR_DATA = "qr_data"
     }
 }

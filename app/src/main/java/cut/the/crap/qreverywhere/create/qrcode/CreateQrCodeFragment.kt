@@ -49,9 +49,6 @@ class CreateQrCodeFragment : Fragment(R.layout.fragment_create_qr_code) {
                 }
             }
 
-            buttonFirst.setOnClickListener {
-//                findNavController().navigate(R.id.action_FirstFragment_to_SecondFragment)
-            }
         }
 
 
