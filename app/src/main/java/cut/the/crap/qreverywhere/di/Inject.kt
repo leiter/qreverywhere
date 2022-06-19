@@ -1,23 +1,47 @@
 package cut.the.crap.qreverywhere.di
 
+import android.app.Application
+import androidx.room.Room
+import cut.the.crap.qreverywhere.db.QrCodeDao
+import cut.the.crap.qreverywhere.db.QrDatabase
 import cut.the.crap.qreverywhere.repository.QrRepository
 import cut.the.crap.qreverywhere.repository.QrRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
 import dagger.hilt.android.components.ViewModelComponent
-import dagger.hilt.android.scopes.ActivityScoped
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
+
+private const val DATABASE_NAME = "my_data"
+
+@Module
+@InstallIn(SingletonComponent::class)
+object AppModule {
+    @Singleton
+    @Provides
+    fun provideAppDb(app: Application): QrDatabase {
+        return Room.databaseBuilder(app, QrDatabase::class.java, DATABASE_NAME)
+            .fallbackToDestructiveMigration()
+            .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideRunDao(db: QrDatabase): QrCodeDao {
+        return db.getRunDao()
+    }
+
+
+}
 
 @Module
 @InstallIn(ViewModelComponent::class)
 interface RepositoryBindings {
 
     @Binds
-    fun provideQrRepository(qrRepositoryImpl: QrRepositoryImpl) : QrRepository
+    fun provideQrRepository(qrRepositoryImpl: QrRepositoryImpl): QrRepository
 
 
 }

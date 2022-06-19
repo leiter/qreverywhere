@@ -47,13 +47,14 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.4.2'
 
     // Room
+    implementation "androidx.room:room-ktx:2.4.2"
     implementation "androidx.room:room-runtime:2.4.2"
     kapt "androidx.room:room-compiler:2.4.2"
 
     // Qr Related
     implementation 'com.google.zxing:core:3.4.0'
-    implementation 'com.dlazaro66.qrcodereaderview:qrcodereaderview:2.0.1'
-
+//    implementation 'com.dlazaro66.qrcodereaderview:qrcodereaderview:2.0.1'
+    implementation project(':QRCodeReaderView')
 
     // Dagger - Hilt
     implementation "com.google.dagger:hilt-android:2.38.1"
@@ -61,6 +62,9 @@ dependencies {
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
     kapt "androidx.hilt:hilt-compiler:1.0.0"
 
+
+    // Timber
+//    implementation 'com.jakewharton.timber:timber:4.7.1'
 
 
     testImplementation 'junit:junit:4.13.2'

@@ -9,10 +9,10 @@ import android.net.Uri
 import android.util.Log
 import com.google.zxing.*
 import com.google.zxing.common.HybridBinarizer
+import java.io.ByteArrayOutputStream
 
 
-// todo integrate settings display or fire here
-
+// todo integrate settings display result or fire intent here
 fun createIntent(qrString: String, context: Context): Intent? {
     return when {
         qrString.startsWith("tel:") -> Intent(Intent.ACTION_DIAL, Uri.parse(qrString))
@@ -53,6 +53,21 @@ fun scanQrImage(uri: Uri, context: Context): String? {
 
     val source: LuminanceSource =
         RGBLuminanceSource(sourceBitmap.width, sourceBitmap.height, intArray)
+
+// todo integrate/test    probably not the right thing
+//    val array: ByteArray = bitmapToArray(sourceBitmap)
+//    val source: LuminanceSource = PlanarYUVLuminanceSource(
+//        array,
+//        sourceBitmap.getWidth(),
+//        sourceBitmap.getHeight(),
+//        0,
+//        0,
+//        sourceBitmap.getWidth(),
+//        sourceBitmap.getHeight(),
+//        false
+//    )
+
+
     val bitmap = BinaryBitmap(HybridBinarizer(source))
 
     val reader: Reader = MultiFormatReader()
@@ -63,4 +78,10 @@ fun scanQrImage(uri: Uri, context: Context): String? {
         Log.e("QrTest", "Error decoding barcode", e)
     }
     return contents
+}
+
+fun bitmapToArray(bmp: Bitmap): ByteArray {
+    val stream = ByteArrayOutputStream()
+    bmp.compress(Bitmap.CompressFormat.JPEG, 50, stream)
+    return stream.toByteArray()
 }
