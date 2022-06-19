@@ -1,9 +1,12 @@
-package cut.the.crap.qreverywhere.home
+package cut.the.crap.qreverywhere.scanqrcode
 
 import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import com.dlazaro66.qrcodereaderview.QRCodeReaderView
+import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentHomeBinding
 import cut.the.crap.qreverywhere.qrdelegates.CameraReadDelegate
@@ -18,6 +21,8 @@ class HomeFragment : Fragment(R.layout.fragment_home),
     CameraReadDelegate by CameraReadDelegateImpl(),
         PickQrCodeDelegate by PickQrCodeDelegateImpl()
 {
+
+    private val activityViewModel by activityViewModels<MainActivityViewModel>()
 
     private val viewBinding by viewBinding {
         FragmentHomeBinding.bind(requireView())
@@ -34,6 +39,21 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         super.onViewCreated(view, savedInstanceState)
 
         with(viewBinding) {
+            val decodeView = qrDecoderView as QRCodeReaderView
+            if(activityViewModel.shouldStartCamera()){
+                qrScanFab.setText(R.string.qrScanFabTextFromFile)
+                qrScanFab.setIconResource(R.drawable.ic_history)
+
+//                decodeView.visibility = View.VISIBLE
+
+            } else {
+                qrScanFab.setText(R.string.qrScanFabTextFromFile)
+                qrScanFab.setIconResource(R.drawable.ic_history)
+//                decodeView.visibility = View.GONE
+
+            }
+
+
             homeReadFromCamera.setOnClickListener {
                 readQrcodeWithCamera()
             }

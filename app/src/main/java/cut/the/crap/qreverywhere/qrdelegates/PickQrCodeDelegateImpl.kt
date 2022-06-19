@@ -23,7 +23,6 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
     override fun attachPickQrCodeDelegate(fragment: Fragment) {
         this.fragment = fragment
 
-
         scanImageLauncher = fragment.registerForActivityResult(
                 androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult()
                 ) { result ->
@@ -37,7 +36,6 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
             }
         }
     }
-
 
     private fun readBarcode() {
         val intent = Intent(Intent.ACTION_GET_CONTENT).apply {

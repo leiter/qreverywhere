@@ -9,8 +9,8 @@ data class QrCodeItem(
     var img: Bitmap? = null,
     var timestamp: Long = 0L,
 
-
-
+//    var textContent: String = "",
+// type (email,tel,... ) via extensionfunction
 
 
     var avgSpeedInKMH: Float = 0f,

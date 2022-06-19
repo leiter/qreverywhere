@@ -7,13 +7,22 @@ import androidx.room.*
 interface QrCodeDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertRun(run: QrCodeItem)
+    suspend fun insertQrItem(qrItem: QrCodeItem)
 
     @Delete
-    suspend fun deleteRun(run: QrCodeItem)
+    suspend fun deleteQrItem(qrItem: QrCodeItem)
+
+
 
     @Query("SELECT * FROM qrcode_history ORDER BY timestamp DESC")
-    fun getAllRunsSortedByDate(): LiveData<List<QrCodeItem>>
+    fun getCompleteHistory(): LiveData<List<QrCodeItem>>
+
+
+
+
+
+
+
 
     @Query("SELECT * FROM qrcode_history ORDER BY timeInMillis DESC")
     fun getAllRunsSortedByTimeInMillis(): LiveData<List<QrCodeItem>>

@@ -10,11 +10,11 @@ class QrHistoryRepository @Inject constructor(
     private val qrCodeDao: QrCodeDao
 ) {
 
-    suspend fun insertRun(qrCodeItem: QrCodeItem) = qrCodeDao.insertRun(qrCodeItem)
+    suspend fun insertQrItem(qrCodeItem: QrCodeItem) = qrCodeDao.insertQrItem(qrCodeItem)
 
-    suspend fun deleteRun(qrCodeItem: QrCodeItem) = qrCodeDao.deleteRun(qrCodeItem)
+    suspend fun deleteQrItem(qrCodeItem: QrCodeItem) = qrCodeDao.deleteQrItem(qrCodeItem)
 
-    fun getAllRunsSortedByDate() = qrCodeDao.getAllRunsSortedByDate()
+    fun getCompleteQrCodeHistory() = qrCodeDao.getCompleteHistory()
 
     fun getAllRunsSortedByTimeInMillis() = qrCodeDao.getAllRunsSortedByTimeInMillis()
 

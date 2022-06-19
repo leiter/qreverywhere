@@ -25,6 +25,12 @@ class MainActivityViewModel @Inject constructor(
 
 
 
+    fun shouldStartCamera() : Boolean {
+
+//        prefs and permission
+        return true
+    }
+
 
 
 }
