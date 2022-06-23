@@ -2,8 +2,6 @@ package cut.the.crap.qreverywhere.scanqrcode
 
 
 import android.graphics.ImageFormat
-import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import com.google.zxing.*

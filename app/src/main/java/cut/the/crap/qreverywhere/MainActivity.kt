@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         appBarConfiguration = AppBarConfiguration(setOf(
             R.id.scanQrFragment,
             R.id.createQrCodeFragment,
+            R.id.qrHistoryFragment
         ))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
@@ -41,7 +42,6 @@ class MainActivity : AppCompatActivity() {
             fab.setOnClickListener { view ->
 //                readBarcode()
             }
-
         }
     }
 

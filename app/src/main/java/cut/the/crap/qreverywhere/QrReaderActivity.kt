@@ -11,12 +11,12 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.common.util.concurrent.ListenableFuture
 import cut.the.crap.qreverywhere.scanqrcode.QRCodeFoundListener
 import cut.the.crap.qreverywhere.scanqrcode.QRCodeImageAnalyzer
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.Executors
-
 
 class QrReaderActivity : AppCompatActivity(){
 
@@ -24,12 +24,20 @@ class QrReaderActivity : AppCompatActivity(){
         ProcessCameraProvider.getInstance(this)
     }
     private lateinit var previewView: PreviewView
+    private lateinit var extendedFab: ExtendedFloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qr_reader)
+        extendedFab = findViewById(R.id.qrScanFromFile)
         previewView = findViewById(R.id.qr_decoder_view_view)
-            startCamera()
+        extendedFab.setOnClickListener {
+            val data = Intent()
+            data.putExtra(EXTRA_START_IMAGE_PICKER, true)
+            setResult(RESULT_OK, data)
+            finish()
+        }
+        startCamera()
     }
 
     private fun startCamera() {
@@ -82,6 +90,7 @@ class QrReaderActivity : AppCompatActivity(){
 
     companion object {
         const val EXTRA_QR_DATA = "qr_data"
+        const val EXTRA_START_IMAGE_PICKER = "start_image_picker"
     }
 
 }

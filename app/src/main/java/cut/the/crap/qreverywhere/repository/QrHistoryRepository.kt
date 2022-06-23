@@ -16,19 +16,19 @@ class QrHistoryRepository @Inject constructor(
 
     fun getCompleteQrCodeHistory() = qrCodeDao.getCompleteHistory()
 
-    fun getAllRunsSortedByTimeInMillis() = qrCodeDao.getAllRunsSortedByTimeInMillis()
-
-    fun getAllRunsSortedByDistance() = qrCodeDao.getAllRunsSortedByDistance()
-
-    fun getAllRunsSortedByCaloriesBurned() = qrCodeDao.getAllRunsSortedByCaloriesBurned()
-
-    fun getAllRunsSortedByAvgSpeed() = qrCodeDao.getAllRunsSortedByAvgSpeed()
-
-    fun getTotalDistance() = qrCodeDao.getTotalDistance()
-
-    fun getTotalTimeInMillis() = qrCodeDao.getTotalTimeInMillis()
-
-    fun getTotalAvgSpeed() = qrCodeDao.getTotalAvgSpeed()
-
-    fun getTotalCaloriesBurned() = qrCodeDao.getTotalCaloriesBurned()
+//    fun getAllRunsSortedByTimeInMillis() = qrCodeDao.getAllRunsSortedByTimeInMillis()
+//
+//    fun getAllRunsSortedByDistance() = qrCodeDao.getAllRunsSortedByDistance()
+//
+//    fun getAllRunsSortedByCaloriesBurned() = qrCodeDao.getAllRunsSortedByCaloriesBurned()
+//
+//    fun getAllRunsSortedByAvgSpeed() = qrCodeDao.getAllRunsSortedByAvgSpeed()
+//
+//    fun getTotalDistance() = qrCodeDao.getTotalDistance()
+//
+//    fun getTotalTimeInMillis() = qrCodeDao.getTotalTimeInMillis()
+//
+//    fun getTotalAvgSpeed() = qrCodeDao.getTotalAvgSpeed()
+//
+//    fun getTotalCaloriesBurned() = qrCodeDao.getTotalCaloriesBurned()
 }

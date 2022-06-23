@@ -4,50 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".scanqrcode.HomeFragment">
 
-    <com.dlazaro66.qrcodereaderview.QRCodeReaderView
+    <androidx.camera.view.PreviewView
         android:id="@+id/qr_decoder_view"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/homeReadFromCamera"
-        android:layout_marginHorizontal="48dp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="122dp"
-        android:text="Read QR Camera"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/homeReadFromFile"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="48dp"
-
-        android:layout_marginTop="24dp"
-        android:text="Read QR From Image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeReadFromCamera" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/homeCreateQr"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="48dp"
-
-        android:layout_marginTop="24dp"
-        android:text="Create QR Code"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/homeReadFromFile" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/qrScanFab"

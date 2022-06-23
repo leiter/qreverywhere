@@ -1,8 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.camera.view.PreviewView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:viewBindingIgnore="true"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent">
+<androidx.camera.view.PreviewView
+
     android:id="@+id/qr_decoder_view_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".QrReaderActivity" />
+    tools:context=".QrReaderActivity" >
+
+
+
+</androidx.camera.view.PreviewView>
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/qrScanFromFile"
+        android:text="@string/qrScanFabTextFromCamera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_gravity="bottom|end"
+        />
+</FrameLayout>

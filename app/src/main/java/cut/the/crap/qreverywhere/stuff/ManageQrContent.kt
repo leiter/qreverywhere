@@ -47,26 +47,10 @@ fun scanQrImage(uri: Uri, context: Context): String? {
     val sourceBitmap: Bitmap = BitmapFactory.decodeStream(inputStream)
 
     val intArray = IntArray(sourceBitmap.width * sourceBitmap.height)
-    //copy pixel data from the Bitmap into the 'intArray' array
-    //copy pixel data from the Bitmap into the 'intArray' array
     sourceBitmap.getPixels(intArray, 0, sourceBitmap.width, 0, 0, sourceBitmap.width, sourceBitmap.height)
 
     val source: LuminanceSource =
         RGBLuminanceSource(sourceBitmap.width, sourceBitmap.height, intArray)
-
-// todo integrate/test    probably not the right thing
-//    val array: ByteArray = bitmapToArray(sourceBitmap)
-//    val source: LuminanceSource = PlanarYUVLuminanceSource(
-//        array,
-//        sourceBitmap.getWidth(),
-//        sourceBitmap.getHeight(),
-//        0,
-//        0,
-//        sourceBitmap.getWidth(),
-//        sourceBitmap.getHeight(),
-//        false
-//    )
-
 
     val bitmap = BinaryBitmap(HybridBinarizer(source))
 

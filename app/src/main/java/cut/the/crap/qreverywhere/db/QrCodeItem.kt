@@ -3,21 +3,31 @@ package cut.the.crap.qreverywhere.db
 import android.graphics.Bitmap
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import cut.the.crap.qreverywhere.data.QrItem
 
 @Entity(tableName = "qrcode_history")
 data class QrCodeItem(
-    var img: Bitmap? = null,
-    var timestamp: Long = 0L,
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
+    val img: Bitmap,
+    val timestamp: Long,
+    val textContent: String,
 
 //    var textContent: String = "",
 // type (email,tel,... ) via extensionfunction
-
-
-    var avgSpeedInKMH: Float = 0f,
-    var distanceInMeters: Int = 0,
-    var timeInMillis: Long = 0,
-    var caloriesBurned: Int = 0
+//    var avgSpeedInKMH: Float = 0f,
+//    var distanceInMeters: Int = 0,
+//    var timeInMillis: Long = 0,
+//    var caloriesBurned: Int = 0
 ) {
-    @PrimaryKey(autoGenerate = true)
-    var id: Int? = null
+
+}
+
+fun QrCodeItem.toQrItem() : QrItem {
+    return QrItem(
+        id = id,
+        img = img,
+        timestamp = timestamp,
+        textContent = textContent
+    )
 }
