@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere.create.qrcode
+package cut.the.crap.qreverywhere.qrcodecreate
 
 import android.os.Bundle
 import android.util.Log
@@ -6,27 +6,24 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.R
-import cut.the.crap.qreverywhere.databinding.FragmentCreateQrCodeBinding
+import cut.the.crap.qreverywhere.databinding.FragmentCreateEmailQrCodeBinding
 import cut.the.crap.qreverywhere.viewBinding
 
-//  createQREmail    createQRUrl    createPhoneCall     readFromFile    readWithCamera
+class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_code) {
 
-
-class CreateQrCodeFragment : Fragment(R.layout.fragment_create_qr_code) {
 
     private val viewModel by viewModels<CreateQrCodeViewModel>()
 
-    private val viewBinding: FragmentCreateQrCodeBinding by viewBinding {
-        FragmentCreateQrCodeBinding.bind(requireView())
+    private val viewBinding by viewBinding {
+        FragmentCreateEmailQrCodeBinding.bind(requireView())
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(viewBinding){
+        with(viewBinding) {
 
             btn.setOnClickListener {
 
@@ -37,12 +34,12 @@ class CreateQrCodeFragment : Fragment(R.layout.fragment_create_qr_code) {
                         Log.e("TEXTLENGTH", "${etqr.text.length}")
                         val bitmap = viewModel.textToImageEncode(etqr.text.toString(), resources)!!
                         iv.setImageBitmap(bitmap)
-                        val path: String? = viewModel.saveImage(bitmap, requireContext()) //give read write permission
-                        Toast.makeText(
-                            requireContext(),
-                            "QRCode saved to -> $path",
-                            Toast.LENGTH_SHORT
-                        ).show()
+//                        val path: String? = viewModel.saveImage(bitmap, requireContext())
+//                        Toast.makeText(
+//                            requireContext(),
+//                            "QRCode saved to -> $path",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
                     } catch (e: WriterException) {
                         e.printStackTrace()
                     }
@@ -50,8 +47,9 @@ class CreateQrCodeFragment : Fragment(R.layout.fragment_create_qr_code) {
             }
 
         }
-
-
     }
 
+    companion object {
+
+    }
 }

@@ -24,5 +24,6 @@
     <string name="nav_title_history">History</string>
     <string name="qrScanFabTextFromFile">Scan from file</string>
     <string name="qrScanFabTextFromCamera">Scan with Camera</string>
+    <string name="qr_create_page_1">QR-Code erstellen</string>
 
 </resources>

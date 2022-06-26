@@ -15,5 +15,5 @@ dependencyResolutionManagement {
 rootProject.name = "QrEveryWhere"
 include ':app'
 
-include ':QRCodeReaderView'
-project(':QRCodeReaderView').projectDir = new File('../QRCodeReaderView/qrcodereaderview')
+//include ':QRCodeReaderView'
+//project(':QRCodeReaderView').projectDir = new File('../QRCodeReaderView/qrcodereaderview')

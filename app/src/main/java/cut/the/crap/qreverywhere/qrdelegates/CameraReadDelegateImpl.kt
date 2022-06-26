@@ -19,7 +19,7 @@ interface GetIt<T>{
 
 }
 
-inline fun <reified T : Activity> implDelegate() : GetIt<T>{
+inline fun <reified T : Activity> implDelegate(permissionDeniedAction: () -> Unit) : GetIt<T>{ //
 
     return  object : GetIt<T> {
 
@@ -112,8 +112,6 @@ class CameraReadDelegateImpl : CameraReadDelegate {
                     }
                 }
 
-
-                // Start file picker
                 val readFromFile = result.data?.getBooleanExtra(
                     QrReaderActivity.EXTRA_START_IMAGE_PICKER, false
                 ) ?: false

@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere.create.qrcode
+package cut.the.crap.qreverywhere.qrcodecreate
 
 import android.content.Context
 import android.content.res.Resources
@@ -8,10 +8,14 @@ import android.os.Environment
 import android.util.Log
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.zxing.*
 import com.google.zxing.common.BitMatrix
 import cut.the.crap.qreverywhere.R
+import cut.the.crap.qreverywhere.db.QrCodeItem
+import cut.the.crap.qreverywhere.repository.QrHistoryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import java.io.*
 import java.util.*
 import javax.inject.Inject
@@ -23,7 +27,9 @@ import kotlin.arrayOf
 
 
 @HiltViewModel
-class CreateQrCodeViewModel @Inject constructor() : ViewModel() {
+class CreateQrCodeViewModel @Inject constructor(
+    private val qrHistoryRepository: QrHistoryRepository
+) : ViewModel() {
 
 
     fun saveImage(myBitmap: Bitmap, context: Context): String? {
@@ -45,7 +51,7 @@ class CreateQrCodeViewModel @Inject constructor() : ViewModel() {
             f.createNewFile() // todo give read write permission
             val fo = FileOutputStream(f)
             fo.write(bytes.toByteArray())
-            MediaScannerConnection.scanFile(context, arrayOf(f.getPath()), arrayOf("image/jpeg"), null)
+            MediaScannerConnection.scanFile(context, arrayOf(f.path), arrayOf("image/jpeg"), null)
             fo.close()
             Log.d("TAG", "File Saved::--->" + f.absolutePath)
             return f.absolutePath
@@ -56,12 +62,12 @@ class CreateQrCodeViewModel @Inject constructor() : ViewModel() {
     }
 
     @Throws(WriterException::class)
-    fun textToImageEncode(Value: String, resources: Resources): Bitmap? {
+    fun textToImageEncode(textContent: String, resources: Resources): Bitmap? {
         // todo 2953  chars are fine
 
         val bitMatrix: BitMatrix = try {
             MultiFormatWriter().encode(
-                Value,
+                textContent,
                 BarcodeFormat.QR_CODE,
                 QRcodeWidth, QRcodeWidth, null
             )
@@ -81,11 +87,15 @@ class CreateQrCodeViewModel @Inject constructor() : ViewModel() {
         }
         val bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_8888)
         bitmap.setPixels(pixels, 0, 500, 0, 0, bitMatrixWidth, bitMatrixHeight)
+        val historyItem = QrCodeItem(img = bitmap, textContent = textContent)
+        viewModelScope.launch {
+            qrHistoryRepository.insertQrItem(historyItem)
+        }
         return bitmap
     }
 
     companion object {
-        const val QRcodeWidth = 500 // should be calculated
+        const val QRcodeWidth = 500 // todo should be calculated
         const val IMAGE_DIRECTORY = "QrEveryWhere";
     }
 

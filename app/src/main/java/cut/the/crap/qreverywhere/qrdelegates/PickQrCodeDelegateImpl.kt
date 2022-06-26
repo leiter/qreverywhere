@@ -1,10 +1,13 @@
 package cut.the.crap.qreverywhere.qrdelegates
 
 import android.content.Intent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.scanqrcode.HomeFragment
 import cut.the.crap.qreverywhere.stuff.hasPermission
 import cut.the.crap.qreverywhere.stuff.scanQrImage
+import cut.the.crap.qreverywhere.stuff.showShortToast
 
 class PickQrCodeDelegateImpl : PickQrCodeDelegate {
 
@@ -14,7 +17,9 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
 
 
     override fun readQrcodeFromFile() {
-        if (fragment.requireContext().hasPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
+        if (fragment.requireContext()
+                .hasPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+        ) {
             readBarcode()
         } else {
             readStoragePermissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
@@ -25,23 +30,27 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
         this.fragment = fragment
 
         scanImageLauncher = fragment.registerForActivityResult(
-                androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult()
-                ) { result ->
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
             if (result.resultCode == android.app.Activity.RESULT_OK) {
                 val uri = result.data?.data
                 uri?.let {
                     val g = scanQrImage(it, fragment.requireContext())  // todo use coroutine
                     g?.let {
                         (fragment as HomeFragment).handleQrCode(g)
-//                        createIntent(g, fragment.requireContext())?.let { intent ->
-//                            fragment.startActivity(intent)
-//                        } ?: run {
-//                            //todo inform and display content   (callback(text))
-//                        }
                     }
                 }
             }
         }
+
+        readStoragePermissionLauncher =
+            fragment.registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+                if (isGranted) {
+                    readBarcode()
+                } else {
+                    fragment.requireContext().showShortToast(R.string.permission_denied_text)
+                }
+            }
     }
 
     private fun readBarcode() {

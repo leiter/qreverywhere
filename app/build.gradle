@@ -63,7 +63,7 @@ dependencies {
     // Qr Related
     implementation 'com.google.zxing:core:3.4.0'
 //    implementation 'com.dlazaro66.qrcodereaderview:qrcodereaderview:2.0.1'
-    implementation project(':QRCodeReaderView')
+//    implementation project(':QRCodeReaderView')
 
     // Dagger - Hilt
     implementation "com.google.dagger:hilt-android:2.38.1"

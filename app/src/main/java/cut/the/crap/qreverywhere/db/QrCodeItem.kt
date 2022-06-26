@@ -8,9 +8,9 @@ import cut.the.crap.qreverywhere.data.QrItem
 @Entity(tableName = "qrcode_history")
 data class QrCodeItem(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int = 0,
     val img: Bitmap,
-    val timestamp: Long,
+    val timestamp: Long = System.currentTimeMillis(),
     val textContent: String,
 
 //    var textContent: String = "",
