@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/createQrCodeFragment"
         android:name="cut.the.crap.qreverywhere.qrcodecreate.CreateQrCodeFragment"
-        android:label="QrEveryWhere"
+        android:label="Create a new qrcode"
         tools:layout="@layout/fragment_create_qr_code">
 
         <action
@@ -30,7 +30,7 @@
 
     <fragment
         android:id="@+id/scanQrFragment"
-        android:name="cut.the.crap.qreverywhere.scanqrcode.HomeFragment"
+        android:name="cut.the.crap.qreverywhere.qrcodescan.HomeFragment"
         android:label="QrEveryWhere"
 
         tools:layout="@layout/fragment_home" >
@@ -46,7 +46,7 @@
     <fragment
         android:id="@+id/createEmailQrCodeFragment"
         android:name="cut.the.crap.qreverywhere.qrcodecreate.CreateEmailQrCodeFragment"
-        android:label="fragment_create_email_qr_code"
+        android:label="Prepare an Email"
         tools:layout="@layout/fragment_create_email_qr_code" >
         <action
             android:id="@+id/action_createEmailQrCodeFragment_to_createQrCodeFragment"

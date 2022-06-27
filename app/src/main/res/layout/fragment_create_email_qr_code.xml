@@ -1,78 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/editContainer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="24dp"
-    android:orientation="vertical"
     tools:context=".qrcodecreate.CreateEmailQrCodeFragment">
 
-    <EditText
-        android:id="@+id/createEmailAddressText"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/editContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="Enter Email Address"
-        android:maxHeight="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv" />
+        android:orientation="vertical"
+        android:paddingHorizontal="24dp">
 
-    <EditText
-        android:id="@+id/createEmailCCAddressText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="optional comma separated cc addressed"
-        android:maxHeight="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/createEmailAddressText" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/createEmailAddressTextLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Email Address of receiver"
+            android:maxHeight="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/createEmailQrImagePreview">
 
- <EditText
-        android:id="@+id/etqr"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Email Subject is optional"
-        android:maxHeight="100dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/createEmailCCAddressText" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/createEmailAddressText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
-    <EditText
-        android:id="@+id/createEmailBodyText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter message"
-        android:maxHeight="100dp"
-        android:minHeight="200dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/createEmailCCAddressTextLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Comma separated cc addressed"
+            android:maxHeight="100dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createEmailAddressTextLayout">
 
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etqr" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/createEmailCCAddressText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
 
-    <Button
-        android:id="@+id/btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create Image"
-        app:layout_constraintBottom_toBottomOf="@+id/iv"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <ImageView
-        android:id="@+id/iv"
-        android:visibility="invisible"
-        android:layout_marginTop="16dp"
-        app:layout_goneMarginTop="56dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_background"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/createEmailSubjectTextLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email Subject"
+            android:maxHeight="100dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createEmailCCAddressTextLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/createEmailSubjectText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/createEmailBodyTextLayout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email message"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_min="200dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createEmailSubjectTextLayout">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/createEmailBodyText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/createEmailCreateQrcode"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Create QrCode"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createEmailBodyTextLayout" />
+
+        <ImageView
+            android:id="@+id/createEmailQrImagePreview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_launcher_background"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginTop="16dp" />
+
+        <Button
+            android:id="@+id/createEmailButtonSaveQrToFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save to file"
+            app:layout_constraintBottom_toBottomOf="@+id/createEmailQrImagePreview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/createEmailQrImagePreview" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

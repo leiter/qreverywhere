@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere
+package cut.the.crap.qreverywhere.qrcodescan
 
 import android.content.res.Resources
 import androidx.lifecycle.ViewModel
@@ -12,38 +12,21 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-sealed class NavigationState {
-    object Home : NavigationState()
-}
 
 @HiltViewModel
-class MainActivityViewModel @Inject constructor(
-    private val historyRepository: QrHistoryRepository
-) : ViewModel(){
+class HomeViewModel @Inject constructor(
+    private val qrHistoryRepository: QrHistoryRepository
+) : ViewModel() {
 
-    private var _currentScannedQrCodeItem: QrCodeItem = QrCodeItem()
-
-    val historyAdapterData = historyRepository.getCompleteQrCodeHistory()
-
-    fun saveQrItem(qrCodeItem: QrCodeItem) {
-        viewModelScope.launch {
-            historyRepository.insertQrItem(qrCodeItem)
-        }
-    }
-
-    fun deleteQrItem(qrCodeItem: QrCodeItem) {
-        viewModelScope.launch {
-            historyRepository.deleteQrItem(qrCodeItem)
-        }
-    }
+    lateinit var currentQrCodeItem: QrCodeItem
 
     @Throws(WriterException::class)
     fun saveQrItemFromFile(textContent: String, resources: Resources){
         val bitmap = textToImageEncoder(textContent, resources)!!
         val historyItem = QrCodeItem(img = bitmap, textContent = textContent, acquireType = Acquire.CREATED)
-        _currentScannedQrCodeItem = historyItem
+        currentQrCodeItem = historyItem
         viewModelScope.launch {
-            historyRepository.insertQrItem(historyItem)
+            qrHistoryRepository.insertQrItem(historyItem)
         }
     }
 

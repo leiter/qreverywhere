@@ -4,24 +4,18 @@ import android.graphics.Bitmap
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import cut.the.crap.qreverywhere.data.QrItem
+import cut.the.crap.qreverywhere.stuff.Acquire
 
 @Entity(tableName = "qrcode_history")
 data class QrCodeItem(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val img: Bitmap,
+    val img: Bitmap = Bitmap.createBitmap(0,0,Bitmap.Config.ARGB_8888),
     val timestamp: Long = System.currentTimeMillis(),
-    val textContent: String,
-
-//    var textContent: String = "",
-// type (email,tel,... ) via extensionfunction
-//    var avgSpeedInKMH: Float = 0f,
-//    var distanceInMeters: Int = 0,
-//    var timeInMillis: Long = 0,
-//    var caloriesBurned: Int = 0
-) {
-
-}
+    val textContent: String = "",
+    @Acquire.Type
+    val acquireType: Int = Acquire.SCANNED
+)
 
 fun QrCodeItem.toQrItem() : QrItem {
     return QrItem(

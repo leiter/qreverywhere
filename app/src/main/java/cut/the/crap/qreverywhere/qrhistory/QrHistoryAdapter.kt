@@ -1,7 +1,6 @@
 package cut.the.crap.qreverywhere.qrhistory
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
@@ -11,10 +10,13 @@ import com.bumptech.glide.Glide
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.ItemQrHistoryBinding
 import cut.the.crap.qreverywhere.db.QrCodeItem
+import cut.the.crap.qreverywhere.stuff.getQrTypeDrawable
 import java.text.SimpleDateFormat
 import java.util.*
 
-class QrHistoryAdapter: RecyclerView.Adapter<QrHistoryAdapter.QrHistoryViewHolder<ViewBinding>>()  {
+class QrHistoryAdapter(val createdTemplate: String) : RecyclerView.Adapter<QrHistoryAdapter.QrHistoryViewHolder<ViewBinding>>()  {
+
+
 
     inner class QrHistoryViewHolder<VB : ViewBinding>(val binding: VB): RecyclerView.ViewHolder(binding.root)
 
@@ -55,12 +57,22 @@ class QrHistoryAdapter: RecyclerView.Adapter<QrHistoryAdapter.QrHistoryViewHolde
     }
 
     private fun bindQrItem(binding: ItemQrHistoryBinding, qrItemData: QrCodeItem){
-        Glide.with(binding.root.context).load(qrItemData.img).into(binding.historyItemImage)
 
-        val calendar = Calendar.getInstance().apply {
-            timeInMillis = qrItemData.timestamp
+        with(binding){
+            Glide.with(root.context).load(qrItemData.img).into(historyItemImage)
+
+            val calendar = Calendar.getInstance().apply {
+                timeInMillis = qrItemData.timestamp
+            }
+            val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+            val createdText = createdTemplate.format(dateFormat.format(qrItemData.timestamp))
+            historyItemTimestamp.text = createdText
+            historyItemType.setImageResource(getQrTypeDrawable(qrItemData.textContent))
+            historyItemContentPreview.text = qrItemData.textContent
+            root.setOnClickListener {
+
+            }
         }
-        val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
-        binding.historyItemTimestamp.text = dateFormat.format(calendar.time)
+
     }
 }

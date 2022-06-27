@@ -20,7 +20,11 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
 
     private val activityViewModel by activityViewModels<MainActivityViewModel>()
 
-    private val historyListAdapter = QrHistoryAdapter()
+//    private val open
+
+    private val historyListAdapter by lazy {
+        QrHistoryAdapter(requireContext().getString(R.string.qr_created_on_template))
+    }
 
 //    private val viewModel by viewModels<QrHistoryViewModel>()
 

@@ -26,4 +26,7 @@
     <string name="qrScanFabTextFromCamera">Scan with Camera</string>
     <string name="qr_create_page_1">QR-Code erstellen</string>
 
+
+    <string name="qr_created_on_template">Created on %s</string>
+
 </resources>

@@ -6,7 +6,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import cut.the.crap.qreverywhere.QrReaderActivity
 import cut.the.crap.qreverywhere.R
-import cut.the.crap.qreverywhere.scanqrcode.HomeFragment
+import cut.the.crap.qreverywhere.qrcodescan.HomeFragment
 import cut.the.crap.qreverywhere.stuff.createIntent
 import cut.the.crap.qreverywhere.stuff.hasPermission
 import cut.the.crap.qreverywhere.stuff.showShortToast

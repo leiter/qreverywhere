@@ -1,13 +1,9 @@
 package cut.the.crap.qreverywhere.qrcodecreate
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentCreateQrCodeBinding
 import cut.the.crap.qreverywhere.viewBinding

@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere.scanqrcode
+package cut.the.crap.qreverywhere.qrcodescan
 
 import android.content.Context
 import android.os.Bundle
@@ -12,7 +12,10 @@ import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.google.common.util.concurrent.ListenableFuture
+import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentHomeBinding
 import cut.the.crap.qreverywhere.qrdelegates.ActOnQrCode
@@ -28,8 +31,11 @@ import java.util.concurrent.Executors
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home),
-//    CameraReadDelegate by CameraReadDelegateImpl(),
     PickQrCodeDelegate by PickQrCodeDelegateImpl(), ActOnQrCode {
+
+    private val activityViewModel by activityViewModels<MainActivityViewModel>()
+    private val viewModel by viewModels<HomeViewModel>()
+
     private val cameraPermissionLauncher: androidx.activity.result.ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
@@ -141,11 +147,13 @@ class HomeFragment : Fragment(R.layout.fragment_home),
     }
 
     override fun handleQrCode(qrCode: String) {
+
         createIntent(qrCode, requireContext())?.let { intent ->
             startActivity(intent)
         } ?: run {
             //todo inform and display content   (callback(text))
         }
+        activityViewModel.saveQrItemFromFile(qrCode, resources)
         Log.e("QRCODE", qrCode ?: "NOT FOUND")
     }
 

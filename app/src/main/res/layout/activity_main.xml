@@ -11,8 +11,9 @@
         android:layout_height="wrap_content"
         android:theme="@style/Theme.QrEveryWhere.AppBarOverlay">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
+            app:titleCentered="true"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"

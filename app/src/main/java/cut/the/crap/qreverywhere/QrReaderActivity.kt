@@ -13,8 +13,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.LifecycleOwner
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 import com.google.common.util.concurrent.ListenableFuture
-import cut.the.crap.qreverywhere.scanqrcode.QRCodeFoundListener
-import cut.the.crap.qreverywhere.scanqrcode.QRCodeImageAnalyzer
+import cut.the.crap.qreverywhere.qrcodescan.QRCodeFoundListener
+import cut.the.crap.qreverywhere.qrcodescan.QRCodeImageAnalyzer
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.Executors
 

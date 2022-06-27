@@ -1,5 +1,4 @@
-package cut.the.crap.qreverywhere.scanqrcode
-
+package cut.the.crap.qreverywhere.qrcodescan
 
 import android.graphics.ImageFormat
 import androidx.camera.core.ImageAnalysis
@@ -9,11 +8,6 @@ import com.google.zxing.common.HybridBinarizer
 import com.google.zxing.multi.qrcode.QRCodeMultiReader
 import java.nio.ByteBuffer
 
-
-interface QRCodeFoundListener {
-    fun onQRCodeFound(qrCode: String?)
-    fun qrCodeNotFound()
-}
 
 class QRCodeImageAnalyzer(listener: QRCodeFoundListener) : ImageAnalysis.Analyzer {
     private val listener: QRCodeFoundListener
