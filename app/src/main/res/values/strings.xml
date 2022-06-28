@@ -28,5 +28,21 @@
 
 
     <string name="qr_created_on_template">Created on %s</string>
+    <string name="qr_scanned_on_template">Scanned on %s</string>
+    <string name="qr_from_file_on_template">Loaded on %s</string>
+
+    <string name="qr_detail_launch_template">Launch %s</string>
+
+
+    <string name="ic_phone">phone call</string>
+    <string name="ic_mail">mail app</string>
+    <string name="ic_open_in_browser">in brrowser</string>
+    <string name="ic_sms">with sms app</string>
+
+
+    <!--     title create onelinerQrCode -->
+    <string name="create_title_sms">Create Sms Code</string>
+    <string name="create_title_phone">Create Phone Code</string>
+    <string name="create_title_web">Create Web Code</string>
 
 </resources>

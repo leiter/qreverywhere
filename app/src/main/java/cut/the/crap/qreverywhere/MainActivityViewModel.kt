@@ -23,6 +23,8 @@ class MainActivityViewModel @Inject constructor(
 
     private var _currentScannedQrCodeItem: QrCodeItem = QrCodeItem()
 
+    lateinit var detailviewQrCodeItem: QrCodeItem
+
     val historyAdapterData = historyRepository.getCompleteQrCodeHistory()
 
     fun saveQrItem(qrCodeItem: QrCodeItem) {
@@ -38,12 +40,28 @@ class MainActivityViewModel @Inject constructor(
     }
 
     @Throws(WriterException::class)
-    fun saveQrItemFromFile(textContent: String, resources: Resources){
+    fun saveQrItemFromFile(textContent: String, resources: Resources, @Acquire.Type type: Int){
         val bitmap = textToImageEncoder(textContent, resources)!!
-        val historyItem = QrCodeItem(img = bitmap, textContent = textContent, acquireType = Acquire.CREATED)
+        val historyItem = QrCodeItem(img = bitmap, textContent = textContent, acquireType = type)
         _currentScannedQrCodeItem = historyItem
         viewModelScope.launch {
             historyRepository.insertQrItem(historyItem)
+        }
+    }
+
+    fun setDetailViewItem(qrCodeItem: QrCodeItem) {
+        detailviewQrCodeItem = qrCodeItem
+    }
+
+    fun deleteCurrentDetailView() {
+        viewModelScope.launch {
+            historyRepository.deleteQrItem(detailviewQrCodeItem)
+        }
+    }
+
+    fun updateQrItem(qrCodeItem: QrCodeItem) {
+        viewModelScope.launch {
+            historyRepository.updateQrItem(qrCodeItem)
         }
     }
 

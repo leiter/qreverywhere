@@ -10,12 +10,15 @@ import cut.the.crap.qreverywhere.stuff.Acquire
 data class QrCodeItem(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val img: Bitmap = Bitmap.createBitmap(0,0,Bitmap.Config.ARGB_8888),
+    val img: Bitmap = Bitmap.createBitmap(1,1,Bitmap.Config.ARGB_8888),
     val timestamp: Long = System.currentTimeMillis(),
     val textContent: String = "",
     @Acquire.Type
-    val acquireType: Int = Acquire.SCANNED
+    val acquireType: Int = Acquire.SCANNED,
+//    val fileUriString: String
 )
+
+
 
 fun QrCodeItem.toQrItem() : QrItem {
     return QrItem(

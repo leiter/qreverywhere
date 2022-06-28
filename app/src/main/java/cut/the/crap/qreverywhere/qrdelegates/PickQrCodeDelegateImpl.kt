@@ -5,6 +5,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.qrcodescan.HomeFragment
+import cut.the.crap.qreverywhere.stuff.Acquire
 import cut.the.crap.qreverywhere.stuff.hasPermission
 import cut.the.crap.qreverywhere.stuff.scanQrImage
 import cut.the.crap.qreverywhere.stuff.showShortToast
@@ -37,7 +38,7 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
                 uri?.let {
                     val g = scanQrImage(it, fragment.requireContext())  // todo use coroutine
                     g?.let {
-                        (fragment as HomeFragment).handleQrCode(g)
+                        (fragment as HomeFragment).handleQrCode(g, Acquire.FROM_FILE)
                     }
                 }
             }

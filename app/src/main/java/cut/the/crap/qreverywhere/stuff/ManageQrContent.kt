@@ -25,6 +25,8 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.net.URLDecoder
+import java.net.URLEncoder
 import java.util.*
 
 
@@ -48,7 +50,8 @@ object Acquire {
     const val CREATED = 1
     const val FROM_FILE = 2
     const val ERROR_OCCURRED = 3
-    @IntDef(SCANNED, CREATED, FROM_FILE, ERROR_OCCURRED)
+    const val EMPTY_DEFAULT= 4
+    @IntDef(SCANNED, CREATED, FROM_FILE, ERROR_OCCURRED, EMPTY_DEFAULT)
     @Retention(AnnotationRetention.SOURCE)
     annotation class Type
 }
@@ -76,6 +79,18 @@ fun getQrTypeDrawable(contentString: String) : Int {
         contentString.startsWith("https:") -> R.drawable.ic_open_in_browser
         contentString.startsWith("sms:") -> R.drawable.ic_sms
         contentString.startsWith("smsto:") -> R.drawable.ic_sms
+        else -> R.drawable.ic_content
+    }
+}
+
+fun getQrLaunchText(contentString: String) : Int {
+    return when {
+        contentString.startsWith("tel:") -> R.string.ic_phone
+        contentString.startsWith("mailto:") -> R.string.ic_mail
+        contentString.startsWith("http:") -> R.string.ic_open_in_browser
+        contentString.startsWith("https:") -> R.string.ic_open_in_browser
+        contentString.startsWith("sms:") -> R.string.ic_sms
+        contentString.startsWith("smsto:") -> R.string.ic_sms
         else -> R.drawable.ic_content
     }
 }

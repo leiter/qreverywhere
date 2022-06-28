@@ -2,14 +2,13 @@ package cut.the.crap.qreverywhere.qrhistory
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentQrHistoryBinding
+import cut.the.crap.qreverywhere.db.QrCodeItem
 import cut.the.crap.qreverywhere.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -20,10 +19,13 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
 
     private val activityViewModel by activityViewModels<MainActivityViewModel>()
 
-//    private val open
+    private val detailViewItemClicked: (QrCodeItem) -> Unit = {
+        activityViewModel.setDetailViewItem(it)
+        findNavController().navigate(R.id.action_qrHistoryFragment_to_detailViewFragment)
+    }
 
     private val historyListAdapter by lazy {
-        QrHistoryAdapter(requireContext().getString(R.string.qr_created_on_template))
+        QrHistoryAdapter(requireContext(),detailViewItemClicked)
     }
 
 //    private val viewModel by viewModels<QrHistoryViewModel>()
@@ -41,7 +43,4 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
 
     }
 
-    companion object {
-
-    }
 }

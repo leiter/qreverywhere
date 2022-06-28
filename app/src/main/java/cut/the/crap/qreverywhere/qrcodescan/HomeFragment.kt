@@ -18,9 +18,9 @@ import com.google.common.util.concurrent.ListenableFuture
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentHomeBinding
-import cut.the.crap.qreverywhere.qrdelegates.ActOnQrCode
 import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegate
 import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegateImpl
+import cut.the.crap.qreverywhere.stuff.Acquire
 import cut.the.crap.qreverywhere.stuff.createIntent
 import cut.the.crap.qreverywhere.stuff.hasPermission
 import cut.the.crap.qreverywhere.stuff.showShortToast
@@ -58,7 +58,6 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-//        attachCameraReadDelegate(this)
         attachPickQrCodeDelegate(this)
     }
 
@@ -104,7 +103,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                     Executors.newSingleThreadExecutor(),
                     QRCodeImageAnalyzer(object : QRCodeFoundListener {
                         override fun onQRCodeFound(qrCode: String?) {
-                            qrCode?.let { handleQrCode(qrCode) }
+                            qrCode?.let { handleQrCode(qrCode, Acquire.SCANNED) }
                         }
 
                         override fun qrCodeNotFound() {
@@ -146,14 +145,14 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         }
     }
 
-    override fun handleQrCode(qrCode: String) {
+    override fun handleQrCode(qrCode: String,@Acquire.Type type: Int) {
 
-        createIntent(qrCode, requireContext())?.let { intent ->
-            startActivity(intent)
-        } ?: run {
-            //todo inform and display content   (callback(text))
-        }
-        activityViewModel.saveQrItemFromFile(qrCode, resources)
+//        createIntent(qrCode, requireContext())?.let { intent ->
+//            startActivity(intent)
+//        } ?: run {
+//            //todo inform and display content   (callback(text))
+//        }
+        activityViewModel.saveQrItemFromFile(qrCode, resources, type)
         Log.e("QRCODE", qrCode ?: "NOT FOUND")
     }
 

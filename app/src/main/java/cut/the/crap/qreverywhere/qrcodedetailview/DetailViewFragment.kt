@@ -1,29 +1,44 @@
 package cut.the.crap.qreverywhere.qrcodedetailview
 
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentDetailViewBinding
+import cut.the.crap.qreverywhere.stuff.getQrLaunchText
 import cut.the.crap.qreverywhere.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
 
+    private val activityViewModel by activityViewModels<MainActivityViewModel>()
 
     private val viewBinding by viewBinding {
         FragmentDetailViewBinding.bind(requireView())
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val item = activityViewModel.detailviewQrCodeItem
+
+
+        val launchText = getString(R.string.qr_detail_launch_template).format(getString(
+            getQrLaunchText(item.textContent)))
 
         with(viewBinding){
-
+            Glide.with(root.context).load(item.img).into(detailViewContentPreviewImage)
+            detailViewContentTextView.text = Uri.decode(item.textContent)
+            detailViewActionTypeTextView.text = launchText
+            detailViewDeleteItem.setOnClickListener {
+                activityViewModel.deleteCurrentDetailView()
+                findNavController().navigate(R.id.action_detailViewFragment_to_qrHistoryFragment)
+            }
         }
     }
 

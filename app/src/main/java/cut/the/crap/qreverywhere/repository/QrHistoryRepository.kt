@@ -14,21 +14,8 @@ class QrHistoryRepository @Inject constructor(
 
     suspend fun deleteQrItem(qrCodeItem: QrCodeItem) = qrCodeDao.deleteQrItem(qrCodeItem)
 
+    suspend fun updateQrItem(qrCodeItem: QrCodeItem) = qrCodeDao.update(qrCodeItem)
+
     fun getCompleteQrCodeHistory() = qrCodeDao.getCompleteHistory()
 
-//    fun getAllRunsSortedByTimeInMillis() = qrCodeDao.getAllRunsSortedByTimeInMillis()
-//
-//    fun getAllRunsSortedByDistance() = qrCodeDao.getAllRunsSortedByDistance()
-//
-//    fun getAllRunsSortedByCaloriesBurned() = qrCodeDao.getAllRunsSortedByCaloriesBurned()
-//
-//    fun getAllRunsSortedByAvgSpeed() = qrCodeDao.getAllRunsSortedByAvgSpeed()
-//
-//    fun getTotalDistance() = qrCodeDao.getTotalDistance()
-//
-//    fun getTotalTimeInMillis() = qrCodeDao.getTotalTimeInMillis()
-//
-//    fun getTotalAvgSpeed() = qrCodeDao.getTotalAvgSpeed()
-//
-//    fun getTotalCaloriesBurned() = qrCodeDao.getTotalCaloriesBurned()
 }

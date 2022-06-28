@@ -39,6 +39,7 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
 //                        Log.e("TEXTLENGTH", "${createEmailSubjectText.text?.length}")
                         val bitmap = viewModel.textToImageEncode(createEmailSubjectText.text.toString(), resources)!!
                         createEmailQrImagePreview.setImageBitmap(bitmap)
+                        createEmailHeaderGroup.visibility = View.VISIBLE
 //                        val path: String? = viewModel.saveImage(bitmap, requireContext())
 //                        Toast.makeText(
 //                            requireContext(),

@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Email Address of receiver"
+            android:hint="Recipient email"
             android:maxHeight="100dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -119,6 +119,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/createEmailQrImagePreview" />
 
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/createEmailHeaderGroup"
+            android:visibility="gone"
+            app:constraint_referenced_ids="createEmailQrImagePreview,createEmailButtonSaveQrToFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -1,5 +1,6 @@
 package cut.the.crap.qreverywhere.qrhistory
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -10,15 +11,28 @@ import com.bumptech.glide.Glide
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.ItemQrHistoryBinding
 import cut.the.crap.qreverywhere.db.QrCodeItem
+import cut.the.crap.qreverywhere.stuff.Acquire
 import cut.the.crap.qreverywhere.stuff.getQrTypeDrawable
 import java.text.SimpleDateFormat
 import java.util.*
 
-class QrHistoryAdapter(val createdTemplate: String) : RecyclerView.Adapter<QrHistoryAdapter.QrHistoryViewHolder<ViewBinding>>()  {
+class QrHistoryAdapter(context: Context, val detailViewItemClicked: (QrCodeItem) -> Unit)
 
+    : RecyclerView.Adapter<QrHistoryAdapter.QrHistoryViewHolder<ViewBinding>>()  {
 
+    private val createdTemplate: String = context.getString(R.string.qr_created_on_template)
+    private val scannedTemplate: String = context.getString(R.string.qr_scanned_on_template)
+    private val loadedFromFileTemplate: String = context.getString(R.string.qr_from_file_on_template)
 
-    inner class QrHistoryViewHolder<VB : ViewBinding>(val binding: VB): RecyclerView.ViewHolder(binding.root)
+    private val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+
+    inner class QrHistoryViewHolder<VB : ViewBinding>(val binding: VB): RecyclerView.ViewHolder(binding.root) {
+        init {
+            this@QrHistoryViewHolder.itemView.setOnClickListener {
+                detailViewItemClicked(differ.currentList[adapterPosition])
+            }
+        }
+    }
 
     private val diffCallback = object : DiffUtil.ItemCallback<QrCodeItem>() {
         override fun areItemsTheSame(oldItem: QrCodeItem, newItem: QrCodeItem): Boolean {
@@ -30,7 +44,16 @@ class QrHistoryAdapter(val createdTemplate: String) : RecyclerView.Adapter<QrHis
         }
     }
 
-    val differ = AsyncListDiffer(this, diffCallback)
+    private val differ = AsyncListDiffer(this, diffCallback)
+
+    private fun getTimeTemplate(qrItemData: QrCodeItem) : String {
+        return when(qrItemData.acquireType){
+            Acquire.SCANNED -> scannedTemplate
+            Acquire.CREATED -> createdTemplate
+            Acquire.FROM_FILE -> loadedFromFileTemplate
+            else -> createdTemplate
+        }
+    }
 
     fun setData(list: List<QrCodeItem>) = differ.submitList(list)
 
@@ -64,14 +87,11 @@ class QrHistoryAdapter(val createdTemplate: String) : RecyclerView.Adapter<QrHis
             val calendar = Calendar.getInstance().apply {
                 timeInMillis = qrItemData.timestamp
             }
-            val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
-            val createdText = createdTemplate.format(dateFormat.format(qrItemData.timestamp))
+
+            val createdText = getTimeTemplate(qrItemData).format(dateFormat.format(qrItemData.timestamp))
             historyItemTimestamp.text = createdText
             historyItemType.setImageResource(getQrTypeDrawable(qrItemData.textContent))
             historyItemContentPreview.text = qrItemData.textContent
-            root.setOnClickListener {
-
-            }
         }
 
     }
