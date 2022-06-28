@@ -19,7 +19,7 @@ interface GetIt<T>{
 
 }
 
-inline fun <reified T : Activity> implDelegate(permissionDeniedAction: () -> Unit) : GetIt<T>{ //
+inline fun <reified T : Activity> implDelegate(permissionDeniedAction: () -> Unit) : GetIt<T> {
 
     return  object : GetIt<T> {
 

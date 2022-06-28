@@ -1,14 +1,17 @@
 package cut.the.crap.qreverywhere.qrcodecreate
 
 import android.content.res.Resources
-import android.graphics.Bitmap
+import android.net.Uri
+import android.util.Patterns
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.zxing.WriterException
+import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.db.QrCodeItem
 import cut.the.crap.qreverywhere.repository.QrHistoryRepository
 import cut.the.crap.qreverywhere.stuff.Acquire
-import cut.the.crap.qreverywhere.stuff.textToImageEncoder
+import cut.the.crap.qreverywhere.stuff.textToImageEnc
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,19 +22,58 @@ class CreateQrCodeViewModel @Inject constructor(
     private val qrHistoryRepository: QrHistoryRepository
 ) : ViewModel() {
 
+    val emailQrCodeItem = MutableLiveData<State<QrCodeItem>>()
+
+    var emailAddress = ""
+    var emailSubject = ""
+    var emailText = ""
+
     @Throws(WriterException::class)
-    fun textToImageEncode(textContent: String, resources: Resources): Bitmap? {
-        val bitmap = textToImageEncoder(textContent, resources)!!
-        val historyItem = QrCodeItem(img = bitmap, textContent = textContent, acquireType = Acquire.CREATED)
+    fun textToQrCodeItem(resources: Resources) {
         viewModelScope.launch {
-            qrHistoryRepository.insertQrItem(historyItem)
+            var qrItem: QrCodeItem? = null
+            try {
+                emailQrCodeItem.value = State.loading()
+                checkValidEmail(emailAddress)
+                val textContent = Uri.encode(
+                    "mailto:%s?subject=%s&body=%s".format(
+                        emailAddress,
+                        emailSubject,
+                        emailText
+                    )
+                )
+
+                val bitmap = textToImageEnc(textContent, resources)!!
+                qrItem = QrCodeItem(
+                    img = bitmap,
+                    textContent = textContent,
+                    acquireType = Acquire.CREATED
+                )
+                emailQrCodeItem.value = State.success(
+
+                )
+            } catch (e: Exception) {
+                emailQrCodeItem.value = State.error(error = e)
+            }
+
+            try {
+                qrItem?.let { qrHistoryRepository.insertQrItem(it) }
+            } catch (e: Exception) {
+                emailQrCodeItem.value = State.error(error = NotSavedToHistoryException())
+            }
         }
-        return bitmap
     }
 
-    companion object {
-
+    @Throws(InvalidEmailException::class)
+    private fun checkValidEmail(emailAddress: String) {
+        if (!Patterns.EMAIL_ADDRESS.matcher(emailAddress).matches()) {
+            throw InvalidEmailException()
+        }
     }
-
 
 }
+
+class InvalidEmailException : Exception()
+
+class NotSavedToHistoryException : Exception()
+

@@ -13,7 +13,7 @@
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_bar_code_scanner">BarCodeScannerActivity</string>
     <string name="permission_denied_text">Permission denied</string>
@@ -22,6 +22,8 @@
     <string name="nav_title_scan">Scan</string>
     <string name="nav_title_create">Create</string>
     <string name="nav_title_history">History</string>
+
+
     <string name="qrScanFabTextFromFile">Scan from file</string>
     <string name="qrScanFabTextFromCamera">Scan with Camera</string>
     <string name="qr_create_page_1">QR-Code erstellen</string>
@@ -41,8 +43,14 @@
 
 
     <!--     title create onelinerQrCode -->
-    <string name="create_title_sms">Create Sms Code</string>
-    <string name="create_title_phone">Create Phone Code</string>
-    <string name="create_title_web">Create Web Code</string>
+    <string name="create_title_sms">Create Sms</string>
+    <string name="create_title_phone">Create Phone</string>
+    <string name="create_title_web">Create Web</string>
+
+
+<!--    Error messages -->
+    <string name="error_could_not_create_qr_image">Could not create qr code</string>
+    <string name="error_invalid_email_address">Please enter a valid email address.</string>
+
 
 </resources>

@@ -1,12 +1,14 @@
 package cut.the.crap.qreverywhere.qrcodescan
 
 import android.graphics.ImageFormat
+import android.os.Looper
 import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.ImageProxy
 import com.google.zxing.*
 import com.google.zxing.common.HybridBinarizer
 import com.google.zxing.multi.qrcode.QRCodeMultiReader
 import java.nio.ByteBuffer
+import java.util.logging.Handler
 
 
 class QRCodeImageAnalyzer(listener: QRCodeFoundListener) : ImageAnalysis.Analyzer {
@@ -27,7 +29,9 @@ class QRCodeImageAnalyzer(listener: QRCodeFoundListener) : ImageAnalysis.Analyze
             val binaryBitmap = BinaryBitmap(HybridBinarizer(source))
             try {
                 val result = QRCodeMultiReader().decode(binaryBitmap)
-                listener.onQRCodeFound(result.text)
+                android.os.Handler(Looper.getMainLooper()).post {
+                    listener.onQRCodeFound(result.text)
+                }
             } catch (e: FormatException) {
                 listener.qrCodeNotFound()
             } catch (e: ChecksumException) {

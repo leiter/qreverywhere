@@ -27,6 +27,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/createEmailAddressText"
+                android:lines="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
@@ -38,7 +39,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Comma separated cc addressed"
-            android:maxHeight="100dp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,6 +46,7 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/createEmailCCAddressText"
+                android:lines="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
@@ -57,14 +58,16 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+
             android:hint="Email Subject"
-            android:maxHeight="100dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/createEmailCCAddressTextLayout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/createEmailSubjectText"
+                android:lines="1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
@@ -78,6 +81,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email message"
+            android:layout_marginTop="8dp"
+
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHeight_min="200dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -85,11 +90,12 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/createEmailBodyText"
+                android:gravity="top"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/createEmailCreateQrcode"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,6 +104,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/createEmailBodyTextLayout" />
+
+        <ProgressBar
+            android:id="@+id/createEmailLoader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/createEmailCreateQrcode" />
 
         <ImageView
             android:id="@+id/createEmailQrImagePreview"

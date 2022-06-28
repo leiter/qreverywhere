@@ -16,7 +16,6 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
     private lateinit var scanImageLauncher: androidx.activity.result.ActivityResultLauncher<Intent>
     private lateinit var readStoragePermissionLauncher: androidx.activity.result.ActivityResultLauncher<String>
 
-
     override fun readQrcodeFromFile() {
         if (fragment.requireContext()
                 .hasPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE)

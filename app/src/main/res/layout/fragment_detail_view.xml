@@ -82,27 +82,11 @@
 
             android:src="@drawable/ic_launcher_background"
             android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_goneMarginTop="16dp" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/detailViewSaveQrToFileButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Save to file"
-            app:layout_constraintBottom_toBottomOf="@+id/detailViewContentPreviewImage"
-            app:layout_constraintEnd_toEndOf="@+id/detailViewAcquiredAt" />
-
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/detailViewDeleteItem"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="Delete"
-            app:layout_constraintEnd_toEndOf="@+id/detailViewAcquiredAt"
-            app:layout_constraintStart_toStartOf="@+id/detailViewSaveQrToFileButton"
-            app:layout_constraintTop_toTopOf="@+id/detailViewContentPreviewImage" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

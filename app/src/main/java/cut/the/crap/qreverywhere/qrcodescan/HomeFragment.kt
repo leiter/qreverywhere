@@ -145,13 +145,13 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         }
     }
 
-    override fun handleQrCode(qrCode: String,@Acquire.Type type: Int) {
+    override fun handleQrCode(qrCode: String, @Acquire.Type type: Int) {
 
-//        createIntent(qrCode, requireContext())?.let { intent ->
-//            startActivity(intent)
-//        } ?: run {
-//            //todo inform and display content   (callback(text))
-//        }
+        createIntent(qrCode, requireContext())?.let { intent ->
+            startActivity(intent)
+        } ?: run {
+            //todo inform and display content   (callback(text))
+        }
         activityViewModel.saveQrItemFromFile(qrCode, resources, type)
         Log.e("QRCODE", qrCode ?: "NOT FOUND")
     }

@@ -1,23 +1,38 @@
 package cut.the.crap.qreverywhere.qrcodecreate
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
+import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentCreateEmailQrCodeBinding
+import cut.the.crap.qreverywhere.db.QrCodeItem
+import cut.the.crap.qreverywhere.stuff.UiEvent
+import cut.the.crap.qreverywhere.stuff.showSnackbar
+import cut.the.crap.qreverywhere.stuff.textChanges
 import cut.the.crap.qreverywhere.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_code) {
 
     private val activityViewModel by activityViewModels<MainActivityViewModel>()
+
+    private fun getBottomNavigationView(): BottomNavigationView {
+        return requireActivity().findViewById(R.id.nav_view)
+    }
+
+    private val bottomNav by lazy {
+        getBottomNavigationView()
+    }
 
     private val viewModel by viewModels<CreateQrCodeViewModel>()
 
@@ -25,37 +40,70 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
         FragmentCreateEmailQrCodeBinding.bind(requireView())
     }
 
+    private fun observeViewModel() {
+        with(viewBinding) {
+            viewModel.emailQrCodeItem.observe(viewLifecycleOwner) {
+                when (it) {
+                    is State.Loading<QrCodeItem> -> {
+                        createEmailLoader.visibility = View.VISIBLE
+                        createEmailAddressTextLayout.error = null
+                    }
+                    is State.Success<QrCodeItem> -> {
+                        createEmailQrImagePreview.setImageBitmap(it.data!!.img)
+                        createEmailHeaderGroup.visibility = View.VISIBLE
+                        createEmailLoader.visibility = View.INVISIBLE
+                    }
+                    is State.Error -> {
+                        createEmailLoader.visibility = View.INVISIBLE
+                        when (it.cause) {
+                            is InvalidEmailException -> createEmailAddressTextLayout.error =
+                                getString(R.string.error_invalid_email_address)
+                            is WriterException -> {
+                                val anchor = bottomNav
+                                root.showSnackbar(
+                                    UiEvent.Snack(
+                                        message = R.string.error_could_not_create_qr_image,
+                                        anchorView = anchor
+                                    )
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         with(viewBinding) {
 
-            createEmailCreateQrcode.setOnClickListener {
+            createEmailAddressText.setText(viewModel.emailAddress)
+            createEmailSubjectText.setText(viewModel.emailSubject)
+            createEmailBodyText.setText(viewModel.emailText)
 
-                if (createEmailSubjectText.text.toString().trim().isEmpty()) {
-                    Toast.makeText(requireContext(), "Enter String!", Toast.LENGTH_SHORT).show()
-                } else {
-                    try {
-//                        Log.e("TEXTLENGTH", "${createEmailSubjectText.text?.length}")
-                        val bitmap = viewModel.textToImageEncode(createEmailSubjectText.text.toString(), resources)!!
-                        createEmailQrImagePreview.setImageBitmap(bitmap)
-                        createEmailHeaderGroup.visibility = View.VISIBLE
-//                        val path: String? = viewModel.saveImage(bitmap, requireContext())
-//                        Toast.makeText(
-//                            requireContext(),
-//                            "QRCode saved to -> $path",
-//                            Toast.LENGTH_SHORT
-//                        ).show()
-                    } catch (e: WriterException) {
-                        e.printStackTrace()
-                    }
+            lifecycleScope.launchWhenResumed {
+                createEmailAddressText.textChanges().collect {
+                    viewModel.emailAddress = it.toString()
+                }
+                createEmailSubjectText.textChanges().collect {
+                    viewModel.emailSubject = it.toString()
+                }
+                createEmailBodyText.textChanges().collect {
+                    viewModel.emailText = it.toString()
                 }
             }
 
+            createEmailCreateQrcode.setOnClickListener {
+                viewModel.textToQrCodeItem(resources)
+            }
+
         }
+        observeViewModel()
     }
 
-    companion object {
 
-    }
+
 }

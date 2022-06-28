@@ -1,5 +1,6 @@
 package cut.the.crap.qreverywhere
 
+import android.content.Context
 import android.content.res.Resources
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -7,6 +8,7 @@ import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.db.QrCodeItem
 import cut.the.crap.qreverywhere.repository.QrHistoryRepository
 import cut.the.crap.qreverywhere.stuff.Acquire
+import cut.the.crap.qreverywhere.stuff.saveImageToFile
 import cut.the.crap.qreverywhere.stuff.textToImageEncoder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -19,11 +21,11 @@ sealed class NavigationState {
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
     private val historyRepository: QrHistoryRepository
-) : ViewModel(){
+) : ViewModel() {
 
     private var _currentScannedQrCodeItem: QrCodeItem = QrCodeItem()
 
-    lateinit var detailviewQrCodeItem: QrCodeItem
+    lateinit var detailViewQrCodeItem: QrCodeItem
 
     val historyAdapterData = historyRepository.getCompleteQrCodeHistory()
 
@@ -39,8 +41,14 @@ class MainActivityViewModel @Inject constructor(
         }
     }
 
+    fun updateQrItem(qrCodeItem: QrCodeItem) {
+        viewModelScope.launch {
+            historyRepository.updateQrItem(qrCodeItem)
+        }
+    }
+
     @Throws(WriterException::class)
-    fun saveQrItemFromFile(textContent: String, resources: Resources, @Acquire.Type type: Int){
+    fun saveQrItemFromFile(textContent: String, resources: Resources, @Acquire.Type type: Int) {
         val bitmap = textToImageEncoder(textContent, resources)!!
         val historyItem = QrCodeItem(img = bitmap, textContent = textContent, acquireType = type)
         _currentScannedQrCodeItem = historyItem
@@ -50,19 +58,18 @@ class MainActivityViewModel @Inject constructor(
     }
 
     fun setDetailViewItem(qrCodeItem: QrCodeItem) {
-        detailviewQrCodeItem = qrCodeItem
+        detailViewQrCodeItem = qrCodeItem
     }
 
     fun deleteCurrentDetailView() {
         viewModelScope.launch {
-            historyRepository.deleteQrItem(detailviewQrCodeItem)
+            historyRepository.deleteQrItem(detailViewQrCodeItem)
         }
     }
 
-    fun updateQrItem(qrCodeItem: QrCodeItem) {
-        viewModelScope.launch {
-            historyRepository.updateQrItem(qrCodeItem)
-        }
+    fun saveQrImageOfDetailView(context: Context) {
+        saveImageToFile(detailViewQrCodeItem.img, context)
     }
+
 
 }

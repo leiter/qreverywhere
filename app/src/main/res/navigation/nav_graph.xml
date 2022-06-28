@@ -8,9 +8,8 @@
     <fragment
         android:id="@+id/createQrCodeFragment"
         android:name="cut.the.crap.qreverywhere.qrcodecreate.CreateQrCodeFragment"
-        android:label="Create a new qrcode"
+        android:label="Create new"
         tools:layout="@layout/fragment_create_qr_code">
-
         <action
             android:id="@+id/action_createQrCodeFragment_to_createEmailQrCodeFragment"
             app:destination="@id/createEmailQrCodeFragment" />
@@ -18,8 +17,6 @@
             android:id="@+id/action_createQrCodeFragment_to_createOneLinerFragment"
             app:destination="@id/createOneLinerFragment" />
     </fragment>
-
-
 
     <fragment
         android:id="@+id/scanQrFragment"
@@ -64,14 +61,12 @@
         android:name="cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment"
         android:label=""
         tools:layout="@layout/fragment_create_one_liner" >
-
         <argument
             android:name="useCaseMode"
             app:argType="integer" />
         <action
             android:id="@+id/action_createOneLinerFragment_to_createQrCodeFragment"
             app:destination="@id/createQrCodeFragment" />
-
     </fragment>
 
 </navigation>

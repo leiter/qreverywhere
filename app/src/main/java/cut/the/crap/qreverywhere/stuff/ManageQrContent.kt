@@ -21,12 +21,12 @@ import cut.the.crap.qreverywhere.stuff.QrCode.PHONE
 import cut.the.crap.qreverywhere.stuff.QrCode.SMS
 import cut.the.crap.qreverywhere.stuff.QrCode.UNKNOWN_CONTENT
 import cut.the.crap.qreverywhere.stuff.QrCode.WEB_URL
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.net.URLDecoder
-import java.net.URLEncoder
 import java.util.*
 
 
@@ -56,7 +56,6 @@ object Acquire {
     annotation class Type
 }
 
-
 fun determineType(contentString: String) : Int {
     return when {
         contentString.startsWith("tel:") -> PHONE
@@ -68,8 +67,6 @@ fun determineType(contentString: String) : Int {
         else -> UNKNOWN_CONTENT
     }
 }
-
-//mailto:%s?subject=%s&body=%s
 
 fun getQrTypeDrawable(contentString: String) : Int {
     return when {
@@ -153,6 +150,38 @@ fun textToImageEncoder(textContent: String, resources: Resources): Bitmap? {
     bitmap.setPixels(pixels, 0, 500, 0, 0, bitMatrixWidth, bitMatrixHeight)
 
     return bitmap
+}
+
+@Throws(WriterException::class)
+suspend fun textToImageEnc(textContent: String, resources: Resources): Bitmap? {
+    // todo 2953  chars are fine
+
+    return withContext(Dispatchers.IO){
+        val bitMatrix: BitMatrix = try {
+            MultiFormatWriter().encode(
+                textContent,
+                BarcodeFormat.QR_CODE,
+                QRcodeWidth, QRcodeWidth, null
+            )
+        } catch (e: WriterException) {
+             throw WriterException()
+        }
+        val bitMatrixWidth = bitMatrix.width
+        val bitMatrixHeight = bitMatrix.height
+        val pixels = IntArray(bitMatrixWidth * bitMatrixHeight)
+        for (y in 0 until bitMatrixHeight) {
+            val offset = y * bitMatrixWidth
+            for (x in 0 until bitMatrixWidth) {
+                pixels[offset + x] =
+                    if (bitMatrix[x, y]) ResourcesCompat.getColor(resources, R.color.black, null)
+                    else ResourcesCompat.getColor(resources, R.color.white,null)
+            }
+        }
+        val bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_8888)
+        bitmap.setPixels(pixels, 0, 500, 0, 0, bitMatrixWidth, bitMatrixHeight)
+
+        bitmap
+    }
 }
 
 

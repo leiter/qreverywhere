@@ -13,6 +13,18 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import cut.the.crap.qreverywhere.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+
+val navSelectorCreate = arrayListOf(
+    R.id.createEmailQrCodeFragment,
+    R.id.createOneLinerFragment,
+    R.id.createQrCodeFragment
+)
+
+val navSelectorHistory = arrayListOf(
+    R.id.qrHistoryFragment,
+    R.id.detailViewFragment
+)
+
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -30,7 +42,14 @@ class MainActivity : AppCompatActivity() {
         val navView: BottomNavigationView = binding.navView
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
+        navController.addOnDestinationChangedListener { controller, destination, arguments ->
+            when(destination.id){
+                in navSelectorCreate -> navView.menu.getItem(1).isChecked = true
+                in navSelectorHistory -> navView.menu.getItem(2).isChecked = true
+                R.id.scanQrFragment -> navView.menu.getItem(0).isChecked = true
+            }
 
+        }
         appBarConfiguration = AppBarConfiguration(setOf(
             R.id.scanQrFragment,
             R.id.createQrCodeFragment,
