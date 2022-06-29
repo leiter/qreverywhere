@@ -34,6 +34,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
     PickQrCodeDelegate by PickQrCodeDelegateImpl(), ActOnQrCode {
 
     private val activityViewModel by activityViewModels<MainActivityViewModel>()
+
     private val viewModel by viewModels<HomeViewModel>()
 
     private val cameraPermissionLauncher: androidx.activity.result.ActivityResultLauncher<String> =
@@ -146,14 +147,12 @@ class HomeFragment : Fragment(R.layout.fragment_home),
     }
 
     override fun handleQrCode(qrCode: String, @Acquire.Type type: Int) {
-
         createIntent(qrCode, requireContext())?.let { intent ->
             startActivity(intent)
         } ?: run {
             //todo inform and display content   (callback(text))
         }
         activityViewModel.saveQrItemFromFile(qrCode, resources, type)
-        Log.e("QRCODE", qrCode ?: "NOT FOUND")
     }
 
 }

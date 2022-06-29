@@ -10,7 +10,6 @@ class QrApplication : Application() , CameraXConfig.Provider {
 
     override fun onCreate() {
         super.onCreate()
-
 //        Timber.plant(Timber.DebugTree())
     }
 

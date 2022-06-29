@@ -51,10 +51,5 @@ class CreateQrCodeFragment : Fragment(R.layout.fragment_create_qr_code) {
                 ))
             }
         }
-
-
     }
-
-
-
 }

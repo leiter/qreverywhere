@@ -71,5 +71,14 @@ class MainActivityViewModel @Inject constructor(
         saveImageToFile(detailViewQrCodeItem.img, context)
     }
 
+    fun removeHistoryItem(pos: Int) {
+        viewModelScope.launch {
+            historyAdapterData.value?.let {
+                historyRepository.deleteQrItem(it[pos])
+            }
+
+        }
+    }
+
 
 }

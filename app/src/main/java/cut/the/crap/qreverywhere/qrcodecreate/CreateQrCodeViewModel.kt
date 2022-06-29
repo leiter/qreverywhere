@@ -16,7 +16,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class CreateQrCodeViewModel @Inject constructor(
     private val qrHistoryRepository: QrHistoryRepository
@@ -35,13 +34,12 @@ class CreateQrCodeViewModel @Inject constructor(
             try {
                 emailQrCodeItem.value = State.loading()
                 checkValidEmail(emailAddress)
-                val textContent = Uri.encode(
+                val textContent =
                     "mailto:%s?subject=%s&body=%s".format(
-                        emailAddress,
-                        emailSubject,
-                        emailText
+                        Uri.encode(emailAddress),
+                        Uri.encode(emailSubject),
+                        Uri.encode(emailText)
                     )
-                )
 
                 val bitmap = textToImageEnc(textContent, resources)!!
                 qrItem = QrCodeItem(
@@ -49,15 +47,15 @@ class CreateQrCodeViewModel @Inject constructor(
                     textContent = textContent,
                     acquireType = Acquire.CREATED
                 )
-                emailQrCodeItem.value = State.success(
-
-                )
+                emailQrCodeItem.value = State.success(qrItem)
             } catch (e: Exception) {
                 emailQrCodeItem.value = State.error(error = e)
             }
 
             try {
                 qrItem?.let { qrHistoryRepository.insertQrItem(it) }
+                emailQrCodeItem.value = State.success()
+                emailQrCodeItem.value = State.success(qrItem)
             } catch (e: Exception) {
                 emailQrCodeItem.value = State.error(error = NotSavedToHistoryException())
             }

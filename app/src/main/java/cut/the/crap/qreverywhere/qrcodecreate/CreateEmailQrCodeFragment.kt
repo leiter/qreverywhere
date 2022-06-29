@@ -3,12 +3,10 @@ package cut.the.crap.qreverywhere.qrcodecreate
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.zxing.WriterException
-import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentCreateEmailQrCodeBinding
@@ -23,8 +21,6 @@ import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_code) {
-
-    private val activityViewModel by activityViewModels<MainActivityViewModel>()
 
     private fun getBottomNavigationView(): BottomNavigationView {
         return requireActivity().findViewById(R.id.nav_view)
@@ -49,7 +45,13 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                         createEmailAddressTextLayout.error = null
                     }
                     is State.Success<QrCodeItem> -> {
-                        createEmailQrImagePreview.setImageBitmap(it.data!!.img)
+                        if(it.data != null){
+                            createEmailQrImagePreview.setImageBitmap(it.data.img)
+                        } else {
+                            root.showSnackbar(
+                                UiEvent.Snack(message = R.string.app_name, anchorView = bottomNav)
+                            )
+                        }
                         createEmailHeaderGroup.visibility = View.VISIBLE
                         createEmailLoader.visibility = View.INVISIBLE
                     }
@@ -103,7 +105,4 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
         }
         observeViewModel()
     }
-
-
-
 }

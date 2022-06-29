@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".qrhistory.QrHistoryFragment">
 
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/qrHistoryEmptyMessage"
+        style="@style/TextAppearance.AppCompat.Subhead"
+        android:visibility="invisible"
+        android:layout_gravity="center"
+        android:layout_marginBottom="72dp"
+        android:text="You have currently no qrcode."
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/qrHistoryList"
         android:layout_width="match_parent"

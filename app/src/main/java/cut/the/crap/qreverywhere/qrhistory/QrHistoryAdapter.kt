@@ -1,6 +1,7 @@
 package cut.the.crap.qreverywhere.qrhistory
 
 import android.content.Context
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -80,18 +81,12 @@ class QrHistoryAdapter(context: Context, val detailViewItemClicked: (QrCodeItem)
     }
 
     private fun bindQrItem(binding: ItemQrHistoryBinding, qrItemData: QrCodeItem){
-
         with(binding){
             Glide.with(root.context).load(qrItemData.img).into(historyItemImage)
-
-            val calendar = Calendar.getInstance().apply {
-                timeInMillis = qrItemData.timestamp
-            }
-
             val createdText = getTimeTemplate(qrItemData).format(dateFormat.format(qrItemData.timestamp))
             historyItemTimestamp.text = createdText
             historyItemType.setImageResource(getQrTypeDrawable(qrItemData.textContent))
-            historyItemContentPreview.text = qrItemData.textContent
+            historyItemContentPreview.text = Uri.decode(qrItemData.textContent)
         }
 
     }

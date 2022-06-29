@@ -19,7 +19,6 @@ data class QrCodeItem(
 )
 
 
-
 fun QrCodeItem.toQrItem() : QrItem {
     return QrItem(
         id = id,
