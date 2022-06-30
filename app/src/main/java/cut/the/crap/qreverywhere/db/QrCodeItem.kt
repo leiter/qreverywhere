@@ -14,8 +14,8 @@ data class QrCodeItem(
     val timestamp: Long = System.currentTimeMillis(),
     val textContent: String = "",
     @Acquire.Type
-    val acquireType: Int = Acquire.SCANNED,
-//    val fileUriString: String
+    val acquireType: Int = Acquire.EMPTY_DEFAULT,
+    val fileUriString: String = "",
 )
 
 

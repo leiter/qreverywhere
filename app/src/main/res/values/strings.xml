@@ -48,7 +48,7 @@
     <string name="create_title_web">Create Web</string>
 
 
-<!--    Error messages -->
+    <!--    Error messages -->
     <string name="error_could_not_create_qr_image">Could not create qr code</string>
     <string name="error_invalid_email_address">Please enter a valid email address.</string>
     <string name="create_one_liner_header_text_web">Please enter the web address including the protocol.</string>

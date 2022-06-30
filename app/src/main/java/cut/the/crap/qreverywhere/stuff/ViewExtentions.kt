@@ -10,9 +10,11 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageButton
 import androidx.annotation.CheckResult
+import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.snackbar.Snackbar
+import cut.the.crap.qreverywhere.R
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.Flow
@@ -25,7 +27,9 @@ fun EditText.textChanges(): Flow<CharSequence?> {
     return callbackFlow {
         val listener = object : TextWatcher {
             override fun afterTextChanged(s: Editable?) = Unit
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) =
+                Unit
+
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 trySend(s)
             }
@@ -60,19 +64,23 @@ fun View.showIme() {
     inputMethod.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
 }
 
-fun ImageButton.setDrawable(resId: Int, imageView: ImageButton){
+fun ImageButton.setDrawable(resId: Int, imageView: ImageButton) {
     val d = ResourcesCompat.getDrawable(resources, resId, imageView.context.theme)
     imageView.setImageDrawable(d)
 }
 
 
-fun View.showSnackbar(config: UiEvent.Snack) {
+fun View.showSnackBar(config: UiEvent.SnackBar) {
     val s = Snackbar.make(this, config.message, config.duration)
-//    config.backGroundColor?.let { s.view.setBackgroundColor(it.asColor(context)) }
-    if(config.anchorView != null){
+    config.backGroundColor?.let {
+        s.view.setBackgroundColor(
+            ResourcesCompat.getColor(context.resources, it, null)
+        )
+    }
+    if (config.anchorView != null) {
         s.anchorView = config.anchorView
     }
-    if(config.hasAction()){
+    if (config.hasAction()) {
         s.setAction(config.actionLabel!!) {
             config.actionBlock!!()
         }
@@ -82,20 +90,24 @@ fun View.showSnackbar(config: UiEvent.Snack) {
 
 
 sealed class UiEvent {
-    data class Snack(
-        @StringRes val message : Int,
-        val duration: Int = Snackbar.LENGTH_LONG ,
+    data class SnackBar(
+        @StringRes val message: Int,
+        val duration: Int = Snackbar.LENGTH_LONG,
         val anchorView: View? = null,
+        @ColorRes val backGroundColor: Int? = R.color.primary,
         @StringRes val actionLabel: Int? = null,
-        val actionBlock: (()->Unit)? = null
+        val actionBlock: (() -> Unit)? = null
     ) {
-        fun hasAction() : Boolean {
+        fun hasAction(): Boolean {
             return actionBlock != null && actionLabel != null
         }
     }
 }
 
-fun View.registerImeVisibilityListener(openAction: () -> Unit, closeAction: () -> Unit) : ViewTreeObserver.OnGlobalLayoutListener {
+fun View.registerImeVisibilityListener(
+    openAction: () -> Unit,
+    closeAction: () -> Unit
+): ViewTreeObserver.OnGlobalLayoutListener {
 
     var isKeyboardShowing = false
 
@@ -109,8 +121,7 @@ fun View.registerImeVisibilityListener(openAction: () -> Unit, closeAction: () -
                 isKeyboardShowing = true
                 openAction()
             }
-        }
-        else {
+        } else {
             if (isKeyboardShowing) {
                 isKeyboardShowing = false
                 closeAction()

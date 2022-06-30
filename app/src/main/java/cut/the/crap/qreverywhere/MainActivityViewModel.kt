@@ -69,7 +69,7 @@ class MainActivityViewModel @Inject constructor(
     }
 
     fun saveQrImageOfDetailView(context: Context) {
-        saveImageToFile(detailViewQrCodeItem.img, context)
+        saveImageToFile(detailViewQrCodeItem, context)
     }
 
     fun removeHistoryItem(pos: Int) {
@@ -79,6 +79,12 @@ class MainActivityViewModel @Inject constructor(
             }
 
         }
+    }
+
+    fun provideListItem(pos: Int): QrCodeItem? {
+        historyAdapterData.value?.let {
+            return it[pos]
+        } ?: return null
     }
 
 

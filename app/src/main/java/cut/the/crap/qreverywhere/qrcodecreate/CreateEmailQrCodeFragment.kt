@@ -12,7 +12,7 @@ import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentCreateEmailQrCodeBinding
 import cut.the.crap.qreverywhere.db.QrCodeItem
 import cut.the.crap.qreverywhere.stuff.UiEvent
-import cut.the.crap.qreverywhere.stuff.showSnackbar
+import cut.the.crap.qreverywhere.stuff.showSnackBar
 import cut.the.crap.qreverywhere.stuff.textChanges
 import cut.the.crap.qreverywhere.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,8 +48,8 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                         if(it.data != null){
                             createEmailQrImagePreview.setImageBitmap(it.data.img)
                         } else {
-                            root.showSnackbar(
-                                UiEvent.Snack(message = R.string.app_name, anchorView = bottomNav)
+                            root.showSnackBar(
+                                UiEvent.SnackBar(message = R.string.app_name, anchorView = bottomNav)
                             )
                         }
                         createEmailHeaderGroup.visibility = View.VISIBLE
@@ -62,8 +62,8 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                                 getString(R.string.error_invalid_email_address)
                             is WriterException -> {
                                 val anchor = bottomNav
-                                root.showSnackbar(
-                                    UiEvent.Snack(
+                                root.showSnackBar(
+                                    UiEvent.SnackBar(
                                         message = R.string.error_could_not_create_qr_image,
                                         anchorView = anchor
                                     )

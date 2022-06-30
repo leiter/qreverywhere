@@ -6,7 +6,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.qrcodescan.HomeFragment
-import cut.the.crap.qreverywhere.stuff.createIntent
+import cut.the.crap.qreverywhere.stuff.createOpenIntent
 import cut.the.crap.qreverywhere.stuff.hasPermission
 import cut.the.crap.qreverywhere.stuff.showShortToast
 
@@ -50,7 +50,7 @@ inline fun <reified T : Activity> implDelegate(permissionDeniedAction: () -> Uni
                         "QrReaderActivity.EXTRA_QR_DATA"
                     ) ?: ""
                     if(barcodeRawValue.isNotEmpty()){
-                        createIntent(barcodeRawValue, fragment.requireContext())?.let {
+                        createOpenIntent(barcodeRawValue, fragment.requireContext())?.let {
                             fragment.startActivity(it)
                         } ?: run {
                             //todo inform and display content   (callback(text))

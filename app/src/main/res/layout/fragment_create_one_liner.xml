@@ -59,12 +59,11 @@
             android:id="@+id/createOneLinerInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="144dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="24dp"
             android:hint="@string/create_one_liner_input_layout_hint_web"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_max="144dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/createOneLinerNumberInputLayout">
 
@@ -72,13 +71,15 @@
                 android:id="@+id/createOneLinerInputField"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="top"
-                android:lineSpacingExtra="24dp"/>
+                android:maxHeight="144dp"
+                android:lineSpacingExtra="24dp"
+                android:gravity="top"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/createOneLinerCreate"
-            android:layout_width="144dp"
+            android:layout_width="wrap_content"
+            app:layout_constraintWidth_min="112dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="24dp"
@@ -88,7 +89,8 @@
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/createOneLinerTest"
-            android:layout_width="144dp"
+            android:layout_width="wrap_content"
+            app:layout_constraintWidth_min="112dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="24dp"

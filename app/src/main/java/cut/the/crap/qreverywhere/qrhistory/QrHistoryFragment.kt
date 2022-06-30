@@ -3,6 +3,7 @@ package cut.the.crap.qreverywhere.qrhistory
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -27,12 +28,21 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
         findNavController().navigate(R.id.action_qrHistoryFragment_to_detailViewFragment)
     }
 
-    private val removeHistoryItem: (Int) -> Unit = { pos ->
-        activityViewModel.removeHistoryItem(pos)
+    private val removeHistoryItem: (position:Int , direction: Int) -> Unit = { pos, direction ->
+        when(direction){
+            ItemTouchHelper.START ->{
+                findNavController().navigate(R.id.action_qrHistoryFragment_to_qrFullscreenFragment, bundleOf(
+                    "itemPosition" to pos
+                ))
+            }
+            ItemTouchHelper.END -> activityViewModel.removeHistoryItem(pos)
+
+        }
+
     }
 
     private val historyListAdapter by lazy {
-        QrHistoryAdapter(requireContext(),detailViewItemClicked)
+        QrHistoryAdapter(requireContext(), detailViewItemClicked)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

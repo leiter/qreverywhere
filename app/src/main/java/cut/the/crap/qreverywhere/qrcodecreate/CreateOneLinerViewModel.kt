@@ -8,9 +8,11 @@ import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.db.QrCodeItem
 import cut.the.crap.qreverywhere.repository.QrHistoryRepository
 import cut.the.crap.qreverywhere.stuff.Acquire
+import cut.the.crap.qreverywhere.stuff.SingleLiveDataEvent
 import cut.the.crap.qreverywhere.stuff.textToImageEnc
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
@@ -18,33 +20,65 @@ class CreateOneLinerViewModel @Inject constructor(
     private val historyRepository: QrHistoryRepository
 ) : ViewModel() {
 
-    val qrCodeItemState = MutableLiveData<State<QrCodeItem>>()
+    val qrCodeItemState = SingleLiveDataEvent<State<QrCodeItem>>(null)
+
     var currentInputText = ""
     var currentInputNumber = ""
 
-    private fun createWebQrcode() {
+    private fun createWebQrcode(resources: Resources) {
+        viewModelScope.launch {
+            val bitmap = textToImageEnc(currentInputText, resources)
+            val qrCodeItem = QrCodeItem(img = bitmap, textContent = currentInputText, acquireType = Acquire.CREATED)
+            historyRepository.insertQrItem(qrCodeItem)
+            qrCodeItemState.value = State.success()
+        }
+    }
+
+    private fun createSMSQrcode(resources: Resources) {
 
     }
 
-    private fun createSMSQrcode() {
-
-    }
-
-    private fun createCallQrcode() {
+    private fun createCallQrcode(resources: Resources) {
+        viewModelScope.launch {
+            val uriString = TEL_PREFIX + currentInputNumber
+            val bitmap = textToImageEnc(uriString, resources)
+            val qrCodeItem = QrCodeItem(img = bitmap, textContent = uriString, acquireType = Acquire.CREATED)
+            historyRepository.insertQrItem(qrCodeItem)
+            qrCodeItemState.value = State.success()
+        }
 
     }
 
     private fun testWebQrcode(resources: Resources) {
-        startLoading()
+        val isValid = isValidWebUrl()
+        if(isValid ){
+            viewModelScope.launch {
+                val bitmap = textToImageEnc(currentInputText, resources)
+                val qrCodeItem = QrCodeItem(img = bitmap, textContent = currentInputText, acquireType = Acquire.CREATED)
+                qrCodeItemState.value = State.success(qrCodeItem)
+            }
+        } else {
+            qrCodeItemState.value = State.error(error = InvalidWebUrl())
+        }
     }
 
     private fun testSMSQrcode(resources: Resources) {
-        startLoading()
+        val isValid = isValidPhoneNumber()
+        if(isValid ){
+            viewModelScope.launch {
+                val uriString = SMS_PREFIX + currentInputNumber
+                val bitmap = textToImageEnc(uriString, resources)
+                val qrCodeItem = QrCodeItem(img = bitmap, textContent = uriString, acquireType = Acquire.CREATED)
+                qrCodeItemState.value = State.success(qrCodeItem)
+            }
+        } else {
+            qrCodeItemState.value = State.error(error = InvalidPhoneNumber())
+        }
     }
 
-    private fun testCallQrcode(resources: Resources) {
-        val isValid = android.util.Patterns.PHONE.matcher(currentInputNumber).matches()
-        if(isValid){
+    private fun testCallQrcode(resources: Resources) : Boolean {
+        val isValid = isValidPhoneNumber()
+        if(isValid ){
             viewModelScope.launch {
                 val uriString = TEL_PREFIX + currentInputNumber
                 val bitmap = textToImageEnc(uriString, resources)
@@ -52,30 +86,51 @@ class CreateOneLinerViewModel @Inject constructor(
                 qrCodeItemState.value = State.success(qrCodeItem)
             }
         } else {
-            qrCodeItemState.value = State.error()
+            qrCodeItemState.value = State.error(error = InvalidPhoneNumber())
         }
+        return isValid
+    }
+
+    private fun isValidPhoneNumber() : Boolean {
+        return android.util.Patterns.PHONE.matcher(currentInputNumber).matches()
+    }
+
+    private fun isValidWebUrl() : Boolean {
+        currentInputText = currentInputText.trim()
+        return android.util.Patterns.WEB_URL.matcher(currentInputText).matches()
     }
 
     private fun startLoading(){
         qrCodeItemState.value = State.loading()
     }
 
-    fun createClicked(mode: Int){
+    fun createClicked(mode: Int, resources: Resources){
+        startLoading()
         when(mode){
-            CreateOneLinerFragment.CREATE_PHONE -> createCallQrcode()
-            CreateOneLinerFragment.CREATE_SMS -> createSMSQrcode()
-            CreateOneLinerFragment.CREATE_WEB -> createWebQrcode()
+            CreateOneLinerFragment.CREATE_PHONE -> {
+                if(isValidPhoneNumber()) createCallQrcode(resources)
+                else qrCodeItemState.value = State.error(error = InvalidPhoneNumber())
+            }
+            CreateOneLinerFragment.CREATE_SMS -> {
+                if(isValidPhoneNumber())  createSMSQrcode(resources)
+                else qrCodeItemState.value = State.error(error = InvalidPhoneNumber())
+
+            }
+            CreateOneLinerFragment.CREATE_WEB -> {
+                if(isValidWebUrl())  createWebQrcode(resources)
+                else qrCodeItemState.value = State.error(error = InvalidWebUrl())
+            }
 
             else -> throw IllegalArgumentException("No function associated with mode $mode")
         }
     }
 
     fun testClicked(mode: Int, resources: Resources) {
+        startLoading()
         when(mode){
             CreateOneLinerFragment.CREATE_PHONE -> testCallQrcode(resources)
             CreateOneLinerFragment.CREATE_SMS -> testSMSQrcode(resources)
             CreateOneLinerFragment.CREATE_WEB -> testWebQrcode(resources)
-
             else -> throw IllegalArgumentException("No function associated with mode $mode")
         }
     }
@@ -85,5 +140,8 @@ class CreateOneLinerViewModel @Inject constructor(
         const val TEL_PREFIX = "tel:"
     }
 
+
 }
 
+class InvalidPhoneNumber : Exception()
+class InvalidWebUrl : Exception()

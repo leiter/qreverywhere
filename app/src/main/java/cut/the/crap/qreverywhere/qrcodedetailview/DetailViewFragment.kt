@@ -13,7 +13,7 @@ import com.bumptech.glide.Glide
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentDetailViewBinding
-import cut.the.crap.qreverywhere.stuff.createIntent
+import cut.the.crap.qreverywhere.stuff.createOpenIntent
 import cut.the.crap.qreverywhere.stuff.getQrLaunchText
 import cut.the.crap.qreverywhere.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,7 +50,7 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
     }
 
     private fun launchClicked(){
-        val intent = createIntent(
+        val intent = createOpenIntent(
             activityViewModel.detailViewQrCodeItem.textContent, requireContext()
         )
         startActivity(intent)

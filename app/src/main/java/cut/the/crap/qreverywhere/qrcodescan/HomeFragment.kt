@@ -13,17 +13,13 @@ import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import com.google.common.util.concurrent.ListenableFuture
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentHomeBinding
 import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegate
 import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegateImpl
-import cut.the.crap.qreverywhere.stuff.Acquire
-import cut.the.crap.qreverywhere.stuff.createIntent
-import cut.the.crap.qreverywhere.stuff.hasPermission
-import cut.the.crap.qreverywhere.stuff.showShortToast
+import cut.the.crap.qreverywhere.stuff.*
 import cut.the.crap.qreverywhere.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.ExecutionException
@@ -35,26 +31,23 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
     private val activityViewModel by activityViewModels<MainActivityViewModel>()
 
-    private val viewModel by viewModels<HomeViewModel>()
+    private val viewBinding by viewBinding {
+        FragmentHomeBinding.bind(requireView())
+    }
 
     private val cameraPermissionLauncher: androidx.activity.result.ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
-                viewBinding.previewView.visibility = View.VISIBLE
+                viewBinding.previewView.visible()
                 startCamera()
             } else {
-                viewBinding.previewView.visibility = View.GONE
+                viewBinding.previewView.gone()
                 requireContext().showShortToast(R.string.permission_denied_text)
             }
         }
 
     private val cameraProviderFuture: ListenableFuture<ProcessCameraProvider> by lazy {
         ProcessCameraProvider.getInstance(requireActivity())
-    }
-
-
-    private val viewBinding by viewBinding {
-        FragmentHomeBinding.bind(requireView())
     }
 
     override fun onAttach(context: Context) {
@@ -138,16 +131,16 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
     private fun handleCameraPermission() {
         if (requireContext().hasPermission(android.Manifest.permission.CAMERA)) {
-            viewBinding.previewView.visibility = View.VISIBLE
+            viewBinding.previewView.visible()
             startCamera()
         } else {
-            viewBinding.previewView.visibility = View.GONE
+            viewBinding.previewView.gone()
             cameraPermissionLauncher.launch(android.Manifest.permission.CAMERA)
         }
     }
 
     override fun handleQrCode(qrCode: String, @Acquire.Type type: Int) {
-        createIntent(qrCode, requireContext())?.let { intent ->
+        createOpenIntent(qrCode, requireContext())?.let { intent ->
             startActivity(intent)
         } ?: run {
             //todo inform and display content (callback(text))

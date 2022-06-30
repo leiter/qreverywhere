@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/createQrCodeFragment"
         android:name="cut.the.crap.qreverywhere.qrcodecreate.CreateQrCodeFragment"
-        android:label="Create new"
+        android:label="Create"
         tools:layout="@layout/fragment_create_qr_code">
         <action
             android:id="@+id/action_createQrCodeFragment_to_createEmailQrCodeFragment"
@@ -21,9 +21,8 @@
     <fragment
         android:id="@+id/scanQrFragment"
         android:name="cut.the.crap.qreverywhere.qrcodescan.HomeFragment"
-        android:label="QrEveryWhere"
-
-        tools:layout="@layout/fragment_home" >
+        android:label="Scan"
+        tools:layout="@layout/fragment_home">
 
         <action
             android:id="@+id/action_scanQrFragment_to_detailViewFragment"
@@ -32,17 +31,20 @@
     <fragment
         android:id="@+id/qrHistoryFragment"
         android:name="cut.the.crap.qreverywhere.qrhistory.QrHistoryFragment"
-        android:label="QrEveryWhere"
-        tools:layout="@layout/fragment_qr_history" >
+        android:label="History"
+        tools:layout="@layout/fragment_qr_history">
         <action
             android:id="@+id/action_qrHistoryFragment_to_detailViewFragment"
             app:destination="@id/detailViewFragment" />
+        <action
+            android:id="@+id/action_qrHistoryFragment_to_qrFullscreenFragment"
+            app:destination="@id/qrFullscreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/createEmailQrCodeFragment"
         android:name="cut.the.crap.qreverywhere.qrcodecreate.CreateEmailQrCodeFragment"
         android:label="Create an email"
-        tools:layout="@layout/fragment_create_email_qr_code" >
+        tools:layout="@layout/fragment_create_email_qr_code">
         <action
             android:id="@+id/action_createEmailQrCodeFragment_to_createQrCodeFragment"
             app:destination="@id/createQrCodeFragment" />
@@ -51,7 +53,7 @@
         android:id="@+id/detailViewFragment"
         android:name="cut.the.crap.qreverywhere.qrcodedetailview.DetailViewFragment"
         android:label="Detail view"
-        tools:layout="@layout/fragment_detail_view" >
+        tools:layout="@layout/fragment_detail_view">
         <action
             android:id="@+id/action_detailViewFragment_to_qrHistoryFragment"
             app:destination="@id/qrHistoryFragment" />
@@ -60,13 +62,25 @@
         android:id="@+id/createOneLinerFragment"
         android:name="cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment"
         android:label=""
-        tools:layout="@layout/fragment_create_one_liner" >
+        tools:layout="@layout/fragment_create_one_liner">
         <argument
             android:name="useCaseMode"
             app:argType="integer" />
         <action
             android:id="@+id/action_createOneLinerFragment_to_createQrCodeFragment"
             app:destination="@id/createQrCodeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/qrFullscreenFragment"
+        android:name="cut.the.crap.qreverywhere.qrfullscreen.QrFullscreenFragment"
+        android:label="Fullscreen"
+        tools:layout="@layout/fragment_qr_fullscreen">
+        <action
+            android:id="@+id/action_qrFullscreenFragment_to_qrHistoryFragment"
+            app:destination="@id/qrHistoryFragment" />
+        <argument
+            android:name="itemPosition"
+            app:argType="integer" />
     </fragment>
 
 </navigation>

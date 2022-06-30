@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.ItemQrHistoryBinding
 
-class ItemDragManager(private val swipeAction: (Int) -> Unit, dragDirs: Int, swipeDirs: Int) :
+class ItemDragManager(private val swipeAction: (pos: Int, direction: Int) -> Unit, dragDirs: Int, swipeDirs: Int) :
     ItemTouchHelper.SimpleCallback(dragDirs, swipeDirs) {
 
     override fun onMove(
@@ -18,7 +18,7 @@ class ItemDragManager(private val swipeAction: (Int) -> Unit, dragDirs: Int, swi
 
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        swipeAction(viewHolder.adapterPosition)
+        swipeAction(viewHolder.adapterPosition, direction)
     }
 
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {

@@ -5,17 +5,21 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.Bitmap
+import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Environment
 import android.util.Log
+import android.view.View
 import androidx.annotation.IntDef
 import androidx.core.content.res.ResourcesCompat
 import com.google.zxing.*
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.common.HybridBinarizer
 import cut.the.crap.qreverywhere.R
+import cut.the.crap.qreverywhere.db.QrCodeItem
 import cut.the.crap.qreverywhere.stuff.QrCode.EMAIL
 import cut.the.crap.qreverywhere.stuff.QrCode.PHONE
 import cut.the.crap.qreverywhere.stuff.QrCode.SMS
@@ -88,14 +92,14 @@ fun getQrLaunchText(contentString: String) : Int {
         contentString.startsWith("https:") -> R.string.ic_open_in_browser
         contentString.startsWith("sms:") -> R.string.ic_sms
         contentString.startsWith("smsto:") -> R.string.ic_sms
-        else -> R.drawable.ic_content
+        else -> R.string.app_name
     }
 }
 
 
-fun saveImageToFile(myBitmap: Bitmap, context: Context): String? {
+fun saveImageToFile(qrCodeItem: QrCodeItem, context: Context): String? {
     val bytes = ByteArrayOutputStream()
-    myBitmap.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
+    qrCodeItem.img.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
     val directory = File(
         Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
         IMAGE_DIRECTORY
@@ -112,7 +116,10 @@ fun saveImageToFile(myBitmap: Bitmap, context: Context): String? {
         f.createNewFile() // todo give read write permission
         val fo = FileOutputStream(f)
         fo.write(bytes.toByteArray())
-        MediaScannerConnection.scanFile(context, arrayOf(f.path), arrayOf("image/jpeg"), null)
+        MediaScannerConnection.scanFile(context, arrayOf(f.path), arrayOf("image/jpeg")) { path, uri ->
+            val updateQritem = qrCodeItem.copy()
+            Log.e("TAG", "MediaScanner::--->" + uri.toString())
+        }
         fo.close()
         Log.d("TAG", "File Saved::--->" + f.absolutePath)
         return f.absolutePath
@@ -156,7 +163,7 @@ suspend fun textToImageEnc(textContent: String, resources: Resources): Bitmap {
 
 
 // todo integrate settings display result or fire intent here
-fun createIntent(qrString: String, context: Context): Intent? {
+fun createOpenIntent(qrString: String, context: Context): Intent? {
     return when {
         qrString.startsWith("tel:") -> Intent(Intent.ACTION_DIAL, Uri.parse(qrString))
         qrString.startsWith("mailto:") -> Intent(Intent.ACTION_SENDTO, Uri.parse(qrString))
@@ -172,9 +179,45 @@ fun createIntent(qrString: String, context: Context): Intent? {
     }
 }
 
+fun createShareIntent(qrImgUri: Uri) : Intent {
+    return Intent(Intent.ACTION_SEND).apply {
+//        data = qrImgUri;
+        type = "image/png";
+        putExtra(Intent.EXTRA_STREAM, qrImgUri);
+//        activity.startActivityForResult(Intent.createChooser(shareIntent, "Share Via"), Navigator.REQUEST_SHARE_ACTION);
+    }
+}
+
+private fun shareBitmap(context: Context, bitmap: Bitmap, fileName: String) {
+    try {
+        val file: File = File(context.cacheDir, "$fileName.png")
+        val fOut = FileOutputStream(file)
+        bitmap.compress(CompressFormat.PNG, 100, fOut)
+        fOut.flush()
+        fOut.close()
+//        file.setReadable(true, false)
+        val intent = Intent(Intent.ACTION_SEND)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file))
+        intent.type = "image/png"
+        context.startActivity(intent)
+    } catch (e: java.lang.Exception) {
+        e.printStackTrace()
+    }
+}
+
+fun screenShot(view: View): Bitmap? {
+    val bitmap = Bitmap.createBitmap(
+        view.width,
+        view.height, Bitmap.Config.ARGB_8888
+    )
+    val canvas = Canvas(bitmap)
+    view.draw(canvas)
+    return bitmap
+}
+
 private fun isIntentAvailable(intent: Intent, context: Context): Boolean {
     val packageManager: PackageManager = context.packageManager
-
     val list = packageManager.queryIntentActivities(
         intent,
         PackageManager.MATCH_DEFAULT_ONLY
@@ -211,4 +254,8 @@ fun bitmapToArray(bmp: Bitmap): ByteArray {
     val stream = ByteArrayOutputStream()
     bmp.compress(Bitmap.CompressFormat.JPEG, 50, stream)
     return stream.toByteArray()
+}
+
+fun extractDomain(url: String) : String {
+    return android.util.Patterns.DOMAIN_NAME.toRegex().find(url)?.value ?: ""
 }
