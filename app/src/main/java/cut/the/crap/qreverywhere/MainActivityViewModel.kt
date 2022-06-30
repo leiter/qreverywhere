@@ -9,7 +9,7 @@ import cut.the.crap.qreverywhere.db.QrCodeItem
 import cut.the.crap.qreverywhere.repository.QrHistoryRepository
 import cut.the.crap.qreverywhere.stuff.Acquire
 import cut.the.crap.qreverywhere.stuff.saveImageToFile
-import cut.the.crap.qreverywhere.stuff.textToImageEncoder
+import cut.the.crap.qreverywhere.stuff.textToImageEnc
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -49,10 +49,11 @@ class MainActivityViewModel @Inject constructor(
 
     @Throws(WriterException::class)
     fun saveQrItemFromFile(textContent: String, resources: Resources, @Acquire.Type type: Int) {
-        val bitmap = textToImageEncoder(textContent, resources)!!
-        val historyItem = QrCodeItem(img = bitmap, textContent = textContent, acquireType = type)
-        _currentScannedQrCodeItem = historyItem
+
         viewModelScope.launch {
+            val bitmap = textToImageEnc(textContent, resources)!!
+            val historyItem = QrCodeItem(img = bitmap, textContent = textContent, acquireType = type)
+            _currentScannedQrCodeItem = historyItem
             historyRepository.insertQrItem(historyItem)
         }
     }

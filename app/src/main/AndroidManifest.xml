@@ -30,10 +30,6 @@
         android:theme="@style/Theme.QrEveryWhere"
         tools:targetApi="31">
         <activity
-            android:name=".QrReaderActivity"
-            android:screenOrientation="portrait"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"

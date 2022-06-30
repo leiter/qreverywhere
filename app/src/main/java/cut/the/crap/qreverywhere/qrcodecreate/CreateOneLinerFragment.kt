@@ -1,16 +1,23 @@
 package cut.the.crap.qreverywhere.qrcodecreate
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import cut.the.crap.qreverywhere.R
+import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentCreateOneLinerBinding
+import cut.the.crap.qreverywhere.stuff.*
 import cut.the.crap.qreverywhere.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.debounce
 
 @AndroidEntryPoint
 class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner) {
@@ -19,30 +26,94 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner) {
 
     private val viewBinding by viewBinding { FragmentCreateOneLinerBinding.bind(requireView()) }
 
+    private val viewModel by viewModels<CreateOneLinerViewModel>()
 
+
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        when(args.useCaseMode){
+        when (args.useCaseMode) {
             CREATE_PHONE -> setupCreateCallQrcode()
             CREATE_SMS -> setupCreateSMSQrcode()
             CREATE_WEB -> setupCreateWebQrcode()
             else -> throw IllegalArgumentException("No fragment associated with this id=${args.useCaseMode}")
         }
+
+        with(viewBinding) {
+            createOneLinerTest.setOnClickListener {
+                viewModel.testClicked(args.useCaseMode, resources)
+            }
+
+            createOneLinerCreate.setOnClickListener {
+                viewModel.createClicked(args.useCaseMode)
+            }
+
+            lifecycleScope.launchWhenResumed {
+                if (args.useCaseMode == CREATE_SMS || args.useCaseMode == CREATE_PHONE) {
+                    createOneLinerNumberInputField.textChanges().collect {
+                        viewModel.currentInputNumber = it.toString()
+                    }
+                }
+            }
+            lifecycleScope.launchWhenResumed {
+                createOneLinerInputField.textChanges().collect {
+                    viewModel.currentInputText = it.toString()
+                }
+            }
+        }
+        viewModel.qrCodeItemState.observe(viewLifecycleOwner){ state ->
+            when(state){
+                is State.Success -> {
+                    showLoading(false)
+                    state.data?.let {
+                        startActivity(createIntent(it.textContent,requireContext()))
+                    }
+                }
+                is State.Error -> {
+                    showLoading(false)
+                }
+
+                is State.Loading -> {
+                    showLoading(true)
+                }
+            }
+        }
     }
 
+    private fun showLoading(show: Boolean){
+        if(show){
+            viewBinding.createOnelinerHeaderText.invisible()
+            viewBinding.createOneLinerLoading.visible()
+        } else{
+            viewBinding.createOnelinerHeaderText.visible()
+            viewBinding.createOneLinerLoading.invisible()
+        }
+
+    }
     private fun setupCreateCallQrcode() {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.create_title_phone)
+        with(viewBinding) {
+            createOneLinerInputLayout.gone()
+            createOnelinerHeaderText.setText(R.string.create_one_liner_header_text_phone)
+        }
     }
 
     private fun setupCreateSMSQrcode() {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.create_title_sms)
-
+        with(viewBinding) {
+            createOneLinerInputLayout.setHint(R.string.create_one_liner_input_layout_hint_sms)
+            createOnelinerHeaderText.setText(R.string.create_one_liner_header_text_sms)
+        }
     }
 
     private fun setupCreateWebQrcode() {
         (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.create_title_web)
-
+        with(viewBinding) {
+            createOneLinerNumberInputLayout.gone()
+            createOneLinerInputLayout.setHint(R.string.create_one_liner_input_layout_hint_web)
+            createOnelinerHeaderText.setText(R.string.create_one_liner_header_text_web)
+        }
     }
 
     companion object {

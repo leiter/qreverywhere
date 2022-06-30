@@ -34,6 +34,7 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
         ) { result ->
             if (result.resultCode == android.app.Activity.RESULT_OK) {
                 val uri = result.data?.data
+
                 uri?.let {
                     val g = scanQrImage(it, fragment.requireContext())  // todo use coroutine
                     g?.let {

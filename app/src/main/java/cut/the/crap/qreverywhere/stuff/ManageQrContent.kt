@@ -123,37 +123,7 @@ fun saveImageToFile(myBitmap: Bitmap, context: Context): String? {
 }
 
 @Throws(WriterException::class)
-fun textToImageEncoder(textContent: String, resources: Resources): Bitmap? {
-    // todo 2953  chars are fine
-
-    val bitMatrix: BitMatrix = try {
-        MultiFormatWriter().encode(
-            textContent,
-            BarcodeFormat.QR_CODE,
-            QRcodeWidth, QRcodeWidth, null
-        )
-    } catch (e: IllegalArgumentException) {
-        return null
-    }
-    val bitMatrixWidth = bitMatrix.width
-    val bitMatrixHeight = bitMatrix.height
-    val pixels = IntArray(bitMatrixWidth * bitMatrixHeight)
-    for (y in 0 until bitMatrixHeight) {
-        val offset = y * bitMatrixWidth
-        for (x in 0 until bitMatrixWidth) {
-            pixels[offset + x] =
-                if (bitMatrix[x, y]) ResourcesCompat.getColor(resources, R.color.black, null)
-                else ResourcesCompat.getColor(resources, R.color.white,null)
-        }
-    }
-    val bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_8888)
-    bitmap.setPixels(pixels, 0, 500, 0, 0, bitMatrixWidth, bitMatrixHeight)
-
-    return bitmap
-}
-
-@Throws(WriterException::class)
-suspend fun textToImageEnc(textContent: String, resources: Resources): Bitmap? {
+suspend fun textToImageEnc(textContent: String, resources: Resources): Bitmap {
     // todo 2953  chars are fine
 
     return withContext(Dispatchers.IO){

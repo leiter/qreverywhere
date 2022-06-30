@@ -7,11 +7,10 @@ import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.db.QrCodeItem
 import cut.the.crap.qreverywhere.repository.QrHistoryRepository
 import cut.the.crap.qreverywhere.stuff.Acquire
-import cut.the.crap.qreverywhere.stuff.textToImageEncoder
+import cut.the.crap.qreverywhere.stuff.textToImageEnc
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -22,10 +21,11 @@ class HomeViewModel @Inject constructor(
 
     @Throws(WriterException::class)
     fun saveQrItemFromFile(textContent: String, resources: Resources){
-        val bitmap = textToImageEncoder(textContent, resources)!!
-        val historyItem = QrCodeItem(img = bitmap, textContent = textContent, acquireType = Acquire.CREATED)
-        currentQrCodeItem = historyItem
+
         viewModelScope.launch {
+            val bitmap = textToImageEnc(textContent, resources)!!
+            val historyItem = QrCodeItem(img = bitmap, textContent = textContent, acquireType = Acquire.CREATED)
+            currentQrCodeItem = historyItem
             qrHistoryRepository.insertQrItem(historyItem)
         }
     }

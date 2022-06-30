@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.onStart
 @ExperimentalCoroutinesApi
 @CheckResult
 fun EditText.textChanges(): Flow<CharSequence?> {
-    return callbackFlow<CharSequence?> {
+    return callbackFlow {
         val listener = object : TextWatcher {
             override fun afterTextChanged(s: Editable?) = Unit
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) = Unit

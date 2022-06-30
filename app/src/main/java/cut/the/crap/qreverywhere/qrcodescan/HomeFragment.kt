@@ -150,7 +150,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         createIntent(qrCode, requireContext())?.let { intent ->
             startActivity(intent)
         } ?: run {
-            //todo inform and display content   (callback(text))
+            //todo inform and display content (callback(text))
         }
         activityViewModel.saveQrItemFromFile(qrCode, resources, type)
     }

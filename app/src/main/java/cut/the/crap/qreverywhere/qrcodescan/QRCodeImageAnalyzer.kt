@@ -14,6 +14,9 @@ import java.util.logging.Handler
 class QRCodeImageAnalyzer(listener: QRCodeFoundListener) : ImageAnalysis.Analyzer {
     private val listener: QRCodeFoundListener
 
+    private var throttle: Long = 0L
+    private val waitingTime = 2000L
+
     override fun analyze(image: ImageProxy) {
         if (image.format == ImageFormat.YUV_420_888 || image.format == ImageFormat.YUV_422_888 || image.format == ImageFormat.YUV_444_888) {
             val byteBuffer: ByteBuffer = image.planes[0].buffer
@@ -29,8 +32,12 @@ class QRCodeImageAnalyzer(listener: QRCodeFoundListener) : ImageAnalysis.Analyze
             val binaryBitmap = BinaryBitmap(HybridBinarizer(source))
             try {
                 val result = QRCodeMultiReader().decode(binaryBitmap)
-                android.os.Handler(Looper.getMainLooper()).post {
-                    listener.onQRCodeFound(result.text)
+                val now = System.currentTimeMillis()
+                if(now - throttle > waitingTime){
+                    throttle = now
+                    android.os.Handler(Looper.getMainLooper()).post {
+                        listener.onQRCodeFound(result.text)
+                    }
                 }
             } catch (e: FormatException) {
                 listener.qrCodeNotFound()
