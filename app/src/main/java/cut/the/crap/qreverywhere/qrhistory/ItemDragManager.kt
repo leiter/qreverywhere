@@ -5,13 +5,16 @@ import android.view.ViewParent
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import cut.the.crap.qreverywhere.R
+import cut.the.crap.qreverywhere.databinding.ItemQrHistoryBinding
 
-class ItemDragManager(private val swipeAction: (Int)-> Unit, dragDirs: Int, swipeDirs: Int) : ItemTouchHelper.SimpleCallback(dragDirs, swipeDirs) {
+class ItemDragManager(private val swipeAction: (Int) -> Unit, dragDirs: Int, swipeDirs: Int) :
+    ItemTouchHelper.SimpleCallback(dragDirs, swipeDirs) {
 
     override fun onMove(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder,
-        target: RecyclerView.ViewHolder): Boolean = true
+        target: RecyclerView.ViewHolder
+    ): Boolean = true
 
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
@@ -19,22 +22,26 @@ class ItemDragManager(private val swipeAction: (Int)-> Unit, dragDirs: Int, swip
     }
 
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
-//        ItemTouchHelper.Callback.getDefaultUIUtil().clearView(viewHolder.itemView.child_foreground)
+        val vh = viewHolder as? QrHistoryAdapter.QrHistoryViewHolder<ItemQrHistoryBinding>
+        ItemTouchHelper.Callback.getDefaultUIUtil().clearView(vh?.binding?.historyItemForeground)
     }
 
     override fun onChildDrawOver(
         c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder?,
         dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean
     ) {
+        val vh = viewHolder as? QrHistoryAdapter.QrHistoryViewHolder<ItemQrHistoryBinding>
+
         ItemTouchHelper.Callback.getDefaultUIUtil().onDrawOver(
-            c, recyclerView, viewHolder?.itemView?.rootView,
+            c, recyclerView, vh?.binding?.historyItemForeground,
             dX, dY, actionState, isCurrentlyActive
         )
     }
 
     override fun onChildDraw(
         c: Canvas, recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
-        dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+        dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean
+    ) {
         val dragView = if (viewHolder.itemView is ViewParent) {
             viewHolder.itemView.findViewById(R.id.history_item_foreground) ?: viewHolder.itemView
         } else {
@@ -49,6 +56,7 @@ class ItemDragManager(private val swipeAction: (Int)-> Unit, dragDirs: Int, swip
     }
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
-        ItemTouchHelper.Callback.getDefaultUIUtil().onSelected(viewHolder?.itemView?.rootView)
+        val vh = viewHolder as? QrHistoryAdapter.QrHistoryViewHolder<ItemQrHistoryBinding>
+        ItemTouchHelper.Callback.getDefaultUIUtil().onSelected(vh?.binding?.historyItemForeground)
     }
 }
