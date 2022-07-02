@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:paddingBottom="24dp"
         android:paddingHorizontal="24dp">
 
         <com.google.android.material.textfield.TextInputLayout
@@ -20,10 +21,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="Recipient email"
-            android:maxHeight="100dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/createEmailQrImagePreview">
+            app:layout_constraintTop_toBottomOf="@+id/createEmailButtonSaveQrToFile">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/createEmailAddressText"
@@ -120,19 +120,20 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:src="@drawable/ic_launcher_background"
-            android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_goneMarginTop="16dp" />
 
         <Button
             android:id="@+id/createEmailButtonSaveQrToFile"
+            android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Save to file"
-            app:layout_constraintBottom_toBottomOf="@+id/createEmailQrImagePreview"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/createEmailQrImagePreview" />
+            app:layout_constraintEnd_toEndOf="@+id/createEmailQrImagePreview"
+            app:layout_constraintStart_toStartOf="@+id/createEmailQrImagePreview"
+            app:layout_constraintTop_toBottomOf="@+id/createEmailQrImagePreview" />
 
         <androidx.constraintlayout.widget.Group
             android:id="@+id/createEmailHeaderGroup"

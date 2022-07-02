@@ -1,17 +1,22 @@
 package cut.the.crap.qreverywhere.qrhistory
 
 import android.os.Bundle
+import android.view.Menu
 import androidx.fragment.app.Fragment
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentQrHistoryBinding
 import cut.the.crap.qreverywhere.db.QrCodeItem
+import cut.the.crap.qreverywhere.stuff.UiEvent
 import cut.the.crap.qreverywhere.stuff.gone
+import cut.the.crap.qreverywhere.stuff.showSnackBar
 import cut.the.crap.qreverywhere.stuff.visible
 import cut.the.crap.qreverywhere.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,19 +28,43 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
 
     private val activityViewModel by activityViewModels<MainActivityViewModel>()
 
+    private fun getProgressIndicator(): LinearProgressIndicator {
+        return requireActivity().findViewById(R.id.top_progress_indicator)
+    }
+
+    private val progress by lazy {
+        getProgressIndicator()
+    }
+
+    private fun getBottomNavigationView(): BottomNavigationView {
+        return requireActivity().findViewById(R.id.nav_view)
+    }
+
     private val detailViewItemClicked: (QrCodeItem) -> Unit = {
         activityViewModel.setDetailViewItem(it)
         findNavController().navigate(R.id.action_qrHistoryFragment_to_detailViewFragment)
     }
 
-    private val removeHistoryItem: (position:Int , direction: Int) -> Unit = { pos, direction ->
+    private val handleSwipeAction: (position:Int, direction: Int) -> Unit = { pos, direction ->
         when(direction){
             ItemTouchHelper.START ->{
                 findNavController().navigate(R.id.action_qrHistoryFragment_to_qrFullscreenFragment, bundleOf(
                     "itemPosition" to pos
                 ))
             }
-            ItemTouchHelper.END -> activityViewModel.removeHistoryItem(pos)
+            ItemTouchHelper.END -> {
+                val backup = activityViewModel.removeHistoryItem(pos)
+                viewBinding.root.showSnackBar(
+                    UiEvent.SnackBar(
+                        message = R.string.item_deleted,
+                        anchorView = getBottomNavigationView(),
+                        actionLabel = R.string.undo_delete,
+                        actionBlock = {
+                            activityViewModel.saveQrItem(backup!!)
+                        }
+                    )
+                )
+            }
 
         }
 
@@ -45,11 +74,16 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
         QrHistoryAdapter(requireContext(), detailViewItemClicked)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         with(viewBinding) {
-            val dragManager = ItemDragManager(removeHistoryItem,0, ItemTouchHelper.END or ItemTouchHelper.START)
+            val dragManager = ItemDragManager(handleSwipeAction,0, ItemTouchHelper.END or ItemTouchHelper.START)
             ItemTouchHelper(dragManager).attachToRecyclerView(qrHistoryList)
             qrHistoryList.adapter = historyListAdapter
             activityViewModel.historyAdapterData.observe(viewLifecycleOwner){
@@ -60,7 +94,20 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
                 }
                 historyListAdapter.setData(it)
             }
+            activityViewModel.progressIndication.observe(viewLifecycleOwner){
+                it?.let {
+                    if(it) progress.show()
+                    else {
+                        progress.hide()
+                    }
+                }
+            }
         }
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.clear()
+        super.onPrepareOptionsMenu(menu)
     }
 
 }

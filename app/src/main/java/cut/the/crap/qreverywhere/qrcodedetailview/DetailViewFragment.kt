@@ -13,8 +13,7 @@ import com.bumptech.glide.Glide
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentDetailViewBinding
-import cut.the.crap.qreverywhere.stuff.createOpenIntent
-import cut.the.crap.qreverywhere.stuff.getQrLaunchText
+import cut.the.crap.qreverywhere.stuff.*
 import cut.the.crap.qreverywhere.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,18 +41,26 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
         with(viewBinding){
             Glide.with(root.context).load(item.img).into(detailViewContentPreviewImage)
             detailViewContentTextView.text = Uri.decode(item.textContent)
-            detailViewActionTypeTextView.text = launchText
-            detailViewLaunchActionButton.setOnClickListener {
-                launchClicked()
+            if(determineType(activityViewModel.detailViewQrCodeItem.textContent)!= QrCode.UNKNOWN_CONTENT){
+                detailViewActionTypeTextView.text = launchText
+                detailViewLaunchActionButton.setOnClickListener {
+                    launchClicked()
+                }
+            } else {
+                detailViewLaunchActionButton.gone()
             }
+
         }
     }
 
     private fun launchClicked(){
-        val intent = createOpenIntent(
-            activityViewModel.detailViewQrCodeItem.textContent, requireContext()
-        )
-        startActivity(intent)
+        if(determineType(activityViewModel.detailViewQrCodeItem.textContent)!= QrCode.UNKNOWN_CONTENT){
+            val intent = createOpenIntent(
+                activityViewModel.detailViewQrCodeItem.textContent, requireContext()
+            )
+            startActivity(intent)
+        }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -72,6 +79,7 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.removeItem(R.id.action_about)
         inflater.inflate(R.menu.menu_detail_view,menu)
         super.onCreateOptionsMenu(menu, inflater)
     }

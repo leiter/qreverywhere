@@ -3,7 +3,9 @@ package cut.the.crap.qreverywhere.qrcodescan
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
+import android.view.animation.Animation
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.NonNull
@@ -13,6 +15,8 @@ import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.common.util.concurrent.ListenableFuture
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
@@ -48,6 +52,11 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
     private val cameraProviderFuture: ListenableFuture<ProcessCameraProvider> by lazy {
         ProcessCameraProvider.getInstance(requireActivity())
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onAttach(context: Context) {
@@ -127,6 +136,11 @@ class HomeFragment : Fragment(R.layout.fragment_home),
             }
             handleCameraPermission()
         }
+        activityViewModel.startDetailViewQrCodeItem.observe(viewLifecycleOwner){
+            it?.let {
+                findNavController().navigate(R.id.action_scanQrFragment_to_detailViewFragment)
+            }
+        }
     }
 
     private fun handleCameraPermission() {
@@ -140,12 +154,27 @@ class HomeFragment : Fragment(R.layout.fragment_home),
     }
 
     override fun handleQrCode(qrCode: String, @Acquire.Type type: Int) {
-        createOpenIntent(qrCode, requireContext())?.let { intent ->
-            startActivity(intent)
-        } ?: run {
-            //todo inform and display content (callback(text))
-        }
         activityViewModel.saveQrItemFromFile(qrCode, resources, type)
+        if(determineType(qrCode) != QrCode.UNKNOWN_CONTENT){
+            createOpenIntent(qrCode, requireContext())?.let { intent ->
+                startActivity(intent)
+            } ?: run {
+                //todo inform and display content (callback(text))
+            }
+        }
+
+    }
+
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_about -> {
+                findNavController().navigate(R.id.action_scanQrFragment_to_SettingsFragment)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 }

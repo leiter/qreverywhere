@@ -1,16 +1,15 @@
 package cut.the.crap.qreverywhere
 
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import cut.the.crap.qreverywhere.databinding.ActivityMainBinding
+import cut.the.crap.qreverywhere.qrpreferences.SettingsFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -24,12 +23,17 @@ val navSelectorHistory = arrayListOf(
     R.id.qrHistoryFragment,
     R.id.detailViewFragment
 )
+val navSelectorScanQr = arrayListOf(
+    R.id.scanQrFragment,
+    R.id.settingsFragment
+)
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    private val  binding: ActivityMainBinding by viewBinding {
+
+    private val binding: ActivityMainBinding by viewBinding {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
@@ -43,25 +47,30 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-            when(destination.id){
-                in navSelectorCreate -> navView.menu.getItem(1).isChecked = true
-                in navSelectorHistory -> navView.menu.getItem(2).isChecked = true
-                R.id.scanQrFragment -> navView.menu.getItem(0).isChecked = true
-            }
 
-        }
-        appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.scanQrFragment,
-            R.id.createQrCodeFragment,
-            R.id.qrHistoryFragment
-        ))
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
-        with(binding) {
-            fab.setOnClickListener { view ->
-//                readBarcode()
+            when (destination.id) {
+                in navSelectorCreate -> {
+                    navView.menu.getItem(1).isChecked = true
+                }
+                in navSelectorHistory -> {
+                    navView.menu.getItem(2).isChecked = true
+                }
+                R.id.scanQrFragment-> {
+                    navView.menu.getItem(0).isChecked = true
+                }
             }
         }
+
+        navView.setupWithNavController(navController)
+
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.scanQrFragment,
+                R.id.createQrCodeFragment,
+                R.id.qrHistoryFragment,
+            )
+        )
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
 
@@ -72,7 +81,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_settings -> true
+//            R.id.action_about -> {
+//                findNavController(R.id.nav_host_fragment_content_main).navigate(R.id.action_scanQrFragment_to_SettingsFragment)
+//                true
+//            }
             else -> super.onOptionsItemSelected(item)
         }
     }

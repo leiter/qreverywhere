@@ -1,6 +1,7 @@
 package cut.the.crap.qreverywhere.qrcodecreate
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -149,6 +150,16 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner) {
             createOneLinerInputLayout.setHint(R.string.create_one_liner_input_layout_hint_web)
             createOnelinerHeaderText.setText(R.string.create_one_liner_header_text_web)
         }
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.clear()
+        super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     companion object {

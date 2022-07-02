@@ -18,6 +18,16 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/Theme.QrEveryWhere.PopupOverlay" />
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/top_progress_indicator"
+            android:visibility="invisible"
+            app:minHideDelay="5000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:trackColor="@color/accent"
+            android:layout_gravity="bottom"
+            android:indeterminate="true"
+            />
 
     </com.google.android.material.appbar.AppBarLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView

@@ -1,6 +1,8 @@
 package cut.the.crap.qreverywhere.qrcodecreate
 
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import androidx.annotation.UiContext
 import androidx.core.os.bundleOf
@@ -22,6 +24,11 @@ class CreateQrCodeFragment : Fragment(R.layout.fragment_create_qr_code) {
 
     private val viewBinding: FragmentCreateQrCodeBinding by viewBinding {
         FragmentCreateQrCodeBinding.bind(requireView())
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -51,5 +58,10 @@ class CreateQrCodeFragment : Fragment(R.layout.fragment_create_qr_code) {
                 ))
             }
         }
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        menu.clear()
+        super.onPrepareOptionsMenu(menu)
     }
 }

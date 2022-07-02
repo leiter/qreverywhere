@@ -31,6 +31,7 @@ class CreateQrCodeViewModel @Inject constructor(
     fun textToQrCodeItem(resources: Resources) {
         viewModelScope.launch {
             var qrItem: QrCodeItem? = null
+            var saveInHistory = false
             try {
                 emailQrCodeItem.value = State.loading()
                 checkValidEmail(emailAddress)
@@ -48,16 +49,19 @@ class CreateQrCodeViewModel @Inject constructor(
                     acquireType = Acquire.CREATED
                 )
                 emailQrCodeItem.value = State.success(qrItem)
+                saveInHistory = true
             } catch (e: Exception) {
                 emailQrCodeItem.value = State.error(error = e)
             }
 
-            try {
-                qrItem?.let { qrHistoryRepository.insertQrItem(it) }
-                emailQrCodeItem.value = State.success()
-                emailQrCodeItem.value = State.success(qrItem)
-            } catch (e: Exception) {
-                emailQrCodeItem.value = State.error(error = NotSavedToHistoryException())
+            if(saveInHistory){
+                try {
+                    qrItem?.let { qrHistoryRepository.insertQrItem(it) }
+                    emailQrCodeItem.value = State.success()
+                    emailQrCodeItem.value = State.success(qrItem)
+                } catch (e: Exception) {
+                    emailQrCodeItem.value = State.error(error = NotSavedToHistoryException())
+                }
             }
         }
     }

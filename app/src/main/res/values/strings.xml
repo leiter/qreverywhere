@@ -47,6 +47,11 @@
     <string name="create_title_phone">Create Phone</string>
     <string name="create_title_web">Create Web</string>
 
+    <!--    Snackbar and Toasts-->
+    <string name="saved_in_history">Saved in history</string>
+    <string name="item_deleted">Deleted</string>
+    <string name="undo_delete">Undo</string>
+
 
     <!--    Error messages -->
     <string name="error_could_not_create_qr_image">Could not create qr code</string>
@@ -57,6 +62,22 @@
     <string name="create_one_liner_number_input_hint">Phone number</string>
     <string name="create_one_liner_input_layout_hint_web">Web address</string>
     <string name="create_one_liner_input_layout_hint_sms">Sms message</string>
+
+
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="auto_start_header">Start automatically or show qr content</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Start automatically</string>
+    <string name="attachment_title">Open url in browser</string>
+    <string name="attachment_summary_on">Automatically open the contained web page
+    </string>
+    <string name="attachment_summary_off">Show the qr content in the detail view</string>
 
 
 </resources>

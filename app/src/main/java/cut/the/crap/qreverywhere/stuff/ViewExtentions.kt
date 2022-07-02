@@ -84,6 +84,7 @@ fun View.showSnackBar(config: UiEvent.SnackBar) {
         s.setAction(config.actionLabel!!) {
             config.actionBlock!!()
         }
+        s.setActionTextColor(ResourcesCompat.getColor(context.resources, R.color.accent, null))
     }
     s.show()
 }
@@ -95,6 +96,7 @@ sealed class UiEvent {
         val duration: Int = Snackbar.LENGTH_LONG,
         val anchorView: View? = null,
         @ColorRes val backGroundColor: Int? = R.color.primary,
+        @ColorRes val actionTextColor: Int = R.color.accent,
         @StringRes val actionLabel: Int? = null,
         val actionBlock: (() -> Unit)? = null
     ) {

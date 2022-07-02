@@ -2,12 +2,14 @@ package cut.the.crap.qreverywhere
 
 import android.content.Context
 import android.content.res.Resources
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.db.QrCodeItem
 import cut.the.crap.qreverywhere.repository.QrHistoryRepository
 import cut.the.crap.qreverywhere.stuff.Acquire
+import cut.the.crap.qreverywhere.stuff.SingleLiveDataEvent
 import cut.the.crap.qreverywhere.stuff.saveImageToFile
 import cut.the.crap.qreverywhere.stuff.textToImageEnc
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -27,7 +29,11 @@ class MainActivityViewModel @Inject constructor(
 
     lateinit var detailViewQrCodeItem: QrCodeItem
 
+    val  startDetailViewQrCodeItem = SingleLiveDataEvent<QrCodeItem?>(null)
+
     val historyAdapterData = historyRepository.getCompleteQrCodeHistory()
+
+    val progressIndication = SingleLiveDataEvent<Boolean?>(null)
 
     fun saveQrItem(qrCodeItem: QrCodeItem) {
         viewModelScope.launch {
@@ -49,11 +55,11 @@ class MainActivityViewModel @Inject constructor(
 
     @Throws(WriterException::class)
     fun saveQrItemFromFile(textContent: String, resources: Resources, @Acquire.Type type: Int) {
-
         viewModelScope.launch {
-            val bitmap = textToImageEnc(textContent, resources)!!
+            val bitmap = textToImageEnc(textContent, resources)
             val historyItem = QrCodeItem(img = bitmap, textContent = textContent, acquireType = type)
-            _currentScannedQrCodeItem = historyItem
+            detailViewQrCodeItem = historyItem
+            startDetailViewQrCodeItem.value = historyItem
             historyRepository.insertQrItem(historyItem)
         }
     }
@@ -63,8 +69,10 @@ class MainActivityViewModel @Inject constructor(
     }
 
     fun deleteCurrentDetailView() {
+        progressIndication.value = true
         viewModelScope.launch {
             historyRepository.deleteQrItem(detailViewQrCodeItem)
+            progressIndication.value = false
         }
     }
 
@@ -72,13 +80,18 @@ class MainActivityViewModel @Inject constructor(
         saveImageToFile(detailViewQrCodeItem, context)
     }
 
-    fun removeHistoryItem(pos: Int) {
+    fun removeHistoryItem(pos: Int) : QrCodeItem? {
+        var result: QrCodeItem? = null
+        progressIndication.value = true
         viewModelScope.launch {
             historyAdapterData.value?.let {
+                result = it[pos]
                 historyRepository.deleteQrItem(it[pos])
+                progressIndication.value = false
             }
 
         }
+        return result
     }
 
     fun provideListItem(pos: Int): QrCodeItem? {
