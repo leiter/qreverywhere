@@ -37,14 +37,14 @@ import java.util.*
 const val QRcodeWidth = 500 // todo should be calculated  / set stride also when ready
 const val IMAGE_DIRECTORY = "QrEveryWhere"
 
-object QrCode{
+object QrCode {
     const val EMAIL = 0
     const val PHONE = 1
     const val WEB_URL = 2
     const val SMS = 3
     const val UNKNOWN_CONTENT = 999
 
-    @IntDef(EMAIL, PHONE, WEB_URL)
+    @IntDef(EMAIL, PHONE, WEB_URL, UNKNOWN_CONTENT)
     @Retention(AnnotationRetention.SOURCE)
     annotation class Type
 }
@@ -54,86 +54,108 @@ object Acquire {
     const val CREATED = 1
     const val FROM_FILE = 2
     const val ERROR_OCCURRED = 3
-    const val EMPTY_DEFAULT= 4
+    const val EMPTY_DEFAULT = 4
+
     @IntDef(SCANNED, CREATED, FROM_FILE, ERROR_OCCURRED, EMPTY_DEFAULT)
     @Retention(AnnotationRetention.SOURCE)
     annotation class Type
 }
 
-fun determineType(contentString: String) : Int {
+object ProtocolPrefix {
+    const val TEL = "tel:"
+    const val MAILTO = "mailto:"
+    const val HTTP = "http:"
+    const val HTTPS = "https:"
+    const val SMS = "sms:"
+    const val SMSTO = "smsto:"
+}
+
+@QrCode.Type
+fun determineType(contentString: String): Int {
+    val decoded = Uri.decode(contentString)
     return when {
-        contentString.startsWith("tel:") -> PHONE
-        contentString.startsWith("mailto:") -> EMAIL
-        contentString.startsWith("http:") -> WEB_URL
-        contentString.startsWith("https:") -> WEB_URL
-        contentString.startsWith("sms:") -> SMS
-        contentString.startsWith("smsto:") -> SMS
+        decoded.startsWith("tel:") -> PHONE
+        decoded.startsWith("mailto:") -> EMAIL
+        decoded.startsWith("http:") -> WEB_URL
+        decoded.startsWith("https:") -> WEB_URL
+        decoded.startsWith("sms:") -> SMS
+        decoded.startsWith("smsto:") -> SMS
         else -> UNKNOWN_CONTENT
     }
 }
 
-fun getQrTypeDrawable(contentString: String) : Int {
+fun getQrTypeDrawable(contentString: String): Int {
+    val decoded = Uri.decode(contentString)
+
     return when {
-        contentString.startsWith("tel:") -> R.drawable.ic_phone
-        contentString.startsWith("mailto:") -> R.drawable.ic_mail_outline
-        contentString.startsWith("http:") -> R.drawable.ic_open_in_browser
-        contentString.startsWith("https:") -> R.drawable.ic_open_in_browser
-        contentString.startsWith("sms:") -> R.drawable.ic_sms
-        contentString.startsWith("smsto:") -> R.drawable.ic_sms
+        decoded.startsWith("tel:") -> R.drawable.ic_phone
+        decoded.startsWith("mailto:") -> R.drawable.ic_mail_outline
+        decoded.startsWith("http:") -> R.drawable.ic_open_in_browser
+        decoded.startsWith("https:") -> R.drawable.ic_open_in_browser
+        decoded.startsWith("sms:") -> R.drawable.ic_sms
+        decoded.startsWith("smsto:") -> R.drawable.ic_sms
         else -> R.drawable.ic_content
     }
 }
 
-fun getQrLaunchText(contentString: String) : Int {
+fun getQrLaunchText(contentString: String): Int {
+    val decoded = Uri.decode(contentString)
     return when {
-        contentString.startsWith("tel:") -> R.string.ic_phone
-        contentString.startsWith("mailto:") -> R.string.ic_mail
-        contentString.startsWith("http:") -> R.string.ic_open_in_browser
-        contentString.startsWith("https:") -> R.string.ic_open_in_browser
-        contentString.startsWith("sms:") -> R.string.ic_sms
-        contentString.startsWith("smsto:") -> R.string.ic_sms
+        decoded.startsWith("tel:") -> R.string.ic_phone
+        decoded.startsWith("mailto:") -> R.string.ic_mail
+        decoded.startsWith("http:") -> R.string.ic_open_in_browser
+        decoded.startsWith("https:") -> R.string.ic_open_in_browser
+        decoded.startsWith("sms:") -> R.string.ic_sms
+        decoded.startsWith("smsto:") -> R.string.ic_sms
         else -> R.string.app_name
     }
 }
 
 
-fun saveImageToFile(qrCodeItem: QrCodeItem, context: Context): String? {
-    val bytes = ByteArrayOutputStream()
-    qrCodeItem.img.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
-    val directory = File(
-        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
-        IMAGE_DIRECTORY
-    )
+suspend fun saveImageToFile(qrCodeItem: QrCodeItem, context: Context): String {
+    return withContext(Dispatchers.IO) {
 
-    if (!directory.exists()) {
-        directory.mkdirs()
-    }
-    try {
-        val f = File( //todo better naming
-            directory, Calendar.getInstance()
-                .timeInMillis.toString() + ".jpg"
+        val bytes = ByteArrayOutputStream()
+        qrCodeItem.img.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
+        val directory = File(
+            Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
+            IMAGE_DIRECTORY
         )
-        f.createNewFile() // todo give read write permission
-        val fo = FileOutputStream(f)
-        fo.write(bytes.toByteArray())
-        MediaScannerConnection.scanFile(context, arrayOf(f.path), arrayOf("image/jpeg")) { path, uri ->
-            val updateQritem = qrCodeItem.copy()
-            Log.e("TAG", "MediaScanner::--->" + uri.toString())
+
+        if (!directory.exists()) {
+            directory.mkdirs()
         }
-        fo.close()
-        Log.d("TAG", "File Saved::--->" + f.absolutePath)
-        return f.absolutePath
-    } catch (e1: IOException) {
-        e1.printStackTrace()
+        try {
+            val f = File( //todo better naming
+                directory, Calendar.getInstance()
+                    .timeInMillis.toString() + ".jpg"
+            )
+            f.createNewFile() // todo give read write permission
+            val fo = FileOutputStream(f)
+            fo.write(bytes.toByteArray())
+            MediaScannerConnection.scanFile(
+                context,
+                arrayOf(f.path),
+                arrayOf("image/jpeg")
+            ) { path, uri ->
+                val updateQritem = qrCodeItem.copy(fileUriString = uri.toString())
+                Log.e("TAG", "MediaScanner::--->" + uri.toString())
+            }
+            fo.close()
+            Log.d("TAG", "File Saved::--->" + f.absolutePath)
+            f.absolutePath
+        } catch (e1: IOException) {
+            e1.printStackTrace()
+            ""
+        }
     }
-    return ""
 }
 
 @Throws(WriterException::class)
 suspend fun textToImageEnc(textContent: String, resources: Resources): Bitmap {
     // todo 2953  chars are fine
 
-    return withContext(Dispatchers.IO){
+    return withContext(Dispatchers.IO) {
         val bitMatrix: BitMatrix = try {
             MultiFormatWriter().encode(
                 textContent,
@@ -141,7 +163,7 @@ suspend fun textToImageEnc(textContent: String, resources: Resources): Bitmap {
                 QRcodeWidth, QRcodeWidth, null
             )
         } catch (e: WriterException) {
-             throw WriterException()
+            throw WriterException()
         }
         val bitMatrixWidth = bitMatrix.width
         val bitMatrixHeight = bitMatrix.height
@@ -151,7 +173,7 @@ suspend fun textToImageEnc(textContent: String, resources: Resources): Bitmap {
             for (x in 0 until bitMatrixWidth) {
                 pixels[offset + x] =
                     if (bitMatrix[x, y]) ResourcesCompat.getColor(resources, R.color.black, null)
-                    else ResourcesCompat.getColor(resources, R.color.white,null)
+                    else ResourcesCompat.getColor(resources, R.color.white, null)
             }
         }
         val bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_8888)
@@ -164,13 +186,14 @@ suspend fun textToImageEnc(textContent: String, resources: Resources): Bitmap {
 
 // todo integrate settings display result or fire intent here
 fun createOpenIntent(qrString: String, context: Context): Intent? {
+    val decoded = Uri.decode(qrString)
     return when {
-        qrString.startsWith("tel:") -> Intent(Intent.ACTION_DIAL, Uri.parse(qrString))
-        qrString.startsWith("mailto:") -> Intent(Intent.ACTION_SENDTO, Uri.parse(qrString))
-        qrString.startsWith("http:") -> Intent(Intent.ACTION_VIEW, Uri.parse(qrString))
-        qrString.startsWith("https:") -> Intent(Intent.ACTION_VIEW, Uri.parse(qrString))
-        qrString.startsWith("sms:") -> Intent(Intent.ACTION_VIEW, Uri.parse(qrString))
-        qrString.startsWith("smsto:") -> Intent(Intent.ACTION_SENDTO, Uri.parse(qrString))
+        decoded.startsWith("tel:") -> Intent(Intent.ACTION_DIAL, Uri.parse(qrString))
+        decoded.startsWith("mailto:") -> Intent(Intent.ACTION_SENDTO, Uri.parse(qrString))
+        decoded.startsWith("http:") -> Intent(Intent.ACTION_VIEW, Uri.parse(decoded))
+        decoded.startsWith("https:") -> Intent(Intent.ACTION_VIEW, Uri.parse(decoded))
+        decoded.startsWith("sms:") -> Intent(Intent.ACTION_VIEW, Uri.parse(qrString))
+        decoded.startsWith("smsto:") -> Intent(Intent.ACTION_SENDTO, Uri.parse(qrString))
         else -> {
             val i = Intent(Intent.ACTION_VIEW, Uri.parse(qrString))
             if (isIntentAvailable(i, context)) i
@@ -179,7 +202,7 @@ fun createOpenIntent(qrString: String, context: Context): Intent? {
     }
 }
 
-fun createShareIntent(qrImgUri: Uri) : Intent {
+fun createShareIntent(qrImgUri: Uri): Intent {
     return Intent(Intent.ACTION_SEND).apply {
 //        data = qrImgUri;
         type = "image/png";
@@ -233,7 +256,15 @@ fun scanQrImage(uri: Uri, context: Context): String? {
     val sourceBitmap: Bitmap = BitmapFactory.decodeStream(inputStream)
 
     val intArray = IntArray(sourceBitmap.width * sourceBitmap.height)
-    sourceBitmap.getPixels(intArray, 0, sourceBitmap.width, 0, 0, sourceBitmap.width, sourceBitmap.height)
+    sourceBitmap.getPixels(
+        intArray,
+        0,
+        sourceBitmap.width,
+        0,
+        0,
+        sourceBitmap.width,
+        sourceBitmap.height
+    )
 
     val source: LuminanceSource =
         RGBLuminanceSource(sourceBitmap.width, sourceBitmap.height, intArray)
@@ -256,6 +287,6 @@ fun bitmapToArray(bmp: Bitmap): ByteArray {
     return stream.toByteArray()
 }
 
-fun extractDomain(url: String) : String {
+fun extractDomain(url: String): String {
     return android.util.Patterns.DOMAIN_NAME.toRegex().find(url)?.value ?: ""
 }

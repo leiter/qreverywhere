@@ -26,10 +26,8 @@ class QrFullscreenFragment : Fragment(R.layout.fragment_qr_fullscreen) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        with(viewBinding){
-            activityViewModel.provideListItem(args.itemPosition)?.let {
-                    qrFullScreenImage.setImageBitmap(it.img)
-            }
+        activityViewModel.historyAdapterData.observe(viewLifecycleOwner){
+            viewBinding.qrFullScreenImage.setImageBitmap(it[args.itemPosition].img)
         }
     }
 

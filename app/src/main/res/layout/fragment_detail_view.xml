@@ -1,94 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="match_parent">
 
-    tools:context=".qrcodedetailview.DetailViewFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".qrcodedetailview.DetailViewFragment">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="24dp">
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/detailViewAcquiredAt"
+                style="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_width="0dp"
+
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:padding="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Scanned on 06.05.2020" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/detailViewActionTypeTextView"
+                style="@style/TextAppearance.AppCompat.Large"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:text="Qr content text:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailViewContentPreviewImage" />
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/detailViewContentTextView"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                android:paddingBottom="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detailViewActionTypeTextView"
+                tools:text="@tools:sample/lorem/random" />
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/detailViewContentPreviewImage"
+                android:layout_width="224dp"
+                android:layout_height="224dp"
+                android:src="@drawable/ic_launcher_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/detailViewAcquiredAt" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/detailViewLaunchActionButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="24dp">
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/detailViewContentTextView"
+        tools:text="Launch action" />
 
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/detailViewAcquiredAt"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-            android:gravity="end"
-            android:maxHeight="100dp"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/detailViewActionTypeTextView"
-            app:layout_constraintTop_toBottomOf="@+id/detailViewContentPreviewImage"
-            tools:text="Scanned on 06.05.2020" />
-
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/detailViewActionTypeTextView"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:maxHeight="100dp"
-
-            app:layout_constraintBottom_toBottomOf="@+id/detailViewAcquiredAt"
-            app:layout_constraintEnd_toStartOf="@+id/detailViewAcquiredAt"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/detailViewAcquiredAt"
-            tools:text="Launch phone call" />
-
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/detailViewContentTextView"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detailViewActionTypeTextView"
-            tools:text="@tools:sample/lorem/random" />
-
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/detailViewLaunchActionButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:text="Launch action"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-
-            app:layout_constraintTop_toBottomOf="@+id/detailViewContentTextView" />
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/detailViewContentPreviewImage"
-            android:layout_width="112dp"
-            android:layout_height="112dp"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-
-            android:src="@drawable/ic_launcher_background"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_goneMarginTop="16dp" />
-
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</ScrollView>
+</FrameLayout>

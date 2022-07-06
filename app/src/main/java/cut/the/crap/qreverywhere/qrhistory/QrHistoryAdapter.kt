@@ -1,7 +1,7 @@
 package cut.the.crap.qreverywhere.qrhistory
 
-import android.content.Context
 import android.net.Uri
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -12,26 +12,24 @@ import com.bumptech.glide.Glide
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.ItemQrHistoryBinding
 import cut.the.crap.qreverywhere.db.QrCodeItem
-import cut.the.crap.qreverywhere.stuff.Acquire
+import cut.the.crap.qreverywhere.stuff.AcquireDateFormatter
 import cut.the.crap.qreverywhere.stuff.getQrTypeDrawable
-import java.text.SimpleDateFormat
-import java.util.*
 
-class QrHistoryAdapter(context: Context, val detailViewItemClicked: (QrCodeItem) -> Unit)
-
-    : RecyclerView.Adapter<QrHistoryAdapter.QrHistoryViewHolder<ViewBinding>>()  {
-
-    private val createdTemplate: String = context.getString(R.string.qr_created_on_template)
-    private val scannedTemplate: String = context.getString(R.string.qr_scanned_on_template)
-    private val loadedFromFileTemplate: String = context.getString(R.string.qr_from_file_on_template)
-
-    private val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
+class QrHistoryAdapter(
+    val detailViewItemClicked: (QrCodeItem) -> Unit,
+    val focusedPosition: (Int) -> Unit,
+    private val acquireDateFormatter: AcquireDateFormatter
+) : RecyclerView.Adapter<QrHistoryAdapter.QrHistoryViewHolder<ViewBinding>>()  {
 
     inner class QrHistoryViewHolder<VB : ViewBinding>(val binding: VB): RecyclerView.ViewHolder(binding.root) {
         init {
             this@QrHistoryViewHolder.itemView.setOnClickListener {
                 detailViewItemClicked(differ.currentList[adapterPosition])
             }
+            (binding as ItemQrHistoryBinding).historyItemImage.setOnClickListener {
+                focusedPosition(adapterPosition)
+            }
+
         }
     }
 
@@ -46,15 +44,6 @@ class QrHistoryAdapter(context: Context, val detailViewItemClicked: (QrCodeItem)
     }
 
     private val differ = AsyncListDiffer(this, diffCallback)
-
-    private fun getTimeTemplate(qrItemData: QrCodeItem) : String {
-        return when(qrItemData.acquireType){
-            Acquire.SCANNED -> scannedTemplate
-            Acquire.CREATED -> createdTemplate
-            Acquire.FROM_FILE -> loadedFromFileTemplate
-            else -> createdTemplate
-        }
-    }
 
     fun setData(list: List<QrCodeItem>) = differ.submitList(list)
 
@@ -76,17 +65,21 @@ class QrHistoryAdapter(context: Context, val detailViewItemClicked: (QrCodeItem)
     override fun onBindViewHolder(holder: QrHistoryViewHolder<ViewBinding>, position: Int) {
         val run = differ.currentList[position]
         if(holder.binding is ItemQrHistoryBinding){
-            bindQrItem(holder.binding, run)
+            bindQrItem(holder.binding, run,position)
         }
     }
 
-    private fun bindQrItem(binding: ItemQrHistoryBinding, qrItemData: QrCodeItem){
+    private fun bindQrItem(binding: ItemQrHistoryBinding, qrItemData: QrCodeItem, position: Int){
         with(binding){
             Glide.with(root.context).load(qrItemData.img).into(historyItemImage)
-            val createdText = getTimeTemplate(qrItemData).format(dateFormat.format(qrItemData.timestamp))
+            val createdText = acquireDateFormatter.getTimeTemplate(qrItemData)
             historyItemTimestamp.text = createdText
+
             historyItemType.setImageResource(getQrTypeDrawable(qrItemData.textContent))
             historyItemContentPreview.text = Uri.decode(qrItemData.textContent)
+            historyItemImage.setOnClickListener {
+                focusedPosition(position)
+            }
         }
 
     }

@@ -1,23 +1,26 @@
 package cut.the.crap.qreverywhere.qrcodecreate
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Menu
 import android.view.View
+import android.view.ViewTreeObserver
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.google.zxing.WriterException
+import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentCreateEmailQrCodeBinding
 import cut.the.crap.qreverywhere.db.QrCodeItem
-import cut.the.crap.qreverywhere.stuff.UiEvent
-import cut.the.crap.qreverywhere.stuff.showSnackBar
-import cut.the.crap.qreverywhere.stuff.textChanges
+import cut.the.crap.qreverywhere.stuff.*
 import cut.the.crap.qreverywhere.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -44,9 +47,23 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
 
     private val viewModel by viewModels<CreateQrCodeViewModel>()
 
+    private val activityViewModel: MainActivityViewModel by activityViewModels()
+
     private val viewBinding by viewBinding {
         FragmentCreateEmailQrCodeBinding.bind(requireView())
     }
+
+    private val openImeAction: () -> Unit = {
+        bottomNav.gone()
+    }
+
+    private val closeImeAction: () -> Unit = {
+        Handler(Looper.getMainLooper()).postDelayed({
+            bottomNav.visible()
+        },120)
+    }
+
+    private lateinit var viewTreeObserverListener: ViewTreeObserver.OnGlobalLayoutListener
 
     private fun observeViewModel() {
         with(viewBinding) {
@@ -58,25 +75,26 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                         createEmailAddressTextLayout.error = null
                     }
                     is State.Success<QrCodeItem> -> {
-                        if(it.data != null){
+                        if (it.data != null) {
                             createEmailQrImagePreview.setImageBitmap(it.data.img)
                         } else {
                             root.showSnackBar(
-                                UiEvent.SnackBar(message = R.string.saved_in_history, anchorView = bottomNav)
+                                UiEvent.SnackBar(
+                                    message = R.string.saved_in_history,
+                                    anchorView = bottomNav
+                                )
                             )
                         }
                         createEmailHeaderGroup.visibility = View.VISIBLE
                         progress.hide()
-//                        createEmailLoader.visibility = View.INVISIBLE
                     }
                     is State.Error -> {
                         progress.hide()
-//                        createEmailLoader.visibility = View.INVISIBLE
                         when (it.cause) {
                             is InvalidEmailException -> createEmailAddressTextLayout.error =
                                 getString(R.string.error_invalid_email_address)
                             is WriterException -> {
-                                val anchor = bottomNav
+//                                val anchor = bottomNav
                                 root.showSnackBar(
                                     UiEvent.SnackBar(message = R.string.error_could_not_create_qr_image)
                                 )
@@ -87,7 +105,6 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
             }
         }
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,25 +125,39 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                 createEmailAddressText.textChanges().collect {
                     viewModel.emailAddress = it.toString()
                 }
+            }
+            lifecycleScope.launchWhenResumed {
+
                 createEmailSubjectText.textChanges().collect {
                     viewModel.emailSubject = it.toString()
                 }
+            }
+            lifecycleScope.launchWhenResumed {
+
                 createEmailBodyText.textChanges().collect {
                     viewModel.emailText = it.toString()
                 }
             }
-
             createEmailCreateQrcode.setOnClickListener {
                 viewModel.textToQrCodeItem(resources)
             }
             createEmailQrImagePreview.setOnClickListener {
-                findNavController().navigate(R.id.action_createEmailQrCodeFragment_to_qrFullscreenFragment, bundleOf(
-                    "itemPosition" to 0
-                ))
+                findNavController().navigate(
+                    R.id.action_createEmailQrCodeFragment_to_qrFullscreenFragment, bundleOf(
+                        "itemPosition" to 0
+                    )
+                )
             }
 
         }
         observeViewModel()
+
+        viewTreeObserverListener = viewBinding.root.registerImeVisibilityListener(openImeAction,closeImeAction)
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        viewBinding.root.viewTreeObserver.removeOnGlobalLayoutListener(viewTreeObserverListener)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {

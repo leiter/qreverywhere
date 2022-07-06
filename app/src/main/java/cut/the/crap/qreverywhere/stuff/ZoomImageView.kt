@@ -33,7 +33,7 @@ class ZoomImage : AppCompatImageView {
     private val atrix: Matrix = Matrix()
     private val m = FloatArray(9)
     var origWidth = 0f
-    var origHeight: kotlin.Float = 0f
+    var origHeight: Float = 0f
     private var mScaleDetector: ScaleGestureDetector? = null
     private var mode: Int = NONE
     private var viewWidth = 0f
@@ -95,7 +95,7 @@ class ZoomImage : AppCompatImageView {
         if (fixTransX != 0f || fixTransY != 0f) atrix.postTranslate(fixTransX, fixTransY)
     }
 
-    fun getFixTrans(trans: Float, viewSize: Float, contentSize: Float): Float {
+    private fun getFixTrans(trans: Float, viewSize: Float, contentSize: Float): Float {
         val minTrans: Float
         val maxTrans: Float
         if (contentSize <= viewSize) {
@@ -129,14 +129,14 @@ class ZoomImage : AppCompatImageView {
             if (drawable == null || drawable.intrinsicWidth == 0 || drawable.intrinsicHeight == 0) return
             val bmWidth = drawable.intrinsicWidth
             val bmHeight = drawable.intrinsicHeight
-            val scaleX = viewWidth.toFloat() / bmWidth.toFloat()
-            val scaleY = viewHeight as Float / bmHeight.toFloat()
+            val scaleX = viewWidth / bmWidth.toFloat()
+            val scaleY = viewHeight / bmHeight.toFloat()
             scale = Math.max(scaleX, scaleY)
             atrix.setScale(scale, scale)
 
             // Center the image
-            var yGap = viewHeight as Float - scale * bmHeight.toFloat()
-            var xGap = viewWidth.toFloat() - scale * bmWidth.toFloat()
+            var yGap = viewHeight - scale * bmHeight.toFloat()
+            var xGap = viewWidth - scale * bmWidth.toFloat()
             yGap /= 2f
             xGap /= 2f
             atrix.postTranslate(xGap, yGap)

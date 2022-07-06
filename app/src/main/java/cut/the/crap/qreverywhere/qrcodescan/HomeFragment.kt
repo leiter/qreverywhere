@@ -5,22 +5,23 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.view.animation.Animation
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.NonNull
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.google.common.util.concurrent.ListenableFuture
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentHomeBinding
+import cut.the.crap.qreverywhere.qrcodedetailview.DetailViewFragment
 import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegate
 import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegateImpl
 import cut.the.crap.qreverywhere.stuff.*
@@ -62,6 +63,17 @@ class HomeFragment : Fragment(R.layout.fragment_home),
     override fun onAttach(context: Context) {
         super.onAttach(context)
         attachPickQrCodeDelegate(this)
+//        val callback: OnBackPressedCallback = object : OnBackPressedCallback(
+//            true
+//        ) {
+//            override fun handleOnBackPressed() {
+//                findNavController().navigateUp()//navigate(R.id.action_detailViewFragment_to_qrHistoryFragment)
+//            }
+//        }
+//        requireActivity().onBackPressedDispatcher.addCallback(
+//            this,
+//            callback
+//        )
     }
 
     private fun startCamera() {
@@ -136,9 +148,11 @@ class HomeFragment : Fragment(R.layout.fragment_home),
             }
             handleCameraPermission()
         }
-        activityViewModel.startDetailViewQrCodeItem.observe(viewLifecycleOwner){
+        activityViewModel.startDetailViewQrCodeItem.observe(viewLifecycleOwner) {
             it?.let {
-                findNavController().navigate(R.id.action_scanQrFragment_to_detailViewFragment)
+//                findNavController().navigate(R.id.actionOpenDetailViewFromHistory, bundleOf(
+//                    DetailViewFragment.ORIGIN_FLAG to DetailViewFragment.FROM_SCAN_QR
+//                ))
             }
         }
     }
@@ -155,22 +169,29 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
     override fun handleQrCode(qrCode: String, @Acquire.Type type: Int) {
         activityViewModel.saveQrItemFromFile(qrCode, resources, type)
-        if(determineType(qrCode) != QrCode.UNKNOWN_CONTENT){
-            createOpenIntent(qrCode, requireContext())?.let { intent ->
-                startActivity(intent)
-            } ?: run {
-                //todo inform and display content (callback(text))
-            }
-        }
+
+        findNavController().navigate(
+            R.id.actionOpenDetailViewFromQrScanFragment, bundleOf(
+                DetailViewFragment.ORIGIN_FLAG to DetailViewFragment.FROM_SCAN_QR
+            )
+        )
+
+
+//        if(determineType(qrCode) != QrCode.UNKNOWN_CONTENT){
+//            createOpenIntent(qrCode, requireContext())?.let { intent ->
+//                startActivity(intent)
+//            } ?: run {
+//                //todo inform and display content (callback(text))
+//            }
+//        }
 
     }
-
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_about -> {
-                findNavController().navigate(R.id.action_scanQrFragment_to_SettingsFragment)
+                findNavController().navigate(R.id.actionOpenSettingsFragment)
                 true
             }
             else -> super.onOptionsItemSelected(item)

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.zxing.WriterException
+import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.db.QrCodeItem
 import cut.the.crap.qreverywhere.repository.QrHistoryRepository
 import cut.the.crap.qreverywhere.stuff.Acquire
@@ -16,20 +17,20 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-sealed class NavigationState {
-    object Home : NavigationState()
-}
-
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
     private val historyRepository: QrHistoryRepository
 ) : ViewModel() {
 
-    private var _currentScannedQrCodeItem: QrCodeItem = QrCodeItem()
+    var focusedItemIndex: Int = 0
 
-    lateinit var detailViewQrCodeItem: QrCodeItem
+    var detailViewQrCodeItem: QrCodeItem = QrCodeItem()
 
-    val  startDetailViewQrCodeItem = SingleLiveDataEvent<QrCodeItem?>(null)
+    val detailViewLiveQrCodeItem = MutableLiveData<State<QrCodeItem>>()
+
+    val saveDetailViewQrCodeImage = SingleLiveDataEvent<State<String?>>(null)
+
+    val startDetailViewQrCodeItem = SingleLiveDataEvent<QrCodeItem?>(null)
 
     val historyAdapterData = historyRepository.getCompleteQrCodeHistory()
 
@@ -55,16 +56,20 @@ class MainActivityViewModel @Inject constructor(
 
     @Throws(WriterException::class)
     fun saveQrItemFromFile(textContent: String, resources: Resources, @Acquire.Type type: Int) {
+        if (Acquire.FROM_FILE == type) detailViewLiveQrCodeItem.value = State.loading()
         viewModelScope.launch {
             val bitmap = textToImageEnc(textContent, resources)
-            val historyItem = QrCodeItem(img = bitmap, textContent = textContent, acquireType = type)
+            val historyItem =
+                QrCodeItem(img = bitmap, textContent = textContent, acquireType = type)
             detailViewQrCodeItem = historyItem
             startDetailViewQrCodeItem.value = historyItem
+            detailViewLiveQrCodeItem.value = State.success(historyItem)
             historyRepository.insertQrItem(historyItem)
         }
     }
 
     fun setDetailViewItem(qrCodeItem: QrCodeItem) {
+        focusedItemIndex = historyAdapterData.value?.indexOf(qrCodeItem) ?: 0
         detailViewQrCodeItem = qrCodeItem
     }
 
@@ -77,10 +82,17 @@ class MainActivityViewModel @Inject constructor(
     }
 
     fun saveQrImageOfDetailView(context: Context) {
-        saveImageToFile(detailViewQrCodeItem, context)
+        saveDetailViewQrCodeImage.value = State.loading()
+        viewModelScope.launch {
+            val imageUri = saveImageToFile(detailViewQrCodeItem, context)
+            saveDetailViewQrCodeImage.value = State.success(data = imageUri )
+            val updateItem = detailViewQrCodeItem.copy(fileUriString = imageUri)
+            historyRepository.updateQrItem(updateItem)
+            detailViewQrCodeItem = updateItem
+        }
     }
 
-    fun removeHistoryItem(pos: Int) : QrCodeItem? {
+    fun removeHistoryItem(pos: Int): QrCodeItem? {
         var result: QrCodeItem? = null
         progressIndication.value = true
         viewModelScope.launch {
@@ -89,16 +101,8 @@ class MainActivityViewModel @Inject constructor(
                 historyRepository.deleteQrItem(it[pos])
                 progressIndication.value = false
             }
-
         }
         return result
     }
-
-    fun provideListItem(pos: Int): QrCodeItem? {
-        historyAdapterData.value?.let {
-            return it[pos]
-        } ?: return null
-    }
-
 
 }

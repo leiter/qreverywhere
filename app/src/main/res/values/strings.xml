@@ -38,7 +38,7 @@
 
     <string name="ic_phone">phone call</string>
     <string name="ic_mail">mail app</string>
-    <string name="ic_open_in_browser">in brrowser</string>
+    <string name="ic_open_in_browser">in browser</string>
     <string name="ic_sms">with sms app</string>
 
 
@@ -49,6 +49,8 @@
 
     <!--    Snackbar and Toasts-->
     <string name="saved_in_history">Saved in history</string>
+    <string name="saved_as_file">Qrcode image saved as file.</string>
+    <string name="error_saved_as_file">Error could not save as file.</string>
     <string name="item_deleted">Deleted</string>
     <string name="undo_delete">Undo</string>
 

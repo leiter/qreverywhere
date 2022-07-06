@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentCreateOneLinerBinding
@@ -29,6 +30,8 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner) {
 
     private val viewModel by viewModels<CreateOneLinerViewModel>()
 
+    private val activityViewModel: MainActivityViewModel by viewModels()
+
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -47,7 +50,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner) {
 
             createOneLinerCreate.setOnClickListener {
                 viewBinding.root.hideIme()
-                viewModel.createClicked(args.useCaseMode, resources)
+                viewModel.createClicked(args.useCaseMode, resources,activityViewModel)
             }
         }
 
@@ -78,8 +81,11 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner) {
                             val anchor = getBottomNavigationView()
                             viewBinding.root.showSnackBar(
                                 UiEvent.SnackBar(
-                                    message = R.string.error_could_not_create_qr_image,
-                                    anchorView = anchor
+                                    message = R.string.saved_in_history,
+                                    anchorView = anchor,
+                                    actionTextColor = R.color.accent,
+                                    actionLabel = R.string.undo_delete,
+
                                 )
                             )
                         }
@@ -144,7 +150,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner) {
     }
 
     private fun setupCreateWebQrcode() {
-        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.create_title_web)
+        setTitle(R.string.create_title_web)
         with(viewBinding) {
             createOneLinerNumberInputLayout.gone()
             createOneLinerInputLayout.setHint(R.string.create_one_liner_input_layout_hint_web)

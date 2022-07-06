@@ -10,6 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primary"
+        android:descendantFocusability="afterDescendants"
+
         android:padding="16dp">
 
         <TextView
@@ -69,6 +71,8 @@
             android:id="@+id/history_item_content_preview"
             android:layout_width="0dp"
             android:layout_height="0dp"
+
+            style="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:lines="3"

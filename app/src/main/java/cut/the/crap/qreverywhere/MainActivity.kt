@@ -21,7 +21,6 @@ val navSelectorCreate = arrayListOf(
 
 val navSelectorHistory = arrayListOf(
     R.id.qrHistoryFragment,
-    R.id.detailViewFragment
 )
 val navSelectorScanQr = arrayListOf(
     R.id.scanQrFragment,
@@ -92,6 +91,7 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration)
-                || super.onSupportNavigateUp()
+                ||
+                return super.onSupportNavigateUp()
     }
 }
