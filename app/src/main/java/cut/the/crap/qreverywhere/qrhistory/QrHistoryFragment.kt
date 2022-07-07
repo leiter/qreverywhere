@@ -12,6 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
+import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentQrHistoryBinding
 import cut.the.crap.qreverywhere.db.QrCodeItem
 import cut.the.crap.qreverywhere.qrcodedetailview.DetailViewFragment
@@ -57,15 +58,8 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
                 navigateToFullscreen(pos)
             }
             ItemTouchHelper.END -> {
-                val backup = activityViewModel.removeHistoryItem(pos)
-                viewBinding.root.showSnackBar(
-                    UiEvent.SnackBar(
-                        message = R.string.item_deleted,
-                        anchorView = getBottomNavigationView(),
-                        actionLabel = R.string.undo_delete,
-                        actionBlock = { activityViewModel.saveQrItem(backup!!) }
-                    )
-                )
+                activityViewModel.removeHistoryItem(pos)
+
             }
         }
     }
@@ -104,7 +98,6 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
             ItemTouchHelper(dragManager).attachToRecyclerView(qrHistoryList)
             qrHistoryList.adapter = historyListAdapter
             activityViewModel.historyAdapterData.observe(viewLifecycleOwner) {
-
                 if (it.isNotEmpty()) {
                     qrHistoryEmptyMessage.gone()
                 } else {
@@ -112,11 +105,25 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
                 }
                 historyListAdapter.setData(it)
             }
-            activityViewModel.progressIndication.observe(viewLifecycleOwner) {
-                it?.let {
-                    if (it) progress.show()
-                    else {
+            activityViewModel.removeItemSingleLiveDataEvent.observe(viewLifecycleOwner){
+                when(it){
+                    is State.Error -> {
                         progress.hide()
+                    }
+                    is State.Loading -> progress.show()
+                    is State.Success -> {
+                        progress.hide()
+                        viewBinding.root.showSnackBar(
+                            UiEvent.SnackBar(
+                                message = R.string.item_deleted,
+                                anchorView = getBottomNavigationView(),
+                                actionLabel = R.string.undo_delete,
+                                actionBlock = { activityViewModel.saveQrItem(it.data!!) }
+                            )
+                        )
+                    }
+                    null -> {
+
                     }
                 }
             }

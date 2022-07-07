@@ -50,7 +50,7 @@ class CreateQrCodeViewModel @Inject constructor(
                 )
                 emailQrCodeItem.value = State.success(qrItem)
                 saveInHistory = true
-            } catch (e: Exception) {
+            } catch (e: InvalidEmailException) {
                 emailQrCodeItem.value = State.error(error = e)
             }
 

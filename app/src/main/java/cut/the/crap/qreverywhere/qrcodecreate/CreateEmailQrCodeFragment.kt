@@ -1,5 +1,6 @@
 package cut.the.crap.qreverywhere.qrcodecreate
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -20,6 +21,8 @@ import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentCreateEmailQrCodeBinding
 import cut.the.crap.qreverywhere.db.QrCodeItem
+import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegate
+import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegateImpl
 import cut.the.crap.qreverywhere.stuff.*
 import cut.the.crap.qreverywhere.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +30,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
-class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_code) {
+class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_code),
+    ImeActionDelegate by ImeActionDelegateImpl() {
 
     private fun getBottomNavigationView(): BottomNavigationView {
         return requireActivity().findViewById(R.id.nav_view)
@@ -35,6 +39,16 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
 
     private val bottomNav by lazy {
         getBottomNavigationView()
+    }
+
+    private val openImeAction: () -> Unit = {
+        bottomNav.gone()
+    }
+
+    private val closeImeAction: () -> Unit = {
+        Handler(Looper.getMainLooper()).postDelayed({
+            bottomNav.visible()
+        },120)
     }
 
     private fun getProgressIndicator(): LinearProgressIndicator {
@@ -53,25 +67,12 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
         FragmentCreateEmailQrCodeBinding.bind(requireView())
     }
 
-    private val openImeAction: () -> Unit = {
-        bottomNav.gone()
-    }
-
-    private val closeImeAction: () -> Unit = {
-        Handler(Looper.getMainLooper()).postDelayed({
-            bottomNav.visible()
-        },120)
-    }
-
-    private lateinit var viewTreeObserverListener: ViewTreeObserver.OnGlobalLayoutListener
-
     private fun observeViewModel() {
         with(viewBinding) {
             viewModel.emailQrCodeItem.observe(viewLifecycleOwner) {
                 when (it) {
                     is State.Loading<QrCodeItem> -> {
                         progress.show()
-//                        createEmailLoader.visibility = View.VISIBLE
                         createEmailAddressTextLayout.error = null
                     }
                     is State.Success<QrCodeItem> -> {
@@ -103,6 +104,34 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                     }
                 }
             }
+
+            activityViewModel.saveDetailViewQrCodeImage.observe(viewLifecycleOwner){
+                when (it) {
+                    is State.Success<String?> -> {
+                        requireView().showSnackBar(
+                            UiEvent.SnackBar(
+                                message = R.string.saved_as_file,
+                                anchorView = viewBinding.createEmailButtonSaveQrToFile
+                            )
+                        )
+                        progress.hide()
+                    }
+                    is State.Error -> {
+                        requireView().showSnackBar(
+                            UiEvent.SnackBar(
+                                message = R.string.error_saved_as_file,
+                                anchorView = viewBinding.createEmailButtonSaveQrToFile,
+                                backGroundColor = R.color.teal_700
+                            )
+                        )
+                        progress.hide()
+                    }
+                    is State.Loading -> progress.show()
+                    null -> {
+
+                    }
+                }
+            }
         }
     }
 
@@ -111,9 +140,18 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
         setHasOptionsMenu(true)
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        attachImeActionDelegate(this, openImeAction, closeImeAction)
+    }
+
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        activityViewModel.historyAdapterData.observe(viewLifecycleOwner) {
+            activityViewModel.setDetailViewItem(it[0])
+        }
 
         with(viewBinding) {
 
@@ -127,19 +165,20 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                 }
             }
             lifecycleScope.launchWhenResumed {
-
                 createEmailSubjectText.textChanges().collect {
                     viewModel.emailSubject = it.toString()
                 }
             }
             lifecycleScope.launchWhenResumed {
-
                 createEmailBodyText.textChanges().collect {
                     viewModel.emailText = it.toString()
                 }
             }
             createEmailCreateQrcode.setOnClickListener {
                 viewModel.textToQrCodeItem(resources)
+            }
+            createEmailButtonSaveQrToFile.setOnClickListener {
+                    activityViewModel.saveQrImageOfDetailView(requireContext())
             }
             createEmailQrImagePreview.setOnClickListener {
                 findNavController().navigate(
@@ -148,16 +187,8 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                     )
                 )
             }
-
         }
         observeViewModel()
-
-        viewTreeObserverListener = viewBinding.root.registerImeVisibilityListener(openImeAction,closeImeAction)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        viewBinding.root.viewTreeObserver.removeOnGlobalLayoutListener(viewTreeObserverListener)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {

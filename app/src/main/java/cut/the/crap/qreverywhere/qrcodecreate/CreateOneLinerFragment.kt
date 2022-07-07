@@ -1,6 +1,9 @@
 package cut.the.crap.qreverywhere.qrcodecreate
 
+import android.content.Context
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.Menu
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -15,6 +18,8 @@ import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentCreateOneLinerBinding
 import cut.the.crap.qreverywhere.db.QrCodeItem
+import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegate
+import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegateImpl
 import cut.the.crap.qreverywhere.stuff.*
 import cut.the.crap.qreverywhere.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -22,7 +27,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
-class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner) {
+class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
+    ImeActionDelegate by ImeActionDelegateImpl() {
 
     private val args: CreateOneLinerFragmentArgs by navArgs()
 
@@ -31,6 +37,29 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner) {
     private val viewModel by viewModels<CreateOneLinerViewModel>()
 
     private val activityViewModel: MainActivityViewModel by viewModels()
+
+    private fun getBottomNavigationView(): BottomNavigationView {
+        return requireActivity().findViewById(R.id.nav_view)
+    }
+
+    private val bottomNav by lazy {
+        getBottomNavigationView()
+    }
+
+    private val openImeAction: () -> Unit = {
+        bottomNav.gone()
+    }
+
+    private val closeImeAction: () -> Unit = {
+        Handler(Looper.getMainLooper()).postDelayed({
+            bottomNav.visible()
+        }, 120)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        attachImeActionDelegate(this, openImeAction, closeImeAction)
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -50,7 +79,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner) {
 
             createOneLinerCreate.setOnClickListener {
                 viewBinding.root.hideIme()
-                viewModel.createClicked(args.useCaseMode, resources,activityViewModel)
+                viewModel.createClicked(args.useCaseMode, resources, activityViewModel)
             }
         }
 
@@ -64,8 +93,8 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner) {
         lifecycleScope.launchWhenResumed {
             viewBinding.createOneLinerInputField.textChanges()
                 .collect {
-                viewModel.currentInputText = it.toString()
-            }
+                    viewModel.currentInputText = it.toString()
+                }
         }
 
         viewModel.qrCodeItemState.observe(viewLifecycleOwner) { state ->
@@ -85,8 +114,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner) {
                                     anchorView = anchor,
                                     actionTextColor = R.color.accent,
                                     actionLabel = R.string.undo_delete,
-
-                                )
+                                    )
                             )
                         }
                     }
@@ -104,10 +132,10 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner) {
     }
 
     private fun resetError() {
-//        when (args.useCaseMode) {
-//            CREATE_PHONE or CREATE_SMS-> viewBinding.createOneLinerNumberInputLayout.error = null
-//            CREATE_WEB -> viewBinding.createOneLinerInputLayout.error = null
-//        }
+        when (args.useCaseMode) {
+            CREATE_PHONE or CREATE_SMS-> viewBinding.createOneLinerNumberInputLayout.error = null
+            CREATE_WEB -> viewBinding.createOneLinerInputLayout.error = null
+        }
     }
 
     private fun handleError(error: State.Error<QrCodeItem>) {
@@ -117,10 +145,6 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner) {
             is InvalidWebUrl -> viewBinding.createOneLinerInputLayout.error =
                 "Invalid web address"
         }
-    }
-
-    private fun getBottomNavigationView(): BottomNavigationView {
-        return requireActivity().findViewById(R.id.nav_view)
     }
 
     private fun showLoading(show: Boolean) {
@@ -174,5 +198,6 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner) {
         const val CREATE_PHONE = 1
         const val CREATE_WEB = 2
     }
+
 
 }

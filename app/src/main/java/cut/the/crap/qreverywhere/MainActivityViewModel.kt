@@ -15,6 +15,7 @@ import cut.the.crap.qreverywhere.stuff.saveImageToFile
 import cut.the.crap.qreverywhere.stuff.textToImageEnc
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
@@ -34,7 +35,7 @@ class MainActivityViewModel @Inject constructor(
 
     val historyAdapterData = historyRepository.getCompleteQrCodeHistory()
 
-    val progressIndication = SingleLiveDataEvent<Boolean?>(null)
+    val removeItemSingleLiveDataEvent = SingleLiveDataEvent<State<QrCodeItem>>(null)
 
     fun saveQrItem(qrCodeItem: QrCodeItem) {
         viewModelScope.launch {
@@ -74,10 +75,13 @@ class MainActivityViewModel @Inject constructor(
     }
 
     fun deleteCurrentDetailView() {
-        progressIndication.value = true
+        val pos = historyAdapterData.value?.indexOf(detailViewQrCodeItem)
         viewModelScope.launch {
-            historyRepository.deleteQrItem(detailViewQrCodeItem)
-            progressIndication.value = false
+            pos?.let {
+                removeHistoryItem(it)
+            } ?: kotlin.run {
+                removeItemSingleLiveDataEvent.value = State.error(error = CouldNotDeleteQrItem())
+            }
         }
     }
 
@@ -85,24 +89,34 @@ class MainActivityViewModel @Inject constructor(
         saveDetailViewQrCodeImage.value = State.loading()
         viewModelScope.launch {
             val imageUri = saveImageToFile(detailViewQrCodeItem, context)
-            saveDetailViewQrCodeImage.value = State.success(data = imageUri )
+            saveDetailViewQrCodeImage.value = State.success(data = imageUri)
             val updateItem = detailViewQrCodeItem.copy(fileUriString = imageUri)
             historyRepository.updateQrItem(updateItem)
             detailViewQrCodeItem = updateItem
         }
     }
 
-    fun removeHistoryItem(pos: Int): QrCodeItem? {
+    fun removeHistoryItem(pos: Int) {
         var result: QrCodeItem? = null
-        progressIndication.value = true
+        removeItemSingleLiveDataEvent.value = State.loading()
         viewModelScope.launch {
             historyAdapterData.value?.let {
                 result = it[pos]
                 historyRepository.deleteQrItem(it[pos])
-                progressIndication.value = false
+                removeItemSingleLiveDataEvent.value = State.success(result)
             }
         }
-        return result
+    }
+
+    fun setLatestItemAsDetail() {
+
+            historyAdapterData.value?.let {
+                if (it.isNotEmpty())
+                    detailViewQrCodeItem = it[0]
+            }
+
     }
 
 }
+
+class CouldNotDeleteQrItem : Exception()

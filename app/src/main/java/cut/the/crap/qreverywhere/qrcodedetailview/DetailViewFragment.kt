@@ -76,21 +76,25 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
             setObserver()
         }
 
-        activityViewModel.saveDetailViewQrCodeImage.observe(viewLifecycleOwner){
-            when(it){
+        activityViewModel.saveDetailViewQrCodeImage.observe(viewLifecycleOwner) {
+            when (it) {
                 is State.Success<String?> -> {
-                    requireView().showSnackBar(UiEvent.SnackBar(
-                        message = R.string.saved_as_file,
-                        anchorView = viewBinding.detailViewContentTextView
-                    ))
+                    requireView().showSnackBar(
+                        UiEvent.SnackBar(
+                            message = R.string.saved_as_file,
+                            anchorView = viewBinding.detailViewContentTextView
+                        )
+                    )
                     progress.hide()
                 }
                 is State.Error -> {
-                    requireView().showSnackBar(UiEvent.SnackBar(
-                        message = R.string.error_saved_as_file,
-                        anchorView = viewBinding.detailViewContentTextView,
-                        backGroundColor = R.color.teal_700
-                    ))
+                    requireView().showSnackBar(
+                        UiEvent.SnackBar(
+                            message = R.string.error_saved_as_file,
+                            anchorView = viewBinding.detailViewContentTextView,
+                            backGroundColor = R.color.teal_700
+                        )
+                    )
                     progress.hide()
                 }
 
@@ -124,51 +128,32 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
                 detailViewLaunchActionButton.gone()
             }
             detailViewContentPreviewImage.setOnClickListener {
-                findNavController().navigate(R.id.action_detailViewFragment_to_qrFullscreenFragment, bundleOf(
-                    "itemPosition" to activityViewModel.focusedItemIndex
-                ))
+                findNavController().navigate(
+                    R.id.action_detailViewFragment_to_qrFullscreenFragment, bundleOf(
+                        "itemPosition" to activityViewModel.focusedItemIndex
+                    )
+                )
             }
 
         }
     }
 
     private fun setObserver() {
-
         activityViewModel.detailViewLiveQrCodeItem.observe(viewLifecycleOwner) {
-            with(viewBinding) {
-                when (it) {
-
-                    is State.Loading<QrCodeItem> -> {
-                        progress.show()
-                    }
-                    is State.Success<QrCodeItem> -> {
-                        if (it.data != null) {
-                            setData()
-                        } else {
-//                        root.showSnackBar(
-//                            UiEvent.SnackBar(
-//                                message = R.string.saved_in_history,
-//                                anchorView = bottomNav
-//                            )
-//                        )
-                        }
-                        progress.hide()
-                    }
-                    is State.Error -> {
-                        progress.hide()
-//                    when (it.cause) {
-//                        is InvalidEmailException -> createEmailAddressTextLayout.error =
-//                            getString(R.string.error_invalid_email_address)
-//                        is WriterException -> {
-//                            val anchor = bottomNav
-//                            root.showSnackBar(
-//                                UiEvent.SnackBar(message = R.string.error_could_not_create_qr_image)
-//                            )
-//                        }
-//                    }
-                    }
+            when (it) {
+                is State.Loading<QrCodeItem> -> {
+                    progress.show()
                 }
-
+                is State.Success<QrCodeItem> -> {
+                    if (it.data != null) {
+                        setData()
+                    } else {
+                    }
+                    progress.hide()
+                }
+                is State.Error -> {
+                    progress.hide()
+                }
             }
         }
     }
