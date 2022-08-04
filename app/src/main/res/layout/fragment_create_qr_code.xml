@@ -32,7 +32,7 @@
         android:background="@drawable/custom_ripple"
         android:gravity="bottom|center_horizontal"
         android:padding="16dp"
-        android:text="Sms"
+        android:text="Text"
         android:textColor="@color/white"
         android:textSize="18sp"
         app:drawableTopCompat="@drawable/ic_sms_white"

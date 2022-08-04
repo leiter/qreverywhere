@@ -8,29 +8,24 @@ import android.view.MotionEvent
 import android.view.ScaleGestureDetector
 import android.view.ScaleGestureDetector.SimpleOnScaleGestureListener
 import androidx.appcompat.widget.AppCompatImageView
+import kotlin.math.abs
+import kotlin.math.max
 
 
 class ZoomImage : AppCompatImageView {
 
     constructor(context: Context) : super(context) {
-
         init(context)
     }
 
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
-
         init(context)
     }
-
-    private val NONE = 0
-    private val DRAG = 1
-    private val ZOOM = 2
-    private val CLICK = 3
 
     private val last = PointF()
     private val start = PointF()
 
-    private val atrix: Matrix = Matrix()
+    private val customMatrix: Matrix = Matrix()
     private val m = FloatArray(9)
     var origWidth = 0f
     var origHeight: Float = 0f
@@ -44,9 +39,9 @@ class ZoomImage : AppCompatImageView {
     private fun init(context: Context) {
         super.setClickable(true)
         mScaleDetector = ScaleGestureDetector(context, ScaleListener())
-        imageMatrix = atrix
+        imageMatrix = customMatrix
         scaleType = ScaleType.MATRIX
-        setOnTouchListener { v, event ->
+        setOnTouchListener { _, event ->
             mScaleDetector!!.onTouchEvent(event)
             val curr = PointF(event.x, event.y)
             when (event.action) {
@@ -66,33 +61,33 @@ class ZoomImage : AppCompatImageView {
                         deltaY, viewHeight,
                         origHeight * saveScale
                     )
-                    atrix.postTranslate(fixTransX, fixTransY)
+                    customMatrix.postTranslate(fixTransX, fixTransY)
                     fixTrans()
                     last.set(curr.x, curr.y)
                 }
                 MotionEvent.ACTION_UP -> {
                     mode = NONE
-                    val xDiff = Math.abs(curr.x - start.x).toInt()
-                    val yDiff = Math.abs(curr.y - start.y).toInt()
+                    val xDiff = abs(curr.x - start.x).toInt()
+                    val yDiff = abs(curr.y - start.y).toInt()
                     if (xDiff < CLICK && yDiff < CLICK) {
                         performClick()
                     }
                 }
                 MotionEvent.ACTION_POINTER_UP -> mode = NONE
             }
-            imageMatrix = atrix
+            imageMatrix = customMatrix
             invalidate()
             true
         }
     }
 
     private fun fixTrans() {
-        atrix.getValues(m)
+        customMatrix.getValues(m)
         val transX = m[Matrix.MTRANS_X]
         val transY = m[Matrix.MTRANS_Y]
         val fixTransX: Float = getFixTrans(transX, viewWidth, origWidth * saveScale)
         val fixTransY: Float = getFixTrans(transY, viewHeight, origHeight * saveScale)
-        if (fixTransX != 0f || fixTransY != 0f) atrix.postTranslate(fixTransX, fixTransY)
+        if (fixTransX != 0f || fixTransY != 0f) customMatrix.postTranslate(fixTransX, fixTransY)
     }
 
     private fun getFixTrans(trans: Float, viewSize: Float, contentSize: Float): Float {
@@ -131,18 +126,18 @@ class ZoomImage : AppCompatImageView {
             val bmHeight = drawable.intrinsicHeight
             val scaleX = viewWidth / bmWidth.toFloat()
             val scaleY = viewHeight / bmHeight.toFloat()
-            scale = Math.max(scaleX, scaleY)
-            atrix.setScale(scale, scale)
+            scale = max(scaleX, scaleY)
+            customMatrix.setScale(scale, scale)
 
             // Center the image
             var yGap = viewHeight - scale * bmHeight.toFloat()
             var xGap = viewWidth - scale * bmWidth.toFloat()
             yGap /= 2f
             xGap /= 2f
-            atrix.postTranslate(xGap, yGap)
+            customMatrix.postTranslate(xGap, yGap)
             origWidth = viewWidth - 2 * xGap
             origHeight = viewHeight - 2 * yGap
-            imageMatrix = atrix
+            imageMatrix = customMatrix
         }
         fixTrans()
     }
@@ -169,12 +164,12 @@ class ZoomImage : AppCompatImageView {
             if (origWidth * saveScale <= viewWidth
                 || origHeight * saveScale <= viewHeight
             ) {
-                atrix.postScale(
+                customMatrix.postScale(
                     mScaleFactor, mScaleFactor, viewWidth / 2,
                     viewHeight / 2
                 )
             } else {
-                atrix.postScale(
+                customMatrix.postScale(
                     mScaleFactor, mScaleFactor,
                     detector.focusX, detector.focusY
                 )
@@ -182,6 +177,13 @@ class ZoomImage : AppCompatImageView {
             fixTrans()
             return true
         }
+    }
+
+    private companion object {
+        const val NONE = 0
+        const val DRAG = 1
+        const val ZOOM = 2
+        const val CLICK = 3
     }
 
 }

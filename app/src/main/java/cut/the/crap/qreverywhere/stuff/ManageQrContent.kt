@@ -111,12 +111,23 @@ fun getQrLaunchText(contentString: String): Int {
     }
 }
 
+fun textForHistoryList(text: String, context: Context) : String {
+    val decodedText = Uri.decode(text)
+    val qrType = determineType(decodedText)
+    return when(qrType){
+        PHONE -> context.getString(R.string.phone_template).format(decodedText.subSequence(4,decodedText.length-1))
+        EMAIL -> context.getString(R.string.mail_template).format(decodedText.subSequence(7,decodedText.indexOf("?")))
+        WEB_URL -> context.getString(R.string.open_in_browser_template).format(decodedText)
+        UNKNOWN_CONTENT -> context.getString(R.string.text_template).format(decodedText)
+        else -> context.getString(R.string.text_template).format(decodedText)
+    }
+}
 
 suspend fun saveImageToFile(qrCodeItem: QrCodeItem, context: Context): String {
     return withContext(Dispatchers.IO) {
 
         val bytes = ByteArrayOutputStream()
-        qrCodeItem.img.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
+        qrCodeItem.img.compress(CompressFormat.JPEG, 90, bytes)
         val directory = File(
             Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS),
             IMAGE_DIRECTORY

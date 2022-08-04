@@ -6,7 +6,6 @@ import android.os.Handler
 import android.os.Looper
 import android.view.Menu
 import android.view.View
-import android.view.ViewTreeObserver
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -33,12 +32,8 @@ import kotlinx.coroutines.flow.collect
 class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_code),
     ImeActionDelegate by ImeActionDelegateImpl() {
 
-    private fun getBottomNavigationView(): BottomNavigationView {
-        return requireActivity().findViewById(R.id.nav_view)
-    }
-
     private val bottomNav by lazy {
-        getBottomNavigationView()
+        requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)
     }
 
     private val openImeAction: () -> Unit = {
@@ -183,7 +178,8 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
             createEmailQrImagePreview.setOnClickListener {
                 findNavController().navigate(
                     R.id.action_createEmailQrCodeFragment_to_qrFullscreenFragment, bundleOf(
-                        "itemPosition" to 0
+                        "itemPosition" to 0,
+                        ORIGIN_FLAG to FROM_CREATE_CONTEXT
                     )
                 )
             }

@@ -47,7 +47,7 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
         activityViewModel.setDetailViewItem(it)
         findNavController().navigate(
             R.id.action_qrHistoryFragment_to_detailViewFragment, bundleOf(
-                DetailViewFragment.ORIGIN_FLAG to DetailViewFragment.FROM_HISTORY_LIST
+                ORIGIN_FLAG to FROM_HISTORY_LIST
             )
         )
     }
@@ -68,7 +68,9 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
         activityViewModel.focusedItemIndex = pos
         findNavController().navigate(
             R.id.action_qrHistoryFragment_to_qrFullscreenFragment, bundleOf(
-                "itemPosition" to pos
+                "itemPosition" to pos,
+                ORIGIN_FLAG to FROM_HISTORY_LIST
+
             )
         )
     }

@@ -1,37 +1,38 @@
 <PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
-
     <PreferenceCategory app:title="@string/auto_start_header">
 
         <SwitchPreferenceCompat
             app:key="sync"
-            app:title="@string/sync_title" />
+            app:title="@string/automation_setting_title" />
 
         <SwitchPreferenceCompat
             app:dependency="sync"
             app:key="web_page"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
+            app:summaryOff="@string/automation_web_summary_off"
+            app:summaryOn="@string/automation_web_summary_on"
+            app:title="@string/automation_web_title" />
 
         <SwitchPreferenceCompat
+            app:dependency="sync"
             app:key="phone_call"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
+            app:summaryOff="@string/automation_web_summary_off"
+            app:summaryOn="@string/automation_web_summary_on"
+            app:title="@string/automation_web_title" />
 
         <SwitchPreferenceCompat
             app:key="email_app"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
+            app:dependency="sync"
+            app:summaryOff="@string/automation_web_summary_off"
+            app:summaryOn="@string/automation_web_summary_on"
+            app:title="@string/automation_web_title" />
 
         <SwitchPreferenceCompat
+            app:dependency="sync"
             app:key="contact_import"
-            app:summaryOff="@string/attachment_summary_off"
-            app:summaryOn="@string/attachment_summary_on"
-            app:title="@string/attachment_title" />
+            app:summaryOff="@string/automation_web_summary_off"
+            app:summaryOn="@string/automation_web_summary_on"
+            app:title="@string/automation_web_title" />
 
 
     </PreferenceCategory>

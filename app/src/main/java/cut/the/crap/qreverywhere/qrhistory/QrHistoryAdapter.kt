@@ -14,6 +14,7 @@ import cut.the.crap.qreverywhere.databinding.ItemQrHistoryBinding
 import cut.the.crap.qreverywhere.db.QrCodeItem
 import cut.the.crap.qreverywhere.stuff.AcquireDateFormatter
 import cut.the.crap.qreverywhere.stuff.getQrTypeDrawable
+import cut.the.crap.qreverywhere.stuff.textForHistoryList
 
 class QrHistoryAdapter(
     val detailViewItemClicked: (QrCodeItem) -> Unit,
@@ -76,7 +77,7 @@ class QrHistoryAdapter(
             historyItemTimestamp.text = createdText
 
             historyItemType.setImageResource(getQrTypeDrawable(qrItemData.textContent))
-            historyItemContentPreview.text = Uri.decode(qrItemData.textContent)
+            historyItemContentPreview.text = textForHistoryList(qrItemData.textContent, root.context)
             historyItemImage.setOnClickListener {
                 focusedPosition(position)
             }

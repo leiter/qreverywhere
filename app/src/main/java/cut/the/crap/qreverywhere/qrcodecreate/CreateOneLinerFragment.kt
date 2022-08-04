@@ -6,12 +6,10 @@ import android.os.Handler
 import android.os.Looper
 import android.view.Menu
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
@@ -28,6 +26,7 @@ import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
+
     ImeActionDelegate by ImeActionDelegateImpl() {
 
     private val args: CreateOneLinerFragmentArgs by navArgs()
@@ -74,6 +73,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
 
         with(viewBinding) {
             createOneLinerTest.setOnClickListener {
+                viewBinding.root.hideIme()
                 viewModel.testClicked(args.useCaseMode, resources)
             }
 
@@ -141,9 +141,9 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
     private fun handleError(error: State.Error<QrCodeItem>) {
         when (error.cause) {
             is InvalidPhoneNumber -> viewBinding.createOneLinerNumberInputLayout.error =
-                "Invalid phone number"
+                getString(R.string.error_msg_invalide_phone_number)
             is InvalidWebUrl -> viewBinding.createOneLinerInputLayout.error =
-                "Invalid web address"
+                getString(R.string.error_msg_invalide_web_adress)
         }
     }
 
@@ -158,7 +158,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
     }
 
     private fun setupCreateCallQrcode() {
-        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.create_title_phone)
+        setTitle(R.string.create_title_phone)
         with(viewBinding) {
             createOneLinerInputLayout.gone()
             createOnelinerHeaderText.setText(R.string.create_one_liner_header_text_phone)
@@ -166,7 +166,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
     }
 
     private fun setupCreateSMSQrcode() {
-        (activity as AppCompatActivity).supportActionBar?.setTitle(R.string.create_title_sms)
+        setTitle(R.string.create_title_sms)
         with(viewBinding) {
             createOneLinerInputLayout.setHint(R.string.create_one_liner_input_layout_hint_sms)
             createOnelinerHeaderText.setText(R.string.create_one_liner_header_text_sms)
@@ -184,7 +184,6 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         menu.clear()
-        super.onPrepareOptionsMenu(menu)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -198,6 +197,5 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
         const val CREATE_PHONE = 1
         const val CREATE_WEB = 2
     }
-
 
 }

@@ -45,7 +45,7 @@
         android:id="@+id/history_item_foreground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white">
+        android:background="?android:attr/colorBackground">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/history_item_type"
@@ -72,7 +72,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
 
-            style="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:lines="3"

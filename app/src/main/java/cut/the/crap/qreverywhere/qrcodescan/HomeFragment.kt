@@ -6,10 +6,12 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.NonNull
-import androidx.camera.core.*
+import androidx.camera.core.AspectRatio
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
 import androidx.core.content.ContextCompat
@@ -21,7 +23,6 @@ import com.google.common.util.concurrent.ListenableFuture
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentHomeBinding
-import cut.the.crap.qreverywhere.qrcodedetailview.DetailViewFragment
 import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegate
 import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegateImpl
 import cut.the.crap.qreverywhere.stuff.*
@@ -63,17 +64,6 @@ class HomeFragment : Fragment(R.layout.fragment_home),
     override fun onAttach(context: Context) {
         super.onAttach(context)
         attachPickQrCodeDelegate(this)
-//        val callback: OnBackPressedCallback = object : OnBackPressedCallback(
-//            true
-//        ) {
-//            override fun handleOnBackPressed() {
-//                findNavController().navigateUp()//navigate(R.id.action_detailViewFragment_to_qrHistoryFragment)
-//            }
-//        }
-//        requireActivity().onBackPressedDispatcher.addCallback(
-//            this,
-//            callback
-//        )
     }
 
     private fun startCamera() {
@@ -128,13 +118,12 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 )
             }
 
-        val camera: Camera =
-            cameraProvider.bindToLifecycle(
-                viewLifecycleOwner,
-                cameraSelector,
-                imageAnalysis,
-                preview
-            )
+        cameraProvider.bindToLifecycle(
+            viewLifecycleOwner,
+            cameraSelector,
+            imageAnalysis,
+            preview
+        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -172,11 +161,9 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
         findNavController().navigate(
             R.id.actionOpenDetailViewFromQrScanFragment, bundleOf(
-                DetailViewFragment.ORIGIN_FLAG to DetailViewFragment.FROM_SCAN_QR
+                ORIGIN_FLAG to FROM_SCAN_QR
             )
         )
-
-
 //        if(determineType(qrCode) != QrCode.UNKNOWN_CONTENT){
 //            createOpenIntent(qrCode, requireContext())?.let { intent ->
 //                startActivity(intent)

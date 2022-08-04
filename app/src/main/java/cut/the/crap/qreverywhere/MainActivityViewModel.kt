@@ -43,18 +43,6 @@ class MainActivityViewModel @Inject constructor(
         }
     }
 
-    fun deleteQrItem(qrCodeItem: QrCodeItem) {
-        viewModelScope.launch {
-            historyRepository.deleteQrItem(qrCodeItem)
-        }
-    }
-
-    fun updateQrItem(qrCodeItem: QrCodeItem) {
-        viewModelScope.launch {
-            historyRepository.updateQrItem(qrCodeItem)
-        }
-    }
-
     @Throws(WriterException::class)
     fun saveQrItemFromFile(textContent: String, resources: Resources, @Acquire.Type type: Int) {
         if (Acquire.FROM_FILE == type) detailViewLiveQrCodeItem.value = State.loading()
@@ -106,15 +94,6 @@ class MainActivityViewModel @Inject constructor(
                 removeItemSingleLiveDataEvent.value = State.success(result)
             }
         }
-    }
-
-    fun setLatestItemAsDetail() {
-
-            historyAdapterData.value?.let {
-                if (it.isNotEmpty())
-                    detailViewQrCodeItem = it[0]
-            }
-
     }
 
 }

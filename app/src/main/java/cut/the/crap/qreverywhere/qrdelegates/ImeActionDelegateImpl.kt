@@ -16,14 +16,12 @@ class ImeActionDelegateImpl : ImeActionDelegate {
 
     private lateinit var closeImeAction: () -> Unit
 
-    private val lifecycleEventObserver = LifecycleEventObserver { source, event ->
-        when(event){
-            Lifecycle.Event.ON_RESUME -> {
-                viewTreeObserverListener = fragment.requireView().registerImeVisibilityListener(openImeAction, closeImeAction)
-            }
-            Lifecycle.Event.ON_PAUSE -> {
-                fragment.requireView().viewTreeObserver.removeOnGlobalLayoutListener(viewTreeObserverListener)
-            }
+    private val lifecycleEventObserver = LifecycleEventObserver { _, event ->
+        if (event == Lifecycle.Event.ON_RESUME) {
+            viewTreeObserverListener = fragment.requireView().registerImeVisibilityListener(openImeAction, closeImeAction)
+        }
+        else if (event == Lifecycle.Event.ON_PAUSE) {
+            fragment.requireView().viewTreeObserver.removeOnGlobalLayoutListener(viewTreeObserverListener)
         }
     }
 

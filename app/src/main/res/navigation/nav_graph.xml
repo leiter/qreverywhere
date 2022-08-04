@@ -33,6 +33,12 @@
         android:name="cut.the.crap.qreverywhere.qrhistory.QrHistoryFragment"
         android:label="History"
         tools:layout="@layout/fragment_qr_history">
+
+        <argument
+            android:name="originFlag"
+            app:argType="integer" />
+
+
         <action
             android:id="@+id/action_qrHistoryFragment_to_detailViewFragment"
             app:destination="@id/detailViewFragment" />
@@ -57,7 +63,6 @@
     <fragment
         android:id="@+id/createOneLinerFragment"
         android:name="cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment"
-        android:label=""
         tools:layout="@layout/fragment_create_one_liner">
         <argument
             android:name="useCaseMode"
@@ -77,8 +82,7 @@
         tools:layout="@layout/fragment_detail_view">
         <argument
             android:name="originFlag"
-            app:argType="integer"
-            />
+            app:argType="integer" />
         <action
             android:id="@+id/action_detailViewFragment_to_qrHistoryFragment"
             app:destination="@id/qrHistoryFragment" />
@@ -98,6 +102,12 @@
         <argument
             android:name="itemPosition"
             app:argType="integer" />
+
+        <argument
+            android:name="originFlag"
+            app:argType="integer"
+            />
+
         <action
             android:id="@+id/action_qrFullscreenFragment_to_createOneLinerFragment"
             app:destination="@id/createOneLinerFragment" />
@@ -111,7 +121,7 @@
     <fragment
         android:id="@+id/settingsFragment"
         android:name="cut.the.crap.qreverywhere.qrpreferences.SettingsFragment"
-        android:label="SettingsFragment" >
+        android:label="SettingsFragment">
         <action
             android:id="@+id/action_settingsFragment_to_scanQrFragment"
             app:destination="@id/scanQrFragment" />
@@ -119,12 +129,11 @@
 
     <action
         android:id="@+id/actionOpenDetailViewFromQrScanFragment"
-        app:popUpToInclusive="true"
+        app:destination="@id/detailViewFragment"
         app:popUpTo="@id/scanQrFragment"
-        app:destination="@id/detailViewFragment" >
+        app:popUpToInclusive="true">
         <argument
             android:name="originFlag"
-            app:argType="integer"
-            />
+            app:argType="integer" />
     </action>
 </navigation>

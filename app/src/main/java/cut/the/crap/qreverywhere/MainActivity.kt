@@ -1,15 +1,18 @@
 package cut.the.crap.qreverywhere
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.*
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import cut.the.crap.qreverywhere.databinding.ActivityMainBinding
-import cut.the.crap.qreverywhere.qrpreferences.SettingsFragmentDirections
+import cut.the.crap.qreverywhere.stuff.FROM_HISTORY_LIST
+import cut.the.crap.qreverywhere.stuff.ORIGIN_FLAG
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -36,6 +39,14 @@ class MainActivity : AppCompatActivity() {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
+    private fun selectHistory(destinationId: Int, argument: Bundle?): Boolean {
+        val argCheck =
+            (argument?.containsKey(ORIGIN_FLAG) ?: false && argument?.getInt(
+                ORIGIN_FLAG) == FROM_HISTORY_LIST) || (destinationId == R.id.qrFullscreenFragment && argument?.containsKey(ORIGIN_FLAG) ?: false
+                    && argument?.getInt(ORIGIN_FLAG) == FROM_HISTORY_LIST)
+        return destinationId == R.id.qrHistoryFragment || argCheck
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -43,18 +54,16 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
 
         val navView: BottomNavigationView = binding.navView
-
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
-
-            when (destination.id) {
-                in navSelectorCreate -> {
-                    navView.menu.getItem(1).isChecked = true
+            when {
+                destination.id in navSelectorCreate -> {
+                    navView.menu.getItem(1) .isChecked = true
                 }
-                in navSelectorHistory -> {
+                selectHistory(destination.id, arguments) -> {
                     navView.menu.getItem(2).isChecked = true
                 }
-                R.id.scanQrFragment-> {
+                destination.id == R.id.scanQrFragment -> {
                     navView.menu.getItem(0).isChecked = true
                 }
             }
@@ -74,7 +83,7 @@ class MainActivity : AppCompatActivity() {
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+//        menuInflater.inflate(R.menu.menu_main, menu)
         return true
     }
 

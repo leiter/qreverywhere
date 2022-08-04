@@ -35,15 +35,19 @@
 
     <string name="qr_detail_launch_template">Launch %s</string>
 
-
     <string name="ic_phone">phone call</string>
     <string name="ic_mail">mail app</string>
     <string name="ic_open_in_browser">in browser</string>
     <string name="ic_sms">with sms app</string>
 
+    <string name="phone_template">Phone call to: %s</string>
+    <string name="mail_template">Email to: %s</string>
+    <string name="open_in_browser_template">Webpage: %s</string>
+    <string name="text_template">Text: %s</string>
+
 
     <!--     title create onelinerQrCode -->
-    <string name="create_title_sms">Create Sms</string>
+    <string name="create_title_sms">Create Text</string>
     <string name="create_title_phone">Create Phone</string>
     <string name="create_title_web">Create Web</string>
 
@@ -75,11 +79,16 @@
     <string name="reply_title">Default reply action</string>
 
     <!-- Sync Preferences -->
-    <string name="sync_title">Start automatically</string>
-    <string name="attachment_title">Open url in browser</string>
-    <string name="attachment_summary_on">Automatically open the contained web page
-    </string>
-    <string name="attachment_summary_off">Show the qr content in the detail view</string>
+    <string name="automation_setting_title">Start automatically</string>
+    <string name="automation_web_title">Open url in browser</string>
+    <string name="automation_web_summary_on">Automatically open the contained web page</string>
+    <string name="automation_web_summary_off">Show the qr content in the detail view</string>
+
+    <string name="automation_open_mail_app_title">Open in email app</string>
+    <string name="automation_open_mail_app_summary_on">Automatically open the contained web page</string>
+    <string name="automation_open_mail_app_summary_off">Show the qr content in the detail view</string>
+    <string name="error_msg_invalide_phone_number">Invalid phone number</string>
+    <string name="error_msg_invalide_web_adress">Invalid web address</string>
 
 
 </resources>

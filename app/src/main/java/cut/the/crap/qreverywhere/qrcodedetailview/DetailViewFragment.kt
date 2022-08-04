@@ -1,6 +1,5 @@
 package cut.the.crap.qreverywhere.qrcodedetailview
 
-import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
@@ -23,7 +22,6 @@ import cut.the.crap.qreverywhere.stuff.*
 import cut.the.crap.qreverywhere.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
@@ -50,21 +48,6 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
 
     private val viewBinding by viewBinding {
         FragmentDetailViewBinding.bind(requireView())
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-//        val callback: OnBackPressedCallback = object : OnBackPressedCallback(
-//            true
-//        ) {
-//            override fun handleOnBackPressed() {
-//                findNavController().navigate(R.id.action_detailViewFragment_to_qrHistoryFragment)
-//            }
-//        }
-//        requireActivity().onBackPressedDispatcher.addCallback(
-//            this,
-//            callback
-//        )
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -104,7 +87,6 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
                 }
             }
         }
-
     }
 
     private fun setData() {
@@ -130,7 +112,9 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
             detailViewContentPreviewImage.setOnClickListener {
                 findNavController().navigate(
                     R.id.action_detailViewFragment_to_qrFullscreenFragment, bundleOf(
-                        "itemPosition" to activityViewModel.focusedItemIndex
+                        "itemPosition" to activityViewModel.focusedItemIndex,
+                        ORIGIN_FLAG to FROM_HISTORY_LIST
+
                     )
                 )
             }
@@ -147,7 +131,6 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
                 is State.Success<QrCodeItem> -> {
                     if (it.data != null) {
                         setData()
-                    } else {
                     }
                     progress.hide()
                 }
@@ -187,13 +170,10 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.removeItem(R.id.action_about)
+        menu.clear()
         inflater.inflate(R.menu.menu_detail_view, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+//        super.onCreateOptionsMenu(menu, inflater)
     }
 
-    companion object {
-        const val ORIGIN_FLAG = "originFlag"
-        const val FROM_HISTORY_LIST = 2
-        const val FROM_SCAN_QR = 0
-    }
+
 }

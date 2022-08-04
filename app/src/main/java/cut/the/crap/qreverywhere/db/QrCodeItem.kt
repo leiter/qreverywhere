@@ -17,13 +17,3 @@ data class QrCodeItem(
     val acquireType: Int = Acquire.EMPTY_DEFAULT,
     val fileUriString: String = "",
 )
-
-
-fun QrCodeItem.toQrItem() : QrItem {
-    return QrItem(
-        id = id,
-        img = img,
-        timestamp = timestamp,
-        textContent = textContent
-    )
-}
