@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere
+package cut.the.crap.qreverywhere.utils
 
 
 import android.view.LayoutInflater
@@ -49,44 +49,3 @@ inline fun <T : ViewBinding> DialogFragment.viewBinding(crossinline factory: (La
 /** Not really a delegate, just a small helper for RecyclerView.ViewHolders */
 inline fun <T : ViewBinding> ViewGroup.viewBinding(factory: (LayoutInflater, ViewGroup, Boolean) -> T) =
     factory(LayoutInflater.from(context), this, false)
-
-
-//https://gist.github.com/jamiesanson/478997780eb6ca93361df311058dc5c2
-fun <T> Fragment.viewLifecycleLazy(initialise: () -> T): ReadOnlyProperty<Fragment, T> =
-    object : ReadOnlyProperty<Fragment, T>, DefaultLifecycleObserver {
-
-        // A backing property to hold our value
-        private var binding: T? = null
-
-        private var viewLifecycleOwner: LifecycleOwner? = null
-
-        init {
-            // Observe the View Lifecycle of the Fragment
-            this@viewLifecycleLazy
-                .viewLifecycleOwnerLiveData
-                .observe(this@viewLifecycleLazy) { newLifecycleOwner ->
-                    viewLifecycleOwner
-                        ?.lifecycle
-                        ?.removeObserver(this)
-
-                    viewLifecycleOwner = newLifecycleOwner.also {
-                        it.lifecycle.addObserver(this)
-                    }
-                }
-        }
-
-        override fun onDestroy(owner: LifecycleOwner) {
-            super.onDestroy(owner)
-            binding = null
-        }
-
-        override fun getValue(
-            thisRef: Fragment,
-            property: KProperty<*>
-        ): T {
-            // Return the backing property if it's set, or initialise
-            return this.binding ?: initialise().also {
-                this.binding = it
-            }
-        }
-    }

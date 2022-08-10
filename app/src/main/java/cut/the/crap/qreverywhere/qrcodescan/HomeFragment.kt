@@ -25,8 +25,8 @@ import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentHomeBinding
 import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegate
 import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegateImpl
-import cut.the.crap.qreverywhere.stuff.*
-import cut.the.crap.qreverywhere.viewBinding
+import cut.the.crap.qreverywhere.utils.*
+import cut.the.crap.qreverywhere.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.Executors

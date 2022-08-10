@@ -2,9 +2,7 @@ package cut.the.crap.qreverywhere.qrcodecreate
 
 import android.os.Bundle
 import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
-import androidx.annotation.UiContext
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -14,7 +12,7 @@ import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment.Companion.C
 import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment.Companion.CREATE_SMS
 import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment.Companion.CREATE_WEB
 import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment.Companion.USE_CASE_MODE
-import cut.the.crap.qreverywhere.viewBinding
+import cut.the.crap.qreverywhere.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 //  createContact    readContact

@@ -9,7 +9,7 @@ import androidx.navigation.fragment.navArgs
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentQrFullscreenBinding
-import cut.the.crap.qreverywhere.viewBinding
+import cut.the.crap.qreverywhere.utils.viewBinding
 
 class QrFullscreenFragment : Fragment(R.layout.fragment_qr_fullscreen) {
 

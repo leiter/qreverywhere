@@ -3,8 +3,7 @@ package cut.the.crap.qreverywhere.db
 import android.graphics.Bitmap
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import cut.the.crap.qreverywhere.data.QrItem
-import cut.the.crap.qreverywhere.stuff.Acquire
+import cut.the.crap.qreverywhere.utils.Acquire
 
 @Entity(tableName = "qrcode_history")
 data class QrCodeItem(

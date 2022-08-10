@@ -1,7 +1,5 @@
 package cut.the.crap.qreverywhere.qrhistory
 
-import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
@@ -12,9 +10,9 @@ import com.bumptech.glide.Glide
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.ItemQrHistoryBinding
 import cut.the.crap.qreverywhere.db.QrCodeItem
-import cut.the.crap.qreverywhere.stuff.AcquireDateFormatter
-import cut.the.crap.qreverywhere.stuff.getQrTypeDrawable
-import cut.the.crap.qreverywhere.stuff.textForHistoryList
+import cut.the.crap.qreverywhere.utils.AcquireDateFormatter
+import cut.the.crap.qreverywhere.utils.getQrTypeDrawable
+import cut.the.crap.qreverywhere.utils.textForHistoryList
 
 class QrHistoryAdapter(
     val detailViewItemClicked: (QrCodeItem) -> Unit,

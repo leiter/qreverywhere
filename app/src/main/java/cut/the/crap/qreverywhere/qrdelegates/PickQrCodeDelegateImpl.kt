@@ -5,10 +5,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.qrcodescan.HomeFragment
-import cut.the.crap.qreverywhere.stuff.Acquire
-import cut.the.crap.qreverywhere.stuff.hasPermission
-import cut.the.crap.qreverywhere.stuff.scanQrImage
-import cut.the.crap.qreverywhere.stuff.showShortToast
+import cut.the.crap.qreverywhere.utils.Acquire
+import cut.the.crap.qreverywhere.utils.hasPermission
+import cut.the.crap.qreverywhere.utils.scanQrImage
+import cut.the.crap.qreverywhere.utils.showShortToast
 
 class PickQrCodeDelegateImpl : PickQrCodeDelegate {
 

@@ -1,11 +1,13 @@
 package cut.the.crap.qreverywhere.qrcodecreate
 
 import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.Menu
 import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -18,8 +20,8 @@ import cut.the.crap.qreverywhere.databinding.FragmentCreateOneLinerBinding
 import cut.the.crap.qreverywhere.db.QrCodeItem
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegate
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegateImpl
-import cut.the.crap.qreverywhere.stuff.*
-import cut.the.crap.qreverywhere.viewBinding
+import cut.the.crap.qreverywhere.utils.*
+import cut.the.crap.qreverywhere.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -66,7 +68,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
 
         when (args.useCaseMode) {
             CREATE_PHONE -> setupCreateCallQrcode()
-            CREATE_SMS -> setupCreateSMSQrcode()
+            CREATE_SMS -> setupCreateTextQrcode()
             CREATE_WEB -> setupCreateWebQrcode()
             else -> throw IllegalArgumentException("No fragment associated with this id=${args.useCaseMode}")
         }
@@ -165,11 +167,16 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
         }
     }
 
-    private fun setupCreateSMSQrcode() {
+    private fun setupCreateTextQrcode() {
         setTitle(R.string.create_title_sms)
         with(viewBinding) {
-            createOneLinerInputLayout.setHint(R.string.create_one_liner_input_layout_hint_sms)
-            createOnelinerHeaderText.setText(R.string.create_one_liner_header_text_sms)
+            createOneLinerNumberInputLayout.gone()
+            createOneLinerTest.gone()
+            val params = createOneLinerInputLayout.layoutParams as ConstraintLayout.LayoutParams
+            params.matchConstraintMinHeight = (200 * Resources.getSystem().displayMetrics.density).toInt()
+            createOneLinerInputLayout.layoutParams = params
+            createOneLinerInputLayout.setHint(R.string.create_one_liner_input_layout_hint_text_message)
+            createOnelinerHeaderText.setText(R.string.create_one_liner_header_text_message_text)
         }
     }
 

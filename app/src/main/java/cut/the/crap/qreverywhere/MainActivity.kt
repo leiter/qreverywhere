@@ -11,8 +11,9 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import cut.the.crap.qreverywhere.databinding.ActivityMainBinding
-import cut.the.crap.qreverywhere.stuff.FROM_HISTORY_LIST
-import cut.the.crap.qreverywhere.stuff.ORIGIN_FLAG
+import cut.the.crap.qreverywhere.utils.FROM_HISTORY_LIST
+import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
+import cut.the.crap.qreverywhere.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 

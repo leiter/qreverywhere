@@ -9,13 +9,12 @@ import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.db.QrCodeItem
 import cut.the.crap.qreverywhere.repository.QrHistoryRepository
-import cut.the.crap.qreverywhere.stuff.Acquire
-import cut.the.crap.qreverywhere.stuff.SingleLiveDataEvent
-import cut.the.crap.qreverywhere.stuff.saveImageToFile
-import cut.the.crap.qreverywhere.stuff.textToImageEnc
+import cut.the.crap.qreverywhere.utils.Acquire
+import cut.the.crap.qreverywhere.utils.SingleLiveDataEvent
+import cut.the.crap.qreverywhere.utils.saveImageToFile
+import cut.the.crap.qreverywhere.utils.textToImageEnc
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 @HiltViewModel
@@ -85,7 +84,7 @@ class MainActivityViewModel @Inject constructor(
     }
 
     fun removeHistoryItem(pos: Int) {
-        var result: QrCodeItem? = null
+        var result: QrCodeItem?
         removeItemSingleLiveDataEvent.value = State.loading()
         viewModelScope.launch {
             historyAdapterData.value?.let {

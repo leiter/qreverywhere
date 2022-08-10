@@ -63,11 +63,11 @@
     <string name="error_could_not_create_qr_image">Could not create qr code</string>
     <string name="error_invalid_email_address">Please enter a valid email address.</string>
     <string name="create_one_liner_header_text_web">Please enter the web address including the protocol.</string>
-    <string name="create_one_liner_header_text_sms">Please enter the receiver number and the message content.</string>
+    <string name="create_one_liner_header_text_message_text">Please enter your message.</string>
     <string name="create_one_liner_header_text_phone">Please enter the phone number.</string>
     <string name="create_one_liner_number_input_hint">Phone number</string>
     <string name="create_one_liner_input_layout_hint_web">Web address</string>
-    <string name="create_one_liner_input_layout_hint_sms">Sms message</string>
+    <string name="create_one_liner_input_layout_hint_text_message">Text message</string>
 
 
     <!-- Preference Titles -->

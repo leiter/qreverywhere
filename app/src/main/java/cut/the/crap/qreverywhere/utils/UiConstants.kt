@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere.stuff
+package cut.the.crap.qreverywhere.utils
 
 const val ORIGIN_FLAG = "originFlag"
 const val FROM_HISTORY_LIST = 2

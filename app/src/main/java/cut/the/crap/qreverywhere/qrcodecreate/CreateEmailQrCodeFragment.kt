@@ -22,8 +22,8 @@ import cut.the.crap.qreverywhere.databinding.FragmentCreateEmailQrCodeBinding
 import cut.the.crap.qreverywhere.db.QrCodeItem
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegate
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegateImpl
-import cut.the.crap.qreverywhere.stuff.*
-import cut.the.crap.qreverywhere.viewBinding
+import cut.the.crap.qreverywhere.utils.*
+import cut.the.crap.qreverywhere.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -90,7 +90,6 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                             is InvalidEmailException -> createEmailAddressTextLayout.error =
                                 getString(R.string.error_invalid_email_address)
                             is WriterException -> {
-//                                val anchor = bottomNav
                                 root.showSnackBar(
                                     UiEvent.SnackBar(message = R.string.error_could_not_create_qr_image)
                                 )

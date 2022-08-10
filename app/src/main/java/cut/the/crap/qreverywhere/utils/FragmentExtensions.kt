@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere.stuff
+package cut.the.crap.qreverywhere.utils
 
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity

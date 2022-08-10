@@ -6,8 +6,8 @@ import androidx.lifecycle.viewModelScope
 import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.db.QrCodeItem
 import cut.the.crap.qreverywhere.repository.QrHistoryRepository
-import cut.the.crap.qreverywhere.stuff.Acquire
-import cut.the.crap.qreverywhere.stuff.textToImageEnc
+import cut.the.crap.qreverywhere.utils.Acquire
+import cut.the.crap.qreverywhere.utils.textToImageEnc
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

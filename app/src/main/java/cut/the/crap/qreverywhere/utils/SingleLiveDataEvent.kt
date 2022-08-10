@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere.stuff
+package cut.the.crap.qreverywhere.utils
 
 import android.util.Log
 import androidx.annotation.MainThread
@@ -10,8 +10,6 @@ import java.util.concurrent.atomic.AtomicBoolean
 
 
 class SingleLiveDataEvent<T>(value: T?) : MutableLiveData<T?>(value) {
-
-    private val TAG = "SingleLiveEvent"
 
     private val pending: AtomicBoolean = AtomicBoolean(false)
 
@@ -42,5 +40,9 @@ class SingleLiveDataEvent<T>(value: T?) : MutableLiveData<T?>(value) {
     @MainThread
     fun call() {
         value = null
+    }
+
+    companion object {
+        private const val TAG = "SingleLiveEvent"
     }
 }

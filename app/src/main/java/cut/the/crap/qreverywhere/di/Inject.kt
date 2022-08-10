@@ -4,13 +4,9 @@ import android.app.Application
 import androidx.room.Room
 import cut.the.crap.qreverywhere.db.QrCodeDao
 import cut.the.crap.qreverywhere.db.QrDatabase
-import cut.the.crap.qreverywhere.repository.QrRepository
-import cut.the.crap.qreverywhere.repository.QrRepositoryImpl
-import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -32,16 +28,6 @@ object AppModule {
     fun provideRunDao(db: QrDatabase): QrCodeDao {
         return db.getRunDao()
     }
-
-
-}
-
-@Module
-@InstallIn(ViewModelComponent::class)
-interface RepositoryBindings {
-
-    @Binds
-    fun provideQrRepository(qrRepositoryImpl: QrRepositoryImpl): QrRepository
 
 
 }

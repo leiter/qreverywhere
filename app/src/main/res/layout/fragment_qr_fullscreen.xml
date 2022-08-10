@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".qrfullscreen.QrFullscreenFragment">
 
-    <cut.the.crap.qreverywhere.stuff.ZoomImage
+    <cut.the.crap.qreverywhere.utils.ZoomImage
         android:id="@+id/qrFullScreenImage"
         android:layout_width="0dp"
         android:layout_height="0dp"

@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere.stuff
+package cut.the.crap.qreverywhere.utils
 
 import android.content.Context
 import android.content.Intent
@@ -20,11 +20,11 @@ import com.google.zxing.common.BitMatrix
 import com.google.zxing.common.HybridBinarizer
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.db.QrCodeItem
-import cut.the.crap.qreverywhere.stuff.QrCode.EMAIL
-import cut.the.crap.qreverywhere.stuff.QrCode.PHONE
-import cut.the.crap.qreverywhere.stuff.QrCode.SMS
-import cut.the.crap.qreverywhere.stuff.QrCode.UNKNOWN_CONTENT
-import cut.the.crap.qreverywhere.stuff.QrCode.WEB_URL
+import cut.the.crap.qreverywhere.utils.QrCode.EMAIL
+import cut.the.crap.qreverywhere.utils.QrCode.PHONE
+import cut.the.crap.qreverywhere.utils.QrCode.SMS
+import cut.the.crap.qreverywhere.utils.QrCode.UNKNOWN_CONTENT
+import cut.the.crap.qreverywhere.utils.QrCode.WEB_URL
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
