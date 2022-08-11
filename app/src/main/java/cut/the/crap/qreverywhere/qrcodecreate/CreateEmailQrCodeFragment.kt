@@ -144,11 +144,12 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
         super.onViewCreated(view, savedInstanceState)
 
         activityViewModel.historyAdapterData.observe(viewLifecycleOwner) {
-            activityViewModel.setDetailViewItem(it[0])
+            if(it.isNotEmpty()) {
+                activityViewModel.setDetailViewItem(it[0])
+            }
         }
 
         with(viewBinding) {
-
             createEmailAddressText.setText(viewModel.emailAddress)
             createEmailSubjectText.setText(viewModel.emailSubject)
             createEmailBodyText.setText(viewModel.emailText)

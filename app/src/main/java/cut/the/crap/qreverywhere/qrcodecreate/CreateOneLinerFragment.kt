@@ -134,14 +134,14 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
     }
 
     private fun resetError() {
-        when (args.useCaseMode) {
-            CREATE_PHONE or CREATE_SMS-> viewBinding.createOneLinerNumberInputLayout.error = null
-            CREATE_WEB -> viewBinding.createOneLinerInputLayout.error = null
-        }
+        viewBinding.createOneLinerNumberInputLayout.error = null
+        viewBinding.createOneLinerInputLayout.error = null
     }
 
     private fun handleError(error: State.Error<QrCodeItem>) {
         when (error.cause) {
+            is NoTextInput -> viewBinding.createOneLinerInputLayout.error =
+                getString(R.string.error_msg_invalide_phone_number)
             is InvalidPhoneNumber -> viewBinding.createOneLinerNumberInputLayout.error =
                 getString(R.string.error_msg_invalide_phone_number)
             is InvalidWebUrl -> viewBinding.createOneLinerInputLayout.error =

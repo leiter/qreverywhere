@@ -134,7 +134,8 @@ class CreateOneLinerViewModel @Inject constructor(
                 else qrCodeItemState.value = State.error(error = InvalidPhoneNumber())
             }
             CreateOneLinerFragment.CREATE_SMS -> {
-                createTextQrcode(resources)
+                if (currentInputText.isNotEmpty()) createTextQrcode(resources)
+                else qrCodeItemState.value = State.error(error = NoTextInput())
 
             }
             CreateOneLinerFragment.CREATE_WEB -> {
@@ -163,5 +164,6 @@ class CreateOneLinerViewModel @Inject constructor(
 
 }
 
+class NoTextInput : Exception()
 class InvalidPhoneNumber : Exception()
 class InvalidWebUrl : Exception()

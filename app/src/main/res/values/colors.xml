@@ -9,6 +9,7 @@
     <color name="white">#FFFFFFFF</color>
 
 
+    <color name="ic_launcher_background">@color/white</color>
 
     <color name="primary">#4CAF50</color>
     <color name="primary_dark">#388E3C</color>
