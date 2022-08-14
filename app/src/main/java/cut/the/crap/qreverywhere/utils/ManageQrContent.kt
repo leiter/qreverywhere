@@ -105,8 +105,6 @@ fun getQrLaunchText(contentString: String): Int {
         decoded.startsWith("mailto:") -> R.string.ic_mail
         decoded.startsWith("http:") -> R.string.ic_open_in_browser
         decoded.startsWith("https:") -> R.string.ic_open_in_browser
-        decoded.startsWith("sms:") -> R.string.ic_sms
-        decoded.startsWith("smsto:") -> R.string.ic_sms
         else -> R.string.app_name
     }
 }

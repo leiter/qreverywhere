@@ -12,7 +12,7 @@
         android:visibility="invisible"
         android:layout_gravity="center"
         android:layout_marginBottom="72dp"
-        android:text="You have currently no qrcode."
+        android:text="@string/history_list_empty_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

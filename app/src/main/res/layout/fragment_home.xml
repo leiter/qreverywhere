@@ -14,7 +14,7 @@
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/qrScanFab"
-        tools:text="@string/qrScanFabTextFromCamera"
+        tools:text="@string/qrScanFabTextFromFile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"

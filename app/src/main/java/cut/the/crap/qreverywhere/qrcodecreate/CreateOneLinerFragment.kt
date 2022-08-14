@@ -13,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.progressindicator.LinearProgressIndicator
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.data.State
@@ -45,6 +46,10 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
 
     private val bottomNav by lazy {
         getBottomNavigationView()
+    }
+
+    private val progress by lazy {
+        requireActivity().findViewById(R.id.top_progress_indicator) as LinearProgressIndicator
     }
 
     private val openImeAction: () -> Unit = {

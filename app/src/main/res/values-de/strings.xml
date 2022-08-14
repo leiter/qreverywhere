@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">QrEveryWhere</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="action_about">Über</string>
+    <!-- Strings used for fragments for navigation -->
+
+    <string name="permission_denied_text">Zugriff verweigert</string>
+
+
+    <string name="nav_title_scan">Scan</string>
+    <string name="nav_title_create">Erstellen</string>
+    <string name="nav_title_history">Qrcodes</string>
+
+
+    <string name="qrScanFabTextFromFile">Bilddatei öffnen</string>
+
+
+    <string name="qr_created_on_template">Erstellt am %s</string>
+    <string name="qr_scanned_on_template">Gescannt am %s</string>
+    <string name="qr_from_file_on_template">Geladen am %s</string>
+
+    <string name="qr_detail_launch_template">%s starten</string>
+
+    <string name="ic_phone">Anfruf</string>
+    <string name="ic_mail">Email app</string>
+    <string name="ic_open_in_browser">Browser</string>
+
+    <string name="phone_template">%s anrufen</string>
+    <string name="mail_template">Email an: %s</string>
+    <string name="open_in_browser_template">Webseite: %s</string>
+    <string name="text_template">Text: %s</string>
+
+
+    <!--     title create onelinerQrCode -->
+    <string name="create_title_sms">Text erstellen</string>
+    <string name="create_title_phone">Anruf erstellen</string>
+    <string name="create_title_web">Weblink erstellen</string>
+
+    <!--    Snackbar and Toasts-->
+    <string name="saved_in_history">In Qrcodes gespeichert.</string>
+    <string name="saved_as_file">Qrcode als Bild gespeichert.</string>
+    <string name="error_saved_as_file">Fehler! Ergebnis wurde nicht gespeichert.</string>
+    <string name="item_deleted">Gelöscht</string>
+    <string name="undo_delete">Rückgängig machen</string>
+
+    <string name="history_list_empty_message">Es sind noch keine Qrcodes erfasst worden.</string>
+
+
+    <!--    Error messages -->
+    <string name="error_could_not_create_qr_image">Qrcode konnte nicht erstellt werden.</string>
+    <string name="error_invalid_email_address">Bitte eine gültige Emailadresse eingeben.</string>
+    <string name="create_one_liner_header_text_web">Webadresse inklusive Protokoll eingeben.</string>
+    <string name="create_one_liner_header_text_message_text">Nachricht eingeben.</string>
+    <string name="create_one_liner_header_text_phone">Telefonnummer eingeben.</string>
+    <string name="create_one_liner_number_input_hint">Telefonnummer eingeben.</string>
+    <string name="create_one_liner_input_layout_hint_web">Webadresse</string>
+    <string name="create_one_liner_input_layout_hint_text_message">Textnachricht</string>
+
+
+
+
+
+    <!--    todo unused-->
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="auto_start_header">Start automatically or show qr content</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="automation_setting_title">Start automatically</string>
+    <string name="automation_web_title">Open url in browser</string>
+    <string name="automation_web_summary_on">Automatically open the contained web page</string>
+    <string name="automation_web_summary_off">Show the qr content in the detail view</string>
+
+    <string name="automation_open_mail_app_title">Open in email app</string>
+    <string name="automation_open_mail_app_summary_on">Webseite automatisch öffnen</string>
+    <string name="automation_open_mail_app_summary_off">Show the qr content in the detail view</string>
+    <string name="error_msg_invalide_phone_number">Ungültige Telefonnummer</string>
+    <string name="error_msg_invalide_web_adress">Ungültige Webadresse</string>
+
+
+</resources>
