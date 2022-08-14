@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:hint="Recipient email"
+            android:hint="@string/qr_create_email_hint_recipient"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/createEmailButtonSaveQrToFile">
@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
 
-            android:hint="Email Subject"
+            android:hint="@string/qr_create_email_hint_subject"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/createEmailCCAddressTextLayout">
@@ -80,7 +80,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email message"
+            android:hint="@string/qr_create_email_hint_message"
             android:layout_marginTop="8dp"
 
             app:layout_constraintEnd_toEndOf="parent"
@@ -100,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Create QrCode"
+            android:text="@string/qr_create_email_button_create"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/createEmailBodyTextLayout" />
@@ -130,7 +130,7 @@
             android:layout_marginTop="8dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Save to file"
+            android:text="@string/qr_create_email_button_save"
             app:layout_constraintEnd_toEndOf="@+id/createEmailQrImagePreview"
             app:layout_constraintStart_toStartOf="@+id/createEmailQrImagePreview"
             app:layout_constraintTop_toBottomOf="@+id/createEmailQrImagePreview" />

@@ -82,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
-            android:text="Create"
+            android:text="@string/qr_create_one_line_button_create"
             android:layout_marginTop="8dp"
             app:layout_constraintVertical_bias="0"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -97,7 +97,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="8dp"
-            android:text="Test"
+            android:text="@string/qr_create_one_line_button_test"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/createOneLinerInputLayout" />
     </androidx.constraintlayout.widget.ConstraintLayout>

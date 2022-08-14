@@ -74,6 +74,20 @@
     <string name="automation_open_mail_app_summary_off">Show the qr content in the detail view</string>
     <string name="error_msg_invalide_phone_number">Invalid phone number</string>
     <string name="error_msg_invalide_web_adress">Invalid web address</string>
+    <string name="qr_content_text">Qr content text:</string>
+    <string name="qr_history_swipe_delete">Delete</string>
+    <string name="qr_history_swipe_fullscreen">Fullscreen</string>
+    <string name="qr_create_button_email">Email</string>
+    <string name="qr_create_button_text">Text</string>
+    <string name="qr_create_button_phone">Phone</string>
+    <string name="qr_create_button_web">Web</string>
+    <string name="qr_create_one_line_button_test">Test</string>
+    <string name="qr_create_one_line_button_create">Create</string>
+    <string name="qr_create_email_hint_recipient">Recipient email</string>
+    <string name="qr_create_email_hint_subject">Email Subject</string>
+    <string name="qr_create_email_hint_message">Email message</string>
+    <string name="qr_create_email_button_create">Create QrCode</string>
+    <string name="qr_create_email_button_save">Save to file</string>
 
 
 </resources>

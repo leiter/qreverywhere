@@ -81,5 +81,20 @@
     <string name="error_msg_invalide_phone_number">Ungültige Telefonnummer</string>
     <string name="error_msg_invalide_web_adress">Ungültige Webadresse</string>
 
+    <string name="qr_content_text">Qrcodeinhalt:</string>
+    <string name="qr_history_swipe_delete">Löschen</string>
+    <string name="qr_history_swipe_fullscreen">Fullscreen</string>
+    <string name="qr_create_button_email">Email</string>
+    <string name="qr_create_button_text">Text</string>
+    <string name="qr_create_button_phone">Anruf</string>
+    <string name="qr_create_button_web">Webseite</string>
+    <string name="qr_create_one_line_button_test">Testen</string>
+    <string name="qr_create_one_line_button_create">Erstellen</string>
+    <string name="qr_create_email_hint_recipient">Empfängeradresse</string>
+    <string name="qr_create_email_hint_subject">Emailbetreff</string>
+    <string name="qr_create_email_hint_message">Emailnachricht</string>
+    <string name="qr_create_email_button_create">QrCode erstellen</string>
+    <string name="qr_create_email_button_save">Speichern als jpg</string>
+
 
 </resources>
