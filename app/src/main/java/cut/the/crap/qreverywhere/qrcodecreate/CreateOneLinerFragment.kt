@@ -8,9 +8,11 @@ import android.os.Looper
 import android.view.Menu
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.progressindicator.LinearProgressIndicator
@@ -104,6 +106,34 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
                 }
         }
 
+        activityViewModel.saveDetailViewQrCodeImage.observe(viewLifecycleOwner){
+            when (it) {
+                is State.Success<String?> -> {
+                    requireView().showSnackBar(
+                        UiEvent.SnackBar(
+                            message = R.string.saved_as_file,
+                            anchorView = bottomNav
+                        )
+                    )
+                    progress.hide()
+                }
+                is State.Error -> {
+                    requireView().showSnackBar(
+                        UiEvent.SnackBar(
+                            message = R.string.error_saved_as_file,
+                            anchorView = bottomNav,
+                            backGroundColor = R.color.teal_700
+                        )
+                    )
+                    progress.hide()
+                }
+                is State.Loading -> progress.show()
+                null -> {
+
+                }
+            }
+        }
+
         viewModel.qrCodeItemState.observe(viewLifecycleOwner) { state ->
             if (state != null)
                 when (state) {
@@ -114,6 +144,19 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
                         } ?: runCatching {
                             viewBinding.createOneLinerNumberInputField.setText("")
                             viewBinding.createOneLinerInputField.setText("")
+                            viewBinding.createOneLinerHeaderGroup.visible()
+                            viewBinding.createOneLinerQrImagePreview.setOnClickListener {
+                                findNavController().navigate(
+                                    R.id.action_createOneLinerFragment_to_qrFullscreenFragment2, bundleOf(
+                                        "itemPosition" to 0,
+                                        ORIGIN_FLAG to FROM_CREATE_CONTEXT
+                                    )
+                                )
+                            }
+                            viewBinding.createOneLinerQrImagePreview.setImageBitmap(activityViewModel.detailViewQrCodeItem.img)
+                            viewBinding.createOneLinerButtonSaveQrToFile.setOnClickListener {
+                                activityViewModel.saveQrImageOfDetailView(requireContext())
+                            }
                             val anchor = getBottomNavigationView()
                             viewBinding.root.showSnackBar(
                                 UiEvent.SnackBar(
@@ -145,6 +188,8 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
 
     private fun handleError(error: State.Error<QrCodeItem>) {
         when (error.cause) {
+            is EmptyMessage -> viewBinding.createOneLinerInputLayout.error =
+                getString(R.string.error_msg_empty_text_message)
             is NoTextInput -> viewBinding.createOneLinerInputLayout.error =
                 getString(R.string.error_msg_invalide_phone_number)
             is InvalidPhoneNumber -> viewBinding.createOneLinerNumberInputLayout.error =
@@ -156,11 +201,9 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
 
     private fun showLoading(show: Boolean) {
         if (show) {
-            viewBinding.createOnelinerHeaderText.invisible()
-            viewBinding.createOneLinerLoading.visible()
+            progress.visible()
         } else {
-            viewBinding.createOnelinerHeaderText.visible()
-            viewBinding.createOneLinerLoading.invisible()
+            progress.hide()
         }
     }
 
@@ -168,7 +211,6 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
         setTitle(R.string.create_title_phone)
         with(viewBinding) {
             createOneLinerInputLayout.gone()
-            createOnelinerHeaderText.setText(R.string.create_one_liner_header_text_phone)
         }
     }
 
@@ -178,10 +220,9 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
             createOneLinerNumberInputLayout.gone()
             createOneLinerTest.gone()
             val params = createOneLinerInputLayout.layoutParams as ConstraintLayout.LayoutParams
-            params.matchConstraintMinHeight = (200 * Resources.getSystem().displayMetrics.density).toInt()
+            params.matchConstraintMinHeight = (160 * Resources.getSystem().displayMetrics.density).toInt()
             createOneLinerInputLayout.layoutParams = params
             createOneLinerInputLayout.setHint(R.string.create_one_liner_input_layout_hint_text_message)
-            createOnelinerHeaderText.setText(R.string.create_one_liner_header_text_message_text)
         }
     }
 
@@ -190,7 +231,6 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
         with(viewBinding) {
             createOneLinerNumberInputLayout.gone()
             createOneLinerInputLayout.setHint(R.string.create_one_liner_input_layout_hint_web)
-            createOnelinerHeaderText.setText(R.string.create_one_liner_header_text_web)
         }
     }
 

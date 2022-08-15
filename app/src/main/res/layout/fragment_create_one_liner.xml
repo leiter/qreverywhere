@@ -12,27 +12,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/createOnelinerHeaderText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="24dp"
-            android:text="@string/create_one_liner_header_text_web"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ProgressBar
-            android:id="@+id/createOneLinerLoading"
-            android:visibility="invisible"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/createOneLinerQrImagePreview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/createOnelinerHeaderText"
-            app:layout_constraintEnd_toEndOf="@+id/createOnelinerHeaderText"
-            app:layout_constraintStart_toStartOf="@+id/createOnelinerHeaderText"
-            app:layout_constraintTop_toTopOf="@+id/createOnelinerHeaderText" />
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_goneMarginTop="16dp" />
+
+        <Button
+            android:id="@+id/createOneLinerButtonSaveQrToFile"
+            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/qr_create_email_button_save"
+            app:layout_constraintEnd_toEndOf="@+id/createOneLinerQrImagePreview"
+            app:layout_constraintStart_toStartOf="@+id/createOneLinerQrImagePreview"
+            app:layout_constraintTop_toBottomOf="@+id/createOneLinerQrImagePreview" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/createOneLinerHeaderGroup"
+            android:visibility="gone"
+            app:constraint_referenced_ids="createOneLinerQrImagePreview,createOneLinerButtonSaveQrToFile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/createOneLinerNumberInputLayout"
@@ -41,11 +50,11 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             android:hint="@string/create_one_liner_number_input_hint"
-            app:layout_goneMarginTop="8dp"
+            app:layout_goneMarginTop="24dp"
             android:layout_marginTop="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/createOnelinerHeaderText">
+            app:layout_constraintTop_toBottomOf="@+id/createOneLinerButtonSaveQrToFile">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/createOneLinerNumberInputField"
@@ -60,11 +69,11 @@
             android:id="@+id/createOneLinerInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
-            android:layout_height="144dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintHeight_min="160dp"
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="24dp"
             android:hint="@string/create_one_liner_input_layout_hint_web"
-            app:layout_goneMarginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/createOneLinerNumberInputLayout">
@@ -100,15 +109,6 @@
             android:text="@string/qr_create_one_line_button_test"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/createOneLinerInputLayout" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/createOnelinerPhone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

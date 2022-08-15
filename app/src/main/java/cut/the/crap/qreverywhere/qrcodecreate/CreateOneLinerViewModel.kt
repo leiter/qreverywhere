@@ -38,7 +38,7 @@ class CreateOneLinerViewModel @Inject constructor(
         }
     }
 
-    private fun createTextQrcode(resources: Resources) {
+    private fun createTextQrcode(resources: Resources, activityViewModel: MainActivityViewModel) {
         viewModelScope.launch {
             val bitmap = textToImageEnc(currentInputText, resources)
             val qrCodeItem =
@@ -48,6 +48,7 @@ class CreateOneLinerViewModel @Inject constructor(
                     acquireType = Acquire.CREATED
                 )
             historyRepository.insertQrItem(qrCodeItem)
+            activityViewModel.detailViewQrCodeItem = qrCodeItem
             qrCodeItemState.value = State.success()
         }
     }
@@ -134,8 +135,8 @@ class CreateOneLinerViewModel @Inject constructor(
                 else qrCodeItemState.value = State.error(error = InvalidPhoneNumber())
             }
             CreateOneLinerFragment.CREATE_SMS -> {
-                if (currentInputText.isNotEmpty()) createTextQrcode(resources)
-                else qrCodeItemState.value = State.error(error = NoTextInput())
+                if (currentInputText.isNotEmpty()) createTextQrcode(resources, activityViewModel)
+                else qrCodeItemState.value = State.error(error = EmptyMessage())
 
             }
             CreateOneLinerFragment.CREATE_WEB -> {
@@ -164,6 +165,7 @@ class CreateOneLinerViewModel @Inject constructor(
 
 }
 
+class EmptyMessage : Exception()
 class NoTextInput : Exception()
 class InvalidPhoneNumber : Exception()
 class InvalidWebUrl : Exception()

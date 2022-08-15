@@ -15,6 +15,7 @@ private const val DATABASE_NAME = "my_data"
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
     @Singleton
     @Provides
     fun provideAppDb(app: Application): QrDatabase {

@@ -73,6 +73,7 @@
     <string name="automation_open_mail_app_summary_on">Automatically open the contained web page</string>
     <string name="automation_open_mail_app_summary_off">Show the qr content in the detail view</string>
     <string name="error_msg_invalide_phone_number">Invalid phone number</string>
+    <string name="error_msg_empty_text_message">Please insert some text</string>
     <string name="error_msg_invalide_web_adress">Invalid web address</string>
     <string name="qr_content_text">Qr content text:</string>
     <string name="qr_history_swipe_delete">Delete</string>
@@ -88,6 +89,7 @@
     <string name="qr_create_email_hint_message">Email message</string>
     <string name="qr_create_email_button_create">Create QrCode</string>
     <string name="qr_create_email_button_save">Save to file</string>
+    <string name="nav_title_create_email">Create an email</string>
 
 
 </resources>

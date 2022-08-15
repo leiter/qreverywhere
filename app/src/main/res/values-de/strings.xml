@@ -32,7 +32,7 @@
 
 
     <!--     title create onelinerQrCode -->
-    <string name="create_title_sms">Text erstellen</string>
+    <string name="create_title_sms">Nachricht erstellen</string>
     <string name="create_title_phone">Anruf erstellen</string>
     <string name="create_title_web">Weblink erstellen</string>
 
@@ -41,7 +41,7 @@
     <string name="saved_as_file">Qrcode als Bild gespeichert.</string>
     <string name="error_saved_as_file">Fehler! Ergebnis wurde nicht gespeichert.</string>
     <string name="item_deleted">Gelöscht</string>
-    <string name="undo_delete">Rückgängig machen</string>
+    <string name="undo_delete">Rückgängig</string>
 
     <string name="history_list_empty_message">Es sind noch keine Qrcodes erfasst worden.</string>
 
@@ -49,6 +49,8 @@
     <!--    Error messages -->
     <string name="error_could_not_create_qr_image">Qrcode konnte nicht erstellt werden.</string>
     <string name="error_invalid_email_address">Bitte eine gültige Emailadresse eingeben.</string>
+    <string name="error_msg_empty_text_message">Bitte text eingeben.</string>
+
     <string name="create_one_liner_header_text_web">Webadresse inklusive Protokoll eingeben.</string>
     <string name="create_one_liner_header_text_message_text">Nachricht eingeben.</string>
     <string name="create_one_liner_header_text_phone">Telefonnummer eingeben.</string>
@@ -95,6 +97,7 @@
     <string name="qr_create_email_hint_message">Emailnachricht</string>
     <string name="qr_create_email_button_create">QrCode erstellen</string>
     <string name="qr_create_email_button_save">Speichern als jpg</string>
+    <string name="nav_title_create_email">Email erstellen</string>
 
 
 </resources>

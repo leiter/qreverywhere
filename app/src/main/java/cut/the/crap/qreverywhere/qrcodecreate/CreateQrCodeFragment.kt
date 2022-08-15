@@ -15,7 +15,6 @@ import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment.Companion.U
 import cut.the.crap.qreverywhere.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 
-//  createContact    readContact
 
 @AndroidEntryPoint
 class CreateQrCodeFragment : Fragment(R.layout.fragment_create_qr_code) {

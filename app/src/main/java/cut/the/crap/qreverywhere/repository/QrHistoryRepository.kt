@@ -1,5 +1,6 @@
 package cut.the.crap.qreverywhere.repository
 
+import androidx.lifecycle.LiveData
 import cut.the.crap.qreverywhere.db.QrCodeDao
 import cut.the.crap.qreverywhere.db.QrCodeItem
 import javax.inject.Inject
@@ -16,6 +17,6 @@ class QrHistoryRepository @Inject constructor(
 
     suspend fun updateQrItem(qrCodeItem: QrCodeItem) = qrCodeDao.update(qrCodeItem)
 
-    fun getCompleteQrCodeHistory() = qrCodeDao.getCompleteHistory()
+    fun getCompleteQrCodeHistory(): LiveData<List<QrCodeItem>> = qrCodeDao.getCompleteHistory()
 
 }
