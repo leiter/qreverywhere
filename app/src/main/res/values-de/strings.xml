@@ -21,13 +21,15 @@
 
     <string name="qr_detail_launch_template">%s starten</string>
 
-    <string name="ic_phone">Anfruf</string>
-    <string name="ic_mail">Email app</string>
+    <string name="ic_open_phone_app">Anfruf</string>
+    <string name="ic_open_mail_app">Email app</string>
     <string name="ic_open_in_browser">Browser</string>
+    <string name="ic_import_contact">Kontakt importieren</string>
 
     <string name="phone_template">%s anrufen</string>
     <string name="mail_template">Email an: %s</string>
     <string name="open_in_browser_template">Webseite: %s</string>
+    <string name="contact_of_template">Kontaktdaten: %s</string>
     <string name="text_template">Text: %s</string>
 
 

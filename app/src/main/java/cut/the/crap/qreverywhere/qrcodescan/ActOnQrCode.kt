@@ -4,6 +4,6 @@ import cut.the.crap.qreverywhere.utils.Acquire
 
 interface ActOnQrCode {
 
-    fun handleQrCode(qrCode: String, @Acquire.Type type: Int )
+    fun handleQrCode(qrCode: com.google.zxing.Result, @Acquire.Type type: Int )
 
 }

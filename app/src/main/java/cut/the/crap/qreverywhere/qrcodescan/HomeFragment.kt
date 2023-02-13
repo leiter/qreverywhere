@@ -92,8 +92,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
     private fun bindCameraPreview(@NonNull cameraProvider: ProcessCameraProvider) {
         viewBinding.previewView.implementationMode = PreviewView.ImplementationMode.COMPATIBLE
-        val preview = Preview.Builder()
-            .build()
+        val preview = Preview.Builder().build()
         val cameraSelector = CameraSelector.Builder()
             .requireLensFacing(CameraSelector.LENS_FACING_BACK)
             .build()
@@ -107,8 +106,8 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 it.setAnalyzer(
                     Executors.newSingleThreadExecutor(),
                     QRCodeImageAnalyzer(object : QRCodeFoundListener {
-                        override fun onQRCodeFound(qrCode: String?) {
-                            qrCode?.let { handleQrCode(qrCode, Acquire.SCANNED) }
+                        override fun onQRCodeFound(qrCode: com.google.zxing.Result) {
+                            qrCode.let { handleQrCode(qrCode, Acquire.SCANNED) }
                         }
 
                         override fun qrCodeNotFound() {
@@ -156,8 +155,8 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         }
     }
 
-    override fun handleQrCode(qrCode: String, @Acquire.Type type: Int) {
-        activityViewModel.saveQrItemFromFile(qrCode, resources, type)
+    override fun handleQrCode(qrCode: com.google.zxing.Result, @Acquire.Type type: Int) {
+        activityViewModel.saveQrItemFromFile(qrCode.text, resources, type)
 
         findNavController().navigate(
             R.id.actionOpenDetailViewFromQrScanFragment, bundleOf(

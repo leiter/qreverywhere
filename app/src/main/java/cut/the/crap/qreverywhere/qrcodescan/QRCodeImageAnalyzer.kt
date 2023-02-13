@@ -36,7 +36,7 @@ class QRCodeImageAnalyzer(listener: QRCodeFoundListener) : ImageAnalysis.Analyze
                 if(now - throttle > waitingTime){
                     throttle = now
                     android.os.Handler(Looper.getMainLooper()).post {
-                        listener.onQRCodeFound(result.text)
+                        listener.onQRCodeFound(result)
                     }
                 }
             } catch (e: FormatException) {

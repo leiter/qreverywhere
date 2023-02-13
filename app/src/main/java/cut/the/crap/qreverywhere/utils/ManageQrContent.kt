@@ -20,6 +20,7 @@ import com.google.zxing.common.BitMatrix
 import com.google.zxing.common.HybridBinarizer
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.db.QrCodeItem
+import cut.the.crap.qreverywhere.utils.QrCode.CONTACT
 import cut.the.crap.qreverywhere.utils.QrCode.EMAIL
 import cut.the.crap.qreverywhere.utils.QrCode.PHONE
 import cut.the.crap.qreverywhere.utils.QrCode.SMS
@@ -42,9 +43,10 @@ object QrCode {
     const val PHONE = 1
     const val WEB_URL = 2
     const val SMS = 3
+    const val CONTACT = 4
     const val UNKNOWN_CONTENT = 999
 
-    @IntDef(EMAIL, PHONE, WEB_URL, UNKNOWN_CONTENT)
+    @IntDef(EMAIL, PHONE, WEB_URL, CONTACT, UNKNOWN_CONTENT)
     @Retention(AnnotationRetention.SOURCE)
     annotation class Type
 }
@@ -78,10 +80,15 @@ fun determineType(contentString: String): Int {
         decoded.startsWith("mailto:") -> EMAIL
         decoded.startsWith("http:") -> WEB_URL
         decoded.startsWith("https:") -> WEB_URL
+        isVcard(decoded) -> CONTACT
         decoded.startsWith("sms:") -> SMS
         decoded.startsWith("smsto:") -> SMS
         else -> UNKNOWN_CONTENT
     }
+}
+
+private fun isVcard(contentString: String): Boolean {
+   return contentString.startsWith("BEGIN:VCARD") && contentString.endsWith("END:VCARD\n")
 }
 
 fun getQrTypeDrawable(contentString: String): Int {
@@ -94,28 +101,31 @@ fun getQrTypeDrawable(contentString: String): Int {
         decoded.startsWith("https:") -> R.drawable.ic_open_in_browser
         decoded.startsWith("sms:") -> R.drawable.ic_sms
         decoded.startsWith("smsto:") -> R.drawable.ic_sms
+        isVcard(decoded) -> R.drawable.ic_add_contact
         else -> R.drawable.ic_content
     }
 }
 
-fun getQrLaunchText(contentString: String): Int {
+fun getQrLaunchButtonText(context: Context, contentString: String): String {
     val decoded = Uri.decode(contentString)
+    val launchTextTemplate = context.getString(R.string.qr_detail_launch_template)
     return when {
-        decoded.startsWith("tel:") -> R.string.ic_phone
-        decoded.startsWith("mailto:") -> R.string.ic_mail
-        decoded.startsWith("http:") -> R.string.ic_open_in_browser
-        decoded.startsWith("https:") -> R.string.ic_open_in_browser
-        else -> R.string.app_name
+        decoded.startsWith("tel:") -> launchTextTemplate.format(context.getString(R.string.ic_open_phone_app))
+        decoded.startsWith("mailto:") -> launchTextTemplate.format(context.getString(R.string.ic_open_mail_app))
+        decoded.startsWith("http:") -> launchTextTemplate.format(context.getString(R.string.ic_open_in_browser))
+        decoded.startsWith("https:") -> launchTextTemplate.format(context.getString(R.string.ic_open_in_browser))
+        isVcard(decoded) -> context.getString(R.string.ic_import_contact)
+        else -> context.getString(R.string.app_name)
     }
 }
 
 fun textForHistoryList(text: String, context: Context) : String {
     val decodedText = Uri.decode(text)
-    val qrType = determineType(decodedText)
-    return when(qrType){
+    return when(determineType(decodedText)){
         PHONE -> context.getString(R.string.phone_template).format(decodedText.subSequence(4,decodedText.length-1))
         EMAIL -> context.getString(R.string.mail_template).format(decodedText.subSequence(7,decodedText.indexOf("?")))
         WEB_URL -> context.getString(R.string.open_in_browser_template).format(decodedText)
+        CONTACT -> context.getString(R.string.contact_of_template).format(decodedText)
         UNKNOWN_CONTENT -> context.getString(R.string.text_template).format(decodedText)
         else -> context.getString(R.string.text_template).format(decodedText)
     }
@@ -258,8 +268,8 @@ private fun isIntentAvailable(intent: Intent, context: Context): Boolean {
 }
 
 
-fun scanQrImage(uri: Uri, context: Context): String? {
-    var contents: String? = null
+fun scanQrImage(uri: Uri, context: Context): Result? {
+    var contents: Result? = null
 
     val inputStream = context.contentResolver.openInputStream(uri)
     val sourceBitmap: Bitmap = BitmapFactory.decodeStream(inputStream)
@@ -283,7 +293,7 @@ fun scanQrImage(uri: Uri, context: Context): String? {
     val reader: Reader = MultiFormatReader()
     try {
         val result: Result = reader.decode(bitmap)
-        contents = result.text
+        contents = result
     } catch (e: Exception) {
         Log.e("QrTest", "Error decoding barcode", e)
     }
@@ -292,7 +302,7 @@ fun scanQrImage(uri: Uri, context: Context): String? {
 
 fun bitmapToArray(bmp: Bitmap): ByteArray {
     val stream = ByteArrayOutputStream()
-    bmp.compress(Bitmap.CompressFormat.JPEG, 50, stream)
+    bmp.compress(CompressFormat.JPEG, 50, stream)
     return stream.toByteArray()
 }
 

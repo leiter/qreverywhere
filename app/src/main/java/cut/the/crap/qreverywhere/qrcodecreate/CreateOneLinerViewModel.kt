@@ -8,6 +8,7 @@ import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.db.QrCodeItem
 import cut.the.crap.qreverywhere.repository.QrHistoryRepository
 import cut.the.crap.qreverywhere.utils.Acquire
+import cut.the.crap.qreverywhere.utils.ContactManager
 import cut.the.crap.qreverywhere.utils.SingleLiveDataEvent
 import cut.the.crap.qreverywhere.utils.textToImageEnc
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -137,7 +138,6 @@ class CreateOneLinerViewModel @Inject constructor(
             CreateOneLinerFragment.CREATE_SMS -> {
                 if (currentInputText.isNotEmpty()) createTextQrcode(resources, activityViewModel)
                 else qrCodeItemState.value = State.error(error = EmptyMessage())
-
             }
             CreateOneLinerFragment.CREATE_WEB -> {
                 if (isValidWebUrl()) createWebQrcode(resources, activityViewModel)
@@ -149,6 +149,9 @@ class CreateOneLinerViewModel @Inject constructor(
     }
 
     fun testClicked(mode: Int, resources: Resources) {
+
+
+
         startLoading()
         when (mode) {
             CreateOneLinerFragment.CREATE_PHONE -> testCallQrcode(resources)

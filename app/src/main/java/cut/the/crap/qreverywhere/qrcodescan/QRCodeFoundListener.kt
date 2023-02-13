@@ -1,6 +1,6 @@
 package cut.the.crap.qreverywhere.qrcodescan
 
 interface QRCodeFoundListener {
-    fun onQRCodeFound(qrCode: String?)
+    fun onQRCodeFound(qrCode: com.google.zxing.Result)
     fun qrCodeNotFound()
 }

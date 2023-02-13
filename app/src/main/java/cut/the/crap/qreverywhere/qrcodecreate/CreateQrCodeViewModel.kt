@@ -42,7 +42,7 @@ class CreateQrCodeViewModel @Inject constructor(
                         Uri.encode(emailText)
                     )
 
-                val bitmap = textToImageEnc(textContent, resources)!!
+                val bitmap = textToImageEnc(textContent, resources)
                 qrItem = QrCodeItem(
                     img = bitmap,
                     textContent = textContent,

@@ -19,13 +19,15 @@
 
     <string name="qr_detail_launch_template">Launch %s</string>
 
-    <string name="ic_phone">phone call</string>
-    <string name="ic_mail">mail app</string>
+    <string name="ic_open_phone_app">phone call</string>
+    <string name="ic_open_mail_app">mail app</string>
     <string name="ic_open_in_browser">in browser</string>
+    <string name="ic_import_contact">Import contact</string>
 
     <string name="phone_template">Phone call to: %s</string>
     <string name="mail_template">Email to: %s</string>
     <string name="open_in_browser_template">Webpage: %s</string>
+    <string name="contact_of_template">Contact of: %s</string>
     <string name="text_template">Text: %s</string>
 
 

@@ -24,7 +24,6 @@ import cut.the.crap.qreverywhere.db.QrCodeItem
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegate
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegateImpl
 import cut.the.crap.qreverywhere.utils.*
-import cut.the.crap.qreverywhere.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
@@ -82,8 +81,10 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
 
         with(viewBinding) {
             createOneLinerTest.setOnClickListener {
-                viewBinding.root.hideIme()
-                viewModel.testClicked(args.useCaseMode, resources)
+                val contactManager = ContactManager()
+                contactManager.insertContact(requireContext())
+//                viewBinding.root.hideIme()
+//                viewModel.testClicked(args.useCaseMode, resources)
             }
 
             createOneLinerCreate.setOnClickListener {
@@ -106,7 +107,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
                 }
         }
 
-        activityViewModel.saveDetailViewQrCodeImage.observe(viewLifecycleOwner){
+        activityViewModel.saveDetailViewQrCodeImage.observe(viewLifecycleOwner) {
             when (it) {
                 is State.Success<String?> -> {
                     requireView().showSnackBar(
@@ -147,13 +148,16 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
                             viewBinding.createOneLinerHeaderGroup.visible()
                             viewBinding.createOneLinerQrImagePreview.setOnClickListener {
                                 findNavController().navigate(
-                                    R.id.action_createOneLinerFragment_to_qrFullscreenFragment2, bundleOf(
+                                    R.id.action_createOneLinerFragment_to_qrFullscreenFragment2,
+                                    bundleOf(
                                         "itemPosition" to 0,
                                         ORIGIN_FLAG to FROM_CREATE_CONTEXT
                                     )
                                 )
                             }
-                            viewBinding.createOneLinerQrImagePreview.setImageBitmap(activityViewModel.detailViewQrCodeItem.img)
+                            viewBinding.createOneLinerQrImagePreview.setImageBitmap(
+                                activityViewModel.detailViewQrCodeItem.img
+                            )
                             viewBinding.createOneLinerButtonSaveQrToFile.setOnClickListener {
                                 activityViewModel.saveQrImageOfDetailView(requireContext())
                             }
@@ -164,7 +168,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
                                     anchorView = anchor,
                                     actionTextColor = R.color.accent,
                                     actionLabel = R.string.undo_delete,
-                                    )
+                                )
                             )
                         }
                     }
@@ -220,7 +224,8 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
             createOneLinerNumberInputLayout.gone()
             createOneLinerTest.gone()
             val params = createOneLinerInputLayout.layoutParams as ConstraintLayout.LayoutParams
-            params.matchConstraintMinHeight = (160 * Resources.getSystem().displayMetrics.density).toInt()
+            params.matchConstraintMinHeight =
+                (160 * Resources.getSystem().displayMetrics.density).toInt()
             createOneLinerInputLayout.layoutParams = params
             createOneLinerInputLayout.setHint(R.string.create_one_liner_input_layout_hint_text_message)
         }

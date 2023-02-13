@@ -91,11 +91,7 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
 
     private fun setData() {
         val item = activityViewModel.detailViewQrCodeItem
-        val launchText = getString(R.string.qr_detail_launch_template).format(
-            getString(
-                getQrLaunchText(item.textContent)
-            )
-        )
+        val launchText = getQrLaunchButtonText(requireContext(), item.textContent)
 
         with(viewBinding) {
             Glide.with(root.context).load(item.img).into(detailViewContentPreviewImage)

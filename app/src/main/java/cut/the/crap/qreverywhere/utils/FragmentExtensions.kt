@@ -5,5 +5,5 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 
 fun Fragment.setTitle(@StringRes title: Int){
-    (activity as AppCompatActivity).supportActionBar?.setTitle(title)
+    (activity as? AppCompatActivity)?.supportActionBar?.setTitle(title)
 }
