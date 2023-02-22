@@ -8,9 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.data.State
-import cut.the.crap.qreverywhere.db.QrCodeItem
-import cut.the.crap.qreverywhere.repository.QrHistoryRepository
-import cut.the.crap.qreverywhere.utils.Acquire
+import cut.the.crap.qrrepository.Acquire
 import cut.the.crap.qreverywhere.utils.textToImageEnc
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -18,10 +16,10 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreateQrCodeViewModel @Inject constructor(
-    private val qrHistoryRepository: QrHistoryRepository
+    private val qrHistoryRepository: cut.the.crap.qrrepository.QrHistoryRepository
 ) : ViewModel() {
 
-    val emailQrCodeItem = MutableLiveData<State<QrCodeItem>>()
+    val emailQrCodeItem = MutableLiveData<State<cut.the.crap.qrrepository.db.QrCodeItem>>()
 
     var emailAddress = ""
     var emailSubject = ""
@@ -30,7 +28,7 @@ class CreateQrCodeViewModel @Inject constructor(
     @Throws(WriterException::class)
     fun textToQrCodeItem(resources: Resources) {
         viewModelScope.launch {
-            var qrItem: QrCodeItem? = null
+            var qrItem: cut.the.crap.qrrepository.db.QrCodeItem? = null
             var saveInHistory = false
             try {
                 emailQrCodeItem.value = State.loading()
@@ -43,7 +41,7 @@ class CreateQrCodeViewModel @Inject constructor(
                     )
 
                 val bitmap = textToImageEnc(textContent, resources)
-                qrItem = QrCodeItem(
+                qrItem = cut.the.crap.qrrepository.db.QrCodeItem(
                     img = bitmap,
                     textContent = textContent,
                     acquireType = Acquire.CREATED

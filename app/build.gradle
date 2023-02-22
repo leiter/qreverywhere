@@ -54,6 +54,7 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:2.5.3"
     implementation "androidx.navigation:navigation-ui-ktx:2.5.3"
     implementation "androidx.preference:preference:1.2.0"
+    implementation project(path: ':qr_repository')
 
 
     // Camera
@@ -62,11 +63,7 @@ dependencies {
     implementation "androidx.camera:camera-lifecycle:$camerax_version"
     implementation "androidx.camera:camera-view:$camerax_version"
 
-    // Room
-    def room_common = "2.5.0"
-    implementation "androidx.room:room-ktx:$room_common"
-    implementation "androidx.room:room-runtime:$room_common"
-    kapt "androidx.room:room-compiler:$room_common"
+
 
     // Qr Related
     implementation 'com.google.zxing:core:3.4.0'

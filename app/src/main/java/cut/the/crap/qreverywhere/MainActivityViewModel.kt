@@ -7,12 +7,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.data.State
-import cut.the.crap.qreverywhere.db.QrCodeItem
-import cut.the.crap.qreverywhere.repository.QrHistoryRepository
-import cut.the.crap.qreverywhere.utils.Acquire
+import cut.the.crap.qrrepository.Acquire
 import cut.the.crap.qreverywhere.utils.SingleLiveDataEvent
 import cut.the.crap.qreverywhere.utils.saveImageToFile
 import cut.the.crap.qreverywhere.utils.textToImageEnc
+import cut.the.crap.qrrepository.QrHistoryRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,19 +23,19 @@ class MainActivityViewModel @Inject constructor(
 
     var focusedItemIndex: Int = 0
 
-    var detailViewQrCodeItem: QrCodeItem = QrCodeItem()
+    var detailViewQrCodeItem: cut.the.crap.qrrepository.db.QrCodeItem = cut.the.crap.qrrepository.db.QrCodeItem()
 
-    val detailViewLiveQrCodeItem = MutableLiveData<State<QrCodeItem>>()
+    val detailViewLiveQrCodeItem = MutableLiveData<State<cut.the.crap.qrrepository.db.QrCodeItem>>()
 
     val saveDetailViewQrCodeImage = SingleLiveDataEvent<State<String?>>(null)
 
-    val startDetailViewQrCodeItem = SingleLiveDataEvent<QrCodeItem?>(null)
+    val startDetailViewQrCodeItem = SingleLiveDataEvent<cut.the.crap.qrrepository.db.QrCodeItem?>(null)
 
     val historyAdapterData = historyRepository.getCompleteQrCodeHistory()
 
-    val removeItemSingleLiveDataEvent = SingleLiveDataEvent<State<QrCodeItem>>(null)
+    val removeItemSingleLiveDataEvent = SingleLiveDataEvent<State<cut.the.crap.qrrepository.db.QrCodeItem>>(null)
 
-    fun saveQrItem(qrCodeItem: QrCodeItem) {
+    fun saveQrItem(qrCodeItem: cut.the.crap.qrrepository.db.QrCodeItem) {
         viewModelScope.launch {
             historyRepository.insertQrItem(qrCodeItem)
         }
@@ -48,7 +47,7 @@ class MainActivityViewModel @Inject constructor(
         viewModelScope.launch {
             val bitmap = textToImageEnc(textContent, resources)
             val historyItem =
-                QrCodeItem(img = bitmap, textContent = textContent, acquireType = type)
+                cut.the.crap.qrrepository.db.QrCodeItem(img = bitmap, textContent = textContent, acquireType = type)
             detailViewQrCodeItem = historyItem
             startDetailViewQrCodeItem.value = historyItem
             detailViewLiveQrCodeItem.value = State.success(historyItem)
@@ -56,7 +55,7 @@ class MainActivityViewModel @Inject constructor(
         }
     }
 
-    fun setDetailViewItem(qrCodeItem: QrCodeItem) {
+    fun setDetailViewItem(qrCodeItem: cut.the.crap.qrrepository.db.QrCodeItem) {
         focusedItemIndex = historyAdapterData.value?.indexOf(qrCodeItem) ?: 0
         detailViewQrCodeItem = qrCodeItem
     }
@@ -83,7 +82,7 @@ class MainActivityViewModel @Inject constructor(
 
     fun removeHistoryItem(pos: Int) {
         if (pos > -1) {
-            var result: QrCodeItem?
+            var result: cut.the.crap.qrrepository.db.QrCodeItem?
             removeItemSingleLiveDataEvent.value = State.loading()
             viewModelScope.launch {
                 historyAdapterData.value?.let {

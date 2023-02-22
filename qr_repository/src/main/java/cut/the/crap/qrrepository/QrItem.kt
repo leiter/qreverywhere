@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere.data
+package cut.the.crap.qrrepository
 
 import android.graphics.Bitmap
 

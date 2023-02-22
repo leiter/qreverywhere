@@ -5,7 +5,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.qrcodescan.HomeFragment
-import cut.the.crap.qreverywhere.utils.Acquire
+import cut.the.crap.qrrepository.Acquire
 import cut.the.crap.qreverywhere.utils.hasPermission
 import cut.the.crap.qreverywhere.utils.scanQrImage
 import cut.the.crap.qreverywhere.utils.showShortToast

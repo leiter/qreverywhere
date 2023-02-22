@@ -25,6 +25,7 @@ import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegate
 import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegateImpl
 import cut.the.crap.qreverywhere.utils.*
 import cut.the.crap.qreverywhere.utils.viewBinding
+import cut.the.crap.qrrepository.Acquire
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 import java.util.concurrent.ExecutionException

@@ -11,15 +11,21 @@ import android.graphics.Canvas
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Environment
-import android.util.Log
 import android.view.View
 import androidx.annotation.IntDef
 import androidx.core.content.res.ResourcesCompat
-import com.google.zxing.*
+import com.google.zxing.BarcodeFormat
+import com.google.zxing.BinaryBitmap
+import com.google.zxing.LuminanceSource
+import com.google.zxing.MultiFormatReader
+import com.google.zxing.MultiFormatWriter
+import com.google.zxing.RGBLuminanceSource
+import com.google.zxing.Reader
+import com.google.zxing.Result
+import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.common.HybridBinarizer
 import cut.the.crap.qreverywhere.R
-import cut.the.crap.qreverywhere.db.QrCodeItem
 import cut.the.crap.qreverywhere.utils.QrCode.CONTACT
 import cut.the.crap.qreverywhere.utils.QrCode.EMAIL
 import cut.the.crap.qreverywhere.utils.QrCode.PHONE
@@ -33,8 +39,7 @@ import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
-import java.util.*
-
+import java.util.Calendar
 
 const val QRcodeWidth = 500 // todo should be calculated  / set stride also when ready
 const val IMAGE_DIRECTORY = "QrEveryWhere"
@@ -48,18 +53,6 @@ object QrCode {
     const val UNKNOWN_CONTENT = 999
 
     @IntDef(EMAIL, PHONE, WEB_URL, CONTACT, UNKNOWN_CONTENT)
-    @Retention(AnnotationRetention.SOURCE)
-    annotation class Type
-}
-
-object Acquire {
-    const val SCANNED = 0
-    const val CREATED = 1
-    const val FROM_FILE = 2
-    const val ERROR_OCCURRED = 3
-    const val EMPTY_DEFAULT = 4
-
-    @IntDef(SCANNED, CREATED, FROM_FILE, ERROR_OCCURRED, EMPTY_DEFAULT)
     @Retention(AnnotationRetention.SOURCE)
     annotation class Type
 }
@@ -132,7 +125,7 @@ fun textForHistoryList(text: String, context: Context) : String {
     }
 }
 
-suspend fun saveImageToFile(qrCodeItem: QrCodeItem, context: Context): String {
+suspend fun saveImageToFile(qrCodeItem: cut.the.crap.qrrepository.db.QrCodeItem, context: Context): String {
     return withContext(Dispatchers.IO) {
 
         val bytes = ByteArrayOutputStream()

@@ -17,7 +17,7 @@ import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentDetailViewBinding
-import cut.the.crap.qreverywhere.db.QrCodeItem
+import cut.the.crap.qrrepository.db.QrCodeItem
 import cut.the.crap.qreverywhere.utils.*
 import cut.the.crap.qreverywhere.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -121,10 +121,10 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
     private fun setObserver() {
         activityViewModel.detailViewLiveQrCodeItem.observe(viewLifecycleOwner) {
             when (it) {
-                is State.Loading<QrCodeItem> -> {
+                is State.Loading<cut.the.crap.qrrepository.db.QrCodeItem> -> {
                     progress.show()
                 }
-                is State.Success<QrCodeItem> -> {
+                is State.Success<cut.the.crap.qrrepository.db.QrCodeItem> -> {
                     if (it.data != null) {
                         setData()
                     }

@@ -19,7 +19,7 @@ import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentCreateEmailQrCodeBinding
-import cut.the.crap.qreverywhere.db.QrCodeItem
+import cut.the.crap.qrrepository.db.QrCodeItem
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegate
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegateImpl
 import cut.the.crap.qreverywhere.utils.*
@@ -66,11 +66,11 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
         with(viewBinding) {
             viewModel.emailQrCodeItem.observe(viewLifecycleOwner) {
                 when (it) {
-                    is State.Loading<QrCodeItem> -> {
+                    is State.Loading<cut.the.crap.qrrepository.db.QrCodeItem> -> {
                         progress.show()
                         createEmailAddressTextLayout.error = null
                     }
-                    is State.Success<QrCodeItem> -> {
+                    is State.Success<cut.the.crap.qrrepository.db.QrCodeItem> -> {
                         if (it.data != null) {
                             createEmailQrImagePreview.setImageBitmap(it.data.img)
                         } else {

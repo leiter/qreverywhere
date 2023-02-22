@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere.db
+package cut.the.crap.qrrepository.db
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

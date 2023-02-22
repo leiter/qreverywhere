@@ -20,7 +20,7 @@ import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentCreateOneLinerBinding
-import cut.the.crap.qreverywhere.db.QrCodeItem
+import cut.the.crap.qrrepository.db.QrCodeItem
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegate
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegateImpl
 import cut.the.crap.qreverywhere.utils.*
@@ -190,7 +190,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
         viewBinding.createOneLinerInputLayout.error = null
     }
 
-    private fun handleError(error: State.Error<QrCodeItem>) {
+    private fun handleError(error: State.Error<cut.the.crap.qrrepository.db.QrCodeItem>) {
         when (error.cause) {
             is EmptyMessage -> viewBinding.createOneLinerInputLayout.error =
                 getString(R.string.error_msg_empty_text_message)

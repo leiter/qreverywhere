@@ -14,7 +14,7 @@ import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentQrHistoryBinding
-import cut.the.crap.qreverywhere.db.QrCodeItem
+import cut.the.crap.qrrepository.db.QrCodeItem
 import cut.the.crap.qreverywhere.utils.*
 import cut.the.crap.qreverywhere.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,7 +42,7 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
         return requireActivity().findViewById(R.id.nav_view)
     }
 
-    private val detailViewItemClicked: (QrCodeItem) -> Unit = {
+    private val detailViewItemClicked: (cut.the.crap.qrrepository.db.QrCodeItem) -> Unit = {
         activityViewModel.setDetailViewItem(it)
         findNavController().navigate(
             R.id.action_qrHistoryFragment_to_detailViewFragment, bundleOf(
