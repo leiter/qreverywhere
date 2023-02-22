@@ -9,7 +9,7 @@ import cut.the.crap.qreverywhere.utils.Acquire
 data class QrCodeItem(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val img: Bitmap = Bitmap.createBitmap(1,1,Bitmap.Config.ARGB_8888),
+    val img: Bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888),
     val timestamp: Long = System.currentTimeMillis(),
     val textContent: String = "",
     @Acquire.Type

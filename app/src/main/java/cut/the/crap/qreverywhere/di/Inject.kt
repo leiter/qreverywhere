@@ -26,8 +26,8 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideRunDao(db: QrDatabase): QrCodeDao {
-        return db.getRunDao()
+    fun provideDao(db: QrDatabase): QrCodeDao {
+        return db.getDao()
     }
 
 

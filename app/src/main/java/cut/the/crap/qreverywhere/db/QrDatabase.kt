@@ -10,5 +10,5 @@ import androidx.room.TypeConverters
 )
 @TypeConverters(Converters::class)
 abstract class QrDatabase : RoomDatabase() {
-    abstract fun getRunDao(): QrCodeDao
+    abstract fun getDao(): QrCodeDao
 }

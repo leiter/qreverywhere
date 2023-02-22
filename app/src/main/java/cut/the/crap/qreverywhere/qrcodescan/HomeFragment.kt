@@ -2,12 +2,10 @@ package cut.the.crap.qreverywhere.qrcodescan
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.NonNull
 import androidx.camera.core.AspectRatio
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -34,7 +32,7 @@ import java.util.concurrent.Executors
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home),
-    PickQrCodeDelegate by PickQrCodeDelegateImpl(), ActOnQrCode {
+    PickQrCodeDelegate by PickQrCodeDelegateImpl(), OnQrCodeRecognition {
 
     private val activityViewModel by activityViewModels<MainActivityViewModel>()
 
