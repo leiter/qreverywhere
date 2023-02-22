@@ -34,8 +34,7 @@ class ContactManager {
         //prepare
         ops.add(ContentProviderOperation.newInsert(RawContacts.CONTENT_URI)
             .withValue(RawContacts.ACCOUNT_TYPE, null)
-            .withValue(RawContacts.ACCOUNT_NAME, null).build());
-
+            .withValue(RawContacts.ACCOUNT_NAME, null).build())
 
         //Phone Number
         ops.add(ContentProviderOperation
@@ -45,7 +44,7 @@ class ContactManager {
             .withValue(Data.MIMETYPE, Phone.CONTENT_ITEM_TYPE)
             .withValue(Phone.NUMBER, "9X-XXXXXXXXX")
             .withValue(Data.MIMETYPE, Phone.CONTENT_ITEM_TYPE)
-            .withValue(Phone.TYPE, "2").build());
+            .withValue(Phone.TYPE, "2").build())
 
         //Display name/Contact name
         ops.add(ContentProviderOperation
@@ -55,8 +54,7 @@ class ContactManager {
                 rawContactInsertIndex)
             .withValue(Data.MIMETYPE, StructuredName.CONTENT_ITEM_TYPE)
             .withValue(StructuredName.DISPLAY_NAME, "Mike Sullivan")
-            .build());
-
+            .build())
 
         //Email details
         ops.add(ContentProviderOperation
@@ -66,8 +64,7 @@ class ContactManager {
             .withValue(Data.MIMETYPE, Email.CONTENT_ITEM_TYPE)
             .withValue(Email.DATA, "abc@aho.com")
             .withValue(Data.MIMETYPE, Email.CONTENT_ITEM_TYPE)
-            .withValue(Email.TYPE, "2").build());
-
+            .withValue(Email.TYPE, "2").build())
 
         //Postal Address
         ops.add(ContentProviderOperation
@@ -96,8 +93,7 @@ class ContactManager {
             .withValue(StructuredPostal.TYPE, "3")
 
 
-            .build());
-
+            .build())
 
         //Organization details
         ops.add(ContentProviderOperation
@@ -110,7 +106,7 @@ class ContactManager {
             .withValue(Data.MIMETYPE, Organization.CONTENT_ITEM_TYPE )
             .withValue(Organization.TYPE, "0")
 
-            .build());
+            .build())
 
         //Instant messenger details
         ops.add(ContentProviderOperation
@@ -122,7 +118,7 @@ class ContactManager {
             .withValue(Im.DATA, "ImName")
             .withValue(Data.MIMETYPE, Im.CONTENT_ITEM_TYPE )
             .withValue(Im.DATA5, "3")  // Skype, yahoo,
-            .build());
+            .build())
 
 
         try {

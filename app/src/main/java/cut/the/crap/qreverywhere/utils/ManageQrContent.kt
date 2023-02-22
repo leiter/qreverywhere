@@ -28,6 +28,7 @@ import cut.the.crap.qreverywhere.utils.QrCode.UNKNOWN_CONTENT
 import cut.the.crap.qreverywhere.utils.QrCode.WEB_URL
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -147,7 +148,7 @@ suspend fun saveImageToFile(qrCodeItem: QrCodeItem, context: Context): String {
         try {
             val f = File( //todo better naming
                 directory, Calendar.getInstance()
-                    .timeInMillis.toString() + ".jpg"
+                .timeInMillis.toString() + ".jpg"
             )
             f.createNewFile() // todo give read write permission
             val fo = FileOutputStream(f)
@@ -158,10 +159,10 @@ suspend fun saveImageToFile(qrCodeItem: QrCodeItem, context: Context): String {
                 arrayOf("image/jpeg")
             ) { path, uri ->
                 val updateQritem = qrCodeItem.copy(fileUriString = uri.toString())
-                Log.e("TAG", "MediaScanner::--->" + uri.toString())
+                Timber.e("MediaScanner::--->$uri")
             }
             fo.close()
-            Log.d("TAG", "File Saved::--->" + f.absolutePath)
+            Timber.d("File Saved::--->" + f.absolutePath)
             f.absolutePath
         } catch (e1: IOException) {
             e1.printStackTrace()
@@ -232,7 +233,7 @@ fun createShareIntent(qrImgUri: Uri): Intent {
 
 private fun shareBitmap(context: Context, bitmap: Bitmap, fileName: String) {
     try {
-        val file: File = File(context.cacheDir, "$fileName.png")
+        val file = File(context.cacheDir, "$fileName.png")
         val fOut = FileOutputStream(file)
         bitmap.compress(CompressFormat.PNG, 100, fOut)
         fOut.flush()
@@ -295,7 +296,7 @@ fun scanQrImage(uri: Uri, context: Context): Result? {
         val result: Result = reader.decode(bitmap)
         contents = result
     } catch (e: Exception) {
-        Log.e("QrTest", "Error decoding barcode", e)
+        Timber.e(e, "Error decoding barcode")
     }
     return contents
 }

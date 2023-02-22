@@ -28,6 +28,7 @@ import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegateImpl
 import cut.the.crap.qreverywhere.utils.*
 import cut.the.crap.qreverywhere.utils.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.Executors
 
@@ -90,7 +91,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         }, ContextCompat.getMainExecutor(requireContext()))
     }
 
-    private fun bindCameraPreview(@NonNull cameraProvider: ProcessCameraProvider) {
+    private fun bindCameraPreview(cameraProvider: ProcessCameraProvider) {
         viewBinding.previewView.implementationMode = PreviewView.ImplementationMode.COMPATIBLE
         val preview = Preview.Builder().build()
         val cameraSelector = CameraSelector.Builder()
@@ -107,11 +108,11 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                     Executors.newSingleThreadExecutor(),
                     QRCodeImageAnalyzer(object : QRCodeFoundListener {
                         override fun onQRCodeFound(qrCode: com.google.zxing.Result) {
-                            qrCode.let { handleQrCode(qrCode, Acquire.SCANNED) }
+                            handleQrCode(qrCode, Acquire.SCANNED)
                         }
 
                         override fun qrCodeNotFound() {
-                            Log.d("NOT_FOUND", "Did not find qr code.")
+                            Timber.d("Did not find qr code.")
                         }
                     })
                 )

@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
-    private val historyRepository: QrHistoryRepository
+    private val historyRepository: QrHistoryRepository,
 ) : ViewModel() {
 
     var focusedItemIndex: Int = 0
@@ -63,12 +63,10 @@ class MainActivityViewModel @Inject constructor(
 
     fun deleteCurrentDetailView() {
         val pos = historyAdapterData.value?.indexOf(detailViewQrCodeItem)
-        viewModelScope.launch {
-            pos?.let {
-                removeHistoryItem(it)
-            } ?: kotlin.run {
-                removeItemSingleLiveDataEvent.value = State.error(error = CouldNotDeleteQrItem())
-            }
+        pos?.let {
+            removeHistoryItem(it)
+        } ?: kotlin.run {
+            removeItemSingleLiveDataEvent.value = State.error(error = CouldNotDeleteQrItem())
         }
     }
 
@@ -84,15 +82,18 @@ class MainActivityViewModel @Inject constructor(
     }
 
     fun removeHistoryItem(pos: Int) {
-        var result: QrCodeItem?
-        removeItemSingleLiveDataEvent.value = State.loading()
-        viewModelScope.launch {
-            historyAdapterData.value?.let {
-                result = it[pos]
-                historyRepository.deleteQrItem(it[pos])
-                removeItemSingleLiveDataEvent.value = State.success(result)
+        if (pos > -1) {
+            var result: QrCodeItem?
+            removeItemSingleLiveDataEvent.value = State.loading()
+            viewModelScope.launch {
+                historyAdapterData.value?.let {
+                    result = it[pos]
+                    historyRepository.deleteQrItem(it[pos])
+                    removeItemSingleLiveDataEvent.value = State.success(result)
+                }
             }
         }
+
     }
 
 }
