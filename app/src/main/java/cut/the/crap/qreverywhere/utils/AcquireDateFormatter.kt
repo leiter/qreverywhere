@@ -3,6 +3,7 @@ package cut.the.crap.qreverywhere.utils
 import android.content.Context
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qrrepository.Acquire
+import cut.the.crap.qrrepository.QrItem
 import dagger.hilt.android.qualifiers.ApplicationContext
 import java.text.SimpleDateFormat
 import java.util.*
@@ -15,7 +16,7 @@ class AcquireDateFormatter @Inject constructor(@ApplicationContext context: Cont
 
     private val dateFormat = SimpleDateFormat("dd.MM.yy", Locale.getDefault())
 
-    fun getTimeTemplate(qrItemData: cut.the.crap.qrrepository.db.QrCodeItem) : String {
+    fun getTimeTemplate(qrItemData: QrItem) : String {
         return when(qrItemData.acquireType){
             Acquire.SCANNED -> scannedTemplate
             Acquire.CREATED -> createdTemplate

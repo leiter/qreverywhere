@@ -17,9 +17,19 @@ import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentDetailViewBinding
-import cut.the.crap.qrrepository.db.QrCodeItem
-import cut.the.crap.qreverywhere.utils.*
+import cut.the.crap.qreverywhere.utils.AcquireDateFormatter
+import cut.the.crap.qreverywhere.utils.FROM_HISTORY_LIST
+import cut.the.crap.qreverywhere.utils.FROM_SCAN_QR
+import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
+import cut.the.crap.qreverywhere.utils.QrCode
+import cut.the.crap.qreverywhere.utils.UiEvent
+import cut.the.crap.qreverywhere.utils.createOpenIntent
+import cut.the.crap.qreverywhere.utils.determineType
+import cut.the.crap.qreverywhere.utils.getQrLaunchButtonText
+import cut.the.crap.qreverywhere.utils.gone
+import cut.the.crap.qreverywhere.utils.showSnackBar
 import cut.the.crap.qreverywhere.utils.viewBinding
+import cut.the.crap.qrrepository.QrItem
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -121,10 +131,10 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
     private fun setObserver() {
         activityViewModel.detailViewLiveQrCodeItem.observe(viewLifecycleOwner) {
             when (it) {
-                is State.Loading<cut.the.crap.qrrepository.db.QrCodeItem> -> {
+                is State.Loading<QrItem> -> {
                     progress.show()
                 }
-                is State.Success<cut.the.crap.qrrepository.db.QrCodeItem> -> {
+                is State.Success<QrItem> -> {
                     if (it.data != null) {
                         setData()
                     }

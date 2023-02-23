@@ -5,7 +5,7 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
 @Database(
-    entities = [QrCodeItem::class],
+    entities = [QrCodeDbItem::class],
     version = 1
 )
 @TypeConverters(Converters::class)

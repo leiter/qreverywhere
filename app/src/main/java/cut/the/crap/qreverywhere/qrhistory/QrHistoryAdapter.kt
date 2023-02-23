@@ -9,18 +9,18 @@ import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.ItemQrHistoryBinding
-import cut.the.crap.qrrepository.db.QrCodeItem
 import cut.the.crap.qreverywhere.utils.AcquireDateFormatter
 import cut.the.crap.qreverywhere.utils.getQrTypeDrawable
 import cut.the.crap.qreverywhere.utils.textForHistoryList
+import cut.the.crap.qrrepository.QrItem
 
 class QrHistoryAdapter(
-    val detailViewItemClicked: (cut.the.crap.qrrepository.db.QrCodeItem) -> Unit,
+    val detailViewItemClicked: (QrItem) -> Unit,
     val focusedPosition: (Int) -> Unit,
-    private val acquireDateFormatter: AcquireDateFormatter
-) : RecyclerView.Adapter<QrHistoryAdapter.QrHistoryViewHolder<ViewBinding>>()  {
+    private val acquireDateFormatter: AcquireDateFormatter,
+) : RecyclerView.Adapter<QrHistoryAdapter.QrHistoryViewHolder<ViewBinding>>() {
 
-    inner class QrHistoryViewHolder<VB : ViewBinding>(val binding: VB): RecyclerView.ViewHolder(binding.root) {
+    inner class QrHistoryViewHolder<VB : ViewBinding>(val binding: VB) : RecyclerView.ViewHolder(binding.root) {
         init {
             this@QrHistoryViewHolder.itemView.setOnClickListener {
                 detailViewItemClicked(differ.currentList[adapterPosition])
@@ -32,19 +32,19 @@ class QrHistoryAdapter(
         }
     }
 
-    private val diffCallback = object : DiffUtil.ItemCallback<cut.the.crap.qrrepository.db.QrCodeItem>() {
-        override fun areItemsTheSame(oldItem: cut.the.crap.qrrepository.db.QrCodeItem, newItem: cut.the.crap.qrrepository.db.QrCodeItem): Boolean {
+    private val diffCallback = object : DiffUtil.ItemCallback<QrItem>() {
+        override fun areItemsTheSame(oldItem: QrItem, newItem: QrItem): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: cut.the.crap.qrrepository.db.QrCodeItem, newItem: cut.the.crap.qrrepository.db.QrCodeItem): Boolean {
+        override fun areContentsTheSame(oldItem: QrItem, newItem: QrItem): Boolean {
             return oldItem.hashCode() == newItem.hashCode()
         }
     }
 
     private val differ = AsyncListDiffer(this, diffCallback)
 
-    fun setData(list: List<cut.the.crap.qrrepository.db.QrCodeItem>) = differ.submitList(list)
+    fun setData(list: List<QrItem>) = differ.submitList(list)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): QrHistoryViewHolder<ViewBinding> {
         val view = LayoutInflater.from(parent.context).inflate(
@@ -62,14 +62,14 @@ class QrHistoryAdapter(
     }
 
     override fun onBindViewHolder(holder: QrHistoryViewHolder<ViewBinding>, position: Int) {
-        val run = differ.currentList[position]
-        if(holder.binding is ItemQrHistoryBinding){
-            bindQrItem(holder.binding, run,position)
+        val qrItem = differ.currentList[position]
+        if (holder.binding is ItemQrHistoryBinding) {
+            bindQrItem(holder.binding, qrItem, position)
         }
     }
 
-    private fun bindQrItem(binding: ItemQrHistoryBinding, qrItemData: cut.the.crap.qrrepository.db.QrCodeItem, position: Int){
-        with(binding){
+    private fun bindQrItem(binding: ItemQrHistoryBinding, qrItemData: QrItem, position: Int) {
+        with(binding) {
             Glide.with(root.context).load(qrItemData.img).into(historyItemImage)
             val createdText = acquireDateFormatter.getTimeTemplate(qrItemData)
             historyItemTimestamp.text = createdText

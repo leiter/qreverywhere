@@ -19,14 +19,19 @@ import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentCreateEmailQrCodeBinding
-import cut.the.crap.qrrepository.db.QrCodeItem
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegate
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegateImpl
-import cut.the.crap.qreverywhere.utils.*
+import cut.the.crap.qreverywhere.utils.FROM_CREATE_CONTEXT
+import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
+import cut.the.crap.qreverywhere.utils.UiEvent
+import cut.the.crap.qreverywhere.utils.gone
+import cut.the.crap.qreverywhere.utils.showSnackBar
+import cut.the.crap.qreverywhere.utils.textChanges
 import cut.the.crap.qreverywhere.utils.viewBinding
+import cut.the.crap.qreverywhere.utils.visible
+import cut.the.crap.qrrepository.QrItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_code),
@@ -66,11 +71,11 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
         with(viewBinding) {
             viewModel.emailQrCodeItem.observe(viewLifecycleOwner) {
                 when (it) {
-                    is State.Loading<cut.the.crap.qrrepository.db.QrCodeItem> -> {
+                    is State.Loading<QrItem> -> {
                         progress.show()
                         createEmailAddressTextLayout.error = null
                     }
-                    is State.Success<cut.the.crap.qrrepository.db.QrCodeItem> -> {
+                    is State.Success<QrItem> -> {
                         if (it.data != null) {
                             createEmailQrImagePreview.setImageBitmap(it.data.img)
                         } else {

@@ -32,6 +32,7 @@ import cut.the.crap.qreverywhere.utils.QrCode.PHONE
 import cut.the.crap.qreverywhere.utils.QrCode.SMS
 import cut.the.crap.qreverywhere.utils.QrCode.UNKNOWN_CONTENT
 import cut.the.crap.qreverywhere.utils.QrCode.WEB_URL
+import cut.the.crap.qrrepository.QrItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -125,7 +126,7 @@ fun textForHistoryList(text: String, context: Context) : String {
     }
 }
 
-suspend fun saveImageToFile(qrCodeItem: cut.the.crap.qrrepository.db.QrCodeItem, context: Context): String {
+suspend fun saveImageToFile(qrCodeItem: QrItem, context: Context): String {
     return withContext(Dispatchers.IO) {
 
         val bytes = ByteArrayOutputStream()
@@ -218,8 +219,8 @@ fun createOpenIntent(qrString: String, context: Context): Intent? {
 fun createShareIntent(qrImgUri: Uri): Intent {
     return Intent(Intent.ACTION_SEND).apply {
 //        data = qrImgUri;
-        type = "image/png";
-        putExtra(Intent.EXTRA_STREAM, qrImgUri);
+        type = "image/png"
+        putExtra(Intent.EXTRA_STREAM, qrImgUri)
 //        activity.startActivityForResult(Intent.createChooser(shareIntent, "Share Via"), Navigator.REQUEST_SHARE_ACTION);
     }
 }

@@ -8,6 +8,7 @@ import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qrrepository.Acquire
 import cut.the.crap.qreverywhere.utils.SingleLiveDataEvent
 import cut.the.crap.qreverywhere.utils.textToImageEnc
+import cut.the.crap.qrrepository.db.toItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -17,7 +18,7 @@ class CreateOneLinerViewModel @Inject constructor(
     private val historyRepository: cut.the.crap.qrrepository.QrHistoryRepository
 ) : ViewModel() {
 
-    val qrCodeItemState = SingleLiveDataEvent<State<cut.the.crap.qrrepository.db.QrCodeItem>>(null)
+    val qrCodeItemState = SingleLiveDataEvent<State<cut.the.crap.qrrepository.db.QrCodeDbItem>>(null)
 
     var currentInputText = ""
     var currentInputNumber = ""
@@ -25,13 +26,13 @@ class CreateOneLinerViewModel @Inject constructor(
     private fun createWebQrcode(resources: Resources, activityViewModel: MainActivityViewModel) {
         viewModelScope.launch {
             val bitmap = textToImageEnc(currentInputText, resources)
-            val qrCodeItem = cut.the.crap.qrrepository.db.QrCodeItem(
+            val qrCodeItem = cut.the.crap.qrrepository.db.QrCodeDbItem(
                 img = bitmap,
                 textContent = currentInputText,
                 acquireType = Acquire.CREATED
             )
-            historyRepository.insertQrItem(qrCodeItem)
-            activityViewModel.detailViewQrCodeItem = qrCodeItem
+            historyRepository.insertQrItem(qrCodeItem.toItem())
+            activityViewModel.detailViewQrCodeItem = qrCodeItem.toItem()
             qrCodeItemState.value = State.success()
         }
     }
@@ -40,11 +41,11 @@ class CreateOneLinerViewModel @Inject constructor(
         viewModelScope.launch {
             val bitmap = textToImageEnc(currentInputText, resources)
             val qrCodeItem =
-                cut.the.crap.qrrepository.db.QrCodeItem(
+                cut.the.crap.qrrepository.db.QrCodeDbItem(
                     img = bitmap,
                     textContent = currentInputText,
                     acquireType = Acquire.CREATED
-                )
+                ).toItem()
             historyRepository.insertQrItem(qrCodeItem)
             activityViewModel.detailViewQrCodeItem = qrCodeItem
             qrCodeItemState.value = State.success()
@@ -56,7 +57,7 @@ class CreateOneLinerViewModel @Inject constructor(
             val uriString = TEL_PREFIX + currentInputNumber
             val bitmap = textToImageEnc(uriString, resources)
             val qrCodeItem =
-                cut.the.crap.qrrepository.db.QrCodeItem(img = bitmap, textContent = uriString, acquireType = Acquire.CREATED)
+                cut.the.crap.qrrepository.db.QrCodeDbItem(img = bitmap, textContent = uriString, acquireType = Acquire.CREATED).toItem()
             historyRepository.insertQrItem(qrCodeItem)
             activityViewModel.detailViewQrCodeItem = qrCodeItem
             qrCodeItemState.value = State.success()
@@ -69,7 +70,7 @@ class CreateOneLinerViewModel @Inject constructor(
         if (isValid) {
             viewModelScope.launch {
                 val bitmap = textToImageEnc(currentInputText, resources)
-                val qrCodeItem = cut.the.crap.qrrepository.db.QrCodeItem(
+                val qrCodeItem = cut.the.crap.qrrepository.db.QrCodeDbItem(
                     img = bitmap,
                     textContent = currentInputText,
                     acquireType = Acquire.CREATED
@@ -88,7 +89,7 @@ class CreateOneLinerViewModel @Inject constructor(
                 val uriString = SMS_PREFIX + currentInputNumber
                 val bitmap = textToImageEnc(uriString, resources)
                 val qrCodeItem =
-                    cut.the.crap.qrrepository.db.QrCodeItem(img = bitmap, textContent = uriString, acquireType = Acquire.CREATED)
+                    cut.the.crap.qrrepository.db.QrCodeDbItem(img = bitmap, textContent = uriString, acquireType = Acquire.CREATED)
                 qrCodeItemState.value = State.success(qrCodeItem)
             }
         } else {
@@ -103,7 +104,7 @@ class CreateOneLinerViewModel @Inject constructor(
                 val uriString = TEL_PREFIX + currentInputNumber
                 val bitmap = textToImageEnc(uriString, resources)
                 val qrCodeItem =
-                    cut.the.crap.qrrepository.db.QrCodeItem(img = bitmap, textContent = uriString, acquireType = Acquire.CREATED)
+                    cut.the.crap.qrrepository.db.QrCodeDbItem(img = bitmap, textContent = uriString, acquireType = Acquire.CREATED)
                 qrCodeItemState.value = State.success(qrCodeItem)
             }
         } else {
@@ -146,9 +147,6 @@ class CreateOneLinerViewModel @Inject constructor(
     }
 
     fun testClicked(mode: Int, resources: Resources) {
-
-
-
         startLoading()
         when (mode) {
             CreateOneLinerFragment.CREATE_PHONE -> testCallQrcode(resources)

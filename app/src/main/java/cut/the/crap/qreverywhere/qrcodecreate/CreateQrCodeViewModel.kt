@@ -10,6 +10,8 @@ import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qrrepository.Acquire
 import cut.the.crap.qreverywhere.utils.textToImageEnc
+import cut.the.crap.qrrepository.QrItem
+import cut.the.crap.qrrepository.db.toItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,7 +21,7 @@ class CreateQrCodeViewModel @Inject constructor(
     private val qrHistoryRepository: cut.the.crap.qrrepository.QrHistoryRepository
 ) : ViewModel() {
 
-    val emailQrCodeItem = MutableLiveData<State<cut.the.crap.qrrepository.db.QrCodeItem>>()
+    val emailQrCodeItem = MutableLiveData<State<QrItem>>()
 
     var emailAddress = ""
     var emailSubject = ""
@@ -28,7 +30,7 @@ class CreateQrCodeViewModel @Inject constructor(
     @Throws(WriterException::class)
     fun textToQrCodeItem(resources: Resources) {
         viewModelScope.launch {
-            var qrItem: cut.the.crap.qrrepository.db.QrCodeItem? = null
+            var qrItem: cut.the.crap.qrrepository.db.QrCodeDbItem? = null
             var saveInHistory = false
             try {
                 emailQrCodeItem.value = State.loading()
@@ -41,12 +43,12 @@ class CreateQrCodeViewModel @Inject constructor(
                     )
 
                 val bitmap = textToImageEnc(textContent, resources)
-                qrItem = cut.the.crap.qrrepository.db.QrCodeItem(
+                qrItem = cut.the.crap.qrrepository.db.QrCodeDbItem(
                     img = bitmap,
                     textContent = textContent,
                     acquireType = Acquire.CREATED
                 )
-                emailQrCodeItem.value = State.success(qrItem)
+                emailQrCodeItem.value = State.success(qrItem.toItem())
                 saveInHistory = true
             } catch (e: InvalidEmailException) {
                 emailQrCodeItem.value = State.error(error = e)
@@ -54,9 +56,12 @@ class CreateQrCodeViewModel @Inject constructor(
 
             if(saveInHistory){
                 try {
-                    qrItem?.let { qrHistoryRepository.insertQrItem(it) }
-                    emailQrCodeItem.value = State.success()
-                    emailQrCodeItem.value = State.success(qrItem)
+                    qrItem?.let {
+                        qrHistoryRepository.insertQrItem(it.toItem())
+                        emailQrCodeItem.value = State.success()
+                        emailQrCodeItem.value = State.success(qrItem.toItem())
+                    }
+
                 } catch (e: Exception) {
                     emailQrCodeItem.value = State.error(error = NotSavedToHistoryException())
                 }
