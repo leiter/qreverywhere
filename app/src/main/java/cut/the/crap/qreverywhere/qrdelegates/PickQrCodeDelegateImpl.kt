@@ -7,6 +7,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.qrcodescan.HomeFragment
+import cut.the.crap.qreverywhere.utils.IntentGenerator.PickImageIntent
 import cut.the.crap.qreverywhere.utils.hasPermission
 import cut.the.crap.qreverywhere.utils.scanQrImage
 import cut.the.crap.qreverywhere.utils.showShortToast
@@ -62,10 +63,7 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
     }
 
     private fun readBarcode() {
-        val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
-            type = "image/*"
-        }
-        scanImageLauncher.launch(intent)
+        scanImageLauncher.launch(PickImageIntent.getIntent())
     }
 
 }

@@ -8,6 +8,7 @@ import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qrrepository.Acquire
 import cut.the.crap.qreverywhere.utils.SingleLiveDataEvent
 import cut.the.crap.qreverywhere.utils.textToImageEnc
+import cut.the.crap.qrrepository.QrItem
 import cut.the.crap.qrrepository.db.toItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -18,7 +19,7 @@ class CreateOneLinerViewModel @Inject constructor(
     private val historyRepository: cut.the.crap.qrrepository.QrHistoryRepository
 ) : ViewModel() {
 
-    val qrCodeItemState = SingleLiveDataEvent<State<cut.the.crap.qrrepository.db.QrCodeDbItem>>(null)
+    val qrCodeItemState = SingleLiveDataEvent<State<QrItem>>(null)
 
     var currentInputText = ""
     var currentInputNumber = ""
@@ -75,7 +76,7 @@ class CreateOneLinerViewModel @Inject constructor(
                     textContent = currentInputText,
                     acquireType = Acquire.CREATED
                 )
-                qrCodeItemState.value = State.success(qrCodeItem)
+                qrCodeItemState.value = State.success(qrCodeItem.toItem())
             }
         } else {
             qrCodeItemState.value = State.error(error = InvalidWebUrl())
@@ -90,7 +91,7 @@ class CreateOneLinerViewModel @Inject constructor(
                 val bitmap = textToImageEnc(uriString, resources)
                 val qrCodeItem =
                     cut.the.crap.qrrepository.db.QrCodeDbItem(img = bitmap, textContent = uriString, acquireType = Acquire.CREATED)
-                qrCodeItemState.value = State.success(qrCodeItem)
+                qrCodeItemState.value = State.success(qrCodeItem.toItem())
             }
         } else {
             qrCodeItemState.value = State.error(error = InvalidPhoneNumber())
@@ -105,7 +106,7 @@ class CreateOneLinerViewModel @Inject constructor(
                 val bitmap = textToImageEnc(uriString, resources)
                 val qrCodeItem =
                     cut.the.crap.qrrepository.db.QrCodeDbItem(img = bitmap, textContent = uriString, acquireType = Acquire.CREATED)
-                qrCodeItemState.value = State.success(qrCodeItem)
+                qrCodeItemState.value = State.success(qrCodeItem.toItem())
             }
         } else {
             qrCodeItemState.value = State.error(error = InvalidPhoneNumber())

@@ -19,7 +19,6 @@ fun Fragment.focusEditText(editText: EditText) {
         editText.requestFocus()
         val manager =
             requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        manager.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
-
+        manager.showSoftInput(editText,InputMethodManager.SHOW_IMPLICIT)
     },50)
 }

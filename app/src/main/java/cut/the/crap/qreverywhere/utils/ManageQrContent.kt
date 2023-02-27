@@ -7,11 +7,9 @@ import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
-import android.graphics.Canvas
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Environment
-import android.view.View
 import androidx.annotation.IntDef
 import androidx.core.content.res.ResourcesCompat
 import com.google.zxing.BarcodeFormat
@@ -29,7 +27,6 @@ import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.utils.ProtocolPrefix.HTTP
 import cut.the.crap.qreverywhere.utils.ProtocolPrefix.HTTPS
 import cut.the.crap.qreverywhere.utils.ProtocolPrefix.MAILTO
-import cut.the.crap.qreverywhere.utils.ProtocolPrefix.SMSTO
 import cut.the.crap.qreverywhere.utils.ProtocolPrefix.TEL
 import cut.the.crap.qreverywhere.utils.QrCodeType.CONTACT
 import cut.the.crap.qreverywhere.utils.QrCodeType.EMAIL
@@ -86,48 +83,8 @@ fun determineType(contentString: String): Int {
     }
 }
 
-private fun isVcard(contentString: String): Boolean {
+fun isVcard(contentString: String): Boolean {
     return contentString.startsWith("BEGIN:VCARD") && contentString.endsWith("END:VCARD\n")
-}
-
-fun getQrTypeDrawable(contentString: String): Int {
-    val decoded = Uri.decode(contentString)
-
-    return when {
-        decoded.startsWith(TEL) -> R.drawable.ic_phone
-        decoded.startsWith(MAILTO) -> R.drawable.ic_mail_outline
-        decoded.startsWith(HTTP) -> R.drawable.ic_open_in_browser
-        decoded.startsWith(HTTPS) -> R.drawable.ic_open_in_browser
-        decoded.startsWith(ProtocolPrefix.SMS) -> R.drawable.ic_sms
-        decoded.startsWith(SMSTO) -> R.drawable.ic_sms
-        isVcard(decoded) -> R.drawable.ic_add_contact
-        else -> R.drawable.ic_content
-    }
-}
-
-fun getQrLaunchButtonText(context: Context, contentString: String): String {
-    val decoded = Uri.decode(contentString)
-    val launchTextTemplate = context.getString(R.string.qr_detail_launch_template)
-    return when {
-        decoded.startsWith("tel:") -> launchTextTemplate.format(context.getString(R.string.ic_open_phone_app))
-        decoded.startsWith("mailto:") -> launchTextTemplate.format(context.getString(R.string.ic_open_mail_app))
-        decoded.startsWith("http:") -> launchTextTemplate.format(context.getString(R.string.ic_open_in_browser))
-        decoded.startsWith("https:") -> launchTextTemplate.format(context.getString(R.string.ic_open_in_browser))
-        isVcard(decoded) -> context.getString(R.string.ic_import_contact)
-        else -> context.getString(R.string.app_name)
-    }
-}
-
-fun textForHistoryList(text: String, context: Context): String {
-    val decodedText = Uri.decode(text)
-    return when (determineType(decodedText)) {
-        PHONE -> context.getString(R.string.phone_template).format(decodedText.subSequence(4, decodedText.length - 1))
-        EMAIL -> context.getString(R.string.mail_template).format(decodedText.subSequence(7, decodedText.indexOf("?")))
-        WEB_URL -> context.getString(R.string.open_in_browser_template).format(decodedText)
-        CONTACT -> context.getString(R.string.contact_of_template).format(decodedText)
-        UNKNOWN_CONTENT -> context.getString(R.string.text_template).format(decodedText)
-        else -> context.getString(R.string.text_template).format(decodedText)
-    }
 }
 
 suspend fun saveImageToFile(qrCodeItem: QrItem, context: Context): String {
@@ -145,8 +102,7 @@ suspend fun saveImageToFile(qrCodeItem: QrItem, context: Context): String {
         }
         try {
             val f = File( //todo better naming
-                directory, Calendar.getInstance()
-                .timeInMillis.toString() + ".jpg"
+                directory, Calendar.getInstance().timeInMillis.toString() + ".jpg"
             )
             f.createNewFile() // todo give read write permission
             val fo = FileOutputStream(f)
@@ -200,31 +156,17 @@ suspend fun textToImageEnc(textContent: String, resources: Resources): Bitmap {
     }
 }
 
-// todo integrate settings display result or fire intent here
-fun createOpenIntent(qrString: String, context: Context): Intent? {
-    val decoded = Uri.decode(qrString)
-    return when {
-        decoded.startsWith("tel:") -> Intent(Intent.ACTION_DIAL, Uri.parse(qrString))
-        decoded.startsWith("mailto:") -> Intent(Intent.ACTION_SENDTO, Uri.parse(qrString))
-        decoded.startsWith("http:") -> Intent(Intent.ACTION_VIEW, Uri.parse(decoded))
-        decoded.startsWith("https:") -> Intent(Intent.ACTION_VIEW, Uri.parse(decoded))
-        decoded.startsWith("sms:") -> Intent(Intent.ACTION_VIEW, Uri.parse(qrString))
-        decoded.startsWith("smsto:") -> Intent(Intent.ACTION_SENDTO, Uri.parse(qrString))
-        else -> {
-            val i = Intent(Intent.ACTION_VIEW, Uri.parse(qrString))
-            if (isIntentAvailable(i, context)) i
-            else null
-        }
-    }
-}
-
-private fun isIntentAvailable(intent: Intent, context: Context): Boolean {
+fun Intent.startIntentGracefully(context: Context, notExecutable: (() -> Unit)? = null)  {
     val packageManager: PackageManager = context.packageManager
     val list = packageManager.queryIntentActivities(
-        intent,
+        this,
         PackageManager.MATCH_DEFAULT_ONLY
     )
-    return list.size > 0
+    if(list.size > 0) {
+        context.startActivity(this)
+    } else {
+        notExecutable?.invoke()
+    }
 }
 
 fun scanQrImage(uri: Uri, context: Context): Result? {
@@ -257,52 +199,4 @@ fun scanQrImage(uri: Uri, context: Context): Result? {
         Timber.e(e, "Error decoding barcode")
     }
     return contents
-}
-
-
-fun createShareIntent(qrImgUri: Uri): Intent {
-    return Intent(Intent.ACTION_SEND).apply {
-//        data = qrImgUri;
-        type = "image/png"
-        putExtra(Intent.EXTRA_STREAM, qrImgUri)
-//        activity.startActivityForResult(Intent.createChooser(shareIntent, "Share Via"), Navigator.REQUEST_SHARE_ACTION);
-    }
-}
-
-private fun shareBitmap(context: Context, bitmap: Bitmap, fileName: String) {
-    try {
-        val file = File(context.cacheDir, "$fileName.png")
-        val fOut = FileOutputStream(file)
-        bitmap.compress(CompressFormat.PNG, 100, fOut)
-        fOut.flush()
-        fOut.close()
-//        file.setReadable(true, false)
-        val intent = Intent(Intent.ACTION_SEND)
-        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file))
-        intent.type = "image/png"
-        context.startActivity(intent)
-    } catch (e: java.lang.Exception) {
-        e.printStackTrace()
-    }
-}
-
-fun bitmapToArray(bmp: Bitmap): ByteArray {
-    val stream = ByteArrayOutputStream()
-    bmp.compress(CompressFormat.JPEG, 50, stream)
-    return stream.toByteArray()
-}
-
-fun extractDomain(url: String): String {
-    return android.util.Patterns.DOMAIN_NAME.toRegex().find(url)?.value ?: ""
-}
-
-fun screenShot(view: View): Bitmap? {
-    val bitmap = Bitmap.createBitmap(
-        view.width,
-        view.height, Bitmap.Config.ARGB_8888
-    )
-    val canvas = Canvas(bitmap)
-    view.draw(canvas)
-    return bitmap
 }

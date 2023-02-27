@@ -1,11 +1,7 @@
 package cut.the.crap.qreverywhere.qrcodescan
 
 import android.content.Context
-import android.content.Intent
-import android.net.Uri
-import android.os.Build
 import android.os.Bundle
-import android.provider.Settings
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -18,14 +14,12 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.common.util.concurrent.ListenableFuture
 import cut.the.crap.qreverywhere.MainActivityViewModel
@@ -33,8 +27,14 @@ import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentHomeBinding
 import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegate
 import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegateImpl
-import cut.the.crap.qreverywhere.utils.*
+import cut.the.crap.qreverywhere.utils.FROM_SCAN_QR
+import cut.the.crap.qreverywhere.utils.IntentGenerator
+import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
+import cut.the.crap.qreverywhere.utils.gone
+import cut.the.crap.qreverywhere.utils.hasPermission
+import cut.the.crap.qreverywhere.utils.showShortToast
 import cut.the.crap.qreverywhere.utils.viewBinding
+import cut.the.crap.qreverywhere.utils.visible
 import cut.the.crap.qrrepository.Acquire
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -43,6 +43,7 @@ import java.util.concurrent.Executors
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home),
+
     PickQrCodeDelegate by PickQrCodeDelegateImpl(), OnQrCodeRecognition {
 
     private val activityViewModel by activityViewModels<MainActivityViewModel>()
@@ -166,16 +167,8 @@ class HomeFragment : Fragment(R.layout.fragment_home),
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.menu_request_camera -> {
-                        if (Build.VERSION.SDK_INT == 30) {
-                            startActivity(
-                                Intent(
-                                    Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                                    Uri.fromParts("package", activity?.packageName, null)
-                                ), null
-                            )
-                        } else {
-                            cameraPermissionLauncher.launch(android.Manifest.permission.CAMERA)
-                        }
+                            startActivity(IntentGenerator.OpenAppSettings.getIntent())
+//                            cameraPermissionLauncher.launch(android.Manifest.permission.CAMERA)
                         true
                     }
 //            R.id.action_about -> {

@@ -22,17 +22,19 @@ import cut.the.crap.qreverywhere.databinding.FragmentCreateOneLinerBinding
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegate
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegateImpl
 import cut.the.crap.qreverywhere.utils.FROM_CREATE_CONTEXT
+import cut.the.crap.qreverywhere.utils.IntentGenerator
 import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
 import cut.the.crap.qreverywhere.utils.UiEvent
-import cut.the.crap.qreverywhere.utils.createOpenIntent
 import cut.the.crap.qreverywhere.utils.focusEditText
 import cut.the.crap.qreverywhere.utils.gone
 import cut.the.crap.qreverywhere.utils.hideIme
 import cut.the.crap.qreverywhere.utils.setTitle
 import cut.the.crap.qreverywhere.utils.showSnackBar
+import cut.the.crap.qreverywhere.utils.startIntentGracefully
 import cut.the.crap.qreverywhere.utils.textChanges
 import cut.the.crap.qreverywhere.utils.viewBinding
 import cut.the.crap.qreverywhere.utils.visible
+import cut.the.crap.qrrepository.QrItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -149,7 +151,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
                     is State.Success -> {
                         showLoading(false)
                         state.data?.let {
-                            startActivity(createOpenIntent(it.textContent, requireContext()))
+                            IntentGenerator.QrStartIntent(it.textContent).getIntent().startIntentGracefully(requireContext())
                         } ?: runCatching {
                             viewBinding.createOneLinerNumberInputField.setText("")
                             viewBinding.createOneLinerInputField.setText("")
@@ -198,7 +200,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
         viewBinding.createOneLinerInputLayout.error = null
     }
 
-    private fun handleError(error: State.Error<cut.the.crap.qrrepository.db.QrCodeDbItem>) {
+    private fun handleError(error: State.Error<QrItem>) {
         when (error.cause) {
             is EmptyMessage -> viewBinding.createOneLinerInputLayout.error =
                 getString(R.string.error_msg_empty_text_message)

@@ -1,5 +1,6 @@
 package cut.the.crap.qreverywhere.qrcodedetailview
 
+import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
@@ -22,14 +23,19 @@ import cut.the.crap.qreverywhere.databinding.FragmentDetailViewBinding
 import cut.the.crap.qreverywhere.utils.AcquireDateFormatter
 import cut.the.crap.qreverywhere.utils.FROM_HISTORY_LIST
 import cut.the.crap.qreverywhere.utils.FROM_SCAN_QR
+import cut.the.crap.qreverywhere.utils.IntentGenerator
 import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
+import cut.the.crap.qreverywhere.utils.ProtocolPrefix.HTTP
+import cut.the.crap.qreverywhere.utils.ProtocolPrefix.HTTPS
+import cut.the.crap.qreverywhere.utils.ProtocolPrefix.MAILTO
+import cut.the.crap.qreverywhere.utils.ProtocolPrefix.TEL
 import cut.the.crap.qreverywhere.utils.QrCodeType
 import cut.the.crap.qreverywhere.utils.UiEvent
-import cut.the.crap.qreverywhere.utils.createOpenIntent
 import cut.the.crap.qreverywhere.utils.determineType
-import cut.the.crap.qreverywhere.utils.getQrLaunchButtonText
 import cut.the.crap.qreverywhere.utils.gone
+import cut.the.crap.qreverywhere.utils.isVcard
 import cut.the.crap.qreverywhere.utils.showSnackBar
+import cut.the.crap.qreverywhere.utils.startIntentGracefully
 import cut.the.crap.qreverywhere.utils.viewBinding
 import cut.the.crap.qrrepository.QrItem
 import dagger.hilt.android.AndroidEntryPoint
@@ -171,12 +177,24 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
         }
     }
 
+    private fun getQrLaunchButtonText(context: Context, contentString: String): String {
+        val decoded = Uri.decode(contentString)
+        val launchTextTemplate = context.getString(R.string.qr_detail_launch_template)
+        return when {
+            decoded.startsWith(TEL) -> launchTextTemplate.format(context.getString(R.string.ic_open_phone_app))
+            decoded.startsWith(MAILTO) -> launchTextTemplate.format(context.getString(R.string.ic_open_mail_app))
+            decoded.startsWith(HTTP) -> launchTextTemplate.format(context.getString(R.string.ic_open_in_browser))
+            decoded.startsWith(HTTPS) -> launchTextTemplate.format(context.getString(R.string.ic_open_in_browser))
+            isVcard(decoded) -> context.getString(R.string.ic_import_contact)
+            else -> context.getString(R.string.app_name)
+        }
+    }
+
     private fun launchClicked() {
         if (determineType(activityViewModel.detailViewQrCodeItem.textContent) != QrCodeType.UNKNOWN_CONTENT) {
-            val intent = createOpenIntent(
-                activityViewModel.detailViewQrCodeItem.textContent, requireContext()
-            )
-            startActivity(intent)
+            IntentGenerator.QrStartIntent(
+                activityViewModel.detailViewQrCodeItem.textContent
+            ).getIntent().startIntentGracefully(requireContext())
         } else {
             viewBinding.detailViewLaunchActionButton.gone()
         }
