@@ -1,7 +1,13 @@
 package cut.the.crap.qreverywhere.qrcodescan
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -12,10 +18,14 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.common.util.concurrent.ListenableFuture
 import cut.the.crap.qreverywhere.MainActivityViewModel
@@ -37,11 +47,9 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
     private val activityViewModel by activityViewModels<MainActivityViewModel>()
 
-    private val viewBinding by viewBinding {
-        FragmentHomeBinding.bind(requireView())
-    }
+    private val viewBinding by viewBinding { FragmentHomeBinding.bind(requireView()) }
 
-    private val cameraPermissionLauncher: androidx.activity.result.ActivityResultLauncher<String> =
+    private val cameraPermissionLauncher: androidx.activity.result.ActivityResultLauncher<String> by lazy {
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
                 viewBinding.previewView.visible()
@@ -51,14 +59,10 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 requireContext().showShortToast(R.string.permission_denied_text)
             }
         }
+    }
 
     private val cameraProviderFuture: ListenableFuture<ProcessCameraProvider> by lazy {
         ProcessCameraProvider.getInstance(requireActivity())
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
     }
 
     override fun onAttach(context: Context) {
@@ -143,13 +147,56 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 //                ))
             }
         }
+        activityViewModel.centralState.observe(viewLifecycleOwner) {
+
+        }
+
+        setupOptionMenu()
+
+    }
+
+    private fun setupOptionMenu() {
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_home, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.menu_request_camera -> {
+                        if (Build.VERSION.SDK_INT == 30) {
+                            startActivity(
+                                Intent(
+                                    Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
+                                    Uri.fromParts("package", activity?.packageName, null)
+                                ), null
+                            )
+                        } else {
+                            cameraPermissionLauncher.launch(android.Manifest.permission.CAMERA)
+                        }
+                        true
+                    }
+//            R.id.action_about -> {
+//                findNavController().navigate(R.id.actionOpenSettingsFragment)
+//                true
+//            }
+                    else -> {
+                        false
+                    }
+                }
+            }
+        }, viewLifecycleOwner)
     }
 
     private fun handleCameraPermission() {
         if (requireContext().hasPermission(android.Manifest.permission.CAMERA)) {
+            activityViewModel.setCameraPermission(true)
             viewBinding.previewView.visible()
             startCamera()
         } else {
+            activityViewModel.setCameraPermission(false)
             viewBinding.previewView.gone()
             cameraPermissionLauncher.launch(android.Manifest.permission.CAMERA)
         }
@@ -157,11 +204,9 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
     override fun handleQrCode(qrCode: com.google.zxing.Result, @Acquire.Type type: Int) {
         activityViewModel.saveQrItemFromFile(qrCode.text, resources, type)
-
         findNavController().navigate(
-            R.id.actionOpenDetailViewFromQrScanFragment, bundleOf(
-                ORIGIN_FLAG to FROM_SCAN_QR
-            )
+            R.id.actionOpenDetailViewFromQrScanFragment,
+            bundleOf(ORIGIN_FLAG to FROM_SCAN_QR)
         )
 //        if(determineType(qrCode) != QrCode.UNKNOWN_CONTENT){
 //            createOpenIntent(qrCode, requireContext())?.let { intent ->
@@ -171,17 +216,6 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 //            }
 //        }
 
-    }
-
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_about -> {
-                findNavController().navigate(R.id.actionOpenSettingsFragment)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
 }

@@ -6,6 +6,8 @@ import androidx.lifecycle.Transformations.map
 import androidx.room.Room
 import cut.the.crap.qrrepository.db.QrCodeDbItem
 import cut.the.crap.qrrepository.db.toItem
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 private const val DATABASE_NAME = "my_data"
 
@@ -25,8 +27,8 @@ class QrHistoryRepository(
 
     suspend fun updateQrItem(qrCodeItem: QrItem) = qrCodeDao.update(qrCodeItem.toQrCodeDbItem())
 
-    fun getCompleteQrCodeHistory(): LiveData<List<QrItem>> {
-        return map(qrCodeDao.getCompleteHistory(), ::transform)
+    fun getCompleteQrCodeHistory(): Flow<List<QrItem>> {
+        return qrCodeDao.getCompleteHistory().map { transform(it) }
     }
 
     private fun transform(list: List<QrCodeDbItem>): List<QrItem> {

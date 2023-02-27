@@ -2,8 +2,10 @@ package cut.the.crap.qreverywhere
 
 import android.content.Context
 import android.content.res.Resources
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.data.State
@@ -16,6 +18,7 @@ import cut.the.crap.qrrepository.QrItem
 import cut.the.crap.qrrepository.db.QrCodeDbItem
 import cut.the.crap.qrrepository.db.toItem
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,8 +28,10 @@ class MainActivityViewModel @Inject constructor(
 ) : ViewModel() {
 
     var focusedItemIndex: Int = 0
+        //private set
 
     var detailViewQrCodeItem: QrItem = QrCodeDbItem().toItem()
+        //private set
 
     val detailViewLiveQrCodeItem = MutableLiveData<State<QrItem>>()
 
@@ -34,9 +39,14 @@ class MainActivityViewModel @Inject constructor(
 
     val startDetailViewQrCodeItem = SingleLiveDataEvent<QrItem?>(null)
 
-    val historyAdapterData = historyRepository.getCompleteQrCodeHistory()
+    val historyAdapterData = historyRepository.getCompleteQrCodeHistory().asLiveData(Dispatchers.Main)
 
     val removeItemSingleLiveDataEvent = SingleLiveDataEvent<State<QrItem>>(null)
+
+    private val _centralState = MutableLiveData<CentralState>().apply {
+        value = CentralState()
+    }
+    val centralState: LiveData<CentralState> = _centralState
 
     fun saveQrItem(qrCodeItem: QrItem) {
         viewModelScope.launch {
@@ -55,6 +65,10 @@ class MainActivityViewModel @Inject constructor(
             detailViewLiveQrCodeItem.value = State.success(historyItem)
             historyRepository.insertQrItem(historyItem)
         }
+    }
+
+    fun setCameraPermission(hasCameraPermission: Boolean) {
+
     }
 
     fun setDetailViewItem(qrCodeItem: QrItem) {
@@ -98,5 +112,9 @@ class MainActivityViewModel @Inject constructor(
     }
 
 }
+
+data class CentralState(
+    val hasCameraPermission: Boolean = false,
+)
 
 class CouldNotDeleteQrItem : Exception()

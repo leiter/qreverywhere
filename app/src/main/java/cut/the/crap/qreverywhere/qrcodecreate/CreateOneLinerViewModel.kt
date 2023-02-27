@@ -30,9 +30,9 @@ class CreateOneLinerViewModel @Inject constructor(
                 img = bitmap,
                 textContent = currentInputText,
                 acquireType = Acquire.CREATED
-            )
-            historyRepository.insertQrItem(qrCodeItem.toItem())
-            activityViewModel.detailViewQrCodeItem = qrCodeItem.toItem()
+            ).toItem()
+            historyRepository.insertQrItem(qrCodeItem)
+            activityViewModel.detailViewQrCodeItem = qrCodeItem
             qrCodeItemState.value = State.success()
         }
     }

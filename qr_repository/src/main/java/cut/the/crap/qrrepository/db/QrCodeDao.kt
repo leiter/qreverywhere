@@ -1,7 +1,7 @@
 package cut.the.crap.qrrepository.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface QrCodeDao {
@@ -13,7 +13,7 @@ interface QrCodeDao {
     suspend fun deleteQrItem(qrItem: QrCodeDbItem)
 
     @Query("SELECT * FROM qrcode_history ORDER BY timestamp DESC")
-    fun getCompleteHistory(): LiveData<List<QrCodeDbItem>>
+    fun getCompleteHistory(): Flow<List<QrCodeDbItem>>
 
     @Update
     suspend fun update(qrItem: QrCodeDbItem)

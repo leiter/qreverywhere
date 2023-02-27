@@ -7,6 +7,8 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.core.os.bundleOf
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -21,7 +23,7 @@ import cut.the.crap.qreverywhere.utils.AcquireDateFormatter
 import cut.the.crap.qreverywhere.utils.FROM_HISTORY_LIST
 import cut.the.crap.qreverywhere.utils.FROM_SCAN_QR
 import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
-import cut.the.crap.qreverywhere.utils.QrCode
+import cut.the.crap.qreverywhere.utils.QrCodeType
 import cut.the.crap.qreverywhere.utils.UiEvent
 import cut.the.crap.qreverywhere.utils.createOpenIntent
 import cut.the.crap.qreverywhere.utils.determineType
@@ -51,11 +53,6 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
         getProgressIndicator()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     private val viewBinding by viewBinding {
         FragmentDetailViewBinding.bind(requireView())
     }
@@ -68,6 +65,33 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
         if (args.originFlag == FROM_SCAN_QR) {
             setObserver()
         }
+
+        val menuHost: MenuHost = requireActivity()
+
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menu.removeItem(R.id.action_about)
+                menu.clear()
+                menuInflater.inflate(R.menu.menu_detail_view, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.menu_delete -> {
+                        activityViewModel.deleteCurrentDetailView()
+                        findNavController().navigate(R.id.action_detailViewFragment_to_qrHistoryFragment)
+                        return true
+                    }
+                    R.id.menu_save_to_file -> {
+                        activityViewModel.saveQrImageOfDetailView(requireContext())
+                        return true
+                    }
+                    else -> false
+
+                }
+
+            }
+        }, viewLifecycleOwner)
 
         activityViewModel.saveDetailViewQrCodeImage.observe(viewLifecycleOwner) {
             when (it) {
@@ -107,7 +131,7 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
             Glide.with(root.context).load(item.img).into(detailViewContentPreviewImage)
             detailViewContentTextView.text = Uri.decode(item.textContent)
             detailViewAcquiredAt.text = acquireDateFormatter.getTimeTemplate(item)
-            if (determineType(activityViewModel.detailViewQrCodeItem.textContent) != QrCode.UNKNOWN_CONTENT) {
+            if (determineType(activityViewModel.detailViewQrCodeItem.textContent) != QrCodeType.UNKNOWN_CONTENT) {
                 detailViewLaunchActionButton.text = launchText
                 detailViewLaunchActionButton.setOnClickListener {
                     launchClicked()
@@ -148,7 +172,7 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
     }
 
     private fun launchClicked() {
-        if (determineType(activityViewModel.detailViewQrCodeItem.textContent) != QrCode.UNKNOWN_CONTENT) {
+        if (determineType(activityViewModel.detailViewQrCodeItem.textContent) != QrCodeType.UNKNOWN_CONTENT) {
             val intent = createOpenIntent(
                 activityViewModel.detailViewQrCodeItem.textContent, requireContext()
             )
@@ -158,28 +182,5 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
         }
 
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.menu_delete -> {
-                activityViewModel.deleteCurrentDetailView()
-                findNavController().navigate(R.id.action_detailViewFragment_to_qrHistoryFragment)
-                return true
-            }
-            R.id.menu_save_to_file -> {
-                activityViewModel.saveQrImageOfDetailView(requireContext())
-                return true
-            }
-            else -> false
-        }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        menu.removeItem(R.id.action_about)
-        menu.clear()
-        inflater.inflate(R.menu.menu_detail_view, menu)
-//        super.onCreateOptionsMenu(menu, inflater)
-    }
-
 
 }

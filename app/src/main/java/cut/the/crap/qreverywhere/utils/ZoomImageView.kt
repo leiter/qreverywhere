@@ -12,7 +12,7 @@ import kotlin.math.abs
 import kotlin.math.max
 
 
-class ZoomImage : AppCompatImageView {
+class ZoomImageView : AppCompatImageView {
 
     constructor(context: Context) : super(context) {
         init(context)

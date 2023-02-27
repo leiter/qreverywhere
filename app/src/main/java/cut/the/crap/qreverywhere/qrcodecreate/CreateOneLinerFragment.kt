@@ -5,7 +5,6 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.Menu
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
@@ -22,7 +21,18 @@ import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentCreateOneLinerBinding
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegate
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegateImpl
-import cut.the.crap.qreverywhere.utils.*
+import cut.the.crap.qreverywhere.utils.FROM_CREATE_CONTEXT
+import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
+import cut.the.crap.qreverywhere.utils.UiEvent
+import cut.the.crap.qreverywhere.utils.createOpenIntent
+import cut.the.crap.qreverywhere.utils.focusEditText
+import cut.the.crap.qreverywhere.utils.gone
+import cut.the.crap.qreverywhere.utils.hideIme
+import cut.the.crap.qreverywhere.utils.setTitle
+import cut.the.crap.qreverywhere.utils.showSnackBar
+import cut.the.crap.qreverywhere.utils.textChanges
+import cut.the.crap.qreverywhere.utils.viewBinding
+import cut.the.crap.qreverywhere.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
@@ -79,10 +89,10 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
 
         with(viewBinding) {
             createOneLinerTest.setOnClickListener {
-                val contactManager = ContactManager()
-                contactManager.insertContact(requireContext())
-//                viewBinding.root.hideIme()
-//                viewModel.testClicked(args.useCaseMode, resources)
+//                val contactManager = ContactManager()
+//                contactManager.insertContact(requireContext())
+                viewBinding.root.hideIme()
+                viewModel.testClicked(args.useCaseMode, resources)
             }
 
             createOneLinerCreate.setOnClickListener {
@@ -213,6 +223,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
         setTitle(R.string.create_title_phone)
         with(viewBinding) {
             createOneLinerInputLayout.gone()
+            focusEditText(createOneLinerNumberInputField)
         }
     }
 
@@ -226,6 +237,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
                 (160 * Resources.getSystem().displayMetrics.density).toInt()
             createOneLinerInputLayout.layoutParams = params
             createOneLinerInputLayout.setHint(R.string.create_one_liner_input_layout_hint_text_message)
+            focusEditText(createOneLinerInputField)
         }
     }
 
@@ -234,16 +246,8 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
         with(viewBinding) {
             createOneLinerNumberInputLayout.gone()
             createOneLinerInputLayout.setHint(R.string.create_one_liner_input_layout_hint_web)
+            focusEditText(createOneLinerInputField)
         }
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        menu.clear()
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
     }
 
     companion object {
