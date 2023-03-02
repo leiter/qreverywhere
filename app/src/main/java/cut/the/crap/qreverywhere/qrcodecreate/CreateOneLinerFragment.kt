@@ -25,6 +25,7 @@ import cut.the.crap.qreverywhere.utils.FROM_CREATE_CONTEXT
 import cut.the.crap.qreverywhere.utils.IntentGenerator
 import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
 import cut.the.crap.qreverywhere.utils.UiEvent
+import cut.the.crap.qreverywhere.utils.activityView
 import cut.the.crap.qreverywhere.utils.focusEditText
 import cut.the.crap.qreverywhere.utils.gone
 import cut.the.crap.qreverywhere.utils.hideIme
@@ -51,16 +52,12 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
 
     private val activityViewModel: MainActivityViewModel by viewModels()
 
-    private fun getBottomNavigationView(): BottomNavigationView {
-        return requireActivity().findViewById(R.id.nav_view)
-    }
-
     private val bottomNav by lazy {
-        getBottomNavigationView()
+        activityView<BottomNavigationView>(R.id.nav_view)
     }
 
     private val progress by lazy {
-        requireActivity().findViewById(R.id.top_progress_indicator) as LinearProgressIndicator
+        activityView<LinearProgressIndicator>(R.id.top_progress_indicator)
     }
 
     private val openImeAction: () -> Unit = {
@@ -171,7 +168,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
                             viewBinding.createOneLinerButtonSaveQrToFile.setOnClickListener {
                                 activityViewModel.saveQrImageOfDetailView(requireContext())
                             }
-                            val anchor = getBottomNavigationView()
+                            val anchor = activityView<BottomNavigationView>(R.id.nav_view)
                             viewBinding.root.showSnackBar(
                                 UiEvent.SnackBar(
                                     message = R.string.saved_in_history,

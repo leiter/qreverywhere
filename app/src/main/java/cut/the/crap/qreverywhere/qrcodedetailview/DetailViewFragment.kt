@@ -31,6 +31,7 @@ import cut.the.crap.qreverywhere.utils.ProtocolPrefix.MAILTO
 import cut.the.crap.qreverywhere.utils.ProtocolPrefix.TEL
 import cut.the.crap.qreverywhere.utils.QrCodeType
 import cut.the.crap.qreverywhere.utils.UiEvent
+import cut.the.crap.qreverywhere.utils.activityView
 import cut.the.crap.qreverywhere.utils.determineType
 import cut.the.crap.qreverywhere.utils.gone
 import cut.the.crap.qreverywhere.utils.isVcard
@@ -51,13 +52,7 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
     @Inject
     lateinit var acquireDateFormatter: AcquireDateFormatter
 
-    private fun getProgressIndicator(): LinearProgressIndicator {
-        return requireActivity().findViewById(R.id.top_progress_indicator)
-    }
-
-    private val progress by lazy {
-        getProgressIndicator()
-    }
+    private val progress by lazy { activityView<LinearProgressIndicator>(R.id.top_progress_indicator) }
 
     private val viewBinding by viewBinding {
         FragmentDetailViewBinding.bind(requireView())
@@ -148,10 +143,10 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
             detailViewContentPreviewImage.setOnClickListener {
                 findNavController().navigate(
                     R.id.action_detailViewFragment_to_qrFullscreenFragment, bundleOf(
-                        "itemPosition" to activityViewModel.focusedItemIndex,
-                        ORIGIN_FLAG to FROM_HISTORY_LIST
+                    "itemPosition" to activityViewModel.focusedItemIndex,
+                    ORIGIN_FLAG to FROM_HISTORY_LIST
 
-                    )
+                )
                 )
             }
 

@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.Menu
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -24,6 +23,7 @@ import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegateImpl
 import cut.the.crap.qreverywhere.utils.FROM_CREATE_CONTEXT
 import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
 import cut.the.crap.qreverywhere.utils.UiEvent
+import cut.the.crap.qreverywhere.utils.activityView
 import cut.the.crap.qreverywhere.utils.gone
 import cut.the.crap.qreverywhere.utils.showSnackBar
 import cut.the.crap.qreverywhere.utils.textChanges
@@ -38,7 +38,7 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
     ImeActionDelegate by ImeActionDelegateImpl() {
 
     private val bottomNav by lazy {
-        requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)
+        activityView<BottomNavigationView>(R.id.nav_view)
     }
 
     private val openImeAction: () -> Unit = {
@@ -48,15 +48,11 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
     private val closeImeAction: () -> Unit = {
         Handler(Looper.getMainLooper()).postDelayed({
             bottomNav.visible()
-        },120)
-    }
-
-    private fun getProgressIndicator(): LinearProgressIndicator {
-        return requireActivity().findViewById(R.id.top_progress_indicator)
+        }, 120)
     }
 
     private val progress by lazy {
-        getProgressIndicator()
+        activityView<LinearProgressIndicator>(R.id.top_progress_indicator)
     }
 
     private val viewModel by viewModels<CreateQrCodeViewModel>()
@@ -104,7 +100,7 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                 }
             }
 
-            activityViewModel.saveDetailViewQrCodeImage.observe(viewLifecycleOwner){
+            activityViewModel.saveDetailViewQrCodeImage.observe(viewLifecycleOwner) {
                 when (it) {
                     is State.Success<String?> -> {
                         requireView().showSnackBar(
@@ -134,11 +130,6 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         attachImeActionDelegate(this, openImeAction, closeImeAction)
@@ -149,7 +140,7 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
         super.onViewCreated(view, savedInstanceState)
 
         activityViewModel.historyAdapterData.observe(viewLifecycleOwner) {
-            if(it.isNotEmpty()) {
+            if (it.isNotEmpty()) {
                 activityViewModel.setDetailViewItem(it[0])
             }
         }
@@ -178,22 +169,18 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                 viewModel.textToQrCodeItem(resources)
             }
             createEmailButtonSaveQrToFile.setOnClickListener {
-                    activityViewModel.saveQrImageOfDetailView(requireContext())
+                activityViewModel.saveQrImageOfDetailView(requireContext())
             }
             createEmailQrImagePreview.setOnClickListener {
                 findNavController().navigate(
                     R.id.action_createEmailQrCodeFragment_to_qrFullscreenFragment, bundleOf(
-                        "itemPosition" to 0,
-                        ORIGIN_FLAG to FROM_CREATE_CONTEXT
-                    )
+                    "itemPosition" to 0,
+                    ORIGIN_FLAG to FROM_CREATE_CONTEXT
+                )
                 )
             }
         }
         observeViewModel()
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        menu.clear()
-        super.onPrepareOptionsMenu(menu)
-    }
 }

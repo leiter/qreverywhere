@@ -13,10 +13,10 @@ import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment.Companion.C
 import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment.Companion.CREATE_SMS
 import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment.Companion.CREATE_WEB
 import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment.Companion.USE_CASE_MODE
+import cut.the.crap.qreverywhere.utils.activityView
 import cut.the.crap.qreverywhere.utils.viewBinding
 import cut.the.crap.qreverywhere.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
-
 
 @AndroidEntryPoint
 class CreateQrCodeFragment : Fragment(R.layout.fragment_create_qr_code) {
@@ -28,7 +28,7 @@ class CreateQrCodeFragment : Fragment(R.layout.fragment_create_qr_code) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(viewBinding){
+        with(viewBinding) {
 
             createEmailQrCode.setOnClickListener {
                 findNavController().navigate(R.id.action_createQrCodeFragment_to_createEmailQrCodeFragment)
@@ -60,8 +60,8 @@ class CreateQrCodeFragment : Fragment(R.layout.fragment_create_qr_code) {
     }
 
     private fun ensureBottomNavigation() {
-        val bottomNavigationView = requireActivity().findViewById<BottomNavigationView>(R.id.nav_view)
-        if(bottomNavigationView.isVisible.not()){
+        val bottomNavigationView = activityView<BottomNavigationView>(R.id.nav_view)
+        if (bottomNavigationView.isVisible.not()) {
             bottomNavigationView.visible()
         }
     }

@@ -1,14 +1,12 @@
 package cut.the.crap.qreverywhere.qrhistory
 
 import android.os.Bundle
-import android.view.Menu
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
@@ -18,6 +16,7 @@ import cut.the.crap.qreverywhere.utils.AcquireDateFormatter
 import cut.the.crap.qreverywhere.utils.FROM_HISTORY_LIST
 import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
 import cut.the.crap.qreverywhere.utils.UiEvent
+import cut.the.crap.qreverywhere.utils.activityView
 import cut.the.crap.qreverywhere.utils.gone
 import cut.the.crap.qreverywhere.utils.showSnackBar
 import cut.the.crap.qreverywhere.utils.viewBinding
@@ -36,24 +35,14 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
     @Inject
     lateinit var acquireDateFormatter: AcquireDateFormatter
 
-    private fun getProgressIndicator(): LinearProgressIndicator {
-        return requireActivity().findViewById(R.id.top_progress_indicator)
-    }
-
-    private val progress by lazy {
-        getProgressIndicator()
-    }
-
-    private fun getBottomNavigationView(): BottomNavigationView {
-        return requireActivity().findViewById(R.id.nav_view)
-    }
+    private val progress by lazy { activityView<LinearProgressIndicator>(R.id.top_progress_indicator) }
 
     private val detailViewItemClicked: (QrItem) -> Unit = {
         activityViewModel.setDetailViewItem(it)
         findNavController().navigate(
             R.id.action_qrHistoryFragment_to_detailViewFragment, bundleOf(
-                ORIGIN_FLAG to FROM_HISTORY_LIST
-            )
+            ORIGIN_FLAG to FROM_HISTORY_LIST
+        )
         )
     }
 
@@ -73,9 +62,8 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
         activityViewModel.focusedItemIndex = pos
         findNavController().navigate(
             R.id.action_qrHistoryFragment_to_qrFullscreenFragment, bundleOf(
-                "itemPosition" to pos,
-                ORIGIN_FLAG to FROM_HISTORY_LIST
-
+            "itemPosition" to pos,
+            ORIGIN_FLAG to FROM_HISTORY_LIST
             )
         )
     }
@@ -86,11 +74,6 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
             navigateToFullscreen,
             acquireDateFormatter
         )
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -112,8 +95,8 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
                 }
                 historyListAdapter.setData(it)
             }
-            activityViewModel.removeItemSingleLiveDataEvent.observe(viewLifecycleOwner){
-                when(it){
+            activityViewModel.removeItemSingleLiveDataEvent.observe(viewLifecycleOwner) {
+                when (it) {
                     is State.Error -> {
                         progress.hide()
                     }
@@ -123,7 +106,7 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
                         viewBinding.root.showSnackBar(
                             UiEvent.SnackBar(
                                 message = R.string.item_deleted,
-                                anchorView = getBottomNavigationView(),
+                                anchorView = requireActivity().findViewById(R.id.nav_view),
                                 actionLabel = R.string.undo_delete,
                                 actionBlock = { activityViewModel.saveQrItem(it.data!!) }
                             )
@@ -137,9 +120,5 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
         }
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        menu.clear()
-        super.onPrepareOptionsMenu(menu)
-    }
-
 }
+
