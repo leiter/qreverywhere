@@ -1,5 +1,6 @@
 package cut.the.crap.qreverywhere.utils
 
+import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -56,4 +57,13 @@ fun createShareIntent(qrImgUri: Uri): Intent {
         putExtra(Intent.EXTRA_STREAM, qrImgUri)
 //        activity.startActivityForResult(Intent.createChooser(shareIntent, "Share Via"), Navigator.REQUEST_SHARE_ACTION);
     }
+}
+
+fun isPermissionDialogDisplayed(context: Context) :Boolean {
+    val am = context.getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager?
+    val cn = am!!.getRunningTasks(1)[0].topActivity
+    if ("com.android.packageinstaller.permission.ui.GrantPermissionsActivity" == cn!!.className) {
+        return true
+    }
+    return false
 }
