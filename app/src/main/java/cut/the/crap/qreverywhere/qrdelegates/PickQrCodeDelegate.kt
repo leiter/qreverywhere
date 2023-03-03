@@ -8,6 +8,8 @@ interface PickQrCodeDelegate {
 
     fun readQrcodeFromFile()
 
+    fun permissionByApiVersion(): String
+
 }
 
 

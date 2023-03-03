@@ -24,6 +24,7 @@ import cut.the.crap.qreverywhere.utils.FROM_CREATE_CONTEXT
 import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
 import cut.the.crap.qreverywhere.utils.UiEvent
 import cut.the.crap.qreverywhere.utils.activityView
+import cut.the.crap.qreverywhere.utils.focusEditText
 import cut.the.crap.qreverywhere.utils.gone
 import cut.the.crap.qreverywhere.utils.showSnackBar
 import cut.the.crap.qreverywhere.utils.textChanges
@@ -147,6 +148,7 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
 
         with(viewBinding) {
             createEmailAddressText.setText(viewModel.emailAddress)
+            focusEditText(createEmailAddressText)
             createEmailSubjectText.setText(viewModel.emailSubject)
             createEmailBodyText.setText(viewModel.emailText)
 

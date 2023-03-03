@@ -11,6 +11,8 @@
 
 
     <string name="qrScanFabTextFromFile">Scan from file</string>
+    <string name="requestQrFromFile">Scan from file</string>
+    <string name="requestCameraPermission">Request Camera</string>
 
 
     <string name="qr_created_on_template">Created on %s</string>
@@ -86,7 +88,7 @@
     <string name="qr_create_button_web">Web</string>
     <string name="qr_create_one_line_button_test">Test</string>
     <string name="qr_create_one_line_button_create">Create</string>
-    <string name="qr_create_email_hint_recipient">Recipient email</string>
+    <string name="qr_create_email_hint_recipient">Email</string>
     <string name="qr_create_email_hint_subject">Email Subject</string>
     <string name="qr_create_email_hint_message">Email message</string>
     <string name="qr_create_email_button_create">Create QrCode</string>

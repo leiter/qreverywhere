@@ -28,11 +28,10 @@ import cut.the.crap.qreverywhere.databinding.FragmentHomeBinding
 import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegate
 import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegateImpl
 import cut.the.crap.qreverywhere.utils.FROM_SCAN_QR
-import cut.the.crap.qreverywhere.utils.IntentGenerator
+import cut.the.crap.qreverywhere.utils.IntentGenerator.OpenAppSettings
 import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
 import cut.the.crap.qreverywhere.utils.gone
 import cut.the.crap.qreverywhere.utils.hasPermission
-import cut.the.crap.qreverywhere.utils.showShortToast
 import cut.the.crap.qreverywhere.utils.viewBinding
 import cut.the.crap.qreverywhere.utils.visible
 import cut.the.crap.qrrepository.Acquire
@@ -54,10 +53,14 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
                 viewBinding.previewView.visible()
+                viewBinding.centerButton.gone()
+                viewBinding.qrScanFab.show()
                 startCamera()
             } else {
                 viewBinding.previewView.gone()
-                requireContext().showShortToast(R.string.permission_denied_text)
+                viewBinding.centerButton.visible()
+                viewBinding.qrScanFab.hide()
+//                requireContext().showShortToast(R.string.permission_denied_text)
             }
         }
     }
@@ -140,6 +143,16 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 readQrcodeFromFile()
             }
             handleCameraPermission()
+            requestCameraPermission.setOnClickListener {
+                startActivity(OpenAppSettings.getIntent())
+            }
+            requestFileScan.setOnClickListener {
+                if(requireContext().hasPermission(permissionByApiVersion())){
+                    readQrcodeFromFile()
+                } else {
+                    startActivity(OpenAppSettings.getIntent())
+                }
+            }
         }
         activityViewModel.startDetailViewQrCodeItem.observe(viewLifecycleOwner) {
             it?.let {
@@ -151,8 +164,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         activityViewModel.centralState.observe(viewLifecycleOwner) {
 
         }
-
-        setupOptionMenu()
+//        setupOptionMenu()
 
     }
 
@@ -167,14 +179,9 @@ class HomeFragment : Fragment(R.layout.fragment_home),
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.menu_request_camera -> {
-                            startActivity(IntentGenerator.OpenAppSettings.getIntent())
 //                            cameraPermissionLauncher.launch(android.Manifest.permission.CAMERA)
                         true
                     }
-//            R.id.action_about -> {
-//                findNavController().navigate(R.id.actionOpenSettingsFragment)
-//                true
-//            }
                     else -> {
                         false
                     }
@@ -187,6 +194,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         if (requireContext().hasPermission(android.Manifest.permission.CAMERA)) {
             activityViewModel.setCameraPermission(true)
             viewBinding.previewView.visible()
+            viewBinding.qrScanFab.show()
             startCamera()
         } else {
             activityViewModel.setCameraPermission(false)
@@ -201,14 +209,6 @@ class HomeFragment : Fragment(R.layout.fragment_home),
             R.id.actionOpenDetailViewFromQrScanFragment,
             bundleOf(ORIGIN_FLAG to FROM_SCAN_QR)
         )
-//        if(determineType(qrCode) != QrCode.UNKNOWN_CONTENT){
-//            createOpenIntent(qrCode, requireContext())?.let { intent ->
-//                startActivity(intent)
-//            } ?: run {
-//                //todo inform and display content (callback(text))
-//            }
-//        }
-
     }
 
 }

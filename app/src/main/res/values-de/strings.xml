@@ -13,6 +13,8 @@
 
 
     <string name="qrScanFabTextFromFile">Bilddatei öffnen</string>
+    <string name="requestQrFromFile">Bilddatei öffnen</string>
+    <string name="requestCameraPermission">Kamera freigeben</string>
 
 
     <string name="qr_created_on_template">Erstellt am %s</string>

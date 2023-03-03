@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="@string/qr_create_email_hint_recipient"
+            app:expandedHintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/createEmailButtonSaveQrToFile">

@@ -8,30 +8,71 @@
 
     <androidx.camera.view.PreviewView
         android:id="@+id/previewView"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:visibility="gone" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.15" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guide_center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/requestCameraPermission"
-        tools:text="Request camera permission"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="16dp"
+        android:text="@string/requestCameraPermission"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/guide_center"
+        app:layout_constraintEnd_toStartOf="@+id/guide_end"
+        app:layout_constraintStart_toStartOf="@+id/guide_start" />
 
-        />
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/requestFileScan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/requestQrFromFile"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/guide_end"
+        app:layout_constraintStart_toStartOf="@+id/guide_start"
+        app:layout_constraintTop_toTopOf="@+id/guide_center" />
+
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/qrScanFab"
-        tools:text="@string/qrScanFabTextFromFile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="@string/qrScanFabTextFromFile" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/centerButton"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="requestCameraPermission,requestFileScan"
+        android:layout_height="wrap_content"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
