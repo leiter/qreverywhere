@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.progressindicator.LinearProgressIndicator
+import com.google.android.material.textfield.TextInputEditText
 import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
@@ -24,6 +25,7 @@ import cut.the.crap.qreverywhere.utils.FROM_CREATE_CONTEXT
 import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
 import cut.the.crap.qreverywhere.utils.UiEvent
 import cut.the.crap.qreverywhere.utils.activityView
+import cut.the.crap.qreverywhere.utils.clipBoard
 import cut.the.crap.qreverywhere.utils.focusEditText
 import cut.the.crap.qreverywhere.utils.gone
 import cut.the.crap.qreverywhere.utils.showSnackBar
@@ -52,6 +54,8 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
         }, 120)
     }
 
+    private val clip by clipBoard()
+
     private val progress by lazy {
         activityView<LinearProgressIndicator>(R.id.top_progress_indicator)
     }
@@ -62,6 +66,15 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
 
     private val viewBinding by viewBinding {
         FragmentCreateEmailQrCodeBinding.bind(requireView())
+    }
+
+    private fun pasteFromClipBoard(text: TextInputEditText) {
+        val item = clip.primaryClip?.getItemAt(0)?.text
+        if (!item.isNullOrBlank()){
+            text.setText(item)
+        } else {
+//            requireContext().showLongToast()
+        }
     }
 
     private fun observeViewModel() {
@@ -167,6 +180,19 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                     viewModel.emailText = it.toString()
                 }
             }
+
+            createEmailSubjectTextLayout.setStartIconOnClickListener {
+                pasteFromClipBoard(createEmailSubjectText)
+            }
+
+            createEmailBodyTextLayout.setStartIconOnClickListener {
+                pasteFromClipBoard(createEmailBodyText)
+            }
+
+            createEmailAddressTextLayout.setStartIconOnClickListener {
+                pasteFromClipBoard(createEmailAddressText)
+            }
+
             createEmailCreateQrcode.setOnClickListener {
                 viewModel.textToQrCodeItem(resources)
             }

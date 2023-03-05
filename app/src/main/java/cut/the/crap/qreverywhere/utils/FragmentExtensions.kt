@@ -35,17 +35,17 @@ inline fun <reified V : View> Fragment.activityView(@IdRes viewId: Int): V = req
 
 fun Fragment.clipBoard(): ReadOnlyProperty<Fragment, ClipboardManager> =
     object : ReadOnlyProperty<Fragment, ClipboardManager>, DefaultLifecycleObserver {
-        private var binding: ClipboardManager? = null
+        private var clipManager: ClipboardManager? = null
 
         override fun getValue(thisRef: Fragment, property: KProperty<*>): ClipboardManager =
-            binding ?: (requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).also {
+            clipManager ?: (requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).also {
                 if (viewLifecycleOwner.lifecycle.currentState.isAtLeast(Lifecycle.State.INITIALIZED)) {
                     viewLifecycleOwner.lifecycle.addObserver(this)
-                    binding = it
+                    clipManager = it
                 }
             }
 
         override fun onDestroy(owner: LifecycleOwner) {
-            binding = null
+            clipManager = null
         }
     }

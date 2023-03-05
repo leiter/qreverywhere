@@ -1,8 +1,6 @@
 package cut.the.crap.qrrepository
 
 import android.content.Context
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations.map
 import androidx.room.Room
 import cut.the.crap.qrrepository.db.QrCodeDbItem
 import cut.the.crap.qrrepository.db.toItem
