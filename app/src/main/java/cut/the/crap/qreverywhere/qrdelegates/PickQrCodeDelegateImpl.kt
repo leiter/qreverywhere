@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
+import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.qrcodescan.HomeFragment
 import cut.the.crap.qreverywhere.utils.IntentGenerator.PickImageIntent
 import cut.the.crap.qreverywhere.utils.hasPermission
@@ -25,7 +26,7 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
         }
     }
 
-    override fun attachPickQrCodeDelegate(fragment: Fragment) {
+    override fun attachPickQrCodeDelegate(fragment: Fragment, activityViewModel: MainActivityViewModel) {
         this.fragment = fragment
 
         scanImageLauncher = fragment.registerForActivityResult(
@@ -45,8 +46,10 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
         readStoragePermissionLauncher =
             fragment.registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
                 if (isGranted) {
+
                     readBarcode()
                 } else {
+
 //                    fragment.requireContext().showShortToast(R.string.permission_denied_text)
                 }
             }

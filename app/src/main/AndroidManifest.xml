@@ -14,6 +14,8 @@
     <uses-feature android:name="android.hardware.camera" android:required="false"/>
     <uses-feature android:name="android.hardware.camera.any" />
 
+    <uses-sdk tools:overrideLibrary="androidx.security"/>
+
     <permission android:name="android.permission.QUERY_ALL_PACKAGES" />
 
     <queries>

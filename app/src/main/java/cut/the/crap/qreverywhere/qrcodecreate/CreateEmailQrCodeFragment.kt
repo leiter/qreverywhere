@@ -28,6 +28,7 @@ import cut.the.crap.qreverywhere.utils.activityView
 import cut.the.crap.qreverywhere.utils.clipBoard
 import cut.the.crap.qreverywhere.utils.focusEditText
 import cut.the.crap.qreverywhere.utils.gone
+import cut.the.crap.qreverywhere.utils.pasteFromClipBoard
 import cut.the.crap.qreverywhere.utils.showSnackBar
 import cut.the.crap.qreverywhere.utils.textChanges
 import cut.the.crap.qreverywhere.utils.viewBinding
@@ -51,7 +52,7 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
     private val closeImeAction: () -> Unit = {
         Handler(Looper.getMainLooper()).postDelayed({
             bottomNav.visible()
-        }, 120)
+        }, 50)
     }
 
     private val clip by clipBoard()
@@ -66,15 +67,6 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
 
     private val viewBinding by viewBinding {
         FragmentCreateEmailQrCodeBinding.bind(requireView())
-    }
-
-    private fun pasteFromClipBoard(text: TextInputEditText) {
-        val item = clip.primaryClip?.getItemAt(0)?.text
-        if (!item.isNullOrBlank()){
-            text.setText(item)
-        } else {
-//            requireContext().showLongToast()
-        }
     }
 
     private fun observeViewModel() {
@@ -182,15 +174,15 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
             }
 
             createEmailSubjectTextLayout.setStartIconOnClickListener {
-                pasteFromClipBoard(createEmailSubjectText)
+                pasteFromClipBoard(createEmailSubjectText, clip)
             }
 
             createEmailBodyTextLayout.setStartIconOnClickListener {
-                pasteFromClipBoard(createEmailBodyText)
+                pasteFromClipBoard(createEmailBodyText, clip)
             }
 
             createEmailAddressTextLayout.setStartIconOnClickListener {
-                pasteFromClipBoard(createEmailAddressText)
+                pasteFromClipBoard(createEmailAddressText, clip)
             }
 
             createEmailCreateQrcode.setOnClickListener {

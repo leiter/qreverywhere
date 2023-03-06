@@ -9,6 +9,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.data.State
+import cut.the.crap.qreverywhere.utils.EncryptedPrefs
 import cut.the.crap.qrrepository.Acquire
 import cut.the.crap.qreverywhere.utils.SingleLiveDataEvent
 import cut.the.crap.qreverywhere.utils.saveImageToFile
@@ -25,6 +26,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
     private val historyRepository: QrHistoryRepository,
+    private val encryptedPrefs: EncryptedPrefs
 ) : ViewModel() {
 
     var focusedItemIndex: Int = 0
@@ -59,7 +61,11 @@ class MainActivityViewModel @Inject constructor(
         if (Acquire.FROM_FILE == type) detailViewLiveQrCodeItem.value = State.loading()
         viewModelScope.launch {
             val bitmap = textToImageEnc(textContent, resources)
-            val historyItem = QrCodeDbItem(img = bitmap, textContent = textContent, acquireType = type).toItem()
+            val historyItem = QrCodeDbItem(
+                img = bitmap,
+                textContent = textContent,
+                acquireType = type)
+                .toItem()
             detailViewQrCodeItem = historyItem
             startDetailViewQrCodeItem.value = historyItem
             detailViewLiveQrCodeItem.value = State.success(historyItem)
@@ -108,13 +114,23 @@ class MainActivityViewModel @Inject constructor(
                 }
             }
         }
+    }
 
+    fun setStoragePermission() {
+    }
+
+    fun hideIme(hide: Boolean) {
+        if(centralState.value?.imeIsHidden == !hide){
+            _centralState.value = centralState.value?.copy(imeIsHidden = hide)
+        }
     }
 
 }
 
 data class CentralState(
     val hasCameraPermission: Boolean = false,
+    val hasStoragePermission: Boolean = false,
+    val imeIsHidden: Boolean = true
 )
 
 class CouldNotDeleteQrItem : Exception()

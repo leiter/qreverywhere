@@ -9,30 +9,31 @@ import androidx.navigation.fragment.navArgs
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentQrFullscreenBinding
+import cut.the.crap.qreverywhere.utils.AcquireDateFormatter
+import cut.the.crap.qreverywhere.utils.setTitle
 import cut.the.crap.qreverywhere.utils.viewBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class QrFullscreenFragment : Fragment(R.layout.fragment_qr_fullscreen) {
 
     private val activityViewModel by activityViewModels<MainActivityViewModel>()
 
     private val viewBinding by viewBinding { FragmentQrFullscreenBinding.bind(requireView()) }
 
-    private val args: QrFullscreenFragmentArgs by navArgs()
+    @Inject
+    lateinit var acquireDateFormatter: AcquireDateFormatter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
+    private val args: QrFullscreenFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activityViewModel.historyAdapterData.observe(viewLifecycleOwner){
-            viewBinding.qrFullScreenImage.setImageBitmap(it[args.itemPosition].img)
+            val item = it[args.itemPosition]
+            viewBinding.qrFullScreenImage.setImageBitmap(item.img)
+            setTitle(acquireDateFormatter.getTimeTemplate(item))
         }
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        menu.clear()
-        super.onPrepareOptionsMenu(menu)
-    }
 }

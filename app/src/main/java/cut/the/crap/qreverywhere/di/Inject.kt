@@ -19,4 +19,7 @@ object AppModule {
         return QrHistoryRepository(application)
     }
 
+    @Provides
+    fun provideFileNameSharedPrefs() = "appState"
+
 }

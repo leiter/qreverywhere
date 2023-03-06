@@ -58,6 +58,7 @@ dependencies {
     implementation "androidx.preference:preference:1.2.0"
     implementation project(path: ':qr_repository')
 
+    implementation "androidx.security:security-crypto:1.0.0"
 
     // Camera
     def camerax_version = "1.2.1"

@@ -23,14 +23,14 @@ import kotlinx.coroutines.flow.onStart
 
 @ExperimentalCoroutinesApi
 @CheckResult
-fun EditText.textChanges(): Flow<CharSequence?> {
+fun EditText.textChanges(): Flow<CharSequence> {
     return callbackFlow {
         val listener = object : TextWatcher {
             override fun afterTextChanged(s: Editable?) = Unit
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) =
                 Unit
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                trySend(s)
+                s?.let { trySend(it) }
             }
         }
         addTextChangedListener(listener)
@@ -68,7 +68,6 @@ fun ImageButton.setDrawable(resId: Int, imageView: ImageButton) {
     imageView.setImageDrawable(d)
 }
 
-
 fun View.showSnackBar(config: UiEvent.SnackBar) {
     val s = Snackbar.make(this, config.message, config.duration)
     config.backGroundColor?.let {
@@ -88,7 +87,6 @@ fun View.showSnackBar(config: UiEvent.SnackBar) {
     s.show()
 }
 
-
 sealed class UiEvent {
     data class SnackBar(
         @StringRes val message: Int,
@@ -97,7 +95,7 @@ sealed class UiEvent {
         @ColorRes val backGroundColor: Int? = R.color.primary,
         @ColorRes val actionTextColor: Int = R.color.accent,
         @StringRes val actionLabel: Int? = null,
-        val actionBlock: (() -> Unit)? = null
+        val actionBlock: (() -> Unit)? = null,
     ) {
         fun hasAction(): Boolean {
             return actionBlock != null && actionLabel != null

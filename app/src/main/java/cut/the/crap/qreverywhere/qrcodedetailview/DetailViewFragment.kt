@@ -35,6 +35,7 @@ import cut.the.crap.qreverywhere.utils.activityView
 import cut.the.crap.qreverywhere.utils.determineType
 import cut.the.crap.qreverywhere.utils.gone
 import cut.the.crap.qreverywhere.utils.isVcard
+import cut.the.crap.qreverywhere.utils.setTitle
 import cut.the.crap.qreverywhere.utils.showSnackBar
 import cut.the.crap.qreverywhere.utils.startIntentGracefully
 import cut.the.crap.qreverywhere.utils.viewBinding
@@ -88,7 +89,6 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
                         return true
                     }
                     else -> false
-
                 }
 
             }
@@ -131,7 +131,8 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
         with(viewBinding) {
             Glide.with(root.context).load(item.img).into(detailViewContentPreviewImage)
             detailViewContentTextView.text = Uri.decode(item.textContent)
-            detailViewAcquiredAt.text = acquireDateFormatter.getTimeTemplate(item)
+//            detailViewAcquiredAt.text = acquireDateFormatter.getTimeTemplate(item)
+            setTitle(acquireDateFormatter.getTimeTemplate(item))
             if (determineType(activityViewModel.detailViewQrCodeItem.textContent) != QrCodeType.UNKNOWN_CONTENT) {
                 detailViewLaunchActionButton.text = launchText
                 detailViewLaunchActionButton.setOnClickListener {

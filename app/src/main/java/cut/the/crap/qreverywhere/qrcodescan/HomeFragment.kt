@@ -71,7 +71,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        attachPickQrCodeDelegate(this)
+        attachPickQrCodeDelegate(this, activityViewModel)
     }
 
     private fun startCamera() {

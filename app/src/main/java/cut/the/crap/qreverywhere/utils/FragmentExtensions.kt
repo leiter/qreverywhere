@@ -14,11 +14,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import com.google.android.material.textfield.TextInputEditText
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 fun Fragment.setTitle(@StringRes title: Int) {
     (activity as? AppCompatActivity)?.supportActionBar?.setTitle(title)
+}
+fun Fragment.setTitle(title: String) {
+    (activity as? AppCompatActivity)?.supportActionBar?.title = title
 }
 
 fun Fragment.focusEditText(editText: EditText) {
@@ -49,3 +53,28 @@ fun Fragment.clipBoard(): ReadOnlyProperty<Fragment, ClipboardManager> =
             clipManager = null
         }
     }
+
+fun pasteFromClipBoard(textInput: TextInputEditText,
+                                clip: ClipboardManager,
+                                onEmptyClipData: (() -> Unit)? = null) {
+    val item = clip.primaryClip?.getItemAt(0)?.text
+    if (!item.isNullOrBlank()) {
+        var currentText = textInput.text
+
+        if (currentText.isNullOrBlank()) {
+            textInput.setText(item)
+        } else {
+            val startPos = textInput.selectionStart
+            val endPos = textInput.selectionEnd
+            currentText = currentText.delete(startPos,endPos)
+            val start = currentText.substring(0, startPos)
+            val end = currentText.substring(startPos)
+            val paste = start + item + end
+            textInput.setText("")
+            textInput.append(paste)
+            textInput.requestFocus()
+        }
+    } else {
+        onEmptyClipData?.invoke()
+    }
+}
