@@ -40,6 +40,12 @@
     <string name="create_title_phone">Anruf erstellen</string>
     <string name="create_title_web">Weblink erstellen</string>
 
+    <!--    titles detail screen-->
+    <string name="detail_title_phone">Anruf</string>
+    <string name="detail_title_email">E-Mail</string>
+    <string name="detail_title_web">Link</string>
+    <string name="detail_title_text">Text</string>
+
     <!--    Snackbar and Toasts-->
     <string name="saved_in_history">In Qrcodes gespeichert.</string>
     <string name="saved_as_file">Qrcode als Bild gespeichert.</string>

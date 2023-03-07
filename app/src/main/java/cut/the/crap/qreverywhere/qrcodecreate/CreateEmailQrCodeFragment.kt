@@ -13,7 +13,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.progressindicator.LinearProgressIndicator
-import com.google.android.material.textfield.TextInputEditText
 import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
@@ -57,9 +56,7 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
 
     private val clip by clipBoard()
 
-    private val progress by lazy {
-        activityView<LinearProgressIndicator>(R.id.top_progress_indicator)
-    }
+    private val progress by lazy { activityView<LinearProgressIndicator>(R.id.top_progress_indicator) }
 
     private val viewModel by viewModels<CreateQrCodeViewModel>()
 
@@ -174,15 +171,15 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
             }
 
             createEmailSubjectTextLayout.setStartIconOnClickListener {
-                pasteFromClipBoard(createEmailSubjectText, clip)
+                createEmailSubjectText.pasteFromClipBoard(clip)
             }
 
             createEmailBodyTextLayout.setStartIconOnClickListener {
-                pasteFromClipBoard(createEmailBodyText, clip)
+                createEmailBodyText.pasteFromClipBoard(clip)
             }
 
             createEmailAddressTextLayout.setStartIconOnClickListener {
-                pasteFromClipBoard(createEmailAddressText, clip)
+                createEmailAddressText.pasteFromClipBoard(clip)
             }
 
             createEmailCreateQrcode.setOnClickListener {

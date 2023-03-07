@@ -32,9 +32,11 @@ import cut.the.crap.qreverywhere.utils.ProtocolPrefix.TEL
 import cut.the.crap.qreverywhere.utils.QrCodeType
 import cut.the.crap.qreverywhere.utils.UiEvent
 import cut.the.crap.qreverywhere.utils.activityView
+import cut.the.crap.qreverywhere.utils.detailTitle
 import cut.the.crap.qreverywhere.utils.determineType
 import cut.the.crap.qreverywhere.utils.gone
 import cut.the.crap.qreverywhere.utils.isVcard
+import cut.the.crap.qreverywhere.utils.setSubTitle
 import cut.the.crap.qreverywhere.utils.setTitle
 import cut.the.crap.qreverywhere.utils.showSnackBar
 import cut.the.crap.qreverywhere.utils.startIntentGracefully
@@ -131,8 +133,8 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
         with(viewBinding) {
             Glide.with(root.context).load(item.img).into(detailViewContentPreviewImage)
             detailViewContentTextView.text = Uri.decode(item.textContent)
-//            detailViewAcquiredAt.text = acquireDateFormatter.getTimeTemplate(item)
-            setTitle(acquireDateFormatter.getTimeTemplate(item))
+            setTitle(item.detailTitle)
+            setSubTitle(acquireDateFormatter.getTimeTemplate(item))
             if (determineType(activityViewModel.detailViewQrCodeItem.textContent) != QrCodeType.UNKNOWN_CONTENT) {
                 detailViewLaunchActionButton.text = launchText
                 detailViewLaunchActionButton.setOnClickListener {
@@ -152,6 +154,11 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
             }
 
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        setSubTitle("")
     }
 
     private fun setObserver() {

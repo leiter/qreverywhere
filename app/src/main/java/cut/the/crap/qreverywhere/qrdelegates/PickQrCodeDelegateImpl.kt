@@ -4,9 +4,11 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Build
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.qrcodescan.HomeFragment
+import cut.the.crap.qreverywhere.utils.IntentGenerator
 import cut.the.crap.qreverywhere.utils.IntentGenerator.PickImageIntent
 import cut.the.crap.qreverywhere.utils.hasPermission
 import cut.the.crap.qreverywhere.utils.scanQrImage
@@ -22,7 +24,11 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
         if (fragment.requireContext().hasPermission(permissionByApiVersion())) {
             readBarcode()
         } else {
-            readStoragePermissionLauncher.launch(permissionByApiVersion())
+            if(ActivityCompat.shouldShowRequestPermissionRationale(fragment.requireActivity(), permissionByApiVersion())){
+                readStoragePermissionLauncher.launch(permissionByApiVersion())
+            } else {
+                fragment.startActivity(IntentGenerator.OpenAppSettings.getIntent())
+            }
         }
     }
 
@@ -46,11 +52,7 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
         readStoragePermissionLauncher =
             fragment.registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
                 if (isGranted) {
-
                     readBarcode()
-                } else {
-
-//                    fragment.requireContext().showShortToast(R.string.permission_denied_text)
                 }
             }
     }

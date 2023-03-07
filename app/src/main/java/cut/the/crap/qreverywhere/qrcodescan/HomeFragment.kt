@@ -2,9 +2,6 @@ package cut.the.crap.qreverywhere.qrcodescan
 
 import android.content.Context
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -14,10 +11,9 @@ import androidx.camera.core.ImageAnalysis
 import androidx.camera.core.Preview
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.camera.view.PreviewView
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -49,7 +45,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
 
     private val viewBinding by viewBinding { FragmentHomeBinding.bind(requireView()) }
 
-    private val cameraPermissionLauncher: androidx.activity.result.ActivityResultLauncher<String> by lazy {
+    private val cameraPermissionLauncher: androidx.activity.result.ActivityResultLauncher<String> =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
             if (isGranted) {
                 viewBinding.previewView.visible()
@@ -60,10 +56,9 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 viewBinding.previewView.gone()
                 viewBinding.centerButton.visible()
                 viewBinding.qrScanFab.hide()
-//                requireContext().showShortToast(R.string.permission_denied_text)
             }
+
         }
-    }
 
     private val cameraProviderFuture: ListenableFuture<ProcessCameraProvider> by lazy {
         ProcessCameraProvider.getInstance(requireActivity())
@@ -139,68 +134,49 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         with(viewBinding) {
             qrScanFab.setText(R.string.qrScanFabTextFromFile)
             qrScanFab.setIconResource(R.drawable.ic_file_open)
-            qrScanFab.setOnClickListener {
-                readQrcodeFromFile()
-            }
-            handleCameraPermission()
+            qrScanFab.setOnClickListener { readQrcodeFromFile() }
             requestCameraPermission.setOnClickListener {
-                startActivity(OpenAppSettings.getIntent())
+                if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), android.Manifest.permission.CAMERA)) {
+                    cameraPermissionLauncher.launch(android.Manifest.permission.CAMERA)
+                } else {
+                    startActivity(OpenAppSettings.getIntent())
+                }
             }
             requestFileScan.setOnClickListener {
-                if(requireContext().hasPermission(permissionByApiVersion())){
+                if (requireContext().hasPermission(permissionByApiVersion())) {
                     readQrcodeFromFile()
                 } else {
                     startActivity(OpenAppSettings.getIntent())
                 }
             }
         }
-        activityViewModel.startDetailViewQrCodeItem.observe(viewLifecycleOwner) {
-            it?.let {
-//                findNavController().navigate(R.id.actionOpenDetailViewFromHistory, bundleOf(
-//                    DetailViewFragment.ORIGIN_FLAG to DetailViewFragment.FROM_SCAN_QR
-//                ))
-            }
-        }
-        activityViewModel.centralState.observe(viewLifecycleOwner) {
-
-        }
-//        setupOptionMenu()
-
-    }
-
-    private fun setupOptionMenu() {
-        val menuHost: MenuHost = requireActivity()
-
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menuInflater.inflate(R.menu.menu_home, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-                    R.id.menu_request_camera -> {
-//                            cameraPermissionLauncher.launch(android.Manifest.permission.CAMERA)
-                        true
-                    }
-                    else -> {
-                        false
-                    }
-                }
-            }
-        }, viewLifecycleOwner)
+        handleCameraPermission()
     }
 
     private fun handleCameraPermission() {
-        if (requireContext().hasPermission(android.Manifest.permission.CAMERA)) {
+        if (!requireContext().hasPermission(android.Manifest.permission.CAMERA)
+            && !ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), android.Manifest.permission.CAMERA)) {
+            viewBinding.previewView.gone()
+            viewBinding.centerButton.visible()
+        } else if (requireContext().hasPermission(android.Manifest.permission.CAMERA)) {
             activityViewModel.setCameraPermission(true)
             viewBinding.previewView.visible()
+            viewBinding.centerButton.gone()
             viewBinding.qrScanFab.show()
             startCamera()
-        } else {
-            activityViewModel.setCameraPermission(false)
+        } else if (!requireContext().hasPermission(android.Manifest.permission.CAMERA)) {
             viewBinding.previewView.gone()
-            cameraPermissionLauncher.launch(android.Manifest.permission.CAMERA)
+            viewBinding.centerButton.visible()
         }
+//        else {
+//            activityViewModel.setCameraPermission(false)
+//            viewBinding.previewView.gone()
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), android.Manifest.permission.CAMERA)) {
+//                cameraPermissionLauncher.launch(android.Manifest.permission.CAMERA)
+//            } else {
+//                startActivity(OpenAppSettings.getIntent())
+//            }
+//        }
     }
 
     override fun handleQrCode(qrCode: com.google.zxing.Result, @Acquire.Type type: Int) {

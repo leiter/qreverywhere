@@ -25,6 +25,10 @@ fun Fragment.setTitle(title: String) {
     (activity as? AppCompatActivity)?.supportActionBar?.title = title
 }
 
+fun Fragment.setSubTitle(title: String) {
+    (activity as? AppCompatActivity)?.supportActionBar?.subtitle = title
+}
+
 fun Fragment.focusEditText(editText: EditText) {
     Handler(Looper.getMainLooper()).postDelayed({
         editText.isFocusableInTouchMode = true
@@ -54,25 +58,26 @@ fun Fragment.clipBoard(): ReadOnlyProperty<Fragment, ClipboardManager> =
         }
     }
 
-fun pasteFromClipBoard(textInput: TextInputEditText,
+fun TextInputEditText.pasteFromClipBoard(
                                 clip: ClipboardManager,
                                 onEmptyClipData: (() -> Unit)? = null) {
     val item = clip.primaryClip?.getItemAt(0)?.text
     if (!item.isNullOrBlank()) {
-        var currentText = textInput.text
+        var currentText = this.text
 
         if (currentText.isNullOrBlank()) {
-            textInput.setText(item)
+            this.append(item)
+            this.requestFocus()
         } else {
-            val startPos = textInput.selectionStart
-            val endPos = textInput.selectionEnd
+            val startPos = this.selectionStart
+            val endPos = this.selectionEnd
             currentText = currentText.delete(startPos,endPos)
             val start = currentText.substring(0, startPos)
             val end = currentText.substring(startPos)
             val paste = start + item + end
-            textInput.setText("")
-            textInput.append(paste)
-            textInput.requestFocus()
+            this.setText("")
+            this.append(paste)
+            this.requestFocus()
         }
     } else {
         onEmptyClipData?.invoke()

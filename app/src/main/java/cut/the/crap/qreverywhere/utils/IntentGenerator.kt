@@ -14,9 +14,11 @@ sealed class IntentGenerator {
             return Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                 Uri.fromParts("package", BuildConfig.APPLICATION_ID, null)).apply {
                 addCategory(Intent.CATEGORY_DEFAULT)
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                addFlags(
+                    Intent.FLAG_ACTIVITY_NEW_TASK
                     or Intent.FLAG_ACTIVITY_NO_HISTORY
-                    or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
+                    or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS
+                )
             }
         }
     }

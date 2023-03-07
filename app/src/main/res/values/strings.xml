@@ -38,6 +38,12 @@
     <string name="create_title_phone">Create Phone</string>
     <string name="create_title_web">Create Web</string>
 
+    <!--    titles detail screen-->
+    <string name="detail_title_phone">Phone call</string>
+    <string name="detail_title_email">Email</string>
+    <string name="detail_title_web">Link</string>
+    <string name="detail_title_text">Text</string>
+
     <!--    Snackbar and Toasts-->
     <string name="saved_in_history">Saved in history</string>
     <string name="saved_as_file">Qrcode image saved as file.</string>
@@ -94,6 +100,9 @@
     <string name="qr_create_email_button_create">Create QrCode</string>
     <string name="qr_create_email_button_save">Save to file</string>
     <string name="nav_title_create_email">Create an email</string>
+
+
+
 
 
 </resources>

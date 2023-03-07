@@ -10,7 +10,9 @@ import android.graphics.BitmapFactory
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Environment
+import androidx.annotation.IdRes
 import androidx.annotation.IntDef
+import androidx.annotation.StringRes
 import androidx.core.content.res.ResourcesCompat
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.BinaryBitmap
@@ -199,4 +201,12 @@ fun scanQrImage(uri: Uri, context: Context): Result? {
         Timber.e(e, "Error decoding barcode")
     }
     return contents
+}
+
+val QrItem.detailTitle:  Int
+get() = when(determineType(textContent)){
+    EMAIL -> R.string.detail_title_email
+    PHONE -> R.string.detail_title_phone
+    WEB_URL -> R.string.detail_title_web
+    else -> R.string.detail_title_text
 }
