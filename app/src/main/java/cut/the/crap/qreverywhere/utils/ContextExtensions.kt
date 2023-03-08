@@ -14,4 +14,7 @@ fun Context.showLongToast(@StringRes message: Int) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
 
-fun Context.hasPermission(permissionString: String) = ContextCompat.checkSelfPermission(this, permissionString) == PackageManager.PERMISSION_GRANTED
+fun Context.hasPermission(permissionString: String) =
+    ContextCompat.checkSelfPermission(
+        this, permissionString
+    ) == PackageManager.PERMISSION_GRANTED

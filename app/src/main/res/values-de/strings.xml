@@ -102,9 +102,13 @@
     <string name="qr_create_button_web">Webseite</string>
     <string name="qr_create_one_line_button_test">Testen</string>
     <string name="qr_create_one_line_button_create">Erstellen</string>
-    <string name="qr_create_email_hint_recipient">Empfängeradresse</string>
-    <string name="qr_create_email_hint_subject">Emailbetreff</string>
-    <string name="qr_create_email_hint_message">Emailnachricht</string>
+
+
+    <string name="qr_create_email_hint_recipient">Emailadresse</string>
+    <string name="qr_create_email_hint_example_recipient">empfänger@mustermann.de</string>
+    <string name="qr_create_email_hint_subject">Betreff</string>
+    <string name="qr_create_email_hint_example_subject">(optional)</string>
+    <string name="qr_create_email_hint_message">Nachricht</string>
     <string name="qr_create_email_button_create">QrCode erstellen</string>
     <string name="qr_create_email_button_save">Speichern als jpg</string>
     <string name="nav_title_create_email">Email erstellen</string>

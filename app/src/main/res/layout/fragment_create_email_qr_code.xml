@@ -21,7 +21,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="@string/qr_create_email_hint_recipient"
-            app:expandedHintEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/createEmailButtonSaveQrToFile">
@@ -29,7 +28,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/createEmailAddressText"
                 android:lines="1"
-                android:hint="empfänger@mustermann.de"
+                android:hint="@string/qr_create_email_hint_example_recipient"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
@@ -70,6 +69,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/createEmailSubjectText"
                 android:lines="1"
+                android:hint="@string/qr_create_email_hint_example_subject"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 

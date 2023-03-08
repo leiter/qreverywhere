@@ -24,7 +24,8 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
         if (fragment.requireContext().hasPermission(permissionByApiVersion())) {
             readBarcode()
         } else {
-            if(ActivityCompat.shouldShowRequestPermissionRationale(fragment.requireActivity(), permissionByApiVersion())){
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    fragment.requireActivity(), permissionByApiVersion())) {
                 readStoragePermissionLauncher.launch(permissionByApiVersion())
             } else {
                 fragment.startActivity(IntentGenerator.OpenAppSettings.getIntent())
@@ -57,7 +58,7 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
             }
     }
 
-   override fun permissionByApiVersion(): String {
+    override fun permissionByApiVersion(): String {
         return if (Build.VERSION.SDK_INT > Build.VERSION_CODES.S_V2)
             android.Manifest.permission.READ_MEDIA_IMAGES
         else

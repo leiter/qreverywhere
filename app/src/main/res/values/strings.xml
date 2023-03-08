@@ -94,9 +94,14 @@
     <string name="qr_create_button_web">Web</string>
     <string name="qr_create_one_line_button_test">Test</string>
     <string name="qr_create_one_line_button_create">Create</string>
+
+
     <string name="qr_create_email_hint_recipient">Email</string>
-    <string name="qr_create_email_hint_subject">Email Subject</string>
-    <string name="qr_create_email_hint_message">Email message</string>
+    <string name="qr_create_email_hint_example_recipient">recipient@example.de</string>
+
+    <string name="qr_create_email_hint_subject">Subject</string>
+    <string name="qr_create_email_hint_example_subject">(optional)</string>
+    <string name="qr_create_email_hint_message">Message</string>
     <string name="qr_create_email_button_create">Create QrCode</string>
     <string name="qr_create_email_button_save">Save to file</string>
     <string name="nav_title_create_email">Create an email</string>
