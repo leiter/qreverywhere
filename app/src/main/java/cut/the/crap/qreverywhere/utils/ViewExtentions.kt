@@ -1,5 +1,6 @@
 package cut.the.crap.qreverywhere.utils
 
+import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.Rect
 import android.text.Editable
@@ -14,6 +15,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.core.content.res.ResourcesCompat
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
 import cut.the.crap.qreverywhere.R
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
@@ -129,4 +131,30 @@ fun View.registerImeVisibilityListener(
     }
     viewTreeObserver.addOnGlobalLayoutListener(globalListener)
     return globalListener
+}
+
+fun TextInputEditText.pasteFromClipBoard(
+    clip: ClipboardManager,
+    onEmptyClipData: (() -> Unit)? = null) {
+    val item = clip.primaryClip?.getItemAt(0)?.text
+    if (!item.isNullOrBlank()) {
+        var currentText = this.text
+
+        if (currentText.isNullOrBlank()) {
+            this.append(item)
+            this.requestFocus()
+        } else {
+            val startPos = this.selectionStart
+            val endPos = this.selectionEnd
+            currentText = currentText.delete(startPos,endPos)
+            val start = currentText.substring(0, startPos)
+            val end = currentText.substring(startPos)
+            val paste = start + item + end
+            this.setText("")
+            this.append(paste)
+            this.requestFocus()
+        }
+    } else {
+        onEmptyClipData?.invoke()
+    }
 }

@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import cut.the.crap.qreverywhere.databinding.ActivityMainBinding
+import cut.the.crap.qreverywhere.utils.FROM_CREATE_CONTEXT
 import cut.the.crap.qreverywhere.utils.FROM_HISTORY_LIST
 import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
 import cut.the.crap.qreverywhere.utils.viewBinding
@@ -25,6 +26,7 @@ val navSelectorCreate = arrayListOf(
 
 val navSelectorHistory = arrayListOf(
     R.id.qrHistoryFragment,
+    R.id.action_createEmailQrCodeFragment_to_detailViewFragment
 )
 val navSelectorScanQr = arrayListOf(
     R.id.scanQrFragment,
@@ -45,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             (argument?.containsKey(ORIGIN_FLAG) ?: false && argument?.getInt(
                 ORIGIN_FLAG) == FROM_HISTORY_LIST) || (destinationId == R.id.qrFullscreenFragment && argument?.containsKey(ORIGIN_FLAG) ?: false
                     && argument?.getInt(ORIGIN_FLAG) == FROM_HISTORY_LIST)
-        return destinationId == R.id.qrHistoryFragment || argCheck
+        return destinationId == R.id.qrHistoryFragment || argCheck || argument?.getInt(ORIGIN_FLAG) == FROM_CREATE_CONTEXT
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

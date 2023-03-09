@@ -45,6 +45,9 @@
         <action
             android:id="@+id/action_qrHistoryFragment_to_qrFullscreenFragment"
             app:destination="@id/qrFullscreenFragment" />
+        <action
+            android:id="@+id/action_qrHistoryFragment_to_scanQrFragment"
+            app:destination="@id/scanQrFragment" />
     </fragment>
 
     <fragment
@@ -58,6 +61,11 @@
         <action
             android:id="@+id/action_createEmailQrCodeFragment_to_qrFullscreenFragment"
             app:destination="@id/qrFullscreenFragment" />
+        <action
+            android:id="@+id/action_createEmailQrCodeFragment_to_detailViewFragment"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/createQrCodeFragment"
+            app:destination="@id/detailViewFragment" />
     </fragment>
 
     <fragment
@@ -88,9 +96,13 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_detailViewFragment_to_qrHistoryFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
             app:destination="@id/qrHistoryFragment" />
         <action
             android:id="@+id/action_detailViewFragment_to_qrFullscreenFragment"
+            app:launchSingleTop="true"
+            app:popUpToInclusive="true"
             app:destination="@id/qrFullscreenFragment" />
     </fragment>
 

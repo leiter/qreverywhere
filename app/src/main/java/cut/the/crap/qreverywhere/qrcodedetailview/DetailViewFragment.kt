@@ -3,13 +3,9 @@ package cut.the.crap.qreverywhere.qrcodedetailview
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
-import androidx.core.view.MenuHost
-import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -21,6 +17,7 @@ import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentDetailViewBinding
 import cut.the.crap.qreverywhere.utils.AcquireDateFormatter
+import cut.the.crap.qreverywhere.utils.FROM_CREATE_CONTEXT
 import cut.the.crap.qreverywhere.utils.FROM_HISTORY_LIST
 import cut.the.crap.qreverywhere.utils.FROM_SCAN_QR
 import cut.the.crap.qreverywhere.utils.IntentGenerator
@@ -38,6 +35,7 @@ import cut.the.crap.qreverywhere.utils.gone
 import cut.the.crap.qreverywhere.utils.isVcard
 import cut.the.crap.qreverywhere.utils.setSubTitle
 import cut.the.crap.qreverywhere.utils.setTitle
+import cut.the.crap.qreverywhere.utils.setupMenuItems
 import cut.the.crap.qreverywhere.utils.showSnackBar
 import cut.the.crap.qreverywhere.utils.startIntentGracefully
 import cut.the.crap.qreverywhere.utils.viewBinding
@@ -61,40 +59,48 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
         FragmentDetailViewBinding.bind(requireView())
     }
 
+    private val optionMap by lazy {
+        val map = mutableMapOf(
+            R.id.menu_delete to {
+                activityViewModel.deleteCurrentDetailView()
+                findNavController().navigate(R.id.action_detailViewFragment_to_qrHistoryFragment)
+            },
+            R.id.menu_save_to_file to {
+                activityViewModel.saveQrImageOfDetailView(requireContext())
+            },
+        )
+        if (args.originFlag == FROM_CREATE_CONTEXT) {
+            map[android.R.id.home] = {
+                requireActivity().onBackPressedDispatcher.onBackPressed()
+            }
+        }
+        map
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        val callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                findNavController().navigateUp()
+                findNavController().navigate(R.id.qrHistoryFragment)
+                isEnabled = false
+            }
+        }
+        if (args.originFlag == FROM_CREATE_CONTEXT) {
+            requireActivity().onBackPressedDispatcher.addCallback(callback)
+        }
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (args.originFlag == FROM_HISTORY_LIST) {
+        if (args.originFlag == FROM_HISTORY_LIST || args.originFlag == FROM_CREATE_CONTEXT) {
             setData()
         }
         if (args.originFlag == FROM_SCAN_QR) {
             setObserver()
         }
 
-        val menuHost: MenuHost = requireActivity()
-
-        menuHost.addMenuProvider(object : MenuProvider {
-            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
-                menu.removeItem(R.id.action_about)
-                menu.clear()
-                menuInflater.inflate(R.menu.menu_detail_view, menu)
-            }
-
-            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
-                return when (menuItem.itemId) {
-                    R.id.menu_delete -> {
-                        activityViewModel.deleteCurrentDetailView()
-                        findNavController().navigate(R.id.action_detailViewFragment_to_qrHistoryFragment)
-                        return true
-                    }
-                    R.id.menu_save_to_file -> {
-                        activityViewModel.saveQrImageOfDetailView(requireContext())
-                        return true
-                    }
-                    else -> false
-                }
-
-            }
-        }, viewLifecycleOwner)
+        setupMenuItems(R.menu.menu_detail_view, optionMap)
 
         activityViewModel.saveDetailViewQrCodeImage.observe(viewLifecycleOwner) {
             when (it) {
@@ -201,7 +207,6 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
         } else {
             viewBinding.detailViewLaunchActionButton.gone()
         }
-
     }
 
 }

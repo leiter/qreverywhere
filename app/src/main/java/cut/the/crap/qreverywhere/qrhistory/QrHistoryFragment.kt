@@ -97,9 +97,7 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
             }
             activityViewModel.removeItemSingleLiveDataEvent.observe(viewLifecycleOwner) {
                 when (it) {
-                    is State.Error -> {
-                        progress.hide()
-                    }
+                    is State.Error -> { progress.hide() }
                     is State.Loading -> progress.show()
                     is State.Success -> {
                         progress.hide()

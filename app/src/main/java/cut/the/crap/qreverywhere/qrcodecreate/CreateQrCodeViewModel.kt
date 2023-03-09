@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.zxing.WriterException
+import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qrrepository.Acquire
 import cut.the.crap.qreverywhere.utils.textToImageEnc
@@ -28,7 +29,7 @@ class CreateQrCodeViewModel @Inject constructor(
     var emailText = ""
 
     @Throws(WriterException::class)
-    fun textToQrCodeItem(resources: Resources) {
+    fun textToQrCodeItem(resources: Resources, activityViewModel: MainActivityViewModel) {
         viewModelScope.launch {
             var qrItem: cut.the.crap.qrrepository.db.QrCodeDbItem? = null
             var saveInHistory = false
@@ -49,12 +50,14 @@ class CreateQrCodeViewModel @Inject constructor(
                     acquireType = Acquire.CREATED
                 )
                 emailQrCodeItem.value = State.success(qrItem.toItem())
+                activityViewModel.setDetailViewItem(qrItem.toItem())
                 saveInHistory = true
             } catch (e: InvalidEmailException) {
                 emailQrCodeItem.value = State.error(error = e)
             }
 
             if(saveInHistory){
+
                 try {
                     qrItem?.let {
                         qrHistoryRepository.insertQrItem(it.toItem())

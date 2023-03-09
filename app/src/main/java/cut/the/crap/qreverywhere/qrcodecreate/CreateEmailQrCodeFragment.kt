@@ -76,7 +76,9 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                     }
                     is State.Success<QrItem> -> {
                         if (it.data != null) {
-                            createEmailQrImagePreview.setImageBitmap(it.data.img)
+                            activityViewModel.setDetailViewItem(it.data)
+//                            createEmailHeaderGroup.visibility = View.VISIBLE
+//                            createEmailQrImagePreview.setImageBitmap(it.data.img)
                         } else {
                             root.showSnackBar(
                                 UiEvent.SnackBar(
@@ -84,8 +86,14 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                                     anchorView = bottomNav
                                 )
                             )
+
+                            findNavController().navigate(
+                                R.id.action_createEmailQrCodeFragment_to_detailViewFragment, bundleOf(
+                                ORIGIN_FLAG to FROM_CREATE_CONTEXT
+                            )
+                            )
                         }
-                        createEmailHeaderGroup.visibility = View.VISIBLE
+
                         progress.hide()
                     }
                     is State.Error -> {
@@ -183,7 +191,7 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
             }
 
             createEmailCreateQrcode.setOnClickListener {
-                viewModel.textToQrCodeItem(resources)
+                viewModel.textToQrCodeItem(resources, activityViewModel)
             }
             createEmailButtonSaveQrToFile.setOnClickListener {
                 activityViewModel.saveQrImageOfDetailView(requireContext())
