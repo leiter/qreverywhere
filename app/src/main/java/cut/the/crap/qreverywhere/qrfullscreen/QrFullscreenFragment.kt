@@ -8,7 +8,7 @@ import androidx.navigation.fragment.navArgs
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentQrFullscreenBinding
-import cut.the.crap.qreverywhere.utils.AcquireDateFormatter
+import cut.the.crap.qreverywhere.utils.data.AcquireDateFormatter
 import cut.the.crap.qreverywhere.utils.ui.setTitle
 import cut.the.crap.qreverywhere.utils.ui.viewBinding
 import dagger.hilt.android.AndroidEntryPoint

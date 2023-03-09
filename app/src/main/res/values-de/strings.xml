@@ -71,6 +71,7 @@
 
     <string name="toast_clipboard_empty">Die Zwischenablage ist leer</string>
 
+    <string name="error_starting_camera">Camera konnte nicht gestartet werden</string>
 
 
 

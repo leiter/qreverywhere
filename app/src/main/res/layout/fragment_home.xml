@@ -61,7 +61,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="72dp"
+        android:text="@string/qrScanFabTextFromFile"
         android:visibility="gone"
+        app:icon="@drawable/ic_image_search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="@string/qrScanFabTextFromFile" />

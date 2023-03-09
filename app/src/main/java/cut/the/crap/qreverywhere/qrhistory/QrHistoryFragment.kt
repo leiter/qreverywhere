@@ -12,9 +12,9 @@ import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentQrHistoryBinding
-import cut.the.crap.qreverywhere.utils.AcquireDateFormatter
-import cut.the.crap.qreverywhere.utils.FROM_HISTORY_LIST
-import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
+import cut.the.crap.qreverywhere.utils.data.AcquireDateFormatter
+import cut.the.crap.qreverywhere.utils.ui.FROM_HISTORY_LIST
+import cut.the.crap.qreverywhere.utils.ui.ORIGIN_FLAG
 import cut.the.crap.qreverywhere.utils.ui.UiEvent
 import cut.the.crap.qreverywhere.utils.ui.activityView
 import cut.the.crap.qreverywhere.utils.ui.gone

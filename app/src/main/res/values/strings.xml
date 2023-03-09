@@ -67,6 +67,8 @@
 
     <string name="toast_clipboard_empty">Clipboard is empty</string>
 
+    <string name="error_starting_camera">Error starting camera</string>
+
 
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>

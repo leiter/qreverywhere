@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere.utils
+package cut.the.crap.qreverywhere.utils.data
 
 import android.content.Context
 import cut.the.crap.qreverywhere.R

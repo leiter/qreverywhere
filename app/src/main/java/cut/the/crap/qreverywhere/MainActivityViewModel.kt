@@ -9,9 +9,9 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.data.State
-import cut.the.crap.qreverywhere.utils.EncryptedPrefs
+import cut.the.crap.qreverywhere.utils.data.EncryptedPrefs
 import cut.the.crap.qrrepository.Acquire
-import cut.the.crap.qreverywhere.utils.SingleLiveDataEvent
+import cut.the.crap.qreverywhere.utils.data.SingleLiveDataEvent
 import cut.the.crap.qreverywhere.utils.saveImageToFile
 import cut.the.crap.qreverywhere.utils.textToImageEnc
 import cut.the.crap.qrrepository.QrHistoryRepository

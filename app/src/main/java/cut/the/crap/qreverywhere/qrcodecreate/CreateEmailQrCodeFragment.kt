@@ -20,12 +20,12 @@ import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentCreateEmailQrCodeBinding
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegate
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegateImpl
-import cut.the.crap.qreverywhere.utils.FROM_CREATE_CONTEXT
-import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
+import cut.the.crap.qreverywhere.utils.ui.FROM_CREATE_CONTEXT
+import cut.the.crap.qreverywhere.utils.ui.ORIGIN_FLAG
 import cut.the.crap.qreverywhere.utils.ui.activityView
 import cut.the.crap.qreverywhere.utils.ui.clipBoard
 import cut.the.crap.qreverywhere.utils.ui.focusEditText
-import cut.the.crap.qreverywhere.utils.showShortToast
+import cut.the.crap.qreverywhere.utils.ui.showShortToast
 import cut.the.crap.qreverywhere.utils.ui.UiEvent
 import cut.the.crap.qreverywhere.utils.ui.gone
 import cut.the.crap.qreverywhere.utils.ui.pasteFromClipBoard

@@ -21,9 +21,9 @@ import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentCreateOneLinerBinding
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegate
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegateImpl
-import cut.the.crap.qreverywhere.utils.FROM_CREATE_CONTEXT
-import cut.the.crap.qreverywhere.utils.IntentGenerator
-import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
+import cut.the.crap.qreverywhere.utils.ui.FROM_CREATE_CONTEXT
+import cut.the.crap.qreverywhere.utils.data.IntentGenerator
+import cut.the.crap.qreverywhere.utils.ui.ORIGIN_FLAG
 import cut.the.crap.qreverywhere.utils.ui.activityView
 import cut.the.crap.qreverywhere.utils.ui.focusEditText
 import cut.the.crap.qreverywhere.utils.ui.setTitle

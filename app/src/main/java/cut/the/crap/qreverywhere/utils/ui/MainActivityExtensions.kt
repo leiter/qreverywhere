@@ -2,9 +2,6 @@ package cut.the.crap.qreverywhere.utils.ui
 
 import android.os.Bundle
 import cut.the.crap.qreverywhere.R
-import cut.the.crap.qreverywhere.utils.FROM_CREATE_CONTEXT
-import cut.the.crap.qreverywhere.utils.FROM_HISTORY_LIST
-import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
 
 fun selectHistory(destinationId: Int, argument: Bundle?): Boolean {
     val argCheck =

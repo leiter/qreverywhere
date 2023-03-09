@@ -3,7 +3,6 @@ package cut.the.crap.qreverywhere.qrcodescan
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.camera.core.AspectRatio
 import androidx.camera.core.CameraSelector
@@ -23,10 +22,11 @@ import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentHomeBinding
 import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegate
 import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegateImpl
-import cut.the.crap.qreverywhere.utils.FROM_SCAN_QR
-import cut.the.crap.qreverywhere.utils.IntentGenerator.OpenAppSettings
-import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
-import cut.the.crap.qreverywhere.utils.hasPermission
+import cut.the.crap.qreverywhere.utils.ui.FROM_SCAN_QR
+import cut.the.crap.qreverywhere.utils.data.IntentGenerator.OpenAppSettings
+import cut.the.crap.qreverywhere.utils.ui.ORIGIN_FLAG
+import cut.the.crap.qreverywhere.utils.ui.hasPermission
+import cut.the.crap.qreverywhere.utils.ui.showLongToast
 import cut.the.crap.qreverywhere.utils.ui.gone
 import cut.the.crap.qreverywhere.utils.ui.viewBinding
 import cut.the.crap.qreverywhere.utils.ui.visible
@@ -57,7 +57,6 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                 viewBinding.centerButton.visible()
                 viewBinding.qrScanFab.hide()
             }
-
         }
 
     private val cameraProviderFuture: ListenableFuture<ProcessCameraProvider> by lazy {
@@ -76,19 +75,9 @@ class HomeFragment : Fragment(R.layout.fragment_home),
                     cameraProviderFuture.get()
                 bindCameraPreview(cameraProvider)
             } catch (e: ExecutionException) {
-                Toast.makeText(
-                    requireContext(),
-                    "Error starting camera " + e.message,
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                requireContext().showLongToast(R.string.error_starting_camera, e)
             } catch (e: InterruptedException) {
-                Toast.makeText(
-                    requireContext(),
-                    "Error starting camera " + e.message,
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                requireContext().showLongToast(R.string.error_starting_camera, e)
             }
         }, ContextCompat.getMainExecutor(requireContext()))
     }
@@ -132,8 +121,6 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         super.onViewCreated(view, savedInstanceState)
 
         with(viewBinding) {
-            qrScanFab.setText(R.string.qrScanFabTextFromFile)
-            qrScanFab.setIconResource(R.drawable.ic_file_open)
             qrScanFab.setOnClickListener { readQrcodeFromFile() }
             requestCameraPermission.setOnClickListener {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), android.Manifest.permission.CAMERA)) {
@@ -168,15 +155,6 @@ class HomeFragment : Fragment(R.layout.fragment_home),
             viewBinding.previewView.gone()
             viewBinding.centerButton.visible()
         }
-//        else {
-//            activityViewModel.setCameraPermission(false)
-//            viewBinding.previewView.gone()
-//            if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), android.Manifest.permission.CAMERA)) {
-//                cameraPermissionLauncher.launch(android.Manifest.permission.CAMERA)
-//            } else {
-//                startActivity(OpenAppSettings.getIntent())
-//            }
-//        }
     }
 
     override fun handleQrCode(qrCode: com.google.zxing.Result, @Acquire.Type type: Int) {

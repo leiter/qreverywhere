@@ -8,9 +8,9 @@ import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.qrcodescan.HomeFragment
-import cut.the.crap.qreverywhere.utils.IntentGenerator
-import cut.the.crap.qreverywhere.utils.IntentGenerator.PickImageIntent
-import cut.the.crap.qreverywhere.utils.hasPermission
+import cut.the.crap.qreverywhere.utils.data.IntentGenerator
+import cut.the.crap.qreverywhere.utils.data.IntentGenerator.PickImageIntent
+import cut.the.crap.qreverywhere.utils.ui.hasPermission
 import cut.the.crap.qreverywhere.utils.scanQrImage
 import cut.the.crap.qrrepository.Acquire
 

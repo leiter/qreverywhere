@@ -16,17 +16,17 @@ import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentDetailViewBinding
-import cut.the.crap.qreverywhere.utils.AcquireDateFormatter
-import cut.the.crap.qreverywhere.utils.FROM_CREATE_CONTEXT
-import cut.the.crap.qreverywhere.utils.FROM_HISTORY_LIST
-import cut.the.crap.qreverywhere.utils.FROM_SCAN_QR
-import cut.the.crap.qreverywhere.utils.IntentGenerator
-import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
+import cut.the.crap.qreverywhere.utils.data.AcquireDateFormatter
+import cut.the.crap.qreverywhere.utils.ui.FROM_CREATE_CONTEXT
+import cut.the.crap.qreverywhere.utils.ui.FROM_HISTORY_LIST
+import cut.the.crap.qreverywhere.utils.ui.FROM_SCAN_QR
+import cut.the.crap.qreverywhere.utils.ui.ORIGIN_FLAG
 import cut.the.crap.qreverywhere.utils.ProtocolPrefix.HTTP
 import cut.the.crap.qreverywhere.utils.ProtocolPrefix.HTTPS
 import cut.the.crap.qreverywhere.utils.ProtocolPrefix.MAILTO
 import cut.the.crap.qreverywhere.utils.ProtocolPrefix.TEL
 import cut.the.crap.qreverywhere.utils.QrCodeType
+import cut.the.crap.qreverywhere.utils.data.IntentGenerator.QrStartIntent
 import cut.the.crap.qreverywhere.utils.ui.activityView
 import cut.the.crap.qreverywhere.utils.detailTitle
 import cut.the.crap.qreverywhere.utils.determineType
@@ -126,7 +126,7 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
 
                 is State.Loading -> progress.show()
                 null -> {
-
+                    progress.hide()
                 }
             }
         }
@@ -151,14 +151,11 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
             }
             detailViewContentPreviewImage.setOnClickListener {
                 findNavController().navigate(
-                    R.id.action_detailViewFragment_to_qrFullscreenFragment, bundleOf(
-                    "itemPosition" to activityViewModel.focusedItemIndex,
-                    ORIGIN_FLAG to FROM_HISTORY_LIST
-
-                )
+                    R.id.action_detailViewFragment_to_qrFullscreenFragment,
+                    bundleOf("itemPosition" to activityViewModel.focusedItemIndex,
+                        ORIGIN_FLAG to FROM_HISTORY_LIST)
                 )
             }
-
         }
     }
 
@@ -201,9 +198,8 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
 
     private fun launchClicked() {
         if (determineType(activityViewModel.detailViewQrCodeItem.textContent) != QrCodeType.UNKNOWN_CONTENT) {
-            IntentGenerator.QrStartIntent(
-                activityViewModel.detailViewQrCodeItem.textContent
-            ).getIntent().startIntentGracefully(requireContext())
+            QrStartIntent(activityViewModel.detailViewQrCodeItem.textContent)
+                .getIntent().startIntentGracefully(requireContext())
         } else {
             viewBinding.detailViewLaunchActionButton.gone()
         }

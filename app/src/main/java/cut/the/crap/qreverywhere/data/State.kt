@@ -30,8 +30,8 @@ sealed class State<T>(val data: T? = null, val message: String? = null) {
             return Error(message, data, error)
         }
 
-        fun <T> error(error: Throwable): State<T> {
-            return Error(null,null, error)
-        }
+//        fun <T> error(error: Throwable): State<T> {
+//            return Error(null,null, error)
+//        }
     }
 }

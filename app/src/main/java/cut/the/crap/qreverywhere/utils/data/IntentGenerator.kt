@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere.utils
+package cut.the.crap.qreverywhere.utils.data
 
 import android.content.Intent
 import android.net.Uri
@@ -37,7 +37,7 @@ sealed class IntentGenerator {
         }
     }
 
-    object PickImageIntent :IntentGenerator() {
+    object PickImageIntent : IntentGenerator() {
         override fun getIntent(): Intent {
             return Intent(Intent.ACTION_GET_CONTENT).apply {
                 type = "image/*"

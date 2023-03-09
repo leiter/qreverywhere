@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qrrepository.Acquire
-import cut.the.crap.qreverywhere.utils.SingleLiveDataEvent
+import cut.the.crap.qreverywhere.utils.data.SingleLiveDataEvent
 import cut.the.crap.qreverywhere.utils.textToImageEnc
 import cut.the.crap.qrrepository.QrItem
 import cut.the.crap.qrrepository.db.toItem

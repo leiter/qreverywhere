@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere.utils
+package cut.the.crap.qreverywhere.utils.data
 
 import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
