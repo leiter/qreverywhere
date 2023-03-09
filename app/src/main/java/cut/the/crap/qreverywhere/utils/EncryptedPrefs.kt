@@ -3,13 +3,10 @@ package cut.the.crap.qreverywhere.utils
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
-import androidx.annotation.RequiresApi
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
-
-
 
 class EncryptedPrefs @Inject constructor(@ApplicationContext context: Context, fileName: String) {
 

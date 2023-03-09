@@ -24,17 +24,17 @@ import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegateImpl
 import cut.the.crap.qreverywhere.utils.FROM_CREATE_CONTEXT
 import cut.the.crap.qreverywhere.utils.IntentGenerator
 import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
-import cut.the.crap.qreverywhere.utils.UiEvent
-import cut.the.crap.qreverywhere.utils.activityView
-import cut.the.crap.qreverywhere.utils.focusEditText
-import cut.the.crap.qreverywhere.utils.gone
-import cut.the.crap.qreverywhere.utils.hideIme
-import cut.the.crap.qreverywhere.utils.setTitle
-import cut.the.crap.qreverywhere.utils.showSnackBar
+import cut.the.crap.qreverywhere.utils.ui.activityView
+import cut.the.crap.qreverywhere.utils.ui.focusEditText
+import cut.the.crap.qreverywhere.utils.ui.setTitle
 import cut.the.crap.qreverywhere.utils.startIntentGracefully
-import cut.the.crap.qreverywhere.utils.textChanges
-import cut.the.crap.qreverywhere.utils.viewBinding
-import cut.the.crap.qreverywhere.utils.visible
+import cut.the.crap.qreverywhere.utils.ui.UiEvent
+import cut.the.crap.qreverywhere.utils.ui.gone
+import cut.the.crap.qreverywhere.utils.ui.hideKeyboardInput
+import cut.the.crap.qreverywhere.utils.ui.showSnackBar
+import cut.the.crap.qreverywhere.utils.ui.textChanges
+import cut.the.crap.qreverywhere.utils.ui.visible
+import cut.the.crap.qreverywhere.utils.ui.viewBinding
 import cut.the.crap.qrrepository.QrItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -88,14 +88,12 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
 
         with(viewBinding) {
             createOneLinerTest.setOnClickListener {
-//                val contactManager = ContactManager()
-//                contactManager.insertContact(requireContext())
-                viewBinding.root.hideIme()
+                hideKeyboardInput()
                 viewModel.testClicked(args.useCaseMode, resources)
             }
 
             createOneLinerCreate.setOnClickListener {
-                viewBinding.root.hideIme()
+                hideKeyboardInput()
                 viewModel.createClicked(args.useCaseMode, resources, activityViewModel)
             }
         }

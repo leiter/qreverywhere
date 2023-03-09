@@ -4,7 +4,7 @@ import android.view.ViewTreeObserver
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
-import cut.the.crap.qreverywhere.utils.registerImeVisibilityListener
+import cut.the.crap.qreverywhere.utils.ui.registerImeVisibilityListener
 
 class ImeActionDelegateImpl : ImeActionDelegate {
 

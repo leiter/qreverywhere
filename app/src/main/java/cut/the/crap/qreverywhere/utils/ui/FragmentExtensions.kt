@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere.utils
+package cut.the.crap.qreverywhere.utils.ui
 
 import android.content.ClipboardManager
 import android.content.Context

@@ -7,9 +7,9 @@
     <string name="permission_denied_text">Zugriff verweigert</string>
 
 
-    <string name="nav_title_scan">Scan</string>
+    <string name="nav_title_scan">Einlesen</string>
     <string name="nav_title_create">Erstellen</string>
-    <string name="nav_title_history">Qrcodes</string>
+    <string name="nav_title_history">QR-Codes</string>
 
 
     <string name="qrScanFabTextFromFile">Bilddatei öffnen</string>
@@ -36,9 +36,10 @@
 
 
     <!--     title create onelinerQrCode -->
-    <string name="create_title_sms">Nachricht erstellen</string>
-    <string name="create_title_phone">Anruf erstellen</string>
-    <string name="create_title_web">Weblink erstellen</string>
+    <string name="create_title_sms">Mitteilung</string>
+    <string name="create_title_phone">Anruf</string>
+    <string name="create_title_web">Weblink</string>
+    <string name="create_title_email">Email</string>
 
     <!--    titles detail screen-->
     <string name="detail_title_phone">Anruf</string>
@@ -67,6 +68,8 @@
     <string name="create_one_liner_number_input_hint">Telefonnummer eingeben.</string>
     <string name="create_one_liner_input_layout_hint_web">Webadresse</string>
     <string name="create_one_liner_input_layout_hint_text_message">Textnachricht</string>
+
+    <string name="toast_clipboard_empty">Die Zwischenablage ist leer</string>
 
 
 
@@ -111,7 +114,7 @@
     <string name="qr_create_email_hint_message">Nachricht</string>
     <string name="qr_create_email_button_create">QrCode erstellen</string>
     <string name="qr_create_email_button_save">Speichern als jpg</string>
-    <string name="nav_title_create_email">Email erstellen</string>
+
 
 
 </resources>

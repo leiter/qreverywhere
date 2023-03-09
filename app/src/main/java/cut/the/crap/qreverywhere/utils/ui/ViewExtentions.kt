@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere.utils
+package cut.the.crap.qreverywhere.utils.ui
 
 import android.content.ClipboardManager
 import android.content.Context
@@ -14,6 +14,7 @@ import androidx.annotation.CheckResult
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes
 import androidx.core.content.res.ResourcesCompat
+import androidx.viewbinding.ViewBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import cut.the.crap.qreverywhere.R
@@ -44,25 +45,22 @@ fun View.visible() {
     this.visibility = View.VISIBLE
 }
 
-fun View.invisible() {
-    this.visibility = View.INVISIBLE
-}
-
 fun View.gone() {
     this.visibility = View.GONE
 }
 
-fun View.hideIme() {
+fun ViewBinding.hideKeyboardInput() {
     val inputMethod =
-        context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    inputMethod.hideSoftInputFromWindow(windowToken, 0)
-    clearFocus()
+        this.root.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    inputMethod.hideSoftInputFromWindow(this.root.windowToken, 0)
+    this.root.clearFocus()
 }
 
 fun View.showIme() {
     this.requestFocus()
     val inputMethod = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    inputMethod.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+//    inputMethod.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+    inputMethod.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
 }
 
 fun ImageButton.setDrawable(resId: Int, imageView: ImageButton) {

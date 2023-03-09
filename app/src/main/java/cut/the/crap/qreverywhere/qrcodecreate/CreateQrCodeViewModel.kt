@@ -23,7 +23,6 @@ class CreateQrCodeViewModel @Inject constructor(
 ) : ViewModel() {
 
     val emailQrCodeItem = MutableLiveData<State<QrItem>>()
-
     var emailAddress = ""
     var emailSubject = ""
     var emailText = ""
@@ -57,7 +56,6 @@ class CreateQrCodeViewModel @Inject constructor(
             }
 
             if(saveInHistory){
-
                 try {
                     qrItem?.let {
                         qrHistoryRepository.insertQrItem(it.toItem())

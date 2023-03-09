@@ -15,12 +15,12 @@ import cut.the.crap.qreverywhere.databinding.FragmentQrHistoryBinding
 import cut.the.crap.qreverywhere.utils.AcquireDateFormatter
 import cut.the.crap.qreverywhere.utils.FROM_HISTORY_LIST
 import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
-import cut.the.crap.qreverywhere.utils.UiEvent
-import cut.the.crap.qreverywhere.utils.activityView
-import cut.the.crap.qreverywhere.utils.gone
-import cut.the.crap.qreverywhere.utils.showSnackBar
-import cut.the.crap.qreverywhere.utils.viewBinding
-import cut.the.crap.qreverywhere.utils.visible
+import cut.the.crap.qreverywhere.utils.ui.UiEvent
+import cut.the.crap.qreverywhere.utils.ui.activityView
+import cut.the.crap.qreverywhere.utils.ui.gone
+import cut.the.crap.qreverywhere.utils.ui.showSnackBar
+import cut.the.crap.qreverywhere.utils.ui.viewBinding
+import cut.the.crap.qreverywhere.utils.ui.visible
 import cut.the.crap.qrrepository.QrItem
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -40,9 +40,8 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
     private val detailViewItemClicked: (QrItem) -> Unit = {
         activityViewModel.setDetailViewItem(it)
         findNavController().navigate(
-            R.id.action_qrHistoryFragment_to_detailViewFragment, bundleOf(
-            ORIGIN_FLAG to FROM_HISTORY_LIST
-        )
+            R.id.action_qrHistoryFragment_to_detailViewFragment,
+            bundleOf(ORIGIN_FLAG to FROM_HISTORY_LIST)
         )
     }
 
@@ -53,7 +52,6 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
             }
             ItemTouchHelper.END -> {
                 activityViewModel.removeHistoryItem(pos)
-
             }
         }
     }
@@ -111,7 +109,7 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
                         )
                     }
                     null -> {
-
+                        progress.hide()
                     }
                 }
             }

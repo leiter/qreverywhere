@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere.utils
+package cut.the.crap.qreverywhere.utils.ui
 
 import android.content.Context
 import android.graphics.Matrix
@@ -26,23 +26,24 @@ class ZoomImageView : AppCompatImageView {
     private val start = PointF()
 
     private val customMatrix: Matrix = Matrix()
-    private val m = FloatArray(9)
-    var origWidth = 0f
-    var origHeight: Float = 0f
-    private var mScaleDetector: ScaleGestureDetector? = null
+    private val currentMatrix = FloatArray(9)
+
+    private var scaleDetector: ScaleGestureDetector? = null
     private var mode: Int = NONE
     private var viewWidth = 0f
     private var viewHeight = 0f
     private var saveScale = 1f
 
+    var origWidth = 0f
+    var origHeight: Float = 0f
 
     private fun init(context: Context) {
         super.setClickable(true)
-        mScaleDetector = ScaleGestureDetector(context, ScaleListener())
+        scaleDetector = ScaleGestureDetector(context, ScaleListener())
         imageMatrix = customMatrix
         scaleType = ScaleType.MATRIX
         setOnTouchListener { _, event ->
-            mScaleDetector!!.onTouchEvent(event)
+            scaleDetector!!.onTouchEvent(event)
             val curr = PointF(event.x, event.y)
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
@@ -82,9 +83,9 @@ class ZoomImageView : AppCompatImageView {
     }
 
     private fun fixTrans() {
-        customMatrix.getValues(m)
-        val transX = m[Matrix.MTRANS_X]
-        val transY = m[Matrix.MTRANS_Y]
+        customMatrix.getValues(currentMatrix)
+        val transX = currentMatrix[Matrix.MTRANS_X]
+        val transY = currentMatrix[Matrix.MTRANS_Y]
         val fixTransX: Float = getFixTrans(transX, viewWidth, origWidth * saveScale)
         val fixTransY: Float = getFixTrans(transY, viewHeight, origHeight * saveScale)
         if (fixTransX != 0f || fixTransY != 0f) customMatrix.postTranslate(fixTransX, fixTransY)
@@ -149,28 +150,28 @@ class ZoomImageView : AppCompatImageView {
         }
 
         override fun onScale(detector: ScaleGestureDetector): Boolean {
-            var mScaleFactor = detector.scaleFactor
+            var currentScaleFactor = detector.scaleFactor
             val origScale: Float = saveScale
-            saveScale *= mScaleFactor
+            saveScale *= currentScaleFactor
             val minScale = 1f
             val maxScale = 3f
             if (saveScale > maxScale) {
                 saveScale = maxScale
-                mScaleFactor = maxScale / origScale
+                currentScaleFactor = maxScale / origScale
             } else if (saveScale < minScale) {
                 saveScale = minScale
-                mScaleFactor = minScale / origScale
+                currentScaleFactor = minScale / origScale
             }
             if (origWidth * saveScale <= viewWidth
                 || origHeight * saveScale <= viewHeight
             ) {
                 customMatrix.postScale(
-                    mScaleFactor, mScaleFactor, viewWidth / 2,
+                    currentScaleFactor, currentScaleFactor, viewWidth / 2,
                     viewHeight / 2
                 )
             } else {
                 customMatrix.postScale(
-                    mScaleFactor, mScaleFactor,
+                    currentScaleFactor, currentScaleFactor,
                     detector.focusX, detector.focusY
                 )
             }

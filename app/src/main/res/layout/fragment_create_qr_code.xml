@@ -35,7 +35,7 @@
         android:text="@string/qr_create_button_text"
         android:textColor="@color/white"
         android:textSize="18sp"
-        app:drawableTopCompat="@drawable/ic_sms_white"
+        app:drawableTopCompat="@drawable/ic_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/createEmailQrCode"

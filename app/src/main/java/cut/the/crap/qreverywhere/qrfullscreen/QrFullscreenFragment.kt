@@ -1,7 +1,6 @@
 package cut.the.crap.qreverywhere.qrfullscreen
 
 import android.os.Bundle
-import android.view.Menu
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -10,8 +9,8 @@ import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentQrFullscreenBinding
 import cut.the.crap.qreverywhere.utils.AcquireDateFormatter
-import cut.the.crap.qreverywhere.utils.setTitle
-import cut.the.crap.qreverywhere.utils.viewBinding
+import cut.the.crap.qreverywhere.utils.ui.setTitle
+import cut.the.crap.qreverywhere.utils.ui.viewBinding
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

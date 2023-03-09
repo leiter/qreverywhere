@@ -34,9 +34,10 @@
 
 
     <!--     title create onelinerQrCode -->
-    <string name="create_title_sms">Create Text</string>
-    <string name="create_title_phone">Create Phone</string>
-    <string name="create_title_web">Create Web</string>
+    <string name="create_title_sms">Text</string>
+    <string name="create_title_phone">Phone call</string>
+    <string name="create_title_web">Web link</string>
+    <string name="create_title_email">Email</string>
 
     <!--    titles detail screen-->
     <string name="detail_title_phone">Phone call</string>
@@ -63,6 +64,8 @@
     <string name="create_one_liner_number_input_hint">Phone number</string>
     <string name="create_one_liner_input_layout_hint_web">Web address</string>
     <string name="create_one_liner_input_layout_hint_text_message">Text message</string>
+
+    <string name="toast_clipboard_empty">Clipboard is empty</string>
 
 
     <!-- Preference Titles -->
@@ -104,7 +107,7 @@
     <string name="qr_create_email_hint_message">Message</string>
     <string name="qr_create_email_button_create">Create QrCode</string>
     <string name="qr_create_email_button_save">Save to file</string>
-    <string name="nav_title_create_email">Create an email</string>
+
 
 
 

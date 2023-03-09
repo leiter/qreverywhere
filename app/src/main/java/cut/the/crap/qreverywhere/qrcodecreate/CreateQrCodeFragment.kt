@@ -13,9 +13,9 @@ import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment.Companion.C
 import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment.Companion.CREATE_SMS
 import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment.Companion.CREATE_WEB
 import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment.Companion.USE_CASE_MODE
-import cut.the.crap.qreverywhere.utils.activityView
-import cut.the.crap.qreverywhere.utils.viewBinding
-import cut.the.crap.qreverywhere.utils.visible
+import cut.the.crap.qreverywhere.utils.ui.activityView
+import cut.the.crap.qreverywhere.utils.ui.viewBinding
+import cut.the.crap.qreverywhere.utils.ui.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

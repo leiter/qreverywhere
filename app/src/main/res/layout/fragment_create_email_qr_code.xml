@@ -84,15 +84,14 @@
             android:layout_height="wrap_content"
             android:hint="@string/qr_create_email_hint_message"
             android:layout_marginTop="8dp"
-
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_min="200dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/createEmailSubjectTextLayout">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/createEmailBodyText"
                 android:gravity="top"
+                android:lines="4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -106,7 +105,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/createEmailBodyTextLayout" />
-
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/createEmailQrImagePreview"

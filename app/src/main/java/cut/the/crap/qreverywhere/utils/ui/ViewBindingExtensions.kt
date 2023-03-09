@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere.utils
+package cut.the.crap.qreverywhere.utils.ui
 
 import android.view.LayoutInflater
 import android.view.View

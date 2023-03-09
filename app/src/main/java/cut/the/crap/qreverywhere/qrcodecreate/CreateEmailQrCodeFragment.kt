@@ -22,16 +22,17 @@ import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegate
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegateImpl
 import cut.the.crap.qreverywhere.utils.FROM_CREATE_CONTEXT
 import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
-import cut.the.crap.qreverywhere.utils.UiEvent
-import cut.the.crap.qreverywhere.utils.activityView
-import cut.the.crap.qreverywhere.utils.clipBoard
-import cut.the.crap.qreverywhere.utils.focusEditText
-import cut.the.crap.qreverywhere.utils.gone
-import cut.the.crap.qreverywhere.utils.pasteFromClipBoard
-import cut.the.crap.qreverywhere.utils.showSnackBar
-import cut.the.crap.qreverywhere.utils.textChanges
-import cut.the.crap.qreverywhere.utils.viewBinding
-import cut.the.crap.qreverywhere.utils.visible
+import cut.the.crap.qreverywhere.utils.ui.activityView
+import cut.the.crap.qreverywhere.utils.ui.clipBoard
+import cut.the.crap.qreverywhere.utils.ui.focusEditText
+import cut.the.crap.qreverywhere.utils.showShortToast
+import cut.the.crap.qreverywhere.utils.ui.UiEvent
+import cut.the.crap.qreverywhere.utils.ui.gone
+import cut.the.crap.qreverywhere.utils.ui.pasteFromClipBoard
+import cut.the.crap.qreverywhere.utils.ui.showSnackBar
+import cut.the.crap.qreverywhere.utils.ui.textChanges
+import cut.the.crap.qreverywhere.utils.ui.viewBinding
+import cut.the.crap.qreverywhere.utils.ui.visible
 import cut.the.crap.qrrepository.QrItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -52,6 +53,10 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
         Handler(Looper.getMainLooper()).postDelayed({
             bottomNav.visible()
         }, 50)
+    }
+
+    private val messageClipboardEmpty = {
+        requireContext().showShortToast(R.string.toast_clipboard_empty)
     }
 
     private val clip by clipBoard()
@@ -77,8 +82,6 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                     is State.Success<QrItem> -> {
                         if (it.data != null) {
                             activityViewModel.setDetailViewItem(it.data)
-//                            createEmailHeaderGroup.visibility = View.VISIBLE
-//                            createEmailQrImagePreview.setImageBitmap(it.data.img)
                         } else {
                             root.showSnackBar(
                                 UiEvent.SnackBar(
@@ -88,12 +91,10 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                             )
 
                             findNavController().navigate(
-                                R.id.action_createEmailQrCodeFragment_to_detailViewFragment, bundleOf(
-                                ORIGIN_FLAG to FROM_CREATE_CONTEXT
-                            )
+                                R.id.action_createEmailQrCodeFragment_to_detailViewFragment,
+                                bundleOf(ORIGIN_FLAG to FROM_CREATE_CONTEXT)
                             )
                         }
-
                         progress.hide()
                     }
                     is State.Error -> {
@@ -179,15 +180,15 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
             }
 
             createEmailSubjectTextLayout.setStartIconOnClickListener {
-                createEmailSubjectText.pasteFromClipBoard(clip)
+                createEmailSubjectText.pasteFromClipBoard(clip, messageClipboardEmpty)
             }
 
             createEmailBodyTextLayout.setStartIconOnClickListener {
-                createEmailBodyText.pasteFromClipBoard(clip)
+                createEmailBodyText.pasteFromClipBoard(clip, messageClipboardEmpty)
             }
 
             createEmailAddressTextLayout.setStartIconOnClickListener {
-                createEmailAddressText.pasteFromClipBoard(clip)
+                createEmailAddressText.pasteFromClipBoard(clip, messageClipboardEmpty)
             }
 
             createEmailCreateQrcode.setOnClickListener {

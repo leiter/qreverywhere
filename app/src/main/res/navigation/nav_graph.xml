@@ -53,7 +53,7 @@
     <fragment
         android:id="@+id/createEmailQrCodeFragment"
         android:name="cut.the.crap.qreverywhere.qrcodecreate.CreateEmailQrCodeFragment"
-        android:label="@string/nav_title_create_email"
+        android:label="@string/create_title_email"
         tools:layout="@layout/fragment_create_email_qr_code">
         <action
             android:id="@+id/action_createEmailQrCodeFragment_to_createQrCodeFragment"

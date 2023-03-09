@@ -26,10 +26,10 @@ import cut.the.crap.qreverywhere.qrdelegates.PickQrCodeDelegateImpl
 import cut.the.crap.qreverywhere.utils.FROM_SCAN_QR
 import cut.the.crap.qreverywhere.utils.IntentGenerator.OpenAppSettings
 import cut.the.crap.qreverywhere.utils.ORIGIN_FLAG
-import cut.the.crap.qreverywhere.utils.gone
 import cut.the.crap.qreverywhere.utils.hasPermission
-import cut.the.crap.qreverywhere.utils.viewBinding
-import cut.the.crap.qreverywhere.utils.visible
+import cut.the.crap.qreverywhere.utils.ui.gone
+import cut.the.crap.qreverywhere.utils.ui.viewBinding
+import cut.the.crap.qreverywhere.utils.ui.visible
 import cut.the.crap.qrrepository.Acquire
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
