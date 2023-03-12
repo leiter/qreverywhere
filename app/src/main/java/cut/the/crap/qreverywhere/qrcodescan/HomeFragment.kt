@@ -149,7 +149,7 @@ class HomeFragment : Fragment(R.layout.fragment_home),
     }
 
     override fun handleQrCode(qrCode: com.google.zxing.Result, @Acquire.Type type: Int) {
-        activityViewModel.saveQrItemFromFile(qrCode.text, resources, type)
+        activityViewModel.saveQrItemFromFile(qrCode.text, type)
         findNavController().navigate(
             R.id.actionOpenDetailViewFromQrScanFragment,
             bundleOf(ORIGIN_FLAG to FROM_SCAN_QR)

@@ -91,7 +91,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
         with(viewBinding) {
             createOneLinerTest.setOnClickListener {
                 hideKeyboardInput()
-                viewModel.testClicked(args.useCaseMode, resources)
+                viewModel.testClicked(args.useCaseMode)
             }
 
             createOneLinerCreate.setOnClickListener {

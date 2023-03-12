@@ -2,7 +2,6 @@ package cut.the.crap.qreverywhere.utils.data
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.Color
 import android.os.Build
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
@@ -28,12 +27,16 @@ class EncryptedPrefs @Inject constructor(@ApplicationContext context: Context, f
         )
     }
 
-    val backgroundColor by lazy {
-        sharedPreferences.getInt(BACKGROUND, -0x1)
+    var backgroundColor = sharedPreferences.getInt(BACKGROUND, -0x1)
+    set(value) {
+        field = value
+        sharedPreferences.put(BACKGROUND, value)
     }
 
-    val foregroundColor by lazy {Color.BLACK
-        sharedPreferences.getInt(FOREGROUND, -0x1000000)
+    var foregroundColor = sharedPreferences.getInt(FOREGROUND, -0x1000000)
+    set(value){
+        field = value
+        sharedPreferences.put(FOREGROUND, value)
     }
 
     companion object {
@@ -56,13 +59,11 @@ inline fun <reified T> SharedPreferences.get(key: String, defaultValue: T): T {
             }
         }
     }
-
     return defaultValue
 }
 
-inline fun <reified T> EncryptedSharedPreferences.put(key: String, value: T) {
+inline fun <reified T> SharedPreferences.put(key: String, value: T) {
     val editor = this.edit()
-
     when (T::class) {
         Boolean::class -> editor.putBoolean(key, value as Boolean)
         Float::class -> editor.putFloat(key, value as Float)
@@ -75,6 +76,5 @@ inline fun <reified T> EncryptedSharedPreferences.put(key: String, value: T) {
             }
         }
     }
-
     editor.apply()
 }

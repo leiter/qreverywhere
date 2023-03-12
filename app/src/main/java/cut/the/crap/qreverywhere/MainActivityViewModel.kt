@@ -48,10 +48,10 @@ class MainActivityViewModel @Inject constructor(
     }
 
     @Throws(WriterException::class)
-    fun saveQrItemFromFile(textContent: String, resources: Resources, @Acquire.Type type: Int) {
+    fun saveQrItemFromFile(textContent: String, @Acquire.Type type: Int) {
         if (Acquire.FROM_FILE == type) detailViewLiveQrCodeItem.value = State.loading()
         viewModelScope.launch {
-            val bitmap = textToImageEnc(textContent, resources)
+            val bitmap = textToImageEnc(textContent, encryptedPrefs.foregroundColor, encryptedPrefs.backgroundColor)
             val historyItem = QrCodeDbItem(
                 img = bitmap,
                 textContent = textContent,

@@ -27,10 +27,10 @@ import cut.the.crap.qreverywhere.utils.ProtocolPrefix.MAILTO
 import cut.the.crap.qreverywhere.utils.ProtocolPrefix.TEL
 import cut.the.crap.qreverywhere.utils.QrCodeType
 import cut.the.crap.qreverywhere.utils.data.IntentGenerator.QrStartIntent
+import cut.the.crap.qreverywhere.utils.data.detailTitle
+import cut.the.crap.qreverywhere.utils.data.fabLaunchIcon
 import cut.the.crap.qreverywhere.utils.ui.activityView
-import cut.the.crap.qreverywhere.utils.detailTitle
 import cut.the.crap.qreverywhere.utils.determineType
-import cut.the.crap.qreverywhere.utils.fabLaunchIcon
 import cut.the.crap.qreverywhere.utils.isVcard
 import cut.the.crap.qreverywhere.utils.ui.setSubTitle
 import cut.the.crap.qreverywhere.utils.ui.setTitle

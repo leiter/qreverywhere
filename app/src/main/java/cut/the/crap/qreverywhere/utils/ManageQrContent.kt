@@ -3,7 +3,6 @@ package cut.the.crap.qreverywhere.utils
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
@@ -11,7 +10,6 @@ import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Environment
 import androidx.annotation.IntDef
-import androidx.core.content.res.ResourcesCompat
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.BinaryBitmap
 import com.google.zxing.LuminanceSource
@@ -23,7 +21,6 @@ import com.google.zxing.Result
 import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.common.HybridBinarizer
-import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.utils.ProtocolPrefix.HTTP
 import cut.the.crap.qreverywhere.utils.ProtocolPrefix.HTTPS
 import cut.the.crap.qreverywhere.utils.ProtocolPrefix.MAILTO
@@ -43,7 +40,7 @@ import java.io.FileOutputStream
 import java.io.IOException
 import java.util.Calendar
 
-const val QRcodeWidth = 500 // todo should be calculated  / set stride also when ready
+const val QRcodeWidth = 500
 const val IMAGE_DIRECTORY = "QrEveryWhere"
 
 object QrCodeType {
@@ -76,7 +73,7 @@ fun determineType(contentString: String): Int {
         decoded.startsWith(MAILTO) -> EMAIL
         decoded.startsWith(HTTP) || decoded.startsWith(HTTPS) -> WEB_URL
         decoded.startsWith(ProtocolPrefix.SMS) ||
-        decoded.startsWith(ProtocolPrefix.SMSTO) -> QrCodeType.SMS
+            decoded.startsWith(ProtocolPrefix.SMSTO) -> QrCodeType.SMS
         isVcard(decoded) -> CONTACT
         else -> UNKNOWN_CONTENT
     }
@@ -125,7 +122,7 @@ suspend fun saveImageToFile(qrCodeItem: QrItem, context: Context): String {
 }
 
 @Throws(WriterException::class)
-suspend fun textToImageEnc(textContent: String, resources: Resources): Bitmap {
+suspend fun textToImageEnc(textContent: String, foreGround: Int, background: Int): Bitmap {
     // todo 2953  chars are fine
     return withContext(Dispatchers.IO) {
         val bitMatrix: BitMatrix = try {
@@ -144,10 +141,8 @@ suspend fun textToImageEnc(textContent: String, resources: Resources): Bitmap {
             val offset = y * bitMatrixWidth
             for (x in 0 until bitMatrixWidth) {
                 pixels[offset + x] =
-                    if (bitMatrix[x, y])                 -0x1000000
-//ResourcesCompat.getColor(resources, R.color.black, null)
-
-                    else -0x1 // ResourcesCompat.getColor(resources, R.color.white, null)
+                    if (bitMatrix[x, y]) foreGround
+                    else background
             }
         }
         val bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_8888)
@@ -157,13 +152,13 @@ suspend fun textToImageEnc(textContent: String, resources: Resources): Bitmap {
     }
 }
 
-fun Intent.startIntentGracefully(context: Context, notExecutable: (() -> Unit)? = null)  {
+fun Intent.startIntentGracefully(context: Context, notExecutable: (() -> Unit)? = null) {
     val packageManager: PackageManager = context.packageManager
     val list = packageManager.queryIntentActivities(
         this,
         PackageManager.MATCH_DEFAULT_ONLY
     )
-    if(list.size > 0) {
+    if (list.size > 0) {
         context.startActivity(this)
     } else {
         notExecutable?.invoke()
@@ -202,20 +197,5 @@ fun scanQrImage(uri: Uri, context: Context): Result? {
     return contents
 }
 
-val QrItem.detailTitle:  Int
-get() = when(determineType(textContent)){
-    EMAIL -> R.string.detail_title_email
-    PHONE -> R.string.detail_title_phone
-    WEB_URL -> R.string.detail_title_web
-    else -> R.string.detail_title_text
-}
 
-
-val QrItem.fabLaunchIcon:  Int
-get() = when(determineType(textContent)){
-    EMAIL -> R.drawable.ic_mail_outline_white
-    PHONE -> R.drawable.ic_phone_white
-    WEB_URL -> R.drawable.ic_open_in_browser_white
-    else -> R.string.detail_title_text
-}
 

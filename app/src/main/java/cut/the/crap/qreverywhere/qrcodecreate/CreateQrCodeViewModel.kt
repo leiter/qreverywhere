@@ -9,6 +9,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.data.State
+import cut.the.crap.qreverywhere.utils.data.EncryptedPrefs
 import cut.the.crap.qreverywhere.utils.textToImageEnc
 import cut.the.crap.qrrepository.Acquire
 import cut.the.crap.qrrepository.QrItem
@@ -19,7 +20,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CreateQrCodeViewModel @Inject constructor(
-    private val qrHistoryRepository: cut.the.crap.qrrepository.QrHistoryRepository
+    private val qrHistoryRepository: cut.the.crap.qrrepository.QrHistoryRepository,
+    private val encryptedPrefs: EncryptedPrefs
+
 ) : ViewModel() {
 
     val emailQrCodeItem = MutableLiveData<State<QrItem>>()
@@ -42,7 +45,9 @@ class CreateQrCodeViewModel @Inject constructor(
                         Uri.encode(emailText)
                     )
 
-                val bitmap = textToImageEnc(textContent, resources)
+                val bitmap = textToImageEnc(textContent,
+                    encryptedPrefs.foregroundColor,
+                    encryptedPrefs.backgroundColor)
                 qrItem = cut.the.crap.qrrepository.db.QrCodeDbItem(
                     img = bitmap,
                     textContent = textContent,
