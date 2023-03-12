@@ -199,10 +199,8 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
             }
             createEmailQrImagePreview.setOnClickListener {
                 findNavController().navigate(
-                    R.id.action_createEmailQrCodeFragment_to_qrFullscreenFragment, bundleOf(
-                    "itemPosition" to 0,
-                    ORIGIN_FLAG to FROM_CREATE_CONTEXT
-                )
+                    R.id.action_createEmailQrCodeFragment_to_qrFullscreenFragment,
+                    bundleOf(ORIGIN_FLAG to FROM_CREATE_CONTEXT)
                 )
             }
         }

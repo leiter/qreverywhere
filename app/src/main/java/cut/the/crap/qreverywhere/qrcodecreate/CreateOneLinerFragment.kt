@@ -1,14 +1,13 @@
 package cut.the.crap.qreverywhere.qrcodecreate
 
 import android.content.Context
-import android.content.res.Resources
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -21,23 +20,23 @@ import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentCreateOneLinerBinding
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegate
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegateImpl
-import cut.the.crap.qreverywhere.utils.ui.FROM_CREATE_CONTEXT
 import cut.the.crap.qreverywhere.utils.data.IntentGenerator
-import cut.the.crap.qreverywhere.utils.ui.ORIGIN_FLAG
-import cut.the.crap.qreverywhere.utils.ui.activityView
-import cut.the.crap.qreverywhere.utils.ui.focusEditText
-import cut.the.crap.qreverywhere.utils.ui.setTitle
 import cut.the.crap.qreverywhere.utils.startIntentGracefully
+import cut.the.crap.qreverywhere.utils.ui.FROM_CREATE_CONTEXT
+import cut.the.crap.qreverywhere.utils.ui.ORIGIN_FLAG
 import cut.the.crap.qreverywhere.utils.ui.UiEvent
+import cut.the.crap.qreverywhere.utils.ui.activityView
 import cut.the.crap.qreverywhere.utils.ui.clipBoard
+import cut.the.crap.qreverywhere.utils.ui.focusEditText
 import cut.the.crap.qreverywhere.utils.ui.gone
 import cut.the.crap.qreverywhere.utils.ui.hideKeyboardInput
 import cut.the.crap.qreverywhere.utils.ui.pasteFromClipBoard
+import cut.the.crap.qreverywhere.utils.ui.setTitle
 import cut.the.crap.qreverywhere.utils.ui.showShortToast
 import cut.the.crap.qreverywhere.utils.ui.showSnackBar
 import cut.the.crap.qreverywhere.utils.ui.textChanges
-import cut.the.crap.qreverywhere.utils.ui.visible
 import cut.the.crap.qreverywhere.utils.ui.viewBinding
+import cut.the.crap.qreverywhere.utils.ui.visible
 import cut.the.crap.qrrepository.QrItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -54,7 +53,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
 
     private val viewModel by viewModels<CreateOneLinerViewModel>()
 
-    private val activityViewModel: MainActivityViewModel by viewModels()
+    private val activityViewModel: MainActivityViewModel by activityViewModels()
 
     private val bottomNav by lazy {
         activityView<BottomNavigationView>(R.id.nav_view)
@@ -146,6 +145,10 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
         viewModel.qrCodeItemState.observe(viewLifecycleOwner) { state ->
             if (state != null)
                 when (state) {
+                    is State.Loading -> {
+                        resetError()
+                        showLoading(true)
+                    }
                     is State.Success -> {
                         showLoading(false)
                         state.data?.let {
@@ -154,22 +157,6 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
                             viewBinding.createOneLinerNumberInputField.setText("")
                             viewBinding.createOneLinerInputField.setText("")
 
-                            viewBinding.createOneLinerHeaderGroup.visible()
-                            viewBinding.createOneLinerQrImagePreview.setOnClickListener {
-                                findNavController().navigate(
-                                    R.id.action_createOneLinerFragment_to_qrFullscreenFragment2,
-                                    bundleOf(
-                                        "itemPosition" to 0,
-                                        ORIGIN_FLAG to FROM_CREATE_CONTEXT
-                                    )
-                                )
-                            }
-                            viewBinding.createOneLinerQrImagePreview.setImageBitmap(
-                                activityViewModel.detailViewQrCodeItem.img
-                            )
-                            viewBinding.createOneLinerButtonSaveQrToFile.setOnClickListener {
-                                activityViewModel.saveQrImageOfDetailView(requireContext())
-                            }
                             val anchor = activityView<BottomNavigationView>(R.id.nav_view)
                             viewBinding.root.showSnackBar(
                                 UiEvent.SnackBar(
@@ -181,20 +168,13 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
                             )
                             findNavController().navigate(
                                 R.id.action_createOneLinerFragment_to_detailViewFragment2,
-                                bundleOf(
-                                    ORIGIN_FLAG to FROM_CREATE_CONTEXT
-                                )
+                                bundleOf(ORIGIN_FLAG to FROM_CREATE_CONTEXT)
                             )
                         }
                     }
                     is State.Error -> {
                         handleError(state)
                         showLoading(false)
-                    }
-
-                    is State.Loading -> {
-                        resetError()
-                        showLoading(true)
                     }
                 }
         }
@@ -220,8 +200,6 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
         when (error.cause) {
             is EmptyMessage -> viewBinding.createOneLinerInputLayout.error =
                 getString(R.string.error_msg_empty_text_message)
-            is NoTextInput -> viewBinding.createOneLinerInputLayout.error =
-                getString(R.string.error_msg_invalide_phone_number)
             is InvalidPhoneNumber -> viewBinding.createOneLinerNumberInputLayout.error =
                 getString(R.string.error_msg_invalide_phone_number)
             is InvalidWebUrl -> viewBinding.createOneLinerInputLayout.error =
@@ -253,10 +231,6 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
         with(viewBinding) {
             createOneLinerNumberInputLayout.gone()
             createOneLinerTest.gone()
-            val params = createOneLinerInputLayout.layoutParams as ConstraintLayout.LayoutParams
-            params.matchConstraintMinHeight =
-                (160 * Resources.getSystem().displayMetrics.density).toInt()
-            createOneLinerInputLayout.layoutParams = params
             createOneLinerInputLayout.setHint(R.string.create_one_liner_input_layout_hint_text_message)
             createOneLinerInputLayout.setStartIconOnClickListener {
                 createOneLinerInputField.pasteFromClipBoard(clip, messageClipboardEmpty)

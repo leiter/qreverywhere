@@ -117,9 +117,6 @@
         <action
             android:id="@+id/action_qrFullscreenFragment_to_qrHistoryFragment"
             app:destination="@id/qrHistoryFragment" />
-        <argument
-            android:name="itemPosition"
-            app:argType="integer" />
 
         <argument
             android:name="originFlag"

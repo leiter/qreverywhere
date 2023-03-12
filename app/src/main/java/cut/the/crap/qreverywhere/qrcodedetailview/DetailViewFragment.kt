@@ -171,7 +171,7 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
             detailViewContentPreviewImage.setOnClickListener {
                 findNavController().navigate(
                     R.id.action_detailViewFragment_to_qrFullscreenFragment,
-                    bundleOf("itemPosition" to activityViewModel.focusedItemIndex,
+                    bundleOf(
                         ORIGIN_FLAG to FROM_HISTORY_LIST)
                 )
             }

@@ -2,6 +2,7 @@ package cut.the.crap.qreverywhere.utils.data
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
 import android.os.Build
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
@@ -25,6 +26,19 @@ class EncryptedPrefs @Inject constructor(@ApplicationContext context: Context, f
             EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
             EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
+    }
+
+    val backgroundColor by lazy {
+        sharedPreferences.getInt(BACKGROUND, 0x00FFFFFF)
+    }
+
+    val foregroundColor by lazy {Color.BLACK
+        sharedPreferences.getInt(FOREGROUND, 0x00000000)
+    }
+
+    companion object {
+        const val BACKGROUND = "background"
+        const val FOREGROUND = "foreground"
     }
 
 }

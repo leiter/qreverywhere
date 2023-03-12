@@ -61,14 +61,12 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
     }
 
     private val navigateToFullscreen: (Int) -> Unit = { pos ->
-        activityViewModel.focusedItemIndex = pos
         activityViewModel.historyAdapterData.value?.get(pos)?.let {
-            activityViewModel.detailViewQrCodeItem = it
+            activityViewModel.setDetailViewItem(it)
         }
 
         findNavController().navigate(
             R.id.action_qrHistoryFragment_to_qrFullscreenFragment, bundleOf(
-            "itemPosition" to pos,
             ORIGIN_FLAG to FROM_HISTORY_LIST
             )
         )

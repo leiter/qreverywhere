@@ -29,17 +29,14 @@ class MainActivityViewModel @Inject constructor(
     private val encryptedPrefs: EncryptedPrefs
 ) : ViewModel() {
 
-    var focusedItemIndex: Int = 0
-        //private set
-
     var detailViewQrCodeItem: QrItem = QrCodeDbItem().toItem()
-        //private set
+        private set
 
     val detailViewLiveQrCodeItem = MutableLiveData<State<QrItem>>()
 
     val saveDetailViewQrCodeImage = SingleLiveDataEvent<State<String?>>(null)
 
-    val startDetailViewQrCodeItem = SingleLiveDataEvent<QrItem?>(null)
+    private val startDetailViewQrCodeItem = SingleLiveDataEvent<QrItem?>(null)
 
     val historyAdapterData = historyRepository.getCompleteQrCodeHistory().asLiveData(Dispatchers.Main)
 
@@ -78,7 +75,6 @@ class MainActivityViewModel @Inject constructor(
     }
 
     fun setDetailViewItem(qrCodeItem: QrItem) {
-        focusedItemIndex = historyAdapterData.value?.indexOf(qrCodeItem) ?: 0
         detailViewQrCodeItem = qrCodeItem
     }
 
