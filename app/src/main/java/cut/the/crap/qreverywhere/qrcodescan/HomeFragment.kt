@@ -1,5 +1,6 @@
 package cut.the.crap.qreverywhere.qrcodescan
 
+import android.Manifest.permission.CAMERA
 import android.content.Context
 import android.os.Bundle
 import android.view.View
@@ -123,37 +124,27 @@ class HomeFragment : Fragment(R.layout.fragment_home),
         with(viewBinding) {
             qrScanFab.setOnClickListener { readQrcodeFromFile() }
             requestCameraPermission.setOnClickListener {
-                if (ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), android.Manifest.permission.CAMERA)) {
-                    cameraPermissionLauncher.launch(android.Manifest.permission.CAMERA)
-                } else {
+                if (ActivityCompat.shouldShowRequestPermissionRationale(
+                        requireActivity(), CAMERA)) {
                     startActivity(OpenAppSettings.getIntent())
+                } else {
+                    cameraPermissionLauncher.launch(CAMERA)
                 }
             }
-            requestFileScan.setOnClickListener {
-                if (requireContext().hasPermission(permissionByApiVersion())) {
-                    readQrcodeFromFile()
-                } else {
-                    startActivity(OpenAppSettings.getIntent())
-                }
-            }
+            requestFileScan.setOnClickListener { readQrcodeFromFile() }
         }
         handleCameraPermission()
     }
 
     private fun handleCameraPermission() {
-        if (!requireContext().hasPermission(android.Manifest.permission.CAMERA)
-            && !ActivityCompat.shouldShowRequestPermissionRationale(requireActivity(), android.Manifest.permission.CAMERA)) {
+        if (!requireContext().hasPermission(CAMERA)) {
             viewBinding.previewView.gone()
             viewBinding.centerButton.visible()
-        } else if (requireContext().hasPermission(android.Manifest.permission.CAMERA)) {
-            activityViewModel.setCameraPermission(true)
+        } else if (requireContext().hasPermission(CAMERA)) {
             viewBinding.previewView.visible()
             viewBinding.centerButton.gone()
             viewBinding.qrScanFab.show()
             startCamera()
-        } else if (!requireContext().hasPermission(android.Manifest.permission.CAMERA)) {
-            viewBinding.previewView.gone()
-            viewBinding.centerButton.visible()
         }
     }
 

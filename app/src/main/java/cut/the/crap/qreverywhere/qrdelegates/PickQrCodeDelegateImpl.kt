@@ -24,7 +24,7 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
         if (fragment.requireContext().hasPermission(permissionByApiVersion())) {
             readBarcode()
         } else {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(
                     fragment.requireActivity(), permissionByApiVersion())) {
                 readStoragePermissionLauncher.launch(permissionByApiVersion())
             } else {
@@ -52,9 +52,7 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
 
         readStoragePermissionLauncher =
             fragment.registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-                if (isGranted) {
-                    readBarcode()
-                }
+                if (isGranted) { readBarcode() }
             }
     }
 

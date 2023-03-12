@@ -2,7 +2,6 @@ package cut.the.crap.qreverywhere
 
 import android.content.Context
 import android.content.res.Resources
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
@@ -10,10 +9,10 @@ import androidx.lifecycle.viewModelScope
 import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.utils.data.EncryptedPrefs
-import cut.the.crap.qrrepository.Acquire
 import cut.the.crap.qreverywhere.utils.data.SingleLiveDataEvent
 import cut.the.crap.qreverywhere.utils.saveImageToFile
 import cut.the.crap.qreverywhere.utils.textToImageEnc
+import cut.the.crap.qrrepository.Acquire
 import cut.the.crap.qrrepository.QrHistoryRepository
 import cut.the.crap.qrrepository.QrItem
 import cut.the.crap.qrrepository.db.QrCodeDbItem
@@ -42,11 +41,6 @@ class MainActivityViewModel @Inject constructor(
 
     val removeItemSingleLiveDataEvent = SingleLiveDataEvent<State<QrItem>>(null)
 
-    private val _centralState = MutableLiveData<CentralState>().apply {
-        value = CentralState()
-    }
-    val centralState: LiveData<CentralState> = _centralState
-
     fun saveQrItem(qrCodeItem: QrItem) {
         viewModelScope.launch {
             historyRepository.insertQrItem(qrCodeItem)
@@ -68,10 +62,6 @@ class MainActivityViewModel @Inject constructor(
             detailViewLiveQrCodeItem.value = State.success(historyItem)
             historyRepository.insertQrItem(historyItem)
         }
-    }
-
-    fun setCameraPermission(hasCameraPermission: Boolean) {
-
     }
 
     fun setDetailViewItem(qrCodeItem: QrItem) {
@@ -112,21 +102,6 @@ class MainActivityViewModel @Inject constructor(
         }
     }
 
-    fun setStoragePermission() {
-    }
-
-    fun hideIme(hide: Boolean) {
-        if(centralState.value?.imeIsHidden == !hide){
-            _centralState.value = centralState.value?.copy(imeIsHidden = hide)
-        }
-    }
-
 }
-
-data class CentralState(
-    val hasCameraPermission: Boolean = false,
-    val hasStoragePermission: Boolean = false,
-    val imeIsHidden: Boolean = true
-)
 
 class CouldNotDeleteQrItem : Exception()

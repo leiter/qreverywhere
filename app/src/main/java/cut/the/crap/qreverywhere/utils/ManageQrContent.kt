@@ -144,8 +144,10 @@ suspend fun textToImageEnc(textContent: String, resources: Resources): Bitmap {
             val offset = y * bitMatrixWidth
             for (x in 0 until bitMatrixWidth) {
                 pixels[offset + x] =
-                    if (bitMatrix[x, y]) ResourcesCompat.getColor(resources, R.color.black, null)
-                    else ResourcesCompat.getColor(resources, R.color.white, null)
+                    if (bitMatrix[x, y])                 -0x1000000
+//ResourcesCompat.getColor(resources, R.color.black, null)
+
+                    else -0x1 // ResourcesCompat.getColor(resources, R.color.white, null)
             }
         }
         val bitmap = Bitmap.createBitmap(bitMatrixWidth, bitMatrixHeight, Bitmap.Config.ARGB_8888)

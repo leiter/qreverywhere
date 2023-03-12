@@ -29,11 +29,11 @@ class EncryptedPrefs @Inject constructor(@ApplicationContext context: Context, f
     }
 
     val backgroundColor by lazy {
-        sharedPreferences.getInt(BACKGROUND, 0x00FFFFFF)
+        sharedPreferences.getInt(BACKGROUND, -0x1)
     }
 
     val foregroundColor by lazy {Color.BLACK
-        sharedPreferences.getInt(FOREGROUND, 0x00000000)
+        sharedPreferences.getInt(FOREGROUND, -0x1000000)
     }
 
     companion object {
