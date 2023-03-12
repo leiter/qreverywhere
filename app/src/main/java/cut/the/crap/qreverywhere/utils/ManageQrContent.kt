@@ -10,9 +10,7 @@ import android.graphics.BitmapFactory
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Environment
-import androidx.annotation.IdRes
 import androidx.annotation.IntDef
-import androidx.annotation.StringRes
 import androidx.core.content.res.ResourcesCompat
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.BinaryBitmap
@@ -76,11 +74,10 @@ fun determineType(contentString: String): Int {
     return when {
         decoded.startsWith(TEL) -> PHONE
         decoded.startsWith(MAILTO) -> EMAIL
-        decoded.startsWith(HTTP) -> WEB_URL
-        decoded.startsWith(HTTPS) -> WEB_URL
-        isVcard(decoded) -> CONTACT
-        decoded.startsWith(ProtocolPrefix.SMS) -> QrCodeType.SMS
+        decoded.startsWith(HTTP) || decoded.startsWith(HTTPS) -> WEB_URL
+        decoded.startsWith(ProtocolPrefix.SMS) ||
         decoded.startsWith(ProtocolPrefix.SMSTO) -> QrCodeType.SMS
+        isVcard(decoded) -> CONTACT
         else -> UNKNOWN_CONTENT
     }
 }
@@ -103,10 +100,10 @@ suspend fun saveImageToFile(qrCodeItem: QrItem, context: Context): String {
             directory.mkdirs()
         }
         try {
-            val f = File( //todo better naming
+            val f = File(
                 directory, Calendar.getInstance().timeInMillis.toString() + ".jpg"
             )
-            f.createNewFile() // todo give read write permission
+            f.createNewFile()
             val fo = FileOutputStream(f)
             fo.write(bytes.toByteArray())
             MediaScannerConnection.scanFile(
@@ -210,3 +207,13 @@ get() = when(determineType(textContent)){
     WEB_URL -> R.string.detail_title_web
     else -> R.string.detail_title_text
 }
+
+
+val QrItem.fabLaunchIcon:  Int
+get() = when(determineType(textContent)){
+    EMAIL -> R.drawable.ic_mail_outline_white
+    PHONE -> R.drawable.ic_phone_white
+    WEB_URL -> R.drawable.ic_open_in_browser_white
+    else -> R.string.detail_title_text
+}
+

@@ -3,19 +3,16 @@ package cut.the.crap.qreverywhere.qrcodecreate
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentCreateQrCodeBinding
 import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment.Companion.CREATE_PHONE
 import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment.Companion.CREATE_SMS
 import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment.Companion.CREATE_WEB
 import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment.Companion.USE_CASE_MODE
-import cut.the.crap.qreverywhere.utils.ui.activityView
+import cut.the.crap.qreverywhere.utils.ui.ensureBottomNavigation
 import cut.the.crap.qreverywhere.utils.ui.viewBinding
-import cut.the.crap.qreverywhere.utils.ui.visible
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -59,11 +56,6 @@ class CreateQrCodeFragment : Fragment(R.layout.fragment_create_qr_code) {
         ensureBottomNavigation()
     }
 
-    private fun ensureBottomNavigation() {
-        val bottomNavigationView = activityView<BottomNavigationView>(R.id.nav_view)
-        if (bottomNavigationView.isVisible.not()) {
-            bottomNavigationView.visible()
-        }
-    }
+
 
 }

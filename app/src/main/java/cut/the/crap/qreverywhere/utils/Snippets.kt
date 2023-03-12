@@ -10,6 +10,7 @@ import android.view.View
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import kotlin.reflect.KClass
 
 private fun shareBitmap(context: Context, bitmap: Bitmap, fileName: String) {
     try {
@@ -66,4 +67,12 @@ fun isPermissionDialogDisplayed(context: Context) :Boolean {
         return true
     }
     return false
+}
+
+fun (() -> Unit).catch(vararg exceptions: KClass<out Throwable>, catchBlock: (Throwable) -> Unit) {
+    try {
+        this()
+    } catch (e: Throwable) {
+        if (e::class in exceptions) catchBlock(e) else throw e
+    }
 }

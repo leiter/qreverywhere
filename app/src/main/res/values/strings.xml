@@ -107,12 +107,10 @@
     <string name="qr_create_email_hint_subject">Subject</string>
     <string name="qr_create_email_hint_example_subject">(optional)</string>
     <string name="qr_create_email_hint_message">Message</string>
-    <string name="qr_create_email_button_create">Create QrCode</string>
+    <string name="qr_create_email_button_create">Create</string>
     <string name="qr_create_email_button_save">Save to file</string>
 
-
-
-
+    <string name="detailview_content_title">Content</string>
 
 
 </resources>

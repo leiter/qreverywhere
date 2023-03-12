@@ -42,11 +42,17 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:id="@+id/history_item_foreground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?android:attr/colorBackground">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.75" />
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/history_item_type"
@@ -64,7 +70,7 @@
             android:layout_height="56dp"
             android:layout_margin="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_qr_code_scanner" />
 
@@ -72,8 +78,8 @@
             android:id="@+id/history_item_content_preview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="48dp"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:lines="1"
@@ -82,7 +88,6 @@
             app:layout_constraintStart_toEndOf="@+id/history_item_type"
             app:layout_constraintTop_toTopOf="@+id/history_item_type"
             tools:text="@tools:sample/lorem/random" />
-
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/history_item_timestamp"
@@ -94,6 +99,32 @@
             app:layout_constraintStart_toEndOf="@+id/history_item_type"
             app:layout_constraintTop_toBottomOf="@+id/history_item_content_preview"
             tools:text="erstellt am 25.06.2020" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/history_item_delete"
+            android:src="@drawable/ic_delete"
+            app:tint="?attr/colorOnSurface"
+            style="@style/Widget.AppCompat.ActionButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/history_item_fullscreen"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/guideline"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageButton
+            android:id="@+id/history_item_fullscreen"
+            style="@style/Widget.AppCompat.ActionButton"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:src="@drawable/ic_open_in_full"
+            app:tint="?attr/colorOnSurface"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@id/history_item_delete"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

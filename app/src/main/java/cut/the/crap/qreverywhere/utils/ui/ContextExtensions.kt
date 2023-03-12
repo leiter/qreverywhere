@@ -2,6 +2,7 @@ package cut.the.crap.qreverywhere.utils.ui
 
 import android.content.Context
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
@@ -21,3 +22,7 @@ fun Context.hasPermission(permissionString: String) =
     ContextCompat.checkSelfPermission(
         this, permissionString
     ) == PackageManager.PERMISSION_GRANTED
+
+fun Context.isLandscape() : Boolean {
+    return resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+}

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".qrcodedetailview.DetailViewFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="24dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/detailViewAcquiredAt"
+            style="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Scanned on 06.05.2020" />
+
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/detailViewActionTypeTextView"
+            style="@style/TextAppearance.AppCompat.Large"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingBottom="16dp"
+            android:text="@string/detailview_content_title"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="@+id/detailViewContentTextViewContainer"
+            app:layout_constraintStart_toEndOf="@+id/detailViewContentPreviewImage"
+            app:layout_constraintTop_toBottomOf="@id/detailViewAcquiredAt"
+
+
+            />
+
+
+        <ScrollView
+            android:id="@+id/detailViewContentTextViewContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/detailViewContentPreviewImage"
+            app:layout_constraintTop_toBottomOf="@+id/detailViewActionTypeTextView"
+            app:layout_constraintWidth_percent="0.4">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/detailViewContentTextView"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="8sp"
+                android:padding="32dp"
+                android:textSize="18sp"
+
+                tools:text="@tools:sample/lorem/random" />
+        </ScrollView>
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/detailViewContentPreviewImage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:src="@drawable/ic_launcher_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="W,1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailViewAcquiredAt"
+            app:layout_constraintWidth_percent="0.2" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/detailViewLaunchActionButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+
+            android:textAllCaps="false"
+            app:layout_constraintWidth_percent="0.2"
+            app:layout_constraintBottom_toBottomOf="@+id/detailViewContentPreviewImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/detailViewContentTextViewContainer"
+            app:layout_constraintTop_toTopOf="@+id/detailViewContentPreviewImage"
+            tools:text="Launch action" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</FrameLayout>

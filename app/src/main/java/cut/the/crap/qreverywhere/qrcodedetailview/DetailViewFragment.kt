@@ -30,12 +30,14 @@ import cut.the.crap.qreverywhere.utils.data.IntentGenerator.QrStartIntent
 import cut.the.crap.qreverywhere.utils.ui.activityView
 import cut.the.crap.qreverywhere.utils.detailTitle
 import cut.the.crap.qreverywhere.utils.determineType
+import cut.the.crap.qreverywhere.utils.fabLaunchIcon
 import cut.the.crap.qreverywhere.utils.isVcard
 import cut.the.crap.qreverywhere.utils.ui.setSubTitle
 import cut.the.crap.qreverywhere.utils.ui.setTitle
 import cut.the.crap.qreverywhere.utils.ui.setupMenuItems
 import cut.the.crap.qreverywhere.utils.startIntentGracefully
 import cut.the.crap.qreverywhere.utils.ui.UiEvent
+import cut.the.crap.qreverywhere.utils.ui.ensureBottomNavigation
 import cut.the.crap.qreverywhere.utils.ui.gone
 import cut.the.crap.qreverywhere.utils.ui.showSnackBar
 import cut.the.crap.qreverywhere.utils.ui.viewBinding
@@ -61,14 +63,19 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
 
     private val optionMap by lazy {
         val map = mutableMapOf(
-            R.id.menu_delete to {
-                activityViewModel.deleteCurrentDetailView()
-                findNavController().navigate(R.id.action_detailViewFragment_to_qrHistoryFragment)
-            },
             R.id.menu_save_to_file to {
                 activityViewModel.saveQrImageOfDetailView(requireContext())
             },
         )
+        if (args.originFlag == FROM_SCAN_QR) {
+            map[R.id.menu_delete] = { findNavController().navigateUp() }
+        } else {
+            map[R.id.menu_delete] = {
+                activityViewModel.deleteCurrentDetailView()
+                findNavController().navigate(R.id.action_detailViewFragment_to_qrHistoryFragment)
+            }
+
+        }
         if (args.originFlag == FROM_CREATE_CONTEXT) {
             map[android.R.id.home] = {
                 requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -89,6 +96,18 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
         if (args.originFlag == FROM_CREATE_CONTEXT) {
             requireActivity().onBackPressedDispatcher.addCallback(callback)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        ensureBottomNavigation()
+        setupToolbar()
+    }
+
+    private fun setupToolbar() {
+        val item = activityViewModel.detailViewQrCodeItem
+        setTitle(item.detailTitle)
+        setSubTitle(acquireDateFormatter.getTimeTemplate(item))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -139,10 +158,10 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
         with(viewBinding) {
             Glide.with(root.context).load(item.img).into(detailViewContentPreviewImage)
             detailViewContentTextView.text = Uri.decode(item.textContent)
-            setTitle(item.detailTitle)
-            setSubTitle(acquireDateFormatter.getTimeTemplate(item))
+
             if (determineType(activityViewModel.detailViewQrCodeItem.textContent) != QrCodeType.UNKNOWN_CONTENT) {
                 detailViewLaunchActionButton.text = launchText
+                detailViewLaunchActionButton.setIconResource(item.fabLaunchIcon)
                 detailViewLaunchActionButton.setOnClickListener {
                     launchClicked()
                 }

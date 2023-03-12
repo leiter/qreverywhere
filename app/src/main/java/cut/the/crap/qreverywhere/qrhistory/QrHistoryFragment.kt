@@ -45,19 +45,27 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
         )
     }
 
+    private val removeHistoryItem: (Int) -> Unit = {
+        pos -> activityViewModel.removeHistoryItem(pos)
+    }
+
     private val handleSwipeAction: (position: Int, direction: Int) -> Unit = { pos, direction ->
         when (direction) {
             ItemTouchHelper.START -> {
                 navigateToFullscreen(pos)
             }
             ItemTouchHelper.END -> {
-                activityViewModel.removeHistoryItem(pos)
+                removeHistoryItem(pos)
             }
         }
     }
 
     private val navigateToFullscreen: (Int) -> Unit = { pos ->
         activityViewModel.focusedItemIndex = pos
+        activityViewModel.historyAdapterData.value?.get(pos)?.let {
+            activityViewModel.detailViewQrCodeItem = it
+        }
+
         findNavController().navigate(
             R.id.action_qrHistoryFragment_to_qrFullscreenFragment, bundleOf(
             "itemPosition" to pos,
@@ -69,6 +77,7 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
     private val historyListAdapter by lazy {
         QrHistoryAdapter(
             detailViewItemClicked,
+            removeHistoryItem,
             navigateToFullscreen,
             acquireDateFormatter
         )

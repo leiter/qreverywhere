@@ -46,13 +46,13 @@
             style="@style/PasteHereTextLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginHorizontal="32dp"
+
             android:hint="@string/create_one_liner_number_input_hint"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/createOneLinerTest"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/createOneLinerButtonSaveQrToFile"
-            app:layout_goneMarginTop="24dp">
+            app:layout_constraintTop_toTopOf="@id/createOneLinerInputLayout"
+            app:layout_constraintWidth_percent="0.50">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/createOneLinerNumberInputField"
@@ -69,11 +69,12 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="48dp"
             android:hint="@string/create_one_liner_input_layout_hint_web"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/createOneLinerCreate"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/createOneLinerNumberInputLayout">
+            app:layout_constraintTop_toBottomOf="@+id/createOneLinerButtonSaveQrToFile"
+            app:layout_constraintWidth_percent="0.6">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/createOneLinerInputField"
@@ -86,33 +87,29 @@
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/createOneLinerCreate"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="12dp"
             android:text="@string/qr_create_one_line_button_create"
             app:icon="@drawable/ic_create_on_fab"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/createOneLinerTest"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/createOneLinerInputLayout"
-            app:layout_constraintVertical_bias="0"
-            app:layout_constraintWidth_min="112dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/createOneLinerInputLayout"
+            app:layout_constraintWidth_min="112dp"
+            app:layout_constraintWidth_percent="0.3" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/createOneLinerTest"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
-            android:layout_marginTop="32dp"
-            app:icon="@drawable/ic_check_on_fab"
+            android:layout_marginTop="24dp"
             android:text="@string/qr_create_one_line_button_test"
+            app:icon="@drawable/ic_check_on_fab"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/createOneLinerCreate"
-            app:layout_constraintTop_toBottomOf="@id/createOneLinerInputLayout"
-            app:layout_constraintWidth_min="112dp" />
+            app:layout_constraintTop_toBottomOf="@+id/createOneLinerCreate"
+            app:layout_constraintWidth_min="112dp"
+            app:layout_constraintWidth_percent="0.3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

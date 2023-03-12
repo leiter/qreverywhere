@@ -5,9 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.data.State
-import cut.the.crap.qrrepository.Acquire
 import cut.the.crap.qreverywhere.utils.data.SingleLiveDataEvent
 import cut.the.crap.qreverywhere.utils.textToImageEnc
+import cut.the.crap.qrrepository.Acquire
 import cut.the.crap.qrrepository.QrItem
 import cut.the.crap.qrrepository.db.toItem
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -47,9 +47,9 @@ class CreateOneLinerViewModel @Inject constructor(
                     textContent = currentInputText,
                     acquireType = Acquire.CREATED
                 ).toItem()
-            historyRepository.insertQrItem(qrCodeItem)
             activityViewModel.detailViewQrCodeItem = qrCodeItem
             qrCodeItemState.value = State.success()
+            historyRepository.insertQrItem(qrCodeItem)
         }
     }
 
@@ -59,9 +59,10 @@ class CreateOneLinerViewModel @Inject constructor(
             val bitmap = textToImageEnc(uriString, resources)
             val qrCodeItem =
                 cut.the.crap.qrrepository.db.QrCodeDbItem(img = bitmap, textContent = uriString, acquireType = Acquire.CREATED).toItem()
-            historyRepository.insertQrItem(qrCodeItem)
             activityViewModel.detailViewQrCodeItem = qrCodeItem
             qrCodeItemState.value = State.success()
+            historyRepository.insertQrItem(qrCodeItem)
+
         }
 
     }

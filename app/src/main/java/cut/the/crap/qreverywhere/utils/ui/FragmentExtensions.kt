@@ -16,10 +16,13 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import cut.the.crap.qreverywhere.R
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
@@ -87,4 +90,11 @@ fun Fragment.setupMenuItems(
             return idActionMap[menuItem.itemId]?.let { it.invoke(); true } ?: false
         }
     }, viewLifecycleOwner)
+}
+
+fun Fragment.ensureBottomNavigation() {
+    val bottomNavigationView = activityView<BottomNavigationView>(R.id.nav_view)
+    if (bottomNavigationView.isVisible.not()) {
+        bottomNavigationView.visible()
+    }
 }

@@ -29,8 +29,11 @@ import cut.the.crap.qreverywhere.utils.ui.focusEditText
 import cut.the.crap.qreverywhere.utils.ui.setTitle
 import cut.the.crap.qreverywhere.utils.startIntentGracefully
 import cut.the.crap.qreverywhere.utils.ui.UiEvent
+import cut.the.crap.qreverywhere.utils.ui.clipBoard
 import cut.the.crap.qreverywhere.utils.ui.gone
 import cut.the.crap.qreverywhere.utils.ui.hideKeyboardInput
+import cut.the.crap.qreverywhere.utils.ui.pasteFromClipBoard
+import cut.the.crap.qreverywhere.utils.ui.showShortToast
 import cut.the.crap.qreverywhere.utils.ui.showSnackBar
 import cut.the.crap.qreverywhere.utils.ui.textChanges
 import cut.the.crap.qreverywhere.utils.ui.visible
@@ -38,6 +41,7 @@ import cut.the.crap.qreverywhere.utils.ui.viewBinding
 import cut.the.crap.qrrepository.QrItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import timber.log.Timber
 
 @AndroidEntryPoint
 class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
@@ -70,6 +74,12 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
         }, 120)
     }
 
+    private val clip by clipBoard()
+
+    private val messageClipboardEmpty = {
+        requireContext().showShortToast(R.string.toast_clipboard_empty)
+    }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         attachImeActionDelegate(this, openImeAction, closeImeAction)
@@ -78,13 +88,6 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
     @OptIn(ExperimentalCoroutinesApi::class)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        when (args.useCaseMode) {
-            CREATE_PHONE -> setupCreateCallQrcode()
-            CREATE_SMS -> setupCreateTextQrcode()
-            CREATE_WEB -> setupCreateWebQrcode()
-            else -> throw IllegalArgumentException("No fragment associated with this id=${args.useCaseMode}")
-        }
 
         with(viewBinding) {
             createOneLinerTest.setOnClickListener {
@@ -150,6 +153,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
                         } ?: runCatching {
                             viewBinding.createOneLinerNumberInputField.setText("")
                             viewBinding.createOneLinerInputField.setText("")
+
                             viewBinding.createOneLinerHeaderGroup.visible()
                             viewBinding.createOneLinerQrImagePreview.setOnClickListener {
                                 findNavController().navigate(
@@ -175,6 +179,12 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
                                     actionLabel = R.string.undo_delete,
                                 )
                             )
+                            findNavController().navigate(
+                                R.id.action_createOneLinerFragment_to_detailViewFragment2,
+                                bundleOf(
+                                    ORIGIN_FLAG to FROM_CREATE_CONTEXT
+                                )
+                            )
                         }
                     }
                     is State.Error -> {
@@ -187,6 +197,17 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
                         showLoading(true)
                     }
                 }
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        when (args.useCaseMode) {
+            CREATE_PHONE -> setupCreateCallQrcode()
+            CREATE_SMS -> setupCreateTextQrcode()
+            CREATE_WEB -> setupCreateWebQrcode()
+            else -> Timber.d("No use case of mode ${args.useCaseMode}")
         }
     }
 
@@ -220,6 +241,9 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
         setTitle(R.string.create_title_phone)
         with(viewBinding) {
             createOneLinerInputLayout.gone()
+            createOneLinerNumberInputLayout.setStartIconOnClickListener {
+                createOneLinerNumberInputField.pasteFromClipBoard(clip, messageClipboardEmpty)
+            }
             focusEditText(createOneLinerNumberInputField)
         }
     }
@@ -234,15 +258,22 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
                 (160 * Resources.getSystem().displayMetrics.density).toInt()
             createOneLinerInputLayout.layoutParams = params
             createOneLinerInputLayout.setHint(R.string.create_one_liner_input_layout_hint_text_message)
+            createOneLinerInputLayout.setStartIconOnClickListener {
+                createOneLinerInputField.pasteFromClipBoard(clip, messageClipboardEmpty)
+            }
             focusEditText(createOneLinerInputField)
         }
     }
+
 
     private fun setupCreateWebQrcode() {
         setTitle(R.string.create_title_web)
         with(viewBinding) {
             createOneLinerNumberInputLayout.gone()
             createOneLinerInputLayout.setHint(R.string.create_one_liner_input_layout_hint_web)
+            createOneLinerInputLayout.setStartIconOnClickListener {
+                createOneLinerInputField.pasteFromClipBoard(clip, messageClipboardEmpty)
+            }
             focusEditText(createOneLinerInputField)
         }
     }

@@ -84,12 +84,16 @@
         <action
             android:id="@+id/action_createOneLinerFragment_to_qrFullscreenFragment2"
             app:destination="@id/qrFullscreenFragment" />
+        <action
+            android:id="@+id/action_createOneLinerFragment_to_detailViewFragment2"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/createQrCodeFragment"
+            app:destination="@id/detailViewFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/detailViewFragment"
         android:name="cut.the.crap.qreverywhere.qrcodedetailview.DetailViewFragment"
-        android:label="Detail view"
         tools:layout="@layout/fragment_detail_view">
         <argument
             android:name="originFlag"
@@ -109,7 +113,6 @@
     <fragment
         android:id="@+id/qrFullscreenFragment"
         android:name="cut.the.crap.qreverywhere.qrfullscreen.QrFullscreenFragment"
-        android:label="Fullscreen"
         tools:layout="@layout/fragment_qr_fullscreen">
         <action
             android:id="@+id/action_qrFullscreenFragment_to_qrHistoryFragment"

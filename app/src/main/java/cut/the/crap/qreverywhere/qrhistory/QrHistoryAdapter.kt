@@ -16,11 +16,13 @@ import cut.the.crap.qreverywhere.utils.ProtocolPrefix
 import cut.the.crap.qreverywhere.utils.QrCodeType
 import cut.the.crap.qreverywhere.utils.determineType
 import cut.the.crap.qreverywhere.utils.isVcard
+import cut.the.crap.qreverywhere.utils.ui.isLandscape
 import cut.the.crap.qrrepository.QrItem
 
 class QrHistoryAdapter(
     val detailViewItemClicked: (QrItem) -> Unit,
-    val focusedPosition: (Int) -> Unit,
+    val deleteItemClicked: (Int) -> Unit,
+    val fullscreenItemClicked: (Int) -> Unit,
     private val acquireDateFormatter: AcquireDateFormatter,
 ) : RecyclerView.Adapter<QrHistoryAdapter.QrHistoryViewHolder<ViewBinding>>() {
 
@@ -30,7 +32,7 @@ class QrHistoryAdapter(
                 detailViewItemClicked(differ.currentList[adapterPosition])
             }
             (binding as ItemQrHistoryBinding).historyItemImage.setOnClickListener {
-                focusedPosition(adapterPosition)
+                fullscreenItemClicked(adapterPosition)
             }
 
         }
@@ -81,8 +83,13 @@ class QrHistoryAdapter(
             historyItemType.setImageResource(getQrTypeDrawable(qrItemData.textContent))
             historyItemContentPreview.text = textForHistoryList(qrItemData.textContent, root.context)
             historyItemImage.setOnClickListener {
-                focusedPosition(position)
+                fullscreenItemClicked(position)
             }
+            if (root.context.isLandscape()){
+                historyItemFullscreen?.setOnClickListener { fullscreenItemClicked(position) }
+                historyItemDelete?.setOnClickListener { deleteItemClicked(position) }
+            }
+
         }
     }
 

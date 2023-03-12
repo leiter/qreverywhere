@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.navArgs
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.FragmentQrFullscreenBinding
@@ -24,12 +23,10 @@ class QrFullscreenFragment : Fragment(R.layout.fragment_qr_fullscreen) {
     @Inject
     lateinit var acquireDateFormatter: AcquireDateFormatter
 
-    private val args: QrFullscreenFragmentArgs by navArgs()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         activityViewModel.historyAdapterData.observe(viewLifecycleOwner){
-            val item = it[args.itemPosition]
+            val item = activityViewModel.detailViewQrCodeItem
             viewBinding.qrFullScreenImage.setImageBitmap(item.img)
             setTitle(acquireDateFormatter.getTimeTemplate(item))
         }

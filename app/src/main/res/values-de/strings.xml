@@ -47,6 +47,9 @@
     <string name="detail_title_web">Link</string>
     <string name="detail_title_text">Text</string>
 
+    <string name="detailview_content_title">Inhalt</string>
+
+
     <!--    Snackbar and Toasts-->
     <string name="saved_in_history">In Qrcodes gespeichert.</string>
     <string name="saved_as_file">Qrcode als Bild gespeichert.</string>
@@ -76,7 +79,7 @@
 
 
 
-    <!--    todo unused-->
+
     <!-- Preference Titles -->
     <string name="messages_header">Messages</string>
     <string name="auto_start_header">Start automatically or show qr content</string>
@@ -113,7 +116,7 @@
     <string name="qr_create_email_hint_subject">Betreff</string>
     <string name="qr_create_email_hint_example_subject">(optional)</string>
     <string name="qr_create_email_hint_message">Nachricht</string>
-    <string name="qr_create_email_button_create">QrCode erstellen</string>
+    <string name="qr_create_email_button_create">Erstellen</string>
     <string name="qr_create_email_button_save">Speichern als jpg</string>
 
 
