@@ -16,7 +16,6 @@ class SingleLiveDataEvent<T>(value: T?) : MutableLiveData<T?>(value) {
         if (hasActiveObservers()) {
             Timber.w("Multiple observers registered but only one will be notified of changes.")
         }
-        // Observe the internal MutableLiveData
         super.observe(
             owner
         ) { t: T? ->
@@ -35,9 +34,5 @@ class SingleLiveDataEvent<T>(value: T?) : MutableLiveData<T?>(value) {
     @MainThread
     fun call() {
         value = null
-    }
-
-    companion object {
-        private const val TAG = "SingleLiveEvent"
     }
 }

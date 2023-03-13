@@ -152,7 +152,8 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
                     is State.Success -> {
                         showLoading(false)
                         state.data?.let {
-                            requireContext().startIntentGracefully(IntentGenerator.QrStartIntent(it.textContent).getIntent())
+                            requireContext().startIntentGracefully(
+                                IntentGenerator.QrStartIntent(it.textContent).getIntent())
                         } ?: runCatching {
                             viewBinding.createOneLinerNumberInputField.setText("")
                             viewBinding.createOneLinerInputField.setText("")

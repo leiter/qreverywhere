@@ -12,5 +12,3 @@ interface PickQrCodeDelegate {
     fun permissionByApiVersion(): String
 
 }
-
-

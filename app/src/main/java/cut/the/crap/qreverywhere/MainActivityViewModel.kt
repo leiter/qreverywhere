@@ -35,7 +35,7 @@ const val IMAGE_DIRECTORY = "QrEveryWhere"
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
     private val historyRepository: QrHistoryRepository,
-    private val encryptedPrefs: EncryptedPrefs
+    private val encryptedPrefs: EncryptedPrefs,
 ) : ViewModel() {
 
     var detailViewQrCodeItem: QrItem = QrCodeDbItem().toItem()

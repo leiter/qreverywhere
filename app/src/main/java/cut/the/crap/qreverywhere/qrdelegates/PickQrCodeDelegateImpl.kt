@@ -11,8 +11,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.google.zxing.BinaryBitmap
+import com.google.zxing.ChecksumException
+import com.google.zxing.FormatException
 import com.google.zxing.LuminanceSource
 import com.google.zxing.MultiFormatReader
+import com.google.zxing.NotFoundException
 import com.google.zxing.RGBLuminanceSource
 import com.google.zxing.Reader
 import com.google.zxing.Result
@@ -104,7 +107,11 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
         try {
             val result: Result = reader.decode(bitmap)
             contents = result
-        } catch (e: Exception) {
+        } catch (e: NotFoundException) {
+            Timber.e(e, "Error decoding barcode")
+        }catch (e: ChecksumException) {
+            Timber.e(e, "Error decoding barcode")
+        }catch (e: FormatException) {
             Timber.e(e, "Error decoding barcode")
         }
         return contents

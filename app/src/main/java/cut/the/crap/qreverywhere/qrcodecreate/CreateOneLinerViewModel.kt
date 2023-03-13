@@ -18,7 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CreateOneLinerViewModel @Inject constructor(
     private val historyRepository: cut.the.crap.qrrepository.QrHistoryRepository,
-    private val encryptedPrefs: EncryptedPrefs
+    private val encryptedPrefs: EncryptedPrefs,
 ) : ViewModel() {
 
     val qrCodeItemState = SingleLiveDataEvent<State<QrItem>>(null)
@@ -50,7 +50,7 @@ class CreateOneLinerViewModel @Inject constructor(
         }
     }
 
-    private suspend fun createQrItem(text: String) : QrItem {
+    private suspend fun createQrItem(text: String): QrItem {
         val bitmap = textToImageEnc(text, encryptedPrefs.foregroundColor, encryptedPrefs.backgroundColor)
         return cut.the.crap.qrrepository.db.QrCodeDbItem(img = bitmap, textContent = text, acquireType = Acquire.CREATED).toItem()
     }
