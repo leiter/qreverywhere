@@ -12,10 +12,10 @@ import com.bumptech.glide.Glide
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.ItemQrHistoryBinding
 import cut.the.crap.qreverywhere.utils.data.AcquireDateFormatter
-import cut.the.crap.qreverywhere.utils.ProtocolPrefix
-import cut.the.crap.qreverywhere.utils.QrCodeType
+import cut.the.crap.qreverywhere.utils.data.ProtocolPrefix
+import cut.the.crap.qreverywhere.utils.data.QrCodeType
 import cut.the.crap.qreverywhere.utils.data.determineType
-import cut.the.crap.qreverywhere.utils.isVcard
+import cut.the.crap.qreverywhere.utils.data.isVcard
 import cut.the.crap.qreverywhere.utils.ui.isLandscape
 import cut.the.crap.qrrepository.QrItem
 
@@ -80,7 +80,7 @@ class QrHistoryAdapter(
             val createdText = acquireDateFormatter.getTimeTemplate(qrItemData)
             historyItemTimestamp.text = createdText
 
-            historyItemType.setImageResource(getQrTypeDrawable(qrItemData.textContent))
+            historyItemType.setImageResource(getQrTypeDrawable(qrItemData))
             historyItemContentPreview.text = textForHistoryList(qrItemData, root.context)
             historyItemImage.setOnClickListener {
                 fullscreenItemClicked(position)
@@ -92,8 +92,8 @@ class QrHistoryAdapter(
         }
     }
 
-    private fun getQrTypeDrawable(contentString: String): Int {
-        val decoded = Uri.decode(contentString)
+    private fun getQrTypeDrawable(qrItem: QrItem): Int {
+        val decoded = Uri.decode(qrItem.textContent)
         return when {
             decoded.startsWith(ProtocolPrefix.TEL) -> R.drawable.ic_phone
             decoded.startsWith(ProtocolPrefix.MAILTO) -> R.drawable.ic_mail_outline
@@ -101,7 +101,7 @@ class QrHistoryAdapter(
             decoded.startsWith(ProtocolPrefix.HTTPS) -> R.drawable.ic_open_in_browser
             decoded.startsWith(ProtocolPrefix.SMS) -> R.drawable.ic_sms
             decoded.startsWith(ProtocolPrefix.SMSTO) -> R.drawable.ic_sms
-            isVcard(decoded) -> R.drawable.ic_add_contact
+            qrItem.isVcard() -> R.drawable.ic_add_contact
             else -> R.drawable.ic_content
         }
     }

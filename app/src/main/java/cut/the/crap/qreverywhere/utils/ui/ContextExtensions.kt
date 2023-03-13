@@ -1,6 +1,7 @@
 package cut.the.crap.qreverywhere.utils.ui
 
 import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
 import android.widget.Toast
@@ -25,4 +26,16 @@ fun Context.hasPermission(permissionString: String) =
 
 fun Context.isLandscape() : Boolean {
     return resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+}
+
+fun Context.startIntentGracefully(intent: Intent, notExecutable: (() -> Unit)? = null) {
+    val list = this.packageManager.queryIntentActivities(
+        intent,
+        PackageManager.MATCH_DEFAULT_ONLY
+    )
+    if (list.size > 0) {
+        startActivity(intent)
+    } else {
+        notExecutable?.invoke()
+    }
 }

@@ -17,29 +17,29 @@ import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.databinding.FragmentDetailViewBinding
 import cut.the.crap.qreverywhere.utils.data.AcquireDateFormatter
+import cut.the.crap.qreverywhere.utils.data.IntentGenerator.QrStartIntent
+import cut.the.crap.qreverywhere.utils.data.ProtocolPrefix.HTTP
+import cut.the.crap.qreverywhere.utils.data.ProtocolPrefix.HTTPS
+import cut.the.crap.qreverywhere.utils.data.ProtocolPrefix.MAILTO
+import cut.the.crap.qreverywhere.utils.data.ProtocolPrefix.TEL
+import cut.the.crap.qreverywhere.utils.data.QrCodeType
+import cut.the.crap.qreverywhere.utils.data.detailTitle
+import cut.the.crap.qreverywhere.utils.data.determineType
+import cut.the.crap.qreverywhere.utils.data.fabLaunchIcon
+import cut.the.crap.qreverywhere.utils.data.isVcard
 import cut.the.crap.qreverywhere.utils.ui.FROM_CREATE_CONTEXT
 import cut.the.crap.qreverywhere.utils.ui.FROM_HISTORY_LIST
 import cut.the.crap.qreverywhere.utils.ui.FROM_SCAN_QR
 import cut.the.crap.qreverywhere.utils.ui.ORIGIN_FLAG
-import cut.the.crap.qreverywhere.utils.ProtocolPrefix.HTTP
-import cut.the.crap.qreverywhere.utils.ProtocolPrefix.HTTPS
-import cut.the.crap.qreverywhere.utils.ProtocolPrefix.MAILTO
-import cut.the.crap.qreverywhere.utils.ProtocolPrefix.TEL
-import cut.the.crap.qreverywhere.utils.QrCodeType
-import cut.the.crap.qreverywhere.utils.data.IntentGenerator.QrStartIntent
-import cut.the.crap.qreverywhere.utils.data.detailTitle
-import cut.the.crap.qreverywhere.utils.data.determineType
-import cut.the.crap.qreverywhere.utils.data.fabLaunchIcon
+import cut.the.crap.qreverywhere.utils.ui.UiEvent
 import cut.the.crap.qreverywhere.utils.ui.activityView
-import cut.the.crap.qreverywhere.utils.isVcard
+import cut.the.crap.qreverywhere.utils.ui.ensureBottomNavigation
+import cut.the.crap.qreverywhere.utils.ui.gone
 import cut.the.crap.qreverywhere.utils.ui.setSubTitle
 import cut.the.crap.qreverywhere.utils.ui.setTitle
 import cut.the.crap.qreverywhere.utils.ui.setupMenuItems
-import cut.the.crap.qreverywhere.utils.startIntentGracefully
-import cut.the.crap.qreverywhere.utils.ui.UiEvent
-import cut.the.crap.qreverywhere.utils.ui.ensureBottomNavigation
-import cut.the.crap.qreverywhere.utils.ui.gone
 import cut.the.crap.qreverywhere.utils.ui.showSnackBar
+import cut.the.crap.qreverywhere.utils.ui.startIntentGracefully
 import cut.the.crap.qreverywhere.utils.ui.viewBinding
 import cut.the.crap.qrrepository.QrItem
 import dagger.hilt.android.AndroidEntryPoint
@@ -153,7 +153,7 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
 
     private fun setData() {
         val item = activityViewModel.detailViewQrCodeItem
-        val launchText = getQrLaunchButtonText(requireContext(), item.textContent)
+        val launchText = getQrLaunchButtonText(requireContext(), item)
 
         with(viewBinding) {
             Glide.with(root.context).load(item.img).into(detailViewContentPreviewImage)
@@ -202,23 +202,23 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
         }
     }
 
-    private fun getQrLaunchButtonText(context: Context, contentString: String): String {
-        val decoded = Uri.decode(contentString)
+    private fun getQrLaunchButtonText(context: Context, qrItem: QrItem): String {
+        val decoded = Uri.decode(qrItem.textContent)
         val launchTextTemplate = context.getString(R.string.qr_detail_launch_template)
         return when {
             decoded.startsWith(TEL) -> launchTextTemplate.format(context.getString(R.string.ic_open_phone_app))
             decoded.startsWith(MAILTO) -> launchTextTemplate.format(context.getString(R.string.ic_open_mail_app))
             decoded.startsWith(HTTP) -> launchTextTemplate.format(context.getString(R.string.ic_open_in_browser))
             decoded.startsWith(HTTPS) -> launchTextTemplate.format(context.getString(R.string.ic_open_in_browser))
-            isVcard(decoded) -> context.getString(R.string.ic_import_contact)
+            qrItem.isVcard() -> context.getString(R.string.ic_import_contact)
             else -> context.getString(R.string.app_name)
         }
     }
 
     private fun launchClicked() {
         if (activityViewModel.detailViewQrCodeItem.determineType() != QrCodeType.UNKNOWN_CONTENT) {
-            QrStartIntent(activityViewModel.detailViewQrCodeItem.textContent)
-                .getIntent().startIntentGracefully(requireContext())
+            requireContext().startIntentGracefully(QrStartIntent(activityViewModel.detailViewQrCodeItem.textContent)
+                .getIntent())
         } else {
             viewBinding.detailViewLaunchActionButton.gone()
         }

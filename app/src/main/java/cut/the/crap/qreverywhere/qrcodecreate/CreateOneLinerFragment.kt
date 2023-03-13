@@ -21,7 +21,6 @@ import cut.the.crap.qreverywhere.databinding.FragmentCreateOneLinerBinding
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegate
 import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegateImpl
 import cut.the.crap.qreverywhere.utils.data.IntentGenerator
-import cut.the.crap.qreverywhere.utils.startIntentGracefully
 import cut.the.crap.qreverywhere.utils.ui.FROM_CREATE_CONTEXT
 import cut.the.crap.qreverywhere.utils.ui.ORIGIN_FLAG
 import cut.the.crap.qreverywhere.utils.ui.UiEvent
@@ -34,6 +33,7 @@ import cut.the.crap.qreverywhere.utils.ui.pasteFromClipBoard
 import cut.the.crap.qreverywhere.utils.ui.setTitle
 import cut.the.crap.qreverywhere.utils.ui.showShortToast
 import cut.the.crap.qreverywhere.utils.ui.showSnackBar
+import cut.the.crap.qreverywhere.utils.ui.startIntentGracefully
 import cut.the.crap.qreverywhere.utils.ui.textChanges
 import cut.the.crap.qreverywhere.utils.ui.viewBinding
 import cut.the.crap.qreverywhere.utils.ui.visible
@@ -96,7 +96,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
 
             createOneLinerCreate.setOnClickListener {
                 hideKeyboardInput()
-                viewModel.createClicked(args.useCaseMode, resources, activityViewModel)
+                viewModel.createClicked(args.useCaseMode, activityViewModel)
             }
         }
 
@@ -152,7 +152,7 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
                     is State.Success -> {
                         showLoading(false)
                         state.data?.let {
-                            IntentGenerator.QrStartIntent(it.textContent).getIntent().startIntentGracefully(requireContext())
+                            requireContext().startIntentGracefully(IntentGenerator.QrStartIntent(it.textContent).getIntent())
                         } ?: runCatching {
                             viewBinding.createOneLinerNumberInputField.setText("")
                             viewBinding.createOneLinerInputField.setText("")

@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.data.State
-import cut.the.crap.qreverywhere.utils.ProtocolPrefix.TEL
+import cut.the.crap.qreverywhere.utils.data.ProtocolPrefix.TEL
 import cut.the.crap.qreverywhere.utils.data.EncryptedPrefs
 import cut.the.crap.qreverywhere.utils.data.SingleLiveDataEvent
 import cut.the.crap.qreverywhere.utils.textToImageEnc

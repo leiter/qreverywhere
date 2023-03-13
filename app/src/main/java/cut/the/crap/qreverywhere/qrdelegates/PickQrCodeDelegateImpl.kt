@@ -1,18 +1,29 @@
 package cut.the.crap.qreverywhere.qrdelegates
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Build
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import com.google.zxing.BinaryBitmap
+import com.google.zxing.LuminanceSource
+import com.google.zxing.MultiFormatReader
+import com.google.zxing.RGBLuminanceSource
+import com.google.zxing.Reader
+import com.google.zxing.Result
+import com.google.zxing.common.HybridBinarizer
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.qrcodescan.HomeFragment
 import cut.the.crap.qreverywhere.utils.data.IntentGenerator
 import cut.the.crap.qreverywhere.utils.data.IntentGenerator.PickImageIntent
 import cut.the.crap.qreverywhere.utils.ui.hasPermission
-import cut.the.crap.qreverywhere.utils.scanQrImage
 import cut.the.crap.qrrepository.Acquire
+import timber.log.Timber
 
 class PickQrCodeDelegateImpl : PickQrCodeDelegate {
 
@@ -66,5 +77,38 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
     private fun readBarcode() {
         scanImageLauncher.launch(PickImageIntent.getIntent())
     }
+
+    private  fun scanQrImage(uri: Uri, context: Context): Result? {
+        var contents: Result? = null
+
+        val inputStream = context.contentResolver.openInputStream(uri)
+        val sourceBitmap: Bitmap = BitmapFactory.decodeStream(inputStream)
+
+        val intArray = IntArray(sourceBitmap.width * sourceBitmap.height)
+        sourceBitmap.getPixels(
+            intArray,
+            0,
+            sourceBitmap.width,
+            0,
+            0,
+            sourceBitmap.width,
+            sourceBitmap.height
+        )
+
+        val source: LuminanceSource =
+            RGBLuminanceSource(sourceBitmap.width, sourceBitmap.height, intArray)
+
+        val bitmap = BinaryBitmap(HybridBinarizer(source))
+
+        val reader: Reader = MultiFormatReader()
+        try {
+            val result: Result = reader.decode(bitmap)
+            contents = result
+        } catch (e: Exception) {
+            Timber.e(e, "Error decoding barcode")
+        }
+        return contents
+    }
+
 
 }

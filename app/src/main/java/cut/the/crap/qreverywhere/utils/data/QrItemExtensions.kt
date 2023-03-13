@@ -2,9 +2,6 @@ package cut.the.crap.qreverywhere.utils.data
 
 import android.net.Uri
 import cut.the.crap.qreverywhere.R
-import cut.the.crap.qreverywhere.utils.ProtocolPrefix
-import cut.the.crap.qreverywhere.utils.QrCodeType
-import cut.the.crap.qreverywhere.utils.isVcard
 import cut.the.crap.qrrepository.QrItem
 
 val QrItem.detailTitle: Int
@@ -33,7 +30,11 @@ fun QrItem.determineType(): Int {
             decoded.startsWith(ProtocolPrefix.HTTPS) -> QrCodeType.WEB_URL
         decoded.startsWith(ProtocolPrefix.SMS) ||
             decoded.startsWith(ProtocolPrefix.SMSTO) -> QrCodeType.SMS
-        isVcard(decoded) -> QrCodeType.CONTACT
+        isVcard() -> QrCodeType.CONTACT
         else -> QrCodeType.UNKNOWN_CONTENT
     }
+}
+
+fun QrItem.isVcard(): Boolean {
+    return textContent.startsWith("BEGIN:VCARD") && textContent.endsWith("END:VCARD\n")
 }
