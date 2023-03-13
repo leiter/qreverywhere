@@ -1,12 +1,17 @@
 package cut.the.crap.qreverywhere.utils
 
 import android.app.ActivityManager
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
+import android.os.Build
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.View
+import androidx.annotation.RequiresApi
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -76,3 +81,24 @@ fun (() -> Unit).catch(vararg exceptions: KClass<out Throwable>, catchBlock: (Th
         if (e::class in exceptions) catchBlock(e) else throw e
     }
 }
+
+//@RequiresApi(Build.VERSION_CODES.Q)
+//private fun saveFileToExternalStorage(displayName: String, content: String) {
+//    val externalUri = MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
+//    val relativeLocation = Environment.DIRECTORY_DOCUMENTS
+//    val contentValues = ContentValues()
+//    contentValues.put(MediaStore.Files.FileColumns.DISPLAY_NAME, "$displayName.txt")
+//    contentValues.put(MediaStore.Files.FileColumns.MIME_TYPE, "application/text")
+//    contentValues.put(MediaStore.Files.FileColumns.TITLE, "Test")
+//    contentValues.put(MediaStore.Files.FileColumns.DATE_ADDED, System.currentTimeMillis() / 1000)
+//    contentValues.put(MediaStore.Files.FileColumns.RELATIVE_PATH, relativeLocation)
+//    contentValues.put(MediaStore.Files.FileColumns.DATE_TAKEN, System.currentTimeMillis())
+//    val fileUri: Uri = getContentResolver().insert(externalUri, contentValues)
+//    try {
+//        val outputStream: OutputStream = getContentResolver().openOutputStream(fileUri)
+//        outputStream.write(content.toByteArray())
+//        outputStream.close()
+//    } catch (e: IOException) {
+//        e.printStackTrace()
+//    }
+//}

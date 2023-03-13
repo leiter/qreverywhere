@@ -126,23 +126,20 @@ class MainActivityViewModel @Inject constructor(
                 directory.mkdirs()
             }
             try {
-                val f = File(
+                val file = File(
                     directory, Calendar.getInstance().timeInMillis.toString() + ".jpg"
                 )
-                f.createNewFile()
-                val fo = FileOutputStream(f)
+                file.createNewFile()
+                val fo = FileOutputStream(file)
                 fo.write(bytes.toByteArray())
                 MediaScannerConnection.scanFile(
                     context,
-                    arrayOf(f.path),
+                    arrayOf(file.path),
                     arrayOf("image/jpeg")
-                ) { path, uri ->
-                    val updateQritem = qrCodeItem.copy(fileUriString = uri.toString())
-                    Timber.e("MediaScanner::--->$uri")
-                }
+                ) { _, uri -> Timber.e("MediaScanner::--->$uri") }
                 fo.close()
-                Timber.d("File Saved::--->" + f.absolutePath)
-                f.absolutePath
+                Timber.d("File Saved::--->" + file.absolutePath)
+                file.absolutePath
             } catch (e1: IOException) {
                 e1.printStackTrace()
                 ""
