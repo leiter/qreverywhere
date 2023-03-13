@@ -68,39 +68,32 @@ fun ImageButton.setDrawable(resId: Int, imageView: ImageButton) {
     imageView.setImageDrawable(d)
 }
 
-fun View.showSnackBar(config: UiEvent.SnackBar) {
-    val s = Snackbar.make(this, config.message, config.duration)
-    config.backGroundColor?.let {
+fun View.showSnackBar(
+    @StringRes message: Int,
+    duration: Int = Snackbar.LENGTH_LONG,
+    anchorView: View? = null,
+    @ColorRes backGroundColor: Int? = R.color.primary,
+    @ColorRes actionTextColor: Int = R.color.accent,
+    @StringRes actionLabel: Int? = null,
+    actionBlock: (() -> Unit)? = null,
+    ) {
+    val hasAction = actionBlock != null && actionLabel != null
+    val s = Snackbar.make(this, message, duration)
+    backGroundColor?.let {
         s.view.setBackgroundColor(
             ResourcesCompat.getColor(context.resources, it, null)
         )
     }
-    if (config.anchorView != null) {
-        s.anchorView = config.anchorView
+    if (anchorView != null) {
+        s.anchorView = anchorView
     }
-    if (config.hasAction()) {
-        s.setAction(config.actionLabel!!) {
-            config.actionBlock!!()
+    if (hasAction) {
+        s.setAction(actionLabel!!) {
+            actionBlock!!()
         }
-        s.setActionTextColor(ResourcesCompat.getColor(context.resources, R.color.accent, null))
+        s.setActionTextColor(ResourcesCompat.getColor(context.resources, actionTextColor, null))
     }
     s.show()
-}
-
-sealed class UiEvent {
-    data class SnackBar(
-        @StringRes val message: Int,
-        val duration: Int = Snackbar.LENGTH_LONG,
-        val anchorView: View? = null,
-        @ColorRes val backGroundColor: Int? = R.color.primary,
-        @ColorRes val actionTextColor: Int = R.color.accent,
-        @StringRes val actionLabel: Int? = null,
-        val actionBlock: (() -> Unit)? = null,
-    ) {
-        fun hasAction(): Boolean {
-            return actionBlock != null && actionLabel != null
-        }
-    }
 }
 
 fun View.registerImeVisibilityListener(

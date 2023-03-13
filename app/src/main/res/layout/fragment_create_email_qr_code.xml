@@ -23,9 +23,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:hint="@string/qr_create_email_hint_recipient"
-            app:layout_constraintEnd_toEndOf="parent"
+
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/createEmailButtonSaveQrToFile">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/createEmailAddressText"
@@ -111,33 +112,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/createEmailBodyTextLayout" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/createEmailQrImagePreview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_launcher_background"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_goneMarginTop="16dp" />
-
-        <Button
-            android:id="@+id/createEmailButtonSaveQrToFile"
-            android:layout_marginTop="8dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/qr_create_email_button_save"
-            app:layout_constraintEnd_toEndOf="@+id/createEmailQrImagePreview"
-            app:layout_constraintStart_toStartOf="@+id/createEmailQrImagePreview"
-            app:layout_constraintTop_toBottomOf="@+id/createEmailQrImagePreview" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/createEmailHeaderGroup"
-            android:visibility="gone"
-            app:constraint_referenced_ids="createEmailQrImagePreview,createEmailButtonSaveQrToFile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

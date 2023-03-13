@@ -4,15 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:background="@android:color/transparent">
+    android:background="@android:color/transparent"
+    android:padding="16dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/primary"
         android:descendantFocusability="afterDescendants"
-
         android:padding="16dp">
 
         <TextView
@@ -20,10 +19,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:drawablePadding="8dp"
             android:text="@string/qr_history_swipe_delete"
             android:textAllCaps="true"
             android:textColor="@color/white"
-            android:drawablePadding="8dp"
             app:drawableStartCompat="@drawable/ic_delete" />
 
         <TextView
@@ -31,18 +30,16 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
+            android:drawablePadding="8dp"
             android:text="@string/qr_history_swipe_fullscreen"
             android:textAllCaps="true"
             android:textColor="@color/white"
-            android:drawablePadding="8dp"
-            app:drawableStartCompat="@drawable/ic_open_in_full"  />
-
+            app:drawableStartCompat="@drawable/ic_open_in_full" />
 
     </RelativeLayout>
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
         android:id="@+id/history_item_foreground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -72,8 +69,8 @@
             android:id="@+id/history_item_content_preview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             android:ellipsize="end"
             android:gravity="center_vertical"
             android:lines="1"
@@ -82,7 +79,6 @@
             app:layout_constraintStart_toEndOf="@+id/history_item_type"
             app:layout_constraintTop_toTopOf="@+id/history_item_type"
             tools:text="@tools:sample/lorem/random" />
-
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/history_item_timestamp"
@@ -93,7 +89,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/history_item_type"
             app:layout_constraintTop_toBottomOf="@+id/history_item_content_preview"
-            tools:text="erstellt am 25.06.2020" />
+            tools:text="Erstellt am 25.06.2020" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

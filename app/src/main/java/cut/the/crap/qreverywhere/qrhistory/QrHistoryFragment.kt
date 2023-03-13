@@ -15,7 +15,6 @@ import cut.the.crap.qreverywhere.databinding.FragmentQrHistoryBinding
 import cut.the.crap.qreverywhere.utils.data.AcquireDateFormatter
 import cut.the.crap.qreverywhere.utils.ui.FROM_HISTORY_LIST
 import cut.the.crap.qreverywhere.utils.ui.ORIGIN_FLAG
-import cut.the.crap.qreverywhere.utils.ui.UiEvent
 import cut.the.crap.qreverywhere.utils.ui.activityView
 import cut.the.crap.qreverywhere.utils.ui.gone
 import cut.the.crap.qreverywhere.utils.ui.showSnackBar
@@ -107,13 +106,11 @@ class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
                     is State.Success -> {
                         progress.hide()
                         viewBinding.root.showSnackBar(
-                            UiEvent.SnackBar(
                                 message = R.string.item_deleted,
                                 anchorView = requireActivity().findViewById(R.id.nav_view),
                                 actionLabel = R.string.undo_delete,
                                 actionBlock = { activityViewModel.saveQrItem(it.data!!) }
                             )
-                        )
                     }
                     null -> {
                         progress.hide()

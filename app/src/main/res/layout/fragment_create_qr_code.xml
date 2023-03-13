@@ -46,9 +46,8 @@
         android:id="@+id/createPhoneQrCode"
         android:layout_width="124dp"
         android:layout_height="122dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="48dp"
         android:background="@drawable/custom_ripple"
-
         android:gravity="bottom|center_horizontal"
         android:padding="16dp"
         android:text="@string/qr_create_button_phone"

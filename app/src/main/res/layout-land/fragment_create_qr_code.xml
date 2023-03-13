@@ -12,7 +12,6 @@
         android:id="@+id/createEmailQrCode"
         android:layout_width="124dp"
         android:layout_height="122dp"
-
         android:background="@drawable/custom_ripple"
         android:gravity="bottom|center_horizontal"
         android:padding="16dp"

@@ -31,7 +31,6 @@ import cut.the.crap.qreverywhere.utils.ui.FROM_CREATE_CONTEXT
 import cut.the.crap.qreverywhere.utils.ui.FROM_HISTORY_LIST
 import cut.the.crap.qreverywhere.utils.ui.FROM_SCAN_QR
 import cut.the.crap.qreverywhere.utils.ui.ORIGIN_FLAG
-import cut.the.crap.qreverywhere.utils.ui.UiEvent
 import cut.the.crap.qreverywhere.utils.ui.activityView
 import cut.the.crap.qreverywhere.utils.ui.ensureBottomNavigation
 import cut.the.crap.qreverywhere.utils.ui.gone
@@ -125,21 +124,18 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
             when (it) {
                 is State.Success<String?> -> {
                     requireView().showSnackBar(
-                        UiEvent.SnackBar(
                             message = R.string.saved_as_file,
                             anchorView = viewBinding.detailViewContentTextView
-                        )
                     )
                     progress.hide()
                 }
                 is State.Error -> {
                     requireView().showSnackBar(
-                        UiEvent.SnackBar(
                             message = R.string.error_saved_as_file,
                             anchorView = viewBinding.detailViewContentTextView,
                             backGroundColor = R.color.teal_700
                         )
-                    )
+
                     progress.hide()
                 }
 

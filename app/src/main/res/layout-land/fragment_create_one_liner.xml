@@ -12,35 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/createOneLinerQrImagePreview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:src="@drawable/ic_launcher_background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_goneMarginTop="16dp" />
-
-        <Button
-            android:id="@+id/createOneLinerButtonSaveQrToFile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/qr_create_email_button_save"
-            app:layout_constraintEnd_toEndOf="@+id/createOneLinerQrImagePreview"
-            app:layout_constraintStart_toStartOf="@+id/createOneLinerQrImagePreview"
-            app:layout_constraintTop_toBottomOf="@+id/createOneLinerQrImagePreview" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/createOneLinerHeaderGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:constraint_referenced_ids="createOneLinerQrImagePreview,createOneLinerButtonSaveQrToFile" />
-
-
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/createOneLinerNumberInputLayout"
             style="@style/PasteHereTextLayout"
@@ -71,9 +42,8 @@
             android:layout_marginHorizontal="24dp"
             android:layout_marginTop="48dp"
             android:hint="@string/create_one_liner_input_layout_hint_web"
-            app:layout_constraintEnd_toStartOf="@+id/createOneLinerCreate"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/createOneLinerButtonSaveQrToFile"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintWidth_percent="0.6">
 
             <com.google.android.material.textfield.TextInputEditText

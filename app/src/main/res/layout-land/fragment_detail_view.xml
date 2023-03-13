@@ -12,16 +12,13 @@
         android:layout_height="wrap_content"
         android:paddingBottom="24dp">
 
-        <com.google.android.material.textview.MaterialTextView
+        <View
             android:id="@+id/detailViewAcquiredAt"
-            style="@style/TextAppearance.AppCompat.Subhead"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_height="32dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Scanned on 06.05.2020" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
         <com.google.android.material.textview.MaterialTextView
@@ -64,7 +61,7 @@
             android:id="@+id/detailViewContentPreviewImage"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="32dp"
             android:src="@drawable/ic_launcher_background"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="W,1"

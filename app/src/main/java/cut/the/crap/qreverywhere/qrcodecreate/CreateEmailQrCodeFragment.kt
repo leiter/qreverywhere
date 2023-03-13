@@ -26,7 +26,6 @@ import cut.the.crap.qreverywhere.utils.ui.activityView
 import cut.the.crap.qreverywhere.utils.ui.clipBoard
 import cut.the.crap.qreverywhere.utils.ui.focusEditText
 import cut.the.crap.qreverywhere.utils.ui.showShortToast
-import cut.the.crap.qreverywhere.utils.ui.UiEvent
 import cut.the.crap.qreverywhere.utils.ui.gone
 import cut.the.crap.qreverywhere.utils.ui.pasteFromClipBoard
 import cut.the.crap.qreverywhere.utils.ui.showSnackBar
@@ -84,11 +83,10 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                             activityViewModel.setDetailViewItem(it.data)
                         } else {
                             root.showSnackBar(
-                                UiEvent.SnackBar(
                                     message = R.string.saved_in_history,
                                     anchorView = bottomNav
                                 )
-                            )
+
 
                             findNavController().navigate(
                                 R.id.action_createEmailQrCodeFragment_to_detailViewFragment,
@@ -104,8 +102,8 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                                 getString(R.string.error_invalid_email_address)
                             is WriterException -> {
                                 root.showSnackBar(
-                                    UiEvent.SnackBar(message = R.string.error_could_not_create_qr_image)
-                                )
+                                    message = R.string.error_could_not_create_qr_image)
+
                             }
                         }
                     }
@@ -116,21 +114,17 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                 when (it) {
                     is State.Success<String?> -> {
                         requireView().showSnackBar(
-                            UiEvent.SnackBar(
                                 message = R.string.saved_as_file,
-                                anchorView = viewBinding.createEmailButtonSaveQrToFile
+                                anchorView = viewBinding.createEmailCreateQrcode
                             )
-                        )
                         progress.hide()
                     }
                     is State.Error -> {
                         requireView().showSnackBar(
-                            UiEvent.SnackBar(
                                 message = R.string.error_saved_as_file,
-                                anchorView = viewBinding.createEmailButtonSaveQrToFile,
+                                anchorView = viewBinding.createEmailCreateQrcode,
                                 backGroundColor = R.color.teal_700
                             )
-                        )
                         progress.hide()
                     }
                     is State.Loading -> progress.show()
@@ -193,15 +187,6 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
 
             createEmailCreateQrcode.setOnClickListener {
                 viewModel.textToQrCodeItem(activityViewModel)
-            }
-            createEmailButtonSaveQrToFile.setOnClickListener {
-                activityViewModel.saveQrImageOfDetailView(requireContext())
-            }
-            createEmailQrImagePreview.setOnClickListener {
-                findNavController().navigate(
-                    R.id.action_createEmailQrCodeFragment_to_qrFullscreenFragment,
-                    bundleOf(ORIGIN_FLAG to FROM_CREATE_CONTEXT)
-                )
             }
         }
         observeViewModel()

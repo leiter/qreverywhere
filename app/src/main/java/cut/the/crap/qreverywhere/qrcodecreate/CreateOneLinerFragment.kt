@@ -23,7 +23,6 @@ import cut.the.crap.qreverywhere.qrdelegates.ImeActionDelegateImpl
 import cut.the.crap.qreverywhere.utils.data.IntentGenerator
 import cut.the.crap.qreverywhere.utils.ui.FROM_CREATE_CONTEXT
 import cut.the.crap.qreverywhere.utils.ui.ORIGIN_FLAG
-import cut.the.crap.qreverywhere.utils.ui.UiEvent
 import cut.the.crap.qreverywhere.utils.ui.activityView
 import cut.the.crap.qreverywhere.utils.ui.clipBoard
 import cut.the.crap.qreverywhere.utils.ui.focusEditText
@@ -118,21 +117,17 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
             when (it) {
                 is State.Success<String?> -> {
                     requireView().showSnackBar(
-                        UiEvent.SnackBar(
                             message = R.string.saved_as_file,
                             anchorView = bottomNav
                         )
-                    )
                     progress.hide()
                 }
                 is State.Error -> {
                     requireView().showSnackBar(
-                        UiEvent.SnackBar(
                             message = R.string.error_saved_as_file,
                             anchorView = bottomNav,
                             backGroundColor = R.color.teal_700
                         )
-                    )
                     progress.hide()
                 }
                 is State.Loading -> progress.show()
@@ -160,13 +155,11 @@ class CreateOneLinerFragment : Fragment(R.layout.fragment_create_one_liner),
 
                             val anchor = activityView<BottomNavigationView>(R.id.nav_view)
                             viewBinding.root.showSnackBar(
-                                UiEvent.SnackBar(
                                     message = R.string.saved_in_history,
                                     anchorView = anchor,
                                     actionTextColor = R.color.accent,
                                     actionLabel = R.string.undo_delete,
                                 )
-                            )
                             findNavController().navigate(
                                 R.id.action_createOneLinerFragment_to_detailViewFragment2,
                                 bundleOf(ORIGIN_FLAG to FROM_CREATE_CONTEXT)

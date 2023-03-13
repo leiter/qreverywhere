@@ -130,15 +130,13 @@ class MainActivityViewModel @Inject constructor(
                     directory, Calendar.getInstance().timeInMillis.toString() + ".jpg"
                 )
                 file.createNewFile()
-                val fo = FileOutputStream(file)
-                fo.write(bytes.toByteArray())
+                FileOutputStream(file).use { it.write(bytes.toByteArray()) }
                 MediaScannerConnection.scanFile(
                     context,
                     arrayOf(file.path),
                     arrayOf("image/jpeg")
-                ) { _, uri -> Timber.e("MediaScanner::--->$uri") }
-                fo.close()
-                Timber.d("File Saved::--->" + file.absolutePath)
+                ) { _, uri -> Timber.d("MediaScanner::--->$uri") }
+//                Timber.d("File Saved::--->" + file.absolutePath)
                 file.absolutePath
             } catch (e1: IOException) {
                 e1.printStackTrace()

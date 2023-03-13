@@ -15,29 +15,28 @@
             android:layout_height="wrap_content"
             android:paddingBottom="24dp">
 
-            <com.google.android.material.textview.MaterialTextView
+            <View
                 android:id="@+id/detailViewAcquiredAt"
-                style="@style/TextAppearance.AppCompat.Subhead"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:gravity="center"
                 android:padding="12dp"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Scanned on 06.05.2020" />
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/detailViewActionTypeTextView"
                 style="@style/TextAppearance.AppCompat.Large"
                 android:layout_width="0dp"
-                android:gravity="center"
-                android:textSize="22sp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="24dp"
+                android:gravity="center"
                 android:text="@string/detailview_content_title"
+                android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detailViewContentPreviewImage" />
@@ -49,8 +48,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:textSize="18sp"
                 android:padding="48dp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/detailViewActionTypeTextView"
