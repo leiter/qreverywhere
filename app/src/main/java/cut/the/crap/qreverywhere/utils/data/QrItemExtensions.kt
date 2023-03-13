@@ -1,12 +1,14 @@
 package cut.the.crap.qreverywhere.utils.data
 
+import android.net.Uri
 import cut.the.crap.qreverywhere.R
+import cut.the.crap.qreverywhere.utils.ProtocolPrefix
 import cut.the.crap.qreverywhere.utils.QrCodeType
-import cut.the.crap.qreverywhere.utils.determineType
+import cut.the.crap.qreverywhere.utils.isVcard
 import cut.the.crap.qrrepository.QrItem
 
 val QrItem.detailTitle: Int
-    get() = when (determineType(textContent)) {
+    get() = when (determineType()) {
         QrCodeType.EMAIL -> R.string.detail_title_email
         QrCodeType.PHONE -> R.string.detail_title_phone
         QrCodeType.WEB_URL -> R.string.detail_title_web
@@ -14,9 +16,24 @@ val QrItem.detailTitle: Int
     }
 
 val QrItem.fabLaunchIcon: Int
-    get() = when (determineType(textContent)) {
+    get() = when (determineType()) {
         QrCodeType.EMAIL -> R.drawable.ic_mail_outline_white
         QrCodeType.PHONE -> R.drawable.ic_phone_white
         QrCodeType.WEB_URL -> R.drawable.ic_open_in_browser_white
         else -> R.string.detail_title_text
     }
+
+@QrCodeType.Type
+fun QrItem.determineType(): Int {
+    val decoded = Uri.decode(textContent)
+    return when {
+        decoded.startsWith(ProtocolPrefix.TEL) -> QrCodeType.PHONE
+        decoded.startsWith(ProtocolPrefix.MAILTO) -> QrCodeType.EMAIL
+        decoded.startsWith(ProtocolPrefix.HTTP) ||
+            decoded.startsWith(ProtocolPrefix.HTTPS) -> QrCodeType.WEB_URL
+        decoded.startsWith(ProtocolPrefix.SMS) ||
+            decoded.startsWith(ProtocolPrefix.SMSTO) -> QrCodeType.SMS
+        isVcard(decoded) -> QrCodeType.CONTACT
+        else -> QrCodeType.UNKNOWN_CONTENT
+    }
+}

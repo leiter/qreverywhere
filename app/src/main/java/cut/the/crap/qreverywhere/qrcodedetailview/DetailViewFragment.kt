@@ -28,9 +28,9 @@ import cut.the.crap.qreverywhere.utils.ProtocolPrefix.TEL
 import cut.the.crap.qreverywhere.utils.QrCodeType
 import cut.the.crap.qreverywhere.utils.data.IntentGenerator.QrStartIntent
 import cut.the.crap.qreverywhere.utils.data.detailTitle
+import cut.the.crap.qreverywhere.utils.data.determineType
 import cut.the.crap.qreverywhere.utils.data.fabLaunchIcon
 import cut.the.crap.qreverywhere.utils.ui.activityView
-import cut.the.crap.qreverywhere.utils.determineType
 import cut.the.crap.qreverywhere.utils.isVcard
 import cut.the.crap.qreverywhere.utils.ui.setSubTitle
 import cut.the.crap.qreverywhere.utils.ui.setTitle
@@ -159,7 +159,7 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
             Glide.with(root.context).load(item.img).into(detailViewContentPreviewImage)
             detailViewContentTextView.text = Uri.decode(item.textContent)
 
-            if (determineType(activityViewModel.detailViewQrCodeItem.textContent) != QrCodeType.UNKNOWN_CONTENT) {
+            if (activityViewModel.detailViewQrCodeItem.determineType() != QrCodeType.UNKNOWN_CONTENT) {
                 detailViewLaunchActionButton.text = launchText
                 detailViewLaunchActionButton.setIconResource(item.fabLaunchIcon)
                 detailViewLaunchActionButton.setOnClickListener {
@@ -216,7 +216,7 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
     }
 
     private fun launchClicked() {
-        if (determineType(activityViewModel.detailViewQrCodeItem.textContent) != QrCodeType.UNKNOWN_CONTENT) {
+        if (activityViewModel.detailViewQrCodeItem.determineType() != QrCodeType.UNKNOWN_CONTENT) {
             QrStartIntent(activityViewModel.detailViewQrCodeItem.textContent)
                 .getIntent().startIntentGracefully(requireContext())
         } else {

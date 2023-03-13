@@ -21,15 +21,6 @@ import com.google.zxing.Result
 import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.common.HybridBinarizer
-import cut.the.crap.qreverywhere.utils.ProtocolPrefix.HTTP
-import cut.the.crap.qreverywhere.utils.ProtocolPrefix.HTTPS
-import cut.the.crap.qreverywhere.utils.ProtocolPrefix.MAILTO
-import cut.the.crap.qreverywhere.utils.ProtocolPrefix.TEL
-import cut.the.crap.qreverywhere.utils.QrCodeType.CONTACT
-import cut.the.crap.qreverywhere.utils.QrCodeType.EMAIL
-import cut.the.crap.qreverywhere.utils.QrCodeType.PHONE
-import cut.the.crap.qreverywhere.utils.QrCodeType.UNKNOWN_CONTENT
-import cut.the.crap.qreverywhere.utils.QrCodeType.WEB_URL
 import cut.the.crap.qrrepository.QrItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -65,19 +56,7 @@ object ProtocolPrefix {
     const val SMSTO = "smsto:"
 }
 
-@QrCodeType.Type
-fun determineType(contentString: String): Int {
-    val decoded = Uri.decode(contentString)
-    return when {
-        decoded.startsWith(TEL) -> PHONE
-        decoded.startsWith(MAILTO) -> EMAIL
-        decoded.startsWith(HTTP) || decoded.startsWith(HTTPS) -> WEB_URL
-        decoded.startsWith(ProtocolPrefix.SMS) ||
-            decoded.startsWith(ProtocolPrefix.SMSTO) -> QrCodeType.SMS
-        isVcard(decoded) -> CONTACT
-        else -> UNKNOWN_CONTENT
-    }
-}
+
 
 fun isVcard(contentString: String): Boolean {
     return contentString.startsWith("BEGIN:VCARD") && contentString.endsWith("END:VCARD\n")

@@ -1,6 +1,5 @@
 package cut.the.crap.qreverywhere.qrcodecreate
 
-import android.content.res.Resources
 import android.net.Uri
 import android.util.Patterns
 import androidx.lifecycle.MutableLiveData
@@ -31,7 +30,7 @@ class CreateQrCodeViewModel @Inject constructor(
     var emailText = ""
 
     @Throws(WriterException::class)
-    fun textToQrCodeItem(resources: Resources, activityViewModel: MainActivityViewModel) {
+    fun textToQrCodeItem(activityViewModel: MainActivityViewModel) {
         viewModelScope.launch {
             var qrItem: cut.the.crap.qrrepository.db.QrCodeDbItem? = null
             var saveInHistory = false

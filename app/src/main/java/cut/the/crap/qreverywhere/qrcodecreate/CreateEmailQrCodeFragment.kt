@@ -192,7 +192,7 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
             }
 
             createEmailCreateQrcode.setOnClickListener {
-                viewModel.textToQrCodeItem(resources, activityViewModel)
+                viewModel.textToQrCodeItem(activityViewModel)
             }
             createEmailButtonSaveQrToFile.setOnClickListener {
                 activityViewModel.saveQrImageOfDetailView(requireContext())

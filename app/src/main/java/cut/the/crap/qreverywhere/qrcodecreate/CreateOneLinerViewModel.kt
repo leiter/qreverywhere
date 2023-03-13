@@ -1,6 +1,5 @@
 package cut.the.crap.qreverywhere.qrcodecreate
 
-import android.content.res.Resources
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cut.the.crap.qreverywhere.MainActivityViewModel
@@ -27,29 +26,28 @@ class CreateOneLinerViewModel @Inject constructor(
     var currentInputText = ""
     var currentInputNumber = ""
 
-    private fun createWebQrcode(resources: Resources, activityViewModel: MainActivityViewModel) {
-        viewModelScope.launch { createCQrcode(resources, activityViewModel,currentInputText) }
+    private fun createWebQrcode(activityViewModel: MainActivityViewModel) {
+        viewModelScope.launch { createCQrcode(activityViewModel,currentInputText) }
     }
 
-    private fun createTextQrcode(resources: Resources, activityViewModel: MainActivityViewModel) {
-        viewModelScope.launch { createCQrcode(resources, activityViewModel,currentInputText) }
+    private fun createTextQrcode(activityViewModel: MainActivityViewModel) {
+        viewModelScope.launch { createCQrcode(activityViewModel,currentInputText) }
     }
 
-    private fun createCallQrcode(resources: Resources, activityViewModel: MainActivityViewModel) {
+    private fun createCallQrcode(activityViewModel: MainActivityViewModel) {
         viewModelScope.launch {
             val uriString = TEL + currentInputNumber
-            createCQrcode(resources,activityViewModel, uriString)
+            createCQrcode(activityViewModel, uriString)
         }
     }
 
-    private fun createCQrcode(resources: Resources, activityViewModel: MainActivityViewModel, text: String) {
+    private fun createCQrcode(activityViewModel: MainActivityViewModel, text: String) {
         viewModelScope.launch {
             val qrCodeItem = createQrItem(text)
             activityViewModel.setDetailViewItem(qrCodeItem)
             qrCodeItemState.value = State.success()
             historyRepository.insertQrItem(qrCodeItem)
         }
-
     }
 
     private suspend fun createQrItem(text: String) : QrItem {
@@ -96,19 +94,18 @@ class CreateOneLinerViewModel @Inject constructor(
         qrCodeItemState.value = State.loading()
     }
 
-    fun createClicked(mode: Int, resources: Resources, activityViewModel: MainActivityViewModel) {
-//        startLoading()
+    fun createClicked(mode: Int, activityViewModel: MainActivityViewModel) {
         when (mode) {
             CreateOneLinerFragment.CREATE_PHONE -> {
-                if (isValidPhoneNumber()) createCallQrcode(resources, activityViewModel)
+                if (isValidPhoneNumber()) createCallQrcode(activityViewModel)
                 else qrCodeItemState.value = State.error(error = InvalidPhoneNumber())
             }
             CreateOneLinerFragment.CREATE_SMS -> {
-                if (currentInputText.isNotEmpty()) createTextQrcode(resources, activityViewModel)
+                if (currentInputText.isNotEmpty()) createTextQrcode(activityViewModel)
                 else qrCodeItemState.value = State.error(error = EmptyMessage())
             }
             CreateOneLinerFragment.CREATE_WEB -> {
-                if (isValidWebUrl()) createWebQrcode(resources, activityViewModel)
+                if (isValidWebUrl()) createWebQrcode(activityViewModel)
                 else qrCodeItemState.value = State.error(error = InvalidWebUrl())
             }
 
@@ -128,5 +125,7 @@ class CreateOneLinerViewModel @Inject constructor(
 }
 
 class EmptyMessage : Exception()
+
 class InvalidPhoneNumber : Exception()
+
 class InvalidWebUrl : Exception()

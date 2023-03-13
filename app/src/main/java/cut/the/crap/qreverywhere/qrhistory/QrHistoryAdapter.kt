@@ -14,7 +14,7 @@ import cut.the.crap.qreverywhere.databinding.ItemQrHistoryBinding
 import cut.the.crap.qreverywhere.utils.data.AcquireDateFormatter
 import cut.the.crap.qreverywhere.utils.ProtocolPrefix
 import cut.the.crap.qreverywhere.utils.QrCodeType
-import cut.the.crap.qreverywhere.utils.determineType
+import cut.the.crap.qreverywhere.utils.data.determineType
 import cut.the.crap.qreverywhere.utils.isVcard
 import cut.the.crap.qreverywhere.utils.ui.isLandscape
 import cut.the.crap.qrrepository.QrItem
@@ -81,7 +81,7 @@ class QrHistoryAdapter(
             historyItemTimestamp.text = createdText
 
             historyItemType.setImageResource(getQrTypeDrawable(qrItemData.textContent))
-            historyItemContentPreview.text = textForHistoryList(qrItemData.textContent, root.context)
+            historyItemContentPreview.text = textForHistoryList(qrItemData, root.context)
             historyItemImage.setOnClickListener {
                 fullscreenItemClicked(position)
             }
@@ -89,13 +89,11 @@ class QrHistoryAdapter(
                 historyItemFullscreen?.setOnClickListener { fullscreenItemClicked(position) }
                 historyItemDelete?.setOnClickListener { deleteItemClicked(position) }
             }
-
         }
     }
 
     private fun getQrTypeDrawable(contentString: String): Int {
         val decoded = Uri.decode(contentString)
-
         return when {
             decoded.startsWith(ProtocolPrefix.TEL) -> R.drawable.ic_phone
             decoded.startsWith(ProtocolPrefix.MAILTO) -> R.drawable.ic_mail_outline
@@ -108,9 +106,9 @@ class QrHistoryAdapter(
         }
     }
 
-    private fun textForHistoryList(text: String, context: Context): String {
-        val decodedText = Uri.decode(text)
-        return when (determineType(decodedText)) {
+    private fun textForHistoryList(qrItemData: QrItem, context: Context): String {
+        val decodedText = Uri.decode(qrItemData.textContent)
+        return when (qrItemData.determineType()) {
             QrCodeType.PHONE -> context.getString(R.string.phone_template).format(decodedText.subSequence(4, decodedText.length - 1))
             QrCodeType.EMAIL -> context.getString(R.string.mail_template).format(decodedText.subSequence(7, decodedText.indexOf("?")))
             QrCodeType.WEB_URL -> context.getString(R.string.open_in_browser_template).format(decodedText)

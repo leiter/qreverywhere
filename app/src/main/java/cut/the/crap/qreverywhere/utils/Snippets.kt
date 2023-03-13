@@ -16,7 +16,7 @@ private fun shareBitmap(context: Context, bitmap: Bitmap, fileName: String) {
     try {
         val file = File(context.cacheDir, "$fileName.png")
         val fOut = FileOutputStream(file)
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut)
         fOut.flush()
         fOut.close()
 //        file.setReadable(true, false)
