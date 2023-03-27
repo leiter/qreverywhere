@@ -13,7 +13,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath("com.android.tools:r8:4.0.48")
+        classpath("com.android.tools:r8:8.0.34")
         classpath('com.google.dagger:hilt-android-gradle-plugin:2.40.1')
         classpath ("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")
 

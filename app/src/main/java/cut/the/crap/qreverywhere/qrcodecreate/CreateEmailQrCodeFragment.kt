@@ -9,7 +9,9 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.progressindicator.LinearProgressIndicator
@@ -35,6 +37,7 @@ import cut.the.crap.qreverywhere.utils.ui.visible
 import cut.the.crap.qrrepository.QrItem
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_code),
@@ -86,8 +89,6 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                                     message = R.string.saved_in_history,
                                     anchorView = bottomNav
                                 )
-
-
                             findNavController().navigate(
                                 R.id.action_createEmailQrCodeFragment_to_detailViewFragment,
                                 bundleOf(ORIGIN_FLAG to FROM_CREATE_CONTEXT)
@@ -103,7 +104,6 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
                             is WriterException -> {
                                 root.showSnackBar(
                                     message = R.string.error_could_not_create_qr_image)
-
                             }
                         }
                     }
@@ -157,19 +157,25 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
             createEmailSubjectText.setText(viewModel.emailSubject)
             createEmailBodyText.setText(viewModel.emailText)
 
-            lifecycleScope.launchWhenResumed {
-                createEmailAddressText.textChanges().collect {
-                    viewModel.emailAddress = it.toString()
+            viewLifecycleOwner.lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.RESUMED){
+                    createEmailAddressText.textChanges().collect {
+                        viewModel.emailAddress = it.toString()
+                    }
                 }
             }
-            lifecycleScope.launchWhenResumed {
-                createEmailSubjectText.textChanges().collect {
-                    viewModel.emailSubject = it.toString()
+            viewLifecycleOwner.lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.RESUMED){
+                    createEmailSubjectText.textChanges().collect {
+                        viewModel.emailSubject = it.toString()
+                    }
                 }
             }
-            lifecycleScope.launchWhenResumed {
-                createEmailBodyText.textChanges().collect {
-                    viewModel.emailText = it.toString()
+            viewLifecycleOwner.lifecycleScope.launch {
+                repeatOnLifecycle(Lifecycle.State.RESUMED){
+                    createEmailBodyText.textChanges().collect {
+                        viewModel.emailText = it.toString()
+                    }
                 }
             }
 

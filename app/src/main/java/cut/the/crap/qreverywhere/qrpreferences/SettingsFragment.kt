@@ -16,7 +16,6 @@ class SettingsFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.root_preferences, rootKey)
     }
 
-
     override fun onPrepareOptionsMenu(menu: Menu) {
         menu.clear()
         super.onPrepareOptionsMenu(menu)

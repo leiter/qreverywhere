@@ -8,17 +8,17 @@ import com.google.zxing.*
 import com.google.zxing.common.HybridBinarizer
 import com.google.zxing.multi.qrcode.QRCodeMultiReader
 import java.nio.ByteBuffer
-import java.util.logging.Handler
 
 
-class QRCodeImageAnalyzer(listener: QRCodeFoundListener) : ImageAnalysis.Analyzer {
-    private val listener: QRCodeFoundListener
+class QRCodeImageAnalyzer(private val listener: QRCodeFoundListener) : ImageAnalysis.Analyzer {
 
     private var throttle: Long = 0L
     private val waitingTime = 2000L
 
     override fun analyze(image: ImageProxy) {
-        if (image.format == ImageFormat.YUV_420_888 || image.format == ImageFormat.YUV_422_888 || image.format == ImageFormat.YUV_444_888) {
+        if (image.format == ImageFormat.YUV_420_888
+            || image.format == ImageFormat.YUV_422_888
+            || image.format == ImageFormat.YUV_444_888) {
             val byteBuffer: ByteBuffer = image.planes[0].buffer
             val imageData = ByteArray(byteBuffer.capacity())
             byteBuffer[imageData]
@@ -48,9 +48,5 @@ class QRCodeImageAnalyzer(listener: QRCodeFoundListener) : ImageAnalysis.Analyze
             }
         }
         image.close()
-    }
-
-    init {
-        this.listener = listener
     }
 }

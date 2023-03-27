@@ -82,6 +82,27 @@ fun (() -> Unit).catch(vararg exceptions: KClass<out Throwable>, catchBlock: (Th
     }
 }
 
+
+//data class State<out T>(
+//    val status: Status,
+//    val data: T?,
+//    val message: String?
+//) {
+//
+//    companion object {
+//
+//        fun <T> success(msg: String?, data: T?): State<T> = State(Status.SUCCESS, data, msg)
+//        fun <T> loading(data: T?): State<T> = State(Status.LOADING, data, null)
+//        fun <T> error(msg: String, data: T?): State<T> = State(Status.ERROR, data, msg)
+//    }
+//}
+//
+//enum class Status {
+//    SUCCESS,
+//    ERROR,
+//    LOADING
+//}
+
 //@RequiresApi(Build.VERSION_CODES.Q)
 //private fun saveFileToExternalStorage(displayName: String, content: String) {
 //    val externalUri = MediaStore.Files.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)

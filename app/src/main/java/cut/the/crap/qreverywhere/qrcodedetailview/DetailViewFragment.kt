@@ -60,7 +60,7 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
         FragmentDetailViewBinding.bind(requireView())
     }
 
-    private val optionMap by lazy {
+    private val menuOptionMap by lazy {
         val map = mutableMapOf(
             R.id.menu_save_to_file to {
                 activityViewModel.saveQrImageOfDetailView(requireContext())
@@ -73,7 +73,6 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
                 activityViewModel.deleteCurrentDetailView()
                 findNavController().navigate(R.id.action_detailViewFragment_to_qrHistoryFragment)
             }
-
         }
         if (args.originFlag == FROM_CREATE_CONTEXT) {
             map[android.R.id.home] = {
@@ -118,7 +117,7 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
             setObserver()
         }
 
-        setupMenuItems(R.menu.menu_detail_view, optionMap)
+        setupMenuItems(R.menu.menu_detail_view, menuOptionMap)
 
         activityViewModel.saveDetailViewQrCodeImage.observe(viewLifecycleOwner) {
             when (it) {
@@ -213,8 +212,8 @@ class DetailViewFragment : Fragment(R.layout.fragment_detail_view) {
 
     private fun launchClicked() {
         if (activityViewModel.detailViewQrCodeItem.determineType() != QrCodeType.UNKNOWN_CONTENT) {
-            requireContext().startIntentGracefully(QrStartIntent(activityViewModel.detailViewQrCodeItem.textContent)
-                .getIntent())
+            requireContext().startIntentGracefully(
+                QrStartIntent(activityViewModel.detailViewQrCodeItem.textContent).getIntent())
         } else {
             viewBinding.detailViewLaunchActionButton.gone()
         }
