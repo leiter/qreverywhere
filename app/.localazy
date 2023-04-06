@@ -1,0 +1,7 @@
+[packages]
+cut.the.crap.qreverywhere = raa
+
+[localazy]
+allStringsUploaded = true
+showWelcomeMessage = false
+

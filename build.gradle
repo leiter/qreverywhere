@@ -6,14 +6,17 @@ buildscript {
         nav_version = '2.4.2'
     }
     repositories {
-        google()
         mavenCentral()
         maven {
             url = uri("https://storage.googleapis.com/r8-releases/raw")
+            url = uri("https://maven.localazy.com/repository/release")
         }
+        google()
     }
     dependencies {
         classpath("com.android.tools:r8:8.0.34")
+        classpath ('com.android.tools.build:gradle:4.2.2')
+        classpath("com.localazy:gradle:1.5.2")
         classpath('com.google.dagger:hilt-android-gradle-plugin:2.40.1')
         classpath ("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")
 

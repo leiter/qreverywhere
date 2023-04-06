@@ -6,6 +6,12 @@ plugins {
     id ("kotlin-kapt")
     id ("dagger.hilt.android.plugin")
     id ("androidx.navigation.safeargs")
+    id ("com.localazy.gradle")
+}
+
+localazy {
+    readKey "a7844856686728087529-01fb65759e01803f9c76e6d9eda43baa77a6d93523bb29f2a887506b97385e7a"
+    writeKey "a7844856686728087529-326192c4249d0bbd857fbb6dcaa014c1484f389cbc9b81e1a4f762b0492883d3"
 }
 
 android {
