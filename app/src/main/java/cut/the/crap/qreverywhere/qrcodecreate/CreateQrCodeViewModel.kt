@@ -9,7 +9,7 @@ import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.utils.data.EncryptedPrefs
-import cut.the.crap.qreverywhere.utils.textToImageEnc
+import cut.the.crap.qreverywhere.utils.data.textToImageEnc
 import cut.the.crap.qrrepository.Acquire
 import cut.the.crap.qrrepository.QrItem
 import cut.the.crap.qrrepository.db.toItem

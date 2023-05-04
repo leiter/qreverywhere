@@ -1,17 +1,12 @@
 package cut.the.crap.qreverywhere.utils
 
 import android.app.ActivityManager
-import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.net.Uri
-import android.os.Build
-import android.os.Environment
-import android.provider.MediaStore
 import android.view.View
-import androidx.annotation.RequiresApi
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -75,6 +70,14 @@ fun isPermissionDialogDisplayed(context: Context) :Boolean {
 }
 
 fun (() -> Unit).catch(vararg exceptions: KClass<out Throwable>, catchBlock: (Throwable) -> Unit) {
+    try {
+        this()
+    } catch (e: Throwable) {
+        if (e::class in exceptions) catchBlock(e) else throw e
+    }
+}
+
+fun <R> (() -> R).catch(vararg exceptions: KClass<out Throwable>, catchBlock: (Throwable) -> Unit) {
     try {
         this()
     } catch (e: Throwable) {

@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere.utils
+package cut.the.crap.qreverywhere.utils.data
 
 import android.graphics.Bitmap
 import com.google.zxing.BarcodeFormat

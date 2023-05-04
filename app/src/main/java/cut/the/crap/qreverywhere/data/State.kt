@@ -35,3 +35,21 @@ sealed class State<T>(val data: T? = null, val message: String? = null) {
 //        }
     }
 }
+
+sealed interface UiState<T> {
+    object Loading : UiState<Nothing>
+    data class LoadingProgress<T>(
+        val showLoading: Boolean = false,
+        val progress: Int = 0,
+        val loaderId: Int = -1,
+    ) : UiState<T>
+
+    data class Success<T>(
+        val data: List<T>,
+    ) : UiState<T>
+
+    data class Error<T : Throwable>(
+        val message: String? = null,
+        val throwable: Throwable? = null,
+    ) : UiState<T>
+}

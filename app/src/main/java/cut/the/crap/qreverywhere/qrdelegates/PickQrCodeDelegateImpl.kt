@@ -21,7 +21,7 @@ import com.google.zxing.Reader
 import com.google.zxing.Result
 import com.google.zxing.common.HybridBinarizer
 import cut.the.crap.qreverywhere.MainActivityViewModel
-import cut.the.crap.qreverywhere.qrcodescan.HomeFragment
+import cut.the.crap.qreverywhere.qrcodescan.OnQrCodeRecognition
 import cut.the.crap.qreverywhere.utils.data.IntentGenerator
 import cut.the.crap.qreverywhere.utils.data.IntentGenerator.PickImageIntent
 import cut.the.crap.qreverywhere.utils.ui.hasPermission
@@ -58,7 +58,7 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
                 uri?.let {
                     val qrScanResult = scanQrImage(it, fragment.requireContext())
                     qrScanResult?.let { result ->
-                        (fragment as HomeFragment).handleQrCode(result, Acquire.FROM_FILE)
+                        (fragment as OnQrCodeRecognition).handleQrCode(result, Acquire.FROM_FILE)
                     }
                 }
             }
@@ -88,6 +88,8 @@ class PickQrCodeDelegateImpl : PickQrCodeDelegate {
         val sourceBitmap: Bitmap = BitmapFactory.decodeStream(inputStream)
 
         val intArray = IntArray(sourceBitmap.width * sourceBitmap.height)
+
+
         sourceBitmap.getPixels(
             intArray,
             0,

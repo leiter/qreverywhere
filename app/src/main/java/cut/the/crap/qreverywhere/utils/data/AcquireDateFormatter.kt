@@ -9,8 +9,11 @@ import java.text.SimpleDateFormat
 import javax.inject.Inject
 
 class AcquireDateFormatter @Inject constructor(@ApplicationContext context: Context) {
+
     private val createdTemplate: String = context.getString(R.string.qr_created_on_template)
+
     private val scannedTemplate: String = context.getString(R.string.qr_scanned_on_template)
+
     private val loadedFromFileTemplate: String = context.getString(R.string.qr_from_file_on_template)
 
     private val dateFormat = SimpleDateFormat.getDateInstance()

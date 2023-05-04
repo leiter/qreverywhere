@@ -28,8 +28,8 @@ fun QrItem.determineType(): Int {
         decoded.startsWith(ProtocolPrefix.MAILTO) -> QrCodeType.EMAIL
         decoded.startsWith(ProtocolPrefix.HTTP) ||
             decoded.startsWith(ProtocolPrefix.HTTPS) -> QrCodeType.WEB_URL
-        decoded.startsWith(ProtocolPrefix.SMS) ||
-            decoded.startsWith(ProtocolPrefix.SMSTO) -> QrCodeType.SMS
+//        decoded.startsWith(ProtocolPrefix.SMS) ||
+//            decoded.startsWith(ProtocolPrefix.SMSTO) -> QrCodeType.SMS
         isVcard() -> QrCodeType.CONTACT
         else -> QrCodeType.UNKNOWN_CONTENT
     }
