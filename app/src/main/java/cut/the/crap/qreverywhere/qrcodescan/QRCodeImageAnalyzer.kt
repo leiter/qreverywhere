@@ -16,37 +16,41 @@ class QRCodeImageAnalyzer(private val listener: QRCodeFoundListener) : ImageAnal
     private val waitingTime = 2000L
 
     override fun analyze(image: ImageProxy) {
-        if (image.format == ImageFormat.YUV_420_888
-            || image.format == ImageFormat.YUV_422_888
-            || image.format == ImageFormat.YUV_444_888) {
-            val byteBuffer: ByteBuffer = image.planes[0].buffer
-            val imageData = ByteArray(byteBuffer.capacity())
-            byteBuffer[imageData]
-            val source = PlanarYUVLuminanceSource(
-                imageData,
-                image.width, image.height,
-                0, 0,
-                image.width, image.height,
-                false
-            )
-            val binaryBitmap = BinaryBitmap(HybridBinarizer(source))
-            try {
-                val result = QRCodeMultiReader().decode(binaryBitmap)
-                val now = System.currentTimeMillis()
-                if(now - throttle > waitingTime){
-                    throttle = now
-                    android.os.Handler(Looper.getMainLooper()).post {
-                        listener.onQRCodeFound(result)
+        when (image.format) {
+            ImageFormat.YUV_420_888,
+            ImageFormat.YUV_422_888,
+            ImageFormat.YUV_444_888,
+            -> {
+                val byteBuffer: ByteBuffer = image.planes[0].buffer
+                val imageData = ByteArray(byteBuffer.capacity())
+                byteBuffer[imageData]
+                val source = PlanarYUVLuminanceSource(
+                    imageData,
+                    image.width, image.height,
+                    0, 0,
+                    image.width, image.height,
+                    false
+                )
+                val binaryBitmap = BinaryBitmap(HybridBinarizer(source))
+                try {
+                    val result = QRCodeMultiReader().decode(binaryBitmap)
+                    val now = System.currentTimeMillis()
+                    if (now - throttle > waitingTime) {
+                        throttle = now
+                        android.os.Handler(Looper.getMainLooper()).post {
+                            listener.onQRCodeFound(result)
+                        }
                     }
+                } catch (e: FormatException) {
+                    listener.qrCodeNotFound()
+                } catch (e: ChecksumException) {
+                    listener.qrCodeNotFound()
+                } catch (e: NotFoundException) {
+                    listener.qrCodeNotFound()
                 }
-            } catch (e: FormatException) {
-                listener.qrCodeNotFound()
-            } catch (e: ChecksumException) {
-                listener.qrCodeNotFound()
-            } catch (e: NotFoundException) {
-                listener.qrCodeNotFound()
+
+                image.close()
             }
         }
-        image.close()
     }
 }

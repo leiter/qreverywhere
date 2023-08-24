@@ -69,21 +69,21 @@ fun isPermissionDialogDisplayed(context: Context) :Boolean {
     return false
 }
 
-fun (() -> Unit).catch(vararg exceptions: KClass<out Throwable>, catchBlock: (Throwable) -> Unit) {
-    try {
-        this()
-    } catch (e: Throwable) {
-        if (e::class in exceptions) catchBlock(e) else throw e
-    }
-}
-
-fun <R> (() -> R).catch(vararg exceptions: KClass<out Throwable>, catchBlock: (Throwable) -> Unit) {
-    try {
-        this()
-    } catch (e: Throwable) {
-        if (e::class in exceptions) catchBlock(e) else throw e
-    }
-}
+//fun (() -> Unit).catch(vararg exceptions: KClass<out Throwable>, catchBlock: (Throwable) -> Unit) {
+//    try {
+//        this()
+//    } catch (e: Throwable) {
+//        if (e::class in exceptions) catchBlock(e) else throw e
+//    }
+//}
+//
+//fun <R> (() -> R).catch(vararg exceptions: KClass<out Throwable>, catchBlock: (Throwable) -> Unit) {
+//    try {
+//        this()
+//    } catch (e: Throwable) {
+//        if (e::class in exceptions) catchBlock(e) else throw e
+//    }
+//}
 
 
 //data class State<out T>(
