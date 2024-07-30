@@ -10,7 +10,6 @@ import android.view.View
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import kotlin.reflect.KClass
 
 private fun shareBitmap(context: Context, bitmap: Bitmap, fileName: String) {
     try {
@@ -40,7 +39,7 @@ fun extractDomain(url: String): String {
     return android.util.Patterns.DOMAIN_NAME.toRegex().find(url)?.value ?: ""
 }
 
-fun screenShot(view: View): Bitmap? {
+fun screenShot(view: View): Bitmap {
     val bitmap = Bitmap.createBitmap(
         view.width,
         view.height, Bitmap.Config.ARGB_8888

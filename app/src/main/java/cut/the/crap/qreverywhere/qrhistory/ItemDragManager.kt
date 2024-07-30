@@ -4,6 +4,7 @@ import android.graphics.Canvas
 import android.view.ViewParent
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.databinding.ItemQrHistoryBinding
 
@@ -59,4 +60,5 @@ class ItemDragManager(private val swipeAction: (pos: Int, direction: Int) -> Uni
         val vh = viewHolder as? QrHistoryAdapter.QrHistoryViewHolder<ItemQrHistoryBinding>
         ItemTouchHelper.Callback.getDefaultUIUtil().onSelected(vh?.binding?.historyItemForeground)
     }
+
 }
