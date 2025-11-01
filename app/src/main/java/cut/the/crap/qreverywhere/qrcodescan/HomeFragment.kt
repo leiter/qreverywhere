@@ -15,7 +15,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.google.common.util.concurrent.ListenableFuture
 import cut.the.crap.qreverywhere.MainActivityViewModel
@@ -32,17 +31,16 @@ import cut.the.crap.qreverywhere.utils.ui.gone
 import cut.the.crap.qreverywhere.utils.ui.viewBinding
 import cut.the.crap.qreverywhere.utils.ui.visible
 import cut.the.crap.qrrepository.Acquire
-import dagger.hilt.android.AndroidEntryPoint
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import timber.log.Timber
 import java.util.concurrent.ExecutionException
 import java.util.concurrent.Executors
 
-@AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home),
 
     PickQrCodeDelegate by PickQrCodeDelegateImpl(), OnQrCodeRecognition {
 
-    private val activityViewModel by activityViewModels<MainActivityViewModel>()
+    private val activityViewModel by activityViewModel<MainActivityViewModel>()
 
     private val viewBinding by viewBinding { FragmentHomeBinding.bind(requireView()) }
 

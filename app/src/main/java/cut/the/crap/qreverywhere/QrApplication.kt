@@ -3,15 +3,26 @@ package cut.the.crap.qreverywhere
 import android.app.Application
 import androidx.camera.camera2.Camera2Config
 import androidx.camera.core.CameraXConfig
-import dagger.hilt.android.HiltAndroidApp
+import cut.the.crap.qreverywhere.di.appModule
+import cut.the.crap.qreverywhere.di.viewModelModule
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
+import org.koin.core.logger.Level
 import timber.log.Timber
 
-@HiltAndroidApp
 class QrApplication : Application() , CameraXConfig.Provider {
 
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
+
+        // Start Koin
+        startKoin {
+            androidLogger(Level.ERROR)
+            androidContext(this@QrApplication)
+            modules(appModule, viewModelModule)
+        }
     }
 
     override fun getCameraXConfig(): CameraXConfig {

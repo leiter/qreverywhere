@@ -7,8 +7,6 @@ import android.os.Looper
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -35,11 +33,11 @@ import cut.the.crap.qreverywhere.utils.ui.textChanges
 import cut.the.crap.qreverywhere.utils.ui.viewBinding
 import cut.the.crap.qreverywhere.utils.ui.visible
 import cut.the.crap.qrrepository.QrItem
-import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-@AndroidEntryPoint
 class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_code),
     ImeActionDelegate by ImeActionDelegateImpl() {
 
@@ -65,9 +63,9 @@ class CreateEmailQrCodeFragment : Fragment(R.layout.fragment_create_email_qr_cod
 
     private val progress by lazy { activityView<LinearProgressIndicator>(R.id.top_progress_indicator) }
 
-    private val viewModel by viewModels<CreateQrCodeViewModel>()
+    private val viewModel by viewModel<CreateQrCodeViewModel>()
 
-    private val activityViewModel: MainActivityViewModel by activityViewModels()
+    private val activityViewModel: MainActivityViewModel by activityViewModel()
 
     private val viewBinding by viewBinding {
         FragmentCreateEmailQrCodeBinding.bind(requireView())

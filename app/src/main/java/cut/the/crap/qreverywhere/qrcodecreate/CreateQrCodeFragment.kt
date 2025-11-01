@@ -13,9 +13,7 @@ import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment.Companion.C
 import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerFragment.Companion.USE_CASE_MODE
 import cut.the.crap.qreverywhere.utils.ui.ensureBottomNavigation
 import cut.the.crap.qreverywhere.utils.ui.viewBinding
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class CreateQrCodeFragment : Fragment(R.layout.fragment_create_qr_code) {
 
     private val viewBinding: FragmentCreateQrCodeBinding by viewBinding {

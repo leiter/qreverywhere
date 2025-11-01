@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.hilt.android)
     alias(libs.plugins.navigation.safeargs)
 //    id ("com.localazy.gradle")
 }
@@ -82,7 +81,6 @@ dependencies {
 
     implementation(libs.bundles.compose)
     debugImplementation(libs.androidx.compose.ui.tooling)
-    implementation(libs.androidx.hilt.navigation.compose)
 
     // Koin for Dependency Injection
     val koinBom = platform(libs.koin.bom)
@@ -97,10 +95,6 @@ dependencies {
 
     // Qr Related
     implementation(libs.google.zxing.core)
-
-    // Dagger - Hilt
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
 
     // Glide
     implementation(libs.glide)

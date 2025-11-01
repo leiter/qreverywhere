@@ -13,12 +13,9 @@ import cut.the.crap.qreverywhere.utils.data.textToImageEnc
 import cut.the.crap.qrrepository.Acquire
 import cut.the.crap.qrrepository.QrItem
 import cut.the.crap.qrrepository.db.toItem
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-@HiltViewModel
-class CreateQrCodeViewModel @Inject constructor(
+class CreateQrCodeViewModel(
     private val qrHistoryRepository: cut.the.crap.qrrepository.QrHistoryRepository,
     private val encryptedPrefs: EncryptedPrefs
 

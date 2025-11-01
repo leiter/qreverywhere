@@ -1,25 +1,32 @@
 package cut.the.crap.qreverywhere.di
 
-import android.content.Context
+import cut.the.crap.qreverywhere.MainActivityViewModel
+import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerViewModel
+import cut.the.crap.qreverywhere.qrcodecreate.CreateQrCodeViewModel
+import cut.the.crap.qreverywhere.utils.data.AcquireDateFormatter
+import cut.the.crap.qreverywhere.utils.data.EncryptedPrefs
 import cut.the.crap.qrrepository.QrHistoryRepository
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.module.dsl.viewModel
+import org.koin.dsl.module
 
-@Module
-@InstallIn(SingletonComponent::class)
-object AppModule {
+val appModule = module {
+    // Provide the shared prefs filename
+    single { "appState" }
 
-    @Singleton
-    @Provides
-    fun provideRepository(@ApplicationContext application: Context): QrHistoryRepository {
-        return QrHistoryRepository(application)
-    }
+    // Provide Repository
+    single { QrHistoryRepository(androidContext()) }
 
-    @Provides
-    fun provideFileNameSharedPrefs() = "appState"
+    // Provide EncryptedPrefs
+    single { EncryptedPrefs(androidContext(), get<String>()) }
 
+    // Provide AcquireDateFormatter
+    single { AcquireDateFormatter(androidContext()) }
+}
+
+val viewModelModule = module {
+    // ViewModels
+    viewModel { MainActivityViewModel(get(), get()) }
+    viewModel { CreateQrCodeViewModel(get(), get()) }
+    viewModel { CreateOneLinerViewModel(get(), get()) }
 }

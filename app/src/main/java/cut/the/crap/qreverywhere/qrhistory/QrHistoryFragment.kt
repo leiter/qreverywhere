@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.google.android.material.progressindicator.LinearProgressIndicator
@@ -21,18 +20,16 @@ import cut.the.crap.qreverywhere.utils.ui.showSnackBar
 import cut.the.crap.qreverywhere.utils.ui.viewBinding
 import cut.the.crap.qreverywhere.utils.ui.visible
 import cut.the.crap.qrrepository.QrItem
-import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
-@AndroidEntryPoint
 class QrHistoryFragment : Fragment(R.layout.fragment_qr_history) {
 
     private val viewBinding by viewBinding { FragmentQrHistoryBinding.bind(requireView()) }
 
-    private val activityViewModel by activityViewModels<MainActivityViewModel>()
+    private val activityViewModel by activityViewModel<MainActivityViewModel>()
 
-    @Inject
-    lateinit var acquireDateFormatter: AcquireDateFormatter
+    private val acquireDateFormatter: AcquireDateFormatter by inject()
 
     private val progress by lazy { activityView<LinearProgressIndicator>(R.id.top_progress_indicator) }
 

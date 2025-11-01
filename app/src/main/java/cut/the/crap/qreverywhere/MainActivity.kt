@@ -12,9 +12,7 @@ import cut.the.crap.qreverywhere.databinding.ActivityMainBinding
 import cut.the.crap.qreverywhere.utils.ui.navSelectorCreate
 import cut.the.crap.qreverywhere.utils.ui.selectHistory
 import cut.the.crap.qreverywhere.utils.ui.viewBinding
-import dagger.hilt.android.AndroidEntryPoint
 
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration

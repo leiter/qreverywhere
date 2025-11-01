@@ -33,8 +33,6 @@ camerax = "1.2.3"
 zxing = "3.4.0"
 
 # Dependency Injection
-hilt = "2.56.2"
-hilt-navigation-compose = "1.2.0"
 koin-bom = "4.0.1"
 
 # Image Loading
@@ -89,11 +87,6 @@ androidx-camera-view = { group = "androidx.camera", name = "camera-view", versio
 # QR & Barcode
 google-zxing-core = { group = "com.google.zxing", name = "core", version.ref = "zxing" }
 
-# Dependency Injection - Hilt
-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
-hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
-androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "hilt-navigation-compose" }
-
 # Dependency Injection - Koin
 koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin-bom" }
 koin-android = { group = "io.insert-koin", name = "koin-android" }
@@ -118,7 +111,6 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "navigation" }
 
 [bundles]

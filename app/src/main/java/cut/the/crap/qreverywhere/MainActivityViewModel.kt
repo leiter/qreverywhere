@@ -18,7 +18,6 @@ import cut.the.crap.qrrepository.QrHistoryRepository
 import cut.the.crap.qrrepository.QrItem
 import cut.the.crap.qrrepository.db.QrCodeDbItem
 import cut.the.crap.qrrepository.db.toItem
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -28,12 +27,10 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.Calendar
-import javax.inject.Inject
 
 const val IMAGE_DIRECTORY = "QrEveryWhere"
 
-@HiltViewModel
-class MainActivityViewModel @Inject constructor(
+class MainActivityViewModel(
     private val historyRepository: QrHistoryRepository,
     private val encryptedPrefs: EncryptedPrefs,
 ) : ViewModel() {

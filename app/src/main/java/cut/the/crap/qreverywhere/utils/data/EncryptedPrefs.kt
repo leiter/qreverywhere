@@ -5,10 +5,8 @@ import android.content.SharedPreferences
 import android.os.Build
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
-import dagger.hilt.android.qualifiers.ApplicationContext
-import javax.inject.Inject
 
-class EncryptedPrefs @Inject constructor(@ApplicationContext context: Context, fileName: String) {
+class EncryptedPrefs(context: Context, fileName: String) {
 
     private val masterKeyAlias by lazy {
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) ""

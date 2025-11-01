@@ -4,11 +4,9 @@ import android.content.Context
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qrrepository.Acquire
 import cut.the.crap.qrrepository.QrItem
-import dagger.hilt.android.qualifiers.ApplicationContext
 import java.text.SimpleDateFormat
-import javax.inject.Inject
 
-class AcquireDateFormatter @Inject constructor(@ApplicationContext context: Context) {
+class AcquireDateFormatter(context: Context) {
 
     private val createdTemplate: String = context.getString(R.string.qr_created_on_template)
 
