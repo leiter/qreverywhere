@@ -1,0 +1,116 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
+plugins {
+    id ("com.android.application")
+    id ("org.jetbrains.kotlin.android")
+    id ("kotlin-kapt")
+    id ("dagger.hilt.android.plugin")
+    id ("androidx.navigation.safeargs")
+//    id ("com.localazy.gradle")
+}
+
+//localazy {
+//    readKey "a7844856686728087529-01fb65759e01803f9c76e6d9eda43baa77a6d93523bb29f2a887506b97385e7a"
+//    writeKey "a7844856686728087529-326192c4249d0bbd857fbb6dcaa014c1484f389cbc9b81e1a4f762b0492883d3"
+//}
+
+android {
+    compileSdk = 35
+    namespace = "cut.the.crap.qreverywhere"
+    defaultConfig {
+        applicationId = "cut.the.crap.qreverywhere"
+        minSdk = 21
+        targetSdk = 35
+        versionName = "1.0"
+        versionCode = 10
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments["room.schemaLocation"] =
+                        "$projectDir/schemas"
+            }
+        }
+    }
+
+    buildTypes {
+        getByName("debug") {
+//            minifyEnabled true
+//            shrinkResources true
+            //proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+        }
+        getByName("release") {
+            //minifyEnabled = true
+           // proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+    buildFeatures {
+        viewBinding = true
+    }
+//    namespace 'cut.the.crap.qreverywhere'
+}
+
+dependencies {
+
+    // Android basics
+    implementation ("androidx.core:core-ktx:1.13.1")
+    implementation ("androidx.appcompat:appcompat:1.7.0")
+    implementation ("com.google.android.material:material:1.12.0")
+    implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
+
+    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.4")
+    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
+    implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
+
+    implementation ("androidx.preference:preference:1.2.1")
+    implementation (project( ":qr_repository"))
+
+    implementation ("androidx.security:security-crypto:1.0.0")
+
+    // Camera
+    val camerax_version = "1.2.3"
+    implementation ("androidx.camera:camera-camera2:$camerax_version")
+    implementation ("androidx.camera:camera-lifecycle:$camerax_version")
+    implementation ("androidx.camera:camera-view:$camerax_version")
+
+
+
+    // Qr Related
+    implementation ("com.google.zxing:core:3.4.0")
+
+    // Dagger - Hilt
+    implementation ("com.google.dagger:hilt-android:2.56.2")
+    kapt ("com.google.dagger:hilt-compiler:2.56.2")
+    //kapt ("androidx.hilt:hilt-compiler:1.2.0")
+
+
+    // Glide
+    implementation ("com.github.bumptech.glide:glide:4.12.0")
+    kapt ("com.github.bumptech.glide:compiler:4.12.0")
+
+
+    // Timber
+    implementation ("com.jakewharton.timber:timber:5.0.1")
+
+
+    // Test
+    testImplementation ("junit:junit:4.13.2")
+
+    // Instrumentation test
+    androidTestImplementation ("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.6.1")
+}
+
+// Allow usage of Kotlin's @OptIn.
+//tasks.withType(KotlinCompile).configureEach {
+//    kotlinOptions {
+//        freeCompilerArgs += ["-opt-in=kotlin.RequiresOptIn"]
+//    }
+//}

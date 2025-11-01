@@ -1,0 +1,46 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+//buildscript {
+//    ext {
+//        compose_version = '1.1.1'
+//        nav_version = '2.5.0'
+//    }
+//    repositories {
+//        mavenCentral()
+//        maven {
+//            url = uri("https://storage.googleapis.com/r8-releases/raw")
+//            url = uri("https://maven.localazy.com/repository/release")
+//        }
+//        google()
+//    }
+//    dependencies {
+//        classpath("com.android.tools:r8:8.3.37")
+////        classpath ('com.android.tools.build:gradle:8.0.0')
+////        classpath("com.localazy:gradle:1.5.2")
+////        classpath('com.google.dagger:hilt-android-gradle-plugin:2.46.1')
+//        classpath ("androidx.navigation:navigation-safe-args-gradle-plugin:$nav_version")
+//
+//    }
+//}
+
+
+//plugins {
+//    id ("com.android.application") version '8.10.1' apply false
+//    id ("com.android.library") version '8.10.1' apply false
+//    id ("org.jetbrains.kotlin.android") version '1.8.0' apply false
+//    id ('com.google.dagger.hilt.android') version '2.44' apply false
+//}
+
+plugins {
+    id("com.android.application") version "8.10.1" apply false
+    id("com.android.library") version "8.10.1" apply false
+    id("org.jetbrains.kotlin.android") version "2.1.21" apply false
+    id("org.jetbrains.kotlin.plugin.compose") version "2.1.21" apply false
+    id("com.google.dagger.hilt.android") version "2.56.2" apply false
+    id("org.jetbrains.kotlin.kapt") version "2.1.21" apply false
+    id("androidx.navigation.safeargs") version "2.7.7" apply false
+}
+
+//task clean(type: Delete) {
+//    delete rootProject.buildDir
+//}

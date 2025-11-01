@@ -7,7 +7,7 @@ import androidx.room.TypeConverters
 @Database(
     entities = [QrCodeDbItem::class],
     version = 1,
-    exportSchema = true
+    exportSchema = false
 )
 @TypeConverters(Converters::class)
 abstract class QrDatabase : RoomDatabase() {
