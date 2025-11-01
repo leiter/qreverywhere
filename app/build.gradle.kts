@@ -82,6 +82,9 @@ dependencies {
     implementation(libs.bundles.compose)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
+    // LiveData support for Compose
+    implementation("androidx.compose.runtime:runtime-livedata")
+
     // Koin for Dependency Injection
     val koinBom = platform(libs.koin.bom)
     implementation(koinBom)
@@ -99,6 +102,9 @@ dependencies {
     // Glide
     implementation(libs.glide)
     kapt(libs.glide.compiler)
+
+    // Coil for Compose
+    implementation(libs.coil.compose)
 
     // Timber
     implementation(libs.timber)

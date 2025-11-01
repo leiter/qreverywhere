@@ -37,6 +37,7 @@ koin-bom = "4.0.1"
 
 # Image Loading
 glide = "4.12.0"
+coil = "2.5.0"
 
 # Logging
 timber = "5.0.1"
@@ -96,6 +97,7 @@ koin-androidx-navigation = { group = "io.insert-koin", name = "koin-androidx-nav
 # Image Loading
 glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "glide" }
 glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", version.ref = "glide" }
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
 # Logging
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
