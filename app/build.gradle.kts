@@ -1,11 +1,12 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id ("com.android.application")
-    id ("org.jetbrains.kotlin.android")
-    id ("kotlin-kapt")
-    id ("dagger.hilt.android.plugin")
-    id ("androidx.navigation.safeargs")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.navigation.safeargs)
 //    id ("com.localazy.gradle")
 }
 
@@ -53,6 +54,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        compose = true
     }
 //    namespace 'cut.the.crap.qreverywhere'
 }
@@ -60,52 +62,59 @@ android {
 dependencies {
 
     // Android basics
-    implementation ("androidx.core:core-ktx:1.13.1")
-    implementation ("androidx.appcompat:appcompat:1.7.0")
-    implementation ("com.google.android.material:material:1.12.0")
-    implementation ("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.google.material)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.preference)
+    implementation(libs.androidx.security.crypto)
 
-    implementation ("androidx.lifecycle:lifecycle-livedata-ktx:2.8.4")
-    implementation ("androidx.navigation:navigation-fragment-ktx:2.7.7")
-    implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
+    // Lifecycle
+    implementation(libs.androidx.lifecycle.livedata.ktx)
 
-    implementation ("androidx.preference:preference:1.2.1")
-    implementation (project( ":qr_repository"))
+    // Navigation
+    implementation(libs.bundles.navigation)
 
-    implementation ("androidx.security:security-crypto:1.0.0")
+    // Jetpack Compose
+    val composeBom = platform(libs.androidx.compose.bom)
+    implementation(composeBom)
+    androidTestImplementation(composeBom)
+
+    implementation(libs.bundles.compose)
+    debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.hilt.navigation.compose)
+
+    // Koin for Dependency Injection
+    val koinBom = platform(libs.koin.bom)
+    implementation(koinBom)
+    implementation(libs.bundles.koin)
+
+    // Local modules
+    implementation(project(":qr_repository"))
 
     // Camera
-    val camerax_version = "1.2.3"
-    implementation ("androidx.camera:camera-camera2:$camerax_version")
-    implementation ("androidx.camera:camera-lifecycle:$camerax_version")
-    implementation ("androidx.camera:camera-view:$camerax_version")
-
-
+    implementation(libs.bundles.camerax)
 
     // Qr Related
-    implementation ("com.google.zxing:core:3.4.0")
+    implementation(libs.google.zxing.core)
 
     // Dagger - Hilt
-    implementation ("com.google.dagger:hilt-android:2.56.2")
-    kapt ("com.google.dagger:hilt-compiler:2.56.2")
-    //kapt ("androidx.hilt:hilt-compiler:1.2.0")
-
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
     // Glide
-    implementation ("com.github.bumptech.glide:glide:4.12.0")
-    kapt ("com.github.bumptech.glide:compiler:4.12.0")
-
+    implementation(libs.glide)
+    kapt(libs.glide.compiler)
 
     // Timber
-    implementation ("com.jakewharton.timber:timber:5.0.1")
-
+    implementation(libs.timber)
 
     // Test
-    testImplementation ("junit:junit:4.13.2")
+    testImplementation(libs.junit)
 
     // Instrumentation test
-    androidTestImplementation ("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation ("androidx.test.espresso:espresso-core:3.6.1")
+    androidTestImplementation(libs.androidx.test.ext.junit)
+    androidTestImplementation(libs.androidx.test.espresso.core)
 }
 
 // Allow usage of Kotlin's @OptIn.
