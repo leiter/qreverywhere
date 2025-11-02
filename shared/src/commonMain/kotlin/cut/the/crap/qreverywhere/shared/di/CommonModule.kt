@@ -8,7 +8,16 @@ import org.koin.dsl.module
  * Common Koin module for shared dependencies
  */
 val commonModule = module {
-    single { MainViewModel(get()) }
+    // Shared ViewModel with all dependencies
+    // Using factory for proper lifecycle scoping
+    factory {
+        MainViewModel(
+            qrRepository = get(),
+            qrCodeGenerator = get(),
+            saveImageUseCase = get(),
+            userPreferences = get()
+        )
+    }
 }
 
 /**

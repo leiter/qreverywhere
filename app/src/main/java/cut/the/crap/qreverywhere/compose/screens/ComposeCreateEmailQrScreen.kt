@@ -37,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.MainActivityViewModel
+import cut.the.crap.qreverywhere.saveQrItemFromFile
 import cut.the.crap.qreverywhere.compose.navigation.ComposeScreen
 import cut.the.crap.qreverywhere.utils.ui.FROM_CREATE_CONTEXT
 import cut.the.crap.qrrepository.Acquire

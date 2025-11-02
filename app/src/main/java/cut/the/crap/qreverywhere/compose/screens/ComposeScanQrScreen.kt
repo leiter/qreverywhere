@@ -60,6 +60,7 @@ import com.google.zxing.Reader
 import com.google.zxing.Result
 import com.google.zxing.common.HybridBinarizer
 import cut.the.crap.qreverywhere.MainActivityViewModel
+import cut.the.crap.qreverywhere.saveQrItemFromFile
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.compose.navigation.ComposeScreen
 import cut.the.crap.qreverywhere.qrcodescan.QRCodeFoundListener

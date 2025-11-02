@@ -37,6 +37,8 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import cut.the.crap.qreverywhere.MainActivityViewModel
+import cut.the.crap.qreverywhere.detailViewQrCodeItem
+import cut.the.crap.qreverywhere.detailViewQrCodeItemState
 import cut.the.crap.qreverywhere.utils.data.AcquireDateFormatter
 import cut.the.crap.qreverywhere.utils.ui.FROM_CREATE_CONTEXT
 import cut.the.crap.qreverywhere.utils.ui.FROM_HISTORY_LIST

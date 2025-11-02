@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import cut.the.crap.qreverywhere.MainActivityViewModel
+import cut.the.crap.qreverywhere.setDetailViewItem
 import cut.the.crap.qreverywhere.compose.navigation.ComposeScreen
 import cut.the.crap.qreverywhere.ui.theme.QrEveryWhereTheme
 import cut.the.crap.qrrepository.QrItem
@@ -36,12 +37,35 @@ import org.koin.androidx.compose.koinViewModel
  * Compose version of QrHistoryFragment
  * Displays list of scanned and created QR codes
  */
+// Helper function to convert shared to Android QrItem
+private fun cut.the.crap.qreverywhere.shared.domain.model.QrItem.toAndroidQrItem(): QrItem {
+    val bitmap = imageData?.let { data ->
+        android.graphics.BitmapFactory.decodeByteArray(data, 0, data.size)
+    } ?: android.graphics.Bitmap.createBitmap(1, 1, android.graphics.Bitmap.Config.ARGB_8888)
+
+    return QrItem(
+        id = this.id,
+        textContent = this.textContent,
+        acquireType = when (this.acquireType) {
+            cut.the.crap.qreverywhere.shared.domain.model.AcquireType.SCANNED -> cut.the.crap.qrrepository.Acquire.SCANNED
+            cut.the.crap.qreverywhere.shared.domain.model.AcquireType.CREATED -> cut.the.crap.qrrepository.Acquire.CREATED
+            cut.the.crap.qreverywhere.shared.domain.model.AcquireType.FROM_FILE -> cut.the.crap.qrrepository.Acquire.FROM_FILE
+            cut.the.crap.qreverywhere.shared.domain.model.AcquireType.ERROR_OCCURRED -> cut.the.crap.qrrepository.Acquire.ERROR_OCCURRED
+            cut.the.crap.qreverywhere.shared.domain.model.AcquireType.EMPTY_DEFAULT -> cut.the.crap.qrrepository.Acquire.EMPTY_DEFAULT
+        },
+        img = bitmap,
+        timestamp = this.timestamp.toEpochMilliseconds()
+    )
+}
+
 @Composable
 fun ComposeHistoryScreen(
     navController: NavController,
     viewModel: MainActivityViewModel
 ) {
-    val historyData by viewModel.historyData.collectAsStateWithLifecycle()
+    // Convert shared QrItems to Android QrItems for UI compatibility
+    val sharedHistoryData by viewModel.historyData.collectAsStateWithLifecycle()
+    val historyData = sharedHistoryData.map { it.toAndroidQrItem() }
 
     Column(
         modifier = Modifier

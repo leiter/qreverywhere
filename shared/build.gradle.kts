@@ -1,6 +1,8 @@
 plugins {
-    kotlin("multiplatform")
-    id("com.android.library")
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.kotlin.compose)
 }
 
 kotlin {
@@ -40,16 +42,30 @@ kotlin {
                 // Coroutines
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
 
-                // Serialization - removed for now
-
                 // DateTime
                 implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
 
-                // Koin DI
-                implementation("io.insert-koin:koin-core:3.5.0")
+                // Koin DI - Using BOM for version management
+                implementation(platform("io.insert-koin:koin-bom:4.0.1"))
+                implementation("io.insert-koin:koin-core")
+                implementation("io.insert-koin:koin-compose")
 
                 // Logging
                 implementation("io.github.aakira:napier:2.6.1")
+
+                // Compose Multiplatform
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material3)
+                implementation(compose.ui)
+                implementation(compose.components.resources)
+                implementation(compose.components.uiToolingPreview)
+
+                // Lifecycle ViewModel (KMP compatible)
+                implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.0")
+
+                // Navigation Compose
+                implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha10")
             }
         }
 
@@ -64,7 +80,11 @@ kotlin {
             dependencies {
                 // Android-specific dependencies
                 implementation("androidx.core:core-ktx:1.13.1")
-                implementation("io.insert-koin:koin-android:3.5.0")
+                implementation(platform("io.insert-koin:koin-bom:4.0.1"))
+                implementation("io.insert-koin:koin-android")
+
+                // Lifecycle (Android-specific)
+                implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.0")
 
                 // Room (Android-specific for now)
                 implementation("androidx.room:room-runtime:2.7.1")
@@ -111,5 +131,9 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+    }
+
+    buildFeatures {
+        compose = true
     }
 }
