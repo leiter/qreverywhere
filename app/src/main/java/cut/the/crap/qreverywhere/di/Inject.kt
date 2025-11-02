@@ -1,8 +1,6 @@
 package cut.the.crap.qreverywhere.di
 
 import cut.the.crap.qreverywhere.MainActivityViewModel
-import cut.the.crap.qreverywhere.qrcodecreate.CreateOneLinerViewModel
-import cut.the.crap.qreverywhere.qrcodecreate.CreateQrCodeViewModel
 import cut.the.crap.qreverywhere.utils.data.AcquireDateFormatter
 import cut.the.crap.qreverywhere.utils.data.EncryptedPrefs
 import cut.the.crap.qrrepository.QrHistoryRepository
@@ -27,6 +25,4 @@ val appModule = module {
 val viewModelModule = module {
     // ViewModels
     viewModel { MainActivityViewModel(get(), get()) }
-    viewModel { CreateQrCodeViewModel(get(), get()) }
-    viewModel { CreateOneLinerViewModel(get(), get()) }
 }

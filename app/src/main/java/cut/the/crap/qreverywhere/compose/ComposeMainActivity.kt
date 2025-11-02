@@ -27,8 +27,6 @@ import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import org.koin.androidx.compose.koinViewModel
 import cut.the.crap.qreverywhere.compose.navigation.ComposeScreen
-import cut.the.crap.qreverywhere.compose.screens.ComposeCreateEmailScreen
-import cut.the.crap.qreverywhere.compose.screens.ComposeCreateOneLinerScreen
 import cut.the.crap.qreverywhere.compose.screens.ComposeCreateQrScreen
 import cut.the.crap.qreverywhere.compose.screens.ComposeDetailViewScreen
 import cut.the.crap.qreverywhere.compose.screens.ComposeFullscreenQrScreen
@@ -113,16 +111,6 @@ fun ComposeMainScreen() {
             }
             composable(ComposeScreen.History.route) {
                 ComposeHistoryScreen(navController, activityViewModel)
-            }
-            composable(ComposeScreen.CreateEmail.route) {
-                ComposeCreateEmailScreen(navController, activityViewModel = activityViewModel)
-            }
-            composable(
-                route = ComposeScreen.CreateOneLiner.route,
-                arguments = listOf(navArgument("useCaseMode") { type = NavType.IntType })
-            ) { backStackEntry ->
-                val useCaseMode = backStackEntry.arguments?.getInt("useCaseMode") ?: 0
-                ComposeCreateOneLinerScreen(navController, useCaseMode, activityViewModel = activityViewModel)
             }
             composable(
                 route = ComposeScreen.DetailView.route,
