@@ -3,8 +3,7 @@ package cut.the.crap.qreverywhere
 import android.app.Application
 import androidx.camera.camera2.Camera2Config
 import androidx.camera.core.CameraXConfig
-import cut.the.crap.qreverywhere.di.appModule
-import cut.the.crap.qreverywhere.di.viewModelModule
+import cut.the.crap.qreverywhere.di.getAllModules
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.startKoin
@@ -21,7 +20,7 @@ class QrApplication : Application() , CameraXConfig.Provider {
         startKoin {
             androidLogger(Level.ERROR)
             androidContext(this@QrApplication)
-            modules(appModule, viewModelModule)
+            modules(getAllModules())
         }
     }
 

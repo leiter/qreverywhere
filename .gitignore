@@ -8,8 +8,37 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
+
+# Build directories
 /build
+*/build/
+**/build/
+
+# Module-specific build directories
+/app/build/
+/shared/build/
+/qr_repository/build/
+/contacts/build/
+
+# Captures and native builds
 /captures
 .externalNativeBuild
 .cxx
 local.properties
+
+# Kotlin Native
+*.klib
+.kotlin/
+kotlin-js-store/
+
+# KMP specific
+/shared/.gradle/
+/shared/build/
+/shared/*/build/
+
+# Gradle build outputs
+*.hprof
+*.log
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache

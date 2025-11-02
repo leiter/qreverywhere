@@ -59,6 +59,9 @@ android {
 
 dependencies {
 
+    // KMP Shared Module
+    implementation(project(":shared"))
+
     // Android basics
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

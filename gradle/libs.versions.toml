@@ -42,6 +42,12 @@ coil = "2.5.0"
 
 # Logging
 timber = "5.0.1"
+napier = "2.6.1"
+
+# KMP Dependencies
+kotlinx-coroutines = "1.7.3"
+kotlinx-serialization = "1.6.2"
+kotlinx-datetime = "0.5.0"
 
 # Testing
 kotlin-test = "2.0.21"
@@ -91,6 +97,7 @@ google-zxing-core = { group = "com.google.zxing", name = "core", version.ref = "
 
 # Dependency Injection - Koin
 koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin-bom" }
+koin-core = { group = "io.insert-koin", name = "koin-core" }
 koin-android = { group = "io.insert-koin", name = "koin-android" }
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose" }
 koin-androidx-navigation = { group = "io.insert-koin", name = "koin-androidx-navigation" }
@@ -102,6 +109,13 @@ coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coi
 
 # Logging
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
+napier = { group = "io.github.aakira", name = "napier", version.ref = "napier" }
+
+# KMP Core
+kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-core", version.ref = "kotlinx-coroutines" }
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
+kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
 
 # Testing
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin-test" }
@@ -116,6 +130,8 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+kotlin-multiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "navigation" }
 
 [bundles]

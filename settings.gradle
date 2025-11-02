@@ -24,3 +24,4 @@ include ':app'
 //project(':QRCodeReaderView').projectDir = new File('../QRCodeReaderView/qrcodereaderview')
 include ':qr_repository'
 include ':contacts'
+include ':shared'
