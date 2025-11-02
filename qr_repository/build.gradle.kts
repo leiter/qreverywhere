@@ -1,8 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
-    // TODO: Migrate to KSP when version compatibility is stable (Kotlin 2.1.21 + KSP)
+    alias(libs.plugins.kotlin.ksp)
 }
 
 android {
@@ -15,6 +14,12 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 //        consumerProguardFiles = "consumer-rules.pro"
+
+        // KSP configuration for Room schema export
+        ksp {
+            arg("room.schemaLocation", "$projectDir/schemas")
+            arg("room.incremental", "true")
+        }
     }
 
     buildTypes {
@@ -38,9 +43,9 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.google.material)
 
-    // Room (TODO: Migrate to KSP when version stable)
+    // Room (KMP-compatible with KSP)
     implementation(libs.bundles.room)
-    kapt(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
 
     testImplementation(libs.kotlin.test)
     androidTestImplementation(libs.androidx.test.ext.junit)
