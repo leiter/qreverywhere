@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
+    // TODO: Migrate to KSP when version compatibility is stable (Kotlin 2.1.21 + KSP)
 }
 
 android {
@@ -37,11 +38,11 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.google.material)
 
-    // Room
+    // Room (TODO: Migrate to KSP when version stable)
     implementation(libs.bundles.room)
     kapt(libs.androidx.room.compiler)
 
-    testImplementation(libs.junit)
+    testImplementation(libs.kotlin.test)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.espresso.core)
 }

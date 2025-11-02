@@ -2,6 +2,7 @@
 # Build & Tooling
 agp = "8.10.1"
 kotlin = "2.1.21"
+ksp = "2.1.0-1.0.29"
 
 # AndroidX Core
 core-ktx = "1.13.1"
@@ -43,7 +44,7 @@ coil = "2.5.0"
 timber = "5.0.1"
 
 # Testing
-junit = "4.13.2"
+kotlin-test = "2.1.21"
 androidx-test-ext-junit = "1.2.1"
 espresso-core = "3.6.1"
 
@@ -103,7 +104,8 @@ coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coi
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 
 # Testing
-junit = { group = "junit", name = "junit", version.ref = "junit" }
+kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin-test" }
+kotlin-test-junit = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit", version.ref = "kotlin-test" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
 androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espresso-core" }
 
@@ -113,6 +115,7 @@ android-library = { id = "com.android.library", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+kotlin-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "navigation" }
 
 [bundles]
@@ -140,8 +143,8 @@ room = [
 
 koin = [
     "koin-android",
-    "koin-androidx-compose",
-    "koin-androidx-navigation"
+    "koin-androidx-compose"
+    # koin-androidx-navigation removed - only needed for Fragment navigation
 ]
 
 navigation = [

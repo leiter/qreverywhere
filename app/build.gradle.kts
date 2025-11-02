@@ -4,8 +4,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.navigation.safeargs)
+    // navigation.safeargs removed - only needed for Fragment navigation
 //    id ("com.localazy.gradle")
 }
 
@@ -68,8 +67,8 @@ dependencies {
     implementation(libs.androidx.preference)
     implementation(libs.androidx.security.crypto)
 
-    // Navigation
-    implementation(libs.bundles.navigation)
+    // Navigation (Compose only, Fragment navigation removed)
+    implementation(libs.androidx.navigation.compose)
 
     // Jetpack Compose
     val composeBom = platform(libs.androidx.compose.bom)
@@ -93,18 +92,14 @@ dependencies {
     // Qr Related
     implementation(libs.google.zxing.core)
 
-    // Glide
-    implementation(libs.glide)
-    kapt(libs.glide.compiler)
-
-    // Coil for Compose
+    // Coil for Compose (Kotlin-first image loading)
     implementation(libs.coil.compose)
 
     // Timber
     implementation(libs.timber)
 
-    // Test
-    testImplementation(libs.junit)
+    // Test (using kotlin-test for KMP compatibility)
+    testImplementation(libs.kotlin.test)
 
     // Instrumentation test
     androidTestImplementation(libs.androidx.test.ext.junit)
