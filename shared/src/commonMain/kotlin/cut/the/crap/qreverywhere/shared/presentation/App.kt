@@ -49,18 +49,20 @@ fun App(
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = {
-                    Text(
-                        text = when (currentDestination?.route) {
-                            Screen.History.route -> Strings.titleHistory
-                            Screen.Scan.route -> Strings.titleScan
-                            Screen.Create.route -> Strings.titleCreate
-                            Screen.CreateText.route -> Strings.titleCreateText
-                            Screen.CreateEmail.route -> Strings.titleCreateEmail
-                            else -> Strings.appName
-                        }
-                    )
-                },
+                title = {},
+
+//                    {
+//                    Text(
+//                        text = when (currentDestination?.route) {
+//                            Screen.History.route -> Strings.titleHistory
+//                            Screen.Scan.route -> Strings.titleScan
+//                            Screen.Create.route -> Strings.titleCreate
+//                            Screen.CreateText.route -> Strings.titleCreateText
+//                            Screen.CreateEmail.route -> Strings.titleCreateEmail
+//                            else -> Strings.appName
+//                        }
+//                    )
+//                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primaryContainer,
                     titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
@@ -71,11 +73,6 @@ fun App(
             NavigationBar {
                 val bottomNavItems = listOf(
                     BottomNavItem(
-                        route = Screen.History.route,
-                        icon = Icons.Default.Home,
-                        label = Strings.navHistory
-                    ),
-                    BottomNavItem(
                         route = Screen.Scan.route,
                         icon = Icons.Default.Search,
                         label = Strings.navScan
@@ -84,6 +81,11 @@ fun App(
                         route = Screen.Create.route,
                         icon = Icons.Default.Add,
                         label = Strings.navCreate
+                    ),
+                    BottomNavItem(
+                        route = Screen.History.route,
+                        icon = Icons.Default.Home,
+                        label = Strings.navHistory
                     )
                 )
 
@@ -93,7 +95,7 @@ fun App(
                         onClick = {
                             navController.navigate(item.route) {
                                 // Pop up to the start destination to avoid building up a large stack
-                                popUpTo(Screen.History.route) {
+                                popUpTo(Screen.Scan.route) {
                                     saveState = true
                                 }
                                 // Avoid multiple copies of the same destination

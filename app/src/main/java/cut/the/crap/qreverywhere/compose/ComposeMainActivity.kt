@@ -34,19 +34,29 @@ import cut.the.crap.qreverywhere.compose.screens.ComposeDetailViewScreen
 import cut.the.crap.qreverywhere.compose.screens.ComposeFullscreenQrScreen
 import cut.the.crap.qreverywhere.compose.screens.ComposeHistoryScreen
 import cut.the.crap.qreverywhere.compose.screens.ComposeScanQrScreen
+import cut.the.crap.qreverywhere.shared.presentation.App
+import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.ui.theme.QrEveryWhereTheme
 
 /**
  * Main Activity for Compose UI migration
- * This hosts the Compose version of the app with bottom navigation
+ *
+ * TESTING: Currently configured to use the shared KMP App() composable
+ * Toggle between TEST_SHARED_UI = true/false to test shared vs Android-specific UI
  */
 class ComposeMainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            QrEveryWhereTheme {
-                ComposeMainScreen()
+            QrEveryWhereTheme {  //ComposeMainScreen()
+                // TEST: Use shared KMP App composable
+                val viewModel: MainViewModel = koinViewModel()
+                App(viewModel = viewModel)
+
+                // OLD: Android-specific Compose screens
+                // Uncomment below to use old Android screens
+                // ComposeMainScreen()
             }
         }
     }

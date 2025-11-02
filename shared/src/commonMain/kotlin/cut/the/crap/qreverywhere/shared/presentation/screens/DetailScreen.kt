@@ -52,7 +52,8 @@ fun DetailScreen(
     viewModel: MainViewModel,
     onNavigateBack: () -> Unit = {},
     onShare: () -> Unit = {},
-    onCopyToClipboard: () -> Unit = {}
+    onCopyToClipboard: () -> Unit = {},
+    onFullscreenClick: () -> Unit = {}
 ) {
     val detailItem by viewModel.detailViewItem.collectAsStateWithLifecycle()
     val detailState by viewModel.detailViewState.collectAsStateWithLifecycle()
@@ -85,14 +86,15 @@ fun DetailScreen(
                             .padding(16.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        // QR Code Image
+                        // QR Code Image (clickable to view fullscreen)
                         qrItem.imageData?.let { imageBytes ->
                             imageBytes.toImagePainter()?.let { painter ->
                                 Card(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .padding(vertical = 16.dp),
-                                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
+                                    elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+                                    onClick = onFullscreenClick
                                 ) {
                                     Image(
                                         painter = painter,

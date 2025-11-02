@@ -6,7 +6,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateScreen
+import cut.the.crap.qreverywhere.shared.presentation.screens.CreateTextScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.DetailScreen
+import cut.the.crap.qreverywhere.shared.presentation.screens.FullscreenScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.HistoryScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.ScanScreen
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
@@ -23,7 +25,7 @@ fun AppNavHost(
     navController: NavHostController,
     viewModel: MainViewModel,
     modifier: Modifier = Modifier,
-    startDestination: String = Screen.History.route
+    startDestination: String = Screen.Scan.route
 ) {
     NavHost(
         navController = navController,
@@ -53,6 +55,22 @@ fun AppNavHost(
                 },
                 onCopyToClipboard = {
                     Logger.w("DetailScreen") { "Clipboard functionality requires platform-specific implementation" }
+                },
+                onFullscreenClick = {
+                    itemId?.let {
+                        navController.navigate(Screen.Fullscreen.createRoute(it))
+                    }
+                }
+            )
+        }
+
+        composable(Screen.Fullscreen.route) { backStackEntry ->
+            val itemId = backStackEntry.arguments?.getString("itemId")?.toIntOrNull()
+
+            FullscreenScreen(
+                viewModel = viewModel,
+                onNavigateBack = {
+                    navController.popBackStack()
                 }
             )
         }
@@ -71,6 +89,28 @@ fun AppNavHost(
 
         composable(Screen.Create.route) {
             CreateScreen(
+                onTextQrClick = {
+                    navController.navigate(Screen.CreateText.createRoute("text"))
+                },
+                onUrlQrClick = {
+                    navController.navigate(Screen.CreateText.createRoute("url"))
+                },
+                onPhoneQrClick = {
+                    navController.navigate(Screen.CreateText.createRoute("phone"))
+                },
+                onSmsQrClick = {
+                    navController.navigate(Screen.CreateText.createRoute("sms"))
+                },
+                onEmailQrClick = {
+                    navController.navigate(Screen.CreateEmail.route)
+                }
+            )
+        }
+
+        composable(Screen.CreateText.route) { backStackEntry ->
+            val qrType = backStackEntry.arguments?.getString("qrType") ?: "text"
+            CreateTextScreen(
+                qrType = qrType,
                 viewModel = viewModel,
                 onQrCreated = {
                     // Navigate to detail view after creating QR code
@@ -81,8 +121,11 @@ fun AppNavHost(
             )
         }
 
-        composable(Screen.CreateText.route) {
-            CreateScreen(
+        composable(Screen.CreateEmail.route) {
+            // TODO: Implement specialized email QR screen
+            // For now, redirect to text creation
+            CreateTextScreen(
+                qrType = "text",
                 viewModel = viewModel,
                 onQrCreated = {
                     viewModel.detailViewItem.value?.let { item ->
@@ -90,11 +133,6 @@ fun AppNavHost(
                     }
                 }
             )
-        }
-
-        composable(Screen.CreateEmail.route) {
-            // TODO: Implement specialized email QR screen
-            CreateScreen(viewModel = viewModel)
         }
     }
 }

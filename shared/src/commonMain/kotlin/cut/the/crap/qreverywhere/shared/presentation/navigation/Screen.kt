@@ -11,7 +11,9 @@ sealed class Screen(val route: String) {
     object Detail : Screen("detail/{itemId}") {
         fun createRoute(itemId: Int) = "detail/$itemId"
     }
-    object CreateText : Screen("create/text")
+    object CreateText : Screen("create/text/{qrType}") {
+        fun createRoute(qrType: String = "text") = "create/text/$qrType"
+    }
     object CreateEmail : Screen("create/email")
     object Fullscreen : Screen("fullscreen/{itemId}") {
         fun createRoute(itemId: Int) = "fullscreen/$itemId"
