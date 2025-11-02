@@ -6,8 +6,20 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
+import android.view.ViewGroup
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.camera.core.AspectRatio
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.ImageAnalysis
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.camera.view.PreviewView
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.ui.platform.LocalLifecycleOwner
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.content.ContextCompat
+import java.util.concurrent.Executors
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -51,6 +63,8 @@ import cut.the.crap.qreverywhere.MainActivity
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.compose.navigation.ComposeScreen
+import cut.the.crap.qreverywhere.qrcodescan.QRCodeFoundListener
+import cut.the.crap.qreverywhere.qrcodescan.QRCodeImageAnalyzer
 import cut.the.crap.qreverywhere.utils.data.IntentGenerator
 import cut.the.crap.qreverywhere.utils.ui.FROM_SCAN_QR
 import cut.the.crap.qreverywhere.utils.ui.hasPermission
@@ -69,9 +83,101 @@ private fun getStoragePermission(): String {
 }
 
 /**
+ * CameraX preview composable with QR code scanning
+ */
+@Composable
+private fun CameraPreview(
+    onQrCodeScanned: (com.google.zxing.Result) -> Unit,
+    modifier: Modifier = Modifier
+) {
+    val context = LocalContext.current
+    val lifecycleOwner = LocalLifecycleOwner.current
+
+    AndroidView(
+        factory = { androidViewContext ->
+            PreviewView(androidViewContext).apply {
+                layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+                implementationMode = PreviewView.ImplementationMode.COMPATIBLE
+
+                val cameraProviderFuture = ProcessCameraProvider.getInstance(context)
+                cameraProviderFuture.addListener({
+                    val cameraProvider = cameraProviderFuture.get()
+
+                    // Preview use case
+                    val preview = Preview.Builder().build().also {
+                        it.setSurfaceProvider(surfaceProvider)
+                    }
+
+                    // Image analysis use case for QR scanning
+                    val imageAnalysis = ImageAnalysis.Builder()
+                        .setTargetAspectRatio(AspectRatio.RATIO_16_9)
+                        .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                        .build()
+                        .also { analysis ->
+                            analysis.setAnalyzer(
+                                Executors.newSingleThreadExecutor(),
+                                QRCodeImageAnalyzer(object : QRCodeFoundListener {
+                                    override fun onQRCodeFound(qrCode: com.google.zxing.Result) {
+                                        Timber.d("QR Code found: ${qrCode.text}")
+                                        onQrCodeScanned(qrCode)
+                                    }
+
+                                    override fun qrCodeNotFound() {
+                                        // No-op, this is called very frequently
+                                    }
+                                })
+                            )
+                        }
+
+                    // Camera selector - back camera
+                    val cameraSelector = CameraSelector.Builder()
+                        .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+                        .build()
+
+                    try {
+                        // Unbind all use cases before rebinding
+                        cameraProvider.unbindAll()
+
+                        // Bind use cases to camera
+                        cameraProvider.bindToLifecycle(
+                            lifecycleOwner,
+                            cameraSelector,
+                            preview,
+                            imageAnalysis
+                        )
+                        Timber.d("Camera bound successfully")
+                    } catch (e: Exception) {
+                        Timber.e(e, "Error binding camera use cases")
+                    }
+                }, ContextCompat.getMainExecutor(context))
+            }
+        },
+        modifier = modifier
+    )
+
+    // Clean up when the composable leaves composition
+    DisposableEffect(Unit) {
+        onDispose {
+            val cameraProviderFuture = ProcessCameraProvider.getInstance(context)
+            cameraProviderFuture.addListener({
+                try {
+                    cameraProviderFuture.get().unbindAll()
+                    Timber.d("Camera unbound")
+                } catch (e: Exception) {
+                    Timber.e(e, "Error unbinding camera")
+                }
+            }, ContextCompat.getMainExecutor(context))
+        }
+    }
+}
+
+/**
  * Scans QR code from an image URI
  */
-private fun scanQrImage(uri: Uri, context: Context): Result? {
+private fun scanQrImage(uri: Uri, context: Context): com.google.zxing.Result? {
     return try {
         val inputStream = context.contentResolver.openInputStream(uri)
         val bitmap = BitmapFactory.decodeStream(inputStream)
@@ -204,24 +310,15 @@ fun ComposeScanQrScreen(
         ) {
             when {
                 hasCameraPermission -> {
-                    // TODO: Show camera preview here
-                    Column(
-                        modifier = Modifier.fillMaxSize(),
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center
-                    ) {
-                        Text(
-                            text = "Camera Preview Coming Soon",
-                            style = MaterialTheme.typography.headlineMedium,
-                            color = MaterialTheme.colorScheme.primary
-                        )
-                        Text(
-                            text = "CameraX integration pending",
-                            style = MaterialTheme.typography.bodyLarge,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                            modifier = Modifier.padding(top = 8.dp)
-                        )
-                    }
+                    // Show camera preview with QR scanning
+                    CameraPreview(
+                        onQrCodeScanned = { qrResult ->
+                            Timber.d("QR code scanned in Compose: ${qrResult.text}")
+                            viewModel.saveQrItemFromFile(qrResult.text, Acquire.SCANNED)
+                            navController.navigate(ComposeScreen.DetailView.createRoute(FROM_SCAN_QR))
+                        },
+                        modifier = Modifier.fillMaxSize()
+                    )
                 }
                 else -> {
                     // Show permission request UI
