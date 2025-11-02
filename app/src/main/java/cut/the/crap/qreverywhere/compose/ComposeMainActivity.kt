@@ -31,6 +31,7 @@ import cut.the.crap.qreverywhere.compose.screens.ComposeCreateEmailScreen
 import cut.the.crap.qreverywhere.compose.screens.ComposeCreateOneLinerScreen
 import cut.the.crap.qreverywhere.compose.screens.ComposeCreateQrScreen
 import cut.the.crap.qreverywhere.compose.screens.ComposeDetailViewScreen
+import cut.the.crap.qreverywhere.compose.screens.ComposeFullscreenQrScreen
 import cut.the.crap.qreverywhere.compose.screens.ComposeHistoryScreen
 import cut.the.crap.qreverywhere.compose.screens.ComposeScanQrScreen
 import cut.the.crap.qreverywhere.ui.theme.QrEveryWhereTheme
@@ -129,6 +130,13 @@ fun ComposeMainScreen() {
             ) { backStackEntry ->
                 val originFlag = backStackEntry.arguments?.getInt("originFlag") ?: 0
                 ComposeDetailViewScreen(navController, originFlag, viewModel = activityViewModel)
+            }
+            composable(
+                route = ComposeScreen.Fullscreen.route,
+                arguments = listOf(navArgument("originFlag") { type = NavType.IntType })
+            ) { backStackEntry ->
+                val originFlag = backStackEntry.arguments?.getInt("originFlag") ?: 0
+                ComposeFullscreenQrScreen(navController, originFlag, viewModel = activityViewModel)
             }
         }
     }

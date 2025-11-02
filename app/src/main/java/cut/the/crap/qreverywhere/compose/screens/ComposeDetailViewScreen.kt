@@ -1,12 +1,15 @@
 package cut.the.crap.qreverywhere.compose.screens
 
+import android.Manifest
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -82,10 +85,26 @@ import cut.the.crap.qreverywhere.utils.data.isVcard
 import cut.the.crap.qreverywhere.utils.ui.FROM_CREATE_CONTEXT
 import cut.the.crap.qreverywhere.utils.ui.FROM_HISTORY_LIST
 import cut.the.crap.qreverywhere.utils.ui.FROM_SCAN_QR
+import cut.the.crap.qreverywhere.utils.ui.hasPermission
 import cut.the.crap.qrrepository.QrItem
 import org.koin.androidx.compose.koinViewModel
 import org.koin.compose.koinInject
 import timber.log.Timber
+
+/**
+ * Helper function to get the correct storage write permission based on Android version
+ * For Android 10+ (API 29+), writing to Downloads doesn't require permission with scoped storage
+ * For Android 9 and below, WRITE_EXTERNAL_STORAGE is required
+ */
+private fun getWriteStoragePermission(): String? {
+    return if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
+        // Android 9 (Pie) and below need WRITE_EXTERNAL_STORAGE
+        Manifest.permission.WRITE_EXTERNAL_STORAGE
+    } else {
+        // Android 10+ uses scoped storage, no permission needed for Downloads
+        null
+    }
+}
 
 /**
  * Compose version of DetailViewFragment
@@ -107,6 +126,53 @@ fun ComposeDetailViewScreen(
     val activityLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
     ) { }
+
+    // Storage permission launcher for saving QR code images
+    val writeStoragePermissionLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            Timber.d("Write storage permission granted, saving QR image")
+            viewModel.saveQrImageOfDetailView(context)
+        } else {
+            Timber.w("Write storage permission denied")
+            scope.launch {
+                snackbarHostState.showSnackbar("Storage permission is required to save QR code")
+            }
+        }
+    }
+
+    // Helper function to handle save QR code with permission check
+    val handleSaveQrCode: () -> Unit = {
+        val requiredPermission = getWriteStoragePermission()
+
+        if (requiredPermission == null) {
+            // Android 10+ doesn't need permission for Downloads directory
+            Timber.d("No permission needed for saving (Android 10+)")
+            viewModel.saveQrImageOfDetailView(context)
+        } else {
+            // Android 9 and below need WRITE_EXTERNAL_STORAGE
+            if (context.hasPermission(requiredPermission)) {
+                Timber.d("Write storage permission already granted")
+                viewModel.saveQrImageOfDetailView(context)
+            } else {
+                // Check if we should show rationale
+                if (context is androidx.activity.ComponentActivity &&
+                    ActivityCompat.shouldShowRequestPermissionRationale(context, requiredPermission)) {
+                    // User has denied before, open app settings
+                    Timber.d("Opening app settings for write storage permission")
+                    scope.launch {
+                        snackbarHostState.showSnackbar("Please grant storage permission in app settings")
+                    }
+                    context.startActivity(IntentGenerator.OpenAppSettings.getIntent())
+                } else {
+                    // Request permission
+                    Timber.d("Requesting write storage permission")
+                    writeStoragePermissionLauncher.launch(requiredPermission)
+                }
+            }
+        }
+    }
 
     // For scanned items, observe LiveData
     val scannedItemState by viewModel.detailViewLiveQrCodeItem.observeAsState()
@@ -218,7 +284,7 @@ fun ComposeDetailViewScreen(
                             text = { Text("Save to file") },
                             onClick = {
                                 showMenu = false
-                                viewModel.saveQrImageOfDetailView(context)
+                                handleSaveQrCode()
                             },
                             leadingIcon = {
                                 Icon(Icons.Default.Share, "Save")

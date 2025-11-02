@@ -5,6 +5,8 @@ import android.content.SharedPreferences
 import android.os.Build
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
+import timber.log.Timber
+import java.io.File
 
 class EncryptedPrefs(context: Context, fileName: String) {
 
@@ -14,15 +16,47 @@ class EncryptedPrefs(context: Context, fileName: String) {
     }
 
     private val sharedPreferences by lazy {
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M )
-            context.getSharedPreferences(fileName,Context.MODE_PRIVATE)
-        else EncryptedSharedPreferences.create(
-            fileName,
-            masterKeyAlias,
-            context,
-            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-        )
+        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) {
+            context.getSharedPreferences(fileName, Context.MODE_PRIVATE)
+        } else {
+            createEncryptedSharedPreferences(context, fileName)
+        }
+    }
+
+    private fun createEncryptedSharedPreferences(context: Context, fileName: String): SharedPreferences {
+        return try {
+            EncryptedSharedPreferences.create(
+                fileName,
+                masterKeyAlias,
+                context,
+                EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+            )
+        } catch (e: Exception) {
+            Timber.e(e, "Failed to create EncryptedSharedPreferences, attempting recovery...")
+
+            // Delete corrupted preferences file and try again
+            try {
+                val prefsFile = File(context.applicationInfo.dataDir + "/shared_prefs/$fileName.xml")
+                if (prefsFile.exists()) {
+                    prefsFile.delete()
+                    Timber.d("Deleted corrupted preferences file: $fileName.xml")
+                }
+
+                // Try creating again after deletion
+                EncryptedSharedPreferences.create(
+                    fileName,
+                    masterKeyAlias,
+                    context,
+                    EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                    EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+                )
+            } catch (retryException: Exception) {
+                Timber.e(retryException, "Recovery failed, falling back to regular SharedPreferences")
+                // Fall back to regular SharedPreferences if encryption continues to fail
+                context.getSharedPreferences(fileName, Context.MODE_PRIVATE)
+            }
+        }
     }
 
     var backgroundColor = sharedPreferences.getInt(BACKGROUND, -0x1)
