@@ -41,7 +41,6 @@
         <activity
             android:name=".compose.ComposeMainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.QrEveryWhere.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

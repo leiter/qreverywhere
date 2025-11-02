@@ -7,6 +7,7 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import timber.log.Timber
 import java.io.File
+import androidx.core.content.edit
 
 class EncryptedPrefs(context: Context, fileName: String) {
 
@@ -95,18 +96,18 @@ inline fun <reified T> SharedPreferences.get(key: String, defaultValue: T): T {
 }
 
 inline fun <reified T> SharedPreferences.put(key: String, value: T) {
-    val editor = this.edit()
-    when (T::class) {
-        Boolean::class -> editor.putBoolean(key, value as Boolean)
-        Float::class -> editor.putFloat(key, value as Float)
-        Int::class -> editor.putInt(key, value as Int)
-        Long::class -> editor.putLong(key, value as Long)
-        String::class -> editor.putString(key, value as String)
-        else -> {
-            if (value is Set<*>) {
-                editor.putStringSet(key, value as Set<String>)
+    this.edit {
+        when (T::class) {
+            Boolean::class -> putBoolean(key, value as Boolean)
+            Float::class -> putFloat(key, value as Float)
+            Int::class -> putInt(key, value as Int)
+            Long::class -> putLong(key, value as Long)
+            String::class -> putString(key, value as String)
+            else -> {
+                if (value is Set<*>) {
+                    putStringSet(key, value as Set<String>)
+                }
             }
         }
     }
-    editor.apply()
 }
