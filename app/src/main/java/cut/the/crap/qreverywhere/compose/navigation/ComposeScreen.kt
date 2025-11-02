@@ -11,7 +11,7 @@ import cut.the.crap.qreverywhere.R
 sealed class ComposeScreen(
     val route: String,
     @StringRes val title: Int,
-    @DrawableRes val icon: Int
+@DrawableRes val icon: Int
 ) {
     // Main bottom navigation screens
     object Scan : ComposeScreen(

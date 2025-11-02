@@ -1,10 +1,14 @@
 package cut.the.crap.qreverywhere.shared.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import cut.the.crap.qreverywhere.shared.presentation.screens.CreateScreen
+import cut.the.crap.qreverywhere.shared.presentation.screens.DetailScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.HistoryScreen
+import cut.the.crap.qreverywhere.shared.presentation.screens.ScanScreen
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.shared.utils.Logger
 
@@ -18,11 +22,13 @@ import cut.the.crap.qreverywhere.shared.utils.Logger
 fun AppNavHost(
     navController: NavHostController,
     viewModel: MainViewModel,
+    modifier: Modifier = Modifier,
     startDestination: String = Screen.History.route
 ) {
     NavHost(
         navController = navController,
-        startDestination = startDestination
+        startDestination = startDestination,
+        modifier = modifier
     ) {
         composable(Screen.History.route) {
             HistoryScreen(
@@ -37,45 +43,58 @@ fun AppNavHost(
         composable(Screen.Detail.route) { backStackEntry ->
             val itemId = backStackEntry.arguments?.getString("itemId")?.toIntOrNull()
 
-            // TODO: Implement DetailScreen
-            // This requires platform-specific image rendering and sharing capabilities
-            Logger.w("NotImplemented") { "DetailScreen not yet implemented for KMP" }
-
-            // Placeholder screen
-            HistoryScreen(viewModel = viewModel)
+            DetailScreen(
+                viewModel = viewModel,
+                onNavigateBack = {
+                    navController.popBackStack()
+                },
+                onShare = {
+                    Logger.w("DetailScreen") { "Share functionality requires platform-specific implementation" }
+                },
+                onCopyToClipboard = {
+                    Logger.w("DetailScreen") { "Clipboard functionality requires platform-specific implementation" }
+                }
+            )
         }
 
         composable(Screen.Scan.route) {
-            // TODO: Implement ScanScreen
-            // This requires platform-specific camera APIs (expect/actual)
-            Logger.w("NotImplemented") { "ScanScreen not yet implemented for KMP - needs platform-specific camera API" }
-
-            // Placeholder screen
-            HistoryScreen(viewModel = viewModel)
+            ScanScreen(
+                onQrCodeScanned = { scannedText ->
+                    viewModel.saveQrItemFromText(
+                        textContent = scannedText,
+                        acquireType = cut.the.crap.qreverywhere.shared.domain.model.AcquireType.SCANNED
+                    )
+                    navController.popBackStack()
+                }
+            )
         }
 
         composable(Screen.Create.route) {
-            // TODO: Implement CreateScreen
-            Logger.w("NotImplemented") { "CreateScreen not yet implemented for KMP" }
-
-            // Placeholder screen
-            HistoryScreen(viewModel = viewModel)
+            CreateScreen(
+                viewModel = viewModel,
+                onQrCreated = {
+                    // Navigate to detail view after creating QR code
+                    viewModel.detailViewItem.value?.let { item ->
+                        navController.navigate(Screen.Detail.createRoute(item.id))
+                    }
+                }
+            )
         }
 
         composable(Screen.CreateText.route) {
-            // TODO: Implement CreateTextScreen
-            Logger.w("NotImplemented") { "CreateTextScreen not yet implemented for KMP" }
-
-            // Placeholder screen
-            HistoryScreen(viewModel = viewModel)
+            CreateScreen(
+                viewModel = viewModel,
+                onQrCreated = {
+                    viewModel.detailViewItem.value?.let { item ->
+                        navController.navigate(Screen.Detail.createRoute(item.id))
+                    }
+                }
+            )
         }
 
         composable(Screen.CreateEmail.route) {
-            // TODO: Implement CreateEmailScreen
-            Logger.w("NotImplemented") { "CreateEmailScreen not yet implemented for KMP" }
-
-            // Placeholder screen
-            HistoryScreen(viewModel = viewModel)
+            // TODO: Implement specialized email QR screen
+            CreateScreen(viewModel = viewModel)
         }
     }
 }

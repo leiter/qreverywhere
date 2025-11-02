@@ -1,14 +1,19 @@
 package cut.the.crap.qreverywhere.shared.presentation.screens
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -17,10 +22,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cut.the.crap.qreverywhere.shared.domain.model.QrItem
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
+import cut.the.crap.qreverywhere.shared.utils.toImagePainter
 
 /**
  * Shared History Screen for Compose Multiplatform
@@ -43,15 +50,8 @@ fun HistoryScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(16.dp) // Padding for content
     ) {
-        Text(
-            text = "QR History",
-            style = MaterialTheme.typography.headlineLarge,
-            color = MaterialTheme.colorScheme.primary,
-            modifier = Modifier.padding(bottom = 16.dp)
-        )
-
         if (historyData.isEmpty()) {
             Box(
                 modifier = Modifier.fillMaxSize(),
@@ -98,6 +98,21 @@ private fun QrHistoryCard(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
+            // QR Code Image Preview (cross-platform!)
+            qrItem.imageData?.let { imageBytes ->
+                imageBytes.toImagePainter()?.let { painter ->
+                    Image(
+                        painter = painter,
+                        contentDescription = "QR Code Preview",
+                        modifier = Modifier
+                            .size(60.dp)
+                            .clip(RoundedCornerShape(8.dp))
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.width(16.dp))
+
             Column(
                 modifier = Modifier.weight(1f)
             ) {
@@ -113,11 +128,6 @@ private fun QrHistoryCard(
                     modifier = Modifier.padding(top = 4.dp)
                 )
             }
-
-            // TODO: Add QR code image preview
-            // This requires platform-specific ImageBitmap conversion (expect/actual)
-            // For now, showing placeholder
-            // Log.w("NotImplemented", "QR code image preview not implemented")
         }
     }
 }
