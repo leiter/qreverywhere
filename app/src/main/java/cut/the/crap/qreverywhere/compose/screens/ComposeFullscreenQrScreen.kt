@@ -20,11 +20,11 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -57,8 +57,8 @@ fun ComposeFullscreenQrScreen(
     viewModel: MainActivityViewModel,
     dateFormatter: AcquireDateFormatter = koinInject()
 ) {
-    // For scanned items, observe LiveData
-    val scannedItemState by viewModel.detailViewLiveQrCodeItem.observeAsState()
+    // For scanned items, collect StateFlow
+    val scannedItemState by viewModel.detailViewQrCodeItemState.collectAsStateWithLifecycle()
 
     // For history/create items, use state to hold the captured item
     var capturedItem by remember { mutableStateOf<QrItem?>(null) }

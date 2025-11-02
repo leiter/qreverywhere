@@ -18,9 +18,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,7 +41,7 @@ fun ComposeHistoryScreen(
     navController: NavController,
     viewModel: MainActivityViewModel
 ) {
-    val historyData by viewModel.historyAdapterData.observeAsState(emptyList())
+    val historyData by viewModel.historyData.collectAsStateWithLifecycle()
 
     Column(
         modifier = Modifier

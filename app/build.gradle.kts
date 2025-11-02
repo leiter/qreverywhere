@@ -68,9 +68,6 @@ dependencies {
     implementation(libs.androidx.preference)
     implementation(libs.androidx.security.crypto)
 
-    // Lifecycle
-    implementation(libs.androidx.lifecycle.livedata.ktx)
-
     // Navigation
     implementation(libs.bundles.navigation)
 
@@ -81,9 +78,6 @@ dependencies {
 
     implementation(libs.bundles.compose)
     debugImplementation(libs.androidx.compose.ui.tooling)
-
-    // LiveData support for Compose
-    implementation("androidx.compose.runtime:runtime-livedata")
 
     // Koin for Dependency Injection
     val koinBom = platform(libs.koin.bom)

@@ -27,7 +27,9 @@ import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.R
 import org.koin.androidx.compose.koinViewModel
 import cut.the.crap.qreverywhere.compose.navigation.ComposeScreen
+import cut.the.crap.qreverywhere.compose.screens.ComposeCreateEmailQrScreen
 import cut.the.crap.qreverywhere.compose.screens.ComposeCreateQrScreen
+import cut.the.crap.qreverywhere.compose.screens.ComposeCreateTextQrScreen
 import cut.the.crap.qreverywhere.compose.screens.ComposeDetailViewScreen
 import cut.the.crap.qreverywhere.compose.screens.ComposeFullscreenQrScreen
 import cut.the.crap.qreverywhere.compose.screens.ComposeHistoryScreen
@@ -125,6 +127,16 @@ fun ComposeMainScreen() {
             ) { backStackEntry ->
                 val originFlag = backStackEntry.arguments?.getInt("originFlag") ?: 0
                 ComposeFullscreenQrScreen(navController, originFlag, viewModel = activityViewModel)
+            }
+            composable(
+                route = ComposeScreen.CreateText.route,
+                arguments = listOf(navArgument("qrType") { type = NavType.StringType })
+            ) { backStackEntry ->
+                val qrType = backStackEntry.arguments?.getString("qrType") ?: "text"
+                ComposeCreateTextQrScreen(navController, activityViewModel, qrType)
+            }
+            composable(ComposeScreen.CreateEmail.route) {
+                ComposeCreateEmailQrScreen(navController, activityViewModel)
             }
         }
     }

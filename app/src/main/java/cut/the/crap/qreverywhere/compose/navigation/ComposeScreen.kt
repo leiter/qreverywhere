@@ -33,19 +33,19 @@ sealed class ComposeScreen(
     )
 
     // Create sub-screens
+    object CreateText : ComposeScreen(
+        route = "create/text/{qrType}",
+        title = R.string.nav_title_create,
+        icon = R.drawable.ic_create_qr
+    ) {
+        fun createRoute(qrType: String) = "create/text/$qrType"
+    }
+
     object CreateEmail : ComposeScreen(
         route = "create/email",
         title = R.string.create_title_email,
         icon = R.drawable.ic_mail_outline
     )
-
-    object CreateOneLiner : ComposeScreen(
-        route = "create/oneliner/{useCaseMode}",
-        title = R.string.nav_title_create,
-        icon = R.drawable.ic_create_qr
-    ) {
-        fun createRoute(useCaseMode: Int) = "create/oneliner/$useCaseMode"
-    }
 
     // Detail screens
     object DetailView : ComposeScreen(

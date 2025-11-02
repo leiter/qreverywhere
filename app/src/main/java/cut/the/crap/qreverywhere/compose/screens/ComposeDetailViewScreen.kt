@@ -49,11 +49,11 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asImageBitmap
@@ -167,8 +167,8 @@ fun ComposeDetailViewScreen(
         }
     }
 
-    // For scanned items, observe LiveData
-    val scannedItemState by viewModel.detailViewLiveQrCodeItem.observeAsState()
+    // For scanned items, collect StateFlow
+    val scannedItemState by viewModel.detailViewQrCodeItemState.collectAsStateWithLifecycle()
 
     // For history/create items, use state to hold the captured item
     var capturedItem by remember { mutableStateOf<QrItem?>(null) }
@@ -209,17 +209,20 @@ fun ComposeDetailViewScreen(
         false
     }
 
-    // Observe save QR image state
-    val saveImageState by viewModel.saveDetailViewQrCodeImage.observeAsState()
-    LaunchedEffect(saveImageState) {
-        when (saveImageState) {
-            is State.Success -> {
-                snackbarHostState.showSnackbar("QR code saved to file")
+    // Collect save QR image events from SharedFlow
+    LaunchedEffect(Unit) {
+        viewModel.saveQrImageEvent.collect { state ->
+            when (state) {
+                is State.Success -> {
+                    snackbarHostState.showSnackbar("QR code saved to file")
+                }
+                is State.Error -> {
+                    snackbarHostState.showSnackbar("Error saving QR code")
+                }
+                is State.Loading -> {
+                    // Loading state handled elsewhere
+                }
             }
-            is State.Error -> {
-                snackbarHostState.showSnackbar("Error saving QR code")
-            }
-            else -> {}
         }
     }
 

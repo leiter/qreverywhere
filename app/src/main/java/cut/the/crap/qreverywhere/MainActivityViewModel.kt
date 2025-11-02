@@ -4,14 +4,11 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.media.MediaScannerConnection
 import android.os.Environment
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.utils.data.EncryptedPrefs
-import cut.the.crap.qreverywhere.utils.data.SingleLiveDataEvent
 import cut.the.crap.qreverywhere.utils.data.textToImageEnc
 import cut.the.crap.qrrepository.Acquire
 import cut.the.crap.qrrepository.QrHistoryRepository
@@ -19,6 +16,12 @@ import cut.the.crap.qrrepository.QrItem
 import cut.the.crap.qrrepository.db.QrCodeDbItem
 import cut.the.crap.qrrepository.db.toItem
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -38,15 +41,26 @@ class MainActivityViewModel(
     var detailViewQrCodeItem: QrItem = QrCodeDbItem().toItem()
         private set
 
-    val detailViewLiveQrCodeItem = MutableLiveData<State<QrItem>>()
+    // StateFlow for scanned QR code items
+    private val _detailViewQrCodeItemState = MutableStateFlow<State<QrItem>?>(null)
+    val detailViewQrCodeItemState: StateFlow<State<QrItem>?> = _detailViewQrCodeItemState.asStateFlow()
 
-    val saveDetailViewQrCodeImage = SingleLiveDataEvent<State<String?>>(null)
+    // SharedFlow for one-time save events (like SingleLiveDataEvent)
+    private val _saveQrImageEvent = MutableSharedFlow<State<String?>>()
+    val saveQrImageEvent: SharedFlow<State<String?>> = _saveQrImageEvent.asSharedFlow()
 
-    private val startDetailViewQrCodeItem = SingleLiveDataEvent<QrItem?>(null)
+    // StateFlow for history data
+    private val _historyData = MutableStateFlow<List<QrItem>>(emptyList())
+    val historyData: StateFlow<List<QrItem>> = _historyData.asStateFlow()
 
-    val historyAdapterData = historyRepository.getCompleteQrCodeHistory().asLiveData(Dispatchers.Main)
-
-    val removeItemSingleLiveDataEvent = SingleLiveDataEvent<State<QrItem>>(null)
+    init {
+        // Collect repository flow and update StateFlow
+        viewModelScope.launch {
+            historyRepository.getCompleteQrCodeHistory().collect { items ->
+                _historyData.value = items
+            }
+        }
+    }
 
     fun saveQrItem(qrCodeItem: QrItem) {
         viewModelScope.launch {
@@ -56,7 +70,7 @@ class MainActivityViewModel(
 
     @Throws(WriterException::class)
     fun saveQrItemFromFile(textContent: String, @Acquire.Type type: Int) {
-        if (Acquire.FROM_FILE == type) detailViewLiveQrCodeItem.value = State.loading()
+        if (Acquire.FROM_FILE == type) _detailViewQrCodeItemState.value = State.loading()
         viewModelScope.launch {
             val bitmap = textToImageEnc(textContent, encryptedPrefs.foregroundColor, encryptedPrefs.backgroundColor)
             val historyItem = QrCodeDbItem(
@@ -65,8 +79,7 @@ class MainActivityViewModel(
                 acquireType = type)
                 .toItem()
             detailViewQrCodeItem = historyItem
-            startDetailViewQrCodeItem.value = historyItem
-            detailViewLiveQrCodeItem.value = State.success(historyItem)
+            _detailViewQrCodeItemState.value = State.success(historyItem)
             historyRepository.insertQrItem(historyItem)
         }
     }
@@ -76,19 +89,19 @@ class MainActivityViewModel(
     }
 
     fun deleteCurrentDetailView() {
-        val pos = historyAdapterData.value?.indexOf(detailViewQrCodeItem)
-        pos?.let {
-            removeHistoryItem(it)
-        } ?: kotlin.run {
-            removeItemSingleLiveDataEvent.value = State.error(error = CouldNotDeleteQrItem())
+        val pos = _historyData.value.indexOf(detailViewQrCodeItem)
+        if (pos >= 0) {
+            removeHistoryItem(pos)
+        } else {
+            Timber.w("Could not find item to delete")
         }
     }
 
     fun saveQrImageOfDetailView(context: Context) {
-        saveDetailViewQrCodeImage.value = State.loading()
         viewModelScope.launch {
+            _saveQrImageEvent.emit(State.loading())
             val imageUri = saveImageToFile(detailViewQrCodeItem, context)
-            saveDetailViewQrCodeImage.value = State.success(data = imageUri)
+            _saveQrImageEvent.emit(State.success(data = imageUri))
             val updateItem = detailViewQrCodeItem.copy(fileUriString = imageUri)
             historyRepository.updateQrItem(updateItem)
             detailViewQrCodeItem = updateItem
@@ -97,13 +110,11 @@ class MainActivityViewModel(
 
     fun removeHistoryItem(pos: Int) {
         if (pos > -1) {
-            var result: QrItem?
-            removeItemSingleLiveDataEvent.value = State.loading()
             viewModelScope.launch {
-                historyAdapterData.value?.let {
-                    result = it[pos]
-                    historyRepository.deleteQrItem(it[pos])
-                    removeItemSingleLiveDataEvent.value = State.success(result)
+                val items = _historyData.value
+                if (pos < items.size) {
+                    historyRepository.deleteQrItem(items[pos])
+                    Timber.d("Deleted QR item at position $pos")
                 }
             }
         }

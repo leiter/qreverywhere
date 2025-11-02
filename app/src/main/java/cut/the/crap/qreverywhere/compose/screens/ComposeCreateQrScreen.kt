@@ -9,8 +9,12 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,6 +23,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import cut.the.crap.qreverywhere.compose.navigation.ComposeScreen
 import cut.the.crap.qreverywhere.ui.theme.QrEveryWhereTheme
+import kotlinx.coroutines.launch
 
 /**
  * Compose version of CreateQrCodeFragment
@@ -45,30 +50,12 @@ fun ComposeCreateQrScreen(navController: NavController) {
             color = MaterialTheme.colorScheme.onSurface
         )
 
-        // Email QR Code
+        // Plain Text QR Code
         QrTypeCard(
-            title = "Email QR Code",
-            description = "Create a QR code with email information",
+            title = "Text QR Code",
+            description = "Create a QR code with any text content",
             onClick = {
-                navController.navigate(ComposeScreen.CreateEmail.route)
-            }
-        )
-
-        // Phone QR Code
-        QrTypeCard(
-            title = "Phone QR Code",
-            description = "Create a QR code with phone number",
-            onClick = {
-                navController.navigate(ComposeScreen.CreateOneLiner.createRoute(0)) // CREATE_PHONE
-            }
-        )
-
-        // SMS QR Code
-        QrTypeCard(
-            title = "SMS QR Code",
-            description = "Create a QR code with SMS message",
-            onClick = {
-                navController.navigate(ComposeScreen.CreateOneLiner.createRoute(1)) // CREATE_SMS
+                navController.navigate(ComposeScreen.CreateText.createRoute("text"))
             }
         )
 
@@ -77,7 +64,34 @@ fun ComposeCreateQrScreen(navController: NavController) {
             title = "Web URL QR Code",
             description = "Create a QR code with website URL",
             onClick = {
-                navController.navigate(ComposeScreen.CreateOneLiner.createRoute(2)) // CREATE_WEB
+                navController.navigate(ComposeScreen.CreateText.createRoute("url"))
+            }
+        )
+
+        // Phone QR Code
+        QrTypeCard(
+            title = "Phone QR Code",
+            description = "Create a QR code with phone number",
+            onClick = {
+                navController.navigate(ComposeScreen.CreateText.createRoute("phone"))
+            }
+        )
+
+        // SMS QR Code
+        QrTypeCard(
+            title = "SMS QR Code",
+            description = "Create a QR code with SMS message",
+            onClick = {
+                navController.navigate(ComposeScreen.CreateText.createRoute("sms"))
+            }
+        )
+
+        // Email QR Code
+        QrTypeCard(
+            title = "Email QR Code",
+            description = "Create a QR code with email information",
+            onClick = {
+                navController.navigate(ComposeScreen.CreateEmail.route)
             }
         )
     }
