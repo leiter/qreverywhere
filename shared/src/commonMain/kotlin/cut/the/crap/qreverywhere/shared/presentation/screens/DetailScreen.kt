@@ -33,6 +33,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import cut.the.crap.qreverywhere.shared.presentation.state.State
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.shared.utils.Logger
 import cut.the.crap.qreverywhere.shared.utils.toImagePainter
@@ -58,13 +59,13 @@ fun DetailScreen(
 
     Box(modifier = Modifier.fillMaxSize()) {
         when (val state = detailState) {
-            is MainViewModel.State.Loading -> {
+            is State.Loading -> {
                 CircularProgressIndicator(
                     modifier = Modifier.align(Alignment.Center)
                 )
             }
 
-            is MainViewModel.State.Error -> {
+            is State.Error -> {
                 Text(
                     text = "Error: ${state.message}",
                     color = MaterialTheme.colorScheme.error,
@@ -75,7 +76,7 @@ fun DetailScreen(
                 )
             }
 
-            is MainViewModel.State.Success, null -> {
+            is State.Success, null -> {
                 detailItem?.let { qrItem ->
                     Column(
                         modifier = Modifier

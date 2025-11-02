@@ -8,6 +8,7 @@ import cut.the.crap.qreverywhere.shared.domain.repository.QrRepository
 import cut.the.crap.qreverywhere.shared.domain.usecase.QrCodeGenerator
 import cut.the.crap.qreverywhere.shared.domain.usecase.SaveImageToFileUseCase
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
+import cut.the.crap.qreverywhere.shared.presentation.state.State
 import cut.the.crap.qreverywhere.shared.utils.Logger
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -86,7 +87,7 @@ class MainViewModel(
      */
     fun saveQrItemFromText(textContent: String, acquireType: AcquireType) {
         if (acquireType == AcquireType.FROM_FILE) {
-            _detailViewState.value = State.Loading
+            _detailViewState.value = State.loading()
         }
 
         viewModelScope.launch {
@@ -112,11 +113,11 @@ class MainViewModel(
 
                 // Update detail view
                 _detailViewItem.value = qrItem
-                _detailViewState.value = State.Success(qrItem)
+                _detailViewState.value = State.success(qrItem)
 
                 Logger.d("MainViewModel") { "Created and saved QR item from text" }
             } catch (e: Exception) {
-                _detailViewState.value = State.Error(e.message ?: "Failed to create QR code")
+                _detailViewState.value = State.error(e.message ?: "Failed to create QR code", throwable = e)
                 Logger.e("MainViewModel", e) { "Failed to create QR item from text" }
             }
         }
@@ -134,11 +135,11 @@ class MainViewModel(
 
         viewModelScope.launch {
             try {
-                _saveQrImageEvent.emit(State.Loading)
+                _saveQrImageEvent.emit(State.loading())
 
                 val imageData = currentItem.imageData
                 if (imageData == null || imageData.isEmpty()) {
-                    _saveQrImageEvent.emit(State.Error("No image data available"))
+                    _saveQrImageEvent.emit(State.error("No image data available"))
                     return@launch
                 }
 
@@ -146,14 +147,14 @@ class MainViewModel(
                 val filePath = saveImageUseCase.saveImage(imageData)
 
                 if (filePath != null) {
-                    _saveQrImageEvent.emit(State.Success(filePath))
+                    _saveQrImageEvent.emit(State.success(filePath))
                     Logger.d("MainViewModel") { "Saved QR image to: $filePath" }
                 } else {
-                    _saveQrImageEvent.emit(State.Error("Failed to save image"))
+                    _saveQrImageEvent.emit(State.error("Failed to save image"))
                     Logger.e("MainViewModel") { "Failed to save QR image" }
                 }
             } catch (e: Exception) {
-                _saveQrImageEvent.emit(State.Error(e.message ?: "Unknown error"))
+                _saveQrImageEvent.emit(State.error(e.message ?: "Unknown error", throwable = e))
                 Logger.e("MainViewModel", e) { "Error saving QR image" }
             }
         }
@@ -216,14 +217,5 @@ class MainViewModel(
                 Logger.e("MainViewModel", e) { "Failed to clear history" }
             }
         }
-    }
-
-    /**
-     * State wrapper for UI states
-     */
-    sealed class State<out T> {
-        object Loading : State<Nothing>()
-        data class Success<T>(val data: T) : State<T>()
-        data class Error(val message: String) : State<Nothing>()
     }
 }

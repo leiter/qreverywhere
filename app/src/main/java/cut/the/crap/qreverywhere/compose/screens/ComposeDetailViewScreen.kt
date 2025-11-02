@@ -69,6 +69,8 @@ import cut.the.crap.qreverywhere.detailViewQrCodeItem
 import cut.the.crap.qreverywhere.detailViewQrCodeItemState
 import cut.the.crap.qreverywhere.R
 import cut.the.crap.qreverywhere.compose.navigation.ComposeScreen
+import cut.the.crap.qreverywhere.shared.presentation.state.State
+import cut.the.crap.qreverywhere.shared.presentation.state.getData
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.utils.data.AcquireDateFormatter
 import cut.the.crap.qreverywhere.utils.data.IntentGenerator
@@ -201,13 +203,13 @@ fun ComposeDetailViewScreen(
     // Determine which item to display based on origin
     val qrItem: QrItem? = when (originFlag) {
         FROM_HISTORY_LIST, FROM_CREATE_CONTEXT -> capturedItem
-        FROM_SCAN_QR -> scannedItemState?.data
+        FROM_SCAN_QR -> scannedItemState?.getData()
         else -> null
     }
 
     // Check loading state for scanned items
     val isLoading = if (originFlag == FROM_SCAN_QR) {
-        scannedItemState is MainViewModel.State.Loading
+        scannedItemState is State.Loading
     } else {
         false
     }
@@ -216,13 +218,13 @@ fun ComposeDetailViewScreen(
     LaunchedEffect(Unit) {
         viewModel.saveQrImageEvent.collect { state ->
             when (state) {
-                is MainViewModel.State.Success -> {
+                is State.Success -> {
                     snackbarHostState.showSnackbar("QR code saved to file")
                 }
-                is MainViewModel.State.Error -> {
+                is State.Error -> {
                     snackbarHostState.showSnackbar("Error saving QR code")
                 }
-                is MainViewModel.State.Loading -> {
+                is State.Loading -> {
                     // Loading state handled elsewhere
                 }
             }

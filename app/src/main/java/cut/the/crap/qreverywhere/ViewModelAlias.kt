@@ -1,8 +1,8 @@
 package cut.the.crap.qreverywhere
 
 import android.content.Context
-import cut.the.crap.qreverywhere.data.State
 import cut.the.crap.qreverywhere.shared.domain.model.AcquireType
+import cut.the.crap.qreverywhere.shared.presentation.state.State
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qrrepository.Acquire
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -43,9 +43,9 @@ val MainViewModel.detailViewQrCodeItem: cut.the.crap.qrrepository.QrItem
 val MainViewModel.detailViewQrCodeItemState: StateFlow<State<cut.the.crap.qrrepository.QrItem>?>
     get() = detailViewState.map { state ->
         when (state) {
-            is MainViewModel.State.Loading -> State.loading()
-            is MainViewModel.State.Success -> State.success(state.data.toAndroidQrItem())
-            is MainViewModel.State.Error -> State.error(state.message)
+            is State.Loading -> State.loading(state.data?.toAndroidQrItem(), state.showLoading, state.progress)
+            is State.Success -> State.success(state.data.toAndroidQrItem())
+            is State.Error -> State.error(state.message, state.data?.toAndroidQrItem(), state.throwable)
             null -> null
         }
     } as? StateFlow<State<cut.the.crap.qrrepository.QrItem>?> ?: MutableStateFlow(null)

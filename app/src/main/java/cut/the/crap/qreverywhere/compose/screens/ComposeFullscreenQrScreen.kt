@@ -39,6 +39,7 @@ import androidx.navigation.NavController
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.detailViewQrCodeItem
 import cut.the.crap.qreverywhere.detailViewQrCodeItemState
+import cut.the.crap.qreverywhere.shared.presentation.state.getData
 import cut.the.crap.qreverywhere.utils.data.AcquireDateFormatter
 import cut.the.crap.qreverywhere.utils.ui.FROM_CREATE_CONTEXT
 import cut.the.crap.qreverywhere.utils.ui.FROM_HISTORY_LIST
@@ -87,7 +88,7 @@ fun ComposeFullscreenQrScreen(
     // Determine which item to display based on origin
     val qrItem: QrItem? = when (originFlag) {
         FROM_HISTORY_LIST, FROM_CREATE_CONTEXT -> capturedItem
-        FROM_SCAN_QR -> scannedItemState?.data
+        FROM_SCAN_QR -> scannedItemState?.getData()
         else -> null
     }
 
