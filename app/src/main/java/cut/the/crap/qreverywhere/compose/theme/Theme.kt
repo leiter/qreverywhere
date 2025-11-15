@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere.ui.theme
+package cut.the.crap.qreverywhere.compose.theme
 
 import android.app.Activity
 import android.os.Build

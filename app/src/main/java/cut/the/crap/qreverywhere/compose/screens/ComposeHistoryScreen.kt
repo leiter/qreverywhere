@@ -22,16 +22,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.ui.graphics.asImageBitmap
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.compose.rememberNavController
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.setDetailViewItem
 import cut.the.crap.qreverywhere.compose.navigation.ComposeScreen
-import cut.the.crap.qreverywhere.ui.theme.QrEveryWhereTheme
 import cut.the.crap.qrrepository.QrItem
-import org.koin.androidx.compose.koinViewModel
 
 /**
  * Compose version of QrHistoryFragment

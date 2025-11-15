@@ -10,12 +10,13 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.datetime.Instant
 import java.io.ByteArrayOutputStream
+import androidx.core.graphics.createBitmap
 
 /**
  * Android implementation of QrRepository using existing Room database
  */
 class AndroidQrRepository(
-    private val roomRepository: QrHistoryRepository
+    private val roomRepository: QrHistoryRepository,
 ) : QrRepository {
 
     override fun getQrHistory(): Flow<List<QrItem>> {
@@ -75,7 +76,7 @@ private fun QrItem.toAndroidQrItem(): cut.the.crap.qrrepository.QrItem {
     // Convert image data back to Bitmap
     val bitmap = imageData?.let { data ->
         android.graphics.BitmapFactory.decodeByteArray(data, 0, data.size)
-    } ?: Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888)
+    } ?: createBitmap(1, 1)
 
     return cut.the.crap.qrrepository.QrItem(
         id = this.id,

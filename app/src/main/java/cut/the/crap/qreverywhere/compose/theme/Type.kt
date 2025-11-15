@@ -1,4 +1,4 @@
-package cut.the.crap.qreverywhere.ui.theme
+package cut.the.crap.qreverywhere.compose.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

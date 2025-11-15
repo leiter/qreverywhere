@@ -24,7 +24,6 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import cut.the.crap.qreverywhere.MainActivityViewModel
-import cut.the.crap.qreverywhere.R
 import org.koin.androidx.compose.koinViewModel
 import cut.the.crap.qreverywhere.compose.navigation.ComposeScreen
 import cut.the.crap.qreverywhere.compose.screens.ComposeCreateEmailQrScreen
@@ -36,7 +35,7 @@ import cut.the.crap.qreverywhere.compose.screens.ComposeHistoryScreen
 import cut.the.crap.qreverywhere.compose.screens.ComposeScanQrScreen
 import cut.the.crap.qreverywhere.shared.presentation.App
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
-import cut.the.crap.qreverywhere.ui.theme.QrEveryWhereTheme
+import cut.the.crap.qreverywhere.compose.theme.QrEveryWhereTheme
 
 /**
  * Main Activity for Compose UI migration

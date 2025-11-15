@@ -1,6 +1,5 @@
-package cut.the.crap.qreverywhere.ui.theme
+package cut.the.crap.qreverywhere.compose.theme
 
-import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
