@@ -41,6 +41,9 @@ import cut.the.crap.qreverywhere.compose.navigation.ComposeScreen
 import cut.the.crap.qreverywhere.utils.ui.FROM_CREATE_CONTEXT
 import cut.the.crap.qrrepository.Acquire
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
+import qreverywhere.shared.generated.resources.Res
+import qreverywhere.shared.generated.resources.*
 import timber.log.Timber
 
 /**
@@ -61,14 +64,23 @@ fun ComposeCreateTextQrScreen(
     val scope = rememberCoroutineScope()
     val focusManager = LocalFocusManager.current
 
+    // Get localized error messages
+    val errorInvalidUrl = stringResource(Res.string.error_invalid_url)
+    val errorInvalidPhone = stringResource(Res.string.error_invalid_phone)
+    val errorEmptyPhone = stringResource(Res.string.error_empty_phone)
+    val errorEmptyText = stringResource(Res.string.error_empty_text)
+    val errorInvalidUrlFormat = stringResource(Res.string.error_invalid_url_format)
+    val errorInvalidPhoneFormat = stringResource(Res.string.error_invalid_phone_format)
+    val errorCreateQr = stringResource(Res.string.error_create_qr)
+
     // Validation function
     fun validateInput(text: String, type: String): String? {
         if (text.isBlank()) {
             return when (type) {
-                "url" -> "Please enter a valid URL"
-                "phone" -> "Please enter a valid phone number"
-                "sms" -> "Please enter a phone number"
-                else -> "Please enter some text"
+                "url" -> errorInvalidUrl
+                "phone" -> errorInvalidPhone
+                "sms" -> errorEmptyPhone
+                else -> errorEmptyText
             }
         }
 
@@ -76,12 +88,12 @@ fun ComposeCreateTextQrScreen(
             "url" -> {
                 val trimmedText = text.trim()
                 if (!Patterns.WEB_URL.matcher(trimmedText).matches()) {
-                    "Invalid URL format"
+                    errorInvalidUrlFormat
                 } else null
             }
             "phone" -> {
                 if (!Patterns.PHONE.matcher(text).matches()) {
-                    "Invalid phone number"
+                    errorInvalidPhoneFormat
                 } else null
             }
             else -> null // Text and SMS don't need format validation beyond blank check
@@ -89,18 +101,42 @@ fun ComposeCreateTextQrScreen(
     }
 
     // Determine labels and hints based on QR type
-    val (title, label, hint, prefix) = when (qrType.lowercase()) {
+    val (title, label, hint, prefix, instruction) = when (qrType.lowercase()) {
         "url" -> {
-            Tuple4("Create URL QR Code", "Website URL", "https://example.com", "")
+            Tuple5(
+                stringResource(Res.string.create_url_title),
+                stringResource(Res.string.label_website_url),
+                stringResource(Res.string.placeholder_url),
+                "",
+                stringResource(Res.string.instruction_url)
+            )
         }
         "phone" -> {
-            Tuple4("Create Phone QR Code", "Phone Number", "+1234567890", "tel:")
+            Tuple5(
+                stringResource(Res.string.create_phone_title),
+                stringResource(Res.string.label_phone_number),
+                stringResource(Res.string.placeholder_phone),
+                "tel:",
+                stringResource(Res.string.instruction_phone)
+            )
         }
         "sms" -> {
-            Tuple4("Create SMS QR Code", "Phone Number", "+1234567890", "sms:")
+            Tuple5(
+                stringResource(Res.string.create_sms_title),
+                stringResource(Res.string.label_phone_number),
+                stringResource(Res.string.placeholder_phone),
+                "sms:",
+                stringResource(Res.string.instruction_sms)
+            )
         }
         else -> {
-            Tuple4("Create Text QR Code", "Text Content", "Enter any text", "")
+            Tuple5(
+                stringResource(Res.string.create_text_title),
+                stringResource(Res.string.label_text_content),
+                stringResource(Res.string.placeholder_text),
+                "",
+                stringResource(Res.string.instruction_text)
+            )
         }
     }
 
@@ -110,7 +146,7 @@ fun ComposeCreateTextQrScreen(
                 title = { Text(title) },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigateUp() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.cd_back))
                     }
                 }
             )
@@ -126,7 +162,7 @@ fun ComposeCreateTextQrScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
-                text = "Enter the $label to encode in the QR code",
+                text = instruction,
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurface
             )
@@ -189,7 +225,7 @@ fun ComposeCreateTextQrScreen(
                     } catch (e: WriterException) {
                         Timber.e(e, "Error creating QR code")
                         scope.launch {
-                            snackbarHostState.showSnackbar("Error creating QR code: ${e.message}")
+                            snackbarHostState.showSnackbar(errorCreateQr.replace("%1\$s", e.message ?: ""))
                         }
                     } finally {
                         isCreating = false
@@ -198,16 +234,17 @@ fun ComposeCreateTextQrScreen(
                 modifier = Modifier.fillMaxWidth(),
                 enabled = !isCreating
             ) {
-                Text(if (isCreating) "Creating..." else "Create QR Code")
+                Text(if (isCreating) stringResource(Res.string.create_button_creating) else stringResource(Res.string.create_button))
             }
         }
     }
 }
 
 // Helper data class for tuple
-private data class Tuple4(
+private data class Tuple5(
     val title: String,
     val label: String,
     val hint: String,
-    val prefix: String
+    val prefix: String,
+    val instruction: String
 )

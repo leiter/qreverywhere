@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!-- App Title -->
+    <string name="app_name">QR Everywhere</string>
+
+    <!-- Bottom Navigation -->
+    <string name="nav_history">History</string>
+    <string name="nav_scan">Scan</string>
+    <string name="nav_create">Create</string>
+
+    <!-- Screen Titles -->
+    <string name="title_history">QR History</string>
+    <string name="title_scan">Scan QR Code</string>
+    <string name="title_create">Create QR Code</string>
+    <string name="title_detail">QR Details</string>
+    <string name="title_create_text">Create Text QR</string>
+    <string name="title_create_email">Create Email QR</string>
+
+    <!-- Create QR Type Titles -->
+    <string name="title_text_qr">Text QR Code</string>
+    <string name="title_url_qr">Web URL QR Code</string>
+    <string name="title_phone_qr">Phone QR Code</string>
+    <string name="title_sms_qr">SMS QR Code</string>
+    <string name="title_email_qr">Email QR Code</string>
+
+    <!-- Create QR Type Descriptions -->
+    <string name="desc_text_qr">Create a QR code with any text content</string>
+    <string name="desc_url_qr">Create a QR code with website URL</string>
+    <string name="desc_phone_qr">Create a QR code with phone number</string>
+    <string name="desc_sms_qr">Create a QR code with SMS message</string>
+    <string name="desc_email_qr">Create a QR code with email information</string>
+
+    <!-- Create Screen -->
+    <string name="create_title">Create QR Code</string>
+    <string name="create_subtitle">Choose what type of QR code to create</string>
+    <string name="create_quick_text">Quick Text QR</string>
+    <string name="create_enter_text">Enter text</string>
+    <string name="create_placeholder">Type anything...</string>
+    <string name="create_button">Generate QR Code</string>
+    <string name="create_button_creating">Creating...</string>
+    <string name="create_more_types">More QR Types</string>
+    <string name="create_coming_soon">Coming soon:</string>
+    <string name="create_types_list">• Email QR Code\n• Phone QR Code\n• WiFi QR Code\n• vCard QR Code\n• URL QR Code</string>
+
+    <!-- Create Text QR Screen -->
+    <string name="create_url_title">Create URL QR Code</string>
+    <string name="create_phone_title">Create Phone QR Code</string>
+    <string name="create_sms_title">Create SMS QR Code</string>
+    <string name="create_text_title">Create Text QR Code</string>
+    <string name="create_email_title">Create Email QR Code</string>
+
+    <!-- Field Labels -->
+    <string name="label_website_url">Website URL</string>
+    <string name="label_phone_number">Phone Number</string>
+    <string name="label_text_content">Text Content</string>
+    <string name="label_email_address">Email Address</string>
+    <string name="label_email_subject">Subject (Optional)</string>
+    <string name="label_email_message">Message (Optional)</string>
+    <string name="label_enter_url">Enter website URL</string>
+    <string name="label_enter_phone">Enter phone number</string>
+    <string name="label_enter_phone_message">Enter phone number and message</string>
+
+    <!-- Field Placeholders -->
+    <string name="placeholder_url">https://example.com</string>
+    <string name="placeholder_phone">+1234567890</string>
+    <string name="placeholder_sms">+1234567890:Hello</string>
+    <string name="placeholder_text">Enter any text</string>
+    <string name="placeholder_email">example@email.com</string>
+    <string name="placeholder_email_subject">Email subject</string>
+    <string name="placeholder_email_message">Email message</string>
+
+    <!-- Field Hints -->
+    <string name="hint_url">The URL should start with http:// or https://</string>
+    <string name="hint_phone">Include country code (e.g., +1 for USA)</string>
+    <string name="hint_sms">Format: phone:message</string>
+
+    <!-- Instructions -->
+    <string name="instruction_url">Enter the Website URL to encode in the QR code</string>
+    <string name="instruction_phone">Enter the Phone Number to encode in the QR code</string>
+    <string name="instruction_sms">Enter the Phone Number to encode in the QR code</string>
+    <string name="instruction_text">Enter the Text Content to encode in the QR code</string>
+    <string name="instruction_email">Enter email details to encode in the QR code</string>
+
+    <!-- Validation Errors -->
+    <string name="error_invalid_url">Please enter a valid URL</string>
+    <string name="error_invalid_url_format">Invalid URL format</string>
+    <string name="error_invalid_phone">Please enter a valid phone number</string>
+    <string name="error_empty_phone">Please enter a phone number</string>
+    <string name="error_invalid_phone_format">Invalid phone number</string>
+    <string name="error_empty_text">Please enter some text</string>
+    <string name="error_empty_email">Please enter an email address</string>
+    <string name="error_invalid_email">Invalid email address</string>
+    <string name="error_create_qr">Error creating QR code: %1$s</string>
+
+    <!-- History Screen -->
+    <string name="history_empty">No QR codes yet.\nScan or create one to get started!</string>
+    <string name="history_type">Type: %1$s</string>
+    <string name="history_type_scanned">Scanned</string>
+    <string name="history_type_created">Created</string>
+    <string name="history_type_from_file">From File</string>
+    <string name="history_type_unknown">Unknown</string>
+
+    <!-- Detail Screen -->
+    <string name="detail_content">Content</string>
+    <string name="detail_details">Details</string>
+    <string name="detail_type">Type</string>
+    <string name="detail_created">Created</string>
+    <string name="detail_share">Share</string>
+    <string name="detail_save">Save Image</string>
+    <string name="detail_save_to_file">Save to file</string>
+    <string name="detail_delete">Delete</string>
+    <string name="detail_no_item">No QR code selected</string>
+    <string name="detail_error">Error: %1$s</string>
+    <string name="detail_loading">Loading QR code...</string>
+    <string name="detail_no_data">No QR code data available</string>
+    <string name="detail_tap_fullscreen">Tap to view fullscreen</string>
+    <string name="detail_copy_clipboard">Copy to clipboard</string>
+    <string name="detail_origin_flag">Origin flag: %1$d</string>
+
+    <!-- Feedback Messages -->
+    <string name="feedback_copied">Copied to clipboard</string>
+    <string name="feedback_saved">QR code saved to file</string>
+    <string name="feedback_save_error">Error saving QR code</string>
+    <string name="feedback_share_not_implemented">Share not yet implemented for cross-platform</string>
+    <string name="feedback_no_qr_in_image">No QR code found in image</string>
+    <string name="feedback_launch_error">Could not open content: %1$s</string>
+    <string name="feedback_no_app_found">No app found to handle this content</string>
+
+    <!-- Permission Messages -->
+    <string name="permission_storage_required">Storage permission is required to save QR code</string>
+    <string name="permission_grant_settings">Please grant storage permission in app settings</string>
+
+    <!-- Scan Screen -->
+    <string name="scan_title">Camera Scanning</string>
+    <string name="scan_message">QR code scanning requires platform-specific camera APIs.\n\nThis feature will be implemented using expect/actual declarations:\n• Android: CameraX\n• iOS: AVFoundation\n• Desktop: Webcam libraries</string>
+    <string name="scan_from_file">Scan from file</string>
+
+    <!-- Content Descriptions (for accessibility) -->
+    <string name="cd_qr_preview">QR Code Preview</string>
+    <string name="cd_qr_code">QR Code</string>
+    <string name="cd_qr_fullscreen">QR Code Fullscreen</string>
+    <string name="cd_back">Back</string>
+    <string name="cd_more">More</string>
+    <string name="cd_menu">Menu</string>
+    <string name="cd_share">Share</string>
+    <string name="cd_save">Save</string>
+    <string name="cd_delete">Delete</string>
+    <string name="cd_create">Create</string>
+    <string name="cd_launch">Launch</string>
+</resources>

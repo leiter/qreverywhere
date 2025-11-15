@@ -86,7 +86,10 @@ import cut.the.crap.qreverywhere.utils.ui.FROM_SCAN_QR
 import cut.the.crap.qreverywhere.utils.ui.hasPermission
 import cut.the.crap.qrrepository.QrItem
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource as kmpStringResource
 import org.koin.compose.koinInject
+import qreverywhere.shared.generated.resources.Res
+import qreverywhere.shared.generated.resources.*
 import timber.log.Timber
 
 /**
@@ -314,19 +317,23 @@ fun ComposeDetailViewScreen(
         floatingActionButton = {
             item?.let { qr ->
                 if (qr.determineType() != QrCodeType.UNKNOWN_CONTENT) {
+                    val launchErrorMessage = kmpStringResource(Res.string.feedback_no_app_found)
                     ExtendedFloatingActionButton(
                         onClick = {
                             val intent = IntentGenerator.QrStartIntent(qr.textContent).getIntent()
                             try {
                                 activityLauncher.launch(intent)
                             } catch (e: Exception) {
-                                // Handle error gracefully
+                                Timber.e(e, "Failed to launch intent for QR content")
+                                scope.launch {
+                                    snackbarHostState.showSnackbar(launchErrorMessage)
+                                }
                             }
                         },
                         icon = {
                             Icon(
                                 painter = painterResource(id = qr.fabLaunchIcon),
-                                contentDescription = "Launch"
+                                contentDescription = kmpStringResource(Res.string.cd_launch)
                             )
                         },
                         text = { Text(getLaunchButtonText(qr)) }

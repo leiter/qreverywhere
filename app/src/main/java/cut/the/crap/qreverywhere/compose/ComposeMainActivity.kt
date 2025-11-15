@@ -1,6 +1,11 @@
 package cut.the.crap.qreverywhere.compose
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +18,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavDestination.Companion.hierarchy
@@ -26,6 +32,9 @@ import androidx.navigation.navArgument
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import org.koin.androidx.compose.koinViewModel
 import cut.the.crap.qreverywhere.compose.navigation.ComposeScreen
+import org.jetbrains.compose.resources.stringResource as kmpStringResource
+import qreverywhere.shared.generated.resources.Res
+import qreverywhere.shared.generated.resources.*
 import cut.the.crap.qreverywhere.compose.screens.ComposeCreateEmailQrScreen
 import cut.the.crap.qreverywhere.compose.screens.ComposeCreateQrScreen
 import cut.the.crap.qreverywhere.compose.screens.ComposeCreateTextQrScreen
@@ -51,7 +60,25 @@ class ComposeMainActivity : ComponentActivity() {
             QrEveryWhereTheme {  //ComposeMainScreen()
                 // TEST: Use shared KMP App composable
                 val viewModel: MainViewModel = koinViewModel()
-                App(viewModel = viewModel)
+                val context = LocalContext.current
+                val copiedMessage = kmpStringResource(Res.string.feedback_copied)
+
+                App(
+                    viewModel = viewModel,
+                    onShareText = { text ->
+                        val shareIntent = Intent(Intent.ACTION_SEND).apply {
+                            type = "text/plain"
+                            putExtra(Intent.EXTRA_TEXT, text)
+                        }
+                        context.startActivity(Intent.createChooser(shareIntent, null))
+                    },
+                    onCopyToClipboard = { text ->
+                        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                        val clip = ClipData.newPlainText("QR Content", text)
+                        clipboard.setPrimaryClip(clip)
+                        Toast.makeText(context, copiedMessage, Toast.LENGTH_SHORT).show()
+                    }
+                )
 
                 // OLD: Android-specific Compose screens
                 // Uncomment below to use old Android screens

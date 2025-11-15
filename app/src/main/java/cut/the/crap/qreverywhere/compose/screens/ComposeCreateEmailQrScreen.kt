@@ -42,6 +42,9 @@ import cut.the.crap.qreverywhere.compose.navigation.ComposeScreen
 import cut.the.crap.qreverywhere.utils.ui.FROM_CREATE_CONTEXT
 import cut.the.crap.qrrepository.Acquire
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
+import qreverywhere.shared.generated.resources.Res
+import qreverywhere.shared.generated.resources.*
 import timber.log.Timber
 
 /**
@@ -63,6 +66,11 @@ fun ComposeCreateEmailQrScreen(
     val scope = rememberCoroutineScope()
     val focusManager = LocalFocusManager.current
 
+    // Get localized strings
+    val errorEmptyEmail = stringResource(Res.string.error_empty_email)
+    val errorInvalidEmail = stringResource(Res.string.error_invalid_email)
+    val errorCreateQr = stringResource(Res.string.error_create_qr)
+
     // Email validation function
     fun validateEmail(email: String): Boolean {
         return Patterns.EMAIL_ADDRESS.matcher(email).matches()
@@ -71,10 +79,10 @@ fun ComposeCreateEmailQrScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Create Email QR Code") },
+                title = { Text(stringResource(Res.string.create_email_title)) },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigateUp() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.cd_back))
                     }
                 }
             )
@@ -90,7 +98,7 @@ fun ComposeCreateEmailQrScreen(
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             Text(
-                text = "Enter email details to encode in the QR code",
+                text = stringResource(Res.string.instruction_email),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurface
             )
@@ -103,8 +111,8 @@ fun ComposeCreateEmailQrScreen(
                     // Clear error when user types
                     emailError = null
                 },
-                label = { Text("Email Address") },
-                placeholder = { Text("example@email.com") },
+                label = { Text(stringResource(Res.string.label_email_address)) },
+                placeholder = { Text(stringResource(Res.string.placeholder_email)) },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 isError = emailError != null,
@@ -122,8 +130,8 @@ fun ComposeCreateEmailQrScreen(
             OutlinedTextField(
                 value = emailSubject,
                 onValueChange = { emailSubject = it },
-                label = { Text("Subject (Optional)") },
-                placeholder = { Text("Email subject") },
+                label = { Text(stringResource(Res.string.label_email_subject)) },
+                placeholder = { Text(stringResource(Res.string.placeholder_email_subject)) },
                 modifier = Modifier.fillMaxWidth(),
                 singleLine = true,
                 keyboardOptions = KeyboardOptions(
@@ -136,8 +144,8 @@ fun ComposeCreateEmailQrScreen(
             OutlinedTextField(
                 value = emailBody,
                 onValueChange = { emailBody = it },
-                label = { Text("Message (Optional)") },
-                placeholder = { Text("Email message") },
+                label = { Text(stringResource(Res.string.label_email_message)) },
+                placeholder = { Text(stringResource(Res.string.placeholder_email_message)) },
                 modifier = Modifier.fillMaxWidth(),
                 maxLines = 5,
                 keyboardOptions = KeyboardOptions(
@@ -153,12 +161,12 @@ fun ComposeCreateEmailQrScreen(
                 onClick = {
                     // Validate email
                     if (emailAddress.isBlank()) {
-                        emailError = "Please enter an email address"
+                        emailError = errorEmptyEmail
                         return@Button
                     }
 
                     if (!validateEmail(emailAddress)) {
-                        emailError = "Invalid email address"
+                        emailError = errorInvalidEmail
                         return@Button
                     }
 
@@ -183,7 +191,7 @@ fun ComposeCreateEmailQrScreen(
                     } catch (e: WriterException) {
                         Timber.e(e, "Error creating QR code")
                         scope.launch {
-                            snackbarHostState.showSnackbar("Error creating QR code: ${e.message}")
+                            snackbarHostState.showSnackbar(errorCreateQr.replace("%1\$s", e.message ?: ""))
                         }
                     } finally {
                         isCreating = false
@@ -192,7 +200,7 @@ fun ComposeCreateEmailQrScreen(
                 modifier = Modifier.fillMaxWidth(),
                 enabled = !isCreating
             ) {
-                Text(if (isCreating) "Creating..." else "Create QR Code")
+                Text(if (isCreating) stringResource(Res.string.create_button_creating) else stringResource(Res.string.create_button))
             }
         }
     }

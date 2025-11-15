@@ -5,6 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import cut.the.crap.qreverywhere.shared.presentation.screens.CreateEmailScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateTextScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.DetailScreen
@@ -25,7 +26,9 @@ fun AppNavHost(
     navController: NavHostController,
     viewModel: MainViewModel,
     modifier: Modifier = Modifier,
-    startDestination: String = Screen.Scan.route
+    startDestination: String = Screen.Scan.route,
+    onShareText: (String) -> Unit = {},
+    onCopyToClipboard: (String) -> Unit = {}
 ) {
     NavHost(
         navController = navController,
@@ -51,10 +54,14 @@ fun AppNavHost(
                     navController.popBackStack()
                 },
                 onShare = {
-                    Logger.w("DetailScreen") { "Share functionality requires platform-specific implementation" }
+                    viewModel.detailViewItem.value?.let { item ->
+                        onShareText(item.textContent)
+                    }
                 },
                 onCopyToClipboard = {
-                    Logger.w("DetailScreen") { "Clipboard functionality requires platform-specific implementation" }
+                    viewModel.detailViewItem.value?.let { item ->
+                        onCopyToClipboard(item.textContent)
+                    }
                 },
                 onFullscreenClick = {
                     itemId?.let {
@@ -122,10 +129,7 @@ fun AppNavHost(
         }
 
         composable(Screen.CreateEmail.route) {
-            // TODO: Implement specialized email QR screen
-            // For now, redirect to text creation
-            CreateTextScreen(
-                qrType = "text",
+            CreateEmailScreen(
                 viewModel = viewModel,
                 onQrCreated = {
                     viewModel.detailViewItem.value?.let { item ->

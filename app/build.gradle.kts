@@ -61,6 +61,9 @@ dependencies {
     // KMP Shared Module
     implementation(project(":shared"))
 
+    // Compose Multiplatform Resources (for accessing shared string resources)
+    implementation("org.jetbrains.compose.components:components-resources:1.7.1")
+
     // Android basics
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

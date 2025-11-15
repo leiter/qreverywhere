@@ -28,6 +28,9 @@ import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.setDetailViewItem
 import cut.the.crap.qreverywhere.compose.navigation.ComposeScreen
 import cut.the.crap.qrrepository.QrItem
+import org.jetbrains.compose.resources.stringResource
+import qreverywhere.shared.generated.resources.Res
+import qreverywhere.shared.generated.resources.*
 
 /**
  * Compose version of QrHistoryFragment
@@ -69,7 +72,7 @@ fun ComposeHistoryScreen(
             .padding(16.dp)
     ) {
         Text(
-            text = "QR History",
+            text = stringResource(Res.string.title_history),
             style = MaterialTheme.typography.headlineLarge,
             color = MaterialTheme.colorScheme.primary,
             modifier = Modifier.padding(bottom = 16.dp)
@@ -81,7 +84,7 @@ fun ComposeHistoryScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "No QR codes yet.\nScan or create one to get started!",
+                    text = stringResource(Res.string.history_empty),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -112,6 +115,13 @@ fun QrHistoryItem(
     qrItem: QrItem,
     onClick: () -> Unit
 ) {
+    val typeLabel = when (qrItem.acquireType) {
+        0 -> stringResource(Res.string.history_type_scanned)
+        1 -> stringResource(Res.string.history_type_created)
+        2 -> stringResource(Res.string.history_type_from_file)
+        else -> stringResource(Res.string.history_type_unknown)
+    }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -130,7 +140,7 @@ fun QrHistoryItem(
             // QR Code thumbnail
             Image(
                 bitmap = qrItem.img.asImageBitmap(),
-                contentDescription = "QR Code",
+                contentDescription = stringResource(Res.string.cd_qr_code),
                 modifier = Modifier.size(60.dp)
             )
 
@@ -146,12 +156,7 @@ fun QrHistoryItem(
                     maxLines = 2
                 )
                 Text(
-                    text = "Type: ${when (qrItem.acquireType) {
-                        0 -> "Scanned"
-                        1 -> "Created"
-                        2 -> "From File"
-                        else -> "Unknown"
-                    }}",
+                    text = "${stringResource(Res.string.detail_type)}: $typeLabel",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )

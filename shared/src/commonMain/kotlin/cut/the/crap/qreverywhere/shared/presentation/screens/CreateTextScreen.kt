@@ -73,11 +73,11 @@ fun CreateTextScreen(
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text(
-            text = title,
-            style = MaterialTheme.typography.headlineMedium,
-            color = MaterialTheme.colorScheme.primary
-        )
+//        Text(
+//            text = title,
+//            style = MaterialTheme.typography.headlineMedium,
+//            color = MaterialTheme.colorScheme.primary
+//        )
 
         // Text QR Code Creation
         Card(

@@ -18,6 +18,9 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import cut.the.crap.qreverywhere.compose.navigation.ComposeScreen
 import cut.the.crap.qreverywhere.compose.theme.QrEveryWhereTheme
+import org.jetbrains.compose.resources.stringResource
+import qreverywhere.shared.generated.resources.Res
+import qreverywhere.shared.generated.resources.*
 
 /**
  * Compose version of CreateQrCodeFragment
@@ -33,21 +36,21 @@ fun ComposeCreateQrScreen(navController: NavController) {
         verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
     ) {
         Text(
-            text = "Create QR Code",
+            text = stringResource(Res.string.create_title),
             style = MaterialTheme.typography.headlineLarge,
             color = MaterialTheme.colorScheme.primary
         )
 
         Text(
-            text = "Choose what type of QR code to create",
+            text = stringResource(Res.string.create_subtitle),
             style = MaterialTheme.typography.bodyLarge,
             color = MaterialTheme.colorScheme.onSurface
         )
 
         // Plain Text QR Code
         QrTypeCard(
-            title = "Text QR Code",
-            description = "Create a QR code with any text content",
+            title = stringResource(Res.string.title_text_qr),
+            description = stringResource(Res.string.desc_text_qr),
             onClick = {
                 navController.navigate(ComposeScreen.CreateText.createRoute("text"))
             }
@@ -55,8 +58,8 @@ fun ComposeCreateQrScreen(navController: NavController) {
 
         // Web URL QR Code
         QrTypeCard(
-            title = "Web URL QR Code",
-            description = "Create a QR code with website URL",
+            title = stringResource(Res.string.title_url_qr),
+            description = stringResource(Res.string.desc_url_qr),
             onClick = {
                 navController.navigate(ComposeScreen.CreateText.createRoute("url"))
             }
@@ -64,8 +67,8 @@ fun ComposeCreateQrScreen(navController: NavController) {
 
         // Phone QR Code
         QrTypeCard(
-            title = "Phone QR Code",
-            description = "Create a QR code with phone number",
+            title = stringResource(Res.string.title_phone_qr),
+            description = stringResource(Res.string.desc_phone_qr),
             onClick = {
                 navController.navigate(ComposeScreen.CreateText.createRoute("phone"))
             }
@@ -73,8 +76,8 @@ fun ComposeCreateQrScreen(navController: NavController) {
 
         // SMS QR Code
         QrTypeCard(
-            title = "SMS QR Code",
-            description = "Create a QR code with SMS message",
+            title = stringResource(Res.string.title_sms_qr),
+            description = stringResource(Res.string.desc_sms_qr),
             onClick = {
                 navController.navigate(ComposeScreen.CreateText.createRoute("sms"))
             }
@@ -82,8 +85,8 @@ fun ComposeCreateQrScreen(navController: NavController) {
 
         // Email QR Code
         QrTypeCard(
-            title = "Email QR Code",
-            description = "Create a QR code with email information",
+            title = stringResource(Res.string.title_email_qr),
+            description = stringResource(Res.string.desc_email_qr),
             onClick = {
                 navController.navigate(ComposeScreen.CreateEmail.route)
             }

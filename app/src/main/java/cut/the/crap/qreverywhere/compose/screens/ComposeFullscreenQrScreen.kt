@@ -45,7 +45,10 @@ import cut.the.crap.qreverywhere.utils.ui.FROM_CREATE_CONTEXT
 import cut.the.crap.qreverywhere.utils.ui.FROM_HISTORY_LIST
 import cut.the.crap.qreverywhere.utils.ui.FROM_SCAN_QR
 import cut.the.crap.qrrepository.QrItem
+import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
+import qreverywhere.shared.generated.resources.Res
+import qreverywhere.shared.generated.resources.*
 import timber.log.Timber
 
 /**
@@ -105,7 +108,7 @@ fun ComposeFullscreenQrScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigateUp() }) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.cd_back))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -150,7 +153,7 @@ private fun ZoomableQrImage(bitmap: Bitmap) {
     ) {
         Image(
             bitmap = bitmap.asImageBitmap(),
-            contentDescription = "QR Code Fullscreen",
+            contentDescription = stringResource(Res.string.cd_qr_fullscreen),
             contentScale = ContentScale.Fit,
             modifier = Modifier
                 .fillMaxSize()

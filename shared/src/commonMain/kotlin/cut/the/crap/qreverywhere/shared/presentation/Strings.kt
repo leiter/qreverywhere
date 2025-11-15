@@ -23,6 +23,13 @@ object Strings {
     const val titleCreateText = "Create Text QR"
     const val titleCreateEmail = "Create Email QR"
 
+    // Create QR Type Titles
+    const val titleTextQr = "Text QR Code"
+    const val titleUrlQr = "Web URL QR Code"
+    const val titlePhoneQr = "Phone QR Code"
+    const val titleSmsQr = "SMS QR Code"
+    const val titleEmailQr = "Email QR Code"
+
     // History Screen
     const val historyEmpty = "No QR codes yet.\nScan or create one to get started!"
     const val historyType = "Type: %s"
