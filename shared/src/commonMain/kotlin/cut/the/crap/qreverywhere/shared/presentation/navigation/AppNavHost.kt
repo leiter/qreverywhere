@@ -85,11 +85,17 @@ fun AppNavHost(
         composable(Screen.Scan.route) {
             ScanScreen(
                 onQrCodeScanned = { scannedText ->
+                    // Save the scanned QR code
                     viewModel.saveQrItemFromText(
                         textContent = scannedText,
                         acquireType = cut.the.crap.qreverywhere.shared.domain.model.AcquireType.SCANNED
                     )
-                    navController.popBackStack()
+
+                    // Navigate to history to show the scanned item
+                    navController.navigate(Screen.History.route) {
+                        popUpTo(Screen.Scan.route) { inclusive = true }
+                        launchSingleTop = true
+                    }
                 }
             )
         }
