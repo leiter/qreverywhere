@@ -1,5 +1,6 @@
 package cut.the.crap.qreverywhere.shared.presentation
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -20,12 +21,16 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import cut.the.crap.qreverywhere.shared.presentation.navigation.AppNavHost
 import cut.the.crap.qreverywhere.shared.presentation.navigation.Screen
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
+import cut.the.crap.qreverywhere.shared.utils.DeviceOrientation
+import cut.the.crap.qreverywhere.shared.utils.getDeviceOrientation
 import org.jetbrains.compose.resources.stringResource
 import qreverywhere.shared.generated.resources.Res
 import qreverywhere.shared.generated.resources.*
@@ -52,6 +57,14 @@ fun App(
     val currentDestination = navBackStackEntry?.destination
     val currentRoute = currentDestination?.route ?: ""
 
+    // Get device orientation
+    val orientation = getDeviceOrientation()
+    val isLandscape = orientation == DeviceOrientation.LANDSCAPE
+    val isScanScreen = currentRoute == Screen.Scan.route
+
+    // Hide top bar when in landscape mode on scan screen for full camera preview
+    val shouldHideTopBar = isLandscape && isScanScreen
+
     // Determine if we're on a child screen that needs a back button
     val isChildScreen = currentRoute.startsWith("create/text/") || currentRoute == Screen.CreateEmail.route
 
@@ -77,28 +90,31 @@ fun App(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    val title = topBarTitle()
-                    if (title.isNotEmpty()) {
-                        Text(text = title)
-                    }
-                },
-                navigationIcon = {
-                    if (isChildScreen) {
-                        IconButton(onClick = { navController.popBackStack() }) {
-                            Icon(
-                                imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                                contentDescription = stringResource(Res.string.cd_back)
-                            )
+            // Only show top bar if not in landscape scan mode
+            if (!shouldHideTopBar) {
+                CenterAlignedTopAppBar(
+                    title = {
+                        val title = topBarTitle()
+                        if (title.isNotEmpty()) {
+                            Text(text = title)
                         }
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primaryContainer,
-                    titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    },
+                    navigationIcon = {
+                        if (isChildScreen) {
+                            IconButton(onClick = { navController.popBackStack() }) {
+                                Icon(
+                                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                                    contentDescription = stringResource(Res.string.cd_back)
+                                )
+                            }
+                        }
+                    },
+                    colors = TopAppBarDefaults.topAppBarColors(
+                        containerColor = MaterialTheme.colorScheme.primaryContainer,
+                        titleContentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                    )
                 )
-            )
+            }
         },
         bottomBar = {
             NavigationBar {
@@ -162,12 +178,25 @@ fun App(
         }
     ) { innerPadding ->
         // Navigation host with proper padding for safe areas
+        // In landscape scan mode, we use custom padding to allow full screen camera
+        val layoutDirection = LocalLayoutDirection.current
+        val adjustedPadding = if (shouldHideTopBar) {
+            PaddingValues(
+                top = 0.dp,
+                bottom = innerPadding.calculateBottomPadding(),
+                start = innerPadding.calculateLeftPadding(layoutDirection),
+                end = innerPadding.calculateRightPadding(layoutDirection)
+            )
+        } else {
+            innerPadding
+        }
+
         AppNavHost(
             navController = navController,
             viewModel = viewModel,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding), // This handles iOS safe areas automatically!
+                .padding(adjustedPadding), // Adjusted padding for landscape camera
             onShareText = onShareText,
             onCopyToClipboard = onCopyToClipboard
         )

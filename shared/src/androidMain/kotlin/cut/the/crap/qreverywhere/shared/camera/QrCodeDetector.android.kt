@@ -65,8 +65,7 @@ actual class QrCodeDetector {
             results.add(
                 QrCodeResult(
                     text = result.text,
-                    format = result.barcodeFormat?.name,
-                    timestamp = System.currentTimeMillis()
+                    format = result.barcodeFormat?.name
                 )
             )
         } catch (e: NotFoundException) {
