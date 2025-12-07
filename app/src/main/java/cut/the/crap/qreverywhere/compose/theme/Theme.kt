@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
+import cut.the.crap.qreverywhere.shared.presentation.theme.*
 
 /**
  * Light color scheme based on QrEveryWhere's green theme

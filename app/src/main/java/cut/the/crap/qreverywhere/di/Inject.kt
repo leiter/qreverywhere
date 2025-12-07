@@ -2,7 +2,6 @@ package cut.the.crap.qreverywhere.di
 
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
 import cut.the.crap.qreverywhere.shared.platform.AndroidUserPreferences
-import cut.the.crap.qreverywhere.utils.data.AcquireDateFormatter
 import cut.the.crap.qreverywhere.utils.data.EncryptedPrefs
 import cut.the.crap.qreverywhere.shared.di.getSharedModule
 import cut.the.crap.qreverywhere.shared.di.platformModule
@@ -15,9 +14,6 @@ val appModule = module {
 
     // Provide EncryptedPrefs
     single { EncryptedPrefs(androidContext(), get<String>()) }
-
-    // Provide AcquireDateFormatter
-    single { AcquireDateFormatter(androidContext()) }
 
     // Provide UserPreferences using EncryptedPrefs
     single<UserPreferences> {
