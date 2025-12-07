@@ -34,7 +34,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.google.material)
-    implementation(project(":app"))
+    implementation(project(":androidApp"))
     testImplementation(libs.kotlin.test)
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.espresso.core)
