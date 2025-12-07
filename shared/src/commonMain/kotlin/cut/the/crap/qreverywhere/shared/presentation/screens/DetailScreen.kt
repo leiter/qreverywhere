@@ -37,6 +37,9 @@ import cut.the.crap.qreverywhere.shared.presentation.state.State
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.shared.utils.Logger
 import cut.the.crap.qreverywhere.shared.utils.toImagePainter
+import org.jetbrains.compose.resources.stringResource
+import qreverywhere.shared.generated.resources.Res
+import qreverywhere.shared.generated.resources.*
 
 /**
  * Shared Detail Screen for Compose Multiplatform
@@ -68,7 +71,7 @@ fun DetailScreen(
 
             is State.Error -> {
                 Text(
-                    text = "Error: ${state.message}",
+                    text = stringResource(Res.string.detail_error, state.message),
                     color = MaterialTheme.colorScheme.error,
                     modifier = Modifier
                         .align(Alignment.Center)
@@ -98,7 +101,7 @@ fun DetailScreen(
                                 ) {
                                     Image(
                                         painter = painter,
-                                        contentDescription = "QR Code",
+                                        contentDescription = stringResource(Res.string.cd_qr_code),
                                         modifier = Modifier
                                             .fillMaxWidth()
                                             .size(300.dp)
@@ -119,7 +122,7 @@ fun DetailScreen(
                                 modifier = Modifier.padding(16.dp)
                             ) {
                                 Text(
-                                    text = "Content",
+                                    text = stringResource(Res.string.detail_content),
                                     style = MaterialTheme.typography.labelLarge,
                                     color = MaterialTheme.colorScheme.primary
                                 )
@@ -142,13 +145,13 @@ fun DetailScreen(
                                 verticalArrangement = Arrangement.spacedBy(8.dp)
                             ) {
                                 Text(
-                                    text = "Details",
+                                    text = stringResource(Res.string.detail_details),
                                     style = MaterialTheme.typography.labelLarge,
                                     color = MaterialTheme.colorScheme.primary
                                 )
 
-                                DetailRow("Type", qrItem.acquireType.name)
-                                DetailRow("Created", qrItem.timestamp.toString())
+                                DetailRow(stringResource(Res.string.detail_type), qrItem.acquireType.name)
+                                DetailRow(stringResource(Res.string.detail_created), qrItem.timestamp.toString())
                             }
                         }
 
@@ -167,9 +170,9 @@ fun DetailScreen(
                                 },
                                 modifier = Modifier.fillMaxWidth()
                             ) {
-                                Icon(Icons.Default.Share, "Share")
+                                Icon(Icons.Default.Share, stringResource(Res.string.cd_share))
                                 Spacer(modifier = Modifier.size(8.dp))
-                                Text("Share")
+                                Text(stringResource(Res.string.detail_share))
                             }
 
                             // Save Image Button
@@ -179,9 +182,9 @@ fun DetailScreen(
                                 },
                                 modifier = Modifier.fillMaxWidth()
                             ) {
-                                Icon(Icons.Default.Share, "Save")
+                                Icon(Icons.Default.Share, stringResource(Res.string.cd_save))
                                 Spacer(modifier = Modifier.size(8.dp))
-                                Text("Save Image")
+                                Text(stringResource(Res.string.detail_save))
                             }
 
                             // Delete Button
@@ -194,15 +197,15 @@ fun DetailScreen(
                                 containerColor = MaterialTheme.colorScheme.errorContainer,
                                 contentColor = MaterialTheme.colorScheme.onErrorContainer
                             ) {
-                                Icon(Icons.Default.Delete, "Delete")
+                                Icon(Icons.Default.Delete, stringResource(Res.string.cd_delete))
                                 Spacer(modifier = Modifier.size(8.dp))
-                                Text("Delete")
+                                Text(stringResource(Res.string.detail_delete))
                             }
                         }
                     }
                 } ?: run {
                     Text(
-                        text = "No QR code selected",
+                        text = stringResource(Res.string.detail_no_item),
                         modifier = Modifier
                             .align(Alignment.Center)
                             .padding(16.dp)

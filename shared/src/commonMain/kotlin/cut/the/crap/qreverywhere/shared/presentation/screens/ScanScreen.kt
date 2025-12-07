@@ -39,6 +39,9 @@ import cut.the.crap.qreverywhere.shared.camera.QrCodeResult
 import cut.the.crap.qreverywhere.shared.camera.rememberCameraPermissionManager
 import cut.the.crap.qreverywhere.shared.utils.Logger
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
+import qreverywhere.shared.generated.resources.Res
+import qreverywhere.shared.generated.resources.*
 
 /**
  * QR Code Scanning Screen with Camera Support
@@ -49,6 +52,11 @@ fun ScanScreen(
 ) {
     val permissionManager = rememberCameraPermissionManager()
     var permissionState by remember { mutableStateOf(CameraPermissionState.NOT_REQUESTED) }
+
+    // Get localized strings for use in callbacks
+    val dismissLabel = stringResource(Res.string.action_dismiss)
+    val okLabel = stringResource(Res.string.action_ok)
+    val qrDetectedMessage = stringResource(Res.string.scan_qr_detected)
     var cameraConfig by remember {
         mutableStateOf(
             CameraConfig(
@@ -98,7 +106,9 @@ fun ScanScreen(
                                             onQrCodeScanned(code)
                                         },
                                         scope = scope,
-                                        snackbarHostState = snackbarHostState
+                                        snackbarHostState = snackbarHostState,
+                                        qrDetectedMessage = qrDetectedMessage,
+                                        okLabel = okLabel
                                     )
                                 }
                             },
@@ -106,7 +116,7 @@ fun ScanScreen(
                                 scope.launch {
                                     snackbarHostState.showSnackbar(
                                         message = errorMessage,
-                                        actionLabel = "Dismiss"
+                                        actionLabel = dismissLabel
                                     )
                                 }
                                 Logger.e("ScanScreen") { errorMessage }
@@ -221,7 +231,7 @@ private fun PermissionDeniedContent(
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "Camera Permission Required",
+            text = stringResource(Res.string.permission_camera_required),
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.primary
         )
@@ -230,9 +240,9 @@ private fun PermissionDeniedContent(
 
         Text(
             text = if (isPermanentlyDenied) {
-                "Camera permission has been permanently denied. Please enable it in your device settings to scan QR codes."
+                stringResource(Res.string.permission_camera_permanently_denied)
             } else {
-                "Camera permission is required to scan QR codes. Please grant the permission to continue."
+                stringResource(Res.string.permission_camera_denied)
             },
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
@@ -246,7 +256,10 @@ private fun PermissionDeniedContent(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                text = if (isPermanentlyDenied) "Open Settings" else "Grant Permission"
+                text = if (isPermanentlyDenied)
+                    stringResource(Res.string.permission_open_settings)
+                else
+                    stringResource(Res.string.permission_grant)
             )
         }
 
@@ -274,7 +287,7 @@ private fun PermissionNotRequestedContent(
         Spacer(modifier = Modifier.height(24.dp))
 
         Text(
-            text = "Ready to Scan",
+            text = stringResource(Res.string.permission_ready_to_scan),
             style = MaterialTheme.typography.headlineMedium,
             color = MaterialTheme.colorScheme.primary
         )
@@ -282,7 +295,7 @@ private fun PermissionNotRequestedContent(
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Tap the button below to start scanning QR codes with your camera.",
+            text = stringResource(Res.string.permission_start_scanning_hint),
             style = MaterialTheme.typography.bodyLarge,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -294,7 +307,7 @@ private fun PermissionNotRequestedContent(
             onClick = onRequestPermission,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text("Start Scanning")
+            Text(stringResource(Res.string.permission_start_scanning))
         }
 
         Spacer(modifier = Modifier.weight(1f))
@@ -307,17 +320,20 @@ private fun handleQrCodeDetected(
     onUpdate: (String) -> Unit,
     onQrCodeScanned: (String) -> Unit,
     scope: kotlinx.coroutines.CoroutineScope,
-    snackbarHostState: SnackbarHostState
+    snackbarHostState: SnackbarHostState,
+    qrDetectedMessage: String,
+    okLabel: String
 ) {
     // Avoid duplicate detections
     if (result.text != lastScannedCode) {
         onUpdate(result.text)
         onQrCodeScanned(result.text)
 
+        val displayText = result.text.take(50) + if (result.text.length > 50) "..." else ""
         scope.launch {
             snackbarHostState.showSnackbar(
-                message = "QR Code detected: ${result.text.take(50)}${if (result.text.length > 50) "..." else ""}",
-                actionLabel = "OK"
+                message = qrDetectedMessage.replace("%1\$s", displayText),
+                actionLabel = okLabel
             )
         }
 

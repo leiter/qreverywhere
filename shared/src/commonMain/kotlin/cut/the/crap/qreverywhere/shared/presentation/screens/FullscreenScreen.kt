@@ -31,6 +31,9 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.shared.utils.toImagePainter
+import org.jetbrains.compose.resources.stringResource
+import qreverywhere.shared.generated.resources.Res
+import qreverywhere.shared.generated.resources.*
 
 /**
  * Fullscreen Screen for Compose Multiplatform
@@ -60,7 +63,7 @@ fun FullscreenScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, "Back")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.cd_back))
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
@@ -103,7 +106,7 @@ private fun ZoomableQrImage(painter: androidx.compose.ui.graphics.painter.Painte
     ) {
         Image(
             painter = painter,
-            contentDescription = "QR Code Fullscreen",
+            contentDescription = stringResource(Res.string.cd_qr_fullscreen),
             contentScale = ContentScale.Fit,
             modifier = Modifier
                 .fillMaxSize()

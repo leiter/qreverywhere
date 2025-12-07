@@ -129,11 +129,24 @@
     <!-- Permission Messages -->
     <string name="permission_storage_required">Storage permission is required to save QR code</string>
     <string name="permission_grant_settings">Please grant storage permission in app settings</string>
+    <string name="permission_camera_required">Camera Permission Required</string>
+    <string name="permission_camera_denied">Camera permission is required to scan QR codes. Please grant the permission to continue.</string>
+    <string name="permission_camera_permanently_denied">Camera permission has been permanently denied. Please enable it in your device settings to scan QR codes.</string>
+    <string name="permission_open_settings">Open Settings</string>
+    <string name="permission_grant">Grant Permission</string>
+    <string name="permission_ready_to_scan">Ready to Scan</string>
+    <string name="permission_start_scanning_hint">Tap the button below to start scanning QR codes with your camera.</string>
+    <string name="permission_start_scanning">Start Scanning</string>
 
     <!-- Scan Screen -->
     <string name="scan_title">Camera Scanning</string>
     <string name="scan_message">QR code scanning requires platform-specific camera APIs.\n\nThis feature will be implemented using expect/actual declarations:\n• Android: CameraX\n• iOS: AVFoundation\n• Desktop: Webcam libraries</string>
     <string name="scan_from_file">Scan from file</string>
+    <string name="scan_qr_detected">QR Code detected: %1$s</string>
+
+    <!-- Common Actions -->
+    <string name="action_dismiss">Dismiss</string>
+    <string name="action_ok">OK</string>
 
     <!-- Content Descriptions (for accessibility) -->
     <string name="cd_qr_preview">QR Code Preview</string>

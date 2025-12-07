@@ -23,6 +23,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cut.the.crap.qreverywhere.shared.domain.model.AcquireType
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
+import org.jetbrains.compose.resources.stringResource
+import qreverywhere.shared.generated.resources.Res
+import qreverywhere.shared.generated.resources.*
 
 /**
  * Create Text QR Screen for Compose Multiplatform
@@ -42,27 +45,27 @@ fun CreateTextScreen(
 
     val (title, label, placeholder, prefix) = when (qrType) {
         "url" -> QrTypeInfo(
-            "Web URL QR Code",
-            "Enter website URL",
-            "https://example.com",
+            stringResource(Res.string.title_url_qr),
+            stringResource(Res.string.label_enter_url),
+            stringResource(Res.string.placeholder_url),
             "https://"
         )
         "phone" -> QrTypeInfo(
-            "Phone QR Code",
-            "Enter phone number",
-            "+1234567890",
+            stringResource(Res.string.title_phone_qr),
+            stringResource(Res.string.label_enter_phone),
+            stringResource(Res.string.placeholder_phone),
             "tel:"
         )
         "sms" -> QrTypeInfo(
-            "SMS QR Code",
-            "Enter phone number and message",
-            "+1234567890:Hello",
+            stringResource(Res.string.title_sms_qr),
+            stringResource(Res.string.label_enter_phone_message),
+            stringResource(Res.string.placeholder_sms),
             "smsto:"
         )
         else -> QrTypeInfo(
-            "Text QR Code",
-            "Enter text",
-            "Type anything...",
+            stringResource(Res.string.title_text_qr),
+            stringResource(Res.string.create_enter_text),
+            stringResource(Res.string.create_placeholder),
             ""
         )
     }
@@ -99,9 +102,9 @@ fun CreateTextScreen(
                 if (qrType == "url" || qrType == "phone" || qrType == "sms") {
                     Text(
                         text = when (qrType) {
-                            "url" -> "The URL should start with http:// or https://"
-                            "phone" -> "Include country code for international numbers"
-                            "sms" -> "Format: phone:message (e.g., +1234567890:Hello)"
+                            "url" -> stringResource(Res.string.hint_url)
+                            "phone" -> stringResource(Res.string.hint_phone)
+                            "sms" -> stringResource(Res.string.hint_sms)
                             else -> ""
                         },
                         style = MaterialTheme.typography.bodySmall,
@@ -131,9 +134,9 @@ fun CreateTextScreen(
                     modifier = Modifier.fillMaxWidth(),
                     enabled = textInput.isNotBlank()
                 ) {
-                    Icon(Icons.Default.Create, "Create")
+                    Icon(Icons.Default.Create, stringResource(Res.string.cd_create))
                     Spacer(modifier = Modifier.padding(4.dp))
-                    Text("Generate QR Code")
+                    Text(stringResource(Res.string.create_button))
                 }
             }
         }

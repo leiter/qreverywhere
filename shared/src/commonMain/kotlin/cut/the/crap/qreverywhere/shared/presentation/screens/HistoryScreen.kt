@@ -28,6 +28,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cut.the.crap.qreverywhere.shared.domain.model.QrItem
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.shared.utils.toImagePainter
+import org.jetbrains.compose.resources.stringResource
+import qreverywhere.shared.generated.resources.Res
+import qreverywhere.shared.generated.resources.*
 
 /**
  * Shared History Screen for Compose Multiplatform
@@ -58,7 +61,7 @@ fun HistoryScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Text(
-                    text = "No QR codes yet.\nScan or create one to get started!",
+                    text = stringResource(Res.string.history_empty),
                     style = MaterialTheme.typography.bodyLarge,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -103,7 +106,7 @@ private fun QrHistoryCard(
                 imageBytes.toImagePainter()?.let { painter ->
                     Image(
                         painter = painter,
-                        contentDescription = "QR Code Preview",
+                        contentDescription = stringResource(Res.string.cd_qr_preview),
                         modifier = Modifier
                             .size(60.dp)
                             .clip(RoundedCornerShape(8.dp))
@@ -122,7 +125,7 @@ private fun QrHistoryCard(
                     maxLines = 2
                 )
                 Text(
-                    text = "Type: ${qrItem.acquireType.name}",
+                    text = stringResource(Res.string.history_type, qrItem.acquireType.name),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(top = 4.dp)
