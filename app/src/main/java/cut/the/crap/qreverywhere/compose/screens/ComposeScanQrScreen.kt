@@ -66,7 +66,7 @@ import cut.the.crap.qreverywhere.compose.navigation.ComposeScreen
 import cut.the.crap.qreverywhere.qrcodescan.QRCodeFoundListener
 import cut.the.crap.qreverywhere.qrcodescan.QRCodeImageAnalyzer
 import cut.the.crap.qreverywhere.utils.data.IntentGenerator
-import cut.the.crap.qreverywhere.utils.ui.FROM_SCAN_QR
+import cut.the.crap.qreverywhere.shared.presentation.OriginFlag
 import cut.the.crap.qreverywhere.utils.ui.hasPermission
 import cut.the.crap.qrrepository.Acquire
 import kotlinx.coroutines.launch
@@ -240,7 +240,7 @@ fun ComposeScanQrScreen(
             result?.let { qrResult ->
                 Timber.d("QR code found in image: ${qrResult.text}")
                 viewModel.saveQrItemFromFile(qrResult.text, Acquire.FROM_FILE)
-                navController.navigate(ComposeScreen.DetailView.createRoute(FROM_SCAN_QR))
+                navController.navigate(ComposeScreen.DetailView.createRoute(OriginFlag.FROM_SCAN_QR))
             } ?: scope.launch {
                 snackbarHostState.showSnackbar("No QR code found in image")
             }
@@ -315,7 +315,7 @@ fun ComposeScanQrScreen(
                         onQrCodeScanned = { qrResult ->
                             Timber.d("QR code scanned in Compose: ${qrResult.text}")
                             viewModel.saveQrItemFromFile(qrResult.text, Acquire.SCANNED)
-                            navController.navigate(ComposeScreen.DetailView.createRoute(FROM_SCAN_QR))
+                            navController.navigate(ComposeScreen.DetailView.createRoute(OriginFlag.FROM_SCAN_QR))
                         },
                         modifier = Modifier.fillMaxSize()
                     )

@@ -41,9 +41,7 @@ import cut.the.crap.qreverywhere.detailViewQrCodeItem
 import cut.the.crap.qreverywhere.detailViewQrCodeItemState
 import cut.the.crap.qreverywhere.shared.presentation.state.getData
 import cut.the.crap.qreverywhere.utils.data.AcquireDateFormatter
-import cut.the.crap.qreverywhere.utils.ui.FROM_CREATE_CONTEXT
-import cut.the.crap.qreverywhere.utils.ui.FROM_HISTORY_LIST
-import cut.the.crap.qreverywhere.utils.ui.FROM_SCAN_QR
+import cut.the.crap.qreverywhere.shared.presentation.OriginFlag
 import cut.the.crap.qrrepository.QrItem
 import org.jetbrains.compose.resources.stringResource
 import org.koin.compose.koinInject
@@ -71,7 +69,7 @@ fun ComposeFullscreenQrScreen(
 
     // Capture the item from ViewModel when screen loads
     LaunchedEffect(originFlag) {
-        if (originFlag == FROM_HISTORY_LIST || originFlag == FROM_CREATE_CONTEXT) {
+        if (originFlag == OriginFlag.FROM_HISTORY_LIST || originFlag == OriginFlag.FROM_CREATE_CONTEXT) {
             var attempts = 0
             while (attempts < 20) {
                 val item = viewModel.detailViewQrCodeItem
@@ -90,8 +88,8 @@ fun ComposeFullscreenQrScreen(
 
     // Determine which item to display based on origin
     val qrItem: QrItem? = when (originFlag) {
-        FROM_HISTORY_LIST, FROM_CREATE_CONTEXT -> capturedItem
-        FROM_SCAN_QR -> scannedItemState?.getData()
+        OriginFlag.FROM_HISTORY_LIST, OriginFlag.FROM_CREATE_CONTEXT -> capturedItem
+        OriginFlag.FROM_SCAN_QR -> scannedItemState?.getData()
         else -> null
     }
 

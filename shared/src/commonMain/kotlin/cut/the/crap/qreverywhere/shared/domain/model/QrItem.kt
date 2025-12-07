@@ -49,3 +49,48 @@ enum class AcquireType {
     ERROR_OCCURRED,
     EMPTY_DEFAULT
 }
+
+/**
+ * Extension functions for QrItem content type detection
+ */
+
+/**
+ * Determines the type of QR code content based on its protocol/format
+ */
+fun QrItem.determineType(): Int {
+    val decoded = decodeUrlComponent(textContent)
+    return when {
+        decoded.startsWith(ProtocolPrefix.TEL) -> QrCodeType.PHONE
+        decoded.startsWith(ProtocolPrefix.MAILTO) -> QrCodeType.EMAIL
+        decoded.startsWith(ProtocolPrefix.HTTP) ||
+            decoded.startsWith(ProtocolPrefix.HTTPS) -> QrCodeType.WEB_URL
+        decoded.startsWith(ProtocolPrefix.SMS) ||
+            decoded.startsWith(ProtocolPrefix.SMSTO) -> QrCodeType.SMS
+        isVcard() -> QrCodeType.CONTACT
+        else -> QrCodeType.UNKNOWN_CONTENT
+    }
+}
+
+/**
+ * Checks if the QR code content is a vCard contact
+ */
+fun QrItem.isVcard(): Boolean {
+    return textContent.startsWith("BEGIN:VCARD") &&
+           (textContent.endsWith("END:VCARD") || textContent.endsWith("END:VCARD\n"))
+}
+
+/**
+ * Simple URL decoding for common percent-encoded characters
+ * This is a basic multiplatform implementation
+ */
+private fun decodeUrlComponent(text: String): String {
+    return text
+        .replace("%20", " ")
+        .replace("%3A", ":")
+        .replace("%2F", "/")
+        .replace("%3F", "?")
+        .replace("%3D", "=")
+        .replace("%26", "&")
+        .replace("%23", "#")
+        .replace("%25", "%")
+}

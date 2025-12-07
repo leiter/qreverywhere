@@ -2,6 +2,8 @@ package cut.the.crap.qreverywhere.utils.data
 
 import android.net.Uri
 import cut.the.crap.qreverywhere.R
+import cut.the.crap.qreverywhere.shared.domain.model.ProtocolPrefix
+import cut.the.crap.qreverywhere.shared.domain.model.QrCodeType
 import cut.the.crap.qrrepository.QrItem
 
 val QrItem.detailTitle: Int
@@ -20,7 +22,6 @@ val QrItem.fabLaunchIcon: Int
         else -> R.string.detail_title_text
     }
 
-@QrCodeType.Type
 fun QrItem.determineType(): Int {
     val decoded = Uri.decode(textContent)
     return when {

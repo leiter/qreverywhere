@@ -74,15 +74,13 @@ import cut.the.crap.qreverywhere.shared.presentation.state.getData
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.utils.data.AcquireDateFormatter
 import cut.the.crap.qreverywhere.utils.data.IntentGenerator
-import cut.the.crap.qreverywhere.utils.data.ProtocolPrefix
-import cut.the.crap.qreverywhere.utils.data.QrCodeType
+import cut.the.crap.qreverywhere.shared.domain.model.ProtocolPrefix
+import cut.the.crap.qreverywhere.shared.domain.model.QrCodeType
+import cut.the.crap.qreverywhere.shared.presentation.OriginFlag
 import cut.the.crap.qreverywhere.utils.data.detailTitle
 import cut.the.crap.qreverywhere.utils.data.determineType
 import cut.the.crap.qreverywhere.utils.data.fabLaunchIcon
 import cut.the.crap.qreverywhere.utils.data.isVcard
-import cut.the.crap.qreverywhere.utils.ui.FROM_CREATE_CONTEXT
-import cut.the.crap.qreverywhere.utils.ui.FROM_HISTORY_LIST
-import cut.the.crap.qreverywhere.utils.ui.FROM_SCAN_QR
 import cut.the.crap.qreverywhere.utils.ui.hasPermission
 import cut.the.crap.qrrepository.QrItem
 import kotlinx.coroutines.launch
@@ -184,7 +182,7 @@ fun ComposeDetailViewScreen(
     // Capture the item from ViewModel when screen loads
     // Poll until we get a valid item (not the default empty one)
     LaunchedEffect(originFlag) {
-        if (originFlag == FROM_HISTORY_LIST || originFlag == FROM_CREATE_CONTEXT) {
+        if (originFlag == OriginFlag.FROM_HISTORY_LIST || originFlag == OriginFlag.FROM_CREATE_CONTEXT) {
             // Poll for a valid item with a small delay
             var attempts = 0
             while (attempts < 20) { // Try for up to 1 second
@@ -205,13 +203,13 @@ fun ComposeDetailViewScreen(
 
     // Determine which item to display based on origin
     val qrItem: QrItem? = when (originFlag) {
-        FROM_HISTORY_LIST, FROM_CREATE_CONTEXT -> capturedItem
-        FROM_SCAN_QR -> scannedItemState?.getData()
+        OriginFlag.FROM_HISTORY_LIST, OriginFlag.FROM_CREATE_CONTEXT -> capturedItem
+        OriginFlag.FROM_SCAN_QR -> scannedItemState?.getData()
         else -> null
     }
 
     // Check loading state for scanned items
-    val isLoading = if (originFlag == FROM_SCAN_QR) {
+    val isLoading = if (originFlag == OriginFlag.FROM_SCAN_QR) {
         scannedItemState is State.Loading
     } else {
         false
@@ -265,7 +263,7 @@ fun ComposeDetailViewScreen(
                 },
                 navigationIcon = {
                     IconButton(onClick = {
-                        if (originFlag == FROM_CREATE_CONTEXT) {
+                        if (originFlag == OriginFlag.FROM_CREATE_CONTEXT) {
                             navController.navigate(ComposeScreen.History.route) {
                                 popUpTo(ComposeScreen.Create.route) { inclusive = true }
                             }
@@ -294,7 +292,7 @@ fun ComposeDetailViewScreen(
                                 Icon(Icons.Default.Share, "Save")
                             }
                         )
-                        if (originFlag != FROM_SCAN_QR) {
+                        if (originFlag != OriginFlag.FROM_SCAN_QR) {
                             DropdownMenuItem(
                                 text = { Text("Delete") },
                                 onClick = {
@@ -405,7 +403,7 @@ fun ComposeDetailViewScreen(
                     modifier = Modifier
                         .size(240.dp)
                         .clickable {
-                            navController.navigate(ComposeScreen.Fullscreen.createRoute(FROM_HISTORY_LIST))
+                            navController.navigate(ComposeScreen.Fullscreen.createRoute(OriginFlag.FROM_HISTORY_LIST))
                         },
                     elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
                     colors = CardDefaults.cardColors(

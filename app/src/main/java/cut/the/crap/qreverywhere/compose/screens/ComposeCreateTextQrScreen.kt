@@ -38,7 +38,7 @@ import com.google.zxing.WriterException
 import cut.the.crap.qreverywhere.MainActivityViewModel
 import cut.the.crap.qreverywhere.saveQrItemFromFile
 import cut.the.crap.qreverywhere.compose.navigation.ComposeScreen
-import cut.the.crap.qreverywhere.utils.ui.FROM_CREATE_CONTEXT
+import cut.the.crap.qreverywhere.shared.presentation.OriginFlag
 import cut.the.crap.qrrepository.Acquire
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
@@ -219,7 +219,7 @@ fun ComposeCreateTextQrScreen(
                         Timber.d("Created QR code with text: $finalText")
 
                         // Navigate to detail view
-                        navController.navigate(ComposeScreen.DetailView.createRoute(FROM_CREATE_CONTEXT)) {
+                        navController.navigate(ComposeScreen.DetailView.createRoute(OriginFlag.FROM_CREATE_CONTEXT)) {
                             popUpTo(ComposeScreen.Create.route)
                         }
                     } catch (e: WriterException) {
