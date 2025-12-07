@@ -4,10 +4,10 @@ package cut.the.crap.qreverywhere.shared.camera
  * Platform-specific QR code detector
  * Analyzes images/frames for QR codes
  */
-expect class QrCodeDetector {
+expect class QrCodeDetector() {
     /**
      * Detect QR codes from image data
-     * @param imageData Platform-specific image data
+     * @param imageData Platform-specific image data (ByteArray, ImageProxy, UIImage, etc.)
      * @return List of detected QR codes
      */
     suspend fun detectQrCodes(imageData: Any): List<QrCodeResult>

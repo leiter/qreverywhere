@@ -1,5 +1,6 @@
 package cut.the.crap.qreverywhere.shared.camera
 
+import android.graphics.BitmapFactory
 import androidx.camera.core.ImageProxy
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.BinaryBitmap
@@ -7,6 +8,7 @@ import com.google.zxing.DecodeHintType
 import com.google.zxing.MultiFormatReader
 import com.google.zxing.NotFoundException
 import com.google.zxing.PlanarYUVLuminanceSource
+import com.google.zxing.RGBLuminanceSource
 import com.google.zxing.Result
 import com.google.zxing.common.HybridBinarizer
 import com.google.zxing.qrcode.QRCodeReader
@@ -82,9 +84,44 @@ actual class QrCodeDetector {
     }
 
     private fun detectFromByteArray(data: ByteArray): List<QrCodeResult> {
-        // This method can be implemented if needed for decoding from static images
-        // For now, returning empty list
-        return emptyList()
+        val results = mutableListOf<QrCodeResult>()
+
+        try {
+            // Decode the ByteArray to a Bitmap
+            val bitmap = BitmapFactory.decodeByteArray(data, 0, data.size)
+                ?: return emptyList()
+
+            val width = bitmap.width
+            val height = bitmap.height
+            val pixels = IntArray(width * height)
+            bitmap.getPixels(pixels, 0, width, 0, 0, width, height)
+
+            // Create luminance source from RGB pixels
+            val source = RGBLuminanceSource(width, height, pixels)
+            val binaryBitmap = BinaryBitmap(HybridBinarizer(source))
+
+            try {
+                val result = multiFormatReader.decode(binaryBitmap)
+                results.add(
+                    QrCodeResult(
+                        text = result.text,
+                        format = result.barcodeFormat?.name
+                    )
+                )
+            } catch (e: NotFoundException) {
+                // No QR code found
+            }
+
+            // Reset reader for next detection
+            multiFormatReader.reset()
+
+            // Recycle the bitmap to free memory
+            bitmap.recycle()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return results
     }
 
     actual fun release() {

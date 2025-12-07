@@ -1,17 +1,24 @@
 package cut.the.crap.qreverywhere.shared.presentation.screens
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExtendedFloatingActionButton
+import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -35,10 +42,15 @@ import cut.the.crap.qreverywhere.shared.camera.CameraConfig
 import cut.the.crap.qreverywhere.shared.camera.CameraFacing
 import cut.the.crap.qreverywhere.shared.camera.CameraPermissionState
 import cut.the.crap.qreverywhere.shared.camera.CameraView
+import cut.the.crap.qreverywhere.shared.camera.ImagePicker
+import cut.the.crap.qreverywhere.shared.camera.ImagePickerResult
+import cut.the.crap.qreverywhere.shared.camera.QrCodeDetector
 import cut.the.crap.qreverywhere.shared.camera.QrCodeResult
 import cut.the.crap.qreverywhere.shared.camera.rememberCameraPermissionManager
+import cut.the.crap.qreverywhere.shared.camera.rememberImagePicker
 import cut.the.crap.qreverywhere.shared.utils.Logger
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import qreverywhere.shared.generated.resources.Res
 import qreverywhere.shared.generated.resources.*
@@ -52,6 +64,11 @@ fun ScanScreen(
 ) {
     val permissionManager = rememberCameraPermissionManager()
     var permissionState by remember { mutableStateOf(CameraPermissionState.NOT_REQUESTED) }
+
+    // Image picker for scanning QR codes from gallery
+    val imagePicker = rememberImagePicker()
+    val qrCodeDetector = remember { QrCodeDetector() }
+    var isPickingImage by remember { mutableStateOf(false) }
 
     // Get localized strings for use in callbacks
     val dismissLabel = stringResource(Res.string.action_dismiss)
@@ -80,8 +97,75 @@ fun ScanScreen(
         }
     }
 
+    // Helper function to handle image picking
+    val handlePickImage: () -> Unit = {
+        scope.launch {
+            isPickingImage = true
+            when (val result = imagePicker.pickImage()) {
+                is ImagePickerResult.Success -> {
+                    val detectedCodes = qrCodeDetector.detectQrCodes(result.imageData)
+                    if (detectedCodes.isNotEmpty()) {
+                        val qrResult = detectedCodes.first()
+                        handleQrCodeDetected(
+                            result = qrResult,
+                            lastScannedCode = lastScannedCode,
+                            onUpdate = { lastScannedCode = it },
+                            onQrCodeScanned = { code ->
+                                hasScanned = true
+                                onQrCodeScanned(code)
+                            },
+                            scope = scope,
+                            snackbarHostState = snackbarHostState,
+                            qrDetectedMessage = qrDetectedMessage,
+                            okLabel = okLabel
+                        )
+                    } else {
+                        snackbarHostState.showSnackbar(
+                            message = "No QR code found in selected image",
+                            actionLabel = dismissLabel
+                        )
+                    }
+                }
+                is ImagePickerResult.Cancelled -> {
+                    // User cancelled, no action needed
+                }
+                is ImagePickerResult.Error -> {
+                    snackbarHostState.showSnackbar(
+                        message = result.message,
+                        actionLabel = dismissLabel
+                    )
+                }
+            }
+            isPickingImage = false
+        }
+    }
+
     Scaffold(
-        snackbarHost = { SnackbarHost(snackbarHostState) }
+        snackbarHost = { SnackbarHost(snackbarHostState) },
+        floatingActionButton = {
+            // Show FAB when camera permission is granted
+            if (permissionState == CameraPermissionState.GRANTED && !hasScanned) {
+                ExtendedFloatingActionButton(
+                    onClick = handlePickImage,
+                    icon = {
+                        if (isPickingImage) {
+                            CircularProgressIndicator(
+                                modifier = Modifier.size(24.dp),
+                                strokeWidth = 2.dp,
+                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                            )
+                        } else {
+                            Icon(
+                                painter = painterResource(Res.drawable.ic_image_search),
+                                contentDescription = stringResource(Res.string.scan_from_file)
+                            )
+                        }
+                    },
+                    text = { Text(stringResource(Res.string.scan_from_file)) },
+                    expanded = !isPickingImage
+                )
+            }
+        }
     ) { paddingValues ->
         Box(
             modifier = Modifier
@@ -123,7 +207,7 @@ fun ScanScreen(
                             }
                         )
 
-                        // Camera controls overlay
+                        // Camera controls overlay (torch only)
                         CameraControlsOverlay(
                             cameraConfig = cameraConfig,
                             onConfigChange = { cameraConfig = it },
@@ -181,6 +265,7 @@ private fun CameraControlsOverlay(
         ),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
     ) {
+        // Torch toggle button
         IconButton(
             onClick = {
                 onConfigChange(cameraConfig.copy(enableTorch = !cameraConfig.enableTorch))
