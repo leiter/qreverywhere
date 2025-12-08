@@ -8,12 +8,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -21,19 +21,19 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.interop.UIKitViewController
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.coroutines.launch
+import platform.AVFoundation.AVCaptureDevice
+import platform.AVFoundation.AVMediaTypeVideo
 
 /**
- * iOS Camera View implementation
- *
- * Since live camera preview requires complex AVFoundation integration,
- * this implementation provides an image picker alternative for QR code scanning.
- * Users can select images from their photo library to scan for QR codes.
- *
- * TODO: Future enhancement - implement live camera using AVCaptureSession
+ * iOS Camera View implementation using AVCaptureSession
+ * Provides real-time QR code scanning using the device camera
  */
+@OptIn(ExperimentalForeignApi::class)
 @Composable
 actual fun CameraView(
     modifier: Modifier,
@@ -41,13 +41,98 @@ actual fun CameraView(
     onQrCodeDetected: (QrCodeResult) -> Unit,
     onError: (String) -> Unit
 ) {
+    // Check if camera is available (not available on simulator)
+    val hasCamera = remember {
+        AVCaptureDevice.defaultDeviceWithMediaType(AVMediaTypeVideo) != null
+    }
+
+    if (!hasCamera) {
+        // Show placeholder for simulator or devices without camera
+        SimulatorCameraPlaceholder(
+            modifier = modifier,
+            onQrCodeDetected = onQrCodeDetected,
+            onError = onError
+        )
+        return
+    }
+
     val scope = rememberCoroutineScope()
-    val imagePicker = rememberImagePicker()
-    val qrDetector = remember { QrCodeDetector() }
+    var cameraController by remember { mutableStateOf<IosCameraViewController?>(null) }
+    var isReady by remember { mutableStateOf(false) }
 
-    var isProcessing by remember { mutableStateOf(false) }
-    var lastError by remember { mutableStateOf<String?>(null) }
+    // Create the camera controller
+    val controller = remember {
+        IosCameraViewController(
+            onQrCodeDetected = { text ->
+                onQrCodeDetected(QrCodeResult(text = text))
+            },
+            onError = onError
+        )
+    }
 
+    // Update torch when config changes
+    LaunchedEffect(config.enableTorch) {
+        cameraController?.setTorchEnabled(config.enableTorch)
+    }
+
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.surface)
+    ) {
+        // Native iOS Camera View
+        UIKitViewController(
+            factory = {
+                cameraController = controller
+                isReady = true
+                controller
+            },
+            modifier = Modifier.fillMaxSize(),
+            update = { viewController ->
+                // Update camera settings if needed
+                (viewController as? IosCameraViewController)?.setTorchEnabled(config.enableTorch)
+            }
+        )
+
+        // Show loading indicator while camera initializes
+        if (!isReady) {
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    CircularProgressIndicator()
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        text = "Starting camera...",
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurface
+                    )
+                }
+            }
+        }
+    }
+
+    // Cleanup when the composable is disposed
+    DisposableEffect(Unit) {
+        onDispose {
+            cameraController = null
+        }
+    }
+}
+
+/**
+ * Placeholder view for simulator or devices without camera
+ * The FAB in ScanScreen provides the "Scan from file" functionality
+ */
+@Composable
+private fun SimulatorCameraPlaceholder(
+    modifier: Modifier,
+    onQrCodeDetected: (QrCodeResult) -> Unit,
+    onError: (String) -> Unit
+) {
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -60,96 +145,25 @@ actual fun CameraView(
             modifier = Modifier.padding(32.dp)
         ) {
             Text(
-                text = "🖼️",
+                text = "📷",
                 style = MaterialTheme.typography.displayLarge
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Scan QR Code from Photo",
+                text = "Camera not available",
                 style = MaterialTheme.typography.headlineSmall,
-                textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSurface
             )
 
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "Select an image from your photo library to scan for QR codes",
+                text = "Running on simulator or device without camera.\nUse the button in the bottom right to scan from photo library.",
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-
-            Spacer(modifier = Modifier.height(24.dp))
-
-            if (isProcessing) {
-                CircularProgressIndicator()
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                    text = "Scanning...",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            } else {
-                Button(
-                    onClick = {
-                        scope.launch {
-                            isProcessing = true
-                            lastError = null
-
-                            when (val result = imagePicker.pickImage()) {
-                                is ImagePickerResult.Success -> {
-                                    val detectedCodes = qrDetector.detectQrCodes(result.imageData)
-                                    if (detectedCodes.isNotEmpty()) {
-                                        onQrCodeDetected(detectedCodes.first())
-                                    } else {
-                                        lastError = "No QR code found in the selected image"
-                                        onError("No QR code found in the selected image")
-                                    }
-                                }
-                                is ImagePickerResult.Cancelled -> {
-                                    // User cancelled, no action needed
-                                }
-                                is ImagePickerResult.Error -> {
-                                    lastError = result.message
-                                    onError(result.message)
-                                }
-                            }
-
-                            isProcessing = false
-                        }
-                    }
-                ) {
-                    Text(
-                        text = "🖼️",
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                    Spacer(modifier = Modifier.size(8.dp))
-                    Text("Choose from Library")
-                }
-            }
-
-            // Show error message if any
-            lastError?.let { error ->
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = error,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.error,
-                    textAlign = TextAlign.Center
-                )
-            }
-
-            Spacer(modifier = Modifier.height(32.dp))
-
-            // Info about live camera
-            Text(
-                text = "Live camera scanning coming soon",
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.6f),
-                textAlign = TextAlign.Center
             )
         }
     }

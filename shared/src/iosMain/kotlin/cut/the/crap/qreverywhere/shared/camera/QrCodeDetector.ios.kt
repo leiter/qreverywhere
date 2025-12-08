@@ -21,14 +21,13 @@ actual class QrCodeDetector {
 
     /**
      * Detect QR codes from image data
-     * @param imageData Can be UIImage, CGImageRef, NSData, or ByteArray
+     * @param imageData Can be UIImage, NSData, or ByteArray
      * @return List of detected QR codes with their content
      */
     actual suspend fun detectQrCodes(imageData: Any): List<QrCodeResult> = withContext(Dispatchers.Default) {
         try {
             val cgImage: CGImageRef? = when (imageData) {
                 is UIImage -> imageData.CGImage
-                is CGImageRef -> imageData
                 is NSData -> UIImage.imageWithData(imageData)?.CGImage
                 is ByteArray -> {
                     val nsData = imageData.toNSData()

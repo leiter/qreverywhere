@@ -91,9 +91,14 @@ fun ScanScreen(
 
     // Check permission on first composition
     LaunchedEffect(Unit) {
-        permissionState = permissionManager.getPermissionState()
-        if (permissionState == CameraPermissionState.NOT_REQUESTED) {
-            permissionState = permissionManager.requestCameraPermission()
+        try {
+            permissionState = permissionManager.getPermissionState()
+            if (permissionState == CameraPermissionState.NOT_REQUESTED) {
+                permissionState = permissionManager.requestCameraPermission()
+            }
+        } catch (e: Exception) {
+            Logger.e("ScanScreen") { "Error checking camera permission: ${e.message}" }
+            permissionState = CameraPermissionState.DENIED
         }
     }
 

@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.ksp)
+    alias(libs.plugins.room)
 }
 
 kotlin {
@@ -66,6 +68,10 @@ kotlin {
 
                 // Navigation Compose
                 implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha10")
+
+                // Room KMP
+                implementation(libs.androidx.room.runtime)
+                implementation(libs.androidx.sqlite.bundled)
             }
         }
 
@@ -147,4 +153,18 @@ android {
 compose.resources {
     publicResClass = true
     generateResClass = always
+}
+
+// Room KMP schema export
+room {
+    schemaDirectory("$projectDir/schemas")
+}
+
+// KSP configuration for Room
+dependencies {
+    add("kspAndroid", libs.androidx.room.compiler)
+    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
+    add("kspIosX64", libs.androidx.room.compiler)
+    add("kspIosArm64", libs.androidx.room.compiler)
+    add("kspDesktop", libs.androidx.room.compiler)
 }

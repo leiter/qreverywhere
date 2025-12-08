@@ -19,12 +19,12 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cut.the.crap.qreverywhere.shared.domain.model.QrItem
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.shared.utils.toImagePainter
@@ -48,7 +48,8 @@ fun HistoryScreen(
     viewModel: MainViewModel,
     onQrItemClick: (QrItem) -> Unit = {}
 ) {
-    val historyData by viewModel.historyData.collectAsStateWithLifecycle()
+    // Use collectAsState instead of collectAsStateWithLifecycle for better iOS compatibility
+    val historyData by viewModel.historyData.collectAsState(initial = emptyList())
 
     Column(
         modifier = Modifier

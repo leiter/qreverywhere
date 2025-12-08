@@ -2,7 +2,6 @@ package cut.the.crap.qreverywhere.shared.presentation
 
 import androidx.compose.runtime.Composable
 import platform.Foundation.NSBundle
-import platform.Foundation.NSLocalizedString
 
 /**
  * iOS implementation: Uses NSLocalizedString
@@ -18,18 +17,7 @@ import platform.Foundation.NSLocalizedString
  */
 @Composable
 actual fun getLocalizedStrings(): LocalizedStrings {
-    // Option 1: Use iOS NSLocalizedString (commented out - requires Localizable.strings)
-    /*
-    return LocalizedStrings(
-        appName = NSLocalizedString("app_name", "QR Everywhere"),
-        navHistory = NSLocalizedString("nav_history", "History"),
-        navScan = NSLocalizedString("nav_scan", "Scan"),
-        navCreate = NSLocalizedString("nav_create", "Create"),
-        // ... etc
-    )
-    */
-
-    // Option 2: Fallback to English (used for now)
+    // Fallback to English (used for now)
     return LocalizedStrings(
         appName = "QR Everywhere",
         navHistory = "History",
@@ -54,5 +42,5 @@ actual fun getLocalizedStrings(): LocalizedStrings {
  * Helper function to get localized string from iOS bundle
  */
 fun getIosLocalizedString(key: String, defaultValue: String = ""): String {
-    return NSLocalizedString(key, defaultValue)
+    return NSBundle.mainBundle.localizedStringForKey(key, defaultValue, null)
 }

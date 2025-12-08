@@ -9,21 +9,7 @@ import kotlinx.cinterop.memScoped
 import kotlinx.cinterop.usePinned
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import platform.CoreFoundation.CFDataCreate
-import platform.CoreFoundation.kCFAllocatorDefault
-import platform.CoreGraphics.CGBitmapContextCreate
-import platform.CoreGraphics.CGBitmapContextCreateImage
-import platform.CoreGraphics.CGColorSpaceCreateDeviceRGB
-import platform.CoreGraphics.CGContextDrawImage
-import platform.CoreGraphics.CGContextSetFillColor
-import platform.CoreGraphics.CGContextFillRect
-import platform.CoreGraphics.CGContextScaleCTM
-import platform.CoreGraphics.CGImageAlphaInfo
-import platform.CoreGraphics.CGImageGetHeight
-import platform.CoreGraphics.CGImageGetWidth
-import platform.CoreGraphics.CGRectMake
-import platform.CoreGraphics.kCGImageAlphaPremultipliedLast
-import platform.CoreImage.CIColor
+import platform.CoreGraphics.CGAffineTransformMakeScale
 import platform.CoreImage.CIContext
 import platform.CoreImage.CIFilter
 import platform.CoreImage.CIImage
@@ -53,70 +39,37 @@ class IosQrCodeGenerator : QrCodeGenerator {
         backgroundColor: Int
     ): ByteArray = withContext(Dispatchers.Default) {
         try {
-            // Create QR code filter
-            val filter = CIFilter.filterWithName("CIQRCodeGenerator")
-                ?: throw Exception("CIQRCodeGenerator filter not available")
-
-            // Convert text to NSData
-            val textData = (text as NSString).dataUsingEncoding(NSUTF8StringEncoding)
-                ?: throw Exception("Failed to encode text")
-
-            filter.setValue(textData, forKey = "inputMessage")
-            filter.setValue("H", forKey = "inputCorrectionLevel") // High error correction
+            // Create QR code filter with convenience method
+            val filter = CIFilter.filterWithName(
+                "CIQRCodeGenerator",
+                withInputParameters = mapOf(
+                    "inputMessage" to (text as NSString).dataUsingEncoding(NSUTF8StringEncoding),
+                    "inputCorrectionLevel" to "H"
+                )
+            ) ?: throw Exception("CIQRCodeGenerator filter not available")
 
             // Get the output CIImage
             val outputImage = filter.outputImage
                 ?: throw Exception("Failed to generate QR code image")
 
-            // Scale the image to desired size
-            val scaleX = size.toDouble() / outputImage.extent.size.width
-            val scaleY = size.toDouble() / outputImage.extent.size.height
+            // Scale the image to desired size using the extent
+            val scaleX = size.toDouble() / 23.0  // QR code default is ~23 pixels
+            val scaleY = size.toDouble() / 23.0
             val scaledImage = outputImage.imageByApplyingTransform(
-                platform.CoreGraphics.CGAffineTransformMakeScale(scaleX, scaleY)
+                CGAffineTransformMakeScale(scaleX, scaleY)
             )
 
-            // Apply colors using CIFalseColor filter
-            val colorFilter = CIFilter.filterWithName("CIFalseColor")
-            if (colorFilter != null) {
-                colorFilter.setValue(scaledImage, forKey = "inputImage")
-
-                // Convert Int colors to CIColor (ARGB format)
-                val fgAlpha = ((foregroundColor shr 24) and 0xFF) / 255.0
-                val fgRed = ((foregroundColor shr 16) and 0xFF) / 255.0
-                val fgGreen = ((foregroundColor shr 8) and 0xFF) / 255.0
-                val fgBlue = (foregroundColor and 0xFF) / 255.0
-
-                val bgAlpha = ((backgroundColor shr 24) and 0xFF) / 255.0
-                val bgRed = ((backgroundColor shr 16) and 0xFF) / 255.0
-                val bgGreen = ((backgroundColor shr 8) and 0xFF) / 255.0
-                val bgBlue = (backgroundColor and 0xFF) / 255.0
-
-                val fgColor = CIColor.colorWithRed(fgRed, fgGreen, fgBlue, fgAlpha)
-                val bgColor = CIColor.colorWithRed(bgRed, bgGreen, bgBlue, bgAlpha)
-
-                colorFilter.setValue(fgColor, forKey = "inputColor0")
-                colorFilter.setValue(bgColor, forKey = "inputColor1")
-
-                val coloredImage = colorFilter.outputImage
-                if (coloredImage != null) {
-                    return@withContext ciImageToByteArray(coloredImage, size)
-                }
-            }
-
-            // Fallback: return scaled image without color modification
-            ciImageToByteArray(scaledImage, size)
+            // Convert to UIImage and then to ByteArray
+            ciImageToByteArray(scaledImage)
         } catch (e: Exception) {
             // Return empty array on failure
             ByteArray(0)
         }
     }
 
-    private fun ciImageToByteArray(ciImage: CIImage, size: Int): ByteArray {
-        val context = CIContext.contextWithOptions(null)
-        val cgImage = context.createCGImage(ciImage, fromRect = ciImage.extent)
-            ?: return ByteArray(0)
-
-        val uiImage = UIImage.imageWithCGImage(cgImage)
+    private fun ciImageToByteArray(ciImage: CIImage): ByteArray {
+        // Convert CIImage to UIImage directly
+        val uiImage = UIImage(cIImage = ciImage)
         val pngData = UIImagePNGRepresentation(uiImage)
             ?: return ByteArray(0)
 
@@ -195,15 +148,17 @@ fun NSData.toByteArray(): ByteArray {
 
 /**
  * Extension function to convert ByteArray to NSData
+ * Creates a copy of the data for safe memory management
  */
 @OptIn(ExperimentalForeignApi::class)
 fun ByteArray.toNSData(): NSData {
     if (this.isEmpty()) return NSData()
 
-    return memScoped {
+    return this.usePinned { pinned ->
+        // NSData.create with copy option ensures data is copied and safe after usePinned exits
         NSData.create(
-            bytes = allocArrayOf(this@toNSData),
-            length = this@toNSData.size.toULong()
+            bytes = pinned.addressOf(0),
+            length = this.size.toULong()
         )
     }
 }

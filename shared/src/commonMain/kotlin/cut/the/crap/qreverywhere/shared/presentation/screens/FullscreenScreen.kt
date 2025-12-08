@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
@@ -28,7 +29,6 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.shared.utils.toImagePainter
 import org.jetbrains.compose.resources.stringResource
@@ -47,7 +47,7 @@ fun FullscreenScreen(
     viewModel: MainViewModel,
     onNavigateBack: () -> Unit
 ) {
-    val detailItem by viewModel.detailViewItem.collectAsStateWithLifecycle()
+    val detailItem by viewModel.detailViewItem.collectAsState()
 
     Scaffold(
         topBar = {

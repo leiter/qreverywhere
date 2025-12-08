@@ -5,6 +5,7 @@ import androidx.compose.runtime.remember
 import cut.the.crap.qreverywhere.shared.platform.toByteArray
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.coroutines.suspendCancellableCoroutine
+import platform.Foundation.NSData
 import platform.PhotosUI.PHPickerConfiguration
 import platform.PhotosUI.PHPickerFilter
 import platform.PhotosUI.PHPickerResult
@@ -29,6 +30,10 @@ import kotlin.coroutines.resume
 @OptIn(ExperimentalForeignApi::class)
 actual class ImagePicker {
 
+    // Strong reference to the delegate to prevent garbage collection
+    // PHPickerViewController holds a weak reference to its delegate
+    private var currentDelegate: NSObject? = null
+
     /**
      * Launch the image picker and return the selected image as ByteArray
      */
@@ -51,6 +56,9 @@ actual class ImagePicker {
             override fun picker(picker: PHPickerViewController, didFinishPicking: List<*>) {
                 picker.dismissViewControllerAnimated(true, completion = null)
 
+                // Clear the delegate reference after picker is dismissed
+                currentDelegate = null
+
                 val results = didFinishPicking.filterIsInstance<PHPickerResult>()
                 if (results.isEmpty()) {
                     if (continuation.isActive) {
@@ -62,22 +70,17 @@ actual class ImagePicker {
                 val result = results.first()
                 val itemProvider = result.itemProvider
 
-                if (itemProvider.canLoadObjectOfClass(UIImage)) {
-                    itemProvider.loadObjectOfClass(UIImage) { image, error ->
-                        if (!continuation.isActive) return@loadObjectOfClass
+                if (itemProvider.hasItemConformingToTypeIdentifier("public.image")) {
+                    itemProvider.loadDataRepresentationForTypeIdentifier("public.image") { data, error ->
+                        if (!continuation.isActive) return@loadDataRepresentationForTypeIdentifier
 
                         when {
                             error != null -> {
                                 continuation.resume(ImagePickerResult.Error(error.localizedDescription))
                             }
-                            image is UIImage -> {
-                                val imageData = UIImageJPEGRepresentation(image, 0.9)
-                                if (imageData != null) {
-                                    val byteArray = imageData.toByteArray()
-                                    continuation.resume(ImagePickerResult.Success(byteArray))
-                                } else {
-                                    continuation.resume(ImagePickerResult.Error("Failed to convert image to data"))
-                                }
+                            data != null -> {
+                                val byteArray = data.toByteArray()
+                                continuation.resume(ImagePickerResult.Success(byteArray))
                             }
                             else -> {
                                 continuation.resume(ImagePickerResult.Error("Failed to load image"))
@@ -92,10 +95,14 @@ actual class ImagePicker {
             }
         }
 
+        // Store strong reference to prevent garbage collection
+        currentDelegate = delegate
+
         picker.delegate = delegate
         rootViewController.presentViewController(picker, animated = true, completion = null)
 
         continuation.invokeOnCancellation {
+            currentDelegate = null
             picker.dismissViewControllerAnimated(true, completion = null)
         }
     }

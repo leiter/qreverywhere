@@ -26,13 +26,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cut.the.crap.qreverywhere.shared.presentation.state.State
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.shared.utils.Logger
@@ -58,8 +58,8 @@ fun DetailScreen(
     onCopyToClipboard: () -> Unit = {},
     onFullscreenClick: () -> Unit = {}
 ) {
-    val detailItem by viewModel.detailViewItem.collectAsStateWithLifecycle()
-    val detailState by viewModel.detailViewState.collectAsStateWithLifecycle()
+    val detailItem by viewModel.detailViewItem.collectAsState()
+    val detailState by viewModel.detailViewState.collectAsState()
 
     Box(modifier = Modifier.fillMaxSize()) {
         when (val state = detailState) {
