@@ -40,3 +40,6 @@ gradle-app.setting
 # Xcode user-specific files
 *.xcuserstate
 xcuserdata/
+
+# Temporary files
+tmp/
