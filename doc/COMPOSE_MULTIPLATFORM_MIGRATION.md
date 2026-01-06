@@ -138,39 +138,42 @@ shared/
 └── build.gradle.kts
 ```
 
-## 🚀 Next Steps
+## 🚀 Next Steps (Updated 2026-01-06)
 
-### Phase 1: Image Handling (Recommended First)
-1. Create `expect fun ByteArray.toImageBitmap(): ImageBitmap`
-2. Implement `actual` for Android, iOS, Desktop
-3. Update HistoryScreen to display QR code images
-4. Update DetailViewScreen to show full QR code image
+### Phase 1: Image Handling ✅ COMPLETE
+1. ✅ Created `expect fun ByteArray.toImageBitmap(): ImageBitmap`
+2. ✅ Implemented `actual` for Android, iOS, Desktop
+3. ✅ Updated HistoryScreen to display QR code images
+4. ✅ Updated DetailViewScreen to show full QR code image
 
-### Phase 2: Platform-Specific APIs
-1. Create expect/actual for clipboard operations
-2. Create expect/actual for sharing functionality
-3. Create expect/actual for file saving
-4. Create expect/actual for camera/scanning
+### Phase 2: Platform-Specific APIs ✅ iOS COMPLETE, ⚠️ Desktop Partial
+| Feature | Android | iOS | Desktop |
+|---------|---------|-----|---------|
+| Clipboard | ✅ | ✅ | ❌ TODO |
+| Share | ✅ | ⚠️ Clipboard fallback | ❌ TODO |
+| File saving | ✅ | ✅ | ❌ TODO |
+| Camera/scanning | ✅ | ✅ | ❌ TODO |
+| QR Generation | ✅ | ✅ | ❌ TODO |
 
-### Phase 3: Complete Screen Migration
-1. Migrate DetailViewScreen to shared module
-2. Migrate CreateTextScreen to shared module
-3. Migrate CreateEmailScreen to shared module
-4. Create platform-specific scanner implementations
+### Phase 3: Complete Screen Migration ✅ COMPLETE
+1. ✅ Migrated DetailViewScreen to shared module
+2. ✅ Migrated CreateTextScreen to shared module
+3. ✅ Migrated CreateEmailScreen to shared module
+4. ✅ Created platform-specific scanner implementations (Android + iOS)
 
-### Phase 4: Testing
-1. Test on Android
-2. Set up iOS project
-3. Test on iOS
-4. Set up Desktop project
-5. Test on Desktop
+### Phase 4: Testing ⚠️ IN PROGRESS
+1. ✅ Test on Android - Working
+2. ✅ Set up iOS project - Done
+3. ⚠️ Test on iOS - In progress (branch: ios_joins_android)
+4. ❌ Set up Desktop project - Not started
+5. ❌ Test on Desktop - Not started
 
-## 📝 Build Status
+## 📝 Build Status (Updated 2026-01-06)
 
 - ✅ **Shared module** builds successfully for all targets (Android, iOS, Desktop)
-- ✅ **Android app** builds successfully with shared module
-- ⏳ **iOS app** - Not yet set up
-- ⏳ **Desktop app** - Not yet set up
+- ✅ **Android app** builds and runs successfully
+- ✅ **iOS app** - Set up and running (branch: ios_joins_android)
+- ⏳ **Desktop app** - Not yet set up (no entry point)
 
 ## 🔧 Technical Details
 

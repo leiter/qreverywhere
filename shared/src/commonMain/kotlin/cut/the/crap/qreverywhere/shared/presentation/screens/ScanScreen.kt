@@ -74,6 +74,7 @@ fun ScanScreen(
     val dismissLabel = stringResource(Res.string.action_dismiss)
     val okLabel = stringResource(Res.string.action_ok)
     val qrDetectedMessage = stringResource(Res.string.scan_qr_detected)
+    val noQrFoundMessage = stringResource(Res.string.feedback_no_qr_in_image)
     var cameraConfig by remember {
         mutableStateOf(
             CameraConfig(
@@ -126,7 +127,7 @@ fun ScanScreen(
                         )
                     } else {
                         snackbarHostState.showSnackbar(
-                            message = "No QR code found in selected image",
+                            message = noQrFoundMessage,
                             actionLabel = dismissLabel
                         )
                     }

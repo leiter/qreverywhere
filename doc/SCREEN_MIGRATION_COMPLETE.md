@@ -191,46 +191,49 @@ fun main() = application {
 }
 ```
 
-## 🚀 What's Next
+## 🚀 What's Next (Updated 2026-01-06)
 
-### Platform-Specific Features to Implement
+### Platform-Specific Features Status
 
 1. **Camera Scanning** (ScanScreen)
-   ```kotlin
-   // commonMain
-   expect class CameraScanner {
-       fun startScanning(onResult: (String) -> Unit)
-   }
-
-   // androidMain - Use CameraX
-   // iosMain - Use AVFoundation
-   // desktopMain - Use webcam libraries
-   ```
+   | Platform | Status | Implementation |
+   |----------|--------|----------------|
+   | Android | ✅ Done | CameraX + ZXing |
+   | iOS | ✅ Done | AVCaptureSession + AVCaptureMetadataOutput |
+   | Desktop | ❌ TODO | Needs OpenCV/Webcam library |
 
 2. **Share Functionality** (DetailScreen)
-   ```kotlin
-   // commonMain
-   expect fun shareQrCode(text: String, imageData: ByteArray?)
-
-   // androidMain - Use Intent.ACTION_SEND
-   // iosMain - Use UIActivityViewController
-   ```
+   | Platform | Status | Implementation |
+   |----------|--------|----------------|
+   | Android | ✅ Done | Intent.ACTION_SEND |
+   | iOS | ⚠️ Partial | Clipboard fallback only, needs UIActivityViewController |
+   | Desktop | ❌ TODO | Not implemented |
 
 3. **Clipboard Operations** (DetailScreen)
-   ```kotlin
-   // commonMain
-   expect fun copyToClipboard(text: String)
+   | Platform | Status | Implementation |
+   |----------|--------|----------------|
+   | Android | ✅ Done | ClipboardManager |
+   | iOS | ✅ Done | UIPasteboard |
+   | Desktop | ❌ TODO | Not implemented |
 
-   // androidMain - Use ClipboardManager
-   // iosMain - Use UIPasteboard
-   ```
+4. **QR Code Types** (CreateScreen)
+   | Type | Status | Notes |
+   |------|--------|-------|
+   | Text | ✅ Done | Basic text QR |
+   | URL | ✅ Done | Auto-adds https:// |
+   | Phone | ✅ Done | tel: protocol |
+   | SMS | ✅ Done | smsto: protocol |
+   | Email | ✅ Done | mailto: with subject/body |
+   | WiFi | ❌ TODO | Not implemented |
+   | vCard | ⚠️ Partial | Detection only, no creation UI |
 
-4. **Advanced QR Types** (CreateScreen)
-   - Email QR Code
-   - Phone QR Code
-   - WiFi QR Code
-   - vCard QR Code
-   - URL QR Code with validation
+### Remaining Work
+1. **iOS Share Sheet** - Implement UIActivityViewController for proper sharing
+2. **Desktop QR Generation** - Implement using ZXing Java
+3. **Desktop Camera** - Implement using OpenCV or webcam-capture library
+4. **Desktop App Entry Point** - Create standalone desktop application
+5. **WiFi QR Creation** - Add WiFi QR code creation screen
+6. **vCard QR Creation** - Add contact/vCard QR code creation screen
 
 ## 📝 Code Examples
 
@@ -305,13 +308,13 @@ qrItem.imageData?.let { bytes ->
 - ✅ Scaffold with automatic safe area handling
 - ✅ Material 3 components
 
-### What Needs expect/actual
-- ⚠️ Image resources (Int on Android, String on iOS)
-- ⚠️ Camera/scanning
-- ⚠️ Share functionality
-- ⚠️ Clipboard operations
-- ⚠️ File picker
-- ⚠️ Permissions
+### What Needs expect/actual (Updated 2026-01-06)
+- ✅ Image resources (Int on Android, String on iOS) - DONE
+- ✅ Camera/scanning (Android + iOS) - DONE, Desktop TODO
+- ⚠️ Share functionality - Android done, iOS partial, Desktop TODO
+- ✅ Clipboard operations (Android + iOS) - DONE, Desktop TODO
+- ✅ File picker - DONE all platforms
+- ✅ Permissions - DONE all platforms
 
 ### Best Practices Discovered
 1. Use `expect/actual` for platform-specific APIs

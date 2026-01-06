@@ -24,18 +24,43 @@ QrEveryWhere/
 - QR generation/scanning
 - Image picker with PickVisualMedia
 
-### iOS: Partial (~30%)
+### iOS: Nearly Complete (~90%)
 | Component | Status | Implementation |
 |-----------|--------|----------------|
 | QR Generation | Done | CIFilter |
-| QR Scanning | Done | Vision framework |
-| Permissions | Done | AVCaptureDevice |
-| Image Picker | Done | PHPickerViewController |
-| Live Camera | TODO | Needs AVCaptureSession |
+| QR Scanning (image) | Done | Vision framework |
+| QR Scanning (camera) | Done | AVCaptureMetadataOutput |
+| Live Camera | Done | AVCaptureSession + UIKitViewController |
+| Permissions (Camera) | Done | AVCaptureDevice |
+| Permissions (Photos) | Done | PHPhotoLibrary |
+| Image Picker | Done | PHPickerViewController + fallback |
+| Clipboard | Done | UIPasteboard |
+| Database | Done | Room + SQLite |
+| User Preferences | Done | NSUserDefaults |
+| Image Saving | Done | UIImageWriteToSavedPhotosAlbum |
+| Share Sheet | Partial | Clipboard fallback only, needs UIActivityViewController |
 
-### Desktop: Partial
-- QR detection from images: Done (ZXing)
-- Image picker: Done (JFileChooser)
+### Desktop: Partial (~40%)
+| Component | Status | Implementation |
+|-----------|--------|----------------|
+| QR Detection (image) | Done | ZXing |
+| Image Picker | Done | JFileChooser |
+| Database | Done | Room + SQLite |
+| Image Resources | Done | Skia decoding |
+| QR Generation | TODO | Needs ZXing implementation |
+| Live Camera | TODO | Needs OpenCV/Webcam lib |
+| App Entry Point | TODO | No standalone desktop app |
+
+## QR Code Types Implementation
+| Type | Creation | Detection | Notes |
+|------|----------|-----------|-------|
+| Text | Done | Done | Basic text QR |
+| URL | Done | Done | Auto-adds https:// |
+| Phone | Done | Done | tel: protocol |
+| SMS | Done | Done | smsto: protocol |
+| Email | Done | Done | mailto: with subject/body |
+| vCard/Contact | TODO | Done | Detection only, no creation UI |
+| WiFi | TODO | TODO | Not implemented |
 
 ## Key Files
 
