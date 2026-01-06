@@ -1,17 +1,14 @@
 package cut.the.crap.qreverywhere.shared.presentation.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -42,7 +39,6 @@ import cut.the.crap.qreverywhere.shared.camera.CameraConfig
 import cut.the.crap.qreverywhere.shared.camera.CameraFacing
 import cut.the.crap.qreverywhere.shared.camera.CameraPermissionState
 import cut.the.crap.qreverywhere.shared.camera.CameraView
-import cut.the.crap.qreverywhere.shared.camera.ImagePicker
 import cut.the.crap.qreverywhere.shared.camera.ImagePickerResult
 import cut.the.crap.qreverywhere.shared.camera.QrCodeDetector
 import cut.the.crap.qreverywhere.shared.camera.QrCodeResult
@@ -53,7 +49,20 @@ import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import qreverywhere.shared.generated.resources.Res
-import qreverywhere.shared.generated.resources.*
+import qreverywhere.shared.generated.resources.action_dismiss
+import qreverywhere.shared.generated.resources.action_ok
+import qreverywhere.shared.generated.resources.feedback_no_qr_in_image
+import qreverywhere.shared.generated.resources.ic_image_search
+import qreverywhere.shared.generated.resources.permission_camera_denied
+import qreverywhere.shared.generated.resources.permission_camera_permanently_denied
+import qreverywhere.shared.generated.resources.permission_camera_required
+import qreverywhere.shared.generated.resources.permission_grant
+import qreverywhere.shared.generated.resources.permission_open_settings
+import qreverywhere.shared.generated.resources.permission_ready_to_scan
+import qreverywhere.shared.generated.resources.permission_start_scanning
+import qreverywhere.shared.generated.resources.permission_start_scanning_hint
+import qreverywhere.shared.generated.resources.scan_from_file
+import qreverywhere.shared.generated.resources.scan_qr_detected
 
 /**
  * QR Code Scanning Screen with Camera Support
