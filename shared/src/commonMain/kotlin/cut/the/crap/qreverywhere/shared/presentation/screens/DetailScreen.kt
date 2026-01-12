@@ -34,9 +34,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import cut.the.crap.qreverywhere.shared.presentation.state.State
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
-import cut.the.crap.qreverywhere.shared.utils.Logger
 import cut.the.crap.qreverywhere.shared.utils.toImagePainter
 import cut.the.crap.qreverywhere.shared.utils.toReadableString
+import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import qreverywhere.shared.generated.resources.Res
 import qreverywhere.shared.generated.resources.*
@@ -164,10 +164,7 @@ fun DetailScreen(
                         ) {
                             // Share Button
                             ExtendedFloatingActionButton(
-                                onClick = {
-                                    Logger.w("DetailScreen") { "Share not yet implemented for cross-platform" }
-                                    onShare()
-                                },
+                                onClick = onShare,
                                 modifier = Modifier.fillMaxWidth()
                             ) {
                                 Icon(Icons.Default.Share, stringResource(Res.string.cd_share))
@@ -182,7 +179,10 @@ fun DetailScreen(
                                 },
                                 modifier = Modifier.fillMaxWidth()
                             ) {
-                                Icon(Icons.Default.Share, stringResource(Res.string.cd_save))
+                                Icon(
+                                    painter = painterResource(Res.drawable.ic_save),
+                                    contentDescription = stringResource(Res.string.cd_save)
+                                )
                                 Spacer(modifier = Modifier.size(8.dp))
                                 Text(stringResource(Res.string.detail_save))
                             }
