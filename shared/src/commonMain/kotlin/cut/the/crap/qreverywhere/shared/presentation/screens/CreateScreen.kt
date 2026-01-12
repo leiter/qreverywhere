@@ -24,8 +24,6 @@ import qreverywhere.shared.generated.resources.title_url_qr
 import qreverywhere.shared.generated.resources.desc_url_qr
 import qreverywhere.shared.generated.resources.title_phone_qr
 import qreverywhere.shared.generated.resources.desc_phone_qr
-import qreverywhere.shared.generated.resources.title_sms_qr
-import qreverywhere.shared.generated.resources.desc_sms_qr
 import qreverywhere.shared.generated.resources.title_email_qr
 import qreverywhere.shared.generated.resources.desc_email_qr
 

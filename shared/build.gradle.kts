@@ -8,6 +8,11 @@ plugins {
 }
 
 kotlin {
+    // Opt-in to experimental time API for kotlinx-datetime 0.7.x
+    sourceSets.all {
+        languageSettings.optIn("kotlin.time.ExperimentalTime")
+    }
+
     // Android target
     androidTarget {
         compilations.all {
@@ -44,8 +49,8 @@ kotlin {
                 // Coroutines
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
 
-                // DateTime
-                implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
+                // DateTime - use api so it's available to dependent modules
+                api("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1")
 
                 // Koin DI - Using BOM for version management
                 implementation(platform("io.insert-koin:koin-bom:4.0.1"))

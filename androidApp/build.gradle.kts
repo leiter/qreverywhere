@@ -1,25 +1,17 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    // navigation.safeargs removed - only needed for Fragment navigation
-//    id ("com.localazy.gradle")
 }
 
-//localazy {
-//    readKey "a7844856686728087529-01fb65759e01803f9c76e6d9eda43baa77a6d93523bb29f2a887506b97385e7a"
-//    writeKey "a7844856686728087529-326192c4249d0bbd857fbb6dcaa014c1484f389cbc9b81e1a4f762b0492883d3"
-//}
-
 android {
-    compileSdk = 35
+    compileSdk = 36
     namespace = "cut.the.crap.qreverywhere"
     defaultConfig {
         applicationId = "cut.the.crap.qreverywhere"
         minSdk = 21
-        targetSdk = 35
+        targetSdk = 36
         versionName = "1.0"
         versionCode = 10
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -53,7 +45,6 @@ android {
     buildFeatures {
         compose = true
     }
-//    namespace 'cut.the.crap.qreverywhere'
 }
 
 dependencies {
@@ -62,7 +53,7 @@ dependencies {
     implementation(project(":shared"))
 
     // Compose Multiplatform Resources (for accessing shared string resources)
-    implementation("org.jetbrains.compose.components:components-resources:1.7.1")
+    implementation(libs.components.resources)
 
     // Android basics
     implementation(libs.androidx.core.ktx)
@@ -104,7 +95,7 @@ dependencies {
     implementation(libs.timber)
 
     // kotlinx-datetime (for KMP compatibility with shared module)
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.5.0")
+    implementation(libs.kotlinx.datetime.v071)
 
     // Test (using kotlin-test for KMP compatibility)
     testImplementation(libs.kotlin.test)
