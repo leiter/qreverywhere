@@ -47,18 +47,17 @@ kotlin {
         val commonMain by getting {
             dependencies {
                 // Coroutines
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3")
+                implementation(libs.kotlinx.coroutines.core)
 
                 // DateTime - use api so it's available to dependent modules
-                api("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1")
+                api(libs.kotlinx.datetime)
 
-                // Koin DI - Using BOM for version management
-                implementation(platform("io.insert-koin:koin-bom:4.0.1"))
-                implementation("io.insert-koin:koin-core")
-                implementation("io.insert-koin:koin-compose")
+                // Koin DI
+                implementation(libs.koin.core)
+                implementation(libs.koin.compose)
 
                 // Logging
-                implementation("io.github.aakira:napier:2.6.1")
+                implementation(libs.napier)
 
                 // Compose Multiplatform
                 implementation(compose.runtime)
@@ -69,10 +68,10 @@ kotlin {
                 implementation(compose.components.uiToolingPreview)
 
                 // Lifecycle ViewModel (KMP compatible)
-                implementation("androidx.lifecycle:lifecycle-viewmodel:2.8.0")
+                implementation(libs.lifecycle.viewmodel.kmp)
 
-                // Navigation Compose
-                implementation("org.jetbrains.androidx.navigation:navigation-compose:2.8.0-alpha10")
+                // Navigation Compose (KMP)
+                implementation(libs.navigation.compose.kmp)
 
                 // Room KMP
                 implementation(libs.androidx.room.runtime)
@@ -83,32 +82,31 @@ kotlin {
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
-                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+                implementation(libs.kotlinx.coroutines.test)
             }
         }
 
         val androidMain by getting {
             dependencies {
                 // Android-specific dependencies
-                implementation("androidx.core:core-ktx:1.13.1")
-                implementation(platform("io.insert-koin:koin-bom:4.0.1"))
-                implementation("io.insert-koin:koin-android")
+                implementation(libs.androidx.core.ktx)
+                implementation(libs.koin.android)
 
                 // Lifecycle (Android-specific)
-                implementation("androidx.lifecycle:lifecycle-runtime-compose:2.8.0")
+                implementation(libs.androidx.lifecycle.runtime.compose)
 
                 // CameraX dependencies
-                implementation("androidx.camera:camera-camera2:1.3.4")
-                implementation("androidx.camera:camera-lifecycle:1.3.4")
-                implementation("androidx.camera:camera-view:1.3.4")
-                implementation("androidx.camera:camera-core:1.3.4")
+                implementation(libs.androidx.camera.camera2)
+                implementation(libs.androidx.camera.lifecycle)
+                implementation(libs.androidx.camera.view)
+                implementation(libs.androidx.camera.core)
 
                 // Room (Android-specific for now)
-                implementation("androidx.room:room-runtime:2.7.1")
-                implementation("androidx.room:room-ktx:2.7.1")
+                implementation(libs.androidx.room.runtime)
+                implementation(libs.androidx.room.ktx)
 
                 // ZXing for QR code operations
-                implementation("com.google.zxing:core:3.4.0")
+                implementation(libs.google.zxing.core)
 
                 // Use existing repository
                 implementation(project(":qr_repository"))
@@ -132,6 +130,8 @@ kotlin {
         val desktopMain by getting {
             dependencies {
                 // Desktop-specific dependencies
+                // ZXing for QR code detection
+                implementation(libs.google.zxing.core)
             }
         }
     }

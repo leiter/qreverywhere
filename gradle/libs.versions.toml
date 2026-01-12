@@ -3,7 +3,6 @@
 agp = "8.10.1"
 components-resources = "1.9.3"
 kotlin = "2.1.0"
-kotlinx-datetime-version = "0.7.1"
 ksp = "2.1.0-1.0.29"
 compose-multiplatform = "1.7.1"
 
@@ -18,10 +17,12 @@ security-crypto = "1.0.0"
 # Lifecycle & Architecture Components
 lifecycle = "2.8.7"
 lifecycle-livedata = "2.8.4"
+lifecycle-viewmodel-kmp = "2.8.0"
 
 # Navigation (KMP-compatible)
 navigation = "2.7.7"
 navigation-compose = "2.8.5"
+navigation-compose-kmp = "2.8.0-alpha10"
 
 # Compose
 compose-bom = "2024.12.01"
@@ -32,7 +33,7 @@ room = "2.7.1"
 sqlite = "2.5.0"
 
 # Camera
-camerax = "1.2.3"
+camerax = "1.3.4"
 
 # QR & Barcode
 zxing = "3.4.0"
@@ -99,14 +100,16 @@ androidx-sqlite-bundled = { group = "androidx.sqlite", name = "sqlite-bundled", 
 androidx-camera-camera2 = { group = "androidx.camera", name = "camera-camera2", version.ref = "camerax" }
 androidx-camera-lifecycle = { group = "androidx.camera", name = "camera-lifecycle", version.ref = "camerax" }
 androidx-camera-view = { group = "androidx.camera", name = "camera-view", version.ref = "camerax" }
+androidx-camera-core = { group = "androidx.camera", name = "camera-core", version.ref = "camerax" }
 
 # QR & Barcode
 google-zxing-core = { group = "com.google.zxing", name = "core", version.ref = "zxing" }
 
 # Dependency Injection - Koin
 koin-bom = { group = "io.insert-koin", name = "koin-bom", version.ref = "koin-bom" }
-koin-core = { group = "io.insert-koin", name = "koin-core" }
-koin-android = { group = "io.insert-koin", name = "koin-android" }
+koin-core = { group = "io.insert-koin", name = "koin-core", version.ref = "koin-bom" }
+koin-android = { group = "io.insert-koin", name = "koin-android", version.ref = "koin-bom" }
+koin-compose = { group = "io.insert-koin", name = "koin-compose", version.ref = "koin-bom" }
 koin-androidx-compose = { group = "io.insert-koin", name = "koin-androidx-compose" }
 koin-androidx-navigation = { group = "io.insert-koin", name = "koin-androidx-navigation" }
 
@@ -116,7 +119,6 @@ glide-compiler = { group = "com.github.bumptech.glide", name = "compiler", versi
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
 # Logging
-kotlinx-datetime-v071 = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinx-datetime-version" }
 timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "timber" }
 napier = { group = "io.github.aakira", name = "napier", version.ref = "napier" }
 
@@ -125,6 +127,10 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinx-coroutines" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinx-datetime" }
+
+# KMP Lifecycle & Navigation
+lifecycle-viewmodel-kmp = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "lifecycle-viewmodel-kmp" }
+navigation-compose-kmp = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation-compose-kmp" }
 
 # Testing
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin-test" }

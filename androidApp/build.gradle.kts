@@ -95,7 +95,7 @@ dependencies {
     implementation(libs.timber)
 
     // kotlinx-datetime (for KMP compatibility with shared module)
-    implementation(libs.kotlinx.datetime.v071)
+    implementation(libs.kotlinx.datetime)
 
     // Test (using kotlin-test for KMP compatibility)
     testImplementation(libs.kotlin.test)
