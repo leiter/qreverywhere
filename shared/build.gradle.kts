@@ -139,7 +139,7 @@ kotlin {
 
 android {
     namespace = "cut.the.crap.qreverywhere.shared"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 21

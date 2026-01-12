@@ -105,9 +105,3 @@ dependencies {
     androidTestImplementation(libs.androidx.test.espresso.core)
 }
 
-// Allow usage of Kotlin's @OptIn.
-//tasks.withType(KotlinCompile).configureEach {
-//    kotlinOptions {
-//        freeCompilerArgs += ["-opt-in=kotlin.RequiresOptIn"]
-//    }
-//}
