@@ -10,7 +10,7 @@
 
     <!-- Screen Titles -->
     <string name="title_history">QR History</string>
-    <string name="title_scan">Scan QR Code</string>
+    <string name="title_scan">Scan or import QR</string>
     <string name="title_create">Create QR Code</string>
     <string name="title_detail">QR Details</string>
     <string name="title_create_text">Create Text QR</string>

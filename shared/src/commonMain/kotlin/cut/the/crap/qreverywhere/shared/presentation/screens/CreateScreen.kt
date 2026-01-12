@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -15,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 import qreverywhere.shared.generated.resources.Res
-import qreverywhere.shared.generated.resources.create_title
 import qreverywhere.shared.generated.resources.create_subtitle
 import qreverywhere.shared.generated.resources.title_text_qr
 import qreverywhere.shared.generated.resources.desc_text_qr
@@ -45,16 +46,11 @@ fun CreateScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .verticalScroll(rememberScrollState())
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        Text(
-            text = stringResource(Res.string.create_title),
-            style = MaterialTheme.typography.headlineLarge,
-            color = MaterialTheme.colorScheme.primary
-        )
-
         Text(
             text = stringResource(Res.string.create_subtitle),
             style = MaterialTheme.typography.bodyLarge,
@@ -82,12 +78,12 @@ fun CreateScreen(
             onClick = onPhoneQrClick
         )
 
-        // SMS QR Code
-        QrTypeCard(
-            title = stringResource(Res.string.title_sms_qr),
-            description = stringResource(Res.string.desc_sms_qr),
-            onClick = onSmsQrClick
-        )
+        // SMS QR Code - temporarily hidden
+        // QrTypeCard(
+        //     title = stringResource(Res.string.title_sms_qr),
+        //     description = stringResource(Res.string.desc_sms_qr),
+        //     onClick = onSmsQrClick
+        // )
 
         // Email QR Code
         QrTypeCard(

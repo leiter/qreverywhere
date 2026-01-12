@@ -79,7 +79,9 @@ fun App(
     // Get the title based on current route
     val topBarTitle: @Composable () -> String = {
         when {
+            currentRoute == Screen.Scan.route -> stringResource(Res.string.title_scan)
             currentRoute == Screen.History.route -> stringResource(Res.string.title_history)
+            currentRoute == Screen.Create.route -> stringResource(Res.string.title_create)
             currentRoute.startsWith("detail/") -> stringResource(Res.string.title_detail)
             currentRoute.startsWith("fullscreen/") -> detailItem?.let { "${it.acquireType.name} • ${it.timestamp.toReadableString()}" } ?: stringResource(Res.string.title_detail)
             currentRoute == Screen.CreateEmail.route -> stringResource(Res.string.title_email_qr)

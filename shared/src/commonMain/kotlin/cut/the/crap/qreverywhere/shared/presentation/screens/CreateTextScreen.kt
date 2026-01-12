@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Create
 import androidx.compose.material3.Card
@@ -20,6 +21,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import cut.the.crap.qreverywhere.shared.domain.model.AcquireType
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
@@ -42,6 +44,23 @@ fun CreateTextScreen(
     onQrCreated: () -> Unit = {}
 ) {
     var textInput by remember { mutableStateOf("") }
+    var inputError by remember { mutableStateOf<String?>(null) }
+
+    // Get localized error strings
+    val errorEmptyText = stringResource(Res.string.error_empty_text)
+    val errorInvalidUrl = stringResource(Res.string.error_invalid_url)
+    val errorInvalidPhone = stringResource(Res.string.error_invalid_phone)
+
+    // Validation functions
+    fun isValidUrl(url: String): Boolean {
+        val urlPattern = url.lowercase()
+        return urlPattern.contains(".") && urlPattern.length > 4
+    }
+
+    fun isValidPhone(phone: String): Boolean {
+        val digitsOnly = phone.filter { it.isDigit() || it == '+' }
+        return digitsOnly.length >= 6
+    }
 
     val (title, label, placeholder, prefix) = when (qrType) {
         "url" -> QrTypeInfo(
@@ -92,11 +111,23 @@ fun CreateTextScreen(
             ) {
                 OutlinedTextField(
                     value = textInput,
-                    onValueChange = { textInput = it },
+                    onValueChange = {
+                        textInput = it
+                        inputError = null
+                    },
                     label = { Text(label) },
                     placeholder = { Text(placeholder) },
                     modifier = Modifier.fillMaxWidth(),
-                    minLines = if (qrType == "text") 3 else 1
+                    minLines = if (qrType == "text") 3 else 1,
+                    isError = inputError != null,
+                    supportingText = inputError?.let { { Text(it) } },
+                    keyboardOptions = KeyboardOptions(
+                        keyboardType = when (qrType) {
+                            "url" -> KeyboardType.Uri
+                            "phone" -> KeyboardType.Phone
+                            else -> KeyboardType.Text
+                        }
+                    )
                 )
 
                 if (qrType == "url" || qrType == "phone" || qrType == "sms") {
@@ -114,22 +145,42 @@ fun CreateTextScreen(
 
                 OutlinedButton(
                     onClick = {
-                        if (textInput.isNotBlank()) {
-                            // Add prefix if needed (for phone, SMS, etc.)
-                            val finalText = when {
-                                qrType == "phone" && !textInput.startsWith("tel:") -> "tel:$textInput"
-                                qrType == "sms" && !textInput.startsWith("smsto:") -> "smsto:$textInput"
-                                qrType == "url" && !textInput.startsWith("http") -> "https://$textInput"
-                                else -> textInput
-                            }
-
-                            viewModel.saveQrItemFromText(
-                                textContent = finalText,
-                                acquireType = AcquireType.CREATED
-                            )
-                            textInput = ""
-                            onQrCreated()
+                        // Validate input
+                        if (textInput.isBlank()) {
+                            inputError = errorEmptyText
+                            return@OutlinedButton
                         }
+
+                        // Type-specific validation
+                        when (qrType) {
+                            "url" -> {
+                                if (!isValidUrl(textInput)) {
+                                    inputError = errorInvalidUrl
+                                    return@OutlinedButton
+                                }
+                            }
+                            "phone" -> {
+                                if (!isValidPhone(textInput)) {
+                                    inputError = errorInvalidPhone
+                                    return@OutlinedButton
+                                }
+                            }
+                        }
+
+                        // Add prefix if needed (for phone, SMS, etc.)
+                        val finalText = when {
+                            qrType == "phone" && !textInput.startsWith("tel:") -> "tel:$textInput"
+                            qrType == "sms" && !textInput.startsWith("smsto:") -> "smsto:$textInput"
+                            qrType == "url" && !textInput.startsWith("http") -> "https://$textInput"
+                            else -> textInput
+                        }
+
+                        viewModel.saveQrItemFromText(
+                            textContent = finalText,
+                            acquireType = AcquireType.CREATED
+                        )
+                        textInput = ""
+                        onQrCreated()
                     },
                     modifier = Modifier.fillMaxWidth(),
                     enabled = textInput.isNotBlank()
