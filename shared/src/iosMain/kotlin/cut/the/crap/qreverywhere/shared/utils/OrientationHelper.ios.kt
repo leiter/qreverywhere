@@ -1,13 +1,18 @@
 package cut.the.crap.qreverywhere.shared.utils
 
 import androidx.compose.runtime.Composable
+import platform.UIKit.UIDevice
+import platform.UIKit.UIDeviceOrientation
 
 /**
  * iOS implementation to get device orientation
  */
 @Composable
 actual fun getDeviceOrientation(): DeviceOrientation {
-    // TODO: Implement using UIDevice.current.orientation
-    // For now, return portrait as default
-    return DeviceOrientation.PORTRAIT
+    val orientation = UIDevice.currentDevice.orientation
+    return when (orientation) {
+        UIDeviceOrientation.UIDeviceOrientationLandscapeLeft,
+        UIDeviceOrientation.UIDeviceOrientationLandscapeRight -> DeviceOrientation.LANDSCAPE
+        else -> DeviceOrientation.PORTRAIT
+    }
 }

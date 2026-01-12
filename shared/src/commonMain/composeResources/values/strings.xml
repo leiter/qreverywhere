@@ -140,6 +140,9 @@
 
     <!-- Scan Screen -->
     <string name="scan_title">Camera Scanning</string>
+    <string name="camera_starting">Starting camera...</string>
+    <string name="camera_not_available">Camera not available</string>
+    <string name="camera_simulator_hint">Running on simulator or device without camera.\nUse the button in the bottom right to scan from photo library.</string>
     <string name="scan_message">QR code scanning requires platform-specific camera APIs.\n\nThis feature will be implemented using expect/actual declarations:\n• Android: CameraX\n• iOS: AVFoundation\n• Desktop: Webcam libraries</string>
     <string name="scan_from_file">Scan from file</string>
     <string name="scan_qr_detected">QR Code detected: %1$s</string>

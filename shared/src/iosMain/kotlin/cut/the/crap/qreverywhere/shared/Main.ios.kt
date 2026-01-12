@@ -8,6 +8,8 @@ import cut.the.crap.qreverywhere.shared.presentation.theme.QrEveryWhereTheme
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import platform.UIKit.UIActivityViewController
+import platform.UIKit.UIApplication
 import platform.UIKit.UIViewController
 
 /**
@@ -45,12 +47,17 @@ private class IosViewModelProvider : KoinComponent {
 }
 
 /**
- * Share text using iOS share sheet
+ * Share text using iOS share sheet (UIActivityViewController)
  */
 private fun shareText(text: String) {
-    // The sharing will be handled by the calling Swift code
-    // For now, just copy to clipboard as fallback
-    copyToClipboard(text)
+    val activityVC = UIActivityViewController(
+        activityItems = listOf(text),
+        applicationActivities = null
+    )
+
+    // Get the root view controller and present the share sheet
+    val rootViewController = UIApplication.sharedApplication.keyWindow?.rootViewController
+    rootViewController?.presentViewController(activityVC, animated = true, completion = null)
 }
 
 /**

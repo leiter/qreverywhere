@@ -2,7 +2,7 @@ package cut.the.crap.qreverywhere.shared.camera
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import kotlin.time.Clock
+import kotlinx.datetime.Clock
 
 /**
  * Camera configuration for the view

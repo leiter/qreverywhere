@@ -26,7 +26,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.coroutines.launch
+import org.jetbrains.compose.resources.stringResource
 import platform.AVFoundation.AVCaptureDevice
+import qreverywhere.shared.generated.resources.Res
+import qreverywhere.shared.generated.resources.camera_not_available
+import qreverywhere.shared.generated.resources.camera_simulator_hint
+import qreverywhere.shared.generated.resources.camera_starting
 import platform.AVFoundation.AVMediaTypeVideo
 
 /**
@@ -106,7 +111,7 @@ actual fun CameraView(
                     CircularProgressIndicator()
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        text = "Starting camera...",
+                        text = stringResource(Res.string.camera_starting),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurface
                     )
@@ -152,7 +157,7 @@ private fun SimulatorCameraPlaceholder(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Camera not available",
+                text = stringResource(Res.string.camera_not_available),
                 style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.onSurface
             )
@@ -160,7 +165,7 @@ private fun SimulatorCameraPlaceholder(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "Running on simulator or device without camera.\nUse the button in the bottom right to scan from photo library.",
+                text = stringResource(Res.string.camera_simulator_hint),
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
