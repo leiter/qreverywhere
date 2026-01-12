@@ -19,6 +19,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
@@ -31,6 +32,7 @@ import cut.the.crap.qreverywhere.shared.presentation.navigation.Screen
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.shared.utils.DeviceOrientation
 import cut.the.crap.qreverywhere.shared.utils.getDeviceOrientation
+import cut.the.crap.qreverywhere.shared.utils.toReadableString
 import org.jetbrains.compose.resources.stringResource
 import qreverywhere.shared.generated.resources.Res
 import qreverywhere.shared.generated.resources.*
@@ -65,13 +67,21 @@ fun App(
     // Hide top bar when in landscape mode on scan screen for full camera preview
     val shouldHideTopBar = isLandscape && isScanScreen
 
+    // Get detail item for fullscreen title
+    val detailItem by viewModel.detailViewItem.collectAsState()
+
     // Determine if we're on a child screen that needs a back button
-    val isChildScreen = currentRoute.startsWith("create/text/") || currentRoute == Screen.CreateEmail.route
+    val isChildScreen = currentRoute.startsWith("create/text/") ||
+        currentRoute == Screen.CreateEmail.route ||
+        currentRoute.startsWith("detail/") ||
+        currentRoute.startsWith("fullscreen/")
 
     // Get the title based on current route
     val topBarTitle: @Composable () -> String = {
         when {
             currentRoute == Screen.History.route -> stringResource(Res.string.title_history)
+            currentRoute.startsWith("detail/") -> stringResource(Res.string.title_detail)
+            currentRoute.startsWith("fullscreen/") -> detailItem?.let { "${it.acquireType.name} • ${it.timestamp.toReadableString()}" } ?: stringResource(Res.string.title_detail)
             currentRoute == Screen.CreateEmail.route -> stringResource(Res.string.title_email_qr)
             currentRoute.startsWith("create/text/") -> {
                 val qrType = navBackStackEntry?.arguments?.getString("qrType") ?: "text"

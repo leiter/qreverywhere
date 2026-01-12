@@ -37,6 +37,7 @@ import cut.the.crap.qreverywhere.shared.presentation.state.State
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.shared.utils.Logger
 import cut.the.crap.qreverywhere.shared.utils.toImagePainter
+import cut.the.crap.qreverywhere.shared.utils.toReadableString
 import org.jetbrains.compose.resources.stringResource
 import qreverywhere.shared.generated.resources.Res
 import qreverywhere.shared.generated.resources.*
@@ -151,7 +152,7 @@ fun DetailScreen(
                                 )
 
                                 DetailRow(stringResource(Res.string.detail_type), qrItem.acquireType.name)
-                                DetailRow(stringResource(Res.string.detail_created), qrItem.timestamp.toString())
+                                DetailRow(stringResource(Res.string.detail_created), qrItem.timestamp.toReadableString())
                             }
                         }
 

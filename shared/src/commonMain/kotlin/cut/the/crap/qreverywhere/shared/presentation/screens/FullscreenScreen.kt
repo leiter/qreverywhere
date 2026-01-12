@@ -5,17 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
-import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -28,7 +17,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.unit.dp
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.shared.utils.toImagePainter
 import org.jetbrains.compose.resources.stringResource
@@ -41,7 +29,6 @@ import qreverywhere.shared.generated.resources.*
  *
  * Design adapted from Android ComposeFullscreenQrScreen
  */
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun FullscreenScreen(
     viewModel: MainViewModel,
@@ -49,43 +36,15 @@ fun FullscreenScreen(
 ) {
     val detailItem by viewModel.detailViewItem.collectAsState()
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        text = detailItem?.let {
-                            // Format timestamp as subtitle
-                            "${it.acquireType.name} • ${it.timestamp}"
-                        } ?: "",
-                        style = MaterialTheme.typography.titleMedium
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = onNavigateBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, stringResource(Res.string.cd_back))
-                    }
-                },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color.Black.copy(alpha = 0.7f),
-                    titleContentColor = Color.White,
-                    navigationIconContentColor = Color.White
-                )
-            )
-        },
-        containerColor = Color.Black
-    ) { paddingValues ->
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .background(Color.Black),
-            contentAlignment = Alignment.Center
-        ) {
-            detailItem?.imageData?.let { imageData ->
-                imageData.toImagePainter()?.let { painter ->
-                    ZoomableQrImage(painter = painter)
-                }
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.Black),
+        contentAlignment = Alignment.Center
+    ) {
+        detailItem?.imageData?.let { imageData ->
+            imageData.toImagePainter()?.let { painter ->
+                ZoomableQrImage(painter = painter)
             }
         }
     }
