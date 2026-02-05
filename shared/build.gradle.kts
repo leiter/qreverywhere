@@ -43,6 +43,18 @@ kotlin {
         }
     }
 
+    // Web (Wasm) target - disabled for now due to dependency compatibility issues
+    // Libraries like Napier, ViewModel, and Navigation don't yet support wasmJs
+    // @OptIn(org.jetbrains.kotlin.gradle.ExperimentalWasmDsl::class)
+    // wasmJs {
+    //     browser {
+    //         commonWebpackConfig {
+    //             outputFileName = "qreverywhere.js"
+    //         }
+    //     }
+    //     binaries.executable()
+    // }
+
     sourceSets {
         val commonMain by getting {
             dependencies {

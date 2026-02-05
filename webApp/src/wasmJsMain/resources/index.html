@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>QR Everywhere</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #fefefe;
+        }
+        #ComposeTarget {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+    <!-- QRCode.js library for QR code generation -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+</head>
+<body>
+    <canvas id="ComposeTarget"></canvas>
+    <script src="qreverywhere.js"></script>
+</body>
+</html>
