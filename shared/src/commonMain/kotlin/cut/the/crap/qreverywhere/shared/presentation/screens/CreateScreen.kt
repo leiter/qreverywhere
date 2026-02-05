@@ -26,6 +26,10 @@ import qreverywhere.shared.generated.resources.title_phone_qr
 import qreverywhere.shared.generated.resources.desc_phone_qr
 import qreverywhere.shared.generated.resources.title_email_qr
 import qreverywhere.shared.generated.resources.desc_email_qr
+import qreverywhere.shared.generated.resources.title_contact_qr
+import qreverywhere.shared.generated.resources.desc_contact_qr
+import qreverywhere.shared.generated.resources.title_wifi_qr
+import qreverywhere.shared.generated.resources.desc_wifi_qr
 
 /**
  * Create Screen for Compose Multiplatform
@@ -39,7 +43,9 @@ fun CreateScreen(
     onUrlQrClick: () -> Unit = {},
     onPhoneQrClick: () -> Unit = {},
     onSmsQrClick: () -> Unit = {},
-    onEmailQrClick: () -> Unit = {}
+    onEmailQrClick: () -> Unit = {},
+    onContactQrClick: () -> Unit = {},
+    onWiFiQrClick: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier
@@ -88,6 +94,20 @@ fun CreateScreen(
             title = stringResource(Res.string.title_email_qr),
             description = stringResource(Res.string.desc_email_qr),
             onClick = onEmailQrClick
+        )
+
+        // Contact (vCard) QR Code
+        QrTypeCard(
+            title = stringResource(Res.string.title_contact_qr),
+            description = stringResource(Res.string.desc_contact_qr),
+            onClick = onContactQrClick
+        )
+
+        // WiFi QR Code
+        QrTypeCard(
+            title = stringResource(Res.string.title_wifi_qr),
+            description = stringResource(Res.string.desc_wifi_qr),
+            onClick = onWiFiQrClick
         )
     }
 }

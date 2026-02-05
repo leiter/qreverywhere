@@ -22,6 +22,8 @@
     <string name="title_phone_qr">Phone QR Code</string>
     <string name="title_sms_qr">SMS QR Code</string>
     <string name="title_email_qr">Email QR Code</string>
+    <string name="title_contact_qr">Contact QR Code</string>
+    <string name="title_wifi_qr">WiFi QR Code</string>
 
     <!-- Create QR Type Descriptions -->
     <string name="desc_text_qr">Create a QR code with any text content</string>
@@ -29,6 +31,8 @@
     <string name="desc_phone_qr">Create a QR code with phone number</string>
     <string name="desc_sms_qr">Create a QR code with SMS message</string>
     <string name="desc_email_qr">Create a QR code with email information</string>
+    <string name="desc_contact_qr">Create a QR code with contact information (vCard)</string>
+    <string name="desc_wifi_qr">Create a QR code with WiFi network credentials</string>
 
     <!-- Create Screen -->
     <string name="create_title">Create QR Code</string>
@@ -59,6 +63,17 @@
     <string name="label_enter_url">Enter website URL</string>
     <string name="label_enter_phone">Enter phone number</string>
     <string name="label_enter_phone_message">Enter phone number and message</string>
+    <!-- vCard Field Labels -->
+    <string name="label_first_name">First Name</string>
+    <string name="label_last_name">Last Name</string>
+    <string name="label_organization">Organization (Optional)</string>
+    <string name="label_job_title">Job Title (Optional)</string>
+    <string name="label_website">Website (Optional)</string>
+    <!-- WiFi Field Labels -->
+    <string name="label_network_name">Network Name (SSID)</string>
+    <string name="label_password">Password</string>
+    <string name="label_security_type">Security Type</string>
+    <string name="label_hidden_network">Hidden Network</string>
 
     <!-- Field Placeholders -->
     <string name="placeholder_url">https://example.com</string>
@@ -68,6 +83,19 @@
     <string name="placeholder_email">example@email.com</string>
     <string name="placeholder_email_subject">Email subject</string>
     <string name="placeholder_email_message">Email message</string>
+    <!-- vCard Placeholders -->
+    <string name="placeholder_first_name">John</string>
+    <string name="placeholder_last_name">Doe</string>
+    <string name="placeholder_organization">Company Inc.</string>
+    <string name="placeholder_job_title">Software Engineer</string>
+    <string name="placeholder_website">https://example.com</string>
+    <!-- WiFi Placeholders -->
+    <string name="placeholder_network_name">MyWiFi</string>
+    <string name="placeholder_password">password123</string>
+    <!-- WiFi Security Types -->
+    <string name="security_wpa">WPA/WPA2</string>
+    <string name="security_wep">WEP</string>
+    <string name="security_open">Open (No password)</string>
 
     <!-- Field Hints -->
     <string name="hint_url">The URL should start with http:// or https://</string>
@@ -80,6 +108,8 @@
     <string name="instruction_sms">Enter the Phone Number to encode in the QR code</string>
     <string name="instruction_text">Enter the Text Content to encode in the QR code</string>
     <string name="instruction_email">Enter email details to encode in the QR code</string>
+    <string name="instruction_contact">Enter contact information to encode in the QR code</string>
+    <string name="instruction_wifi">Enter WiFi network details to encode in the QR code</string>
 
     <!-- Validation Errors -->
     <string name="error_invalid_url">Please enter a valid URL</string>
@@ -91,6 +121,8 @@
     <string name="error_empty_email">Please enter an email address</string>
     <string name="error_invalid_email">Invalid email address</string>
     <string name="error_create_qr">Error creating QR code: %1$s</string>
+    <string name="error_empty_name">Please enter at least a first or last name</string>
+    <string name="error_empty_ssid">Please enter the network name (SSID)</string>
 
     <!-- History Screen -->
     <string name="history_empty">No QR codes yet.\nScan or create one to get started!</string>

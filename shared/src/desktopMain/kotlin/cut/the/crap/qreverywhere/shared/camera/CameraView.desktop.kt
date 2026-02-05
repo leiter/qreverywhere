@@ -16,19 +16,15 @@ actual fun CameraView(
     onQrCodeDetected: (QrCodeResult) -> Unit,
     onError: (String) -> Unit
 ) {
-    // TODO: Implement using desktop camera libraries
-    // Options:
-    // - OpenCV for camera capture
-    // - Webcam-capture library
-    // - JavaCV
-    // - Native platform APIs (Windows Media Foundation, macOS AVFoundation, Linux V4L2)
+    // Live camera scanning is not yet available on desktop.
+    // Users can use "Scan from file" feature to scan QR codes from images.
 
     Box(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = "Desktop Camera\nImplementation Required\n\nOptions:\n• OpenCV\n• Webcam-capture library\n• JavaCV\n• Platform-specific APIs",
+            text = "Live camera scanning is not yet available on desktop.\n\nUse the \"Scan from file\" button to scan QR codes from images.",
             style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurfaceVariant

@@ -73,6 +73,8 @@ fun App(
     // Determine if we're on a child screen that needs a back button
     val isChildScreen = currentRoute.startsWith("create/text/") ||
         currentRoute == Screen.CreateEmail.route ||
+        currentRoute == Screen.CreateVcard.route ||
+        currentRoute == Screen.CreateWiFi.route ||
         currentRoute.startsWith("detail/") ||
         currentRoute.startsWith("fullscreen/")
 
@@ -85,6 +87,8 @@ fun App(
             currentRoute.startsWith("detail/") -> stringResource(Res.string.title_detail)
             currentRoute.startsWith("fullscreen/") -> detailItem?.let { "${it.acquireType.name} • ${it.timestamp.toReadableString()}" } ?: stringResource(Res.string.title_detail)
             currentRoute == Screen.CreateEmail.route -> stringResource(Res.string.title_email_qr)
+            currentRoute == Screen.CreateVcard.route -> stringResource(Res.string.title_contact_qr)
+            currentRoute == Screen.CreateWiFi.route -> stringResource(Res.string.title_wifi_qr)
             currentRoute.startsWith("create/text/") -> {
                 val qrType = navBackStackEntry?.arguments?.getString("qrType") ?: "text"
                 when (qrType) {

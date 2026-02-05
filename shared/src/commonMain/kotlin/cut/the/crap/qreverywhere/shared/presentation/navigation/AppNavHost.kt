@@ -8,6 +8,8 @@ import androidx.navigation.compose.composable
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateEmailScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateTextScreen
+import cut.the.crap.qreverywhere.shared.presentation.screens.CreateVcardScreen
+import cut.the.crap.qreverywhere.shared.presentation.screens.CreateWiFiScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.DetailScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.FullscreenScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.HistoryScreen
@@ -116,6 +118,12 @@ fun AppNavHost(
                 },
                 onEmailQrClick = {
                     navController.navigate(Screen.CreateEmail.route)
+                },
+                onContactQrClick = {
+                    navController.navigate(Screen.CreateVcard.route)
+                },
+                onWiFiQrClick = {
+                    navController.navigate(Screen.CreateWiFi.route)
                 }
             )
         }
@@ -136,6 +144,28 @@ fun AppNavHost(
 
         composable(Screen.CreateEmail.route) {
             CreateEmailScreen(
+                viewModel = viewModel,
+                onQrCreated = {
+                    viewModel.detailViewItem.value?.let { item ->
+                        navController.navigate(Screen.Detail.createRoute(item.id))
+                    }
+                }
+            )
+        }
+
+        composable(Screen.CreateVcard.route) {
+            CreateVcardScreen(
+                viewModel = viewModel,
+                onQrCreated = {
+                    viewModel.detailViewItem.value?.let { item ->
+                        navController.navigate(Screen.Detail.createRoute(item.id))
+                    }
+                }
+            )
+        }
+
+        composable(Screen.CreateWiFi.route) {
+            CreateWiFiScreen(
                 viewModel = viewModel,
                 onQrCreated = {
                     viewModel.detailViewItem.value?.let { item ->

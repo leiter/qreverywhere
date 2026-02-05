@@ -6,8 +6,12 @@ import cut.the.crap.qreverywhere.shared.data.db.createDatabase
 import cut.the.crap.qreverywhere.shared.domain.repository.QrRepository
 import cut.the.crap.qreverywhere.shared.domain.usecase.QrCodeGenerator
 import cut.the.crap.qreverywhere.shared.domain.usecase.QrCodeScanner
+import cut.the.crap.qreverywhere.shared.domain.usecase.SaveImageToFileUseCase
+import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
 import cut.the.crap.qreverywhere.shared.platform.DesktopQrCodeGenerator
 import cut.the.crap.qreverywhere.shared.platform.DesktopQrCodeScanner
+import cut.the.crap.qreverywhere.shared.platform.DesktopSaveImageToFileUseCase
+import cut.the.crap.qreverywhere.shared.platform.DesktopUserPreferences
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import org.koin.core.module.Module
@@ -24,6 +28,8 @@ actual fun platformModule(): Module = module {
     // Platform-specific implementations
     single<QrCodeGenerator> { DesktopQrCodeGenerator() }
     single<QrCodeScanner> { DesktopQrCodeScanner() }
+    single<SaveImageToFileUseCase> { DesktopSaveImageToFileUseCase() }
+    single<UserPreferences> { DesktopUserPreferences() }
 
     single {
         // Initialize Napier for Desktop

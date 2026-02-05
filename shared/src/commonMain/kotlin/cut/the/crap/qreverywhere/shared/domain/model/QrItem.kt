@@ -66,6 +66,7 @@ fun QrItem.determineType(): Int {
             decoded.startsWith(ProtocolPrefix.HTTPS) -> QrCodeType.WEB_URL
         decoded.startsWith(ProtocolPrefix.SMS) ||
             decoded.startsWith(ProtocolPrefix.SMSTO) -> QrCodeType.SMS
+        decoded.startsWith("WIFI:") -> QrCodeType.WIFI
         isVcard() -> QrCodeType.CONTACT
         else -> QrCodeType.UNKNOWN_CONTENT
     }

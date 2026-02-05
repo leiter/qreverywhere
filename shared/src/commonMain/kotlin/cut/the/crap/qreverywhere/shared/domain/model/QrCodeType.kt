@@ -10,5 +10,6 @@ object QrCodeType {
     const val WEB_URL = 2
     const val SMS = 3
     const val CONTACT = 4
+    const val WIFI = 5
     const val UNKNOWN_CONTENT = 999
 }

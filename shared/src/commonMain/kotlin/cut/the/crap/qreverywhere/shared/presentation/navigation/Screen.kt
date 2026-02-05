@@ -15,6 +15,8 @@ sealed class Screen(val route: String) {
         fun createRoute(qrType: String = "text") = "create/text/$qrType"
     }
     object CreateEmail : Screen("create/email")
+    object CreateVcard : Screen("create/vcard")
+    object CreateWiFi : Screen("create/wifi")
     object Fullscreen : Screen("fullscreen/{itemId}") {
         fun createRoute(itemId: Int) = "fullscreen/$itemId"
     }
