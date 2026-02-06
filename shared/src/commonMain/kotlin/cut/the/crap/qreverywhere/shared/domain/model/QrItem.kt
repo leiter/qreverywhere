@@ -67,6 +67,9 @@ fun QrItem.determineType(): Int {
         decoded.startsWith(ProtocolPrefix.SMS) ||
             decoded.startsWith(ProtocolPrefix.SMSTO) -> QrCodeType.SMS
         decoded.startsWith("WIFI:") -> QrCodeType.WIFI
+        decoded.startsWith("geo:") -> QrCodeType.LOCATION
+        decoded.startsWith("MECARD:") -> QrCodeType.MECARD
+        decoded.contains("BEGIN:VCALENDAR") && decoded.contains("BEGIN:VEVENT") -> QrCodeType.CALENDAR
         isVcard() -> QrCodeType.CONTACT
         else -> QrCodeType.UNKNOWN_CONTENT
     }

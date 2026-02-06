@@ -11,5 +11,8 @@ object QrCodeType {
     const val SMS = 3
     const val CONTACT = 4
     const val WIFI = 5
+    const val CALENDAR = 6
+    const val LOCATION = 7
+    const val MECARD = 8
     const val UNKNOWN_CONTENT = 999
 }
