@@ -20,6 +20,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -55,11 +56,41 @@ import qreverywhere.shared.generated.resources.*
 fun App(
     viewModel: MainViewModel,
     userPreferences: UserPreferences,
+    initialRoute: String? = null,
+    initialDetailId: Int? = null,
     onShareText: (String) -> Unit = {},
     onCopyToClipboard: (String) -> Unit = {},
     onThemeChanged: (ThemePreference) -> Unit = {}
 ) {
     val navController = rememberNavController()
+
+    // Handle initial navigation from shortcuts, widgets, or deep links
+    LaunchedEffect(initialRoute, initialDetailId) {
+        when (initialRoute) {
+            "scan" -> {
+                navController.navigate(Screen.Scan.route) {
+                    popUpTo(Screen.Scan.route) { inclusive = true }
+                }
+            }
+            "create" -> {
+                navController.navigate(Screen.Create.route) {
+                    popUpTo(Screen.Scan.route)
+                }
+            }
+            "history" -> {
+                navController.navigate(Screen.History.route) {
+                    popUpTo(Screen.Scan.route)
+                }
+            }
+            "detail" -> {
+                initialDetailId?.let { id ->
+                    navController.navigate(Screen.Detail.createRoute(id)) {
+                        popUpTo(Screen.Scan.route)
+                    }
+                }
+            }
+        }
+    }
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
     val currentRoute = currentDestination?.route ?: ""

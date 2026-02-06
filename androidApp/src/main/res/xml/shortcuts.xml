@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <shortcut
+        android:shortcutId="scan"
+        android:enabled="true"
+        android:icon="@drawable/ic_qr_code_scanner"
+        android:shortcutShortLabel="@string/shortcut_scan"
+        android:shortcutLongLabel="@string/shortcut_scan_long">
+        <intent
+            android:action="cut.the.crap.qreverywhere.OPEN_SCAN"
+            android:targetPackage="cut.the.crap.qreverywhere"
+            android:targetClass="cut.the.crap.qreverywhere.compose.ComposeMainActivity" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="create"
+        android:enabled="true"
+        android:icon="@drawable/ic_create_qr"
+        android:shortcutShortLabel="@string/shortcut_create"
+        android:shortcutLongLabel="@string/shortcut_create_long">
+        <intent
+            android:action="cut.the.crap.qreverywhere.OPEN_CREATE"
+            android:targetPackage="cut.the.crap.qreverywhere"
+            android:targetClass="cut.the.crap.qreverywhere.compose.ComposeMainActivity" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+
+    <shortcut
+        android:shortcutId="history"
+        android:enabled="true"
+        android:icon="@drawable/ic_history"
+        android:shortcutShortLabel="@string/shortcut_history"
+        android:shortcutLongLabel="@string/shortcut_history_long">
+        <intent
+            android:action="cut.the.crap.qreverywhere.OPEN_HISTORY"
+            android:targetPackage="cut.the.crap.qreverywhere"
+            android:targetClass="cut.the.crap.qreverywhere.compose.ComposeMainActivity" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+
+</shortcuts>

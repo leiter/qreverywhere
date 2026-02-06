@@ -30,6 +30,9 @@ kotlin {
                 // Koin
                 implementation(libs.koin.core)
 
+                // Lifecycle ViewModel (KMP)
+                implementation(libs.lifecycle.viewmodel.kmp)
+
                 // Coroutines (swing provides Main dispatcher for desktop)
                 implementation(libs.kotlinx.coroutines.core)
                 implementation("org.jetbrains.kotlinx:kotlinx-coroutines-swing:1.7.3")

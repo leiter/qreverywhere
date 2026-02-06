@@ -112,5 +112,17 @@
 
     <string name="detailview_content_title">Content</string>
 
+    <!-- Widget strings -->
+    <string name="widget_no_qr">No QR code saved</string>
+    <string name="widget_description">Display your recent QR code on the home screen</string>
+    <string name="widget_qr_content_description">QR code image</string>
+
+    <!-- Shortcut strings -->
+    <string name="shortcut_scan">Scan QR</string>
+    <string name="shortcut_scan_long">Scan a QR code</string>
+    <string name="shortcut_create">Create QR</string>
+    <string name="shortcut_create_long">Create a new QR code</string>
+    <string name="shortcut_history">History</string>
+    <string name="shortcut_history_long">View QR code history</string>
 
 </resources>

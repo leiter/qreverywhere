@@ -19,4 +19,8 @@
     <color name="secondary_text">#757575</color>
     <color name="icons">#FFFFFF</color>
     <color name="divider">#BDBDBD</color>
+
+    <!-- Widget colors -->
+    <color name="widget_text_color">#212121</color>
+    <color name="widget_background">#FFFFFF</color>
 </resources>

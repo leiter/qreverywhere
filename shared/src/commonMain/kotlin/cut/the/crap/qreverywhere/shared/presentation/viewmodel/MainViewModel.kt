@@ -51,6 +51,10 @@ class MainViewModel(
     private val _errorEvent = MutableSharedFlow<String>()
     val errorEvent: SharedFlow<String> = _errorEvent.asSharedFlow()
 
+    // Clipboard content for creating QR codes from clipboard (desktop)
+    private val _clipboardContent = MutableStateFlow<String?>(null)
+    val clipboardContent: StateFlow<String?> = _clipboardContent.asStateFlow()
+
     init {
         loadHistory()
     }
@@ -233,5 +237,20 @@ class MainViewModel(
                 Logger.e("MainViewModel", e) { "Failed to clear history" }
             }
         }
+    }
+
+    /**
+     * Set clipboard content for creating QR codes (used by desktop tray)
+     */
+    fun setClipboardContent(content: String) {
+        _clipboardContent.value = content
+        Logger.d("MainViewModel") { "Set clipboard content for QR creation" }
+    }
+
+    /**
+     * Clear clipboard content after it's been used
+     */
+    fun clearClipboardContent() {
+        _clipboardContent.value = null
     }
 }

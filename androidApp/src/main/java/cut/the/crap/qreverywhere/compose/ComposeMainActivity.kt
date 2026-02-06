@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.LocalContext
 import org.koin.androidx.compose.koinViewModel
 import org.jetbrains.compose.resources.stringResource as kmpStringResource
@@ -17,6 +18,7 @@ import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
 import cut.the.crap.qreverywhere.shared.presentation.App
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.compose.theme.QrEveryWhereTheme
+import cut.the.crap.qreverywhere.widget.QrWidgetProvider
 import org.koin.compose.koinInject
 
 /**
@@ -24,8 +26,16 @@ import org.koin.compose.koinInject
  */
 class ComposeMainActivity : ComponentActivity() {
 
+    // Initial route based on intent (shortcuts, widgets)
+    private val initialRoute = mutableStateOf<String?>(null)
+    private val initialDetailId = mutableStateOf<Int?>(null)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Handle initial intent (shortcuts, widgets)
+        handleIntent(intent)
+
         setContent {
             QrEveryWhereTheme {
                 val viewModel: MainViewModel = koinViewModel()
@@ -36,6 +46,8 @@ class ComposeMainActivity : ComponentActivity() {
                 App(
                     viewModel = viewModel,
                     userPreferences = userPreferences,
+                    initialRoute = initialRoute.value,
+                    initialDetailId = initialDetailId.value,
                     onShareText = { text ->
                         val shareIntent = Intent(Intent.ACTION_SEND).apply {
                             type = "text/plain"
@@ -52,5 +64,38 @@ class ComposeMainActivity : ComponentActivity() {
                 )
             }
         }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        handleIntent(intent)
+    }
+
+    /**
+     * Handle intents from shortcuts, widgets, and deep links
+     */
+    private fun handleIntent(intent: Intent?) {
+        when (intent?.action) {
+            QrWidgetProvider.ACTION_OPEN_SCAN -> {
+                initialRoute.value = "scan"
+            }
+            QrWidgetProvider.ACTION_OPEN_CREATE -> {
+                initialRoute.value = "create"
+            }
+            ACTION_OPEN_HISTORY -> {
+                initialRoute.value = "history"
+            }
+            QrWidgetProvider.ACTION_OPEN_DETAIL -> {
+                val qrId = intent.getIntExtra(QrWidgetProvider.EXTRA_QR_ID, -1)
+                if (qrId != -1) {
+                    initialRoute.value = "detail"
+                    initialDetailId.value = qrId
+                }
+            }
+        }
+    }
+
+    companion object {
+        const val ACTION_OPEN_HISTORY = "cut.the.crap.qreverywhere.OPEN_HISTORY"
     }
 }
