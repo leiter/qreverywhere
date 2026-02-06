@@ -9,6 +9,7 @@ import cut.the.crap.qreverywhere.shared.domain.usecase.QrCodeGenerator
 import cut.the.crap.qreverywhere.shared.domain.usecase.SaveImageToFileUseCase
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
 import cut.the.crap.qreverywhere.shared.presentation.state.State
+import cut.the.crap.qreverywhere.shared.utils.ErrorHandler
 import cut.the.crap.qreverywhere.shared.utils.Logger
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -46,6 +47,10 @@ class MainViewModel(
     private val _saveQrImageEvent = MutableSharedFlow<State<String?>>()
     val saveQrImageEvent: SharedFlow<State<String?>> = _saveQrImageEvent.asSharedFlow()
 
+    // Transient error events for snackbar display
+    private val _errorEvent = MutableSharedFlow<String>()
+    val errorEvent: SharedFlow<String> = _errorEvent.asSharedFlow()
+
     init {
         loadHistory()
     }
@@ -76,6 +81,8 @@ class MainViewModel(
                 qrRepository.insertQrItem(item)
                 Logger.d("MainViewModel") { "Saved QR item: ${item.id}" }
             } catch (e: Exception) {
+                val message = ErrorHandler.getDisplayMessage(e)
+                _errorEvent.emit(message)
                 Logger.e("MainViewModel", e) { "Failed to save QR item" }
             }
         }
@@ -117,7 +124,9 @@ class MainViewModel(
 
                 Logger.d("MainViewModel") { "Created and saved QR item from text" }
             } catch (e: Exception) {
-                _detailViewState.value = State.error(e.message ?: "Failed to create QR code", throwable = e)
+                val message = ErrorHandler.getDisplayMessage(e)
+                _detailViewState.value = State.error(message, throwable = e)
+                _errorEvent.emit(message)
                 Logger.e("MainViewModel", e) { "Failed to create QR item from text" }
             }
         }
@@ -154,7 +163,8 @@ class MainViewModel(
                     Logger.e("MainViewModel") { "Failed to save QR image" }
                 }
             } catch (e: Exception) {
-                _saveQrImageEvent.emit(State.error(e.message ?: "Unknown error", throwable = e))
+                val message = ErrorHandler.getDisplayMessage(e)
+                _saveQrImageEvent.emit(State.error(message, throwable = e))
                 Logger.e("MainViewModel", e) { "Error saving QR image" }
             }
         }
@@ -181,6 +191,8 @@ class MainViewModel(
                 qrRepository.deleteQrItem(item)
                 Logger.d("MainViewModel") { "Deleted QR item: ${item.id}" }
             } catch (e: Exception) {
+                val message = ErrorHandler.getDisplayMessage(e)
+                _errorEvent.emit(message)
                 Logger.e("MainViewModel", e) { "Failed to delete QR item" }
             }
         }
@@ -200,6 +212,8 @@ class MainViewModel(
                     Logger.d("MainViewModel") { "Deleted QR item at position $position" }
                 }
             } catch (e: Exception) {
+                val message = ErrorHandler.getDisplayMessage(e)
+                _errorEvent.emit(message)
                 Logger.e("MainViewModel", e) { "Failed to remove history item" }
             }
         }
@@ -214,6 +228,8 @@ class MainViewModel(
                 qrRepository.deleteAll()
                 Logger.d("MainViewModel") { "Cleared QR history" }
             } catch (e: Exception) {
+                val message = ErrorHandler.getDisplayMessage(e)
+                _errorEvent.emit(message)
                 Logger.e("MainViewModel", e) { "Failed to clear history" }
             }
         }
