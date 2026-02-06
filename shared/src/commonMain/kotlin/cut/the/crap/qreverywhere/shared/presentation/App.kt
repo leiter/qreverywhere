@@ -8,6 +8,7 @@ import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -27,6 +28,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import cut.the.crap.qreverywhere.shared.domain.usecase.ThemePreference
+import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
 import cut.the.crap.qreverywhere.shared.presentation.navigation.AppNavHost
 import cut.the.crap.qreverywhere.shared.presentation.navigation.Screen
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
@@ -51,8 +54,10 @@ import qreverywhere.shared.generated.resources.*
 @Composable
 fun App(
     viewModel: MainViewModel,
+    userPreferences: UserPreferences,
     onShareText: (String) -> Unit = {},
-    onCopyToClipboard: (String) -> Unit = {}
+    onCopyToClipboard: (String) -> Unit = {},
+    onThemeChanged: (ThemePreference) -> Unit = {}
 ) {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
@@ -76,7 +81,8 @@ fun App(
         currentRoute == Screen.CreateVcard.route ||
         currentRoute == Screen.CreateWiFi.route ||
         currentRoute.startsWith("detail/") ||
-        currentRoute.startsWith("fullscreen/")
+        currentRoute.startsWith("fullscreen/") ||
+        currentRoute == Screen.Settings.route
 
     // Get the title based on current route
     val topBarTitle: @Composable () -> String = {
@@ -89,6 +95,7 @@ fun App(
             currentRoute == Screen.CreateEmail.route -> stringResource(Res.string.title_email_qr)
             currentRoute == Screen.CreateVcard.route -> stringResource(Res.string.title_contact_qr)
             currentRoute == Screen.CreateWiFi.route -> stringResource(Res.string.title_wifi_qr)
+            currentRoute == Screen.Settings.route -> "Settings"
             currentRoute.startsWith("create/text/") -> {
                 val qrType = navBackStackEntry?.arguments?.getString("qrType") ?: "text"
                 when (qrType) {
@@ -121,6 +128,21 @@ fun App(
                                 Icon(
                                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                                     contentDescription = stringResource(Res.string.cd_back)
+                                )
+                            }
+                        }
+                    },
+                    actions = {
+                        // Show settings icon only on main screens (not child screens)
+                        if (!isChildScreen) {
+                            IconButton(
+                                onClick = {
+                                    navController.navigate(Screen.Settings.route)
+                                }
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Settings,
+                                    contentDescription = "Settings"
                                 )
                             }
                         }
@@ -210,11 +232,13 @@ fun App(
         AppNavHost(
             navController = navController,
             viewModel = viewModel,
+            userPreferences = userPreferences,
             modifier = Modifier
                 .fillMaxSize()
                 .padding(adjustedPadding), // Adjusted padding for landscape camera
             onShareText = onShareText,
-            onCopyToClipboard = onCopyToClipboard
+            onCopyToClipboard = onCopyToClipboard,
+            onThemeChanged = onThemeChanged
         )
     }
 }

@@ -5,6 +5,7 @@ import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.application
 import cut.the.crap.qreverywhere.shared.di.commonModule
 import cut.the.crap.qreverywhere.shared.di.platformModule
+import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
 import cut.the.crap.qreverywhere.shared.presentation.App
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import io.github.aakira.napier.DebugAntilog
@@ -23,8 +24,9 @@ fun main() = application {
         modules(commonModule, platformModule())
     }
 
-    // Get ViewModel from Koin
+    // Get ViewModel and UserPreferences from Koin
     val viewModel: MainViewModel = getKoin().get()
+    val userPreferences: UserPreferences = getKoin().get()
 
     Window(
         onCloseRequest = ::exitApplication,
@@ -33,6 +35,7 @@ fun main() = application {
         MaterialTheme {
             App(
                 viewModel = viewModel,
+                userPreferences = userPreferences,
                 onShareText = { text ->
                     // On desktop, share is implemented as copy to clipboard
                     copyToClipboard(text)

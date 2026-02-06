@@ -13,9 +13,11 @@ import org.koin.androidx.compose.koinViewModel
 import org.jetbrains.compose.resources.stringResource as kmpStringResource
 import qreverywhere.shared.generated.resources.Res
 import qreverywhere.shared.generated.resources.*
+import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
 import cut.the.crap.qreverywhere.shared.presentation.App
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.compose.theme.QrEveryWhereTheme
+import org.koin.compose.koinInject
 
 /**
  * Main Activity using shared KMP App composable
@@ -27,11 +29,13 @@ class ComposeMainActivity : ComponentActivity() {
         setContent {
             QrEveryWhereTheme {
                 val viewModel: MainViewModel = koinViewModel()
+                val userPreferences: UserPreferences = koinInject()
                 val context = LocalContext.current
                 val copiedMessage = kmpStringResource(Res.string.feedback_copied)
 
                 App(
                     viewModel = viewModel,
+                    userPreferences = userPreferences,
                     onShareText = { text ->
                         val shareIntent = Intent(Intent.ACTION_SEND).apply {
                             type = "text/plain"

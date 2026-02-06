@@ -6,6 +6,7 @@ package cut.the.crap.qreverywhere.shared.domain.usecase
 class FakeUserPreferences : UserPreferences {
     private var foregroundColor: Int = 0xFF000000.toInt()
     private var backgroundColor: Int = 0xFFFFFFFF.toInt()
+    private var themePreference: ThemePreference = ThemePreference.SYSTEM
 
     override fun getForegroundColor(): Int = foregroundColor
 
@@ -19,8 +20,15 @@ class FakeUserPreferences : UserPreferences {
         backgroundColor = color
     }
 
+    override fun getThemePreference(): ThemePreference = themePreference
+
+    override fun setThemePreference(theme: ThemePreference) {
+        themePreference = theme
+    }
+
     fun reset() {
         foregroundColor = 0xFF000000.toInt()
         backgroundColor = 0xFFFFFFFF.toInt()
+        themePreference = ThemePreference.SYSTEM
     }
 }

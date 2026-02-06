@@ -1,5 +1,6 @@
 package cut.the.crap.qreverywhere.shared.data
 
+import cut.the.crap.qreverywhere.shared.domain.usecase.ThemePreference
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
 import platform.Foundation.NSUserDefaults
 
@@ -13,6 +14,7 @@ class IosUserPreferences : UserPreferences {
     companion object {
         private const val KEY_FOREGROUND_COLOR = "qr_foreground_color"
         private const val KEY_BACKGROUND_COLOR = "qr_background_color"
+        private const val KEY_THEME_PREFERENCE = "app_theme_preference"
 
         // Default colors (black on white)
         private const val DEFAULT_FOREGROUND = 0xFF000000.toInt() // Black
@@ -42,6 +44,20 @@ class IosUserPreferences : UserPreferences {
 
     override fun setBackgroundColor(color: Int) {
         defaults.setInteger(color.toLong(), forKey = KEY_BACKGROUND_COLOR)
+        defaults.synchronize()
+    }
+
+    override fun getThemePreference(): ThemePreference {
+        val value = defaults.stringForKey(KEY_THEME_PREFERENCE) ?: return ThemePreference.SYSTEM
+        return try {
+            ThemePreference.valueOf(value)
+        } catch (e: Exception) {
+            ThemePreference.SYSTEM
+        }
+    }
+
+    override fun setThemePreference(theme: ThemePreference) {
+        defaults.setObject(theme.name, forKey = KEY_THEME_PREFERENCE)
         defaults.synchronize()
     }
 }

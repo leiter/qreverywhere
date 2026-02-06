@@ -5,6 +5,8 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import cut.the.crap.qreverywhere.shared.domain.usecase.ThemePreference
+import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateEmailScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateTextScreen
@@ -14,6 +16,7 @@ import cut.the.crap.qreverywhere.shared.presentation.screens.DetailScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.FullscreenScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.HistoryScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.ScanScreen
+import cut.the.crap.qreverywhere.shared.presentation.screens.SettingsScreen
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.shared.utils.Logger
 
@@ -27,10 +30,12 @@ import cut.the.crap.qreverywhere.shared.utils.Logger
 fun AppNavHost(
     navController: NavHostController,
     viewModel: MainViewModel,
+    userPreferences: UserPreferences,
     modifier: Modifier = Modifier,
     startDestination: String = Screen.Scan.route,
     onShareText: (String) -> Unit = {},
-    onCopyToClipboard: (String) -> Unit = {}
+    onCopyToClipboard: (String) -> Unit = {},
+    onThemeChanged: (ThemePreference) -> Unit = {}
 ) {
     NavHost(
         navController = navController,
@@ -172,6 +177,16 @@ fun AppNavHost(
                         navController.navigate(Screen.Detail.createRoute(item.id))
                     }
                 }
+            )
+        }
+
+        composable(Screen.Settings.route) {
+            SettingsScreen(
+                userPreferences = userPreferences,
+                onNavigateBack = {
+                    navController.popBackStack()
+                },
+                onThemeChanged = onThemeChanged
             )
         }
     }
