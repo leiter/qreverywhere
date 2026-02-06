@@ -1,0 +1,83 @@
+# Fastfile for QrEveryWhere Android
+# Documentation: https://docs.fastlane.tools
+
+default_platform(:android)
+
+platform :android do
+  desc "Runs all the tests"
+  lane :test do
+    gradle(
+      task: "test",
+      project_dir: ".."
+    )
+  end
+
+  desc "Build debug APK"
+  lane :debug do
+    gradle(
+      task: "clean assembleDebug",
+      project_dir: ".."
+    )
+  end
+
+  desc "Build release APK"
+  lane :release do
+    gradle(
+      task: "clean assembleRelease",
+      project_dir: ".."
+    )
+  end
+
+  desc "Build release bundle (AAB) for Play Store"
+  lane :bundle do
+    gradle(
+      task: "clean bundleRelease",
+      project_dir: ".."
+    )
+  end
+
+  desc "Submit a new Beta Build to Play Store"
+  lane :beta do
+    # Ensure clean build
+    gradle(
+      task: "clean bundleRelease",
+      project_dir: ".."
+    )
+
+    # Upload to Play Store internal track
+    upload_to_play_store(
+      track: "internal",
+      aab: "../build/outputs/bundle/release/androidApp-release.aab",
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  desc "Deploy a new version to the Google Play Store"
+  lane :deploy do
+    # Ensure clean build
+    gradle(
+      task: "clean bundleRelease",
+      project_dir: ".."
+    )
+
+    # Upload to Play Store production track
+    upload_to_play_store(
+      track: "production",
+      aab: "../build/outputs/bundle/release/androidApp-release.aab"
+    )
+  end
+
+  desc "Increment version code"
+  lane :bump_version do
+    # Read current version code from build.gradle.kts
+    version_code = google_play_track_version_codes(
+      track: "internal"
+    ).max + 1
+
+    # Update version code in build.gradle.kts
+    # This would need to be implemented with a custom script
+    UI.message("New version code: #{version_code}")
+  end
+end

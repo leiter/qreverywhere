@@ -1,0 +1,85 @@
+# Fastfile for QrEveryWhere iOS
+# Documentation: https://docs.fastlane.tools
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Run tests"
+  lane :test do
+    run_tests(
+      scheme: "iosApp",
+      device: "iPhone 15 Pro"
+    )
+  end
+
+  desc "Build iOS app for simulator"
+  lane :build_simulator do
+    build_app(
+      scheme: "iosApp",
+      configuration: "Debug",
+      destination: "generic/platform=iOS Simulator",
+      skip_archive: true
+    )
+  end
+
+  desc "Build iOS app for device (requires signing)"
+  lane :build do
+    build_app(
+      scheme: "iosApp",
+      configuration: "Release",
+      export_method: "app-store"
+    )
+  end
+
+  desc "Submit a new Beta Build to TestFlight"
+  lane :beta do
+    # Build the app
+    build_app(
+      scheme: "iosApp",
+      configuration: "Release",
+      export_method: "app-store"
+    )
+
+    # Upload to TestFlight
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true
+    )
+  end
+
+  desc "Deploy a new version to the App Store"
+  lane :deploy do
+    # Build the app
+    build_app(
+      scheme: "iosApp",
+      configuration: "Release",
+      export_method: "app-store"
+    )
+
+    # Upload to App Store
+    upload_to_app_store(
+      force: true,
+      submit_for_review: false,
+      automatic_release: false
+    )
+  end
+
+  desc "Increment build number"
+  lane :bump_build do
+    increment_build_number
+  end
+
+  desc "Increment version number"
+  lane :bump_version do |options|
+    increment_version_number(
+      bump_type: options[:type] || "patch"
+    )
+  end
+
+  desc "Sync certificates and provisioning profiles"
+  lane :sync_certificates do
+    match(
+      type: "appstore",
+      readonly: true
+    )
+  end
+end

@@ -1,0 +1,6 @@
+# Appfile for QrEveryWhere Android
+# Documentation: https://docs.fastlane.tools/advanced/Appfile/
+
+# Package name
+json_key_file("path/to/google-play-key.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup
+package_name("cut.the.crap.qreverywhere")
