@@ -36,7 +36,7 @@ sqlite = "2.5.0"
 camerax = "1.4.1"
 
 # QR & Barcode
-zxing = "3.4.0"
+zxing = "3.5.4"
 
 # Dependency Injection
 koin-bom = "4.0.1"
