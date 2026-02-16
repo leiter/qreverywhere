@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Everywhere</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            line-height: 1.6;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            color: #333;
+            background-color: #fafafa;
+            text-align: center;
+        }
+        .logo {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #4CAF50, #2e7d32);
+            border-radius: 24px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+        }
+        .logo svg {
+            width: 80px;
+            height: 80px;
+            fill: white;
+        }
+        h1 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+        .tagline {
+            color: #666;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+        }
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        a {
+            display: block;
+            padding: 15px 25px;
+            background-color: #fff;
+            color: #2e7d32;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.2s ease;
+        }
+        a:hover {
+            background-color: #2e7d32;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .features {
+            text-align: left;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 30px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .features h3 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+        .features ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+        .features li {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 3h6v6H3V3zm2 2v2h2V5H5zm8-2h6v6h-6V3zm2 2v2h2V5h-2zM3 13h6v6H3v-6zm2 2v2h2v-2H5zm13-2h1v2h-2v-1h1v-1zm-4 0h1v1h-1v-1zm2 0h1v1h-1v-1zm-2 2h1v1h-1v-1zm0 2h1v1h-1v-1zm2 0h2v1h-2v-1zm0 2h1v1h-1v-1zm2-2h2v2h-1v1h-1v-2h-1v-1h1zm0-2h1v1h-1v-1z"/>
+        </svg>
+    </div>
+    <h1>QR Everywhere</h1>
+    <p class="tagline">Scan and create QR codes on any device</p>
+
+    <div class="features">
+        <h3>Features</h3>
+        <ul>
+            <li>Scan QR codes with camera or from images</li>
+            <li>Create QR codes for URLs, WiFi, contacts, and more</li>
+            <li>Save and manage your QR code history</li>
+            <li>Works offline - your data stays on your device</li>
+        </ul>
+    </div>
+
+    <div class="links">
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="https://github.com/leiter/qreverywhere">View on GitHub</a>
+    </div>
+</body>
+</html>
