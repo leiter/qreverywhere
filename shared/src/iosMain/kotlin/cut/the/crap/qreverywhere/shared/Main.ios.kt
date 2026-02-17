@@ -112,6 +112,20 @@ data class WidgetQrData(
 /**
  * Callback for widget updates.
  * Set this from Swift to receive QR data updates for the widget.
+ *
+ * Usage in Swift:
+ * ```swift
+ * Main_iosKt.onWidgetUpdateCallback = { qrData in
+ *     if let data = qrData {
+ *         WidgetDataStore.shared.saveLatestQrCode(
+ *             id: Int(data.id),
+ *             text: data.text,
+ *             imageData: data.imageData?.toData(),
+ *             type: data.type
+ *         )
+ *     }
+ * }
+ * ```
  */
 var onWidgetUpdateCallback: ((WidgetQrData?) -> Unit)? = null
 
