@@ -72,11 +72,7 @@ data class CalendarEvent(
      */
     private fun formatDateTime(instant: Instant): String {
         val dt = instant.toLocalDateTime(TimeZone.UTC)
-        return String.format(
-            "%04d%02d%02dT%02d%02d%02dZ",
-            dt.year, dt.monthNumber, dt.dayOfMonth,
-            dt.hour, dt.minute, dt.second
-        )
+        return "${dt.year.pad(4)}${dt.monthNumber.pad(2)}${dt.dayOfMonth.pad(2)}T${dt.hour.pad(2)}${dt.minute.pad(2)}${dt.second.pad(2)}Z"
     }
 
     /**
@@ -85,11 +81,10 @@ data class CalendarEvent(
      */
     private fun formatDate(instant: Instant): String {
         val dt = instant.toLocalDateTime(TimeZone.UTC)
-        return String.format(
-            "%04d%02d%02d",
-            dt.year, dt.monthNumber, dt.dayOfMonth
-        )
+        return "${dt.year.pad(4)}${dt.monthNumber.pad(2)}${dt.dayOfMonth.pad(2)}"
     }
+
+    private fun Int.pad(length: Int): String = this.toString().padStart(length, '0')
 
     /**
      * Escape special characters for iCalendar text

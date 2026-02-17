@@ -16,7 +16,7 @@ QrEveryWhere/
 ```
 
 ## Branch
-- **Current:** `migrate_to_kmp`
+- **Current:** `feature/phase6-new-qr-types`
 - **Main branch:** `migrate_to_kmp`
 
 ## KMP Implementation Status
@@ -82,6 +82,9 @@ QrEveryWhere/
 | Email | Done | Done | mailto: with subject/body via CreateEmailScreen |
 | vCard/Contact | Done | Done | Full creation UI via CreateVcardScreen |
 | WiFi | Done | Done | WIFI: format via CreateWiFiScreen |
+| Calendar Event | Done | Done | CalendarEvent.kt + CreateCalendarScreen.kt |
+| Location | Done | Done | GeoLocation.kt + CreateLocationScreen.kt |
+| MeCard | Done | Done | MeCard.kt + CreateMeCardScreen.kt |
 
 ### Protocol Prefixes
 - `tel:` - Phone numbers
@@ -90,6 +93,9 @@ QrEveryWhere/
 - `sms:` / `smsto:` - SMS messages
 - `WIFI:T:...;S:...;P:...;;` - WiFi credentials
 - `BEGIN:VCARD ... END:VCARD` - Contact cards
+- `BEGIN:VCALENDAR ... END:VCALENDAR` - Calendar events (VEVENT)
+- `geo:lat,lon` - Geographic location
+- `MECARD:N:...;TEL:...;;` - MeCard contacts
 
 ## Key Files
 
@@ -113,6 +119,23 @@ QrEveryWhere/
 - `shared/src/commonMain/kotlin/.../presentation/screens/CreateEmailScreen.kt` - Email
 - `shared/src/commonMain/kotlin/.../presentation/screens/CreateWiFiScreen.kt` - WiFi
 - `shared/src/commonMain/kotlin/.../presentation/screens/CreateVcardScreen.kt` - vCard
+- `shared/src/commonMain/kotlin/.../presentation/screens/CreateCalendarScreen.kt` - Calendar Event
+- `shared/src/commonMain/kotlin/.../presentation/screens/CreateLocationScreen.kt` - Location
+- `shared/src/commonMain/kotlin/.../presentation/screens/CreateMeCardScreen.kt` - MeCard
+- `shared/src/commonMain/kotlin/.../presentation/screens/SettingsScreen.kt` - Theme settings
+
+### QR Type Models (Phase 6)
+- `shared/src/commonMain/kotlin/.../domain/model/CalendarEvent.kt` - VEVENT parsing/generation
+- `shared/src/commonMain/kotlin/.../domain/model/GeoLocation.kt` - geo: URI parsing/generation
+- `shared/src/commonMain/kotlin/.../domain/model/MeCard.kt` - MECARD parsing/generation
+- `shared/src/commonMain/kotlin/.../domain/model/WifiCredentials.kt` - WiFi parsing/generation
+
+### Security & Utilities
+- `shared/src/commonMain/kotlin/.../domain/usecase/UrlSafetyChecker.kt` - Malicious URL detection
+- `shared/src/commonMain/kotlin/.../utils/ErrorHandler.kt` - Centralized error handling
+
+### Platform-Specific Features
+- `androidApp/src/main/java/.../widget/QrWidgetProvider.kt` - Android home screen widget
 
 ### App Entry Points
 - `androidApp/src/main/java/.../MainActivity.kt` - Android
@@ -226,6 +249,9 @@ adb -d logcat | grep -i "AndroidRuntime\|FATAL"
 | User Preferences | ✅ | ✅ | ✅ | ✅ |
 | Image Saving | ✅ | ✅ | ✅ | ✅ |
 | Share Sheet | ⏳ | ⏳ | Clipboard | ❌ |
+| Dark Mode/Theming | ✅ | ✅ | ✅ | ✅ |
+| Home Screen Widget | ✅ | ❌ | N/A | N/A |
+| URL Safety Check | ✅ | ✅ | ✅ | ✅ |
 
 ## Missing Implementations & Improvements
 
@@ -233,20 +259,21 @@ adb -d logcat | grep -i "AndroidRuntime\|FATAL"
 1. **Desktop Live Camera** - Currently shows stub message; needs webcam integration (OpenCV or similar)
 2. **iOS Share Sheet** - Uses clipboard fallback; needs UIActivityViewController implementation
 3. **SMS Creation UI** - Fully implemented in CreateTextScreen.kt but card hidden in CreateScreen.kt:85-90; just uncomment to enable
-4. **Web QR Scanning** - webApp only generates QR codes; scanning not implemented
+4. **Activate CI/CD** - Templates exist in ci/ directory but not copied to .github/workflows/
 
 ### Medium Priority
-1. **Web Database/History** - webApp is stateless; could add IndexedDB for history
-2. **Android/iOS Share Sheet Improvements** - Full native share sheet vs clipboard fallback
-3. **Batch QR Generation** - Generate multiple QR codes at once
-4. **QR Code Customization** - Colors, logos, error correction levels
+1. **Web QR Scanning** - webApp only generates QR codes; scanning not implemented
+2. **Web Database/History** - webApp is stateless; could add IndexedDB for history
+3. **History Search/Filter** - Search through scanned/created QR codes
+4. **iOS Home Screen Widget** - Android widget exists, iOS WidgetKit not implemented
+5. **Crash Reporting** - Firebase Crashlytics or Sentry not integrated
 
 ### Low Priority / Future Enhancements
 1. **Web Integration with Shared Module** - Currently webApp is standalone due to Napier/Navigation conflicts
 2. **vCard Photo Support** - Add photo field to contact QR codes
 3. **WiFi QR Import** - Auto-connect to WiFi from scanned QR (platform-specific)
-4. **Calendar Event QR** - VEVENT format support
-5. **Location QR** - geo: URI format support
+4. **Wear OS Companion** - Display QR codes on smartwatch
+5. **macOS Menu Bar App** - Quick access from menu bar
 
 ### Technical Debt
 1. **qr_repository module** - Legacy module; functionality merged into shared
@@ -258,70 +285,97 @@ adb -d logcat | grep -i "AndroidRuntime\|FATAL"
 - webApp added in commit 4e69c05 (Feb 5, 2026)
 - Desktop platform completed in commit 5a7dc2e (Feb 5, 2026)
 - WiFi/vCard creation screens added in commit 5a7dc2e
+- Phase 1 (tests + error handling) added in commit cac554a
+- Phase 2 (Settings screen) added in commit 2aa517f
+- Phase 3 (security features) added in commit 51eb747
+- Phase 4 (Android widget) added in commit b9c9328
+- Phase 5 (CI templates + Fastlane) added in commits 19bedf7, d62be2e
+- Phase 6 (QR type models: CalendarEvent, GeoLocation, MeCard) added in commit 283bb9f
+
+### Current Work (feature/phase6-new-qr-types)
+**Uncommitted changes:**
+- CalendarEvent.kt - minor refinements
+- GeoLocation.kt - minor refinements
+- Main.ios.kt - adjustments
+- NEW: CreateCalendarScreen.kt - Full calendar event creation UI
+- NEW: CreateLocationScreen.kt - Full location creation UI
+- NEW: CreateMeCardScreen.kt - Full MeCard creation UI
+- Updated: CreateScreen.kt - Added navigation cards for new types
+- Updated: AppNavHost.kt - Added routes for new screens
+- Updated: Screen.kt - Added route definitions
+- Updated: strings.xml - Added all required strings
+
+**Next Steps:**
+1. ~~Create UI screens for Calendar, Location, MeCard QR creation~~ ✅ DONE
+2. ~~Wire new screens into CreateScreen.kt navigation~~ ✅ DONE
+3. Activate CI/CD by copying templates to .github/workflows/
+4. Test new screens on all platforms
 
 ---
 
 ## Roadmap
 
-### Phase 1: Architecture & Code Quality
-| Feature | Priority | Description |
-|---------|----------|-------------|
-| Unit Tests | High | Test coverage for shared module (QR generation, parsing, repository) |
-| UI Tests | High | Compose UI tests for critical flows (scan, create, history) |
-| Error Handling | High | Centralized error handling with user-friendly messages |
-| Offline-First | Medium | Queue operations when offline, sync when back online |
+### Phase 1: Architecture & Code Quality ✅ PARTIAL
+| Feature | Status | Description |
+|---------|--------|-------------|
+| Unit Tests | ✅ Done | Tests: QrItemTest, MainViewModelTest, RoomQrRepositoryTest, ErrorHandlerTest, UrlSafetyCheckerTest, WifiCredentialsTest, CalendarEventTest, GeoLocationTest, MeCardTest |
+| UI Tests | ❌ Pending | Compose UI tests for critical flows (scan, create, history) |
+| Error Handling | ✅ Done | ErrorHandler.kt with user-friendly messages, error categorization |
+| Offline-First | ❌ Pending | Queue operations when offline, sync when back online |
 
-### Phase 2: UX Improvements
-| Feature | Priority | Description |
-|---------|----------|-------------|
-| Dark Mode | High | Follow system theme preference across all platforms |
-| Haptic Feedback | Medium | Vibrate on successful QR scan (Android/iOS) |
-| QR Preview Animation | Low | Animate QR code generation |
-| History Search/Filter | High | Search through scanned/created QR codes |
-| Favorites/Pinning | Medium | Pin frequently used QR codes |
-| QR Categories | Medium | Organize history by type (URL, WiFi, Contact, etc.) |
-| Bulk Delete | Medium | Select multiple history items for deletion |
-| Undo Delete | Medium | Snackbar with undo option after deleting |
+### Phase 2: UX Improvements ✅ PARTIAL
+| Feature | Status | Description |
+|---------|--------|-------------|
+| Dark Mode | ✅ Done | SettingsScreen.kt with ThemePreference (System/Light/Dark) |
+| Haptic Feedback | ❌ Pending | Vibrate on successful QR scan (Android/iOS) |
+| QR Preview Animation | ❌ Pending | Animate QR code generation |
+| History Search/Filter | ❌ Pending | Search through scanned/created QR codes |
+| Favorites/Pinning | ❌ Pending | Pin frequently used QR codes |
+| QR Categories | ❌ Pending | Organize history by type (URL, WiFi, Contact, etc.) |
+| Bulk Delete | ❌ Pending | Select multiple history items for deletion |
+| Undo Delete | ❌ Pending | Snackbar with undo option after deleting |
 
-### Phase 3: Security
-| Feature | Priority | Description |
-|---------|----------|-------------|
-| Malicious URL Detection | High | Warn users before opening suspicious URLs from scanned QR |
-| WiFi Password Masking | Medium | Hide password by default when displaying scanned WiFi QR |
+### Phase 3: Security ✅ COMPLETE
+| Feature | Status | Description |
+|---------|--------|-------------|
+| Malicious URL Detection | ✅ Done | UrlSafetyChecker.kt - phishing detection, dangerous extensions, URL shortener warnings |
+| WiFi Password Masking | ✅ Done | WifiCredentials.getMaskedPassword() hides passwords by default |
 
-### Phase 4: Platform-Specific Enhancements
-| Feature | Platform | Description |
-|---------|----------|-------------|
-| Home Screen Widget | Android | Quick scan or show saved QR from home screen |
-| Home Screen Widget | iOS | WidgetKit implementation |
-| App Shortcuts | Android | Shortcuts for "New Scan" and "Create QR" |
-| Wear OS Companion | Android | Display QR codes on smartwatch |
-| Menu Bar App | macOS | Quick access from menu bar |
+### Phase 4: Platform-Specific Enhancements ✅ PARTIAL
+| Feature | Status | Description |
+|---------|--------|-------------|
+| Home Screen Widget | ✅ Android | QrWidgetProvider.kt - shows recent QR, tap to open detail |
+| Home Screen Widget | ❌ iOS | WidgetKit implementation pending |
+| App Shortcuts | ❌ Pending | Shortcuts for "New Scan" and "Create QR" |
+| Wear OS Companion | ❌ Pending | Display QR codes on smartwatch |
+| Menu Bar App | ❌ Pending | macOS quick access from menu bar |
 
-### Phase 5: Distribution & DevOps
-| Feature | Priority | Description |
-|---------|----------|-------------|
-| CI/CD Pipeline | High | GitHub Actions for automated builds and testing |
-| Fastlane | Medium | Automated iOS/Android store deployment |
-| Crash Reporting | High | Firebase Crashlytics or Sentry integration |
-| Analytics | Medium | Track feature usage to prioritize improvements |
+### Phase 5: Distribution & DevOps ✅ PARTIAL
+| Feature | Status | Description |
+|---------|--------|-------------|
+| CI/CD Pipeline | ⏳ Templates | ci/build.yml.template and ci/release.yml.template exist, need to copy to .github/workflows/ |
+| Fastlane | ✅ Done | androidApp/fastlane/ and iosApp/fastlane/ configured |
+| Crash Reporting | ❌ Pending | Firebase Crashlytics or Sentry not integrated |
+| Analytics | ❌ Pending | Track feature usage to prioritize improvements |
 
-### Phase 6: New QR Types
-| Type | Format | Description |
-|------|--------|-------------|
-| Calendar Event | VEVENT | Create meeting/event QR codes |
-| Location | geo: | Share GPS coordinates |
-| App Store Links | URL | Deep links to app stores |
-| PayPal/Venmo | URL | Payment request QR codes |
-| Bitcoin/Crypto | bitcoin: | Wallet address QR codes |
-| MeCard | MECARD: | Alternative contact format (simpler than vCard) |
+### Phase 6: New QR Types ✅ MOSTLY COMPLETE
+| Type | Model | Creation UI | Detection | Notes |
+|------|-------|-------------|-----------|-------|
+| Calendar Event | ✅ CalendarEvent.kt | ✅ CreateCalendarScreen.kt | ✅ Done | VEVENT format with full UI |
+| Location | ✅ GeoLocation.kt | ✅ CreateLocationScreen.kt | ✅ Done | geo: URI with full UI |
+| MeCard | ✅ MeCard.kt | ✅ CreateMeCardScreen.kt | ✅ Done | MECARD: format with full UI |
+| App Store Links | ❌ N/A | ❌ Pending | ❌ N/A | Deep links to app stores |
+| PayPal/Venmo | ❌ N/A | ❌ Pending | ❌ N/A | Payment request QR codes |
+| Bitcoin/Crypto | ❌ N/A | ❌ Pending | ❌ N/A | Wallet address QR codes |
+
+**Note:** Calendar, Location, and MeCard are now fully implemented with data models, detection/parsing, and creation UIs.
 
 ### Phase 7: Performance (Future)
-| Feature | Priority | Description |
-|---------|----------|-------------|
-| QR Generation Caching | Medium | Cache generated QR images to avoid regeneration |
-| Lazy Loading History | Medium | Paginate history list for large datasets |
-| Image Compression | Low | Compress saved QR images to reduce storage |
+| Feature | Status | Description |
+|---------|--------|-------------|
+| QR Generation Caching | ❌ Pending | Cache generated QR images to avoid regeneration |
+| Lazy Loading History | ❌ Pending | Paginate history list for large datasets |
+| Image Compression | ❌ Pending | Compress saved QR images to reduce storage |
 
 ---
 

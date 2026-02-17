@@ -24,6 +24,9 @@
     <string name="title_email_qr">Email QR Code</string>
     <string name="title_contact_qr">Contact QR Code</string>
     <string name="title_wifi_qr">WiFi QR Code</string>
+    <string name="title_calendar_qr">Calendar Event QR Code</string>
+    <string name="title_location_qr">Location QR Code</string>
+    <string name="title_mecard_qr">MeCard QR Code</string>
 
     <!-- Create QR Type Descriptions -->
     <string name="desc_text_qr">Create a QR code with any text content</string>
@@ -33,6 +36,9 @@
     <string name="desc_email_qr">Create a QR code with email information</string>
     <string name="desc_contact_qr">Create a QR code with contact information (vCard)</string>
     <string name="desc_wifi_qr">Create a QR code with WiFi network credentials</string>
+    <string name="desc_calendar_qr">Create a QR code with calendar event (VEVENT)</string>
+    <string name="desc_location_qr">Create a QR code with GPS coordinates</string>
+    <string name="desc_mecard_qr">Create a QR code with contact (simple format)</string>
 
     <!-- Create Screen -->
     <string name="create_title">Create QR Code</string>
@@ -97,6 +103,46 @@
     <string name="security_wep">WEP</string>
     <string name="security_open">Open (No password)</string>
 
+    <!-- Calendar Event Labels -->
+    <string name="label_event_title">Event Title</string>
+    <string name="label_all_day_event">All Day Event</string>
+    <string name="label_start_date">Start Date</string>
+    <string name="label_start_time">Start Time</string>
+    <string name="label_end_date">End Date</string>
+    <string name="label_end_time">End Time</string>
+    <string name="label_event_location">Location (Optional)</string>
+    <string name="label_event_description">Description (Optional)</string>
+    <!-- Calendar Event Placeholders -->
+    <string name="placeholder_event_title">Team Meeting</string>
+    <string name="placeholder_date">YYYY-MM-DD</string>
+    <string name="placeholder_time">HH:MM</string>
+    <string name="placeholder_event_location">Conference Room A</string>
+    <string name="placeholder_event_description">Discuss project updates</string>
+    <!-- Calendar Event Hints -->
+    <string name="hint_date_format">Format: YYYY-MM-DD (e.g., 2024-03-15)</string>
+    <string name="hint_time_format">Format: HH:MM (e.g., 14:30)</string>
+
+    <!-- Location Labels -->
+    <string name="label_latitude">Latitude</string>
+    <string name="label_longitude">Longitude</string>
+    <string name="label_location_label">Label (Optional)</string>
+    <!-- Location Placeholders -->
+    <string name="placeholder_latitude">37.7749</string>
+    <string name="placeholder_longitude">-122.4194</string>
+    <string name="placeholder_location_label">San Francisco</string>
+    <!-- Location Hints -->
+    <string name="hint_latitude">Range: -90 to 90</string>
+    <string name="hint_longitude">Range: -180 to 180</string>
+
+    <!-- MeCard Labels -->
+    <string name="label_mecard_name">Full Name</string>
+    <string name="label_mecard_address">Address (Optional)</string>
+    <string name="label_mecard_note">Note (Optional)</string>
+    <!-- MeCard Placeholders -->
+    <string name="placeholder_mecard_name">John Doe</string>
+    <string name="placeholder_mecard_address">123 Main St, City</string>
+    <string name="placeholder_mecard_note">Met at conference</string>
+
     <!-- Field Hints -->
     <string name="hint_url">The URL should start with http:// or https://</string>
     <string name="hint_phone">Include country code (e.g., +1 for USA)</string>
@@ -110,6 +156,9 @@
     <string name="instruction_email">Enter email details to encode in the QR code</string>
     <string name="instruction_contact">Enter contact information to encode in the QR code</string>
     <string name="instruction_wifi">Enter WiFi network details to encode in the QR code</string>
+    <string name="instruction_calendar">Enter event details to encode in the QR code</string>
+    <string name="instruction_location">Enter coordinates to encode in the QR code</string>
+    <string name="instruction_mecard">Enter contact details to encode in the QR code</string>
 
     <!-- Validation Errors -->
     <string name="error_invalid_url">Please enter a valid URL</string>
@@ -123,6 +172,16 @@
     <string name="error_create_qr">Error creating QR code: %1$s</string>
     <string name="error_empty_name">Please enter at least a first or last name</string>
     <string name="error_empty_ssid">Please enter the network name (SSID)</string>
+    <!-- Calendar Event Errors -->
+    <string name="error_empty_event_title">Please enter an event title</string>
+    <string name="error_invalid_date">Please enter a valid date (YYYY-MM-DD)</string>
+    <!-- Location Errors -->
+    <string name="error_empty_latitude">Please enter a latitude</string>
+    <string name="error_empty_longitude">Please enter a longitude</string>
+    <string name="error_invalid_latitude">Latitude must be between -90 and 90</string>
+    <string name="error_invalid_longitude">Longitude must be between -180 and 180</string>
+    <!-- MeCard Errors -->
+    <string name="error_empty_mecard_name">Please enter a name</string>
 
     <!-- History Screen -->
     <string name="history_empty">No QR codes yet.\nScan or create one to get started!</string>

@@ -18,6 +18,9 @@ sealed class Screen(val route: String) {
     object CreateEmail : Screen("create/email")
     object CreateVcard : Screen("create/vcard")
     object CreateWiFi : Screen("create/wifi")
+    object CreateCalendar : Screen("create/calendar")
+    object CreateLocation : Screen("create/location")
+    object CreateMeCard : Screen("create/mecard")
     object Fullscreen : Screen("fullscreen/{itemId}") {
         fun createRoute(itemId: Int) = "fullscreen/$itemId"
     }

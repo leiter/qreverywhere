@@ -17,19 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
 import qreverywhere.shared.generated.resources.Res
-import qreverywhere.shared.generated.resources.create_subtitle
-import qreverywhere.shared.generated.resources.title_text_qr
-import qreverywhere.shared.generated.resources.desc_text_qr
-import qreverywhere.shared.generated.resources.title_url_qr
-import qreverywhere.shared.generated.resources.desc_url_qr
-import qreverywhere.shared.generated.resources.title_phone_qr
-import qreverywhere.shared.generated.resources.desc_phone_qr
-import qreverywhere.shared.generated.resources.title_email_qr
-import qreverywhere.shared.generated.resources.desc_email_qr
-import qreverywhere.shared.generated.resources.title_contact_qr
-import qreverywhere.shared.generated.resources.desc_contact_qr
-import qreverywhere.shared.generated.resources.title_wifi_qr
-import qreverywhere.shared.generated.resources.desc_wifi_qr
+import qreverywhere.shared.generated.resources.*
 
 /**
  * Create Screen for Compose Multiplatform
@@ -45,7 +33,10 @@ fun CreateScreen(
     onSmsQrClick: () -> Unit = {},
     onEmailQrClick: () -> Unit = {},
     onContactQrClick: () -> Unit = {},
-    onWiFiQrClick: () -> Unit = {}
+    onWiFiQrClick: () -> Unit = {},
+    onCalendarQrClick: () -> Unit = {},
+    onLocationQrClick: () -> Unit = {},
+    onMeCardQrClick: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier
@@ -108,6 +99,27 @@ fun CreateScreen(
             title = stringResource(Res.string.title_wifi_qr),
             description = stringResource(Res.string.desc_wifi_qr),
             onClick = onWiFiQrClick
+        )
+
+        // Calendar Event QR Code
+        QrTypeCard(
+            title = stringResource(Res.string.title_calendar_qr),
+            description = stringResource(Res.string.desc_calendar_qr),
+            onClick = onCalendarQrClick
+        )
+
+        // Location QR Code
+        QrTypeCard(
+            title = stringResource(Res.string.title_location_qr),
+            description = stringResource(Res.string.desc_location_qr),
+            onClick = onLocationQrClick
+        )
+
+        // MeCard QR Code
+        QrTypeCard(
+            title = stringResource(Res.string.title_mecard_qr),
+            description = stringResource(Res.string.desc_mecard_qr),
+            onClick = onMeCardQrClick
         )
     }
 }

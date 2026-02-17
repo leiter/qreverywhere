@@ -63,7 +63,17 @@ data class GeoLocation(
      */
     private fun formatCoordinate(value: Double): String {
         // Use 6 decimal places (approximately 0.1 meter precision)
-        return String.format("%.6f", value)
+        // Round to 6 decimal places
+        val factor = 1_000_000.0
+        val rounded = kotlin.math.round(value * factor) / factor
+        val str = rounded.toString()
+        // Ensure we have 6 decimal places
+        val parts = str.split(".")
+        return if (parts.size == 2) {
+            "${parts[0]}.${parts[1].padEnd(6, '0').take(6)}"
+        } else {
+            "$str.000000"
+        }
     }
 
     /**

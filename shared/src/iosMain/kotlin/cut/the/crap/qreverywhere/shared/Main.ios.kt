@@ -3,6 +3,7 @@ package cut.the.crap.qreverywhere.shared
 import androidx.compose.runtime.remember
 import androidx.compose.ui.window.ComposeUIViewController
 import cut.the.crap.qreverywhere.shared.di.initKoinIos
+import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
 import cut.the.crap.qreverywhere.shared.presentation.App
 import cut.the.crap.qreverywhere.shared.presentation.theme.QrEveryWhereTheme
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
@@ -21,12 +22,13 @@ fun MainViewController(): UIViewController {
     initKoinIos()
 
     return ComposeUIViewController {
-        val viewModel = remember { IosViewModelProvider().mainViewModel }
+        val provider = remember { IosViewModelProvider() }
 
         // Use the shared theme from commonMain
         QrEveryWhereTheme {
             App(
-                viewModel = viewModel,
+                viewModel = provider.mainViewModel,
+                userPreferences = provider.userPreferences,
                 onShareText = { text ->
                     // iOS sharing handled via native code
                     shareText(text)
@@ -44,6 +46,7 @@ fun MainViewController(): UIViewController {
  */
 private class IosViewModelProvider : KoinComponent {
     val mainViewModel: MainViewModel by inject()
+    val userPreferences: UserPreferences by inject()
 }
 
 /**

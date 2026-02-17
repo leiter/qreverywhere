@@ -7,7 +7,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import cut.the.crap.qreverywhere.shared.domain.usecase.ThemePreference
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
+import cut.the.crap.qreverywhere.shared.presentation.screens.CreateCalendarScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateEmailScreen
+import cut.the.crap.qreverywhere.shared.presentation.screens.CreateLocationScreen
+import cut.the.crap.qreverywhere.shared.presentation.screens.CreateMeCardScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateTextScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateVcardScreen
@@ -129,6 +132,15 @@ fun AppNavHost(
                 },
                 onWiFiQrClick = {
                     navController.navigate(Screen.CreateWiFi.route)
+                },
+                onCalendarQrClick = {
+                    navController.navigate(Screen.CreateCalendar.route)
+                },
+                onLocationQrClick = {
+                    navController.navigate(Screen.CreateLocation.route)
+                },
+                onMeCardQrClick = {
+                    navController.navigate(Screen.CreateMeCard.route)
                 }
             )
         }
@@ -171,6 +183,39 @@ fun AppNavHost(
 
         composable(Screen.CreateWiFi.route) {
             CreateWiFiScreen(
+                viewModel = viewModel,
+                onQrCreated = {
+                    viewModel.detailViewItem.value?.let { item ->
+                        navController.navigate(Screen.Detail.createRoute(item.id))
+                    }
+                }
+            )
+        }
+
+        composable(Screen.CreateCalendar.route) {
+            CreateCalendarScreen(
+                viewModel = viewModel,
+                onQrCreated = {
+                    viewModel.detailViewItem.value?.let { item ->
+                        navController.navigate(Screen.Detail.createRoute(item.id))
+                    }
+                }
+            )
+        }
+
+        composable(Screen.CreateLocation.route) {
+            CreateLocationScreen(
+                viewModel = viewModel,
+                onQrCreated = {
+                    viewModel.detailViewItem.value?.let { item ->
+                        navController.navigate(Screen.Detail.createRoute(item.id))
+                    }
+                }
+            )
+        }
+
+        composable(Screen.CreateMeCard.route) {
+            CreateMeCardScreen(
                 viewModel = viewModel,
                 onQrCreated = {
                     viewModel.detailViewItem.value?.let { item ->
