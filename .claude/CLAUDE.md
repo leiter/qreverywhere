@@ -296,9 +296,9 @@ adb -d logcat | grep -i "AndroidRuntime\|FATAL"
 - **Payment QR** - PayPal and Venmo payment request URLs
 - **Cryptocurrency QR** - Bitcoin and Ethereum wallet addresses
 
-### Technical Debt
-1. **qr_repository module** - Legacy module; functionality merged into shared
-2. **contacts module** - Evaluate if still needed or can be merged
+### Technical Debt (Resolved)
+- ~~**qr_repository module**~~ - Removed: Android now uses shared Room database
+- ~~**contacts module**~~ - Removed: Zero dependencies, functionality available in shared module
 
 ## Session Notes
 - Legacy code was deleted in commit b1d68a6
@@ -326,7 +326,11 @@ adb -d logcat | grep -i "AndroidRuntime\|FATAL"
 - Undo Delete - Snackbar with undo in DetailScreen
 - QR Preview Animation - Scale/fade animation
 - QR Generation Caching - LRU cache in CachingQrCodeGenerator
-- NEW: CreateLocationScreen.kt - Full location creation UI
+
+**Technical Debt Cleanup:**
+- Removed contacts module (unused, zero dependencies)
+- Removed qr_repository module (migrated Android to shared Room database)
+- Removed AndroidQrRepository.kt (no longer needed)
 - NEW: CreateMeCardScreen.kt - Full MeCard creation UI
 - Updated: CreateScreen.kt - Added navigation cards for new types
 - Updated: AppNavHost.kt - Added routes for new screens

@@ -122,9 +122,6 @@ kotlin {
 
                 // Firebase Crashlytics - use direct version since BOM doesn't work in KMP
                 implementation("com.google.firebase:firebase-crashlytics-ktx:19.3.0")
-
-                // Use existing repository
-                implementation(project(":qr_repository"))
             }
         }
 

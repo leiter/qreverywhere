@@ -81,9 +81,6 @@ dependencies {
     implementation(koinBom)
     implementation(libs.bundles.koin)
 
-    // Local modules
-    implementation(project(":qr_repository"))
-
     // Camera
     implementation(libs.bundles.camerax)
 
