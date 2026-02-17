@@ -43,6 +43,11 @@ QrEveryWhere/
 | User Preferences | Done | NSUserDefaults |
 | Image Saving | Done | UIImageWriteToSavedPhotosAlbum |
 | Share Sheet | Done | UIActivityViewController in Main.ios.kt |
+| Home Screen Widget | Ready* | WidgetKit (QrWidget extension) |
+| Firebase Crashlytics | Ready* | Configured in iOSApp.swift |
+| Deep Links | Done | qreverywhere:// URL scheme |
+
+*Requires manual Xcode setup: App Group, Widget target, GoogleService-Info.plist
 
 ### Desktop: Mostly Complete (~85%)
 | Component | Status | Implementation |
@@ -148,6 +153,12 @@ QrEveryWhere/
 
 ### Platform-Specific Features
 - `androidApp/src/main/java/.../widget/QrWidgetProvider.kt` - Android home screen widget
+- `iosApp/iosApp/iOSApp.swift` - iOS app delegate with Firebase + deep links
+- `iosApp/iosApp/WidgetDataStore.swift` - Shared data store for iOS widget
+- `iosApp/iosApp/WidgetBridge.swift` - Kotlin/Swift widget callback bridge
+- `iosApp/QrWidget/QrWidget.swift` - iOS WidgetKit widget implementation
+- `iosApp/QrWidget/QrWidgetBundle.swift` - iOS widget entry point
+- `shared/src/iosMain/kotlin/.../Main.ios.kt` - iOS entry point with widget callbacks
 
 ### App Entry Points
 - `androidApp/src/main/java/.../MainActivity.kt` - Android
@@ -276,8 +287,10 @@ adb -d logcat | grep -i "AndroidRuntime\|FATAL"
 ### Medium Priority
 1. **Web QR Scanning** - webApp only generates QR codes; scanning not implemented
 2. **Web Database/History** - webApp is stateless; could add IndexedDB for history
-3. **iOS Home Screen Widget** - Android widget exists, iOS WidgetKit not implemented
-4. **iOS Firebase Setup** - Add GoogleService-Info.plist for iOS Crashlytics
+
+### Completed Medium Priority Features
+- **iOS Home Screen Widget** - WidgetKit implementation with QrWidget extension (requires Xcode setup)
+- **iOS Firebase Setup** - Code ready, requires GoogleService-Info.plist from Firebase Console
 
 ### Low Priority / Future Enhancements
 1. **Web Integration with Shared Module** - Currently webApp is standalone due to Napier/Navigation conflicts
@@ -326,6 +339,8 @@ adb -d logcat | grep -i "AndroidRuntime\|FATAL"
 - Undo Delete - Snackbar with undo in DetailScreen
 - QR Preview Animation - Scale/fade animation
 - QR Generation Caching - LRU cache in CachingQrCodeGenerator
+- iOS Firebase Setup - iOSApp.swift configured (needs GoogleService-Info.plist)
+- iOS Home Screen Widget - WidgetKit extension created (needs Xcode target setup)
 
 **Technical Debt Cleanup:**
 - Removed contacts module (unused, zero dependencies)
@@ -373,11 +388,12 @@ adb -d logcat | grep -i "AndroidRuntime\|FATAL"
 | Malicious URL Detection | ✅ Done | UrlSafetyChecker.kt - phishing detection, dangerous extensions, URL shortener warnings |
 | WiFi Password Masking | ✅ Done | WifiCredentials.getMaskedPassword() hides passwords by default |
 
-### Phase 4: Platform-Specific Enhancements ✅ PARTIAL
+### Phase 4: Platform-Specific Enhancements ✅ MOSTLY COMPLETE
 | Feature | Status | Description |
 |---------|--------|-------------|
 | Home Screen Widget | ✅ Android | QrWidgetProvider.kt - shows recent QR, tap to open detail |
-| Home Screen Widget | ❌ iOS | WidgetKit implementation pending |
+| Home Screen Widget | ✅ iOS | QrWidget/ extension - requires Xcode target setup + App Group |
+| Firebase iOS | ⏳ Ready | iOSApp.swift configured, needs GoogleService-Info.plist |
 | App Shortcuts | ❌ Pending | Shortcuts for "New Scan" and "Create QR" |
 | Wear OS Companion | ❌ Pending | Display QR codes on smartwatch |
 | Menu Bar App | ❌ Pending | macOS quick access from menu bar |

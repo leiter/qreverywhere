@@ -54,5 +54,18 @@
     <string>Used to save generated QR code images</string>
     <key>CADisableMinimumFrameDurationOnPhone</key>
     <true/>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLName</key>
+            <string>cut.the.crap.qreverywhere</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>qreverywhere</string>
+            </array>
+        </dict>
+    </array>
 </dict>
 </plist>
