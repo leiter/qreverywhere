@@ -1,86 +1,58 @@
 package cut.the.crap.qreverywhere.shared.utils
 
+import com.google.firebase.crashlytics.FirebaseCrashlytics
+
 /**
- * Android implementation of CrashReporter
+ * Android implementation of CrashReporter using Firebase Crashlytics
  *
- * Uses Firebase Crashlytics if available, otherwise logs to Napier
- *
- * To enable Firebase Crashlytics:
+ * Setup requirements:
  * 1. Add google-services.json to androidApp/
- * 2. Add Firebase dependencies to build.gradle.kts
- * 3. Uncomment the Crashlytics implementation below
+ * 2. Firebase dependencies are in build.gradle.kts
+ * 3. Initialize Firebase in Application class (auto-initialized by default)
  */
 actual object CrashReporter {
 
     private var isEnabled = true
 
+    private val crashlytics: FirebaseCrashlytics?
+        get() = try {
+            FirebaseCrashlytics.getInstance()
+        } catch (e: Exception) {
+            // Firebase not initialized
+            null
+        }
+
     actual fun log(message: String) {
         if (!isEnabled) return
 
-        // Firebase Crashlytics implementation (uncomment when Firebase is added)
-        // try {
-        //     FirebaseCrashlytics.getInstance().log(message)
-        // } catch (e: Exception) {
-        //     // Firebase not initialized, fallback to Napier
-        //     Logger.d("CrashReporter") { message }
-        // }
-
-        // Fallback to Napier logging
-        Logger.d("CrashReporter") { message }
+        crashlytics?.log(message) ?: Logger.d("CrashReporter") { message }
     }
 
     actual fun recordException(throwable: Throwable) {
         if (!isEnabled) return
 
-        // Firebase Crashlytics implementation (uncomment when Firebase is added)
-        // try {
-        //     FirebaseCrashlytics.getInstance().recordException(throwable)
-        // } catch (e: Exception) {
-        //     Logger.e("CrashReporter", throwable) { "Non-fatal exception" }
-        // }
-
-        // Fallback to Napier logging
-        Logger.e("CrashReporter", throwable) { "Non-fatal exception recorded" }
+        crashlytics?.recordException(throwable)
+            ?: Logger.e("CrashReporter", throwable) { "Non-fatal exception recorded" }
     }
 
     actual fun setCustomKey(key: String, value: String) {
         if (!isEnabled) return
 
-        // Firebase Crashlytics implementation (uncomment when Firebase is added)
-        // try {
-        //     FirebaseCrashlytics.getInstance().setCustomKey(key, value)
-        // } catch (e: Exception) {
-        //     Logger.d("CrashReporter") { "Custom key: $key = $value" }
-        // }
-
-        // Fallback to Napier logging
-        Logger.d("CrashReporter") { "Custom key: $key = $value" }
+        crashlytics?.setCustomKey(key, value)
+            ?: Logger.d("CrashReporter") { "Custom key: $key = $value" }
     }
 
     actual fun setUserId(userId: String?) {
         if (!isEnabled) return
 
-        // Firebase Crashlytics implementation (uncomment when Firebase is added)
-        // try {
-        //     FirebaseCrashlytics.getInstance().setUserId(userId ?: "")
-        // } catch (e: Exception) {
-        //     Logger.d("CrashReporter") { "User ID: $userId" }
-        // }
-
-        // Fallback to Napier logging
-        Logger.d("CrashReporter") { "User ID set: ${userId ?: "(cleared)"}" }
+        crashlytics?.setUserId(userId ?: "")
+            ?: Logger.d("CrashReporter") { "User ID set: ${userId ?: "(cleared)"}" }
     }
 
     actual fun setCrashlyticsCollectionEnabled(enabled: Boolean) {
         isEnabled = enabled
 
-        // Firebase Crashlytics implementation (uncomment when Firebase is added)
-        // try {
-        //     FirebaseCrashlytics.getInstance().setCrashlyticsCollectionEnabled(enabled)
-        // } catch (e: Exception) {
-        //     Logger.d("CrashReporter") { "Crash collection: $enabled" }
-        // }
-
+        crashlytics?.setCrashlyticsCollectionEnabled(enabled)
         Logger.d("CrashReporter") { "Crash collection ${if (enabled) "enabled" else "disabled"}" }
     }
 }

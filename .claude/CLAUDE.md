@@ -42,7 +42,7 @@ QrEveryWhere/
 | Database | Done | Room + SQLite |
 | User Preferences | Done | NSUserDefaults |
 | Image Saving | Done | UIImageWriteToSavedPhotosAlbum |
-| Share Sheet | Partial | Clipboard fallback only, needs UIActivityViewController |
+| Share Sheet | Done | UIActivityViewController in Main.ios.kt |
 
 ### Desktop: Mostly Complete (~85%)
 | Component | Status | Implementation |
@@ -248,7 +248,7 @@ adb -d logcat | grep -i "AndroidRuntime\|FATAL"
 | Database/History | ✅ | ✅ | ✅ | ❌ |
 | User Preferences | ✅ | ✅ | ✅ | ✅ |
 | Image Saving | ✅ | ✅ | ✅ | ✅ |
-| Share Sheet | ⏳ | ⏳ | Clipboard | ❌ |
+| Share Sheet | ✅ | ✅ | Clipboard | ❌ |
 | Dark Mode/Theming | ✅ | ✅ | ✅ | ✅ |
 | Home Screen Widget | ✅ | ❌ | N/A | N/A |
 | URL Safety Check | ✅ | ✅ | ✅ | ✅ |
@@ -257,16 +257,15 @@ adb -d logcat | grep -i "AndroidRuntime\|FATAL"
 
 ### High Priority
 1. **Desktop Live Camera** - Currently shows stub message; needs webcam integration (OpenCV or similar)
-2. **iOS Share Sheet** - Uses clipboard fallback; needs UIActivityViewController implementation
-3. **SMS Creation UI** - Fully implemented in CreateTextScreen.kt but card hidden in CreateScreen.kt:85-90; just uncomment to enable
-4. **Activate CI/CD** - Templates exist in ci/ directory but not copied to .github/workflows/
+2. **SMS Creation UI** - Fully implemented in CreateTextScreen.kt but card hidden in CreateScreen.kt:85-90; just uncomment to enable
+3. **Activate CI/CD** - Templates exist in ci/ directory but not copied to .github/workflows/
+4. **Add google-services.json** - Required to enable Firebase Crashlytics (download from Firebase Console)
 
 ### Medium Priority
 1. **Web QR Scanning** - webApp only generates QR codes; scanning not implemented
 2. **Web Database/History** - webApp is stateless; could add IndexedDB for history
-3. **History Search/Filter** - Search through scanned/created QR codes
-4. **iOS Home Screen Widget** - Android widget exists, iOS WidgetKit not implemented
-5. **Crash Reporting** - Firebase Crashlytics or Sentry not integrated
+3. **iOS Home Screen Widget** - Android widget exists, iOS WidgetKit not implemented
+4. **iOS Firebase Setup** - Add GoogleService-Info.plist for iOS Crashlytics
 
 ### Low Priority / Future Enhancements
 1. **Web Integration with Shared Module** - Currently webApp is standalone due to Napier/Navigation conflicts
@@ -329,7 +328,7 @@ adb -d logcat | grep -i "AndroidRuntime\|FATAL"
 | Dark Mode | ✅ Done | SettingsScreen.kt with ThemePreference (System/Light/Dark) |
 | Haptic Feedback | ❌ Pending | Vibrate on successful QR scan (Android/iOS) |
 | QR Preview Animation | ❌ Pending | Animate QR code generation |
-| History Search/Filter | ❌ Pending | Search through scanned/created QR codes |
+| History Search/Filter | ✅ Done | Search bar in HistoryScreen filters by content and type |
 | Favorites/Pinning | ❌ Pending | Pin frequently used QR codes |
 | QR Categories | ❌ Pending | Organize history by type (URL, WiFi, Contact, etc.) |
 | Bulk Delete | ❌ Pending | Select multiple history items for deletion |
@@ -355,8 +354,8 @@ adb -d logcat | grep -i "AndroidRuntime\|FATAL"
 |---------|--------|-------------|
 | CI/CD Pipeline | ⏳ Templates | ci/build.yml.template and ci/release.yml.template exist, need to copy to .github/workflows/ |
 | Fastlane | ✅ Done | androidApp/fastlane/ and iosApp/fastlane/ configured |
-| Crash Reporting | ❌ Pending | Firebase Crashlytics or Sentry not integrated |
-| Analytics | ❌ Pending | Track feature usage to prioritize improvements |
+| Crash Reporting | ✅ Done | Firebase Crashlytics integrated (requires google-services.json) |
+| Analytics | ✅ Done | Firebase Analytics integrated (requires google-services.json) |
 
 ### Phase 6: New QR Types ✅ MOSTLY COMPLETE
 | Type | Model | Creation UI | Detection | Notes |

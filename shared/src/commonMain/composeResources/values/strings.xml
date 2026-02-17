@@ -190,6 +190,10 @@
     <string name="history_type_created">Created</string>
     <string name="history_type_from_file">From File</string>
     <string name="history_type_unknown">Unknown</string>
+    <string name="history_search">Search</string>
+    <string name="history_search_placeholder">Search QR codes...</string>
+    <string name="history_clear_search">Clear search</string>
+    <string name="history_no_results">No QR codes match your search</string>
 
     <!-- Detail Screen -->
     <string name="detail_content">Content</string>

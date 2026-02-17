@@ -35,6 +35,14 @@ class MainViewModel(
     private val _historyData = MutableStateFlow<List<QrItem>>(emptyList())
     val historyData: StateFlow<List<QrItem>> = _historyData.asStateFlow()
 
+    // Search query for filtering history
+    private val _searchQuery = MutableStateFlow("")
+    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
+
+    // Filtered history based on search query
+    private val _filteredHistoryData = MutableStateFlow<List<QrItem>>(emptyList())
+    val filteredHistoryData: StateFlow<List<QrItem>> = _filteredHistoryData.asStateFlow()
+
     // State for detail view item
     private val _detailViewItem = MutableStateFlow<QrItem?>(null)
     val detailViewItem: StateFlow<QrItem?> = _detailViewItem.asStateFlow()
@@ -63,7 +71,39 @@ class MainViewModel(
         viewModelScope.launch {
             qrRepository.getQrHistory().collect { items ->
                 _historyData.value = items
+                applySearchFilter(items, _searchQuery.value)
                 Logger.d("MainViewModel") { "Loaded ${items.size} QR items from history" }
+            }
+        }
+    }
+
+    /**
+     * Update search query and filter history
+     */
+    fun updateSearchQuery(query: String) {
+        _searchQuery.value = query
+        applySearchFilter(_historyData.value, query)
+    }
+
+    /**
+     * Clear search query
+     */
+    fun clearSearch() {
+        _searchQuery.value = ""
+        _filteredHistoryData.value = _historyData.value
+    }
+
+    /**
+     * Apply search filter to history items
+     */
+    private fun applySearchFilter(items: List<QrItem>, query: String) {
+        _filteredHistoryData.value = if (query.isBlank()) {
+            items
+        } else {
+            val lowercaseQuery = query.lowercase()
+            items.filter { item ->
+                item.textContent.lowercase().contains(lowercaseQuery) ||
+                item.acquireType.name.lowercase().contains(lowercaseQuery)
             }
         }
     }

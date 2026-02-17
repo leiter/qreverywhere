@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.crashlytics)
 }
 
 android {
@@ -96,6 +98,11 @@ dependencies {
 
     // kotlinx-datetime (for KMP compatibility with shared module)
     implementation(libs.kotlinx.datetime)
+
+    // Firebase (Crash Reporting & Analytics)
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
 
     // Test (using kotlin-test for KMP compatibility)
     testImplementation(libs.kotlin.test)
