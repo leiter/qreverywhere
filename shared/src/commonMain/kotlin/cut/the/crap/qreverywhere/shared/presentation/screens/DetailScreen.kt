@@ -1,5 +1,7 @@
 package cut.the.crap.qreverywhere.shared.presentation.screens
 
+import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,15 +25,28 @@ import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarDuration
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import kotlinx.coroutines.launch
 import cut.the.crap.qreverywhere.shared.presentation.state.State
 import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.shared.utils.toImagePainter
@@ -60,8 +75,38 @@ fun DetailScreen(
 ) {
     val detailItem by viewModel.detailViewItem.collectAsState()
     val detailState by viewModel.detailViewState.collectAsState()
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
 
-    Box(modifier = Modifier.fillMaxSize()) {
+    // Get localized strings for undo snackbar
+    val deleteMessage = stringResource(Res.string.detail_deleted)
+    val undoLabel = stringResource(Res.string.action_undo)
+
+    // QR code preview animation state
+    var animationStarted by remember { mutableStateOf(false) }
+    val animatedScale by animateFloatAsState(
+        targetValue = if (animationStarted) 1f else 0.8f,
+        animationSpec = tween(durationMillis = 300),
+        label = "qrScale"
+    )
+    val animatedAlpha by animateFloatAsState(
+        targetValue = if (animationStarted) 1f else 0f,
+        animationSpec = tween(durationMillis = 300),
+        label = "qrAlpha"
+    )
+
+    // Trigger animation when detail item changes
+    LaunchedEffect(detailItem?.id) {
+        animationStarted = false
+        // Small delay then start animation
+        kotlinx.coroutines.delay(50)
+        animationStarted = true
+    }
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { paddingValues ->
+        Box(modifier = Modifier.fillMaxSize().padding(paddingValues)) {
         when (val state = detailState) {
             is State.Loading -> {
                 CircularProgressIndicator(
@@ -89,13 +134,15 @@ fun DetailScreen(
                             .padding(16.dp),
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        // QR Code Image (clickable to view fullscreen)
+                        // QR Code Image (clickable to view fullscreen) with animation
                         qrItem.imageData?.let { imageBytes ->
                             imageBytes.toImagePainter()?.let { painter ->
                                 Card(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .padding(vertical = 16.dp),
+                                        .padding(vertical = 16.dp)
+                                        .scale(animatedScale)
+                                        .alpha(animatedAlpha),
                                     elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
                                     onClick = onFullscreenClick
                                 ) {
@@ -192,6 +239,22 @@ fun DetailScreen(
                                 onClick = {
                                     viewModel.deleteCurrentDetailView()
                                     onNavigateBack()
+                                    // Show undo snackbar
+                                    scope.launch {
+                                        val result = snackbarHostState.showSnackbar(
+                                            message = deleteMessage,
+                                            actionLabel = undoLabel,
+                                            duration = SnackbarDuration.Long
+                                        )
+                                        when (result) {
+                                            SnackbarResult.ActionPerformed -> {
+                                                viewModel.undoDelete()
+                                            }
+                                            SnackbarResult.Dismissed -> {
+                                                viewModel.clearLastDeletedItem()
+                                            }
+                                        }
+                                    }
                                 },
                                 modifier = Modifier.fillMaxWidth(),
                                 containerColor = MaterialTheme.colorScheme.errorContainer,
@@ -212,6 +275,7 @@ fun DetailScreen(
                     )
                 }
             }
+        }
         }
     }
 }

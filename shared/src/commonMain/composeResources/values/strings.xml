@@ -27,6 +27,9 @@
     <string name="title_calendar_qr">Calendar Event QR Code</string>
     <string name="title_location_qr">Location QR Code</string>
     <string name="title_mecard_qr">MeCard QR Code</string>
+    <string name="title_appstore_qr">App Store Link QR Code</string>
+    <string name="title_payment_qr">Payment QR Code</string>
+    <string name="title_crypto_qr">Cryptocurrency QR Code</string>
 
     <!-- Create QR Type Descriptions -->
     <string name="desc_text_qr">Create a QR code with any text content</string>
@@ -39,6 +42,9 @@
     <string name="desc_calendar_qr">Create a QR code with calendar event (VEVENT)</string>
     <string name="desc_location_qr">Create a QR code with GPS coordinates</string>
     <string name="desc_mecard_qr">Create a QR code with contact (simple format)</string>
+    <string name="desc_appstore_qr">Create a QR code linking to an app store</string>
+    <string name="desc_payment_qr">Create a QR code for PayPal or Venmo payments</string>
+    <string name="desc_crypto_qr">Create a QR code for Bitcoin or Ethereum wallet</string>
 
     <!-- Create Screen -->
     <string name="create_title">Create QR Code</string>
@@ -143,6 +149,48 @@
     <string name="placeholder_mecard_address">123 Main St, City</string>
     <string name="placeholder_mecard_note">Met at conference</string>
 
+    <!-- App Store Labels -->
+    <string name="label_select_store">Select App Store</string>
+    <string name="label_apple_app_id">Apple App ID</string>
+    <string name="label_google_package_name">Google Play Package Name</string>
+    <string name="store_apple">Apple App Store</string>
+    <string name="store_google">Google Play Store</string>
+    <!-- App Store Placeholders -->
+    <string name="placeholder_apple_app_id">1234567890</string>
+    <string name="placeholder_google_package_name">com.example.app</string>
+    <!-- App Store Hints -->
+    <string name="hint_apple_app_id">Numeric ID from App Store URL</string>
+    <string name="hint_google_package_name">Package name from Play Store URL</string>
+
+    <!-- Payment Labels -->
+    <string name="label_select_provider">Select Payment Provider</string>
+    <string name="label_payment_username">Username</string>
+    <string name="label_payment_amount">Amount (Optional)</string>
+    <string name="label_payment_note">Note (Optional)</string>
+    <string name="provider_paypal">PayPal</string>
+    <string name="provider_venmo">Venmo</string>
+    <!-- Payment Placeholders -->
+    <string name="placeholder_paypal_username">yourpaypalusername</string>
+    <string name="placeholder_venmo_username">yourvenmo</string>
+    <string name="placeholder_payment_amount">10.00</string>
+    <string name="placeholder_payment_note">Payment for lunch</string>
+
+    <!-- Crypto Labels -->
+    <string name="label_select_crypto">Select Cryptocurrency</string>
+    <string name="label_crypto_address">Wallet Address</string>
+    <string name="label_crypto_amount_btc">Amount in BTC (Optional)</string>
+    <string name="label_crypto_amount_eth">Amount in ETH (Optional)</string>
+    <string name="label_crypto_label">Label (Optional)</string>
+    <string name="label_crypto_message">Message (Optional)</string>
+    <string name="crypto_bitcoin">Bitcoin (BTC)</string>
+    <string name="crypto_ethereum">Ethereum (ETH)</string>
+    <!-- Crypto Placeholders -->
+    <string name="placeholder_bitcoin_address">bc1q...</string>
+    <string name="placeholder_ethereum_address">0x...</string>
+    <string name="placeholder_crypto_amount">0.001</string>
+    <string name="placeholder_crypto_label">Donation</string>
+    <string name="placeholder_crypto_message">Thank you for your support</string>
+
     <!-- Field Hints -->
     <string name="hint_url">The URL should start with http:// or https://</string>
     <string name="hint_phone">Include country code (e.g., +1 for USA)</string>
@@ -159,6 +207,9 @@
     <string name="instruction_calendar">Enter event details to encode in the QR code</string>
     <string name="instruction_location">Enter coordinates to encode in the QR code</string>
     <string name="instruction_mecard">Enter contact details to encode in the QR code</string>
+    <string name="instruction_app_store">Enter app store details to create a download link</string>
+    <string name="instruction_payment">Enter payment details to create a payment request</string>
+    <string name="instruction_crypto">Enter wallet details to create a cryptocurrency address QR</string>
 
     <!-- Validation Errors -->
     <string name="error_invalid_url">Please enter a valid URL</string>
@@ -182,6 +233,12 @@
     <string name="error_invalid_longitude">Longitude must be between -180 and 180</string>
     <!-- MeCard Errors -->
     <string name="error_empty_mecard_name">Please enter a name</string>
+    <!-- App Store Errors -->
+    <string name="error_empty_app_id">Please enter an app ID or package name</string>
+    <!-- Payment Errors -->
+    <string name="error_empty_payment_username">Please enter a username</string>
+    <!-- Crypto Errors -->
+    <string name="error_empty_crypto_address">Please enter a wallet address</string>
 
     <!-- History Screen -->
     <string name="history_empty">No QR codes yet.\nScan or create one to get started!</string>
@@ -245,6 +302,10 @@
     <!-- Common Actions -->
     <string name="action_dismiss">Dismiss</string>
     <string name="action_ok">OK</string>
+    <string name="action_undo">Undo</string>
+
+    <!-- Delete Feedback -->
+    <string name="detail_deleted">QR code deleted</string>
 
     <!-- Content Descriptions (for accessibility) -->
     <string name="cd_qr_preview">QR Code Preview</string>

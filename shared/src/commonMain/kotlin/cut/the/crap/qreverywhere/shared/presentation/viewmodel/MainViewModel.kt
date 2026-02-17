@@ -63,6 +63,10 @@ class MainViewModel(
     private val _clipboardContent = MutableStateFlow<String?>(null)
     val clipboardContent: StateFlow<String?> = _clipboardContent.asStateFlow()
 
+    // Undo delete support - track last deleted item
+    private val _lastDeletedItem = MutableStateFlow<QrItem?>(null)
+    val lastDeletedItem: StateFlow<QrItem?> = _lastDeletedItem.asStateFlow()
+
     init {
         loadHistory()
     }
@@ -228,18 +232,47 @@ class MainViewModel(
 
     /**
      * Delete a QR item from the repository
+     * Stores the item for potential undo
      */
     fun deleteQrItem(item: QrItem) {
         viewModelScope.launch {
             try {
+                // Store for undo before deleting
+                _lastDeletedItem.value = item
                 qrRepository.deleteQrItem(item)
                 Logger.d("MainViewModel") { "Deleted QR item: ${item.id}" }
             } catch (e: Exception) {
+                _lastDeletedItem.value = null
                 val message = ErrorHandler.getDisplayMessage(e)
                 _errorEvent.emit(message)
                 Logger.e("MainViewModel", e) { "Failed to delete QR item" }
             }
         }
+    }
+
+    /**
+     * Restore the last deleted item (undo)
+     */
+    fun undoDelete() {
+        val deletedItem = _lastDeletedItem.value ?: return
+        viewModelScope.launch {
+            try {
+                qrRepository.insertQrItem(deletedItem)
+                _lastDeletedItem.value = null
+                Logger.d("MainViewModel") { "Restored deleted QR item: ${deletedItem.id}" }
+            } catch (e: Exception) {
+                val message = ErrorHandler.getDisplayMessage(e)
+                _errorEvent.emit(message)
+                Logger.e("MainViewModel", e) { "Failed to restore QR item" }
+            }
+        }
+    }
+
+    /**
+     * Clear the last deleted item (when undo window expires)
+     */
+    fun clearLastDeletedItem() {
+        _lastDeletedItem.value = null
     }
 
     /**

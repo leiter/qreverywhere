@@ -2,6 +2,7 @@ package cut.the.crap.qreverywhere.shared.di
 
 import cut.the.crap.qreverywhere.shared.data.AndroidQrRepository
 import cut.the.crap.qreverywhere.shared.domain.repository.QrRepository
+import cut.the.crap.qreverywhere.shared.domain.usecase.CachingQrCodeGenerator
 import cut.the.crap.qreverywhere.shared.domain.usecase.QrCodeGenerator
 import cut.the.crap.qreverywhere.shared.domain.usecase.QrCodeScanner
 import cut.the.crap.qreverywhere.shared.domain.usecase.SaveImageToFileUseCase
@@ -28,8 +29,8 @@ actual fun platformModule(): Module = module {
     // Repository implementation
     single<QrRepository> { AndroidQrRepository(get()) }
 
-    // Platform-specific QR code operations
-    single<QrCodeGenerator> { AndroidQrCodeGenerator() }
+    // Platform-specific QR code operations with caching
+    single<QrCodeGenerator> { CachingQrCodeGenerator(AndroidQrCodeGenerator()) }
     single<QrCodeScanner> { AndroidQrCodeScanner() }
 
     // Save image use case

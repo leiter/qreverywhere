@@ -7,10 +7,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import cut.the.crap.qreverywhere.shared.domain.usecase.ThemePreference
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
+import cut.the.crap.qreverywhere.shared.presentation.screens.CreateAppStoreLinkScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateCalendarScreen
+import cut.the.crap.qreverywhere.shared.presentation.screens.CreateCryptoScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateEmailScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateLocationScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateMeCardScreen
+import cut.the.crap.qreverywhere.shared.presentation.screens.CreatePaymentScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateTextScreen
 import cut.the.crap.qreverywhere.shared.presentation.screens.CreateVcardScreen
@@ -141,6 +144,15 @@ fun AppNavHost(
                 },
                 onMeCardQrClick = {
                     navController.navigate(Screen.CreateMeCard.route)
+                },
+                onAppStoreLinkQrClick = {
+                    navController.navigate(Screen.CreateAppStoreLink.route)
+                },
+                onPaymentQrClick = {
+                    navController.navigate(Screen.CreatePayment.route)
+                },
+                onCryptoQrClick = {
+                    navController.navigate(Screen.CreateCrypto.route)
                 }
             )
         }
@@ -216,6 +228,39 @@ fun AppNavHost(
 
         composable(Screen.CreateMeCard.route) {
             CreateMeCardScreen(
+                viewModel = viewModel,
+                onQrCreated = {
+                    viewModel.detailViewItem.value?.let { item ->
+                        navController.navigate(Screen.Detail.createRoute(item.id))
+                    }
+                }
+            )
+        }
+
+        composable(Screen.CreateAppStoreLink.route) {
+            CreateAppStoreLinkScreen(
+                viewModel = viewModel,
+                onQrCreated = {
+                    viewModel.detailViewItem.value?.let { item ->
+                        navController.navigate(Screen.Detail.createRoute(item.id))
+                    }
+                }
+            )
+        }
+
+        composable(Screen.CreatePayment.route) {
+            CreatePaymentScreen(
+                viewModel = viewModel,
+                onQrCreated = {
+                    viewModel.detailViewItem.value?.let { item ->
+                        navController.navigate(Screen.Detail.createRoute(item.id))
+                    }
+                }
+            )
+        }
+
+        composable(Screen.CreateCrypto.route) {
+            CreateCryptoScreen(
                 viewModel = viewModel,
                 onQrCreated = {
                     viewModel.detailViewItem.value?.let { item ->

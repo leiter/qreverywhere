@@ -85,6 +85,9 @@ QrEveryWhere/
 | Calendar Event | Done | Done | CalendarEvent.kt + CreateCalendarScreen.kt |
 | Location | Done | Done | GeoLocation.kt + CreateLocationScreen.kt |
 | MeCard | Done | Done | MeCard.kt + CreateMeCardScreen.kt |
+| App Store Link | Done | Done | CreateAppStoreLinkScreen.kt (Apple/Google) |
+| Payment | Done | Done | CreatePaymentScreen.kt (PayPal/Venmo) |
+| Cryptocurrency | Done | Done | CreateCryptoScreen.kt (Bitcoin/Ethereum) |
 
 ### Protocol Prefixes
 - `tel:` - Phone numbers
@@ -96,6 +99,12 @@ QrEveryWhere/
 - `BEGIN:VCALENDAR ... END:VCALENDAR` - Calendar events (VEVENT)
 - `geo:lat,lon` - Geographic location
 - `MECARD:N:...;TEL:...;;` - MeCard contacts
+- `https://apps.apple.com/app/id...` - iOS App Store links
+- `https://play.google.com/store/apps/details?id=...` - Google Play Store links
+- `https://paypal.me/...` - PayPal payment links
+- `https://venmo.com/...` - Venmo payment links
+- `bitcoin:address?amount=...` - Bitcoin wallet addresses
+- `ethereum:address?value=...` - Ethereum wallet addresses
 
 ## Key Files
 
@@ -122,6 +131,9 @@ QrEveryWhere/
 - `shared/src/commonMain/kotlin/.../presentation/screens/CreateCalendarScreen.kt` - Calendar Event
 - `shared/src/commonMain/kotlin/.../presentation/screens/CreateLocationScreen.kt` - Location
 - `shared/src/commonMain/kotlin/.../presentation/screens/CreateMeCardScreen.kt` - MeCard
+- `shared/src/commonMain/kotlin/.../presentation/screens/CreateAppStoreLinkScreen.kt` - App Store Links
+- `shared/src/commonMain/kotlin/.../presentation/screens/CreatePaymentScreen.kt` - PayPal/Venmo
+- `shared/src/commonMain/kotlin/.../presentation/screens/CreateCryptoScreen.kt` - Bitcoin/Ethereum
 - `shared/src/commonMain/kotlin/.../presentation/screens/SettingsScreen.kt` - Theme settings
 
 ### QR Type Models (Phase 6)
@@ -273,6 +285,16 @@ adb -d logcat | grep -i "AndroidRuntime\|FATAL"
 3. **WiFi QR Import** - Auto-connect to WiFi from scanned QR (platform-specific)
 4. **Wear OS Companion** - Display QR codes on smartwatch
 5. **macOS Menu Bar App** - Quick access from menu bar
+6. **Lazy Loading History** - Paginate history list for large datasets
+7. **Offline-First** - Queue operations when offline, sync when back online
+
+### Completed Low Priority Features
+- **Undo Delete** - Snackbar with undo action in DetailScreen
+- **QR Preview Animation** - Scale/fade-in animation when viewing QR codes
+- **QR Generation Caching** - LRU cache for generated QR code images
+- **App Store Links QR** - iOS App Store and Google Play deep links
+- **Payment QR** - PayPal and Venmo payment request URLs
+- **Cryptocurrency QR** - Bitcoin and Ethereum wallet addresses
 
 ### Technical Debt
 1. **qr_repository module** - Legacy module; functionality merged into shared
@@ -292,11 +314,18 @@ adb -d logcat | grep -i "AndroidRuntime\|FATAL"
 - Phase 6 (QR type models: CalendarEvent, GeoLocation, MeCard) added in commit 283bb9f
 
 ### Current Work (feature/phase6-new-qr-types)
-**Uncommitted changes:**
-- CalendarEvent.kt - minor refinements
-- GeoLocation.kt - minor refinements
-- Main.ios.kt - adjustments
-- NEW: CreateCalendarScreen.kt - Full calendar event creation UI
+**Completed features:**
+- Calendar Event QR - CreateCalendarScreen.kt with VEVENT format
+- Location QR - CreateLocationScreen.kt with geo: URI
+- MeCard QR - CreateMeCardScreen.kt with MECARD format
+- History Search - Search bar with real-time filtering
+- Firebase Crashlytics - Integrated in shared module for Android
+- App Store Links QR - iOS App Store and Google Play support
+- Payment QR - PayPal and Venmo URL formats
+- Cryptocurrency QR - Bitcoin and Ethereum URI formats
+- Undo Delete - Snackbar with undo in DetailScreen
+- QR Preview Animation - Scale/fade animation
+- QR Generation Caching - LRU cache in CachingQrCodeGenerator
 - NEW: CreateLocationScreen.kt - Full location creation UI
 - NEW: CreateMeCardScreen.kt - Full MeCard creation UI
 - Updated: CreateScreen.kt - Added navigation cards for new types

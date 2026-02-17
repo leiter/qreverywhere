@@ -36,7 +36,10 @@ fun CreateScreen(
     onWiFiQrClick: () -> Unit = {},
     onCalendarQrClick: () -> Unit = {},
     onLocationQrClick: () -> Unit = {},
-    onMeCardQrClick: () -> Unit = {}
+    onMeCardQrClick: () -> Unit = {},
+    onAppStoreLinkQrClick: () -> Unit = {},
+    onPaymentQrClick: () -> Unit = {},
+    onCryptoQrClick: () -> Unit = {}
 ) {
     Column(
         modifier = Modifier
@@ -120,6 +123,27 @@ fun CreateScreen(
             title = stringResource(Res.string.title_mecard_qr),
             description = stringResource(Res.string.desc_mecard_qr),
             onClick = onMeCardQrClick
+        )
+
+        // App Store Link QR Code
+        QrTypeCard(
+            title = stringResource(Res.string.title_appstore_qr),
+            description = stringResource(Res.string.desc_appstore_qr),
+            onClick = onAppStoreLinkQrClick
+        )
+
+        // Payment QR Code
+        QrTypeCard(
+            title = stringResource(Res.string.title_payment_qr),
+            description = stringResource(Res.string.desc_payment_qr),
+            onClick = onPaymentQrClick
+        )
+
+        // Cryptocurrency QR Code
+        QrTypeCard(
+            title = stringResource(Res.string.title_crypto_qr),
+            description = stringResource(Res.string.desc_crypto_qr),
+            onClick = onCryptoQrClick
         )
     }
 }
