@@ -1,0 +1,1 @@
+qr,scanner,qr code,barcode,wifi qr,vcard,qr generator,scan,create qr,qr reader,mecard,calendar qr,location qr,bitcoin qr,payment qr

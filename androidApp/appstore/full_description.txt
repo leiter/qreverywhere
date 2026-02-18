@@ -1,0 +1,41 @@
+QR Everywhere - Scan & Create QR Codes
+
+Your all-in-one QR code companion. Scan existing codes instantly or create your own in seconds.
+
+SCAN QR CODES
+- Use your camera for instant scanning
+- Import images from your photo library
+- Supports all standard QR code formats
+- Automatic URL safety checking
+
+CREATE QR CODES
+- Text & URLs - Share links and messages
+- WiFi Networks - Let guests connect instantly
+- Contact Cards (vCard & MeCard) - Share your details professionally
+- Email - Pre-filled email addresses with subject lines
+- Phone Numbers - One-tap calling
+- Calendar Events - Share meeting details
+- Locations - Share GPS coordinates
+- App Store Links - Link to iOS and Android apps
+- Payment Links - PayPal and Venmo requests
+- Cryptocurrency - Bitcoin and Ethereum addresses
+
+ORGANIZE & MANAGE
+- Full history of scanned and created codes
+- Search through your QR history
+- Save and share your QR codes anytime
+- Quick access with home screen widget
+
+PRIVACY FIRST
+- No account required
+- No data collection or tracking
+- Everything stays on your device
+- Open source and transparent
+
+FEATURES
+- Dark mode support
+- Material You theming
+- Fast and lightweight
+- Works offline
+
+Simple. Fast. Private.
