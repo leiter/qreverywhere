@@ -1,0 +1,10 @@
+Version 1.0
+
+Initial release of QR Everywhere!
+
+- Scan QR codes with camera or from images
+- Create QR codes for text, URLs, WiFi, contacts, email, phone, calendar events, locations, and more
+- Full history with search
+- Home screen widget for quick access
+- Dark mode and Material You theming
+- Privacy-first: no tracking, no accounts, all data stays on device
