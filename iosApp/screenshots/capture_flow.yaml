@@ -1,0 +1,42 @@
+appId: cut.the.crap.qreverywhere
+---
+# Screenshot 1: Scan screen (home)
+- launchApp
+- waitForAnimationToEnd
+- takeScreenshot: 01_scan_screen
+
+# Navigate to Create tab
+- tapOn: "Create"
+- waitForAnimationToEnd
+- takeScreenshot: 02_create_screen
+
+# Tap on Text/URL option
+- tapOn:
+    text: ".*Text.*"
+    optional: true
+- waitForAnimationToEnd
+- takeScreenshot: 03_create_text_screen
+
+# Go back
+- tapOn:
+    text: ".*back.*"
+    optional: true
+- waitForAnimationToEnd
+
+# Try WiFi option
+- tapOn:
+    text: ".*WiFi.*"
+    optional: true
+- waitForAnimationToEnd
+- takeScreenshot: 04_create_wifi_screen
+
+# Go back to Create
+- tapOn:
+    text: ".*back.*"
+    optional: true
+- waitForAnimationToEnd
+
+# Navigate to History tab
+- tapOn: "History"
+- waitForAnimationToEnd
+- takeScreenshot: 05_history_screen

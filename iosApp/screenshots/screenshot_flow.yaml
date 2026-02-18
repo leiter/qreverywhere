@@ -1,0 +1,48 @@
+appId: cut.the.crap.qreverywhere
+---
+# Launch and wait
+- launchApp:
+    clearState: true
+- waitForAnimationToEnd:
+    timeout: 5000
+
+# Screenshot 1: Scan screen
+- takeScreenshot: 01_scan_screen
+
+# Navigate to Create tab
+- tapOn: "Create"
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 02_create_screen
+
+# Tap on WiFi option
+- tapOn: "WiFi QR Code"
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 03_wifi_create_screen
+
+# Go back using back gesture (swipe from left edge)
+- swipe:
+    direction: RIGHT
+    duration: 300
+- waitForAnimationToEnd:
+    timeout: 3000
+
+# Tap on Text option
+- tapOn: "Text QR Code"
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 04_text_create_screen
+
+# Go back
+- swipe:
+    direction: RIGHT
+    duration: 300
+- waitForAnimationToEnd:
+    timeout: 3000
+
+# Navigate to History tab
+- tapOn: "History"
+- waitForAnimationToEnd:
+    timeout: 3000
+- takeScreenshot: 05_history_screen

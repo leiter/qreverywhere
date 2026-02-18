@@ -1,0 +1,4 @@
+appId: cut.the.crap.qreverywhere
+---
+- launchApp
+- takeScreenshot: 01_scan_screen
