@@ -67,6 +67,8 @@ fun CreateWiFiScreen(
 
     // Get localized strings
     val errorEmptySsid = stringResource(Res.string.error_empty_ssid)
+    val showPasswordDesc = stringResource(Res.string.cd_show_password)
+    val hidePasswordDesc = stringResource(Res.string.cd_hide_password)
 
     Column(
         modifier = Modifier
@@ -151,7 +153,7 @@ fun CreateWiFiScreen(
                                 if (isPasswordVisible) Res.drawable.visibility_off
                                 else Res.drawable.visibility
                             ),
-                            contentDescription = if (isPasswordVisible) "Hide password" else "Show password"
+                            contentDescription = if (isPasswordVisible) hidePasswordDesc else showPasswordDesc
                         )
                     }
                 },

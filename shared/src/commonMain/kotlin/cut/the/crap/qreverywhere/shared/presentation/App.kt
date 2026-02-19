@@ -126,7 +126,7 @@ fun App(
             currentRoute == Screen.CreateEmail.route -> stringResource(Res.string.title_email_qr)
             currentRoute == Screen.CreateVcard.route -> stringResource(Res.string.title_contact_qr)
             currentRoute == Screen.CreateWiFi.route -> stringResource(Res.string.title_wifi_qr)
-            currentRoute == Screen.Settings.route -> "Settings"
+            currentRoute == Screen.Settings.route -> stringResource(Res.string.settings_title)
             currentRoute.startsWith("create/text/") -> {
                 val qrType = navBackStackEntry?.arguments?.getString("qrType") ?: "text"
                 when (qrType) {
@@ -173,7 +173,7 @@ fun App(
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.Settings,
-                                    contentDescription = "Settings"
+                                    contentDescription = stringResource(Res.string.cd_settings)
                                 )
                             }
                         }

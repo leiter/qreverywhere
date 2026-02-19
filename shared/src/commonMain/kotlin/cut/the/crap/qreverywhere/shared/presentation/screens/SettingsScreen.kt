@@ -33,6 +33,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import cut.the.crap.qreverywhere.shared.domain.usecase.ThemePreference
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
+import org.jetbrains.compose.resources.stringResource
+import qreverywhere.shared.generated.resources.Res
+import qreverywhere.shared.generated.resources.*
 
 /**
  * Settings Screen for app configuration
@@ -50,12 +53,12 @@ fun SettingsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Settings") },
+                title = { Text(stringResource(Res.string.settings_title)) },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Back"
+                            contentDescription = stringResource(Res.string.cd_back)
                         )
                     }
                 }
@@ -75,7 +78,7 @@ fun SettingsScreen(
 
             // Theme Section
             item {
-                SettingsSection(title = "Appearance") {
+                SettingsSection(title = stringResource(Res.string.settings_section_appearance)) {
                     ThemeSelector(
                         currentTheme = currentTheme,
                         onThemeSelected = { theme ->
@@ -89,13 +92,13 @@ fun SettingsScreen(
 
             // About Section
             item {
-                SettingsSection(title = "About") {
+                SettingsSection(title = stringResource(Res.string.settings_section_about)) {
                     SettingsInfoItem(
-                        label = "Version",
+                        label = stringResource(Res.string.settings_version),
                         value = "1.0.0"
                     )
                     SettingsInfoItem(
-                        label = "Build",
+                        label = stringResource(Res.string.settings_build),
                         value = "KMP"
                     )
                 }
@@ -139,20 +142,20 @@ private fun ThemeSelector(
 ) {
     Column {
         ThemeOption(
-            label = "System Default",
-            description = "Follow system theme",
+            label = stringResource(Res.string.settings_theme_system),
+            description = stringResource(Res.string.settings_theme_system_desc),
             selected = currentTheme == ThemePreference.SYSTEM,
             onClick = { onThemeSelected(ThemePreference.SYSTEM) }
         )
         ThemeOption(
-            label = "Light",
-            description = "Always use light theme",
+            label = stringResource(Res.string.settings_theme_light),
+            description = stringResource(Res.string.settings_theme_light_desc),
             selected = currentTheme == ThemePreference.LIGHT,
             onClick = { onThemeSelected(ThemePreference.LIGHT) }
         )
         ThemeOption(
-            label = "Dark",
-            description = "Always use dark theme",
+            label = stringResource(Res.string.settings_theme_dark),
+            description = stringResource(Res.string.settings_theme_dark_desc),
             selected = currentTheme == ThemePreference.DARK,
             onClick = { onThemeSelected(ThemePreference.DARK) }
         )
@@ -195,7 +198,7 @@ private fun ThemeOption(
         if (selected) {
             Icon(
                 imageVector = Icons.Default.Check,
-                contentDescription = "Selected",
+                contentDescription = stringResource(Res.string.cd_selected),
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(24.dp)
             )

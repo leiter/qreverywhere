@@ -63,6 +63,7 @@ fun CreateVcardScreen(
 
     // Get localized strings
     val errorEmptyName = stringResource(Res.string.error_empty_name)
+    val optionalSuffix = stringResource(Res.string.label_optional_suffix)
 
     Column(
         modifier = Modifier
@@ -119,7 +120,7 @@ fun CreateVcardScreen(
         OutlinedTextField(
             value = phone,
             onValueChange = { phone = it },
-            label = { Text(stringResource(Res.string.label_phone_number) + " (Optional)") },
+            label = { Text(stringResource(Res.string.label_phone_number) + optionalSuffix) },
             placeholder = { Text(stringResource(Res.string.placeholder_phone)) },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true,
@@ -133,7 +134,7 @@ fun CreateVcardScreen(
         OutlinedTextField(
             value = email,
             onValueChange = { email = it },
-            label = { Text(stringResource(Res.string.label_email_address) + " (Optional)") },
+            label = { Text(stringResource(Res.string.label_email_address) + optionalSuffix) },
             placeholder = { Text(stringResource(Res.string.placeholder_email)) },
             modifier = Modifier.fillMaxWidth(),
             singleLine = true,

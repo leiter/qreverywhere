@@ -22,6 +22,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import cut.the.crap.qreverywhere.shared.domain.usecase.SafetyStatus
 import cut.the.crap.qreverywhere.shared.domain.usecase.UrlSafetyResult
+import org.jetbrains.compose.resources.stringResource
+import qreverywhere.shared.generated.resources.Res
+import qreverywhere.shared.generated.resources.*
 
 /**
  * Dialog showing URL safety warnings before opening a potentially dangerous link
@@ -33,12 +36,28 @@ fun UrlWarningDialog(
     onProceed: () -> Unit,
     onCancel: () -> Unit
 ) {
+    val titleText = when (safetyResult.status) {
+        SafetyStatus.DANGEROUS -> stringResource(Res.string.url_warning_dangerous)
+        SafetyStatus.WARNING -> stringResource(Res.string.url_warning_suspicious)
+        SafetyStatus.SAFE -> stringResource(Res.string.url_warning_check)
+    }
+    val descriptionText = when (safetyResult.status) {
+        SafetyStatus.DANGEROUS -> stringResource(Res.string.url_warning_dangerous_desc)
+        SafetyStatus.WARNING -> stringResource(Res.string.url_warning_suspicious_desc)
+        SafetyStatus.SAFE -> stringResource(Res.string.url_warning_safe_desc)
+    }
+    val urlPrefixText = stringResource(Res.string.url_warning_url_prefix)
+    val warningsLabelText = stringResource(Res.string.url_warning_warnings_label)
+    val openAnywayText = stringResource(Res.string.url_warning_open_anyway)
+    val closeText = stringResource(Res.string.url_warning_close)
+    val cancelText = stringResource(Res.string.url_warning_cancel)
+
     AlertDialog(
         onDismissRequest = onDismiss,
         icon = {
             Icon(
                 imageVector = Icons.Default.Warning,
-                contentDescription = "Warning",
+                contentDescription = stringResource(Res.string.cd_warning),
                 tint = when (safetyResult.status) {
                     SafetyStatus.DANGEROUS -> MaterialTheme.colorScheme.error
                     SafetyStatus.WARNING -> MaterialTheme.colorScheme.tertiary
@@ -49,11 +68,7 @@ fun UrlWarningDialog(
         },
         title = {
             Text(
-                text = when (safetyResult.status) {
-                    SafetyStatus.DANGEROUS -> "Dangerous Link Detected"
-                    SafetyStatus.WARNING -> "Suspicious Link"
-                    SafetyStatus.SAFE -> "URL Check"
-                },
+                text = titleText,
                 fontWeight = FontWeight.Bold
             )
         },
@@ -64,7 +79,7 @@ fun UrlWarningDialog(
             ) {
                 // Show the URL (truncated if too long)
                 Text(
-                    text = "URL: ${safetyResult.originalUrl.take(50)}${if (safetyResult.originalUrl.length > 50) "..." else ""}",
+                    text = "$urlPrefixText ${safetyResult.originalUrl.take(50)}${if (safetyResult.originalUrl.length > 50) "..." else ""}",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -74,7 +89,7 @@ fun UrlWarningDialog(
                 // Show warnings
                 if (safetyResult.warnings.isNotEmpty()) {
                     Text(
-                        text = "Warnings:",
+                        text = warningsLabelText,
                         style = MaterialTheme.typography.labelLarge,
                         fontWeight = FontWeight.Medium
                     )
@@ -102,11 +117,7 @@ fun UrlWarningDialog(
                 Spacer(modifier = Modifier.height(8.dp))
 
                 Text(
-                    text = when (safetyResult.status) {
-                        SafetyStatus.DANGEROUS -> "Opening this link is not recommended as it may harm your device or compromise your data."
-                        SafetyStatus.WARNING -> "This link has some characteristics that may indicate a security risk. Proceed with caution."
-                        SafetyStatus.SAFE -> "No issues were detected with this URL."
-                    },
+                    text = descriptionText,
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -115,14 +126,14 @@ fun UrlWarningDialog(
         confirmButton = {
             if (safetyResult.status != SafetyStatus.DANGEROUS) {
                 TextButton(onClick = onProceed) {
-                    Text("Open Anyway")
+                    Text(openAnywayText)
                 }
             }
         },
         dismissButton = {
             TextButton(onClick = onCancel) {
                 Text(
-                    text = if (safetyResult.status == SafetyStatus.DANGEROUS) "Close" else "Cancel"
+                    text = if (safetyResult.status == SafetyStatus.DANGEROUS) closeText else cancelText
                 )
             }
         }

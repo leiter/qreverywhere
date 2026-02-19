@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- Thai (ภาษาไทย) - Translation stub -->
+<!-- TODO: Translate all strings to Simplified Chinese -->
 <resources>
     <!-- App Title -->
     <string name="app_name">QR Everywhere</string>
@@ -75,13 +77,11 @@
     <string name="label_enter_url">Enter website URL</string>
     <string name="label_enter_phone">Enter phone number</string>
     <string name="label_enter_phone_message">Enter phone number and message</string>
-    <!-- vCard Field Labels -->
     <string name="label_first_name">First Name</string>
     <string name="label_last_name">Last Name</string>
     <string name="label_organization">Organization (Optional)</string>
     <string name="label_job_title">Job Title (Optional)</string>
     <string name="label_website">Website (Optional)</string>
-    <!-- WiFi Field Labels -->
     <string name="label_network_name">Network Name (SSID)</string>
     <string name="label_password">Password</string>
     <string name="label_security_type">Security Type</string>
@@ -95,16 +95,13 @@
     <string name="placeholder_email">example@email.com</string>
     <string name="placeholder_email_subject">Email subject</string>
     <string name="placeholder_email_message">Email message</string>
-    <!-- vCard Placeholders -->
     <string name="placeholder_first_name">John</string>
     <string name="placeholder_last_name">Doe</string>
     <string name="placeholder_organization">Company Inc.</string>
     <string name="placeholder_job_title">Software Engineer</string>
     <string name="placeholder_website">https://example.com</string>
-    <!-- WiFi Placeholders -->
     <string name="placeholder_network_name">MyWiFi</string>
     <string name="placeholder_password">password123</string>
-    <!-- WiFi Security Types -->
     <string name="security_wpa">WPA/WPA2</string>
     <string name="security_wep">WEP</string>
     <string name="security_open">Open (No password)</string>
@@ -118,13 +115,11 @@
     <string name="label_end_time">End Time</string>
     <string name="label_event_location">Location (Optional)</string>
     <string name="label_event_description">Description (Optional)</string>
-    <!-- Calendar Event Placeholders -->
     <string name="placeholder_event_title">Team Meeting</string>
     <string name="placeholder_date">YYYY-MM-DD</string>
     <string name="placeholder_time">HH:MM</string>
     <string name="placeholder_event_location">Conference Room A</string>
     <string name="placeholder_event_description">Discuss project updates</string>
-    <!-- Calendar Event Hints -->
     <string name="hint_date_format">Format: YYYY-MM-DD (e.g., 2024-03-15)</string>
     <string name="hint_time_format">Format: HH:MM (e.g., 14:30)</string>
 
@@ -132,11 +127,9 @@
     <string name="label_latitude">Latitude</string>
     <string name="label_longitude">Longitude</string>
     <string name="label_location_label">Label (Optional)</string>
-    <!-- Location Placeholders -->
     <string name="placeholder_latitude">37.7749</string>
     <string name="placeholder_longitude">-122.4194</string>
     <string name="placeholder_location_label">San Francisco</string>
-    <!-- Location Hints -->
     <string name="hint_latitude">Range: -90 to 90</string>
     <string name="hint_longitude">Range: -180 to 180</string>
 
@@ -144,7 +137,6 @@
     <string name="label_mecard_name">Full Name</string>
     <string name="label_mecard_address">Address (Optional)</string>
     <string name="label_mecard_note">Note (Optional)</string>
-    <!-- MeCard Placeholders -->
     <string name="placeholder_mecard_name">John Doe</string>
     <string name="placeholder_mecard_address">123 Main St, City</string>
     <string name="placeholder_mecard_note">Met at conference</string>
@@ -155,10 +147,8 @@
     <string name="label_google_package_name">Google Play Package Name</string>
     <string name="store_apple">Apple App Store</string>
     <string name="store_google">Google Play Store</string>
-    <!-- App Store Placeholders -->
     <string name="placeholder_apple_app_id">1234567890</string>
     <string name="placeholder_google_package_name">com.example.app</string>
-    <!-- App Store Hints -->
     <string name="hint_apple_app_id">Numeric ID from App Store URL</string>
     <string name="hint_google_package_name">Package name from Play Store URL</string>
 
@@ -169,7 +159,6 @@
     <string name="label_payment_note">Note (Optional)</string>
     <string name="provider_paypal">PayPal</string>
     <string name="provider_venmo">Venmo</string>
-    <!-- Payment Placeholders -->
     <string name="placeholder_paypal_username">yourpaypalusername</string>
     <string name="placeholder_venmo_username">yourvenmo</string>
     <string name="placeholder_payment_amount">10.00</string>
@@ -184,7 +173,6 @@
     <string name="label_crypto_message">Message (Optional)</string>
     <string name="crypto_bitcoin">Bitcoin (BTC)</string>
     <string name="crypto_ethereum">Ethereum (ETH)</string>
-    <!-- Crypto Placeholders -->
     <string name="placeholder_bitcoin_address">bc1q...</string>
     <string name="placeholder_ethereum_address">0x...</string>
     <string name="placeholder_crypto_amount">0.001</string>
@@ -223,21 +211,15 @@
     <string name="error_create_qr">Error creating QR code: %1$s</string>
     <string name="error_empty_name">Please enter at least a first or last name</string>
     <string name="error_empty_ssid">Please enter the network name (SSID)</string>
-    <!-- Calendar Event Errors -->
     <string name="error_empty_event_title">Please enter an event title</string>
     <string name="error_invalid_date">Please enter a valid date (YYYY-MM-DD)</string>
-    <!-- Location Errors -->
     <string name="error_empty_latitude">Please enter a latitude</string>
     <string name="error_empty_longitude">Please enter a longitude</string>
     <string name="error_invalid_latitude">Latitude must be between -90 and 90</string>
     <string name="error_invalid_longitude">Longitude must be between -180 and 180</string>
-    <!-- MeCard Errors -->
     <string name="error_empty_mecard_name">Please enter a name</string>
-    <!-- App Store Errors -->
     <string name="error_empty_app_id">Please enter an app ID or package name</string>
-    <!-- Payment Errors -->
     <string name="error_empty_payment_username">Please enter a username</string>
-    <!-- Crypto Errors -->
     <string name="error_empty_crypto_address">Please enter a wallet address</string>
 
     <!-- History Screen -->

@@ -185,3 +185,126 @@ dependencies {
     add("kspIosArm64", libs.androidx.room.compiler)
     add("kspDesktop", libs.androidx.room.compiler)
 }
+
+// Localization validation tasks
+tasks.register("checkHardcodedStrings") {
+    group = "verification"
+    description = "Check for hardcoded strings in Kotlin source files that should use stringResource()"
+
+    doLast {
+        val sourceDir = file("src/commonMain/kotlin")
+        val violations = mutableListOf<String>()
+
+        // Patterns to detect hardcoded strings
+        val patterns = listOf(
+            """Text\s*\(\s*"[^"]+"\s*\)""".toRegex(),
+            """title\s*=\s*"[^"]+"""".toRegex(),
+            """label\s*=\s*"[^"]+"""".toRegex(),
+            """contentDescription\s*=\s*"[^"]+"""".toRegex(),
+            """description\s*=\s*"[^"]+"""".toRegex(),
+            """placeholder\s*=\s*"[^"]+"""".toRegex()
+        )
+
+        // Patterns to exclude (valid uses)
+        val excludePatterns = listOf(
+            "stringResource",
+            "Res.string",
+            "\${",
+            "\"\"\"",  // Multi-line strings
+            "// ",     // Comments
+            "/*"       // Block comments
+        )
+
+        sourceDir.walkTopDown()
+            .filter { it.isFile && it.extension == "kt" }
+            .forEach { file ->
+                file.readLines().forEachIndexed { lineNum, line ->
+                    // Skip if line contains exclude patterns
+                    if (excludePatterns.any { line.contains(it) }) return@forEachIndexed
+
+                    patterns.forEach { pattern ->
+                        if (pattern.containsMatchIn(line)) {
+                            // Additional check: skip emoji-only strings like "📷"
+                            val match = pattern.find(line)?.value ?: ""
+                            if (!match.matches(""".*"[\p{So}\p{Sc}]+".*""".toRegex())) {
+                                violations.add("${file.relativeTo(sourceDir)}:${lineNum + 1}: $line")
+                            }
+                        }
+                    }
+                }
+            }
+
+        if (violations.isNotEmpty()) {
+            println("\n⚠️  Found ${violations.size} potential hardcoded strings:")
+            violations.forEach { println("  $it") }
+            println("\nConsider using stringResource(Res.string.xxx) for localization.\n")
+            // Note: Change to throw GradleException(...) to fail the build
+        } else {
+            println("✅ No hardcoded strings detected.")
+        }
+    }
+}
+
+tasks.register("validateStringResources") {
+    group = "verification"
+    description = "Validate that all language files have matching string keys"
+
+    doLast {
+        val resourcesDir = file("src/commonMain/composeResources")
+        val defaultStringsFile = file("$resourcesDir/values/strings.xml")
+
+        if (!defaultStringsFile.exists()) {
+            throw GradleException("Default strings.xml not found at ${defaultStringsFile.path}")
+        }
+
+        // Parse default string keys
+        val defaultKeys = mutableSetOf<String>()
+        val keyPattern = """<string\s+name="([^"]+)"[^>]*>""".toRegex()
+
+        defaultStringsFile.readLines().forEach { line ->
+            keyPattern.find(line)?.let { match ->
+                defaultKeys.add(match.groupValues[1])
+            }
+        }
+
+        println("Found ${defaultKeys.size} string keys in default strings.xml")
+
+        // Check each language directory
+        val errors = mutableListOf<String>()
+        resourcesDir.listFiles()
+            ?.filter { it.isDirectory && it.name.startsWith("values-") }
+            ?.forEach { langDir ->
+                val stringsFile = file("${langDir.path}/strings.xml")
+                if (stringsFile.exists()) {
+                    val langKeys = mutableSetOf<String>()
+                    stringsFile.readLines().forEach { line ->
+                        keyPattern.find(line)?.let { match ->
+                            langKeys.add(match.groupValues[1])
+                        }
+                    }
+
+                    val missingKeys = defaultKeys - langKeys
+                    val extraKeys = langKeys - defaultKeys
+
+                    if (missingKeys.isNotEmpty()) {
+                        errors.add("${langDir.name}: Missing ${missingKeys.size} keys: ${missingKeys.take(5).joinToString()}${if (missingKeys.size > 5) "..." else ""}")
+                    }
+                    if (extraKeys.isNotEmpty()) {
+                        errors.add("${langDir.name}: Extra ${extraKeys.size} keys: ${extraKeys.take(5).joinToString()}${if (extraKeys.size > 5) "..." else ""}")
+                    }
+
+                    if (missingKeys.isEmpty() && extraKeys.isEmpty()) {
+                        println("✅ ${langDir.name}: All ${langKeys.size} keys match")
+                    }
+                }
+            }
+
+        if (errors.isNotEmpty()) {
+            println("\n⚠️  String resource validation issues:")
+            errors.forEach { println("  $it") }
+            // Note: Change to throw GradleException(...) to fail the build
+        } else {
+            println("\n✅ All language files have matching keys.")
+        }
+    }
+}

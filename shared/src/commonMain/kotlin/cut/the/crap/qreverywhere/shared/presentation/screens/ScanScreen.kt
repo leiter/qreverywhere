@@ -63,6 +63,9 @@ import qreverywhere.shared.generated.resources.permission_start_scanning
 import qreverywhere.shared.generated.resources.permission_start_scanning_hint
 import qreverywhere.shared.generated.resources.scan_from_file
 import qreverywhere.shared.generated.resources.scan_qr_detected
+import qreverywhere.shared.generated.resources.cd_torch_on
+import qreverywhere.shared.generated.resources.cd_torch_off
+import qreverywhere.shared.generated.resources.cd_camera
 
 /**
  * QR Code Scanning Screen with Camera Support
