@@ -51,3 +51,11 @@ GoogleService-Info.plist
 
 # Temporary files
 tmp/
+
+# Firebase config (contains API keys)
+google-services.json
+GoogleService-Info.plist
+
+# Build artifacts
+*.dSYM.zip
+**/fastlane/report.xml
