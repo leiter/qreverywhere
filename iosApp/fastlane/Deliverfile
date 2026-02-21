@@ -1,0 +1,32 @@
+# Deliverfile for QR Everywhere
+# Documentation: https://docs.fastlane.tools/actions/deliver/
+
+# App Identifier
+app_identifier("cut.the.crap.qreverywhere")
+
+# Team ID
+team_id("K4K982LMZ9")
+
+# Skip binary upload (already uploaded)
+skip_binary_upload(true)
+
+# Metadata path
+metadata_path("./fastlane/metadata")
+
+# Screenshots path
+screenshots_path("./fastlane/screenshots")
+
+# Don't submit for review automatically
+submit_for_review(false)
+
+# Skip waiting for screenshots processing
+skip_screenshots(false)
+
+# Overwrite screenshots
+overwrite_screenshots(true)
+
+# Force upload (skip HTML preview)
+force(true)
+
+# Precheck settings
+precheck_include_in_app_purchases(false)

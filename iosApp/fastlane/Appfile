@@ -3,7 +3,7 @@
 
 app_identifier("cut.the.crap.qreverywhere")
 apple_id("your-apple-id@example.com") # Your Apple Developer email address
-team_id("TEAM_ID") # Your Apple Developer Team ID
+team_id("K4K982LMZ9") # Your Apple Developer Team ID
 
 # For App Store Connect API (recommended over password authentication)
 # Generate an API Key at https://appstoreconnect.apple.com/access/api
