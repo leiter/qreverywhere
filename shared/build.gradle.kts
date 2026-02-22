@@ -3,8 +3,6 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.kotlin.ksp)
-    alias(libs.plugins.room)
 }
 
 kotlin {
@@ -58,11 +56,21 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                // Core module (models, interfaces, theme, camera, utils, resources)
+                api(project(":core:base"))
+
+                // Data module (Room DB, DAO, repository)
+                api(project(":data:db"))
+
+                // Feature modules
+                api(project(":feature:history"))
+                api(project(":feature:scan"))
+                api(project(":feature:create"))
+                api(project(":feature:detail"))
+                api(project(":feature:settings"))
+
                 // Coroutines
                 implementation(libs.kotlinx.coroutines.core)
-
-                // DateTime - use api so it's available to dependent modules
-                api(libs.kotlinx.datetime)
 
                 // Koin DI
                 implementation(libs.koin.core)
@@ -84,10 +92,6 @@ kotlin {
 
                 // Navigation Compose (KMP)
                 implementation(libs.navigation.compose.kmp)
-
-                // Room KMP
-                implementation(libs.androidx.room.runtime)
-                implementation(libs.androidx.sqlite.bundled)
             }
         }
 
@@ -107,21 +111,8 @@ kotlin {
                 // Lifecycle (Android-specific)
                 implementation(libs.androidx.lifecycle.runtime.compose)
 
-                // CameraX dependencies
-                implementation(libs.androidx.camera.camera2)
-                implementation(libs.androidx.camera.lifecycle)
-                implementation(libs.androidx.camera.view)
-                implementation(libs.androidx.camera.core)
-
-                // Room (Android-specific for now)
-                implementation(libs.androidx.room.runtime)
-                implementation(libs.androidx.room.ktx)
-
-                // ZXing for QR code operations
-                implementation(libs.google.zxing.core)
-
-                // Use existing repository
-                implementation(project(":qr_repository"))
+                // Firebase Crashlytics - use direct version since BOM doesn't work in KMP
+                implementation("com.google.firebase:firebase-crashlytics-ktx:19.3.0")
             }
         }
 
@@ -142,11 +133,14 @@ kotlin {
         val desktopMain by getting {
             dependencies {
                 // Desktop-specific dependencies
-                // ZXing for QR code detection
-                implementation(libs.google.zxing.core)
             }
         }
     }
+}
+
+compose.resources {
+    publicResClass = true
+    generateResClass = never
 }
 
 android {
@@ -167,21 +161,69 @@ android {
     }
 }
 
-compose.resources {
-    publicResClass = true
-    generateResClass = always
-}
+// Localization validation tasks
+tasks.register("checkHardcodedStrings") {
+    group = "verification"
+    description = "Check for hardcoded strings in Kotlin source files that should use stringResource()"
 
-// Room KMP schema export
-room {
-    schemaDirectory("$projectDir/schemas")
-}
+    doLast {
+        val sourceDirs = listOf(
+            file("src/commonMain/kotlin"),
+            rootProject.file("core/base/src/commonMain/kotlin"),
+            rootProject.file("feature/create/src/commonMain/kotlin"),
+            rootProject.file("feature/detail/src/commonMain/kotlin"),
+            rootProject.file("feature/history/src/commonMain/kotlin"),
+            rootProject.file("feature/scan/src/commonMain/kotlin"),
+            rootProject.file("feature/settings/src/commonMain/kotlin")
+        )
+        val violations = mutableListOf<String>()
 
-// KSP configuration for Room
-dependencies {
-    add("kspAndroid", libs.androidx.room.compiler)
-    add("kspIosSimulatorArm64", libs.androidx.room.compiler)
-    add("kspIosX64", libs.androidx.room.compiler)
-    add("kspIosArm64", libs.androidx.room.compiler)
-    add("kspDesktop", libs.androidx.room.compiler)
+        // Patterns to detect hardcoded strings
+        val patterns = listOf(
+            """Text\s*\(\s*"[^"]+"\s*\)""".toRegex(),
+            """title\s*=\s*"[^"]+"""".toRegex(),
+            """label\s*=\s*"[^"]+"""".toRegex(),
+            """contentDescription\s*=\s*"[^"]+"""".toRegex(),
+            """description\s*=\s*"[^"]+"""".toRegex(),
+            """placeholder\s*=\s*"[^"]+"""".toRegex()
+        )
+
+        // Patterns to exclude (valid uses)
+        val excludePatterns = listOf(
+            "stringResource",
+            "Res.string",
+            "\${",
+            "\"\"\"",  // Multi-line strings
+            "// ",     // Comments
+            "/*"       // Block comments
+        )
+
+        sourceDirs.filter { it.exists() }.forEach { sourceDir ->
+            sourceDir.walkTopDown()
+                .filter { it.isFile && it.extension == "kt" }
+                .forEach { file ->
+                    file.readLines().forEachIndexed { lineNum, line ->
+                        // Skip if line contains exclude patterns
+                        if (excludePatterns.any { line.contains(it) }) return@forEachIndexed
+
+                        patterns.forEach { pattern ->
+                            if (pattern.containsMatchIn(line)) {
+                                val match = pattern.find(line)?.value ?: ""
+                                if (!match.matches(""".*"[\p{So}\p{Sc}]+".*""".toRegex())) {
+                                    violations.add("${file.relativeTo(sourceDir)}:${lineNum + 1}: $line")
+                                }
+                            }
+                        }
+                    }
+                }
+        }
+
+        if (violations.isNotEmpty()) {
+            println("\n⚠️  Found ${violations.size} potential hardcoded strings:")
+            violations.forEach { println("  $it") }
+            println("\nConsider using stringResource(Res.string.xxx) for localization.\n")
+        } else {
+            println("✅ No hardcoded strings detected.")
+        }
+    }
 }

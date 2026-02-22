@@ -8,12 +8,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowState
 import androidx.compose.ui.window.application
+import cut.the.crap.qreverywhere.feature.create.CreateViewModel
+import cut.the.crap.qreverywhere.feature.detail.DetailViewModel
+import cut.the.crap.qreverywhere.feature.history.HistoryViewModel
 import cut.the.crap.qreverywhere.shared.domain.repository.QrRepository
 import cut.the.crap.qreverywhere.shared.di.commonModule
 import cut.the.crap.qreverywhere.shared.di.platformModule
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
 import cut.the.crap.qreverywhere.shared.presentation.App
-import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import org.koin.core.context.startKoin
@@ -33,7 +35,9 @@ fun main() = application {
     }
 
     // Get dependencies from Koin
-    val viewModel: MainViewModel = getKoin().get()
+    val historyViewModel: HistoryViewModel = getKoin().get()
+    val createViewModel: CreateViewModel = getKoin().get()
+    val detailViewModel: DetailViewModel = getKoin().get()
     val userPreferences: UserPreferences = getKoin().get()
     val repository: QrRepository = getKoin().get()
 
@@ -52,12 +56,6 @@ fun main() = application {
             onShowWindow = { isWindowVisible = true },
             onHideWindow = { isWindowVisible = false },
             onCreateFromClipboard = {
-                // Get text from clipboard and navigate to create screen
-                val clipboardText = getClipboardText()
-                if (clipboardText != null) {
-                    // Set the clipboard text in ViewModel and navigate to create
-                    viewModel.setClipboardContent(clipboardText)
-                }
                 initialRoute = "create"
                 isWindowVisible = true
             },
@@ -84,7 +82,9 @@ fun main() = application {
     ) {
         MaterialTheme {
             App(
-                viewModel = viewModel,
+                historyViewModel = historyViewModel,
+                createViewModel = createViewModel,
+                detailViewModel = detailViewModel,
                 userPreferences = userPreferences,
                 initialRoute = initialRoute,
                 initialDetailId = initialDetailId,

@@ -29,11 +29,13 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import cut.the.crap.qreverywhere.feature.create.CreateViewModel
+import cut.the.crap.qreverywhere.feature.detail.DetailViewModel
+import cut.the.crap.qreverywhere.feature.history.HistoryViewModel
 import cut.the.crap.qreverywhere.shared.domain.usecase.ThemePreference
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
 import cut.the.crap.qreverywhere.shared.presentation.navigation.AppNavHost
 import cut.the.crap.qreverywhere.shared.presentation.navigation.Screen
-import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.shared.utils.DeviceOrientation
 import cut.the.crap.qreverywhere.shared.utils.getDeviceOrientation
 import cut.the.crap.qreverywhere.shared.utils.toReadableString
@@ -44,17 +46,13 @@ import qreverywhere.shared.generated.resources.*
 /**
  * Main App Composable for Compose Multiplatform
  * This is the root composable that will be used by iOS, Android, and Desktop
- *
- * Handles:
- * - Bottom Navigation Bar (Material 3)
- * - Top App Bar
- * - Navigation between screens
- * - iOS safe areas (handled automatically by Scaffold)
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun App(
-    viewModel: MainViewModel,
+    historyViewModel: HistoryViewModel,
+    createViewModel: CreateViewModel,
+    detailViewModel: DetailViewModel,
     userPreferences: UserPreferences,
     initialRoute: String? = null,
     initialDetailId: Int? = null,
@@ -104,13 +102,19 @@ fun App(
     val shouldHideTopBar = isLandscape && isScanScreen
 
     // Get detail item for fullscreen title
-    val detailItem by viewModel.detailViewItem.collectAsState()
+    val detailItem by detailViewModel.detailViewItem.collectAsState()
 
     // Determine if we're on a child screen that needs a back button
     val isChildScreen = currentRoute.startsWith("create/text/") ||
         currentRoute == Screen.CreateEmail.route ||
         currentRoute == Screen.CreateVcard.route ||
         currentRoute == Screen.CreateWiFi.route ||
+        currentRoute == Screen.CreateCalendar.route ||
+        currentRoute == Screen.CreateLocation.route ||
+        currentRoute == Screen.CreateMeCard.route ||
+        currentRoute == Screen.CreateAppStoreLink.route ||
+        currentRoute == Screen.CreatePayment.route ||
+        currentRoute == Screen.CreateCrypto.route ||
         currentRoute.startsWith("detail/") ||
         currentRoute.startsWith("fullscreen/") ||
         currentRoute == Screen.Settings.route
@@ -126,7 +130,13 @@ fun App(
             currentRoute == Screen.CreateEmail.route -> stringResource(Res.string.title_email_qr)
             currentRoute == Screen.CreateVcard.route -> stringResource(Res.string.title_contact_qr)
             currentRoute == Screen.CreateWiFi.route -> stringResource(Res.string.title_wifi_qr)
-            currentRoute == Screen.Settings.route -> "Settings"
+            currentRoute == Screen.CreateCalendar.route -> stringResource(Res.string.title_calendar_qr)
+            currentRoute == Screen.CreateLocation.route -> stringResource(Res.string.title_location_qr)
+            currentRoute == Screen.CreateMeCard.route -> stringResource(Res.string.title_mecard_qr)
+            currentRoute == Screen.CreateAppStoreLink.route -> stringResource(Res.string.title_appstore_qr)
+            currentRoute == Screen.CreatePayment.route -> stringResource(Res.string.title_payment_qr)
+            currentRoute == Screen.CreateCrypto.route -> stringResource(Res.string.title_crypto_qr)
+            currentRoute == Screen.Settings.route -> stringResource(Res.string.settings_title)
             currentRoute.startsWith("create/text/") -> {
                 val qrType = navBackStackEntry?.arguments?.getString("qrType") ?: "text"
                 when (qrType) {
@@ -173,7 +183,7 @@ fun App(
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.Settings,
-                                    contentDescription = "Settings"
+                                    contentDescription = stringResource(Res.string.cd_settings)
                                 )
                             }
                         }
@@ -247,7 +257,6 @@ fun App(
         }
     ) { innerPadding ->
         // Navigation host with proper padding for safe areas
-        // In landscape scan mode, we use custom padding to allow full screen camera
         val layoutDirection = LocalLayoutDirection.current
         val adjustedPadding = if (shouldHideTopBar) {
             PaddingValues(
@@ -262,11 +271,13 @@ fun App(
 
         AppNavHost(
             navController = navController,
-            viewModel = viewModel,
+            historyViewModel = historyViewModel,
+            createViewModel = createViewModel,
+            detailViewModel = detailViewModel,
             userPreferences = userPreferences,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(adjustedPadding), // Adjusted padding for landscape camera
+                .padding(adjustedPadding),
             onShareText = onShareText,
             onCopyToClipboard = onCopyToClipboard,
             onThemeChanged = onThemeChanged

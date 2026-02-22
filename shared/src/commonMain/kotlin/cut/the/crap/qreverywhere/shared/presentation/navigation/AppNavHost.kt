@@ -5,31 +5,35 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import cut.the.crap.qreverywhere.feature.create.CreateAppStoreLinkScreen
+import cut.the.crap.qreverywhere.feature.create.CreateCalendarScreen
+import cut.the.crap.qreverywhere.feature.create.CreateCryptoScreen
+import cut.the.crap.qreverywhere.feature.create.CreateEmailScreen
+import cut.the.crap.qreverywhere.feature.create.CreateLocationScreen
+import cut.the.crap.qreverywhere.feature.create.CreateMeCardScreen
+import cut.the.crap.qreverywhere.feature.create.CreatePaymentScreen
+import cut.the.crap.qreverywhere.feature.create.CreateScreen
+import cut.the.crap.qreverywhere.feature.create.CreateTextScreen
+import cut.the.crap.qreverywhere.feature.create.CreateVcardScreen
+import cut.the.crap.qreverywhere.feature.create.CreateViewModel
+import cut.the.crap.qreverywhere.feature.create.CreateWiFiScreen
+import cut.the.crap.qreverywhere.feature.detail.DetailScreen
+import cut.the.crap.qreverywhere.feature.detail.DetailViewModel
+import cut.the.crap.qreverywhere.feature.detail.FullscreenScreen
+import cut.the.crap.qreverywhere.feature.history.HistoryScreen
+import cut.the.crap.qreverywhere.feature.history.HistoryViewModel
+import cut.the.crap.qreverywhere.feature.scan.ScanScreen
+import cut.the.crap.qreverywhere.feature.settings.SettingsScreen
+import cut.the.crap.qreverywhere.shared.domain.model.AcquireType
 import cut.the.crap.qreverywhere.shared.domain.usecase.ThemePreference
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
-import cut.the.crap.qreverywhere.shared.presentation.screens.CreateEmailScreen
-import cut.the.crap.qreverywhere.shared.presentation.screens.CreateScreen
-import cut.the.crap.qreverywhere.shared.presentation.screens.CreateTextScreen
-import cut.the.crap.qreverywhere.shared.presentation.screens.CreateVcardScreen
-import cut.the.crap.qreverywhere.shared.presentation.screens.CreateWiFiScreen
-import cut.the.crap.qreverywhere.shared.presentation.screens.DetailScreen
-import cut.the.crap.qreverywhere.shared.presentation.screens.FullscreenScreen
-import cut.the.crap.qreverywhere.shared.presentation.screens.HistoryScreen
-import cut.the.crap.qreverywhere.shared.presentation.screens.ScanScreen
-import cut.the.crap.qreverywhere.shared.presentation.screens.SettingsScreen
-import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
-import cut.the.crap.qreverywhere.shared.utils.Logger
 
-/**
- * Shared Navigation Host for Compose Multiplatform
- *
- * Note: Platform-specific screens (Scanner, Share, etc.) are not yet implemented.
- * These require expect/actual declarations for platform-specific APIs.
- */
 @Composable
 fun AppNavHost(
     navController: NavHostController,
-    viewModel: MainViewModel,
+    historyViewModel: HistoryViewModel,
+    createViewModel: CreateViewModel,
+    detailViewModel: DetailViewModel,
     userPreferences: UserPreferences,
     modifier: Modifier = Modifier,
     startDestination: String = Screen.Scan.route,
@@ -37,6 +41,13 @@ fun AppNavHost(
     onCopyToClipboard: (String) -> Unit = {},
     onThemeChanged: (ThemePreference) -> Unit = {}
 ) {
+    val navigateToHistoryAfterCreate: () -> Unit = {
+        navController.navigate(Screen.History.route) {
+            popUpTo(Screen.Create.route) { inclusive = true }
+            launchSingleTop = true
+        }
+    }
+
     NavHost(
         navController = navController,
         startDestination = startDestination,
@@ -44,9 +55,9 @@ fun AppNavHost(
     ) {
         composable(Screen.History.route) {
             HistoryScreen(
-                viewModel = viewModel,
+                viewModel = historyViewModel,
                 onQrItemClick = { qrItem ->
-                    viewModel.setDetailViewItem(qrItem)
+                    detailViewModel.setDetailViewItem(qrItem)
                     navController.navigate(Screen.Detail.createRoute(qrItem.id))
                 }
             )
@@ -56,17 +67,17 @@ fun AppNavHost(
             val itemId = backStackEntry.arguments?.getString("itemId")?.toIntOrNull()
 
             DetailScreen(
-                viewModel = viewModel,
+                viewModel = detailViewModel,
                 onNavigateBack = {
                     navController.popBackStack()
                 },
                 onShare = {
-                    viewModel.detailViewItem.value?.let { item ->
+                    detailViewModel.detailViewItem.value?.let { item ->
                         onShareText(item.textContent)
                     }
                 },
                 onCopyToClipboard = {
-                    viewModel.detailViewItem.value?.let { item ->
+                    detailViewModel.detailViewItem.value?.let { item ->
                         onCopyToClipboard(item.textContent)
                     }
                 },
@@ -78,11 +89,9 @@ fun AppNavHost(
             )
         }
 
-        composable(Screen.Fullscreen.route) { backStackEntry ->
-            val itemId = backStackEntry.arguments?.getString("itemId")?.toIntOrNull()
-
+        composable(Screen.Fullscreen.route) {
             FullscreenScreen(
-                viewModel = viewModel,
+                viewModel = detailViewModel,
                 onNavigateBack = {
                     navController.popBackStack()
                 }
@@ -92,13 +101,11 @@ fun AppNavHost(
         composable(Screen.Scan.route) {
             ScanScreen(
                 onQrCodeScanned = { scannedText ->
-                    // Save the scanned QR code
-                    viewModel.saveQrItemFromText(
+                    detailViewModel.saveScannedQrItem(
                         textContent = scannedText,
-                        acquireType = cut.the.crap.qreverywhere.shared.domain.model.AcquireType.SCANNED
-                    )
+                        acquireType = AcquireType.SCANNED
+                    ) { /* result handled internally */ }
 
-                    // Navigate to history to show the scanned item
                     navController.navigate(Screen.History.route) {
                         popUpTo(Screen.Scan.route) { inclusive = true }
                         launchSingleTop = true
@@ -109,27 +116,19 @@ fun AppNavHost(
 
         composable(Screen.Create.route) {
             CreateScreen(
-                onTextQrClick = {
-                    navController.navigate(Screen.CreateText.createRoute("text"))
-                },
-                onUrlQrClick = {
-                    navController.navigate(Screen.CreateText.createRoute("url"))
-                },
-                onPhoneQrClick = {
-                    navController.navigate(Screen.CreateText.createRoute("phone"))
-                },
-                onSmsQrClick = {
-                    navController.navigate(Screen.CreateText.createRoute("sms"))
-                },
-                onEmailQrClick = {
-                    navController.navigate(Screen.CreateEmail.route)
-                },
-                onContactQrClick = {
-                    navController.navigate(Screen.CreateVcard.route)
-                },
-                onWiFiQrClick = {
-                    navController.navigate(Screen.CreateWiFi.route)
-                }
+                onTextQrClick = { navController.navigate(Screen.CreateText.createRoute("text")) },
+                onUrlQrClick = { navController.navigate(Screen.CreateText.createRoute("url")) },
+                onPhoneQrClick = { navController.navigate(Screen.CreateText.createRoute("phone")) },
+                onSmsQrClick = { navController.navigate(Screen.CreateText.createRoute("sms")) },
+                onEmailQrClick = { navController.navigate(Screen.CreateEmail.route) },
+                onContactQrClick = { navController.navigate(Screen.CreateVcard.route) },
+                onWiFiQrClick = { navController.navigate(Screen.CreateWiFi.route) },
+                onCalendarQrClick = { navController.navigate(Screen.CreateCalendar.route) },
+                onLocationQrClick = { navController.navigate(Screen.CreateLocation.route) },
+                onMeCardQrClick = { navController.navigate(Screen.CreateMeCard.route) },
+                onAppStoreQrClick = { navController.navigate(Screen.CreateAppStoreLink.route) },
+                onPaymentQrClick = { navController.navigate(Screen.CreatePayment.route) },
+                onCryptoQrClick = { navController.navigate(Screen.CreateCrypto.route) }
             )
         }
 
@@ -137,46 +136,71 @@ fun AppNavHost(
             val qrType = backStackEntry.arguments?.getString("qrType") ?: "text"
             CreateTextScreen(
                 qrType = qrType,
-                viewModel = viewModel,
-                onQrCreated = {
-                    // Navigate to detail view after creating QR code
-                    viewModel.detailViewItem.value?.let { item ->
-                        navController.navigate(Screen.Detail.createRoute(item.id))
-                    }
-                }
+                viewModel = createViewModel,
+                onQrCreated = navigateToHistoryAfterCreate
             )
         }
 
         composable(Screen.CreateEmail.route) {
             CreateEmailScreen(
-                viewModel = viewModel,
-                onQrCreated = {
-                    viewModel.detailViewItem.value?.let { item ->
-                        navController.navigate(Screen.Detail.createRoute(item.id))
-                    }
-                }
+                viewModel = createViewModel,
+                onQrCreated = navigateToHistoryAfterCreate
             )
         }
 
         composable(Screen.CreateVcard.route) {
             CreateVcardScreen(
-                viewModel = viewModel,
-                onQrCreated = {
-                    viewModel.detailViewItem.value?.let { item ->
-                        navController.navigate(Screen.Detail.createRoute(item.id))
-                    }
-                }
+                viewModel = createViewModel,
+                onQrCreated = navigateToHistoryAfterCreate
             )
         }
 
         composable(Screen.CreateWiFi.route) {
             CreateWiFiScreen(
-                viewModel = viewModel,
-                onQrCreated = {
-                    viewModel.detailViewItem.value?.let { item ->
-                        navController.navigate(Screen.Detail.createRoute(item.id))
-                    }
-                }
+                viewModel = createViewModel,
+                onQrCreated = navigateToHistoryAfterCreate
+            )
+        }
+
+        composable(Screen.CreateCalendar.route) {
+            CreateCalendarScreen(
+                viewModel = createViewModel,
+                onQrCreated = navigateToHistoryAfterCreate
+            )
+        }
+
+        composable(Screen.CreateLocation.route) {
+            CreateLocationScreen(
+                viewModel = createViewModel,
+                onQrCreated = navigateToHistoryAfterCreate
+            )
+        }
+
+        composable(Screen.CreateMeCard.route) {
+            CreateMeCardScreen(
+                viewModel = createViewModel,
+                onQrCreated = navigateToHistoryAfterCreate
+            )
+        }
+
+        composable(Screen.CreateAppStoreLink.route) {
+            CreateAppStoreLinkScreen(
+                viewModel = createViewModel,
+                onQrCreated = navigateToHistoryAfterCreate
+            )
+        }
+
+        composable(Screen.CreatePayment.route) {
+            CreatePaymentScreen(
+                viewModel = createViewModel,
+                onQrCreated = navigateToHistoryAfterCreate
+            )
+        }
+
+        composable(Screen.CreateCrypto.route) {
+            CreateCryptoScreen(
+                viewModel = createViewModel,
+                onQrCreated = navigateToHistoryAfterCreate
             )
         }
 

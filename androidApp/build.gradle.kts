@@ -3,6 +3,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.crashlytics)
 }
 
 android {
@@ -79,8 +81,10 @@ dependencies {
     implementation(koinBom)
     implementation(libs.bundles.koin)
 
-    // Local modules
-    implementation(project(":qr_repository"))
+    // Firebase
+    implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
 
     // Camera
     implementation(libs.bundles.camerax)

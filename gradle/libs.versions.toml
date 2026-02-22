@@ -54,6 +54,11 @@ kotlinx-coroutines = "1.7.3"
 kotlinx-serialization = "1.6.2"
 kotlinx-datetime = "0.5.0"
 
+# Firebase
+firebase-bom = "33.7.0"
+google-services = "4.4.2"
+firebase-crashlytics-plugin = "3.0.2"
+
 # Testing
 kotlin-test = "2.0.21"
 androidx-test-ext-junit = "1.2.1"
@@ -132,6 +137,11 @@ kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime",
 lifecycle-viewmodel-kmp = { group = "androidx.lifecycle", name = "lifecycle-viewmodel", version.ref = "lifecycle-viewmodel-kmp" }
 navigation-compose-kmp = { module = "org.jetbrains.androidx.navigation:navigation-compose", version.ref = "navigation-compose-kmp" }
 
+# Firebase
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebase-bom" }
+firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics-ktx" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics-ktx" }
+
 # Testing
 kotlin-test = { group = "org.jetbrains.kotlin", name = "kotlin-test", version.ref = "kotlin-test" }
 kotlin-test-junit = { group = "org.jetbrains.kotlin", name = "kotlin-test-junit", version.ref = "kotlin-test" }
@@ -150,6 +160,8 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 navigation-safeargs = { id = "androidx.navigation.safeargs", version.ref = "navigation" }
 jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
 room = { id = "androidx.room", version.ref = "room" }
+google-services = { id = "com.google.gms.google-services", version.ref = "google-services" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "firebase-crashlytics-plugin" }
 
 [bundles]
 compose = [

@@ -10,13 +10,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.LocalContext
-import org.koin.androidx.compose.koinViewModel
 import org.jetbrains.compose.resources.stringResource as kmpStringResource
 import qreverywhere.shared.generated.resources.Res
 import qreverywhere.shared.generated.resources.*
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
+import cut.the.crap.qreverywhere.feature.create.CreateViewModel
+import cut.the.crap.qreverywhere.feature.detail.DetailViewModel
+import cut.the.crap.qreverywhere.feature.history.HistoryViewModel
 import cut.the.crap.qreverywhere.shared.presentation.App
-import cut.the.crap.qreverywhere.shared.presentation.viewmodel.MainViewModel
 import cut.the.crap.qreverywhere.compose.theme.QrEveryWhereTheme
 import cut.the.crap.qreverywhere.widget.QrWidgetProvider
 import org.koin.compose.koinInject
@@ -38,13 +39,17 @@ class ComposeMainActivity : ComponentActivity() {
 
         setContent {
             QrEveryWhereTheme {
-                val viewModel: MainViewModel = koinViewModel()
+                val historyViewModel: HistoryViewModel = koinInject()
+                val createViewModel: CreateViewModel = koinInject()
+                val detailViewModel: DetailViewModel = koinInject()
                 val userPreferences: UserPreferences = koinInject()
                 val context = LocalContext.current
                 val copiedMessage = kmpStringResource(Res.string.feedback_copied)
 
                 App(
-                    viewModel = viewModel,
+                    historyViewModel = historyViewModel,
+                    createViewModel = createViewModel,
+                    detailViewModel = detailViewModel,
                     userPreferences = userPreferences,
                     initialRoute = initialRoute.value,
                     initialDetailId = initialDetailId.value,

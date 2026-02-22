@@ -41,5 +41,13 @@ gradle-app.setting
 *.xcuserstate
 xcuserdata/
 
+# Firebase config (contains API keys)
+google-services.json
+GoogleService-Info.plist
+
+# Build artifacts
+*.dSYM.zip
+**/fastlane/report.xml
+
 # Temporary files
 tmp/

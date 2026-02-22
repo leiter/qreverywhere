@@ -64,8 +64,17 @@ include ':androidApp'
 
 //include ':QRCodeReaderView'
 //project(':QRCodeReaderView').projectDir = new File('../QRCodeReaderView/qrcodereaderview')
-include ':qr_repository'
-include ':contacts'
+// qr_repository module removed - migrated to shared Room database
+// include ':qr_repository'
+// contacts module removed - functionality available in shared module
+// include ':contacts'
+include ':core:base'
+include ':data:db'
+include ':feature:history'
+include ':feature:scan'
+include ':feature:create'
+include ':feature:detail'
+include ':feature:settings'
 include ':shared'
 include ':desktopApp'
 include ':webApp'

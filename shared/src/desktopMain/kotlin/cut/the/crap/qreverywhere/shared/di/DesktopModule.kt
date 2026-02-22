@@ -4,6 +4,7 @@ import cut.the.crap.qreverywhere.shared.data.RoomQrRepository
 import cut.the.crap.qreverywhere.shared.data.db.QrDatabase
 import cut.the.crap.qreverywhere.shared.data.db.createDatabase
 import cut.the.crap.qreverywhere.shared.domain.repository.QrRepository
+import cut.the.crap.qreverywhere.shared.domain.usecase.CachingQrCodeGenerator
 import cut.the.crap.qreverywhere.shared.domain.usecase.QrCodeGenerator
 import cut.the.crap.qreverywhere.shared.domain.usecase.QrCodeScanner
 import cut.the.crap.qreverywhere.shared.domain.usecase.SaveImageToFileUseCase
@@ -25,8 +26,8 @@ actual fun platformModule(): Module = module {
     single<QrDatabase> { createDatabase() }
     single<QrRepository> { RoomQrRepository(get<QrDatabase>().qrCodeDao()) }
 
-    // Platform-specific implementations
-    single<QrCodeGenerator> { DesktopQrCodeGenerator() }
+    // Platform-specific implementations with caching
+    single<QrCodeGenerator> { CachingQrCodeGenerator(DesktopQrCodeGenerator()) }
     single<QrCodeScanner> { DesktopQrCodeScanner() }
     single<SaveImageToFileUseCase> { DesktopSaveImageToFileUseCase() }
     single<UserPreferences> { DesktopUserPreferences() }

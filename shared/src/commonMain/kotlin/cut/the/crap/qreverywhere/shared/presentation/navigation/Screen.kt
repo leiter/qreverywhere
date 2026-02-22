@@ -1,9 +1,5 @@
 package cut.the.crap.qreverywhere.shared.presentation.navigation
 
-/**
- * Sealed class representing navigation destinations in the app
- * This is a shared navigation structure for Compose Multiplatform
- */
 sealed class Screen(val route: String) {
     object History : Screen("history")
     object Scan : Screen("scan")
@@ -18,6 +14,12 @@ sealed class Screen(val route: String) {
     object CreateEmail : Screen("create/email")
     object CreateVcard : Screen("create/vcard")
     object CreateWiFi : Screen("create/wifi")
+    object CreateCalendar : Screen("create/calendar")
+    object CreateLocation : Screen("create/location")
+    object CreateMeCard : Screen("create/mecard")
+    object CreateAppStoreLink : Screen("create/appstore")
+    object CreatePayment : Screen("create/payment")
+    object CreateCrypto : Screen("create/crypto")
     object Fullscreen : Screen("fullscreen/{itemId}") {
         fun createRoute(itemId: Int) = "fullscreen/$itemId"
     }
