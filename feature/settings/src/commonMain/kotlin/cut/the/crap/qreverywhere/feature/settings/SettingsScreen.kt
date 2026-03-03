@@ -12,17 +12,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -37,70 +32,51 @@ import org.jetbrains.compose.resources.stringResource
 import qreverywhere.shared.generated.resources.Res
 import qreverywhere.shared.generated.resources.*
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SettingsScreen(
     userPreferences: UserPreferences,
-    onNavigateBack: () -> Unit = {},
     onThemeChanged: (ThemePreference) -> Unit = {}
 ) {
     var currentTheme by remember { mutableStateOf(userPreferences.getThemePreference()) }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text(stringResource(Res.string.settings_title)) },
-                navigationIcon = {
-                    IconButton(onClick = onNavigateBack) {
-                        Icon(
-                            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = stringResource(Res.string.cd_back)
-                        )
-                    }
-                }
-            )
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(horizontal = 16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        item {
+            Spacer(modifier = Modifier.height(8.dp))
         }
-    ) { paddingValues ->
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
-                .padding(horizontal = 16.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
-        ) {
-            item {
-                Spacer(modifier = Modifier.height(8.dp))
-            }
 
-            item {
-                SettingsSection(title = stringResource(Res.string.settings_section_appearance)) {
-                    ThemeSelector(
-                        currentTheme = currentTheme,
-                        onThemeSelected = { theme ->
-                            currentTheme = theme
-                            userPreferences.setThemePreference(theme)
-                            onThemeChanged(theme)
-                        }
-                    )
-                }
+        item {
+            SettingsSection(title = stringResource(Res.string.settings_section_appearance)) {
+                ThemeSelector(
+                    currentTheme = currentTheme,
+                    onThemeSelected = { theme ->
+                        currentTheme = theme
+                        userPreferences.setThemePreference(theme)
+                        onThemeChanged(theme)
+                    }
+                )
             }
+        }
 
-            item {
-                SettingsSection(title = stringResource(Res.string.settings_section_about)) {
-                    SettingsInfoItem(
-                        label = stringResource(Res.string.settings_version),
-                        value = "1.0.0"
-                    )
-                    SettingsInfoItem(
-                        label = stringResource(Res.string.settings_build),
-                        value = "KMP"
-                    )
-                }
+        item {
+            SettingsSection(title = stringResource(Res.string.settings_section_about)) {
+                SettingsInfoItem(
+                    label = stringResource(Res.string.settings_version),
+                    value = "1.0.0"
+                )
+                SettingsInfoItem(
+                    label = stringResource(Res.string.settings_build),
+                    value = "KMP"
+                )
             }
+        }
 
-            item {
-                Spacer(modifier = Modifier.height(16.dp))
-            }
+        item {
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }

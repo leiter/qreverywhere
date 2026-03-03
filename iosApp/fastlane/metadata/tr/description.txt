@@ -1,0 +1,37 @@
+QR Everywhere - QR Kodları Tara ve Oluştur
+
+Hepsi bir arada QR kod arkadaşınız. Mevcut kodları anında tarayın veya saniyeler içinde kendi kodlarınızı oluşturun.
+
+ARTIK 25 DİLDE
+İngilizce, İspanyolca, Fransızca, Almanca, İtalyanca, Portekizce, Rusça, Japonca, Korece, Çince (Basitleştirilmiş ve Geleneksel), Arapça, Hintçe, Bengalce, Endonezce, Vietnamca, Tayca, Türkçe, Lehçe, Felemenkçe, Ukraynaca, Filipince, Malayca, İbranice ve Svahili dillerinde mevcuttur.
+
+QR KODLARI TARA
+• Anında tarama için kameranızı kullanın
+• Fotoğraf kitaplığınızdan resim içe aktarın
+• Şüpheli bağlantılar için URL güvenlik uyarıları
+• Tüm standart QR kod formatlarını destekler
+
+QR KODLARI OLUŞTUR
+• Metin ve URL'ler - Bağlantıları ve mesajları paylaşın
+• WiFi Ağları - Misafirlerin anında bağlanmasına izin verin
+• Kişi Kartları (vCard ve MeCard) - Bilgilerinizi paylaşın
+• E-posta - Konu satırlı önceden doldurulmuş adresler
+• Telefon Numaraları - Tek dokunuşla arama
+• Takvim Etkinlikleri - Toplantı davetiyelerini paylaşın
+• Konumlar - Etiketli GPS koordinatları
+• App Store Bağlantıları - iOS ve Android uygulama bağlantıları
+• Ödeme Bağlantıları - PayPal ve Venmo istekleri
+• Kripto Para - Bitcoin ve Ethereum adresleri
+
+DÜZENLE VE YÖNET
+• Taranan ve oluşturulan kodların tam geçmişi
+• QR kod geçmişinizde arama yapın
+• QR kodlarınızı istediğiniz zaman kaydedin ve paylaşın
+• Hızlı erişim için ana ekran widget'ı
+
+GİZLİLİK ÖNCELİKLİ
+• Hesap gerekmez
+• Veri toplama veya izleme yok
+• Her şey cihazınızda kalır
+
+Basit. Hızlı. Özel. Kendi dilinizde.

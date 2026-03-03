@@ -2,7 +2,7 @@
 # Documentation: https://docs.fastlane.tools/advanced/Appfile/
 
 app_identifier("cut.the.crap.qreverywhere")
-apple_id("your-apple-id@example.com") # Your Apple Developer email address
+apple_id("markro77@arcor.de") # Your Apple Developer email address
 team_id("K4K982LMZ9") # Your Apple Developer Team ID
 
 # For App Store Connect API (recommended over password authentication)

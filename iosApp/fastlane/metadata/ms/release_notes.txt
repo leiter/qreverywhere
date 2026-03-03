@@ -1,0 +1,15 @@
+Apa yang Baharu dalam Versi 1.1.0:
+
+KINI TERSEDIA DALAM 25 BAHASA
+QR Everywhere kini bertutur dalam bahasa anda! Sokongan penuh untuk:
+• Eropah: Inggeris, Sepanyol, Perancis, Jerman, Itali, Portugis, Belanda, Poland, Rusia, Ukraine
+• Asia: Cina (Ringkas & Tradisional), Jepun, Korea, Hindi, Bengali, Indonesia, Vietnam, Thai, Melayu, Filipina
+• Timur Tengah & Afrika: Arab, Ibrani, Turki, Swahili
+
+PENINGKATAN KESELAMATAN
+• Semakan keselamatan URL yang dipertingkatkan
+• Sokongan kebolehcapaian yang dipertingkatkan
+
+PEMBAIKAN PEPIJAT
+• Memperbaiki isu teks hardcoded
+• Meningkatkan konsistensi penyetempatan

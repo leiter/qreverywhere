@@ -1,0 +1,15 @@
+Tính năng mới trong Phiên bản 1.1.0:
+
+HIỆN CÓ 25 NGÔN NGỮ
+QR Everywhere giờ nói ngôn ngữ của bạn! Hỗ trợ đầy đủ cho:
+• Châu Âu: Anh, Tây Ban Nha, Pháp, Đức, Ý, Bồ Đào Nha, Hà Lan, Ba Lan, Nga, Ukraine
+• Châu Á: Trung Quốc (Giản thể & Phồn thể), Nhật, Hàn, Hindi, Bengali, Indonesia, Việt, Thái, Mã Lai, Philippines
+• Trung Đông & Châu Phi: Ả Rập, Hebrew, Thổ Nhĩ Kỳ, Swahili
+
+CẢI TIẾN BẢO MẬT
+• Kiểm tra bảo mật URL nâng cao
+• Hỗ trợ khả năng truy cập nâng cao
+
+SỬA LỖI
+• Sửa các vấn đề văn bản hardcoded
+• Cải thiện tính nhất quán bản địa hóa

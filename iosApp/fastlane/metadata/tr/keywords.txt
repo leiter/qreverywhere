@@ -1,0 +1,1 @@
+qr,tarayıcı,qr kod,barkod,wifi qr,vcard,qr oluşturucu,tara,qr oluştur,çok dilli

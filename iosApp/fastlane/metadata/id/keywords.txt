@@ -1,0 +1,1 @@
+qr,pemindai,kode qr,barcode,wifi qr,vcard,pembuat qr,pindai,buat qr,multibahasa

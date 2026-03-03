@@ -1,0 +1,37 @@
+QR Everywhere - Quét và Tạo Mã QR
+
+Người bạn đồng hành mã QR toàn diện của bạn. Quét mã hiện có ngay lập tức hoặc tạo mã của riêng bạn trong vài giây.
+
+HIỆN CÓ 25 NGÔN NGỮ
+Có sẵn bằng tiếng Anh, Tây Ban Nha, Pháp, Đức, Ý, Bồ Đào Nha, Nga, Nhật, Hàn, Trung Quốc (Giản thể & Phồn thể), Ả Rập, Hindi, Bengali, Indonesia, Việt, Thái, Thổ Nhĩ Kỳ, Ba Lan, Hà Lan, Ukraine, Philippines, Mã Lai, Hebrew và Swahili.
+
+QUÉT MÃ QR
+• Sử dụng camera để quét ngay lập tức
+• Nhập hình ảnh từ thư viện ảnh
+• Cảnh báo bảo mật URL cho các liên kết đáng ngờ
+• Hỗ trợ tất cả định dạng mã QR tiêu chuẩn
+
+TẠO MÃ QR
+• Văn bản & URL - Chia sẻ liên kết và tin nhắn
+• Mạng WiFi - Cho phép khách kết nối ngay
+• Thẻ liên hệ (vCard & MeCard) - Chia sẻ thông tin của bạn
+• Email - Địa chỉ đã điền sẵn với dòng tiêu đề
+• Số điện thoại - Gọi bằng một chạm
+• Sự kiện lịch - Chia sẻ lời mời họp
+• Vị trí - Tọa độ GPS với nhãn
+• Liên kết App Store - Liên kết ứng dụng iOS & Android
+• Liên kết thanh toán - Yêu cầu PayPal & Venmo
+• Tiền điện tử - Địa chỉ Bitcoin & Ethereum
+
+SẮP XẾP & QUẢN LÝ
+• Lịch sử đầy đủ các mã đã quét và tạo
+• Tìm kiếm trong lịch sử mã QR của bạn
+• Lưu và chia sẻ mã QR bất cứ lúc nào
+• Widget màn hình chính để truy cập nhanh
+
+RIÊNG TƯ ĐẦU TIÊN
+• Không cần tài khoản
+• Không thu thập dữ liệu hoặc theo dõi
+• Mọi thứ ở lại trên thiết bị của bạn
+
+Đơn giản. Nhanh chóng. Riêng tư. Bằng ngôn ngữ của bạn.

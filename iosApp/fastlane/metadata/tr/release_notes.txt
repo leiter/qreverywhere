@@ -1,0 +1,15 @@
+Sürüm 1.1.0'daki Yenilikler:
+
+ARTIK 25 DİLDE MEVCUT
+QR Everywhere artık sizin dilinizi konuşuyor! Tam destek:
+• Avrupa: İngilizce, İspanyolca, Fransızca, Almanca, İtalyanca, Portekizce, Felemenkçe, Lehçe, Rusça, Ukraynaca
+• Asya: Çince (Basitleştirilmiş ve Geleneksel), Japonca, Korece, Hintçe, Bengalce, Endonezce, Vietnamca, Tayca, Malayca, Filipince
+• Orta Doğu ve Afrika: Arapça, İbranice, Türkçe, Svahili
+
+GÜVENLİK İYİLEŞTİRMELERİ
+• Geliştirilmiş URL güvenlik kontrolü
+• Geliştirilmiş erişilebilirlik desteği
+
+HATA DÜZELTMELERİ
+• Sabit kodlanmış metin sorunları düzeltildi
+• Yerelleştirme tutarlılığı iyileştirildi

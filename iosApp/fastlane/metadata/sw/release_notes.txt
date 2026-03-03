@@ -1,0 +1,15 @@
+Nini Kipya katika Toleo 1.1.0:
+
+SASA INAPATIKANA KATIKA LUGHA 25
+QR Everywhere sasa inazungumza lugha yako! Msaada kamili kwa:
+• Ulaya: Kiingereza, Kihispania, Kifaransa, Kijerumani, Kiitaliano, Kireno, Kiholanzi, Kipolandi, Kirusi, Kiukraini
+• Asia: Kichina (Kilichorahisishwa na cha Jadi), Kijapani, Kikorea, Kihindi, Kibengali, Kiindonesia, Kivietinamu, Kithai, Kimalesia, Kifilipino
+• Mashariki ya Kati na Afrika: Kiarabu, Kiebrania, Kituruki, Kiswahili
+
+MABORESHO YA USALAMA
+• Ukaguzi wa usalama wa URL ulioboreshwa
+• Msaada wa ufikiaji ulioboreshwa
+
+MAREKEBISHO YA HITILAFU
+• Imerekebisha matatizo ya maandishi yaliyowekwa ngumu
+• Imeboresha uthabiti wa ujanibishaji

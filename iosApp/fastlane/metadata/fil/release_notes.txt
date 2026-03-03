@@ -1,0 +1,15 @@
+Ano ang Bago sa Bersyon 1.1.0:
+
+NGAYON AVAILABLE SA 25 WIKA
+Nagsasalita na ng iyong wika ang QR Everywhere! Buong suporta para sa:
+• Europa: Ingles, Espanyol, Pranses, Aleman, Italyano, Portuges, Dutch, Polish, Ruso, Ukrainian
+• Asya: Tsino (Pinasimple at Tradisyonal), Hapon, Koreano, Hindi, Bengali, Indones, Vietnamese, Thai, Malay, Filipino
+• Gitnang Silangan at Africa: Arabe, Hebrew, Turko, Swahili
+
+MGA PAGPAPABUTI SA SEGURIDAD
+• Pinahusay na pagsusuri sa kaligtasan ng URL
+• Pinahusay na suporta sa accessibility
+
+MGA PAG-AAYOS NG BUG
+• Naayos ang mga isyu sa hardcoded na text
+• Pinahusay ang pagkakapare-pareho ng lokalisasyon

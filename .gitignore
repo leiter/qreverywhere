@@ -52,10 +52,6 @@ GoogleService-Info.plist
 # Temporary files
 tmp/
 
-# Firebase config (contains API keys)
-google-services.json
-GoogleService-Info.plist
-
-# Build artifacts
-*.dSYM.zip
-**/fastlane/report.xml
+# Fastlane secrets (App Store Connect API keys)
+**/fastlane/AuthKey_*.p8
+**/fastlane/api_key.json

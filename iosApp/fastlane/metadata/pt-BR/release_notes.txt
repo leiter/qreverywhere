@@ -1,0 +1,15 @@
+Novidades na versão 1.1.0:
+
+AGORA DISPONÍVEL EM 25 IDIOMAS
+QR Everywhere agora fala seu idioma! Suporte completo para:
+• Europeu: Inglês, espanhol, francês, alemão, italiano, português, holandês, polonês, russo, ucraniano
+• Asiático: Chinês (simplificado e tradicional), japonês, coreano, hindi, bengali, indonésio, vietnamita, tailandês, malaio, filipino
+• Oriente Médio e África: Árabe, hebraico, turco, suaíli
+
+MELHORIAS DE SEGURANÇA
+• Verificação de segurança de URL aprimorada
+• Suporte de acessibilidade aprimorado
+
+CORREÇÕES DE BUGS
+• Problemas de texto codificado corrigidos
+• Consistência de localização aprimorada

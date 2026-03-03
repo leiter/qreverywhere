@@ -3,6 +3,16 @@
 
 default_platform(:ios)
 
+# App Store Connect API Key authentication
+def api_key
+  app_store_connect_api_key(
+    key_id: "68DRP2Y8RW",
+    issuer_id: "e3c717d8-00fc-4ff7-8a05-65f96d2b1562",
+    key_filepath: File.expand_path("AuthKey_68DRP2Y8RW.p8", __dir__),
+    in_house: false
+  )
+end
+
 platform :ios do
   desc "Run tests"
   lane :test do
@@ -43,6 +53,7 @@ platform :ios do
 
     # Upload to TestFlight
     upload_to_testflight(
+      api_key: api_key,
       skip_waiting_for_build_processing: true
     )
   end
@@ -58,6 +69,18 @@ platform :ios do
 
     # Upload to App Store
     upload_to_app_store(
+      api_key: api_key,
+      force: true,
+      submit_for_review: false,
+      automatic_release: false
+    )
+  end
+
+  desc "Upload metadata and screenshots only (no binary)"
+  lane :deliver_metadata do
+    upload_to_app_store(
+      api_key: api_key,
+      skip_binary_upload: true,
       force: true,
       submit_for_review: false,
       automatic_release: false

@@ -1,0 +1,1 @@
+qr,掃描器,qr碼,條碼,wifi qr,vcard,qr產生器,掃描,建立qr,多語言

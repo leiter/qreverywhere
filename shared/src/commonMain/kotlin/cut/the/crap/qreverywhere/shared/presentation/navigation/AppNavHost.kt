@@ -207,9 +207,6 @@ fun AppNavHost(
         composable(Screen.Settings.route) {
             SettingsScreen(
                 userPreferences = userPreferences,
-                onNavigateBack = {
-                    navController.popBackStack()
-                },
                 onThemeChanged = onThemeChanged
             )
         }

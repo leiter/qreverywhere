@@ -1,11 +1,16 @@
 package cut.the.crap.qreverywhere.shared
 
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.window.ComposeUIViewController
 import cut.the.crap.qreverywhere.feature.create.CreateViewModel
 import cut.the.crap.qreverywhere.feature.detail.DetailViewModel
 import cut.the.crap.qreverywhere.feature.history.HistoryViewModel
 import cut.the.crap.qreverywhere.shared.di.initKoinIos
+import cut.the.crap.qreverywhere.shared.domain.usecase.ThemePreference
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
 import cut.the.crap.qreverywhere.shared.presentation.App
 import cut.the.crap.qreverywhere.shared.presentation.theme.QrEveryWhereTheme
@@ -26,8 +31,21 @@ fun MainViewController(): UIViewController {
     return ComposeUIViewController {
         val provider = remember { IosViewModelProvider() }
 
-        // Use the shared theme from commonMain
-        QrEveryWhereTheme {
+        // Track theme preference state to trigger recomposition when changed
+        var themePreference by remember {
+            mutableStateOf(provider.userPreferences.getThemePreference())
+        }
+
+        // Determine if dark theme based on preference
+        val isSystemDark = isSystemInDarkTheme()
+        val isDarkTheme = when (themePreference) {
+            ThemePreference.LIGHT -> false
+            ThemePreference.DARK -> true
+            ThemePreference.SYSTEM -> isSystemDark
+        }
+
+        // Use the shared theme from commonMain with dynamic dark theme
+        QrEveryWhereTheme(darkTheme = isDarkTheme) {
             App(
                 historyViewModel = provider.historyViewModel,
                 createViewModel = provider.createViewModel,
@@ -38,6 +56,9 @@ fun MainViewController(): UIViewController {
                 },
                 onCopyToClipboard = { text ->
                     copyToClipboard(text)
+                },
+                onThemeChanged = { newTheme ->
+                    themePreference = newTheme
                 }
             )
         }
