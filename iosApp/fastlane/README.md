@@ -55,6 +55,14 @@ Submit a new Beta Build to TestFlight
 
 Deploy a new version to the App Store
 
+### ios deliver_metadata
+
+```sh
+[bundle exec] fastlane ios deliver_metadata
+```
+
+Upload metadata and screenshots only (no binary)
+
 ### ios bump_build
 
 ```sh

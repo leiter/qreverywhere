@@ -1,1 +1,0 @@
-qr,scanner,qr code,barcode,wifi qr,vcard,qr generator,scan,gumawa qr,maraming wika
