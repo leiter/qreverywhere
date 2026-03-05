@@ -68,6 +68,8 @@ fun DetailScreen(
     val snackbarHostState = remember { SnackbarHostState() }
     val deletedMessage = stringResource(Res.string.detail_deleted)
     val undoLabel = stringResource(Res.string.action_undo)
+    val savedMessage = stringResource(Res.string.feedback_saved)
+    val saveErrorMessage = stringResource(Res.string.feedback_save_error)
 
     // Show undo snackbar when an item is deleted
     LaunchedEffect(lastDeletedItem) {
@@ -81,6 +83,29 @@ fun DetailScreen(
                 viewModel.undoDelete()
             } else {
                 viewModel.clearLastDeletedItem()
+            }
+        }
+    }
+
+    // Show snackbar for save image result
+    LaunchedEffect(Unit) {
+        viewModel.saveQrImageEvent.collect { state ->
+            when (state) {
+                is State.Success -> {
+                    snackbarHostState.showSnackbar(
+                        message = savedMessage,
+                        duration = SnackbarDuration.Short
+                    )
+                }
+                is State.Error -> {
+                    snackbarHostState.showSnackbar(
+                        message = state.message ?: saveErrorMessage,
+                        duration = SnackbarDuration.Short
+                    )
+                }
+                is State.Loading -> {
+                    // Optionally show loading state
+                }
             }
         }
     }
