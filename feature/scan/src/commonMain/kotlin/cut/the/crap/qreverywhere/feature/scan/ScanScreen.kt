@@ -1,6 +1,7 @@
 package cut.the.crap.qreverywhere.feature.scan
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,19 +12,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SmallFloatingActionButton
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -53,7 +50,11 @@ import org.jetbrains.compose.resources.stringResource
 import qreverywhere.shared.generated.resources.Res
 import qreverywhere.shared.generated.resources.action_dismiss
 import qreverywhere.shared.generated.resources.action_ok
+import qreverywhere.shared.generated.resources.cd_torch_off
+import qreverywhere.shared.generated.resources.cd_torch_on
 import qreverywhere.shared.generated.resources.feedback_no_qr_in_image
+import qreverywhere.shared.generated.resources.ic_flashlight_off
+import qreverywhere.shared.generated.resources.ic_flashlight_on
 import qreverywhere.shared.generated.resources.ic_image_search
 import qreverywhere.shared.generated.resources.permission_camera_denied
 import qreverywhere.shared.generated.resources.permission_camera_permanently_denied
@@ -65,8 +66,6 @@ import qreverywhere.shared.generated.resources.permission_start_scanning
 import qreverywhere.shared.generated.resources.permission_start_scanning_hint
 import qreverywhere.shared.generated.resources.scan_from_file
 import qreverywhere.shared.generated.resources.scan_qr_detected
-import qreverywhere.shared.generated.resources.cd_torch_on
-import qreverywhere.shared.generated.resources.cd_torch_off
 
 @Composable
 fun ScanScreen(
@@ -154,25 +153,53 @@ fun ScanScreen(
         snackbarHost = { SnackbarHost(snackbarHostState) },
         floatingActionButton = {
             if (permissionState == CameraPermissionState.GRANTED && !hasScanned) {
-                ExtendedFloatingActionButton(
-                    onClick = handlePickImage,
-                    icon = {
-                        if (isPickingImage) {
-                            CircularProgressIndicator(
-                                modifier = Modifier.size(24.dp),
-                                strokeWidth = 2.dp,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer
+                Column(
+                    verticalArrangement = Arrangement.spacedBy(12.dp),
+                    horizontalAlignment = Alignment.End
+                ) {
+                    // Flashlight toggle button
+                    SmallFloatingActionButton(
+                        onClick = {
+                            cameraConfig = cameraConfig.copy(enableTorch = !cameraConfig.enableTorch)
+                        },
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+                        contentColor = MaterialTheme.colorScheme.onSecondaryContainer
+                    ) {
+                        Icon(
+                            painter = painterResource(
+                                if (cameraConfig.enableTorch) {
+                                    Res.drawable.ic_flashlight_on
+                                } else {
+                                    Res.drawable.ic_flashlight_off
+                                }
+                            ),
+                            contentDescription = stringResource(
+                                if (cameraConfig.enableTorch) Res.string.cd_torch_on else Res.string.cd_torch_off
                             )
-                        } else {
-                            Icon(
-                                painter = painterResource(Res.drawable.ic_image_search),
-                                contentDescription = stringResource(Res.string.scan_from_file)
-                            )
-                        }
-                    },
-                    text = { Text(stringResource(Res.string.scan_from_file)) },
-                    expanded = !isPickingImage
-                )
+                        )
+                    }
+
+                    // Scan from file button
+                    ExtendedFloatingActionButton(
+                        onClick = handlePickImage,
+                        icon = {
+                            if (isPickingImage) {
+                                CircularProgressIndicator(
+                                    modifier = Modifier.size(24.dp),
+                                    strokeWidth = 2.dp,
+                                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                                )
+                            } else {
+                                Icon(
+                                    painter = painterResource(Res.drawable.ic_image_search),
+                                    contentDescription = stringResource(Res.string.scan_from_file)
+                                )
+                            }
+                        },
+                        text = { Text(stringResource(Res.string.scan_from_file)) },
+                        expanded = !isPickingImage
+                    )
+                }
             }
         }
     ) { paddingValues ->
@@ -215,12 +242,6 @@ fun ScanScreen(
                             }
                         )
 
-                        CameraControlsOverlay(
-                            cameraConfig = cameraConfig,
-                            onConfigChange = { cameraConfig = it },
-                            modifier = Modifier.align(Alignment.TopEnd)
-                        )
-
                         ScanIndicatorOverlay(
                             modifier = Modifier.align(Alignment.Center)
                         )
@@ -253,38 +274,6 @@ fun ScanScreen(
                     )
                 }
             }
-        }
-    }
-}
-
-@Composable
-private fun CameraControlsOverlay(
-    cameraConfig: CameraConfig,
-    onConfigChange: (CameraConfig) -> Unit,
-    modifier: Modifier = Modifier
-) {
-    val torchDescription = stringResource(
-        if (cameraConfig.enableTorch) Res.string.cd_torch_on else Res.string.cd_torch_off
-    )
-    Card(
-        modifier = modifier.padding(16.dp),
-        shape = RoundedCornerShape(12.dp),
-        colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.9f)
-        ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
-    ) {
-        IconButton(
-            onClick = {
-                onConfigChange(cameraConfig.copy(enableTorch = !cameraConfig.enableTorch))
-            }
-        ) {
-            Text(
-                text = if (cameraConfig.enableTorch) "\uD83D\uDCA1" else "\uD83D\uDD26",
-                style = MaterialTheme.typography.headlineSmall,
-                color = MaterialTheme.colorScheme.primary,
-                modifier = Modifier.semantics { contentDescription = torchDescription }
-            )
         }
     }
 }
