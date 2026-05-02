@@ -1,11 +1,13 @@
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
-    alias(libs.plugins.jetbrains.compose)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.jetbrains.compose)
 }
 
 kotlin {
+
+    jvmToolchain(17)
     // Opt-in to experimental time API for kotlinx-datetime 0.7.x
     sourceSets.all {
         languageSettings.optIn("kotlin.time.ExperimentalTime")
@@ -15,7 +17,7 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "11"
+                jvmTarget = "17"
             }
         }
     }
@@ -31,7 +33,7 @@ kotlin {
     jvm("desktop") {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "11"
+                jvmTarget = "17"
             }
         }
     }
@@ -61,6 +63,9 @@ kotlin {
 
                 // Lifecycle ViewModel (KMP compatible)
                 implementation(libs.lifecycle.viewmodel.kmp)
+
+                implementation(libs.guava)
+                //implementation(libs.kotlinx.coroutines.guava)
             }
         }
 
@@ -93,7 +98,7 @@ kotlin {
                 implementation(libs.google.zxing.core)
 
                 // Firebase Crashlytics
-                implementation("com.google.firebase:firebase-crashlytics-ktx:19.3.0")
+                implementation(libs.firebase.crashlytics)
             }
         }
 
@@ -129,8 +134,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     buildFeatures {
@@ -140,6 +145,5 @@ android {
 
 compose.resources {
     publicResClass = true
-    generateResClass = always
-    packageOfResClass = "qreverywhere.shared.generated.resources"
+    packageOfResClass = "cut.the.crap.qreverywhere.core.base.generated.resources"
 }

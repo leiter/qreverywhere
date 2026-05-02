@@ -7,10 +7,13 @@ plugins {
 }
 
 kotlin {
+
+    jvmToolchain(17)
+
     jvm("desktop") {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "11"
+                jvmTarget = "17"
             }
         }
     }

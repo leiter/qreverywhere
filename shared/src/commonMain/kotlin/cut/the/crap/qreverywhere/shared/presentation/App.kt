@@ -40,8 +40,8 @@ import cut.the.crap.qreverywhere.shared.utils.DeviceOrientation
 import cut.the.crap.qreverywhere.shared.utils.getDeviceOrientation
 import cut.the.crap.qreverywhere.shared.utils.toReadableString
 import org.jetbrains.compose.resources.stringResource
-import qreverywhere.shared.generated.resources.Res
-import qreverywhere.shared.generated.resources.*
+import cut.the.crap.qreverywhere.core.base.generated.resources.Res
+import cut.the.crap.qreverywhere.core.base.generated.resources.*
 
 /**
  * Main App Composable for Compose Multiplatform

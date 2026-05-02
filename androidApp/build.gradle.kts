@@ -1,3 +1,5 @@
+import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
@@ -12,7 +14,7 @@ android {
     namespace = "cut.the.crap.qreverywhere"
     defaultConfig {
         applicationId = "cut.the.crap.qreverywhere"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 36
         versionName = "1.0"
         versionCode = 11
@@ -26,6 +28,21 @@ android {
         }
     }
 
+    val signingPropsFile = File("/home/mandroid/Videos/AA_FILES/qreverywhere_signature_prop")
+    val signingProps = Properties()
+    if (signingPropsFile.exists()) {
+        signingProps.load(FileInputStream(signingPropsFile))
+    }
+
+    signingConfigs {
+        create("release") {
+            storeFile = signingProps["storeFile"]?.let { signingPropsFile.parentFile.resolve(it as String) }
+            storePassword = signingProps["storePassword"] as String?
+            keyAlias = signingProps["keyAlias"] as String?
+            keyPassword = signingProps["keyPassword"] as String?
+        }
+    }
+
     buildTypes {
         getByName("debug") {
 //            minifyEnabled true
@@ -33,17 +50,28 @@ android {
             //proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
         }
         getByName("release") {
-            //minifyEnabled = true
-           // proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig = signingConfigs.getByName("release")
+            isMinifyEnabled = false //true // Enable R8 for code shrinking/obfuscation
+            isShrinkResources = false // true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+
+    packaging {
+        jniLibs {
+            useLegacyPackaging = false
+        }
+    }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
+
     buildFeatures {
         compose = true
     }
@@ -59,9 +87,9 @@ dependencies {
 
     // Android basics
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
+    //implementation(libs.androidx.appcompat)
     implementation(libs.google.material)
-    implementation(libs.androidx.constraintlayout)
+    //implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.preference)
     implementation(libs.androidx.security.crypto)
 

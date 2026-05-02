@@ -11,8 +11,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.LocalContext
 import org.jetbrains.compose.resources.stringResource as kmpStringResource
-import qreverywhere.shared.generated.resources.Res
-import qreverywhere.shared.generated.resources.*
+import cut.the.crap.qreverywhere.core.base.generated.resources.Res
+import cut.the.crap.qreverywhere.core.base.generated.resources.*
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
 import cut.the.crap.qreverywhere.feature.create.CreateViewModel
 import cut.the.crap.qreverywhere.feature.detail.DetailViewModel

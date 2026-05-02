@@ -31,11 +31,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import cut.the.crap.qreverywhere.core.base.generated.resources.Res
+import cut.the.crap.qreverywhere.core.base.generated.resources.cd_qr_preview
+import cut.the.crap.qreverywhere.core.base.generated.resources.history_clear_search
+import cut.the.crap.qreverywhere.core.base.generated.resources.history_empty
+import cut.the.crap.qreverywhere.core.base.generated.resources.history_no_results
+import cut.the.crap.qreverywhere.core.base.generated.resources.history_search
+import cut.the.crap.qreverywhere.core.base.generated.resources.history_search_placeholder
+import cut.the.crap.qreverywhere.core.base.generated.resources.history_type
 import cut.the.crap.qreverywhere.shared.domain.model.QrItem
 import cut.the.crap.qreverywhere.shared.utils.toImagePainter
 import org.jetbrains.compose.resources.stringResource
-import qreverywhere.shared.generated.resources.Res
-import qreverywhere.shared.generated.resources.*
 
 @Composable
 fun HistoryScreen(

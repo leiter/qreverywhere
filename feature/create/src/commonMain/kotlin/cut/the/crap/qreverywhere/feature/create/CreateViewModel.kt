@@ -10,7 +10,7 @@ import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
 import cut.the.crap.qreverywhere.shared.utils.ErrorHandler
 import cut.the.crap.qreverywhere.shared.utils.Logger
 import kotlinx.coroutines.launch
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 
 class CreateViewModel(
     private val qrRepository: QrRepository,

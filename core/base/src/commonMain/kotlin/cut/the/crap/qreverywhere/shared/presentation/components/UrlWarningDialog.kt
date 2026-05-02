@@ -20,11 +20,22 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import cut.the.crap.qreverywhere.core.base.generated.resources.Res
+import cut.the.crap.qreverywhere.core.base.generated.resources.cd_warning
+import cut.the.crap.qreverywhere.core.base.generated.resources.url_warning_cancel
+import cut.the.crap.qreverywhere.core.base.generated.resources.url_warning_check
+import cut.the.crap.qreverywhere.core.base.generated.resources.url_warning_close
+import cut.the.crap.qreverywhere.core.base.generated.resources.url_warning_dangerous
+import cut.the.crap.qreverywhere.core.base.generated.resources.url_warning_dangerous_desc
+import cut.the.crap.qreverywhere.core.base.generated.resources.url_warning_open_anyway
+import cut.the.crap.qreverywhere.core.base.generated.resources.url_warning_safe_desc
+import cut.the.crap.qreverywhere.core.base.generated.resources.url_warning_suspicious
+import cut.the.crap.qreverywhere.core.base.generated.resources.url_warning_suspicious_desc
+import cut.the.crap.qreverywhere.core.base.generated.resources.url_warning_url_prefix
+import cut.the.crap.qreverywhere.core.base.generated.resources.url_warning_warnings_label
 import cut.the.crap.qreverywhere.shared.domain.usecase.SafetyStatus
 import cut.the.crap.qreverywhere.shared.domain.usecase.UrlSafetyResult
 import org.jetbrains.compose.resources.stringResource
-import qreverywhere.shared.generated.resources.Res
-import qreverywhere.shared.generated.resources.*
 
 /**
  * Dialog showing URL safety warnings before opening a potentially dangerous link

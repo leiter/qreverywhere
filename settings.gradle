@@ -2,79 +2,27 @@ import org.gradle.api.initialization.resolve.RepositoriesMode
 
 pluginManagement {
     repositories {
-        gradlePluginPortal()
         google()
         mavenCentral()
+        gradlePluginPortal()
     }
 }
+
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         google()
         mavenCentral()
-        maven {
-            url = uri("https://maven.localazy.com/repository/release")
-        }
-        // Node.js distribution for Kotlin/Wasm
-        ivy {
-            name = "Node Distributions"
-            url = uri("https://nodejs.org/dist")
-            patternLayout {
-                artifact("v[revision]/[artifact](-v[revision]-[classifier]).[ext]")
-            }
-            metadataSources {
-                artifact()
-            }
-            content {
-                includeModule("org.nodejs", "node")
-            }
-        }
-        // Yarn distribution for Kotlin/Wasm
-        ivy {
-            name = "Yarn Distributions"
-            url = uri("https://github.com/yarnpkg/yarn/releases/download")
-            patternLayout {
-                artifact("v[revision]/[artifact](-v[revision]).[ext]")
-            }
-            metadataSources {
-                artifact()
-            }
-            content {
-                includeModule("com.yarnpkg", "yarn")
-            }
-        }
-        // Binaryen distribution for WebAssembly optimization
-        ivy {
-            name = "Binaryen Distributions"
-            url = uri("https://github.com/WebAssembly/binaryen/releases/download")
-            patternLayout {
-                artifact("version_[revision]/[artifact]-version_[revision]-[classifier].[ext]")
-            }
-            metadataSources {
-                artifact()
-            }
-            content {
-                includeModule("com.github.webassembly", "binaryen")
-            }
-        }
     }
 }
-rootProject.name = "QrEveryWhere"
-include ':androidApp'
 
-//include ':QRCodeReaderView'
-//project(':QRCodeReaderView').projectDir = new File('../QRCodeReaderView/qrcodereaderview')
-// qr_repository module removed - migrated to shared Room database
-// include ':qr_repository'
-// contacts module removed - functionality available in shared module
-// include ':contacts'
-include ':core:base'
-include ':data:db'
-include ':feature:history'
-include ':feature:scan'
-include ':feature:create'
-include ':feature:detail'
-include ':feature:settings'
-include ':shared'
-include ':desktopApp'
-include ':webApp'
+rootProject.name = "QrEveryWhere"
+include(":androidApp")
+include(":desktopApp")
+include(":shared")
+include(":core:base")
+include(":data:db")
+include(":feature:history")
+include(":feature:scan")
+include(":feature:create")
+include(":feature:detail")
+include(":feature:settings")

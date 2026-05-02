@@ -16,8 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import org.jetbrains.compose.resources.stringResource
-import qreverywhere.shared.generated.resources.Res
-import qreverywhere.shared.generated.resources.*
+import cut.the.crap.qreverywhere.core.base.generated.resources.Res
+import cut.the.crap.qreverywhere.core.base.generated.resources.*
 
 @Composable
 fun CreateScreen(

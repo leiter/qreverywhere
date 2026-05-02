@@ -28,10 +28,10 @@ import kotlinx.cinterop.ExperimentalForeignApi
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.stringResource
 import platform.AVFoundation.AVCaptureDevice
-import qreverywhere.shared.generated.resources.Res
-import qreverywhere.shared.generated.resources.camera_not_available
-import qreverywhere.shared.generated.resources.camera_simulator_hint
-import qreverywhere.shared.generated.resources.camera_starting
+import cut.the.crap.qreverywhere.core.base.generated.resources.Res
+import cut.the.crap.qreverywhere.core.base.generated.resources.camera_not_available
+import cut.the.crap.qreverywhere.core.base.generated.resources.camera_simulator_hint
+import cut.the.crap.qreverywhere.core.base.generated.resources.camera_starting
 import platform.AVFoundation.AVMediaTypeVideo
 
 /**

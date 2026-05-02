@@ -6,6 +6,9 @@ plugins {
 }
 
 kotlin {
+
+    jvmToolchain(17)
+
     // Opt-in to experimental time API for kotlinx-datetime 0.7.x
     sourceSets.all {
         languageSettings.optIn("kotlin.time.ExperimentalTime")
@@ -15,7 +18,7 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "11"
+                jvmTarget = "17"
             }
         }
     }
@@ -36,7 +39,7 @@ kotlin {
     jvm("desktop") {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "11"
+                jvmTarget = "17"
             }
         }
     }
@@ -112,7 +115,7 @@ kotlin {
                 implementation(libs.androidx.lifecycle.runtime.compose)
 
                 // Firebase Crashlytics - use direct version since BOM doesn't work in KMP
-                implementation("com.google.firebase:firebase-crashlytics-ktx:19.3.0")
+                implementation(libs.firebase.crashlytics)
             }
         }
 
@@ -152,8 +155,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     buildFeatures {

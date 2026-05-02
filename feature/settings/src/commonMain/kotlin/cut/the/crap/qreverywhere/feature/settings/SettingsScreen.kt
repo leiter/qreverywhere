@@ -26,11 +26,21 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import cut.the.crap.qreverywhere.core.base.generated.resources.Res
+import cut.the.crap.qreverywhere.core.base.generated.resources.cd_selected
+import cut.the.crap.qreverywhere.core.base.generated.resources.settings_build
+import cut.the.crap.qreverywhere.core.base.generated.resources.settings_section_about
+import cut.the.crap.qreverywhere.core.base.generated.resources.settings_section_appearance
+import cut.the.crap.qreverywhere.core.base.generated.resources.settings_theme_dark
+import cut.the.crap.qreverywhere.core.base.generated.resources.settings_theme_dark_desc
+import cut.the.crap.qreverywhere.core.base.generated.resources.settings_theme_light
+import cut.the.crap.qreverywhere.core.base.generated.resources.settings_theme_light_desc
+import cut.the.crap.qreverywhere.core.base.generated.resources.settings_theme_system
+import cut.the.crap.qreverywhere.core.base.generated.resources.settings_theme_system_desc
+import cut.the.crap.qreverywhere.core.base.generated.resources.settings_version
 import cut.the.crap.qreverywhere.shared.domain.usecase.ThemePreference
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
 import org.jetbrains.compose.resources.stringResource
-import qreverywhere.shared.generated.resources.Res
-import qreverywhere.shared.generated.resources.*
 
 @Composable
 fun SettingsScreen(

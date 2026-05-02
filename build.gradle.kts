@@ -30,6 +30,13 @@
 //    id ("org.jetbrains.kotlin.android") version '1.8.0' apply false
 //    id ('com.google.dagger.hilt.android') version '2.44' apply false
 //}
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
 
 plugins {
     alias(libs.plugins.android.application) apply false
@@ -47,3 +54,21 @@ plugins {
 //task clean(type: Delete) {
 //    delete rootProject.buildDir
 //}
+
+subprojects {
+    tasks.withType<JavaCompile>().configureEach {
+        options.compilerArgs.add("-Xlint:deprecation")
+        sourceCompatibility = "17"
+        targetCompatibility = "17"
+    }
+
+    configurations.all {
+        resolutionStrategy {
+            force("org.jetbrains.kotlin:kotlin-stdlib:2.1.20")
+            force("org.jetbrains.kotlin:kotlin-stdlib-common:2.1.20")
+            force("org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.1.20")
+            force("org.jetbrains.kotlin:kotlin-stdlib-jdk8:2.1.20")
+            force("org.jetbrains.kotlin:kotlin-reflect:2.1.20")
+        }
+    }
+}

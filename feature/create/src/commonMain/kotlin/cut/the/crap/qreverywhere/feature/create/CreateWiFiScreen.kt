@@ -34,8 +34,8 @@ import androidx.compose.ui.unit.dp
 import cut.the.crap.qreverywhere.shared.domain.model.AcquireType
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
-import qreverywhere.shared.generated.resources.Res
-import qreverywhere.shared.generated.resources.*
+import cut.the.crap.qreverywhere.core.base.generated.resources.Res
+import cut.the.crap.qreverywhere.core.base.generated.resources.*
 
 enum class WiFiSecurityType(val code: String) {
     WPA("WPA"),
@@ -136,8 +136,8 @@ fun CreateWiFiScreen(
                     IconButton(onClick = { isPasswordVisible = !isPasswordVisible }) {
                         Icon(
                             painter = painterResource(
-                                if (isPasswordVisible) Res.drawable.visibility_off
-                                else Res.drawable.visibility
+                                if (isPasswordVisible) Res.drawable.ic_visibility_off
+                                else Res.drawable.ic_visibility
                             ),
                             contentDescription = stringResource(if (isPasswordVisible) Res.string.cd_hide_password else Res.string.cd_show_password)
                         )

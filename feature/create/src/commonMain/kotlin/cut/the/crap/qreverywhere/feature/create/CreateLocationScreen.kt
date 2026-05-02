@@ -27,8 +27,8 @@ import androidx.compose.ui.unit.dp
 import cut.the.crap.qreverywhere.shared.domain.model.AcquireType
 import cut.the.crap.qreverywhere.shared.domain.model.GeoLocation
 import org.jetbrains.compose.resources.stringResource
-import qreverywhere.shared.generated.resources.Res
-import qreverywhere.shared.generated.resources.*
+import cut.the.crap.qreverywhere.core.base.generated.resources.Res
+import cut.the.crap.qreverywhere.core.base.generated.resources.*
 
 @Composable
 fun CreateLocationScreen(

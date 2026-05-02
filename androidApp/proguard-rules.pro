@@ -27,3 +27,19 @@
     public static int d(...);
     public static int e(...);
 }
+
+# Compose rules
+-keepclassmembers class  ** {
+    @androidx.compose.runtime.Composable *;
+    @androidx.compose.runtime.ReadOnlyComposable *;
+}
+
+# Keep Kotlinx Serialization (if using @Serializable)
+-keepattributes *Annotation*, EnclosingMethod, Signature
+-keepclassmembers class * {
+    *** Companion;
+}
+
+# Firebase & Crashlytics
+-keepattributes SourceFile,LineNumberTable
+-keep public class com.google.firebase.** { *; }
