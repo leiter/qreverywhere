@@ -6,8 +6,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    //alias(libs.plugins.google.services)
-    //alias(libs.plugins.firebase.crashlytics)
+    alias(libs.plugins.google.services)
+    alias(libs.plugins.firebase.crashlytics)
 }
 
 // Migrate kotlin compiler options to the new DSL
@@ -119,9 +119,9 @@ dependencies {
     implementation(libs.bundles.koin)
 
     // Firebase
-    //implementation(platform(libs.firebase.bom))
-    //implementation(libs.firebase.crashlytics)
-    //implementation(libs.firebase.analytics)
+    implementation(project.dependencies.platform(libs.firebase.bom))
+    implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.analytics)
 
     // Camera
     implementation(libs.bundles.camerax)

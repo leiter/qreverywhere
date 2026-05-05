@@ -8,8 +8,17 @@ plugins {
     alias(libs.plugins.kotlin.compose)
 }
 
+compose.resources {
+    packageOfResClass = "cut.the.crap.qreverywhere.core.base.generated.resources"
+    publicResClass = true
+}
+
 kotlin {
     jvmToolchain(21)
+
+    sourceSets.all {
+        languageSettings.optIn("kotlin.time.ExperimentalTime")
+    }
 
     // Android target
     androidTarget()
@@ -36,6 +45,8 @@ kotlin {
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material3)
+                api(compose.material)
+                api(compose.materialIconsExtended)
                 implementation(compose.ui)
                 implementation(compose.components.resources)
 
@@ -49,7 +60,7 @@ kotlin {
                 implementation(libs.napier)
 
                 // DateTime
-                implementation(libs.kotlinx.datetime)
+                api(libs.kotlinx.datetime)
             }
         }
 
@@ -63,12 +74,20 @@ kotlin {
             dependencies {
                 // Android-specific dependencies
                 implementation(libs.androidx.core.ktx)
+                implementation(libs.androidx.camera.core)
+                implementation(libs.bundles.camerax)
+                implementation(libs.google.zxing.core)
+                implementation(libs.guava)
+                implementation(libs.androidx.activity.compose)
+                implementation(project.dependencies.platform(libs.firebase.bom))
+                implementation(libs.firebase.crashlytics)
             }
         }
 
         val desktopMain by getting {
             dependencies {
                 // Desktop-specific dependencies
+                implementation(libs.google.zxing.core)
             }
         }
 

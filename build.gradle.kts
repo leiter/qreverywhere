@@ -47,8 +47,8 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform) apply false
     alias(libs.plugins.jetbrains.compose) apply false
     alias(libs.plugins.navigation.safeargs) apply false
-   // alias(libs.plugins.google.services) apply false
-    //alias(libs.plugins.firebase.crashlytics) apply false
+    alias(libs.plugins.google.services) apply false
+    alias(libs.plugins.firebase.crashlytics) apply false
 }
 
 //task clean(type: Delete) {

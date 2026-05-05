@@ -48,6 +48,9 @@ kotlin {
 
                 // Coroutines
                 implementation(libs.kotlinx.coroutines.core)
+
+                // Datetime
+                api(libs.kotlinx.datetime)
             }
         }
 
