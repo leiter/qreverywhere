@@ -138,7 +138,7 @@ fun App(
             currentRoute == Screen.CreateCrypto.route -> stringResource(Res.string.title_crypto_qr)
             currentRoute == Screen.Settings.route -> stringResource(Res.string.settings_title)
             currentRoute.startsWith("create/text/") -> {
-                val qrType = navBackStackEntry?.arguments?.getString("qrType") ?: "text"
+                val qrType = (navBackStackEntry?.arguments?.get("qrType") as? String) ?: "text"
                 when (qrType) {
                     "text" -> stringResource(Res.string.title_text_qr)
                     "url" -> stringResource(Res.string.title_url_qr)

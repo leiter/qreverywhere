@@ -64,7 +64,7 @@ fun AppNavHost(
         }
 
         composable(Screen.Detail.route) { backStackEntry ->
-            val itemId = backStackEntry.arguments?.getString("itemId")?.toIntOrNull()
+            val itemId = (backStackEntry.arguments?.get("itemId") as? String)?.toIntOrNull()
 
             DetailScreen(
                 viewModel = detailViewModel,
@@ -133,7 +133,7 @@ fun AppNavHost(
         }
 
         composable(Screen.CreateText.route) { backStackEntry ->
-            val qrType = backStackEntry.arguments?.getString("qrType") ?: "text"
+            val qrType = (backStackEntry.arguments?.get("qrType") as? String) ?: "text"
             CreateTextScreen(
                 qrType = qrType,
                 viewModel = createViewModel,
