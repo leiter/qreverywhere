@@ -1,4 +1,5 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
@@ -7,14 +8,11 @@ plugins {
 }
 
 kotlin {
-
     jvmToolchain(21)
 
     jvm("desktop") {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "21"
-            }
+        compilerOptions {
+            jvmTarget = JvmTarget.JVM_21
         }
     }
 
@@ -44,6 +42,13 @@ kotlin {
                 implementation(libs.napier)
             }
         }
+    }
+}
+
+compose {
+    resources {
+        publicResClass = true
+        generateResClass = always  // or "always" for automatic generation
     }
 }
 

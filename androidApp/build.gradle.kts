@@ -1,12 +1,20 @@
 import java.io.FileInputStream
 import java.util.Properties
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    alias(libs.plugins.google.services)
-    alias(libs.plugins.firebase.crashlytics)
+    //alias(libs.plugins.google.services)
+    //alias(libs.plugins.firebase.crashlytics)
+}
+
+// Migrate kotlin compiler options to the new DSL
+kotlin {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_21
+    }
 }
 
 android {
@@ -23,7 +31,7 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments["room.schemaLocation"] =
-                        "$projectDir/schemas"
+                    "$projectDir/schemas"
             }
         }
     }
@@ -68,9 +76,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_21
     }
 
-    kotlinOptions {
-        jvmTarget = "21"
-    }
+    // REMOVE THIS BLOCK - it's deprecated
+    // kotlinOptions {
+    //     jvmTarget = "21"
+    // }
 
     buildFeatures {
         compose = true
@@ -110,9 +119,9 @@ dependencies {
     implementation(libs.bundles.koin)
 
     // Firebase
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.crashlytics)
-    implementation(libs.firebase.analytics)
+    //implementation(platform(libs.firebase.bom))
+    //implementation(libs.firebase.crashlytics)
+    //implementation(libs.firebase.analytics)
 
     // Camera
     implementation(libs.bundles.camerax)
@@ -136,4 +145,3 @@ dependencies {
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.androidx.test.espresso.core)
 }
-

@@ -1,79 +1,61 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinJvmCompile
+
 plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.kotlin.compose)
 }
 
 kotlin {
-
     jvmToolchain(21)
-    // Opt-in to experimental time API for kotlinx-datetime 0.7.x
-    sourceSets.all {
-        languageSettings.optIn("kotlin.time.ExperimentalTime")
-    }
 
     // Android target
-    androidTarget {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "21"
-            }
-        }
-    }
+    androidTarget()
 
-    // iOS targets (no framework binary - only :shared produces the framework)
+    // iOS targets
     listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
-    )
-
-    // Desktop (JVM) target
-    jvm("desktop") {
-        compilations.all {
-            kotlinOptions {
-                jvmTarget = "21"
-            }
+    ).forEach { iosTarget ->
+        iosTarget.binaries.framework {
+            baseName = "base"
+            isStatic = true
         }
     }
+
+    // Desktop (JVM) target
+    jvm("desktop")
 
     sourceSets {
         val commonMain by getting {
             dependencies {
+                // Compose Multiplatform
+                implementation(compose.runtime)
+                implementation(compose.foundation)
+                implementation(compose.material3)
+                implementation(compose.ui)
+                implementation(compose.components.resources)
+
                 // Coroutines
                 implementation(libs.kotlinx.coroutines.core)
 
-                // DateTime - use api so it's available to dependent modules
-                api(libs.kotlinx.datetime)
-
-                // Koin DI
+                // Koin
                 implementation(libs.koin.core)
 
                 // Logging
                 implementation(libs.napier)
 
-                // Compose Multiplatform
-                implementation(compose.runtime)
-                implementation(compose.foundation)
-                implementation(compose.material3)
-                api(compose.material) // For Icons and shared components
-                implementation(compose.ui)
-                implementation(compose.components.resources)
-                implementation(compose.components.uiToolingPreview)
-
-                // Lifecycle ViewModel (KMP compatible)
-                implementation(libs.lifecycle.viewmodel.kmp)
-
-                implementation(libs.guava)
-                //implementation(libs.kotlinx.coroutines.guava)
+                // DateTime
+                implementation(libs.kotlinx.datetime)
             }
         }
 
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
-                implementation(libs.kotlinx.coroutines.test)
             }
         }
 
@@ -81,25 +63,12 @@ kotlin {
             dependencies {
                 // Android-specific dependencies
                 implementation(libs.androidx.core.ktx)
-                implementation(libs.koin.android)
+            }
+        }
 
-                // Lifecycle (Android-specific)
-                implementation(libs.androidx.lifecycle.runtime.compose)
-
-                // Activity Compose (for rememberLauncherForActivityResult)
-                implementation(libs.androidx.activity.compose)
-
-                // CameraX dependencies
-                implementation(libs.androidx.camera.camera2)
-                implementation(libs.androidx.camera.lifecycle)
-                implementation(libs.androidx.camera.view)
-                implementation(libs.androidx.camera.core)
-
-                // ZXing for QR code operations
-                implementation(libs.google.zxing.core)
-
-                // Firebase Crashlytics
-                implementation(libs.firebase.crashlytics)
+        val desktopMain by getting {
+            dependencies {
+                // Desktop-specific dependencies
             }
         }
 
@@ -111,18 +80,14 @@ kotlin {
             iosX64Main.dependsOn(this)
             iosArm64Main.dependsOn(this)
             iosSimulatorArm64Main.dependsOn(this)
-
-            dependencies {
-                // iOS-specific dependencies
-            }
         }
+    }
+}
 
-        val desktopMain by getting {
-            dependencies {
-                // ZXing for QR code detection
-                implementation(libs.google.zxing.core)
-            }
-        }
+// Configure JVM compilation tasks with the new DSL
+tasks.withType<KotlinJvmCompile>().configureEach {
+    compilerOptions {
+        jvmTarget = JvmTarget.JVM_21
     }
 }
 
@@ -138,13 +103,4 @@ android {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
     }
-
-    buildFeatures {
-        compose = true
-    }
-}
-
-compose.resources {
-    publicResClass = true
-    packageOfResClass = "cut.the.crap.qreverywhere.core.base.generated.resources"
 }
