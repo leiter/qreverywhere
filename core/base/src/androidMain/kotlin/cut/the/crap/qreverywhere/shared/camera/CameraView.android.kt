@@ -1,5 +1,6 @@
 package cut.the.crap.qreverywhere.shared.camera
 
+import android.view.Surface
 import android.view.ViewGroup
 import androidx.camera.core.CameraSelector
 import androidx.camera.core.ImageAnalysis
@@ -67,7 +68,6 @@ actual fun CameraView(
                 // Properly clean up camera resources
                 try {
                     cameraProvider?.unbindAll()
-                    previewView?.releasePointerCapture()
                     cameraExecutor.shutdown()
                     qrCodeDetector.release()
                 } catch (e: Exception) {
@@ -146,7 +146,7 @@ private fun setupCamera(
         val imageAnalysis = if (config.enableQrDetection) {
             ImageAnalysis.Builder()
                 .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
-                .setTargetRotation(previewView.display?.rotation ?: 0)
+                .setTargetRotation(previewView.display?.rotation ?: Surface.ROTATION_0)
                 .build()
                 .also { analysis ->
                     analysis.setAnalyzer(cameraExecutor, QrCodeAnalyzer(

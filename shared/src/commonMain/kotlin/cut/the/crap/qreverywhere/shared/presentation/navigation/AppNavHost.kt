@@ -63,9 +63,7 @@ fun AppNavHost(
             )
         }
 
-        composable(Screen.Detail.route) { backStackEntry ->
-            val itemId = backStackEntry.destination.route?.substringAfterLast("/")?.toIntOrNull()
-
+        composable(Screen.Detail.route) {
             DetailScreen(
                 viewModel = detailViewModel,
                 onNavigateBack = {
@@ -82,8 +80,8 @@ fun AppNavHost(
                     }
                 },
                 onFullscreenClick = {
-                    itemId?.let {
-                        navController.navigate(Screen.Fullscreen.createRoute(it))
+                    detailViewModel.detailViewItem.value?.id?.let { itemId ->
+                        navController.navigate(Screen.Fullscreen.createRoute(itemId))
                     }
                 }
             )
