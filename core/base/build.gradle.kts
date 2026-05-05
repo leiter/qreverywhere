@@ -7,7 +7,7 @@ plugins {
 
 kotlin {
 
-    jvmToolchain(17)
+    jvmToolchain(21)
     // Opt-in to experimental time API for kotlinx-datetime 0.7.x
     sourceSets.all {
         languageSettings.optIn("kotlin.time.ExperimentalTime")
@@ -17,7 +17,7 @@ kotlin {
     androidTarget {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "17"
+                jvmTarget = "21"
             }
         }
     }
@@ -33,7 +33,7 @@ kotlin {
     jvm("desktop") {
         compilations.all {
             kotlinOptions {
-                jvmTarget = "17"
+                jvmTarget = "21"
             }
         }
     }
@@ -57,6 +57,7 @@ kotlin {
                 implementation(compose.runtime)
                 implementation(compose.foundation)
                 implementation(compose.material3)
+                api(compose.material) // For Icons and shared components
                 implementation(compose.ui)
                 implementation(compose.components.resources)
                 implementation(compose.components.uiToolingPreview)
@@ -134,8 +135,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     buildFeatures {

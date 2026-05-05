@@ -43,3 +43,9 @@
 # Firebase & Crashlytics
 -keepattributes SourceFile,LineNumberTable
 -keep public class com.google.firebase.** { *; }
+
+# Keep Compose Material Icons (needed for R8 full mode)
+-keep class androidx.compose.material.icons.** { *; }
+-keep interface androidx.compose.material.icons.** { *; }
+-keep enum androidx.compose.material.icons.** { *; }
+-dontwarn androidx.compose.material.icons.**

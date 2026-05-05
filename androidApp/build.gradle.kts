@@ -17,7 +17,7 @@ android {
         minSdk = 23
         targetSdk = 36
         versionName = "1.0"
-        versionCode = 11
+        versionCode = 12
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         javaCompileOptions {
@@ -45,14 +45,14 @@ android {
 
     buildTypes {
         getByName("debug") {
-//            minifyEnabled true
-//            shrinkResources true
-            //proguardFiles getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            isMinifyEnabled = true // Enable R8 for code shrinking/obfuscation
+            isShrinkResources = true
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         getByName("release") {
             signingConfig = signingConfigs.getByName("release")
-            isMinifyEnabled = false //true // Enable R8 for code shrinking/obfuscation
-            isShrinkResources = false // true
+            isMinifyEnabled = true // Enable R8 for code shrinking/obfuscation
+            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
@@ -64,12 +64,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_17
-        targetCompatibility = JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
 
     kotlinOptions {
-        jvmTarget = "17"
+        jvmTarget = "21"
     }
 
     buildFeatures {
