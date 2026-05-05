@@ -1,5 +1,7 @@
 package cut.the.crap.qreverywhere.shared.domain.usecase
 
+import kotlinx.coroutines.flow.Flow
+
 /**
  * Platform-specific interface for user preferences
  */
@@ -29,6 +31,11 @@ interface UserPreferences {
      * @return ThemePreference indicating System, Light, or Dark
      */
     fun getThemePreference(): ThemePreference
+
+    /**
+     * Get the app theme preference as a Flow for reactive updates
+     */
+    fun getThemePreferenceFlow(): Flow<ThemePreference>
 
     /**
      * Set the app theme preference

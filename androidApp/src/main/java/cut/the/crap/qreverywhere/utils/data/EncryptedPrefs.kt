@@ -72,9 +72,16 @@ class EncryptedPrefs(context: Context, fileName: String) {
         sharedPreferences.put(FOREGROUND, value)
     }
 
+    var themePreference = sharedPreferences.getString(THEME, "SYSTEM") ?: "SYSTEM"
+    set(value) {
+        field = value
+        sharedPreferences.put(THEME, value)
+    }
+
     companion object {
         const val BACKGROUND = "background"
         const val FOREGROUND = "foreground"
+        const val THEME = "theme"
     }
 
 }

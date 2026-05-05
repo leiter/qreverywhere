@@ -2,6 +2,8 @@ package cut.the.crap.qreverywhere.shared.platform
 
 import cut.the.crap.qreverywhere.shared.domain.usecase.ThemePreference
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 
 /**
  * Android implementation of UserPreferences
@@ -13,6 +15,7 @@ class AndroidUserPreferences(
     private val setForegroundColorFn: (Int) -> Unit,
     private val setBackgroundColorFn: (Int) -> Unit,
     private val getThemePreferenceFn: () -> ThemePreference = { ThemePreference.SYSTEM },
+    private val getThemePreferenceFlowFn: () -> Flow<ThemePreference> = { flowOf(ThemePreference.SYSTEM) },
     private val setThemePreferenceFn: (ThemePreference) -> Unit = {}
 ) : UserPreferences {
 
@@ -25,6 +28,8 @@ class AndroidUserPreferences(
     override fun setBackgroundColor(color: Int) = setBackgroundColorFn(color)
 
     override fun getThemePreference(): ThemePreference = getThemePreferenceFn()
+
+    override fun getThemePreferenceFlow(): Flow<ThemePreference> = getThemePreferenceFlowFn()
 
     override fun setThemePreference(theme: ThemePreference) = setThemePreferenceFn(theme)
 }

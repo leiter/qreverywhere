@@ -8,12 +8,15 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.LocalContext
 import org.jetbrains.compose.resources.stringResource as kmpStringResource
 import cut.the.crap.qreverywhere.core.base.generated.resources.Res
 import cut.the.crap.qreverywhere.core.base.generated.resources.*
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
+import cut.the.crap.qreverywhere.shared.domain.usecase.ThemePreference
 import cut.the.crap.qreverywhere.feature.create.CreateViewModel
 import cut.the.crap.qreverywhere.feature.detail.DetailViewModel
 import cut.the.crap.qreverywhere.feature.history.HistoryViewModel
@@ -30,6 +33,7 @@ class ComposeMainActivity : ComponentActivity() {
     // Initial route based on intent (shortcuts, widgets)
     private val initialRoute = mutableStateOf<String?>(null)
     private val initialDetailId = mutableStateOf<Int?>(null)
+    private val currentTheme = mutableStateOf<ThemePreference?>(null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,11 +42,14 @@ class ComposeMainActivity : ComponentActivity() {
         handleIntent(intent)
 
         setContent {
-            QrEveryWhereTheme {
+            val userPreferences: UserPreferences = koinInject()
+            val themePreference by userPreferences.getThemePreferenceFlow().collectAsState(initial = ThemePreference.SYSTEM)
+            currentTheme.value = themePreference
+
+            QrEveryWhereTheme(themePreference = themePreference) {
                 val historyViewModel: HistoryViewModel = koinInject()
                 val createViewModel: CreateViewModel = koinInject()
                 val detailViewModel: DetailViewModel = koinInject()
-                val userPreferences: UserPreferences = koinInject()
                 val context = LocalContext.current
                 val copiedMessage = kmpStringResource(Res.string.feedback_copied)
 
@@ -65,6 +72,9 @@ class ComposeMainActivity : ComponentActivity() {
                         val clip = ClipData.newPlainText("QR Content", text)
                         clipboard.setPrimaryClip(clip)
                         Toast.makeText(context, copiedMessage, Toast.LENGTH_SHORT).show()
+                    },
+                    onThemeChanged = { theme ->
+                        currentTheme.value = theme
                     }
                 )
             }

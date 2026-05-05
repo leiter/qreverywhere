@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 import cut.the.crap.qreverywhere.shared.presentation.theme.*
+import cut.the.crap.qreverywhere.shared.domain.usecase.ThemePreference
 
 /**
  * Light color scheme based on QrEveryWhere's green theme
@@ -85,16 +86,22 @@ private val DarkColorScheme = darkColorScheme(
 /**
  * Main theme composable for QrEveryWhere app
  *
- * @param darkTheme Whether to use dark theme. Defaults to system setting
+ * @param themePreference User's theme preference (SYSTEM, LIGHT, DARK). Defaults to SYSTEM
  * @param dynamicColor Whether to use dynamic colors on Android 12+. Defaults to false to maintain brand colors
  * @param content The composable content to be themed
  */
 @Composable
 fun QrEveryWhereTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
+    themePreference: ThemePreference = ThemePreference.SYSTEM,
     dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
+    val darkTheme = when (themePreference) {
+        ThemePreference.SYSTEM -> isSystemInDarkTheme()
+        ThemePreference.LIGHT -> false
+        ThemePreference.DARK -> true
+    }
+
     val colorScheme = when {
         // Dynamic color is available on Android 12+ but we prefer brand colors
         dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
