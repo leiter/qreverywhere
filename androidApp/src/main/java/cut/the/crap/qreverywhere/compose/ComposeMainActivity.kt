@@ -68,7 +68,7 @@ class ComposeMainActivity : ComponentActivity() {
                         context.startActivity(Intent.createChooser(shareIntent, null))
                     },
                     onCopyToClipboard = { text ->
-                        val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                        val clipboard = context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
                         val clip = ClipData.newPlainText("QR Content", text)
                         clipboard.setPrimaryClip(clip)
                         Toast.makeText(context, copiedMessage, Toast.LENGTH_SHORT).show()

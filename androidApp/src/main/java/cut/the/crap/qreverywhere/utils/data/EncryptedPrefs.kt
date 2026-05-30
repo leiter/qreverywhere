@@ -2,26 +2,20 @@ package cut.the.crap.qreverywhere.utils.data
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.os.Build
+import androidx.core.content.edit
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import timber.log.Timber
 import java.io.File
-import androidx.core.content.edit
 
 class EncryptedPrefs(context: Context, fileName: String) {
 
     private val masterKeyAlias by lazy {
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) ""
-            else MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+        MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
     }
 
     private val sharedPreferences by lazy {
-        if(Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) {
-            context.getSharedPreferences(fileName, Context.MODE_PRIVATE)
-        } else {
-            createEncryptedSharedPreferences(context, fileName)
-        }
+        createEncryptedSharedPreferences(context, fileName)
     }
 
     private fun createEncryptedSharedPreferences(context: Context, fileName: String): SharedPreferences {
