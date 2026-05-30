@@ -2,6 +2,9 @@ package cut.the.crap.qreverywhere.shared.data
 
 import cut.the.crap.qreverywhere.shared.domain.usecase.ThemePreference
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import platform.Foundation.NSUserDefaults
 
 /**
@@ -10,6 +13,10 @@ import platform.Foundation.NSUserDefaults
 class IosUserPreferences : UserPreferences {
 
     private val defaults = NSUserDefaults.standardUserDefaults
+
+    private val _themeFlow by lazy {
+        MutableStateFlow(getThemePreference())
+    }
 
     companion object {
         private const val KEY_FOREGROUND_COLOR = "qr_foreground_color"
@@ -56,8 +63,11 @@ class IosUserPreferences : UserPreferences {
         }
     }
 
+    override fun getThemePreferenceFlow(): Flow<ThemePreference> = _themeFlow.asStateFlow()
+
     override fun setThemePreference(theme: ThemePreference) {
         defaults.setObject(theme.name, forKey = KEY_THEME_PREFERENCE)
         defaults.synchronize()
+        _themeFlow.value = theme
     }
 }
