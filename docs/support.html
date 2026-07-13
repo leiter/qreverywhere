@@ -24,7 +24,7 @@
         }
         h2 {
             color: #388e3c;
-            margin-top: 30px;
+            margin-top: 0;
         }
         h3 {
             color: #388e3c;
@@ -57,6 +57,10 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             margin-bottom: 25px;
+            scroll-margin-top: 20px;
+        }
+        section[dir="rtl"] {
+            text-align: right;
         }
         .contact {
             background-color: #e8f5e9;
@@ -64,6 +68,10 @@
             border-radius: 8px;
             border-left: 4px solid #2e7d32;
             margin: 15px 0 0;
+        }
+        section[dir="rtl"] .contact {
+            border-left: none;
+            border-right: 4px solid #2e7d32;
         }
         .faq p {
             margin: 0 0 16px;
@@ -84,17 +92,32 @@
 
     <div class="langbar">
         <a href="#en">English</a>
-        <a href="#es">Español</a>
-        <a href="#pt">Português (Brasil)</a>
-        <a href="#ko">한국어</a>
-        <a href="#zh">简体中文</a>
         <a href="#de">Deutsch</a>
+        <a href="#es">Español</a>
+        <a href="#fr">Français</a>
+        <a href="#it">Italiano</a>
+        <a href="#nl">Nederlands</a>
+        <a href="#pl">Polski</a>
+        <a href="#pt">Português (Brasil)</a>
+        <a href="#tr">Türkçe</a>
+        <a href="#ru">Русский</a>
+        <a href="#uk">Українська</a>
+        <a href="#ar">العربية</a>
+        <a href="#he">עברית</a>
+        <a href="#hi">हिन्दी</a>
+        <a href="#id">Bahasa Indonesia</a>
+        <a href="#ms">Bahasa Melayu</a>
+        <a href="#th">ไทย</a>
+        <a href="#vi">Tiếng Việt</a>
+        <a href="#ja">日本語</a>
+        <a href="#ko">한국어</a>
+        <a href="#zh-hans">简体中文</a>
+        <a href="#zh-hant">繁體中文</a>
     </div>
 
-    <section id="en">
+    <section id="en" lang="en">
         <h2>English</h2>
         <p>QR Everywhere lets you scan and create QR codes for text, links, Wi-Fi networks, contacts, phone numbers and e-mail. Everything is processed on your device.</p>
-
         <h3>Frequently asked questions</h3>
         <div class="faq">
             <p><strong>The camera does not open.</strong> Allow camera access under Settings → QR Everywhere → Camera. Without this permission, you can still scan a QR code from a photo.</p>
@@ -102,89 +125,15 @@
             <p><strong>Where is my history stored?</strong> Only on your device. Uninstalling the app deletes it permanently.</p>
             <p><strong>Does the app collect data?</strong> No. See the <a href="privacy-policy.html">Privacy Policy</a>.</p>
         </div>
-
         <div class="contact">
             <strong>Contact:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
             We usually reply within a few business days.
         </div>
     </section>
 
-    <section id="es">
-        <h2>Español</h2>
-        <p>QR Everywhere te permite escanear y crear códigos QR para texto, enlaces, redes Wi-Fi, contactos, números de teléfono y correo electrónico. Todo se procesa en tu dispositivo.</p>
-
-        <h3>Preguntas frecuentes</h3>
-        <div class="faq">
-            <p><strong>La cámara no se abre.</strong> Permite el acceso a la cámara en Ajustes → QR Everywhere → Cámara. Sin este permiso, todavía puedes escanear un código QR desde una foto.</p>
-            <p><strong>No se reconoce un código QR.</strong> Asegúrate de que el código esté completamente dentro del marco, bien iluminado y enfocado. Los códigos muy pequeños, borrosos o dañados pueden no ser legibles.</p>
-            <p><strong>¿Dónde se guarda mi historial?</strong> Solo en tu dispositivo. Al desinstalar la app se borra de forma permanente.</p>
-            <p><strong>¿La app recopila datos?</strong> No. Consulta la <a href="privacy-policy.html">Política de Privacidad</a>.</p>
-        </div>
-
-        <div class="contact">
-            <strong>Contacto:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
-            Normalmente respondemos en unos pocos días laborables.
-        </div>
-    </section>
-
-    <section id="pt">
-        <h2>Português (Brasil)</h2>
-        <p>O QR Everywhere permite escanear e criar códigos QR para texto, links, redes Wi-Fi, contatos, números de telefone e e-mail. Tudo é processado no seu dispositivo.</p>
-
-        <h3>Perguntas frequentes</h3>
-        <div class="faq">
-            <p><strong>A câmera não abre.</strong> Permita o acesso à câmera em Ajustes → QR Everywhere → Câmera. Sem essa permissão, você ainda pode escanear um código QR a partir de uma foto.</p>
-            <p><strong>Um código QR não é reconhecido.</strong> Verifique se o código está totalmente dentro do quadro, bem iluminado e em foco. Códigos muito pequenos, borrados ou danificados podem não ser legíveis.</p>
-            <p><strong>Onde meu histórico é armazenado?</strong> Somente no seu dispositivo. Desinstalar o app o apaga permanentemente.</p>
-            <p><strong>O app coleta dados?</strong> Não. Veja a <a href="privacy-policy.html">Política de Privacidade</a>.</p>
-        </div>
-
-        <div class="contact">
-            <strong>Contato:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
-            Normalmente respondemos em alguns dias úteis.
-        </div>
-    </section>
-
-    <section id="ko">
-        <h2>한국어</h2>
-        <p>QR Everywhere에서는 텍스트, 링크, Wi-Fi 네트워크, 연락처, 전화번호, 이메일용 QR 코드를 스캔하고 만들 수 있습니다. 모든 처리는 기기에서 이루어집니다.</p>
-
-        <h3>자주 묻는 질문</h3>
-        <div class="faq">
-            <p><strong>카메라가 열리지 않습니다.</strong> 설정 → QR Everywhere → 카메라에서 카메라 접근을 허용하세요. 권한이 없어도 사진에서 QR 코드를 스캔할 수 있습니다.</p>
-            <p><strong>QR 코드가 인식되지 않습니다.</strong> 코드가 화면 안에 완전히 들어오고, 조명이 충분하며 초점이 맞는지 확인하세요. 너무 작거나 흐릿하거나 손상된 코드는 읽지 못할 수 있습니다.</p>
-            <p><strong>기록은 어디에 저장되나요?</strong> 기기에만 저장됩니다. 앱을 삭제하면 기록도 영구적으로 삭제됩니다.</p>
-            <p><strong>앱이 데이터를 수집하나요?</strong> 아니요. <a href="privacy-policy.html">개인정보 처리방침</a>을 참고하세요.</p>
-        </div>
-
-        <div class="contact">
-            <strong>문의:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
-            보통 영업일 기준 며칠 이내에 답변드립니다.
-        </div>
-    </section>
-
-    <section id="zh">
-        <h2>简体中文</h2>
-        <p>QR Everywhere 可以扫描和创建用于文本、链接、Wi-Fi 网络、联系人、电话号码和电子邮件的二维码。所有处理均在您的设备上完成。</p>
-
-        <h3>常见问题</h3>
-        <div class="faq">
-            <p><strong>相机无法打开。</strong> 请在“设置 → QR Everywhere → 相机”中允许访问相机。即使没有该权限，您仍可以从照片中扫描二维码。</p>
-            <p><strong>无法识别二维码。</strong> 请确保二维码完整位于取景框内、光线充足且已对焦。过小、模糊或损坏的二维码可能无法读取。</p>
-            <p><strong>我的历史记录保存在哪里？</strong> 仅保存在您的设备上。卸载应用会将其永久删除。</p>
-            <p><strong>应用会收集数据吗？</strong> 不会。请参阅<a href="privacy-policy.html">隐私政策</a>。</p>
-        </div>
-
-        <div class="contact">
-            <strong>联系方式：</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
-            我们通常会在几个工作日内回复。
-        </div>
-    </section>
-
-    <section id="de">
+    <section id="de" lang="de">
         <h2>Deutsch</h2>
         <p>Mit QR Everywhere kannst du QR-Codes für Text, Links, WLAN-Netzwerke, Kontakte, Telefonnummern und E-Mail scannen und erstellen. Alles wird auf deinem Gerät verarbeitet.</p>
-
         <h3>Häufige Fragen</h3>
         <div class="faq">
             <p><strong>Die Kamera öffnet sich nicht.</strong> Erlaube den Kamerazugriff unter Einstellungen → QR Everywhere → Kamera. Ohne diese Berechtigung kannst du QR-Codes weiterhin aus einem Foto scannen.</p>
@@ -192,10 +141,329 @@
             <p><strong>Wo wird mein Verlauf gespeichert?</strong> Nur auf deinem Gerät. Beim Deinstallieren der App wird er endgültig gelöscht.</p>
             <p><strong>Sammelt die App Daten?</strong> Nein. Siehe die <a href="privacy-policy.html">Datenschutzerklärung</a>.</p>
         </div>
-
         <div class="contact">
             <strong>Kontakt:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
             Wir antworten in der Regel innerhalb weniger Werktage.
+        </div>
+    </section>
+
+    <section id="es" lang="es">
+        <h2>Español</h2>
+        <p>QR Everywhere te permite escanear y crear códigos QR para texto, enlaces, redes Wi-Fi, contactos, números de teléfono y correo electrónico. Todo se procesa en tu dispositivo.</p>
+        <h3>Preguntas frecuentes</h3>
+        <div class="faq">
+            <p><strong>La cámara no se abre.</strong> Permite el acceso a la cámara en Ajustes → QR Everywhere → Cámara. Sin este permiso, todavía puedes escanear un código QR desde una foto.</p>
+            <p><strong>No se reconoce un código QR.</strong> Asegúrate de que el código esté completamente dentro del marco, bien iluminado y enfocado. Los códigos muy pequeños, borrosos o dañados pueden no ser legibles.</p>
+            <p><strong>¿Dónde se guarda mi historial?</strong> Solo en tu dispositivo. Al desinstalar la app se borra de forma permanente.</p>
+            <p><strong>¿La app recopila datos?</strong> No. Consulta la <a href="privacy-policy.html">Política de Privacidad</a>.</p>
+        </div>
+        <div class="contact">
+            <strong>Contacto:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            Normalmente respondemos en unos pocos días laborables.
+        </div>
+    </section>
+
+    <section id="fr" lang="fr">
+        <h2>Français</h2>
+        <p>QR Everywhere vous permet de scanner et de créer des QR codes pour du texte, des liens, des réseaux Wi-Fi, des contacts, des numéros de téléphone et des e-mails. Tout est traité sur votre appareil.</p>
+        <h3>Questions fréquentes</h3>
+        <div class="faq">
+            <p><strong>La caméra ne s'ouvre pas.</strong> Autorisez l'accès à la caméra dans Réglages → QR Everywhere → Appareil photo. Sans cette autorisation, vous pouvez toujours scanner un QR code à partir d'une photo.</p>
+            <p><strong>Un QR code n'est pas reconnu.</strong> Vérifiez que le code est entièrement dans le cadre, bien éclairé et net. Les codes très petits, flous ou endommagés peuvent être illisibles.</p>
+            <p><strong>Où mon historique est-il enregistré ?</strong> Uniquement sur votre appareil. La désinstallation de l'app le supprime définitivement.</p>
+            <p><strong>L'app collecte-t-elle des données ?</strong> Non. Consultez la <a href="privacy-policy.html">politique de confidentialité</a>.</p>
+        </div>
+        <div class="contact">
+            <strong>Contact :</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            Nous répondons généralement sous quelques jours ouvrés.
+        </div>
+    </section>
+
+    <section id="it" lang="it">
+        <h2>Italiano</h2>
+        <p>QR Everywhere ti permette di scansionare e creare codici QR per testo, link, reti Wi-Fi, contatti, numeri di telefono ed e-mail. Tutto viene elaborato sul tuo dispositivo.</p>
+        <h3>Domande frequenti</h3>
+        <div class="faq">
+            <p><strong>La fotocamera non si apre.</strong> Consenti l'accesso alla fotocamera in Impostazioni → QR Everywhere → Fotocamera. Senza questa autorizzazione puoi comunque scansionare un codice QR da una foto.</p>
+            <p><strong>Un codice QR non viene riconosciuto.</strong> Assicurati che il codice sia completamente all'interno dell'inquadratura, ben illuminato e a fuoco. I codici molto piccoli, sfocati o danneggiati potrebbero non essere leggibili.</p>
+            <p><strong>Dove viene salvata la cronologia?</strong> Solo sul tuo dispositivo. Disinstallando l'app viene eliminata definitivamente.</p>
+            <p><strong>L'app raccoglie dati?</strong> No. Consulta l'<a href="privacy-policy.html">Informativa sulla privacy</a>.</p>
+        </div>
+        <div class="contact">
+            <strong>Contatto:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            Di solito rispondiamo entro pochi giorni lavorativi.
+        </div>
+    </section>
+
+    <section id="nl" lang="nl">
+        <h2>Nederlands</h2>
+        <p>Met QR Everywhere kun je QR-codes scannen en maken voor tekst, links, wifi-netwerken, contacten, telefoonnummers en e-mail. Alles wordt op je apparaat verwerkt.</p>
+        <h3>Veelgestelde vragen</h3>
+        <div class="faq">
+            <p><strong>De camera gaat niet open.</strong> Geef toegang tot de camera via Instellingen → QR Everywhere → Camera. Zonder deze toestemming kun je nog steeds een QR-code vanaf een foto scannen.</p>
+            <p><strong>Een QR-code wordt niet herkend.</strong> Zorg dat de code volledig in beeld is, goed verlicht en scherp. Zeer kleine, wazige of beschadigde codes zijn mogelijk niet leesbaar.</p>
+            <p><strong>Waar wordt mijn geschiedenis bewaard?</strong> Alleen op je apparaat. Bij het verwijderen van de app wordt deze definitief gewist.</p>
+            <p><strong>Verzamelt de app gegevens?</strong> Nee. Zie het <a href="privacy-policy.html">privacybeleid</a>.</p>
+        </div>
+        <div class="contact">
+            <strong>Contact:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            We reageren meestal binnen enkele werkdagen.
+        </div>
+    </section>
+
+    <section id="pl" lang="pl">
+        <h2>Polski</h2>
+        <p>QR Everywhere pozwala skanować i tworzyć kody QR dla tekstu, linków, sieci Wi-Fi, kontaktów, numerów telefonu i adresów e-mail. Wszystko jest przetwarzane na Twoim urządzeniu.</p>
+        <h3>Najczęstsze pytania</h3>
+        <div class="faq">
+            <p><strong>Aparat się nie otwiera.</strong> Zezwól na dostęp do aparatu w Ustawienia → QR Everywhere → Aparat. Bez tego uprawnienia nadal możesz zeskanować kod QR ze zdjęcia.</p>
+            <p><strong>Kod QR nie jest rozpoznawany.</strong> Upewnij się, że kod jest w całości w kadrze, dobrze oświetlony i ostry. Bardzo małe, rozmyte lub uszkodzone kody mogą być nieczytelne.</p>
+            <p><strong>Gdzie zapisywana jest historia?</strong> Wyłącznie na Twoim urządzeniu. Odinstalowanie aplikacji trwale ją usuwa.</p>
+            <p><strong>Czy aplikacja zbiera dane?</strong> Nie. Zobacz <a href="privacy-policy.html">politykę prywatności</a>.</p>
+        </div>
+        <div class="contact">
+            <strong>Kontakt:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            Zazwyczaj odpowiadamy w ciągu kilku dni roboczych.
+        </div>
+    </section>
+
+    <section id="pt" lang="pt-BR">
+        <h2>Português (Brasil)</h2>
+        <p>O QR Everywhere permite escanear e criar códigos QR para texto, links, redes Wi-Fi, contatos, números de telefone e e-mail. Tudo é processado no seu dispositivo.</p>
+        <h3>Perguntas frequentes</h3>
+        <div class="faq">
+            <p><strong>A câmera não abre.</strong> Permita o acesso à câmera em Ajustes → QR Everywhere → Câmera. Sem essa permissão, você ainda pode escanear um código QR a partir de uma foto.</p>
+            <p><strong>Um código QR não é reconhecido.</strong> Verifique se o código está totalmente dentro do quadro, bem iluminado e em foco. Códigos muito pequenos, borrados ou danificados podem não ser legíveis.</p>
+            <p><strong>Onde meu histórico é armazenado?</strong> Somente no seu dispositivo. Desinstalar o app o apaga permanentemente.</p>
+            <p><strong>O app coleta dados?</strong> Não. Veja a <a href="privacy-policy.html">Política de Privacidade</a>.</p>
+        </div>
+        <div class="contact">
+            <strong>Contato:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            Normalmente respondemos em alguns dias úteis.
+        </div>
+    </section>
+
+    <section id="tr" lang="tr">
+        <h2>Türkçe</h2>
+        <p>QR Everywhere ile metin, bağlantı, Wi-Fi ağları, kişiler, telefon numaraları ve e-posta için QR kodları tarayabilir ve oluşturabilirsiniz. Her şey cihazınızda işlenir.</p>
+        <h3>Sık sorulan sorular</h3>
+        <div class="faq">
+            <p><strong>Kamera açılmıyor.</strong> Ayarlar → QR Everywhere → Kamera bölümünden kamera erişimine izin verin. Bu izin olmadan da bir fotoğraftan QR kod tarayabilirsiniz.</p>
+            <p><strong>QR kod tanınmıyor.</strong> Kodun tamamen çerçeve içinde, iyi aydınlatılmış ve net olduğundan emin olun. Çok küçük, bulanık veya hasarlı kodlar okunamayabilir.</p>
+            <p><strong>Geçmişim nerede saklanıyor?</strong> Yalnızca cihazınızda. Uygulamayı kaldırdığınızda kalıcı olarak silinir.</p>
+            <p><strong>Uygulama veri topluyor mu?</strong> Hayır. <a href="privacy-policy.html">Gizlilik Politikası</a>'na bakın.</p>
+        </div>
+        <div class="contact">
+            <strong>İletişim:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            Genellikle birkaç iş günü içinde yanıt veriyoruz.
+        </div>
+    </section>
+
+    <section id="ru" lang="ru">
+        <h2>Русский</h2>
+        <p>QR Everywhere позволяет сканировать и создавать QR-коды для текста, ссылок, сетей Wi-Fi, контактов, номеров телефонов и электронной почты. Все обрабатывается на вашем устройстве.</p>
+        <h3>Часто задаваемые вопросы</h3>
+        <div class="faq">
+            <p><strong>Камера не открывается.</strong> Разрешите доступ к камере в «Настройки → QR Everywhere → Камера». Без этого разрешения вы все равно можете отсканировать QR-код с фотографии.</p>
+            <p><strong>QR-код не распознается.</strong> Убедитесь, что код полностью попадает в кадр, хорошо освещен и находится в фокусе. Очень маленькие, размытые или поврежденные коды могут не читаться.</p>
+            <p><strong>Где хранится история?</strong> Только на вашем устройстве. При удалении приложения она удаляется безвозвратно.</p>
+            <p><strong>Собирает ли приложение данные?</strong> Нет. См. <a href="privacy-policy.html">политику конфиденциальности</a>.</p>
+        </div>
+        <div class="contact">
+            <strong>Контакт:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            Обычно мы отвечаем в течение нескольких рабочих дней.
+        </div>
+    </section>
+
+    <section id="uk" lang="uk">
+        <h2>Українська</h2>
+        <p>QR Everywhere дає змогу сканувати та створювати QR-коди для тексту, посилань, мереж Wi-Fi, контактів, номерів телефонів і електронної пошти. Усе обробляється на вашому пристрої.</p>
+        <h3>Поширені запитання</h3>
+        <div class="faq">
+            <p><strong>Камера не відкривається.</strong> Дозвольте доступ до камери в «Налаштування → QR Everywhere → Камера». Без цього дозволу ви все одно можете відсканувати QR-код із фотографії.</p>
+            <p><strong>QR-код не розпізнається.</strong> Переконайтеся, що код повністю в кадрі, добре освітлений і у фокусі. Дуже малі, розмиті або пошкоджені коди можуть бути нечитабельними.</p>
+            <p><strong>Де зберігається історія?</strong> Лише на вашому пристрої. Після видалення програми вона зникає назавжди.</p>
+            <p><strong>Чи збирає програма дані?</strong> Ні. Див. <a href="privacy-policy.html">політику конфіденційності</a>.</p>
+        </div>
+        <div class="contact">
+            <strong>Контакт:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            Зазвичай ми відповідаємо протягом кількох робочих днів.
+        </div>
+    </section>
+
+    <section id="ar" lang="ar" dir="rtl">
+        <h2>العربية</h2>
+        <p>يتيح لك تطبيق QR Everywhere مسح وإنشاء رموز QR للنصوص والروابط وشبكات Wi‑Fi وجهات الاتصال وأرقام الهواتف والبريد الإلكتروني. تتم معالجة كل شيء على جهازك.</p>
+        <h3>الأسئلة الشائعة</h3>
+        <div class="faq">
+            <p><strong>الكاميرا لا تفتح.</strong> اسمح بالوصول إلى الكاميرا من «الإعدادات ← QR Everywhere ← الكاميرا». وبدون هذا الإذن، لا يزال بإمكانك مسح رمز QR من صورة.</p>
+            <p><strong>لا يتم التعرف على رمز QR.</strong> تأكد من أن الرمز داخل الإطار بالكامل، وأن الإضاءة جيدة والصورة واضحة. قد يتعذر قراءة الرموز الصغيرة جدًا أو الضبابية أو التالفة.</p>
+            <p><strong>أين يُحفظ السجل الخاص بي؟</strong> على جهازك فقط. وإلغاء تثبيت التطبيق يحذفه نهائيًا.</p>
+            <p><strong>هل يجمع التطبيق بيانات؟</strong> لا. راجع <a href="privacy-policy.html">سياسة الخصوصية</a>.</p>
+        </div>
+        <div class="contact">
+            <strong>التواصل:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            نرد عادةً في غضون أيام عمل قليلة.
+        </div>
+    </section>
+
+    <section id="he" lang="he" dir="rtl">
+        <h2>עברית</h2>
+        <p>‏QR Everywhere מאפשר לסרוק וליצור קודי QR לטקסט, לקישורים, לרשתות Wi‑Fi, לאנשי קשר, למספרי טלפון ולדוא״ל. הכול מעובד במכשיר שלך.</p>
+        <h3>שאלות נפוצות</h3>
+        <div class="faq">
+            <p><strong>המצלמה לא נפתחת.</strong> אפשר גישה למצלמה תחת «הגדרות ← QR Everywhere ← מצלמה». גם ללא ההרשאה הזו ניתן לסרוק קוד QR מתוך תמונה.</p>
+            <p><strong>קוד QR לא מזוהה.</strong> ודא שהקוד נמצא כולו בתוך המסגרת, מואר היטב וממוקד. קודים קטנים מאוד, מטושטשים או פגומים עלולים להיות בלתי קריאים.</p>
+            <p><strong>היכן נשמרת ההיסטוריה שלי?</strong> רק במכשיר שלך. הסרת האפליקציה מוחקת אותה לצמיתות.</p>
+            <p><strong>האם האפליקציה אוספת נתונים?</strong> לא. ראה את <a href="privacy-policy.html">מדיניות הפרטיות</a>.</p>
+        </div>
+        <div class="contact">
+            <strong>יצירת קשר:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            בדרך כלל נענה בתוך כמה ימי עסקים.
+        </div>
+    </section>
+
+    <section id="hi" lang="hi">
+        <h2>हिन्दी</h2>
+        <p>QR Everywhere से आप टेक्स्ट, लिंक, Wi‑Fi नेटवर्क, संपर्क, फ़ोन नंबर और ईमेल के लिए QR कोड स्कैन और बना सकते हैं। सब कुछ आपके डिवाइस पर ही प्रोसेस होता है।</p>
+        <h3>अक्सर पूछे जाने वाले प्रश्न</h3>
+        <div class="faq">
+            <p><strong>कैमरा नहीं खुलता।</strong> सेटिंग्स → QR Everywhere → कैमरा में कैमरा एक्सेस की अनुमति दें। इस अनुमति के बिना भी आप फ़ोटो से QR कोड स्कैन कर सकते हैं।</p>
+            <p><strong>QR कोड पहचाना नहीं जा रहा।</strong> सुनिश्चित करें कि कोड पूरी तरह फ़्रेम के भीतर हो, पर्याप्त रोशनी हो और फ़ोकस सही हो। बहुत छोटे, धुंधले या क्षतिग्रस्त कोड पढ़े नहीं जा सकते।</p>
+            <p><strong>मेरा इतिहास कहाँ सहेजा जाता है?</strong> केवल आपके डिवाइस पर। ऐप हटाने पर यह स्थायी रूप से मिट जाता है।</p>
+            <p><strong>क्या ऐप डेटा एकत्र करता है?</strong> नहीं। <a href="privacy-policy.html">गोपनीयता नीति</a> देखें।</p>
+        </div>
+        <div class="contact">
+            <strong>संपर्क:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            हम आमतौर पर कुछ कार्यदिवसों में उत्तर देते हैं।
+        </div>
+    </section>
+
+    <section id="id" lang="id">
+        <h2>Bahasa Indonesia</h2>
+        <p>QR Everywhere memungkinkan Anda memindai dan membuat kode QR untuk teks, tautan, jaringan Wi‑Fi, kontak, nomor telepon, dan email. Semuanya diproses di perangkat Anda.</p>
+        <h3>Pertanyaan yang sering diajukan</h3>
+        <div class="faq">
+            <p><strong>Kamera tidak terbuka.</strong> Izinkan akses kamera di Pengaturan → QR Everywhere → Kamera. Tanpa izin ini, Anda tetap dapat memindai kode QR dari foto.</p>
+            <p><strong>Kode QR tidak dikenali.</strong> Pastikan kode sepenuhnya berada di dalam bingkai, cukup terang, dan fokus. Kode yang sangat kecil, buram, atau rusak mungkin tidak terbaca.</p>
+            <p><strong>Di mana riwayat saya disimpan?</strong> Hanya di perangkat Anda. Menghapus instalasi aplikasi akan menghapusnya secara permanen.</p>
+            <p><strong>Apakah aplikasi mengumpulkan data?</strong> Tidak. Lihat <a href="privacy-policy.html">Kebijakan Privasi</a>.</p>
+        </div>
+        <div class="contact">
+            <strong>Kontak:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            Kami biasanya membalas dalam beberapa hari kerja.
+        </div>
+    </section>
+
+    <section id="ms" lang="ms">
+        <h2>Bahasa Melayu</h2>
+        <p>QR Everywhere membolehkan anda mengimbas dan mencipta kod QR untuk teks, pautan, rangkaian Wi‑Fi, kenalan, nombor telefon dan e-mel. Semuanya diproses pada peranti anda.</p>
+        <h3>Soalan lazim</h3>
+        <div class="faq">
+            <p><strong>Kamera tidak dibuka.</strong> Benarkan akses kamera di Tetapan → QR Everywhere → Kamera. Tanpa kebenaran ini, anda masih boleh mengimbas kod QR daripada foto.</p>
+            <p><strong>Kod QR tidak dikenali.</strong> Pastikan kod berada sepenuhnya di dalam bingkai, mempunyai pencahayaan yang baik dan fokus. Kod yang terlalu kecil, kabur atau rosak mungkin tidak dapat dibaca.</p>
+            <p><strong>Di manakah sejarah saya disimpan?</strong> Hanya pada peranti anda. Menyahpasang aplikasi akan memadamkannya secara kekal.</p>
+            <p><strong>Adakah aplikasi mengumpul data?</strong> Tidak. Lihat <a href="privacy-policy.html">Dasar Privasi</a>.</p>
+        </div>
+        <div class="contact">
+            <strong>Hubungi:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            Kami biasanya membalas dalam beberapa hari bekerja.
+        </div>
+    </section>
+
+    <section id="th" lang="th">
+        <h2>ไทย</h2>
+        <p>QR Everywhere ให้คุณสแกนและสร้างคิวอาร์โค้ดสำหรับข้อความ ลิงก์ เครือข่าย Wi‑Fi รายชื่อติดต่อ หมายเลขโทรศัพท์ และอีเมล ทุกอย่างประมวลผลบนอุปกรณ์ของคุณ</p>
+        <h3>คำถามที่พบบ่อย</h3>
+        <div class="faq">
+            <p><strong>กล้องไม่เปิด</strong> โปรดอนุญาตการเข้าถึงกล้องที่ การตั้งค่า → QR Everywhere → กล้อง หากไม่มีสิทธิ์นี้ คุณยังสามารถสแกนคิวอาร์โค้ดจากรูปภาพได้</p>
+            <p><strong>สแกนคิวอาร์โค้ดไม่ได้</strong> ตรวจสอบว่าคิวอาร์โค้ดอยู่ในกรอบทั้งหมด มีแสงเพียงพอ และภาพคมชัด โค้ดที่เล็กมาก เบลอ หรือเสียหายอาจอ่านไม่ได้</p>
+            <p><strong>ประวัติของฉันถูกเก็บไว้ที่ใด</strong> เก็บไว้บนอุปกรณ์ของคุณเท่านั้น การถอนการติดตั้งแอปจะลบข้อมูลอย่างถาวร</p>
+            <p><strong>แอปเก็บข้อมูลหรือไม่</strong> ไม่ ดู<a href="privacy-policy.html">นโยบายความเป็นส่วนตัว</a></p>
+        </div>
+        <div class="contact">
+            <strong>ติดต่อ:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            โดยปกติเราจะตอบกลับภายในไม่กี่วันทำการ
+        </div>
+    </section>
+
+    <section id="vi" lang="vi">
+        <h2>Tiếng Việt</h2>
+        <p>QR Everywhere cho phép bạn quét và tạo mã QR cho văn bản, liên kết, mạng Wi‑Fi, danh bạ, số điện thoại và email. Mọi thứ đều được xử lý trên thiết bị của bạn.</p>
+        <h3>Câu hỏi thường gặp</h3>
+        <div class="faq">
+            <p><strong>Máy ảnh không mở.</strong> Hãy cho phép truy cập máy ảnh trong Cài đặt → QR Everywhere → Máy ảnh. Nếu không có quyền này, bạn vẫn có thể quét mã QR từ ảnh.</p>
+            <p><strong>Không nhận dạng được mã QR.</strong> Hãy đảm bảo mã nằm trọn trong khung hình, đủ sáng và rõ nét. Mã quá nhỏ, bị mờ hoặc hư hỏng có thể không đọc được.</p>
+            <p><strong>Lịch sử của tôi được lưu ở đâu?</strong> Chỉ trên thiết bị của bạn. Gỡ cài đặt ứng dụng sẽ xóa vĩnh viễn lịch sử.</p>
+            <p><strong>Ứng dụng có thu thập dữ liệu không?</strong> Không. Xem <a href="privacy-policy.html">Chính sách quyền riêng tư</a>.</p>
+        </div>
+        <div class="contact">
+            <strong>Liên hệ:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            Chúng tôi thường phản hồi trong vòng vài ngày làm việc.
+        </div>
+    </section>
+
+    <section id="ja" lang="ja">
+        <h2>日本語</h2>
+        <p>QR Everywhere では、テキスト、リンク、Wi‑Fi ネットワーク、連絡先、電話番号、メール用の QR コードをスキャン・作成できます。すべての処理は端末上で行われます。</p>
+        <h3>よくある質問</h3>
+        <div class="faq">
+            <p><strong>カメラが起動しません。</strong> 「設定 → QR Everywhere → カメラ」でカメラへのアクセスを許可してください。この権限がなくても、写真から QR コードをスキャンできます。</p>
+            <p><strong>QR コードが認識されません。</strong> コード全体がフレーム内に収まり、十分な明るさとピントがあることを確認してください。極端に小さい、ぼやけた、または破損したコードは読み取れない場合があります。</p>
+            <p><strong>履歴はどこに保存されますか？</strong> 端末内のみに保存されます。アプリを削除すると完全に消去されます。</p>
+            <p><strong>アプリはデータを収集しますか？</strong> いいえ。<a href="privacy-policy.html">プライバシーポリシー</a>をご覧ください。</p>
+        </div>
+        <div class="contact">
+            <strong>お問い合わせ:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            通常、数営業日以内に返信いたします。
+        </div>
+    </section>
+
+    <section id="ko" lang="ko">
+        <h2>한국어</h2>
+        <p>QR Everywhere에서는 텍스트, 링크, Wi‑Fi 네트워크, 연락처, 전화번호, 이메일용 QR 코드를 스캔하고 만들 수 있습니다. 모든 처리는 기기에서 이루어집니다.</p>
+        <h3>자주 묻는 질문</h3>
+        <div class="faq">
+            <p><strong>카메라가 열리지 않습니다.</strong> 설정 → QR Everywhere → 카메라에서 카메라 접근을 허용하세요. 권한이 없어도 사진에서 QR 코드를 스캔할 수 있습니다.</p>
+            <p><strong>QR 코드가 인식되지 않습니다.</strong> 코드가 화면 안에 완전히 들어오고, 조명이 충분하며 초점이 맞는지 확인하세요. 너무 작거나 흐릿하거나 손상된 코드는 읽지 못할 수 있습니다.</p>
+            <p><strong>기록은 어디에 저장되나요?</strong> 기기에만 저장됩니다. 앱을 삭제하면 기록도 영구적으로 삭제됩니다.</p>
+            <p><strong>앱이 데이터를 수집하나요?</strong> 아니요. <a href="privacy-policy.html">개인정보 처리방침</a>을 참고하세요.</p>
+        </div>
+        <div class="contact">
+            <strong>문의:</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            보통 영업일 기준 며칠 이내에 답변드립니다.
+        </div>
+    </section>
+
+    <section id="zh-hans" lang="zh-Hans">
+        <h2>简体中文</h2>
+        <p>QR Everywhere 可以扫描和创建用于文本、链接、Wi‑Fi 网络、联系人、电话号码和电子邮件的二维码。所有处理均在您的设备上完成。</p>
+        <h3>常见问题</h3>
+        <div class="faq">
+            <p><strong>相机无法打开。</strong> 请在“设置 → QR Everywhere → 相机”中允许访问相机。即使没有该权限，您仍可以从照片中扫描二维码。</p>
+            <p><strong>无法识别二维码。</strong> 请确保二维码完整位于取景框内、光线充足且已对焦。过小、模糊或损坏的二维码可能无法读取。</p>
+            <p><strong>我的历史记录保存在哪里？</strong> 仅保存在您的设备上。卸载应用会将其永久删除。</p>
+            <p><strong>应用会收集数据吗？</strong> 不会。请参阅<a href="privacy-policy.html">隐私政策</a>。</p>
+        </div>
+        <div class="contact">
+            <strong>联系方式：</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            我们通常会在几个工作日内回复。
+        </div>
+    </section>
+
+    <section id="zh-hant" lang="zh-Hant">
+        <h2>繁體中文</h2>
+        <p>QR Everywhere 可以掃描和建立用於文字、連結、Wi‑Fi 網路、聯絡人、電話號碼和電子郵件的 QR Code。所有處理均在您的裝置上完成。</p>
+        <h3>常見問題</h3>
+        <div class="faq">
+            <p><strong>相機無法開啟。</strong> 請在「設定 → QR Everywhere → 相機」中允許存取相機。即使沒有該權限，您仍可從照片中掃描 QR Code。</p>
+            <p><strong>無法辨識 QR Code。</strong> 請確認 QR Code 完整位於取景框內、光線充足且已對焦。過小、模糊或損毀的 QR Code 可能無法讀取。</p>
+            <p><strong>我的紀錄儲存在哪裡？</strong> 僅儲存在您的裝置上。解除安裝應用程式會將其永久刪除。</p>
+            <p><strong>應用程式會收集資料嗎？</strong> 不會。請參閱<a href="privacy-policy.html">隱私權政策</a>。</p>
+        </div>
+        <div class="contact">
+            <strong>聯絡方式：</strong> <a href="mailto:qreverywhere@cutthecrap.link">qreverywhere@cutthecrap.link</a><br>
+            我們通常會在幾個工作天內回覆。
         </div>
     </section>
 
