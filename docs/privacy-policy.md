@@ -57,7 +57,7 @@ We may update this Privacy Policy from time to time. Any changes will be reflect
 
 If you have questions about this Privacy Policy, please contact us at:
 
-**Email**: [your-email@example.com]
+**Email**: [qreverywhere@cutthecrap.link](mailto:qreverywhere@cutthecrap.link)
 
 **GitHub**: [https://github.com/leiter/qreverywhere](https://github.com/leiter/qreverywhere)
 
