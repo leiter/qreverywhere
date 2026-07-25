@@ -40,6 +40,7 @@ gradle-app.setting
 # Xcode user-specific files
 *.xcuserstate
 xcuserdata/
+**/*.xcodeproj/project.xcworkspace/
 
 # Firebase config (contains API keys)
 google-services.json
