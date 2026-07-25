@@ -8,7 +8,7 @@ source in this repo (see "Evidence" at the bottom), not assumed.
 | App name | QR Everywhere |
 | Bundle ID | `cut.the.crap.qreverywhere` |
 | Team ID | `K4K982LMZ9` |
-| Version / Build | 1.1 / 10 (see "Open items" — the project has a version mismatch) |
+| Version / Build | 1.0 / 10 |
 | Primary category | Utilities |
 | Secondary category | Productivity |
 | Copyright | 2026 Marco Leiter |
@@ -132,12 +132,11 @@ Support contact on the page: `qreverywhere@cutthecrap.link`.
 
 1. **App Review phone number.** I did not invent one. Add it in App Store Connect, or create
    `iosApp/fastlane/metadata/review_information/phone_number.txt` so `deliver` uploads it.
-2. **Version number mismatch.** `iosApp/iosApp/Info.plist` ships `1.1` / build `10`, but
-   `project.pbxproj` says `MARKETING_VERSION = 1.1.0` and `CURRENT_PROJECT_VERSION = 8`. Because
-   the target uses `INFOPLIST_FILE`, the **Info.plist values are what ship** and the build settings
-   are dead — which also means fastlane's `increment_build_number` silently changes nothing. Decide
-   on one source of truth. Also consider whether a first-ever release should be called 1.1 rather
-   than 1.0.
+2. **Build numbering for future releases.** Version is settled at 1.0 / build 10, consistent in
+   both `Info.plist` and `project.pbxproj`. But because the target uses `INFOPLIST_FILE`, only the
+   Info.plist values ship, so fastlane's `increment_build_number` (which edits the pbxproj) has no
+   effect on the binary. Bump `CFBundleVersion` by hand, or point the plist at
+   `$(MARKETING_VERSION)` / `$(CURRENT_PROJECT_VERSION)`.
 3. **Screenshots.** Not resolved — details below.
 4. **Copyright name.** I used "2026 Marco Leiter"; it must match the legal entity on the developer
    account.

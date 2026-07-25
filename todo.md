@@ -163,18 +163,19 @@ iPhones produce sizes App Store Connect will reject for this slot.
 Not invented — it must be real. Either enter it in App Store Connect directly, or create
 `iosApp/fastlane/metadata/review_information/phone_number.txt` so `deliver` uploads it.
 
-## 3. Version number decision
+## 3. Version number — settled at 1.0
 
-`iosApp/iosApp/Info.plist` ships `CFBundleShortVersionString = 1.1` and `CFBundleVersion = 10`.
-`iosApp.xcodeproj/project.pbxproj` says `MARKETING_VERSION = 1.1.0` and
-`CURRENT_PROJECT_VERSION = 8`.
+Version is **1.0**, build **10**, set consistently in both places:
 
-Because the target uses `INFOPLIST_FILE`, **the Info.plist values are what ship** and the build
-settings are dead. Consequence: fastlane's `increment_build_number`, which edits the pbxproj,
-silently does nothing.
+- `iosApp/iosApp/Info.plist`: `CFBundleShortVersionString = 1.0`, `CFBundleVersion = 10`
+- `iosApp.xcodeproj/project.pbxproj`: `MARKETING_VERSION = 1.0`, `CURRENT_PROJECT_VERSION = 10`
 
-Decide on one source of truth. Also consider whether a first-ever release should be **1.0** rather
-than 1.1.
+**Still unresolved (low priority):** because the target uses `INFOPLIST_FILE`, only the Info.plist
+values actually ship — the build settings are inert. They now agree, so nothing is wrong today, but
+fastlane's `increment_build_number` edits the pbxproj and therefore still has **no effect on the
+shipped binary**. Bump `CFBundleVersion` in the Info.plist by hand for future builds, or make the
+plist reference `$(MARKETING_VERSION)` / `$(CURRENT_PROJECT_VERSION)` so the build settings become
+the single source of truth and fastlane starts working.
 
 ## 4. Copyright name
 
