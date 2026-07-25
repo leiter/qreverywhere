@@ -1,1 +1,1 @@
-qr,skaner,kod qr,kod kreskowy,wifi qr,vcard,generator qr,skanuj,twórz qr,wielojęzyczny
+kod qr,skaner qr,czytnik qr,generator qr,kod kreskowy,wifi,vcard,skanuj,tworz qr,wizytowka

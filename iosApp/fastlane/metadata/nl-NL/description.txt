@@ -1,37 +1,37 @@
-QR Everywhere - Scan en Maak QR-codes
+QR Everywhere - Scan en maak QR-codes
 
-Uw alles-in-één QR-code metgezel. Scan bestaande codes direct of maak uw eigen in seconden.
-
-NU IN 25 TALEN
-Beschikbaar in Engels, Spaans, Frans, Duits, Italiaans, Portugees, Russisch, Japans, Koreaans, Chinees (vereenvoudigd en traditioneel), Arabisch, Hindi, Bengaals, Indonesisch, Vietnamees, Thais, Turks, Pools, Nederlands, Oekraïens, Filipijns, Maleis, Hebreeuws en Swahili.
+Jouw complete hulp voor QR-codes. Scan elke code direct of maak in seconden je eigen code.
 
 QR-CODES SCANNEN
-• Gebruik uw camera voor direct scannen
-• Importeer afbeeldingen uit uw fotobibliotheek
-• URL-veiligheidswaarschuwingen voor verdachte links
-• Ondersteunt alle standaard QR-codeformaten
+• Direct scannen met de camera
+• Afbeeldingen importeren uit je fotobibliotheek
+• Waarschuwingen bij verdachte links
+• Ondersteunt alle gangbare QR-formaten
 
 QR-CODES MAKEN
-• Tekst en URLs - Deel links en berichten
-• WiFi-netwerken - Laat gasten direct verbinden
-• Contactkaarten (vCard en MeCard) - Deel uw gegevens
-• E-mail - Vooraf ingevulde adressen met onderwerpregels
-• Telefoonnummers - Bellen met één tik
-• Agenda-evenementen - Deel vergaderuitnodigingen
-• Locaties - GPS-coördinaten met labels
-• App Store-links - iOS en Android app-links
-• Betalingslinks - PayPal en Venmo verzoeken
-• Cryptocurrency - Bitcoin en Ethereum adressen
+• Tekst en links: deel berichten en URL's
+• Wifi: laat gasten meteen verbinding maken
+• Contactkaarten: vCard en MeCard
+• E-mail: met onderwerp en bericht
+• Telefoonnummers: bellen met één tik
+• Agenda-afspraken: deel uitnodigingen
+• Locaties: GPS-coördinaten met label
+• App Store-links: iOS en Android
+• Betalingen: PayPal- en Venmo-verzoeken
+• Crypto: Bitcoin- en Ethereum-adressen
 
-ORGANISEREN EN BEHEREN
+ORDENEN
 • Volledige geschiedenis van gescande en gemaakte codes
-• Zoek door uw QR-codegeschiedenis
-• Bewaar en deel uw QR-codes wanneer u wilt
-• Startscherm-widget voor snelle toegang
+• Doorzoek je hele geschiedenis
+• Bewaar en deel je codes wanneer je wilt
+• Widget op het beginscherm voor snelle toegang
 
-PRIVACY EERST
-• Geen account vereist
-• Geen gegevensverzameling of tracking
-• Alles blijft op uw apparaat
+PRIVACY VOOROP
+• Geen account nodig
+• Geen dataverzameling, geen tracking
+• Alles blijft op je apparaat
 
-Eenvoudig. Snel. Privé. In uw taal.
+IN JOUW TAAL
+Beschikbaar in 25 talen, waaronder Engels, Spaans, Frans, Duits, Italiaans, Portugees, Russisch, Chinees, Japans, Koreaans, Arabisch en Hindi.
+
+Eenvoudig. Snel. Privé.

@@ -1,37 +1,37 @@
-QR Everywhere - Scanner et Créer des Codes QR
+QR Everywhere - Scannez et créez des QR codes
 
-Votre compagnon tout-en-un pour les codes QR. Scannez des codes existants instantanément ou créez les vôtres en quelques secondes.
+Votre compagnon tout-en-un pour les QR codes. Scannez n'importe quel code instantanément ou créez le vôtre en quelques secondes.
 
-MAINTENANT EN 25 LANGUES
-Disponible en anglais, espagnol, français, allemand, italien, portugais, russe, japonais, coréen, chinois (simplifié et traditionnel), arabe, hindi, bengali, indonésien, vietnamien, thaï, turc, polonais, néerlandais, ukrainien, philippin, malais, hébreu et swahili.
-
-SCANNER DES CODES QR
-• Utilisez votre appareil photo pour un scan instantané
+SCANNER DES QR CODES
+• Scan instantané avec l'appareil photo
 • Importez des images depuis votre photothèque
-• Avertissements de sécurité URL pour les liens suspects
-• Prend en charge tous les formats de codes QR standard
+• Alertes de sécurité pour les liens suspects
+• Compatible avec tous les formats QR standard
 
-CRÉER DES CODES QR
-• Texte et URLs - Partagez des liens et des messages
-• Réseaux WiFi - Permettez aux invités de se connecter instantanément
-• Cartes de contact (vCard et MeCard) - Partagez vos coordonnées
-• Email - Adresses préremplies avec lignes d'objet
-• Numéros de téléphone - Appel en un seul toucher
-• Événements de calendrier - Partagez des invitations de réunion
-• Emplacements - Coordonnées GPS avec étiquettes
-• Liens App Store - Liens d'applications iOS et Android
-• Liens de paiement - Demandes PayPal et Venmo
-• Cryptomonnaie - Adresses Bitcoin et Ethereum
+CRÉER DES QR CODES
+• Texte et liens : partagez messages et URL
+• Wi-Fi : vos invités se connectent en un instant
+• Cartes de visite : vCard et MeCard
+• E-mail : avec objet et message
+• Numéros de téléphone : appelez d'un geste
+• Événements de calendrier : partagez vos invitations
+• Lieux : coordonnées GPS avec libellé
+• Liens vers les stores : iOS et Android
+• Paiements : demandes PayPal et Venmo
+• Crypto : adresses Bitcoin et Ethereum
 
-ORGANISER ET GÉRER
+ORGANISER
 • Historique complet des codes scannés et créés
-• Recherchez dans votre historique de codes QR
-• Enregistrez et partagez vos codes QR à tout moment
-• Widget d'écran d'accueil pour un accès rapide
+• Recherchez dans tout votre historique
+• Enregistrez et partagez vos codes à tout moment
+• Widget sur l'écran d'accueil pour un accès rapide
 
-CONFIDENTIALITÉ D'ABORD
+LA CONFIDENTIALITÉ D'ABORD
 • Aucun compte requis
-• Aucune collecte de données ni suivi
+• Aucune collecte de données, aucun suivi
 • Tout reste sur votre appareil
 
-Simple. Rapide. Privé. Dans votre langue.
+DANS VOTRE LANGUE
+Disponible en 25 langues, dont l'anglais, l'espagnol, le français, l'allemand, l'italien, le portugais, le russe, le chinois, le japonais, le coréen, l'arabe et l'hindi.
+
+Simple. Rapide. Privé.

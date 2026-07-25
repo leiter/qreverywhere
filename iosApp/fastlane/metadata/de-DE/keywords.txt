@@ -1,1 +1,1 @@
-qr,scanner,qr code,barcode,wlan qr,vcard,qr generator,scannen,qr erstellen,mehrsprachig
+qr code,qr scanner,barcode,qr generator,wlan,vcard,code scannen,qr leser,qr erstellen,visitenkarte

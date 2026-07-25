@@ -1,0 +1,22 @@
+QR Everywhere is a fully offline QR code scanner and generator. No account, no sign-in, and no server: the app makes no network requests at all, so every feature is available immediately on launch.
+
+TESTING THE SCANNER
+The live camera scanner requires a physical device. On the Simulator the scan screen intentionally shows "Camera not available" and offers the "Scan from file" button instead, which detects QR codes in images from the photo library. To test on Simulator, save any QR code image to the photo library and use "Scan from file".
+
+PERMISSIONS
+- Camera (NSCameraUsageDescription): only used for live QR scanning. The app never records or stores video or photos.
+- Photo Library read (NSPhotoLibraryUsageDescription): only used to pick an image the user wants to scan a QR code from.
+- Photo Library add (NSPhotoLibraryAddUsageDescription): only used when the user explicitly saves a QR code image they generated.
+All three are optional; the app remains usable if the user declines.
+
+ABOUT THE PAYMENT AND CRYPTOCURRENCY QR TYPES
+These features do not process, transmit, or facilitate any payment or transaction. They only encode text the user types (for example a PayPal.me link or a wallet address) into a standard QR code image, exactly like the text or URL types. There is no wallet, no exchange, no payment processing, and no financial account of any kind in the app.
+
+DATA HANDLING
+Scan and creation history is stored only in a local database on the device. Nothing is uploaded, shared, or analysed. There is no analytics or tracking SDK in the app. Deleting the app removes all data.
+
+URL SAFETY WARNINGS
+When a scanned QR code contains a link, the app shows a warning for suspicious patterns (executable file extensions, known phishing patterns, shortened URLs). This check runs entirely on-device using local heuristics; no URL is ever sent to a server.
+
+WIDGET
+The home screen widget shows a saved QR code for quick access and opens the app via the qreverywhere:// URL scheme.

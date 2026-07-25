@@ -1,1 +1,1 @@
-qr,scanner,codice qr,codice a barre,wifi qr,vcard,generatore qr,scansiona,crea qr,multilingue
+codice qr,scanner qr,lettore qr,generatore qr,barre,wifi,vcard,scansiona,crea qr,biglietto visita

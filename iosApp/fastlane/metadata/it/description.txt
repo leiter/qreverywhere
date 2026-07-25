@@ -1,37 +1,37 @@
-QR Everywhere - Scansiona e Crea Codici QR
+QR Everywhere - Scansiona e crea codici QR
 
-Il tuo compagno tutto in uno per i codici QR. Scansiona codici esistenti istantaneamente o crea i tuoi in pochi secondi.
-
-ORA IN 25 LINGUE
-Disponibile in inglese, spagnolo, francese, tedesco, italiano, portoghese, russo, giapponese, coreano, cinese (semplificato e tradizionale), arabo, hindi, bengalese, indonesiano, vietnamita, tailandese, turco, polacco, olandese, ucraino, filippino, malese, ebraico e swahili.
+Il tuo compagno completo per i codici QR. Scansiona qualsiasi codice all'istante o creane uno in pochi secondi.
 
 SCANSIONA CODICI QR
-• Usa la tua fotocamera per la scansione istantanea
-• Importa immagini dalla tua libreria foto
-• Avvisi di sicurezza URL per link sospetti
-• Supporta tutti i formati standard di codici QR
+• Scansione istantanea con la fotocamera
+• Importa immagini dalla libreria foto
+• Avvisi di sicurezza per i link sospetti
+• Supporta tutti i formati QR standard
 
 CREA CODICI QR
-• Testo e URL - Condividi link e messaggi
-• Reti WiFi - Permetti agli ospiti di connettersi istantaneamente
-• Schede contatto (vCard e MeCard) - Condividi i tuoi dati
-• Email - Indirizzi precompilati con righe oggetto
-• Numeri di telefono - Chiamata con un tocco
-• Eventi calendario - Condividi inviti a riunioni
-• Posizioni - Coordinate GPS con etichette
-• Link App Store - Link app iOS e Android
-• Link di pagamento - Richieste PayPal e Venmo
-• Criptovalute - Indirizzi Bitcoin ed Ethereum
+• Testo e link: condividi messaggi e URL
+• Wi-Fi: i tuoi ospiti si connettono subito
+• Biglietti da visita: vCard e MeCard
+• E-mail: con oggetto e messaggio
+• Numeri di telefono: chiama con un tocco
+• Eventi del calendario: condividi inviti
+• Luoghi: coordinate GPS con etichetta
+• Link agli store: iOS e Android
+• Pagamenti: richieste PayPal e Venmo
+• Cripto: indirizzi Bitcoin ed Ethereum
 
-ORGANIZZA E GESTISCI
+ORGANIZZA
 • Cronologia completa dei codici scansionati e creati
-• Cerca nella tua cronologia di codici QR
-• Salva e condividi i tuoi codici QR in qualsiasi momento
-• Widget schermata home per accesso rapido
+• Cerca in tutta la cronologia
+• Salva e condividi i tuoi codici quando vuoi
+• Widget nella schermata Home per un accesso rapido
 
-PRIVACY PRIMA
+PRIVACY PRIMA DI TUTTO
 • Nessun account richiesto
-• Nessuna raccolta dati o tracciamento
-• Tutto rimane sul tuo dispositivo
+• Nessuna raccolta dati, nessun tracciamento
+• Tutto resta sul tuo dispositivo
 
-Semplice. Veloce. Privato. Nella tua lingua.
+NELLA TUA LINGUA
+Disponibile in 25 lingue, tra cui inglese, spagnolo, francese, tedesco, italiano, portoghese, russo, cinese, giapponese, coreano, arabo e hindi.
+
+Semplice. Veloce. Privato.

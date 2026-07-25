@@ -1,37 +1,37 @@
 QR Everywhere - Scan & Create QR Codes
 
-Your all-in-one QR code companion. Scan existing codes instantly or create your own in seconds.
-
-NOW IN 25 LANGUAGES
-Available in English, Spanish, French, German, Italian, Portuguese, Russian, Japanese, Korean, Chinese (Simplified & Traditional), Arabic, Hindi, Bengali, Indonesian, Vietnamese, Thai, Turkish, Polish, Dutch, Ukrainian, Filipino, Malay, Hebrew, and Swahili.
+Your all-in-one QR code companion. Scan any code instantly, or create your own in seconds.
 
 SCAN QR CODES
-• Use your camera for instant scanning
+• Instant scanning with your camera
 • Import images from your photo library
-• URL safety warnings for suspicious links
+• Safety warnings for suspicious links
 • Supports all standard QR code formats
 
 CREATE QR CODES
-• Text & URLs - Share links and messages
-• WiFi Networks - Let guests connect instantly
-• Contact Cards (vCard & MeCard) - Share your details
-• Email - Pre-filled addresses with subject lines
-• Phone Numbers - One-tap calling
-• Calendar Events - Share meeting invites
-• Locations - GPS coordinates with labels
-• App Store Links - iOS & Android app links
-• Payment Links - PayPal & Venmo requests
-• Cryptocurrency - Bitcoin & Ethereum addresses
+• Text & URLs - share links and messages
+• WiFi - let guests connect instantly
+• Contact cards - vCard and MeCard
+• Email - with subject and message
+• Phone numbers - one tap to call
+• Calendar events - share invitations
+• Locations - GPS coordinates with a label
+• App Store links - iOS and Android
+• Payments - PayPal and Venmo requests
+• Crypto - Bitcoin and Ethereum addresses
 
-ORGANIZE & MANAGE
+ORGANIZE
 • Full history of scanned and created codes
-• Search through your QR code history
-• Save and share your QR codes anytime
+• Search your entire history
+• Save and share your codes anytime
 • Home screen widget for quick access
 
 PRIVACY FIRST
 • No account required
-• No data collection or tracking
+• No data collection, no tracking
 • Everything stays on your device
 
-Simple. Fast. Private. In your language.
+IN YOUR LANGUAGE
+Available in 25 languages, including English, Spanish, French, German, Italian, Portuguese, Russian, Chinese, Japanese, Korean, Arabic and Hindi.
+
+Simple. Fast. Private.

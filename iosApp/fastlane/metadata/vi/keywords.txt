@@ -1,1 +1,1 @@
-qr,máy quét,mã qr,mã vạch,wifi qr,vcard,tạo qr,quét,tạo mã qr,đa ngôn ngữ
+ma qr,quet qr,ma vach,tao qr,wifi,vcard,quet ma,doc qr,tao ma qr,danh thiep

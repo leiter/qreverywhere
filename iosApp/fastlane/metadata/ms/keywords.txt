@@ -1,1 +1,1 @@
-qr,pengimbas,kod qr,kod bar,wifi qr,vcard,penjana qr,imbas,cipta qr,pelbagai bahasa
+kod qr,pengimbas qr,barcode,penjana qr,wifi,vcard,imbas,pembaca qr,cipta qr,kad kenalan

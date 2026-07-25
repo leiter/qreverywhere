@@ -1,37 +1,37 @@
-QR Everywhere - Pindai dan Buat Kode QR
+QR Everywhere - Pindai & buat kode QR
 
-Pendamping kode QR all-in-one Anda. Pindai kode yang ada secara instan atau buat sendiri dalam hitungan detik.
+Teman lengkap Anda untuk kode QR. Pindai kode apa pun secara instan atau buat milik Anda dalam hitungan detik.
 
-SEKARANG DALAM 25 BAHASA
-Tersedia dalam bahasa Inggris, Spanyol, Prancis, Jerman, Italia, Portugis, Rusia, Jepang, Korea, Tionghoa (Sederhana & Tradisional), Arab, Hindi, Bengali, Indonesia, Vietnam, Thailand, Turki, Polandia, Belanda, Ukraina, Filipina, Melayu, Ibrani, dan Swahili.
+MEMINDAI KODE QR
+• Pemindaian instan dengan kamera
+• Impor gambar dari pustaka foto
+• Peringatan keamanan untuk tautan mencurigakan
+• Mendukung semua format QR standar
 
-PINDAI KODE QR
-• Gunakan kamera untuk pemindaian instan
-• Impor gambar dari perpustakaan foto
-• Peringatan keamanan URL untuk tautan mencurigakan
-• Mendukung semua format kode QR standar
+MEMBUAT KODE QR
+• Teks & tautan - bagikan pesan dan URL
+• Wi-Fi - tamu langsung terhubung
+• Kartu kontak - vCard dan MeCard
+• Email - dengan subjek dan pesan
+• Nomor telepon - telepon dengan sekali ketuk
+• Acara kalender - bagikan undangan
+• Lokasi - koordinat GPS dengan label
+• Tautan toko aplikasi - iOS dan Android
+• Pembayaran - permintaan PayPal dan Venmo
+• Kripto - alamat Bitcoin dan Ethereum
 
-BUAT KODE QR
-• Teks & URL - Bagikan tautan dan pesan
-• Jaringan WiFi - Biarkan tamu terhubung secara instan
-• Kartu Kontak (vCard & MeCard) - Bagikan detail Anda
-• Email - Alamat yang sudah diisi dengan baris subjek
-• Nomor Telepon - Panggilan satu ketukan
-• Acara Kalender - Bagikan undangan rapat
-• Lokasi - Koordinat GPS dengan label
-• Tautan App Store - Tautan aplikasi iOS & Android
-• Tautan Pembayaran - Permintaan PayPal & Venmo
-• Cryptocurrency - Alamat Bitcoin & Ethereum
-
-ATUR & KELOLA
+MENGATUR
 • Riwayat lengkap kode yang dipindai dan dibuat
-• Cari dalam riwayat kode QR Anda
-• Simpan dan bagikan kode QR kapan saja
-• Widget layar beranda untuk akses cepat
+• Cari di seluruh riwayat
+• Simpan dan bagikan kode kapan saja
+• Widget layar utama untuk akses cepat
 
-PRIVASI DULU
+PRIVASI UTAMA
 • Tidak perlu akun
-• Tidak ada pengumpulan data atau pelacakan
+• Tanpa pengumpulan data, tanpa pelacakan
 • Semuanya tetap di perangkat Anda
 
-Sederhana. Cepat. Pribadi. Dalam bahasa Anda.
+DALAM BAHASA ANDA
+Tersedia dalam 25 bahasa, termasuk Inggris, Spanyol, Prancis, Jerman, Italia, Portugis, Rusia, Mandarin, Jepang, Korea, Arab, dan Hindi.
+
+Sederhana. Cepat. Privat.

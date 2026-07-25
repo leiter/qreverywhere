@@ -1,37 +1,37 @@
-QR Everywhere - Skanuj i Twórz Kody QR
+QR Everywhere - Skanuj i twórz kody QR
 
-Twój uniwersalny towarzysz kodów QR. Skanuj istniejące kody natychmiast lub twórz własne w kilka sekund.
+Twój kompletny asystent kodów QR. Zeskanuj dowolny kod błyskawicznie lub stwórz własny w kilka sekund.
 
-TERAZ W 25 JĘZYKACH
-Dostępne w języku angielskim, hiszpańskim, francuskim, niemieckim, włoskim, portugalskim, rosyjskim, japońskim, koreańskim, chińskim (uproszczonym i tradycyjnym), arabskim, hindi, bengalskim, indonezyjskim, wietnamskim, tajskim, tureckim, polskim, holenderskim, ukraińskim, filipińskim, malajskim, hebrajskim i suahili.
+SKANOWANIE KODÓW QR
+• Błyskawiczne skanowanie aparatem
+• Importuj zdjęcia z biblioteki
+• Ostrzeżenia o podejrzanych linkach
+• Obsługa wszystkich standardowych formatów QR
 
-SKANUJ KODY QR
-• Użyj aparatu do natychmiastowego skanowania
-• Importuj obrazy z biblioteki zdjęć
-• Ostrzeżenia bezpieczeństwa URL dla podejrzanych linków
-• Obsługuje wszystkie standardowe formaty kodów QR
+TWORZENIE KODÓW QR
+• Tekst i linki - udostępniaj wiadomości i adresy URL
+• Wi-Fi - goście połączą się od razu
+• Wizytówki - vCard i MeCard
+• E-mail - z tematem i treścią
+• Numery telefonów - dzwoń jednym dotknięciem
+• Wydarzenia w kalendarzu - udostępniaj zaproszenia
+• Lokalizacje - współrzędne GPS z etykietą
+• Linki do sklepów z aplikacjami - iOS i Android
+• Płatności - prośby PayPal i Venmo
+• Kryptowaluty - adresy Bitcoin i Ethereum
 
-TWÓRZ KODY QR
-• Tekst i URL-e - Udostępniaj linki i wiadomości
-• Sieci WiFi - Pozwól gościom połączyć się natychmiast
-• Wizytówki (vCard i MeCard) - Udostępniaj swoje dane
-• E-mail - Wstępnie wypełnione adresy z tematami
-• Numery telefonów - Dzwoń jednym dotknięciem
-• Wydarzenia kalendarza - Udostępniaj zaproszenia na spotkania
-• Lokalizacje - Współrzędne GPS z etykietami
-• Linki App Store - Linki do aplikacji iOS i Android
-• Linki płatności - Żądania PayPal i Venmo
-• Kryptowaluty - Adresy Bitcoin i Ethereum
-
-ORGANIZUJ I ZARZĄDZAJ
-• Pełna historia skanowanych i tworzonych kodów
-• Przeszukuj historię kodów QR
-• Zapisuj i udostępniaj kody QR w dowolnym momencie
-• Widget ekranu głównego dla szybkiego dostępu
+PORZĄDEK
+• Pełna historia zeskanowanych i utworzonych kodów
+• Przeszukuj całą historię
+• Zapisuj i udostępniaj kody w dowolnej chwili
+• Widżet na ekranie początkowym
 
 PRYWATNOŚĆ PRZEDE WSZYSTKIM
-• Konto nie jest wymagane
-• Brak zbierania danych ani śledzenia
-• Wszystko pozostaje na Twoim urządzeniu
+• Konto niepotrzebne
+• Bez zbierania danych i śledzenia
+• Wszystko zostaje na Twoim urządzeniu
 
-Proste. Szybkie. Prywatne. W Twoim języku.
+W TWOIM JĘZYKU
+Dostępna w 25 językach, w tym po angielsku, hiszpańsku, francusku, niemiecku, włosku, portugalsku, rosyjsku, chińsku, japońsku, koreańsku, arabsku i w hindi.
+
+Proste. Szybkie. Prywatne.

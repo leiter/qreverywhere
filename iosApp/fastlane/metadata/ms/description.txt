@@ -1,37 +1,37 @@
-QR Everywhere - Imbas dan Cipta Kod QR
+QR Everywhere - Imbas & cipta kod QR
 
-Teman kod QR serba lengkap anda. Imbas kod sedia ada dengan serta-merta atau cipta kod anda sendiri dalam beberapa saat.
+Teman lengkap anda untuk kod QR. Imbas sebarang kod serta-merta atau cipta kod anda sendiri dalam beberapa saat.
 
-KINI DALAM 25 BAHASA
-Tersedia dalam bahasa Inggeris, Sepanyol, Perancis, Jerman, Itali, Portugis, Rusia, Jepun, Korea, Cina (Ringkas & Tradisional), Arab, Hindi, Bengali, Indonesia, Vietnam, Thai, Turki, Poland, Belanda, Ukraine, Filipina, Melayu, Ibrani, dan Swahili.
-
-IMBAS KOD QR
-• Gunakan kamera untuk pengimbasan segera
+MENGIMBAS KOD QR
+• Imbasan serta-merta dengan kamera
 • Import imej dari pustaka foto
-• Amaran keselamatan URL untuk pautan mencurigakan
-• Menyokong semua format kod QR standard
+• Amaran keselamatan untuk pautan mencurigakan
+• Menyokong semua format QR standard
 
-CIPTA KOD QR
-• Teks & URL - Kongsi pautan dan mesej
-• Rangkaian WiFi - Biarkan tetamu berhubung dengan segera
-• Kad Kenalan (vCard & MeCard) - Kongsi butiran anda
-• E-mel - Alamat pra-isi dengan baris subjek
-• Nombor Telefon - Panggilan satu ketuk
-• Acara Kalendar - Kongsi jemputan mesyuarat
-• Lokasi - Koordinat GPS dengan label
-• Pautan App Store - Pautan aplikasi iOS & Android
-• Pautan Pembayaran - Permintaan PayPal & Venmo
-• Mata Wang Kripto - Alamat Bitcoin & Ethereum
+MENCIPTA KOD QR
+• Teks & pautan - kongsi mesej dan URL
+• Wi-Fi - tetamu terus bersambung
+• Kad kenalan - vCard dan MeCard
+• E-mel - dengan subjek dan mesej
+• Nombor telefon - panggil dengan satu ketikan
+• Acara kalendar - kongsi jemputan
+• Lokasi - koordinat GPS dengan label
+• Pautan gedung aplikasi - iOS dan Android
+• Pembayaran - permintaan PayPal dan Venmo
+• Kripto - alamat Bitcoin dan Ethereum
 
-URUS & KELOLA
+MENYUSUN
 • Sejarah penuh kod yang diimbas dan dicipta
-• Cari dalam sejarah kod QR anda
-• Simpan dan kongsi kod QR bila-bila masa
+• Cari dalam keseluruhan sejarah
+• Simpan dan kongsi kod anda bila-bila masa
 • Widget skrin utama untuk akses pantas
 
-PRIVASI DAHULU
+PRIVASI DIUTAMAKAN
 • Tiada akaun diperlukan
-• Tiada pengumpulan data atau penjejakan
+• Tiada pengumpulan data, tiada penjejakan
 • Semuanya kekal pada peranti anda
 
-Mudah. Pantas. Peribadi. Dalam bahasa anda.
+DALAM BAHASA ANDA
+Tersedia dalam 25 bahasa, termasuk Inggeris, Sepanyol, Perancis, Jerman, Itali, Portugis, Rusia, Cina, Jepun, Korea, Arab dan Hindi.
+
+Mudah. Pantas. Peribadi.

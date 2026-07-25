@@ -1,1 +1,1 @@
-qr,스캐너,qr코드,바코드,wifi qr,vcard,qr생성기,스캔,qr만들기,다국어
+qr코드,qr스캐너,바코드,qr생성기,스캔,wifi,vcard,qr리더,명함,코드생성

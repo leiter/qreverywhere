@@ -1,1 +1,1 @@
-qr,tarayıcı,qr kod,barkod,wifi qr,vcard,qr oluşturucu,tara,qr oluştur,çok dilli
+qr kod,qr tarayici,barkod,qr olusturucu,wifi,vcard,kod tara,qr okuyucu,qr yap,kartvizit
