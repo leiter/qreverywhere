@@ -49,6 +49,8 @@ GoogleService-Info.plist
 # Build artifacts
 *.dSYM.zip
 **/fastlane/report.xml
+*.ipa
+*.mobileprovision
 
 # Temporary files
 tmp/

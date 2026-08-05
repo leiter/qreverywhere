@@ -79,6 +79,14 @@ Increment build number
 
 Increment version number
 
+### ios latest_beta
+
+```sh
+[bundle exec] fastlane ios latest_beta
+```
+
+Print the latest build number available on TestFlight
+
 ### ios sync_certificates
 
 ```sh

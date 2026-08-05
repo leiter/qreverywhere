@@ -8,7 +8,12 @@ def api_key
   app_store_connect_api_key(
     key_id: "M4S9AWXXL7",
     issuer_id: "e3c717d8-00fc-4ff7-8a05-65f96d2b1562",
-    key_filepath: File.expand_path("AuthKey_M4S9AWXXL7.p8", __dir__),
+    # Key lives outside the repo so it is never committed. Falls back to the
+    # fastlane dir for CI, where the key is materialised next to the Fastfile.
+    key_filepath: [
+      File.expand_path("~/.appstoreconnect/private_keys/AuthKey_M4S9AWXXL7.p8"),
+      File.expand_path("AuthKey_M4S9AWXXL7.p8", __dir__)
+    ].find { |path| File.exist?(path) },
     in_house: false
   )
 end
@@ -139,6 +144,15 @@ platform :ios do
     increment_version_number(
       bump_type: options[:type] || "patch"
     )
+  end
+
+  desc "Print the latest build number available on TestFlight"
+  lane :latest_beta do
+    build = latest_testflight_build_number(
+      app_identifier: "cut.the.crap.qreverywhere",
+      api_key: api_key
+    )
+    UI.important("Latest TestFlight build: #{build}")
   end
 
   desc "Sync certificates and provisioning profiles"
