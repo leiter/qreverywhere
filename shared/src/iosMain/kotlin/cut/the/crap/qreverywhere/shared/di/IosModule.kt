@@ -5,10 +5,12 @@ import cut.the.crap.qreverywhere.shared.data.db.QrDatabase
 import cut.the.crap.qreverywhere.shared.data.db.createDatabase
 import cut.the.crap.qreverywhere.shared.domain.repository.QrRepository
 import cut.the.crap.qreverywhere.shared.domain.usecase.CachingQrCodeGenerator
+import cut.the.crap.qreverywhere.shared.domain.usecase.QrActionLauncher
 import cut.the.crap.qreverywhere.shared.domain.usecase.QrCodeGenerator
 import cut.the.crap.qreverywhere.shared.domain.usecase.QrCodeScanner
 import cut.the.crap.qreverywhere.shared.domain.usecase.SaveImageToFileUseCase
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
+import cut.the.crap.qreverywhere.shared.platform.IosQrActionLauncher
 import cut.the.crap.qreverywhere.shared.platform.IosQrCodeGenerator
 import cut.the.crap.qreverywhere.shared.platform.IosQrCodeScanner
 import cut.the.crap.qreverywhere.shared.data.IosSaveImageToFileUseCase
@@ -52,4 +54,5 @@ actual fun platformModule(): Module = module {
     single<QrCodeScanner> { IosQrCodeScanner() }
     single<SaveImageToFileUseCase> { IosSaveImageToFileUseCase() }
     single<UserPreferences> { IosUserPreferences() }
+    single<QrActionLauncher> { IosQrActionLauncher() }
 }

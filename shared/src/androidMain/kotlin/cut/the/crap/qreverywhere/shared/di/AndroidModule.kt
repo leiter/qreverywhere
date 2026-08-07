@@ -6,10 +6,12 @@ import cut.the.crap.qreverywhere.shared.data.db.createDatabase
 import cut.the.crap.qreverywhere.shared.data.db.initializeDatabase
 import cut.the.crap.qreverywhere.shared.domain.repository.QrRepository
 import cut.the.crap.qreverywhere.shared.domain.usecase.CachingQrCodeGenerator
+import cut.the.crap.qreverywhere.shared.domain.usecase.QrActionLauncher
 import cut.the.crap.qreverywhere.shared.domain.usecase.QrCodeGenerator
 import cut.the.crap.qreverywhere.shared.domain.usecase.QrCodeScanner
 import cut.the.crap.qreverywhere.shared.domain.usecase.SaveImageToFileUseCase
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
+import cut.the.crap.qreverywhere.shared.platform.AndroidQrActionLauncher
 import cut.the.crap.qreverywhere.shared.platform.AndroidQrCodeGenerator
 import cut.the.crap.qreverywhere.shared.platform.AndroidQrCodeScanner
 import cut.the.crap.qreverywhere.shared.platform.AndroidSaveImageToFileUseCase
@@ -40,6 +42,9 @@ actual fun platformModule(): Module = module {
 
     // Save image use case
     single<SaveImageToFileUseCase> { AndroidSaveImageToFileUseCase(androidContext()) }
+
+    // QR action launcher (Test/Open on Detail and Create screens)
+    single<QrActionLauncher> { AndroidQrActionLauncher(androidContext()) }
 
     single {
         // Initialize Napier for Android

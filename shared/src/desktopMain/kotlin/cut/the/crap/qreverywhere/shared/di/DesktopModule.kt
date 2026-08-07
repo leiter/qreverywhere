@@ -5,10 +5,12 @@ import cut.the.crap.qreverywhere.shared.data.db.QrDatabase
 import cut.the.crap.qreverywhere.shared.data.db.createDatabase
 import cut.the.crap.qreverywhere.shared.domain.repository.QrRepository
 import cut.the.crap.qreverywhere.shared.domain.usecase.CachingQrCodeGenerator
+import cut.the.crap.qreverywhere.shared.domain.usecase.QrActionLauncher
 import cut.the.crap.qreverywhere.shared.domain.usecase.QrCodeGenerator
 import cut.the.crap.qreverywhere.shared.domain.usecase.QrCodeScanner
 import cut.the.crap.qreverywhere.shared.domain.usecase.SaveImageToFileUseCase
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
+import cut.the.crap.qreverywhere.shared.platform.DesktopQrActionLauncher
 import cut.the.crap.qreverywhere.shared.platform.DesktopQrCodeGenerator
 import cut.the.crap.qreverywhere.shared.platform.DesktopQrCodeScanner
 import cut.the.crap.qreverywhere.shared.platform.DesktopSaveImageToFileUseCase
@@ -31,6 +33,7 @@ actual fun platformModule(): Module = module {
     single<QrCodeScanner> { DesktopQrCodeScanner() }
     single<SaveImageToFileUseCase> { DesktopSaveImageToFileUseCase() }
     single<UserPreferences> { DesktopUserPreferences() }
+    single<QrActionLauncher> { DesktopQrActionLauncher() }
 
     single {
         // Initialize Napier for Desktop
