@@ -12,7 +12,7 @@ import org.koin.dsl.module
 val commonModule = module {
     // Feature ViewModels - using single to share state across screens
     single { HistoryViewModel(qrRepository = get()) }
-    single { CreateViewModel(qrRepository = get(), qrCodeGenerator = get(), userPreferences = get()) }
+    single { CreateViewModel(qrRepository = get(), qrCodeGenerator = get(), userPreferences = get(), qrActionLauncher = get()) }
     single { DetailViewModel(qrRepository = get(), saveImageUseCase = get(), qrCodeGenerator = get(), userPreferences = get(), qrActionLauncher = get()) }
 }
 

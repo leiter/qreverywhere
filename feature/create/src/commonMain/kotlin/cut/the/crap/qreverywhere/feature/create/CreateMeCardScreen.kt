@@ -12,6 +12,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -49,10 +52,27 @@ fun CreateMeCardScreen(
     val focusManager = LocalFocusManager.current
     val errorEmptyName = stringResource(Res.string.error_empty_mecard_name)
 
+    val snackbarHostState = remember { SnackbarHostState() }
+    val testActionState = rememberTestActionState(viewModel, snackbarHostState)
+
+    fun buildMeCardText(): String = MeCard(
+        name = name,
+        phone = phone.ifBlank { null },
+        email = email.ifBlank { null },
+        address = address.ifBlank { null },
+        organization = organization.ifBlank { null },
+        note = note.ifBlank { null },
+        url = url.ifBlank { null }
+    ).toMeCard()
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { innerPadding ->
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
+            .padding(innerPadding)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -142,17 +162,8 @@ fun CreateMeCardScreen(
                 if (name.isBlank()) { nameError = errorEmptyName; return@Button }
 
                 isCreating = true
-                val meCard = MeCard(
-                    name = name,
-                    phone = phone.ifBlank { null },
-                    email = email.ifBlank { null },
-                    address = address.ifBlank { null },
-                    organization = organization.ifBlank { null },
-                    note = note.ifBlank { null },
-                    url = url.ifBlank { null }
-                )
 
-                viewModel.createQrItem(meCard.toMeCard(), AcquireType.CREATED) { result ->
+                viewModel.createQrItem(buildMeCardText(), AcquireType.CREATED) { result ->
                     isCreating = false
                     result.onSuccess { onQrCreated() }
                 }
@@ -165,5 +176,13 @@ fun CreateMeCardScreen(
                 else stringResource(Res.string.create_button)
             )
         }
+
+        TestActionButton(
+            content = if (name.isNotBlank()) buildMeCardText() else "",
+            state = testActionState
+        )
     }
+    }
+
+    TestActionOverlays(testActionState)
 }

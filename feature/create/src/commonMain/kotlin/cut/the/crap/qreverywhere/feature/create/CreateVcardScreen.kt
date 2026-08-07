@@ -12,6 +12,9 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -47,10 +50,27 @@ fun CreateVcardScreen(
 
     val errorEmptyName = stringResource(Res.string.error_empty_name)
 
+    val snackbarHostState = remember { SnackbarHostState() }
+    val testActionState = rememberTestActionState(viewModel, snackbarHostState)
+
+    fun buildVcardText(): String = buildVcard(
+        firstName = firstName.trim(),
+        lastName = lastName.trim(),
+        phone = phone.trim(),
+        email = email.trim(),
+        organization = organization.trim(),
+        jobTitle = jobTitle.trim(),
+        website = website.trim()
+    )
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { innerPadding ->
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
+            .padding(innerPadding)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -173,15 +193,7 @@ fun CreateVcardScreen(
 
                 isCreating = true
 
-                val vcardText = buildVcard(
-                    firstName = firstName.trim(),
-                    lastName = lastName.trim(),
-                    phone = phone.trim(),
-                    email = email.trim(),
-                    organization = organization.trim(),
-                    jobTitle = jobTitle.trim(),
-                    website = website.trim()
-                )
+                val vcardText = buildVcardText()
 
                 viewModel.createQrItem(vcardText, AcquireType.CREATED) { result ->
                     isCreating = false
@@ -196,7 +208,15 @@ fun CreateVcardScreen(
                 else stringResource(Res.string.create_button)
             )
         }
+
+        TestActionButton(
+            content = if (firstName.isNotBlank() || lastName.isNotBlank()) buildVcardText() else "",
+            state = testActionState
+        )
     }
+    }
+
+    TestActionOverlays(testActionState)
 }
 
 private fun buildVcard(

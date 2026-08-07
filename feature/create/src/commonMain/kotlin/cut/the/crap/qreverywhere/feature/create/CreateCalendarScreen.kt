@@ -14,6 +14,9 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -59,10 +62,34 @@ fun CreateCalendarScreen(
     val errorEmptyTitle = stringResource(Res.string.error_empty_event_title)
     val errorInvalidDate = stringResource(Res.string.error_invalid_date)
 
+    val snackbarHostState = remember { SnackbarHostState() }
+    val testActionState = rememberTestActionState(viewModel, snackbarHostState)
+
+    fun buildCalendarText(): String? {
+        val startInstant = parseDateTime(startDate, if (isAllDay) "00:00" else startTime) ?: return null
+        val endInstant = parseDateTime(
+            endDate.ifBlank { startDate },
+            if (isAllDay) "23:59" else endTime.ifBlank { startTime }
+        )
+        val calendarEvent = CalendarEvent(
+            title = eventTitle,
+            startDateTime = startInstant,
+            endDateTime = endInstant ?: startInstant,
+            location = location.ifBlank { null },
+            description = description.ifBlank { null },
+            isAllDay = isAllDay
+        )
+        return calendarEvent.toVEvent()
+    }
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { innerPadding ->
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
+            .padding(innerPadding)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -173,28 +200,15 @@ fun CreateCalendarScreen(
                     return@Button
                 }
 
-                val startInstant = parseDateTime(startDate, if (isAllDay) "00:00" else startTime)
-                val endInstant = parseDateTime(
-                    endDate.ifBlank { startDate },
-                    if (isAllDay) "23:59" else endTime.ifBlank { startTime }
-                )
-
-                if (startInstant == null) {
+                val vEventText = buildCalendarText()
+                if (vEventText == null) {
                     dateError = errorInvalidDate
                     return@Button
                 }
 
                 isCreating = true
-                val calendarEvent = CalendarEvent(
-                    title = eventTitle,
-                    startDateTime = startInstant,
-                    endDateTime = endInstant ?: startInstant,
-                    location = location.ifBlank { null },
-                    description = description.ifBlank { null },
-                    isAllDay = isAllDay
-                )
 
-                viewModel.createQrItem(calendarEvent.toVEvent(), AcquireType.CREATED) { result ->
+                viewModel.createQrItem(vEventText, AcquireType.CREATED) { result ->
                     isCreating = false
                     result.onSuccess { onQrCreated() }
                 }
@@ -207,7 +221,15 @@ fun CreateCalendarScreen(
                 else stringResource(Res.string.create_button)
             )
         }
+
+        TestActionButton(
+            content = if (eventTitle.isNotBlank()) (buildCalendarText() ?: "") else "",
+            state = testActionState
+        )
     }
+    }
+
+    TestActionOverlays(testActionState)
 }
 
 private fun parseDateTime(dateStr: String, timeStr: String): Instant? {

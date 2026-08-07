@@ -10,6 +10,9 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -39,6 +42,9 @@ fun CreateEmailScreen(
     var emailError by remember { mutableStateOf<String?>(null) }
     val focusManager = LocalFocusManager.current
 
+    val snackbarHostState = remember { SnackbarHostState() }
+    val testActionState = rememberTestActionState(viewModel, snackbarHostState)
+
     val errorEmptyEmail = stringResource(Res.string.error_empty_email)
     val errorInvalidEmail = stringResource(Res.string.error_invalid_email)
 
@@ -46,9 +52,29 @@ fun CreateEmailScreen(
         return email.contains("@") && email.contains(".") && email.length > 5
     }
 
+    fun buildMailtoText(): String = buildString {
+        append("mailto:")
+        append(emailAddress)
+        val params = mutableListOf<String>()
+        if (emailSubject.isNotBlank()) {
+            params.add("subject=${encodeUrlComponent(emailSubject)}")
+        }
+        if (emailBody.isNotBlank()) {
+            params.add("body=${encodeUrlComponent(emailBody)}")
+        }
+        if (params.isNotEmpty()) {
+            append("?")
+            append(params.joinToString("&"))
+        }
+    }
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { innerPadding ->
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .padding(innerPadding)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -120,21 +146,7 @@ fun CreateEmailScreen(
 
                 isCreating = true
 
-                val mailtoText = buildString {
-                    append("mailto:")
-                    append(emailAddress)
-                    val params = mutableListOf<String>()
-                    if (emailSubject.isNotBlank()) {
-                        params.add("subject=${encodeUrlComponent(emailSubject)}")
-                    }
-                    if (emailBody.isNotBlank()) {
-                        params.add("body=${encodeUrlComponent(emailBody)}")
-                    }
-                    if (params.isNotEmpty()) {
-                        append("?")
-                        append(params.joinToString("&"))
-                    }
-                }
+                val mailtoText = buildMailtoText()
 
                 viewModel.createQrItem(mailtoText, AcquireType.CREATED) { result ->
                     isCreating = false
@@ -149,7 +161,15 @@ fun CreateEmailScreen(
                 else stringResource(Res.string.create_button)
             )
         }
+
+        TestActionButton(
+            content = if (emailAddress.isNotBlank()) buildMailtoText() else "",
+            state = testActionState
+        )
     }
+    }
+
+    TestActionOverlays(testActionState)
 }
 
 private fun encodeUrlComponent(text: String): String {

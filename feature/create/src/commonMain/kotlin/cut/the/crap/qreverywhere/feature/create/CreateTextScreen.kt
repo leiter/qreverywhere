@@ -14,6 +14,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,6 +39,9 @@ fun CreateTextScreen(
 ) {
     var textInput by remember { mutableStateOf("") }
     var inputError by remember { mutableStateOf<String?>(null) }
+
+    val snackbarHostState = remember { SnackbarHostState() }
+    val testActionState = rememberTestActionState(viewModel, snackbarHostState)
 
     val errorEmptyText = stringResource(Res.string.error_empty_text)
     val errorInvalidUrl = stringResource(Res.string.error_invalid_url)
@@ -78,9 +84,23 @@ fun CreateTextScreen(
         )
     }
 
+    // Live preview of the same prefixing logic applied to `finalText` on Create, used to
+    // drive the Test button - recomputed on every recomposition so it always reflects the
+    // current textInput, unlike `finalText` which is only computed inside the Create onClick.
+    val testContent = when {
+        qrType == "phone" && !textInput.startsWith("tel:") -> "tel:$textInput"
+        qrType == "sms" && !textInput.startsWith("smsto:") -> "smsto:$textInput"
+        qrType == "url" && !textInput.startsWith("http") -> "https://$textInput"
+        else -> textInput
+    }
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { innerPadding ->
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .padding(innerPadding)
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
@@ -171,9 +191,14 @@ fun CreateTextScreen(
                     Spacer(modifier = Modifier.padding(4.dp))
                     Text(stringResource(Res.string.create_button))
                 }
+
+                TestActionButton(content = testContent, state = testActionState)
             }
         }
     }
+    }
+
+    TestActionOverlays(testActionState)
 }
 
 private data class QrTypeInfo(

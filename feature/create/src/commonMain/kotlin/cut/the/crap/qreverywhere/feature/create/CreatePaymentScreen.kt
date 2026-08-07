@@ -15,6 +15,9 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -50,10 +53,31 @@ fun CreatePaymentScreen(
 
     val errorEmptyUsername = stringResource(Res.string.error_empty_payment_username)
 
+    val snackbarHostState = remember { SnackbarHostState() }
+    val testActionState = rememberTestActionState(viewModel, snackbarHostState)
+
+    fun buildPaymentUrl(): String = when (selectedProvider) {
+        PaymentProvider.PAYPAL -> {
+            val base = "https://paypal.me/${username.trim()}"
+            if (amount.isNotBlank()) "$base/${amount.trim()}" else base
+        }
+        PaymentProvider.VENMO -> {
+            val base = "https://venmo.com/${username.trim()}"
+            val params = mutableListOf("txn=pay")
+            if (amount.isNotBlank()) params.add("amount=${amount.trim()}")
+            if (note.isNotBlank()) params.add("note=${note.trim()}")
+            "$base?${params.joinToString("&")}"
+        }
+    }
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { innerPadding ->
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
+            .padding(innerPadding)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -136,21 +160,8 @@ fun CreatePaymentScreen(
                 if (username.isBlank()) { usernameError = errorEmptyUsername; return@Button }
 
                 isCreating = true
-                val paymentUrl = when (selectedProvider) {
-                    PaymentProvider.PAYPAL -> {
-                        val base = "https://paypal.me/${username.trim()}"
-                        if (amount.isNotBlank()) "$base/${amount.trim()}" else base
-                    }
-                    PaymentProvider.VENMO -> {
-                        val base = "https://venmo.com/${username.trim()}"
-                        val params = mutableListOf("txn=pay")
-                        if (amount.isNotBlank()) params.add("amount=${amount.trim()}")
-                        if (note.isNotBlank()) params.add("note=${note.trim()}")
-                        "$base?${params.joinToString("&")}"
-                    }
-                }
 
-                viewModel.createQrItem(paymentUrl, AcquireType.CREATED) { result ->
+                viewModel.createQrItem(buildPaymentUrl(), AcquireType.CREATED) { result ->
                     isCreating = false
                     result.onSuccess { onQrCreated() }
                 }
@@ -163,5 +174,13 @@ fun CreatePaymentScreen(
                 else stringResource(Res.string.create_button)
             )
         }
+
+        TestActionButton(
+            content = if (username.isNotBlank()) buildPaymentUrl() else "",
+            state = testActionState
+        )
     }
+    }
+
+    TestActionOverlays(testActionState)
 }

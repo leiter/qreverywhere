@@ -17,6 +17,9 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -57,12 +60,32 @@ fun CreateWiFiScreen(
     var ssidError by remember { mutableStateOf<String?>(null) }
     val focusManager = LocalFocusManager.current
 
+    val snackbarHostState = remember { SnackbarHostState() }
+    val testActionState = rememberTestActionState(viewModel, snackbarHostState)
+
     val errorEmptySsid = stringResource(Res.string.error_empty_ssid)
 
+    fun buildWifiText(): String = buildString {
+        append("WIFI:")
+        append("T:${securityType.code};")
+        append("S:${escapeWiFiSpecialChars(networkName)};")
+        if (securityType != WiFiSecurityType.OPEN && password.isNotEmpty()) {
+            append("P:${escapeWiFiSpecialChars(password)};")
+        }
+        if (isHidden) {
+            append("H:true;")
+        }
+        append(";")
+    }
+
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarHostState) }
+    ) { innerPadding ->
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
+            .padding(innerPadding)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -177,18 +200,7 @@ fun CreateWiFiScreen(
 
                 isCreating = true
 
-                val wifiText = buildString {
-                    append("WIFI:")
-                    append("T:${securityType.code};")
-                    append("S:${escapeWiFiSpecialChars(networkName)};")
-                    if (securityType != WiFiSecurityType.OPEN && password.isNotEmpty()) {
-                        append("P:${escapeWiFiSpecialChars(password)};")
-                    }
-                    if (isHidden) {
-                        append("H:true;")
-                    }
-                    append(";")
-                }
+                val wifiText = buildWifiText()
 
                 viewModel.createQrItem(wifiText, AcquireType.CREATED) { result ->
                     isCreating = false
@@ -203,7 +215,15 @@ fun CreateWiFiScreen(
                 else stringResource(Res.string.create_button)
             )
         }
+
+        TestActionButton(
+            content = if (networkName.isNotBlank()) buildWifiText() else "",
+            state = testActionState
+        )
     }
+    }
+
+    TestActionOverlays(testActionState)
 }
 
 private fun escapeWiFiSpecialChars(text: String): String {
