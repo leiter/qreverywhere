@@ -122,10 +122,12 @@ platform :ios do
   end
 
   desc "Upload metadata and screenshots only (no binary)"
-  lane :deliver_metadata do
+  desc "Pass skip_screenshots:true to upload text metadata without touching screenshots"
+  lane :deliver_metadata do |options|
     upload_to_app_store(
       api_key: api_key,
       skip_binary_upload: true,
+      skip_screenshots: options[:skip_screenshots] || false,
       force: true,
       submit_for_review: false,
       automatic_release: false

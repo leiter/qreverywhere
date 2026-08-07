@@ -16,7 +16,7 @@ QR Everywhere - 掃描與製作 QR Code
 • 電話號碼 - 一觸即撥
 • 行事曆活動 - 分享邀請
 • 位置 - 附標籤的 GPS 座標
-• App 商店連結 - iOS 與 Android
+• App 商店連結
 • 付款 - PayPal 與 Venmo 收款要求
 • 加密貨幣 - Bitcoin 與 Ethereum 位址
 

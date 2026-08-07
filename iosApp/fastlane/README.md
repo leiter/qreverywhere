@@ -63,6 +63,8 @@ Deploy a new version to the App Store
 
 Upload metadata and screenshots only (no binary)
 
+Pass skip_screenshots:true to upload text metadata without touching screenshots
+
 ### ios bump_build
 
 ```sh

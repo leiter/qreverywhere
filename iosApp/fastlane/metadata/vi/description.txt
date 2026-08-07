@@ -16,7 +16,7 @@ TẠO MÃ QR
 • Số điện thoại - gọi chỉ với một chạm
 • Sự kiện lịch - chia sẻ lời mời
 • Vị trí - tọa độ GPS kèm nhãn
-• Liên kết cửa hàng ứng dụng - iOS và Android
+• Liên kết cửa hàng ứng dụng
 • Thanh toán - yêu cầu PayPal và Venmo
 • Tiền mã hóa - địa chỉ Bitcoin và Ethereum
 

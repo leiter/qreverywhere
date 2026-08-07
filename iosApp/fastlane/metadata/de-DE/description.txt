@@ -16,7 +16,7 @@ QR-CODES ERSTELLEN
 • Telefonnummern - Anruf mit einem Tipp
 • Termine - Einladungen teilen
 • Orte - GPS-Koordinaten mit Bezeichnung
-• App-Store-Links - iOS und Android
+• App-Store-Links
 • Zahlungen - PayPal- und Venmo-Anfragen
 • Krypto - Bitcoin- und Ethereum-Adressen
 

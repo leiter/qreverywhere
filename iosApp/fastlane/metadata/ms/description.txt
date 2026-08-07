@@ -16,7 +16,7 @@ MENCIPTA KOD QR
 • Nombor telefon - panggil dengan satu ketikan
 • Acara kalendar - kongsi jemputan
 • Lokasi - koordinat GPS dengan label
-• Pautan gedung aplikasi - iOS dan Android
+• Pautan gedung aplikasi
 • Pembayaran - permintaan PayPal dan Venmo
 • Kripto - alamat Bitcoin dan Ethereum
 

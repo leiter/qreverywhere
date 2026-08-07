@@ -16,7 +16,7 @@ QR KOD OLUŞTURMA
 • Telefon numaraları - tek dokunuşla arama
 • Takvim etkinlikleri - davetiye paylaşın
 • Konumlar - etiketli GPS koordinatları
-• Uygulama mağazası bağlantıları - iOS ve Android
+• Uygulama mağazası bağlantıları
 • Ödemeler - PayPal ve Venmo talepleri
 • Kripto - Bitcoin ve Ethereum adresleri
 

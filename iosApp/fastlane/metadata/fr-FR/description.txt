@@ -16,7 +16,7 @@ CRÉER DES QR CODES
 • Numéros de téléphone : appelez d'un geste
 • Événements de calendrier : partagez vos invitations
 • Lieux : coordonnées GPS avec libellé
-• Liens vers les stores : iOS et Android
+• Liens vers les stores
 • Paiements : demandes PayPal et Venmo
 • Crypto : adresses Bitcoin et Ethereum
 

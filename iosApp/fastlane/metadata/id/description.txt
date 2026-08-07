@@ -16,7 +16,7 @@ MEMBUAT KODE QR
 • Nomor telepon - telepon dengan sekali ketuk
 • Acara kalender - bagikan undangan
 • Lokasi - koordinat GPS dengan label
-• Tautan toko aplikasi - iOS dan Android
+• Tautan toko aplikasi
 • Pembayaran - permintaan PayPal dan Venmo
 • Kripto - alamat Bitcoin dan Ethereum
 

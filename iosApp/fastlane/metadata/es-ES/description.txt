@@ -16,7 +16,7 @@ CREAR CÓDIGOS QR
 • Números de teléfono: llama con un toque
 • Eventos de calendario: comparte invitaciones
 • Ubicaciones: coordenadas GPS con etiqueta
-• Enlaces a tiendas de apps: iOS y Android
+• Enlaces a tiendas de apps
 • Pagos: solicitudes de PayPal y Venmo
 • Cripto: direcciones de Bitcoin y Ethereum
 

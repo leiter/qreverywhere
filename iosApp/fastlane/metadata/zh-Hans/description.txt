@@ -16,7 +16,7 @@ QR Everywhere - 扫描和创建二维码
 • 电话号码 - 一键拨号
 • 日历事件 - 分享邀请
 • 位置 - 带标签的 GPS 坐标
-• 应用商店链接 - iOS 与 Android
+• 应用商店链接
 • 付款 - PayPal 与 Venmo 收款请求
 • 加密货币 - Bitcoin 与 Ethereum 地址
 

@@ -16,7 +16,7 @@ TWORZENIE KODÓW QR
 • Numery telefonów - dzwoń jednym dotknięciem
 • Wydarzenia w kalendarzu - udostępniaj zaproszenia
 • Lokalizacje - współrzędne GPS z etykietą
-• Linki do sklepów z aplikacjami - iOS i Android
+• Linki do sklepów z aplikacjami
 • Płatności - prośby PayPal i Venmo
 • Kryptowaluty - adresy Bitcoin i Ethereum
 

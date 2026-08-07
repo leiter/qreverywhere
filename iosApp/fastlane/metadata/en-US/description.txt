@@ -16,7 +16,7 @@ CREATE QR CODES
 • Phone numbers - one tap to call
 • Calendar events - share invitations
 • Locations - GPS coordinates with a label
-• App Store links - iOS and Android
+• App Store links
 • Payments - PayPal and Venmo requests
 • Crypto - Bitcoin and Ethereum addresses
 

@@ -16,7 +16,7 @@ QR 코드 생성
 • 전화번호 - 한 번의 탭으로 통화
 • 캘린더 일정 - 초대장 공유
 • 위치 - 라벨이 있는 GPS 좌표
-• 앱 스토어 링크 - iOS 및 Android
+• 앱 스토어 링크
 • 결제 - PayPal 및 Venmo 요청
 • 암호화폐 - Bitcoin 및 Ethereum 주소
 

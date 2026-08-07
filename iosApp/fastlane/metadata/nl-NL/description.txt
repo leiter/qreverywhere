@@ -16,7 +16,7 @@ QR-CODES MAKEN
 • Telefoonnummers: bellen met één tik
 • Agenda-afspraken: deel uitnodigingen
 • Locaties: GPS-coördinaten met label
-• App Store-links: iOS en Android
+• App Store-links
 • Betalingen: PayPal- en Venmo-verzoeken
 • Crypto: Bitcoin- en Ethereum-adressen
 
