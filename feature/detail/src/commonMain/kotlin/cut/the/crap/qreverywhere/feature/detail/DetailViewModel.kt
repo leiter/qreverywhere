@@ -3,8 +3,12 @@ package cut.the.crap.qreverywhere.feature.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cut.the.crap.qreverywhere.shared.domain.model.AcquireType
+import cut.the.crap.qreverywhere.shared.domain.model.QrAction
 import cut.the.crap.qreverywhere.shared.domain.model.QrItem
+import cut.the.crap.qreverywhere.shared.domain.model.toQrAction
 import cut.the.crap.qreverywhere.shared.domain.repository.QrRepository
+import cut.the.crap.qreverywhere.shared.domain.usecase.QrActionLauncher
+import cut.the.crap.qreverywhere.shared.domain.usecase.QrActionResult
 import cut.the.crap.qreverywhere.shared.domain.usecase.QrCodeGenerator
 import cut.the.crap.qreverywhere.shared.domain.usecase.SaveImageToFileUseCase
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
@@ -24,7 +28,8 @@ class DetailViewModel(
     private val qrRepository: QrRepository,
     private val saveImageUseCase: SaveImageToFileUseCase,
     private val qrCodeGenerator: QrCodeGenerator,
-    private val userPreferences: UserPreferences
+    private val userPreferences: UserPreferences,
+    private val qrActionLauncher: QrActionLauncher
 ) : ViewModel() {
 
     private val _detailViewItem = MutableStateFlow<QrItem?>(null)
@@ -151,6 +156,19 @@ class DetailViewModel(
     fun clearLastDeletedItem() {
         _lastDeletedItem.value = null
     }
+
+    /**
+     * Resolves the currently displayed [QrItem]'s content to the [QrAction] it represents,
+     * used to drive the "Test"/"Open" action button on the Detail screen.
+     */
+    fun resolveAction(): QrAction = detailViewItem.value?.toQrAction() ?: QrAction.NoAction("")
+
+    /**
+     * Executes the given [action] via the platform [QrActionLauncher]. Pure passthrough -
+     * the UI layer owns Snackbar/dialog/card decision-making, this just performs the action
+     * once the user has confirmed it.
+     */
+    fun executeAction(action: QrAction): QrActionResult = qrActionLauncher.launch(action)
 
     fun deleteQrItem(item: QrItem) {
         viewModelScope.launch {

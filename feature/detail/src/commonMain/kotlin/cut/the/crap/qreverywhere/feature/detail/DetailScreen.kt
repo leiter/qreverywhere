@@ -16,8 +16,17 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.ContactPage
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Event
+import androidx.compose.material.icons.filled.Link
+import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.PlayArrow
 import androidx.compose.material.icons.filled.Share
+import androidx.compose.material.icons.filled.Sms
+import androidx.compose.material.icons.filled.Wifi
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -37,6 +46,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,9 +55,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.vector.ImageVector
+import cut.the.crap.qreverywhere.shared.domain.model.QrAction
+import cut.the.crap.qreverywhere.shared.domain.model.snackbarLabel
+import cut.the.crap.qreverywhere.shared.domain.usecase.QrActionResult
+import cut.the.crap.qreverywhere.shared.domain.usecase.SafetyStatus
+import cut.the.crap.qreverywhere.shared.domain.usecase.UrlSafetyChecker
+import cut.the.crap.qreverywhere.shared.presentation.components.UrlWarningDialog
+import cut.the.crap.qreverywhere.shared.presentation.components.WifiCredentialsCard
 import cut.the.crap.qreverywhere.shared.presentation.state.State
 import cut.the.crap.qreverywhere.shared.utils.toImagePainter
 import cut.the.crap.qreverywhere.shared.utils.toReadableString
+import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import cut.the.crap.qreverywhere.core.base.generated.resources.Res
@@ -66,10 +85,71 @@ fun DetailScreen(
     val lastDeletedItem by viewModel.lastDeletedItem.collectAsState()
 
     val snackbarHostState = remember { SnackbarHostState() }
+    val coroutineScope = rememberCoroutineScope()
     val deletedMessage = stringResource(Res.string.detail_deleted)
     val undoLabel = stringResource(Res.string.action_undo)
     val savedMessage = stringResource(Res.string.feedback_saved)
     val saveErrorMessage = stringResource(Res.string.feedback_save_error)
+    val openActionLabel = stringResource(Res.string.action_open)
+    val noHandlerMessage = stringResource(Res.string.feedback_no_handler_available)
+
+    // Test/Open action state: URL safety dialog and WiFi credentials reveal are both
+    // presented as overlays rather than going through the Snackbar-with-action flow.
+    val urlSafetyChecker = remember { UrlSafetyChecker() }
+    var pendingUrlWarning by remember { mutableStateOf<Pair<QrAction.OpenUrl, cut.the.crap.qreverywhere.shared.domain.usecase.UrlSafetyResult>?>(null) }
+    var wifiCredentialsToShow by remember { mutableStateOf<cut.the.crap.qreverywhere.shared.domain.model.WifiCredentials?>(null) }
+
+    fun runAction(action: QrAction) {
+        coroutineScope.launch {
+            val result = viewModel.executeAction(action)
+            when (result) {
+                is QrActionResult.Success -> Unit
+                is QrActionResult.NoHandlerAvailable -> {
+                    snackbarHostState.showSnackbar(
+                        message = noHandlerMessage,
+                        duration = SnackbarDuration.Short
+                    )
+                }
+                is QrActionResult.Failed -> {
+                    snackbarHostState.showSnackbar(
+                        message = result.reason,
+                        duration = SnackbarDuration.Short
+                    )
+                }
+            }
+        }
+    }
+
+    fun confirmActionViaSnackbar(action: QrAction) {
+        coroutineScope.launch {
+            val result = snackbarHostState.showSnackbar(
+                message = action.snackbarLabel(),
+                actionLabel = openActionLabel,
+                duration = SnackbarDuration.Short
+            )
+            if (result == SnackbarResult.ActionPerformed) {
+                runAction(action)
+            }
+        }
+    }
+
+    fun onTestActionClick(action: QrAction) {
+        when (action) {
+            is QrAction.ConnectWifi -> {
+                wifiCredentialsToShow = action.credentials
+            }
+            is QrAction.OpenUrl -> {
+                val safetyResult = urlSafetyChecker.checkUrl(action.url)
+                if (safetyResult.status == SafetyStatus.SAFE) {
+                    confirmActionViaSnackbar(action)
+                } else {
+                    pendingUrlWarning = action to safetyResult
+                }
+            }
+            is QrAction.NoAction -> Unit
+            else -> confirmActionViaSnackbar(action)
+        }
+    }
 
     // Show undo snackbar when an item is deleted
     LaunchedEffect(lastDeletedItem) {
@@ -260,6 +340,18 @@ fun DetailScreen(
                                     Spacer(modifier = Modifier.size(8.dp))
                                     Text(stringResource(Res.string.detail_delete))
                                 }
+
+                                val resolvedAction = remember(qrItem) { viewModel.resolveAction() }
+                                if (resolvedAction !is QrAction.NoAction) {
+                                    ExtendedFloatingActionButton(
+                                        onClick = { onTestActionClick(resolvedAction) },
+                                        modifier = Modifier.fillMaxWidth()
+                                    ) {
+                                        Icon(actionIcon(resolvedAction), stringResource(Res.string.cd_test_action))
+                                        Spacer(modifier = Modifier.size(8.dp))
+                                        Text(stringResource(Res.string.detail_test_action))
+                                    }
+                                }
                             }
                         }
                     } ?: run {
@@ -274,6 +366,40 @@ fun DetailScreen(
             }
         }
     }
+
+    wifiCredentialsToShow?.let { credentials ->
+        WifiCredentialsCard(
+            credentials = credentials,
+            onDismiss = { wifiCredentialsToShow = null }
+        )
+    }
+
+    pendingUrlWarning?.let { (action, safetyResult) ->
+        UrlWarningDialog(
+            safetyResult = safetyResult,
+            onDismiss = { pendingUrlWarning = null },
+            onProceed = {
+                pendingUrlWarning = null
+                confirmActionViaSnackbar(action)
+            },
+            onCancel = { pendingUrlWarning = null }
+        )
+    }
+}
+
+/**
+ * Icon reflecting the resolved [QrAction] type, shown on the Test/Open FAB.
+ */
+private fun actionIcon(action: QrAction): ImageVector = when (action) {
+    is QrAction.OpenUrl -> Icons.Default.Link
+    is QrAction.DialPhone -> Icons.Default.Call
+    is QrAction.SendEmail -> Icons.Default.Email
+    is QrAction.SendSms -> Icons.Default.Sms
+    is QrAction.ConnectWifi -> Icons.Default.Wifi
+    is QrAction.SaveContact -> Icons.Default.ContactPage
+    is QrAction.AddCalendarEvent -> Icons.Default.Event
+    is QrAction.ShowLocation -> Icons.Default.LocationOn
+    is QrAction.NoAction -> Icons.Default.PlayArrow
 }
 
 @Composable

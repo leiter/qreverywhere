@@ -261,6 +261,7 @@
     <string name="detail_save">Save Image</string>
     <string name="detail_save_to_file">Save to file</string>
     <string name="detail_delete">Delete</string>
+    <string name="detail_test_action">Test</string>
     <string name="detail_no_item">No QR code selected</string>
     <string name="detail_error">Error: %1$s</string>
     <string name="detail_loading">Loading QR code...</string>
@@ -277,6 +278,7 @@
     <string name="feedback_no_qr_in_image">No QR code found in image</string>
     <string name="feedback_launch_error">Could not open content: %1$s</string>
     <string name="feedback_no_app_found">No app found to handle this content</string>
+    <string name="feedback_no_handler_available">No app available for this action</string>
 
     <!-- Permission Messages -->
     <string name="permission_storage_required">Storage permission is required to save QR code</string>
@@ -303,9 +305,18 @@
     <string name="action_dismiss">Dismiss</string>
     <string name="action_ok">OK</string>
     <string name="action_undo">Undo</string>
+    <string name="action_open">Open</string>
 
     <!-- Delete Feedback -->
     <string name="detail_deleted">QR code deleted</string>
+
+    <!-- WiFi Credentials Card -->
+    <string name="wifi_credentials_title">WiFi Credentials</string>
+    <string name="wifi_credentials_ssid">Network name (SSID)</string>
+    <string name="wifi_credentials_password">Password</string>
+    <string name="wifi_credentials_show">Show</string>
+    <string name="wifi_credentials_hide">Hide</string>
+    <string name="wifi_credentials_close">Close</string>
 
     <!-- Content Descriptions (for accessibility) -->
     <string name="cd_qr_preview">QR Code Preview</string>
@@ -317,6 +328,8 @@
     <string name="cd_share">Share</string>
     <string name="cd_save">Save</string>
     <string name="cd_delete">Delete</string>
+    <string name="cd_test_action">Test action</string>
+    <string name="cd_wifi">WiFi</string>
     <string name="cd_create">Create</string>
     <string name="cd_launch">Launch</string>
     <string name="cd_settings">Settings</string>

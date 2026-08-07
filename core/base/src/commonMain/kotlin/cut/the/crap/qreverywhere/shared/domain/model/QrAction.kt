@@ -103,6 +103,24 @@ fun String.toQrAction(): QrAction {
 fun QrItem.toQrAction(): QrAction = textContent.toQrAction()
 
 /**
+ * Short human-readable label describing what this action will do, used as the message
+ * for the Snackbar-with-action confirmation flow on Detail/Create screens. Plain Kotlin
+ * string templates (not compose-resource lookups) match the existing precedent for
+ * building display strings from domain data - see [GeoLocation.toDisplayString].
+ */
+fun QrAction.snackbarLabel(): String = when (this) {
+    is QrAction.OpenUrl -> "Open $url"
+    is QrAction.DialPhone -> "Call $number"
+    is QrAction.SendEmail -> "Send email to $to"
+    is QrAction.SendSms -> "Send SMS to $number"
+    is QrAction.ConnectWifi -> "Connect to ${credentials.ssid}"
+    is QrAction.SaveContact -> "Save contact"
+    is QrAction.AddCalendarEvent -> "Add to calendar: ${event.title}"
+    is QrAction.ShowLocation -> "Show location"
+    is QrAction.NoAction -> ""
+}
+
+/**
  * Basic percent-decoding for mailto: query params (subject=/body=), mirroring the
  * limited decodeUrlComponent() approach already used privately in QrItem.kt (that function
  * is private to its file, so it can't be reused directly here).
