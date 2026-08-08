@@ -148,6 +148,26 @@ platform :ios do
     )
   end
 
+  desc "Submit the current App Store version for review (uploads nothing)"
+  desc "Declarations mirror iosApp/appstore/app_store_connect_answers.md"
+  lane :submit_review do
+    upload_to_app_store(
+      api_key: api_key,
+      skip_binary_upload: true,
+      skip_screenshots: true,
+      skip_metadata: true,
+      submit_for_review: true,
+      automatic_release: false,
+      force: true,
+      precheck_include_in_app_purchases: false,
+      submission_information: {
+        export_compliance_uses_encryption: false,
+        add_id_info_uses_idfa: false,
+        content_rights_contains_third_party_content: false
+      }
+    )
+  end
+
   desc "Print the latest build number available on TestFlight"
   lane :latest_beta do
     build = latest_testflight_build_number(

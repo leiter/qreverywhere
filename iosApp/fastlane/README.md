@@ -81,6 +81,16 @@ Increment build number
 
 Increment version number
 
+### ios submit_review
+
+```sh
+[bundle exec] fastlane ios submit_review
+```
+
+Submit the current App Store version for review (uploads nothing)
+
+Declarations mirror iosApp/appstore/app_store_connect_answers.md
+
 ### ios latest_beta
 
 ```sh
