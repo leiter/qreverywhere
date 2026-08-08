@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination.Companion.hierarchy
+import kotlinx.coroutines.flow.first
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import cut.the.crap.qreverywhere.feature.create.CreateViewModel
@@ -64,6 +65,13 @@ fun App(
 
     // Handle initial navigation from shortcuts, widgets, or deep links
     LaunchedEffect(initialRoute, initialDetailId) {
+        if (initialRoute == null) return@LaunchedEffect
+
+        // NavHost installs the graph during its own first composition, which
+        // happens after this effect is launched. Navigating before that throws
+        // "Navigation graph has not been set", so wait for the first entry.
+        navController.currentBackStackEntryFlow.first()
+
         when (initialRoute) {
             "scan" -> {
                 navController.navigate(Screen.Scan.route) {
@@ -85,6 +93,14 @@ fun App(
                     navController.navigate(Screen.Detail.createRoute(id)) {
                         popUpTo(Screen.Scan.route)
                     }
+                }
+            }
+            // Anything else is treated as a literal route, which is how
+            // screenshot capture reaches screens the shortcuts never name
+            // (e.g. "create/wifi", "detail/1").
+            else -> {
+                navController.navigate(initialRoute) {
+                    popUpTo(Screen.Scan.route)
                 }
             }
         }

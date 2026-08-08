@@ -10,12 +10,20 @@ import cut.the.crap.qreverywhere.feature.create.CreateViewModel
 import cut.the.crap.qreverywhere.feature.detail.DetailViewModel
 import cut.the.crap.qreverywhere.feature.history.HistoryViewModel
 import cut.the.crap.qreverywhere.shared.di.initKoinIos
+import cut.the.crap.qreverywhere.shared.domain.repository.QrRepository
+import cut.the.crap.qreverywhere.shared.domain.usecase.QrCodeGenerator
 import cut.the.crap.qreverywhere.shared.domain.usecase.ThemePreference
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
 import cut.the.crap.qreverywhere.shared.presentation.App
 import cut.the.crap.qreverywhere.shared.presentation.theme.QrEveryWhereTheme
+import cut.the.crap.qreverywhere.shared.screenshot.ScreenshotMode
+import cut.the.crap.qreverywhere.shared.screenshot.ScreenshotSeeder
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
+import platform.Foundation.NSUserDefaults
 import platform.UIKit.UIActivityViewController
 import platform.UIKit.UIApplication
 import platform.UIKit.UIViewController
@@ -27,6 +35,8 @@ import platform.UIKit.UIViewController
 fun MainViewController(): UIViewController {
     // Initialize Koin for iOS
     initKoinIos()
+
+    val screenshotRoute = configureScreenshotMode()
 
     return ComposeUIViewController {
         val provider = remember { IosViewModelProvider() }
@@ -51,6 +61,7 @@ fun MainViewController(): UIViewController {
                 createViewModel = provider.createViewModel,
                 detailViewModel = provider.detailViewModel,
                 userPreferences = provider.userPreferences,
+                initialRoute = screenshotRoute,
                 onShareText = { text ->
                     shareText(text)
                 },
@@ -63,6 +74,50 @@ fun MainViewController(): UIViewController {
             )
         }
     }
+}
+
+/**
+ * Turns screenshot launch arguments into a start destination.
+ *
+ * Arguments prefixed with `-` land in the NSUserDefaults argument domain, so
+ * `simctl launch <app> -screenshotMode YES -screenshotScreen wifi` is readable
+ * here with no URL scheme and no taps. Returns null for a normal launch.
+ *
+ * Seeding is fire-and-forget: the history is a Room Flow, so the list redraws
+ * itself once the demo rows land, and the capture script waits out the delay.
+ */
+private fun configureScreenshotMode(): String? {
+    val defaults = NSUserDefaults.standardUserDefaults
+    if (!defaults.boolForKey("screenshotMode")) return null
+
+    ScreenshotMode.enabled = true
+
+    val screen = defaults.stringForKey("screenshotScreen") ?: "scan"
+    val seedTarget = ScreenshotSeedTarget()
+
+    CoroutineScope(Dispatchers.Main).launch {
+        val newest = ScreenshotSeeder(seedTarget.repository, seedTarget.generator).seed()
+        // The detail screen reads the selected item from the view model rather
+        // than from the route, so hand it over explicitly.
+        newest?.let { seedTarget.detailViewModel.setDetailViewItem(it) }
+    }
+
+    return when (screen) {
+        "create" -> "create"
+        "history" -> "history"
+        "wifi" -> "create/wifi"
+        "detail" -> "detail/1"
+        else -> "scan"
+    }
+}
+
+/**
+ * Koin lookups needed for seeding, kept out of the composable.
+ */
+private class ScreenshotSeedTarget : KoinComponent {
+    val repository: QrRepository by inject()
+    val generator: QrCodeGenerator by inject()
+    val detailViewModel: DetailViewModel by inject()
 }
 
 /**

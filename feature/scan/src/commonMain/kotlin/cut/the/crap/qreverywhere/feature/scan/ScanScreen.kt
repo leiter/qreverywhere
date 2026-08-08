@@ -1,5 +1,6 @@
 package cut.the.crap.qreverywhere.feature.scan
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -58,6 +59,8 @@ import cut.the.crap.qreverywhere.shared.camera.CameraFacing
 import cut.the.crap.qreverywhere.shared.camera.CameraPermissionState
 import cut.the.crap.qreverywhere.shared.camera.CameraView
 import cut.the.crap.qreverywhere.shared.camera.ImagePickerResult
+import cut.the.crap.qreverywhere.shared.screenshot.ScreenshotMode
+import cut.the.crap.qreverywhere.shared.utils.toImagePainter
 import cut.the.crap.qreverywhere.shared.camera.QrCodeDetector
 import cut.the.crap.qreverywhere.shared.camera.QrCodeResult
 import cut.the.crap.qreverywhere.shared.camera.rememberCameraPermissionManager
@@ -208,6 +211,15 @@ fun ScanScreen(
                 .fillMaxSize()
                 .padding(paddingValues)
         ) {
+            if (ScreenshotMode.enabled) {
+                // A simulator has no camera, so capture runs frame a real
+                // generated QR code behind the app's own scan overlay rather
+                // than photographing the "camera unavailable" placeholder.
+                ScanPreviewBackdrop(modifier = Modifier.fillMaxSize())
+                ScanIndicatorOverlay(modifier = Modifier.align(Alignment.Center))
+                return@Box
+            }
+
             when (permissionState) {
                 CameraPermissionState.GRANTED -> {
                     if (!hasScanned) {
@@ -274,6 +286,28 @@ fun ScanScreen(
                     )
                 }
             }
+        }
+    }
+}
+
+/**
+ * Stand-in for the camera feed during screenshot capture: a dark surface with a
+ * real QR code where the lens would have found one.
+ */
+@Composable
+private fun ScanPreviewBackdrop(
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier.background(Color(0xFF1C1B1F)),
+        contentAlignment = Alignment.Center
+    ) {
+        ScreenshotMode.scanPreviewImage?.toImagePainter()?.let { painter ->
+            Image(
+                painter = painter,
+                contentDescription = null,
+                modifier = Modifier.size(200.dp)
+            )
         }
     }
 }

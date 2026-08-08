@@ -35,6 +35,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import cut.the.crap.qreverywhere.shared.domain.model.AcquireType
+import cut.the.crap.qreverywhere.shared.screenshot.ScreenshotMode
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
 import cut.the.crap.qreverywhere.core.base.generated.resources.Res
@@ -51,11 +52,17 @@ fun CreateWiFiScreen(
     viewModel: CreateViewModel,
     onQrCreated: () -> Unit = {}
 ) {
-    var networkName by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    // An empty form makes for a poor App Store screenshot, so capture runs
+    // start from filled-in demo credentials.
+    var networkName by remember {
+        mutableStateOf(if (ScreenshotMode.enabled) ScreenshotMode.DEMO_WIFI_SSID else "")
+    }
+    var password by remember {
+        mutableStateOf(if (ScreenshotMode.enabled) ScreenshotMode.DEMO_WIFI_PASSWORD else "")
+    }
     var securityType by remember { mutableStateOf(WiFiSecurityType.WPA) }
     var isHidden by remember { mutableStateOf(false) }
-    var isPasswordVisible by remember { mutableStateOf(false) }
+    var isPasswordVisible by remember { mutableStateOf(ScreenshotMode.enabled) }
     var isCreating by remember { mutableStateOf(false) }
     var ssidError by remember { mutableStateOf<String?>(null) }
     val focusManager = LocalFocusManager.current
