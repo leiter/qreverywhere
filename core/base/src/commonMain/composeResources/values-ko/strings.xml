@@ -1,341 +1,372 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Korean (한국어) - Translation stub -->
-<!-- TODO: Translate all strings to Korean (한국어) -->
 <resources>
     <!-- App Title -->
     <string name="app_name">QR Everywhere</string>
 
     <!-- Bottom Navigation -->
-    <string name="nav_history">History</string>
-    <string name="nav_scan">Scan</string>
-    <string name="nav_create">Create</string>
+    <string name="nav_history">기록</string>
+    <string name="nav_scan">스캔</string>
+    <string name="nav_create">만들기</string>
 
     <!-- Screen Titles -->
-    <string name="title_history">QR History</string>
-    <string name="title_scan">Scan or import QR</string>
-    <string name="title_create">Create QR Code</string>
-    <string name="title_detail">QR Details</string>
-    <string name="title_create_text">Create Text QR</string>
-    <string name="title_create_email">Create Email QR</string>
+    <string name="title_history">QR 코드 기록</string>
+    <string name="title_scan">QR 스캔 또는 가져오기</string>
+    <string name="title_create">QR 코드 만들기</string>
+    <string name="title_detail">QR 코드 정보</string>
+    <string name="title_create_text">텍스트 QR 만들기</string>
+    <string name="title_create_email">이메일 QR 만들기</string>
 
     <!-- Create QR Type Titles -->
-    <string name="title_text_qr">Text QR Code</string>
-    <string name="title_url_qr">Web URL QR Code</string>
-    <string name="title_phone_qr">Phone QR Code</string>
-    <string name="title_sms_qr">SMS QR Code</string>
-    <string name="title_email_qr">Email QR Code</string>
-    <string name="title_contact_qr">Contact QR Code</string>
-    <string name="title_wifi_qr">WiFi QR Code</string>
-    <string name="title_calendar_qr">Calendar Event QR Code</string>
-    <string name="title_location_qr">Location QR Code</string>
-    <string name="title_mecard_qr">MeCard QR Code</string>
-    <string name="title_appstore_qr">App Store Link QR Code</string>
-    <string name="title_payment_qr">Payment QR Code</string>
-    <string name="title_crypto_qr">Cryptocurrency QR Code</string>
+    <string name="title_text_qr">텍스트 QR 코드</string>
+    <string name="title_url_qr">URL QR 코드</string>
+    <string name="title_phone_qr">전화번호 QR 코드</string>
+    <string name="title_sms_qr">SMS QR 코드</string>
+    <string name="title_email_qr">이메일 QR 코드</string>
+    <string name="title_contact_qr">연락처 QR 코드</string>
+    <string name="title_wifi_qr">Wi-Fi QR 코드</string>
+    <string name="title_calendar_qr">일정 QR 코드</string>
+    <string name="title_location_qr">위치 QR 코드</string>
+    <string name="title_mecard_qr">MeCard QR 코드</string>
+    <string name="title_appstore_qr">앱 스토어 링크 QR 코드</string>
+    <string name="title_payment_qr">결제 QR 코드</string>
+    <string name="title_crypto_qr">가상자산 QR 코드</string>
 
     <!-- Create QR Type Descriptions -->
-    <string name="desc_text_qr">Create a QR code with any text content</string>
-    <string name="desc_url_qr">Create a QR code with website URL</string>
-    <string name="desc_phone_qr">Create a QR code with phone number</string>
-    <string name="desc_sms_qr">Create a QR code with SMS message</string>
-    <string name="desc_email_qr">Create a QR code with email information</string>
-    <string name="desc_contact_qr">Create a QR code with contact information (vCard)</string>
-    <string name="desc_wifi_qr">Create a QR code with WiFi network credentials</string>
-    <string name="desc_calendar_qr">Create a QR code with calendar event (VEVENT)</string>
-    <string name="desc_location_qr">Create a QR code with GPS coordinates</string>
-    <string name="desc_mecard_qr">Create a QR code with contact (simple format)</string>
-    <string name="desc_appstore_qr">Create a QR code linking to an app store</string>
-    <string name="desc_payment_qr">Create a QR code for PayPal or Venmo payments</string>
-    <string name="desc_crypto_qr">Create a QR code for Bitcoin or Ethereum wallet</string>
+    <string name="desc_text_qr">원하는 텍스트로 QR 코드를 만듭니다</string>
+    <string name="desc_url_qr">웹사이트 주소로 QR 코드를 만듭니다</string>
+    <string name="desc_phone_qr">전화번호로 QR 코드를 만듭니다</string>
+    <string name="desc_sms_qr">SMS 메시지로 QR 코드를 만듭니다</string>
+    <string name="desc_email_qr">이메일 정보로 QR 코드를 만듭니다</string>
+    <string name="desc_contact_qr">연락처 정보로 QR 코드를 만듭니다(vCard)</string>
+    <string name="desc_wifi_qr">Wi-Fi 접속 정보로 QR 코드를 만듭니다</string>
+    <string name="desc_calendar_qr">일정으로 QR 코드를 만듭니다(VEVENT)</string>
+    <string name="desc_location_qr">GPS 좌표로 QR 코드를 만듭니다</string>
+    <string name="desc_mecard_qr">연락처로 QR 코드를 만듭니다(간단한 형식)</string>
+    <string name="desc_appstore_qr">앱 스토어 링크로 QR 코드를 만듭니다</string>
+    <string name="desc_payment_qr">PayPal 또는 Venmo 결제용 QR 코드를 만듭니다</string>
+    <string name="desc_crypto_qr">Bitcoin 또는 Ethereum 지갑용 QR 코드를 만듭니다</string>
 
     <!-- Create Screen -->
-    <string name="create_title">Create QR Code</string>
-    <string name="create_subtitle">Choose what type of QR code to create</string>
-    <string name="create_quick_text">Quick Text QR</string>
-    <string name="create_enter_text">Enter text</string>
-    <string name="create_placeholder">Type anything...</string>
-    <string name="create_button">Generate QR Code</string>
-    <string name="create_button_creating">Creating...</string>
-    <string name="create_more_types">More QR Types</string>
-    <string name="create_coming_soon">Coming soon:</string>
-    <string name="create_types_list">• Email QR Code\n• Phone QR Code\n• WiFi QR Code\n• vCard QR Code\n• URL QR Code</string>
+    <string name="create_title">QR 코드 만들기</string>
+    <string name="create_subtitle">만들 QR 코드 종류를 선택하세요</string>
+    <string name="create_quick_text">빠른 텍스트 QR</string>
+    <string name="create_enter_text">텍스트 입력</string>
+    <string name="create_placeholder">무엇이든 입력하세요…</string>
+    <string name="create_button">QR 코드 생성</string>
+    <string name="create_button_creating">만드는 중…</string>
+    <string name="create_more_types">다른 QR 종류</string>
+    <string name="create_coming_soon">출시 예정:</string>
+    <string name="create_types_list">• 이메일 QR 코드\n• 전화번호 QR 코드\n• Wi-Fi QR 코드\n• vCard QR 코드\n• URL QR 코드</string>
 
     <!-- Create Text QR Screen -->
-    <string name="create_url_title">Create URL QR Code</string>
-    <string name="create_phone_title">Create Phone QR Code</string>
-    <string name="create_sms_title">Create SMS QR Code</string>
-    <string name="create_text_title">Create Text QR Code</string>
-    <string name="create_email_title">Create Email QR Code</string>
+    <string name="create_url_title">URL QR 코드 만들기</string>
+    <string name="create_phone_title">전화번호 QR 코드 만들기</string>
+    <string name="create_sms_title">SMS QR 코드 만들기</string>
+    <string name="create_text_title">텍스트 QR 코드 만들기</string>
+    <string name="create_email_title">이메일 QR 코드 만들기</string>
 
     <!-- Field Labels -->
-    <string name="label_website_url">Website URL</string>
-    <string name="label_phone_number">Phone Number</string>
-    <string name="label_text_content">Text Content</string>
-    <string name="label_email_address">Email Address</string>
-    <string name="label_email_subject">Subject (Optional)</string>
-    <string name="label_email_message">Message (Optional)</string>
-    <string name="label_enter_url">Enter website URL</string>
-    <string name="label_enter_phone">Enter phone number</string>
-    <string name="label_enter_phone_message">Enter phone number and message</string>
-    <string name="label_first_name">First Name</string>
-    <string name="label_last_name">Last Name</string>
-    <string name="label_organization">Organization (Optional)</string>
-    <string name="label_job_title">Job Title (Optional)</string>
-    <string name="label_website">Website (Optional)</string>
-    <string name="label_network_name">Network Name (SSID)</string>
-    <string name="label_password">Password</string>
-    <string name="label_security_type">Security Type</string>
-    <string name="label_hidden_network">Hidden Network</string>
+    <string name="label_website_url">웹사이트 주소</string>
+    <string name="label_phone_number">전화번호</string>
+    <string name="label_text_content">텍스트 내용</string>
+    <string name="label_email_address">이메일 주소</string>
+    <string name="label_email_subject">제목(선택 사항)</string>
+    <string name="label_email_message">내용(선택 사항)</string>
+    <string name="label_enter_url">웹사이트 주소 입력</string>
+    <string name="label_enter_phone">전화번호 입력</string>
+    <string name="label_enter_phone_message">전화번호와 메시지 입력</string>
+    <!-- vCard Field Labels -->
+    <string name="label_first_name">이름</string>
+    <string name="label_last_name">성</string>
+    <string name="label_organization">회사(선택 사항)</string>
+    <string name="label_job_title">직함(선택 사항)</string>
+    <string name="label_website">웹사이트(선택 사항)</string>
+    <!-- WiFi Field Labels -->
+    <string name="label_network_name">네트워크 이름(SSID)</string>
+    <string name="label_password">비밀번호</string>
+    <string name="label_security_type">보안 방식</string>
+    <string name="label_hidden_network">숨겨진 네트워크</string>
 
     <!-- Field Placeholders -->
     <string name="placeholder_url">https://example.com</string>
-    <string name="placeholder_phone">+1234567890</string>
-    <string name="placeholder_sms">+1234567890:Hello</string>
-    <string name="placeholder_text">Enter any text</string>
+    <string name="placeholder_phone">+821012345678</string>
+    <string name="placeholder_sms">+821012345678:안녕하세요</string>
+    <string name="placeholder_text">아무 텍스트나 입력</string>
     <string name="placeholder_email">example@email.com</string>
-    <string name="placeholder_email_subject">Email subject</string>
-    <string name="placeholder_email_message">Email message</string>
-    <string name="placeholder_first_name">John</string>
-    <string name="placeholder_last_name">Doe</string>
-    <string name="placeholder_organization">Company Inc.</string>
-    <string name="placeholder_job_title">Software Engineer</string>
+    <string name="placeholder_email_subject">이메일 제목</string>
+    <string name="placeholder_email_message">이메일 내용</string>
+    <!-- vCard Placeholders -->
+    <string name="placeholder_first_name">철수</string>
+    <string name="placeholder_last_name">김</string>
+    <string name="placeholder_organization">샘플 주식회사</string>
+    <string name="placeholder_job_title">소프트웨어 엔지니어</string>
     <string name="placeholder_website">https://example.com</string>
+    <!-- WiFi Placeholders -->
     <string name="placeholder_network_name">MyWiFi</string>
     <string name="placeholder_password">password123</string>
+    <!-- WiFi Security Types -->
     <string name="security_wpa">WPA/WPA2</string>
     <string name="security_wep">WEP</string>
-    <string name="security_open">Open (No password)</string>
+    <string name="security_open">개방형(비밀번호 없음)</string>
 
     <!-- Calendar Event Labels -->
-    <string name="label_event_title">Event Title</string>
-    <string name="label_all_day_event">All Day Event</string>
-    <string name="label_start_date">Start Date</string>
-    <string name="label_start_time">Start Time</string>
-    <string name="label_end_date">End Date</string>
-    <string name="label_end_time">End Time</string>
-    <string name="label_event_location">Location (Optional)</string>
-    <string name="label_event_description">Description (Optional)</string>
-    <string name="placeholder_event_title">Team Meeting</string>
+    <string name="label_event_title">일정 제목</string>
+    <string name="label_all_day_event">하루 종일</string>
+    <string name="label_start_date">시작 날짜</string>
+    <string name="label_start_time">시작 시간</string>
+    <string name="label_end_date">종료 날짜</string>
+    <string name="label_end_time">종료 시간</string>
+    <string name="label_event_location">장소(선택 사항)</string>
+    <string name="label_event_description">설명(선택 사항)</string>
+    <!-- Calendar Event Placeholders -->
+    <string name="placeholder_event_title">팀 회의</string>
     <string name="placeholder_date">YYYY-MM-DD</string>
     <string name="placeholder_time">HH:MM</string>
-    <string name="placeholder_event_location">Conference Room A</string>
-    <string name="placeholder_event_description">Discuss project updates</string>
-    <string name="hint_date_format">Format: YYYY-MM-DD (e.g., 2024-03-15)</string>
-    <string name="hint_time_format">Format: HH:MM (e.g., 14:30)</string>
+    <string name="placeholder_event_location">회의실 A</string>
+    <string name="placeholder_event_description">프로젝트 진행 상황 공유</string>
+    <!-- Calendar Event Hints -->
+    <string name="hint_date_format">형식: YYYY-MM-DD(예: 2024-03-15)</string>
+    <string name="hint_time_format">형식: HH:MM(예: 14:30)</string>
 
     <!-- Location Labels -->
-    <string name="label_latitude">Latitude</string>
-    <string name="label_longitude">Longitude</string>
-    <string name="label_location_label">Label (Optional)</string>
+    <string name="label_latitude">위도</string>
+    <string name="label_longitude">경도</string>
+    <string name="label_location_label">라벨(선택 사항)</string>
+    <!-- Location Placeholders -->
     <string name="placeholder_latitude">37.7749</string>
     <string name="placeholder_longitude">-122.4194</string>
-    <string name="placeholder_location_label">San Francisco</string>
-    <string name="hint_latitude">Range: -90 to 90</string>
-    <string name="hint_longitude">Range: -180 to 180</string>
+    <string name="placeholder_location_label">샌프란시스코</string>
+    <!-- Location Hints -->
+    <string name="hint_latitude">범위: -90 ~ 90</string>
+    <string name="hint_longitude">범위: -180 ~ 180</string>
 
     <!-- MeCard Labels -->
-    <string name="label_mecard_name">Full Name</string>
-    <string name="label_mecard_address">Address (Optional)</string>
-    <string name="label_mecard_note">Note (Optional)</string>
-    <string name="placeholder_mecard_name">John Doe</string>
-    <string name="placeholder_mecard_address">123 Main St, City</string>
-    <string name="placeholder_mecard_note">Met at conference</string>
+    <string name="label_mecard_name">전체 이름</string>
+    <string name="label_mecard_address">주소(선택 사항)</string>
+    <string name="label_mecard_note">메모(선택 사항)</string>
+    <!-- MeCard Placeholders -->
+    <string name="placeholder_mecard_name">김철수</string>
+    <string name="placeholder_mecard_address">서울시 중앙로 123</string>
+    <string name="placeholder_mecard_note">컨퍼런스에서 만남</string>
 
     <!-- App Store Labels -->
-    <string name="label_select_store">Select App Store</string>
-    <string name="label_apple_app_id">Apple App ID</string>
-    <string name="label_google_package_name">Google Play Package Name</string>
+    <string name="label_select_store">앱 스토어 선택</string>
+    <string name="label_apple_app_id">Apple 앱 ID</string>
+    <string name="label_google_package_name">Google Play 패키지 이름</string>
     <string name="store_apple">Apple App Store</string>
     <string name="store_google">Google Play Store</string>
+    <!-- App Store Placeholders -->
     <string name="placeholder_apple_app_id">1234567890</string>
     <string name="placeholder_google_package_name">com.example.app</string>
-    <string name="hint_apple_app_id">Numeric ID from App Store URL</string>
-    <string name="hint_google_package_name">Package name from Play Store URL</string>
+    <!-- App Store Hints -->
+    <string name="hint_apple_app_id">App Store 주소에 있는 숫자 ID</string>
+    <string name="hint_google_package_name">Play Store 주소에 있는 패키지 이름</string>
 
     <!-- Payment Labels -->
-    <string name="label_select_provider">Select Payment Provider</string>
-    <string name="label_payment_username">Username</string>
-    <string name="label_payment_amount">Amount (Optional)</string>
-    <string name="label_payment_note">Note (Optional)</string>
+    <string name="label_select_provider">결제 서비스 선택</string>
+    <string name="label_payment_username">사용자 이름</string>
+    <string name="label_payment_amount">금액(선택 사항)</string>
+    <string name="label_payment_note">메모(선택 사항)</string>
     <string name="provider_paypal">PayPal</string>
     <string name="provider_venmo">Venmo</string>
+    <!-- Payment Placeholders -->
     <string name="placeholder_paypal_username">yourpaypalusername</string>
     <string name="placeholder_venmo_username">yourvenmo</string>
     <string name="placeholder_payment_amount">10.00</string>
-    <string name="placeholder_payment_note">Payment for lunch</string>
+    <string name="placeholder_payment_note">점심값 결제</string>
 
     <!-- Crypto Labels -->
-    <string name="label_select_crypto">Select Cryptocurrency</string>
-    <string name="label_crypto_address">Wallet Address</string>
-    <string name="label_crypto_amount_btc">Amount in BTC (Optional)</string>
-    <string name="label_crypto_amount_eth">Amount in ETH (Optional)</string>
-    <string name="label_crypto_label">Label (Optional)</string>
-    <string name="label_crypto_message">Message (Optional)</string>
+    <string name="label_select_crypto">가상자산 선택</string>
+    <string name="label_crypto_address">지갑 주소</string>
+    <string name="label_crypto_amount_btc">BTC 금액(선택 사항)</string>
+    <string name="label_crypto_amount_eth">ETH 금액(선택 사항)</string>
+    <string name="label_crypto_label">라벨(선택 사항)</string>
+    <string name="label_crypto_message">메시지(선택 사항)</string>
     <string name="crypto_bitcoin">Bitcoin (BTC)</string>
     <string name="crypto_ethereum">Ethereum (ETH)</string>
-    <string name="placeholder_bitcoin_address">bc1q...</string>
-    <string name="placeholder_ethereum_address">0x...</string>
+    <!-- Crypto Placeholders -->
+    <string name="placeholder_bitcoin_address">bc1q…</string>
+    <string name="placeholder_ethereum_address">0x…</string>
     <string name="placeholder_crypto_amount">0.001</string>
-    <string name="placeholder_crypto_label">Donation</string>
-    <string name="placeholder_crypto_message">Thank you for your support</string>
+    <string name="placeholder_crypto_label">후원</string>
+    <string name="placeholder_crypto_message">후원해 주셔서 감사합니다</string>
 
     <!-- Field Hints -->
-    <string name="hint_url">The URL should start with http:// or https://</string>
-    <string name="hint_phone">Include country code (e.g., +1 for USA)</string>
-    <string name="hint_sms">Format: phone:message</string>
+    <string name="hint_url">주소는 http:// 또는 https:// 로 시작해야 합니다</string>
+    <string name="hint_phone">국가 번호를 포함하세요(예: 한국은 +82)</string>
+    <string name="hint_sms">형식: 전화번호:메시지</string>
 
     <!-- Instructions -->
-    <string name="instruction_url">Enter the Website URL to encode in the QR code</string>
-    <string name="instruction_phone">Enter the Phone Number to encode in the QR code</string>
-    <string name="instruction_sms">Enter the Phone Number to encode in the QR code</string>
-    <string name="instruction_text">Enter the Text Content to encode in the QR code</string>
-    <string name="instruction_email">Enter email details to encode in the QR code</string>
-    <string name="instruction_contact">Enter contact information to encode in the QR code</string>
-    <string name="instruction_wifi">Enter WiFi network details to encode in the QR code</string>
-    <string name="instruction_calendar">Enter event details to encode in the QR code</string>
-    <string name="instruction_location">Enter coordinates to encode in the QR code</string>
-    <string name="instruction_mecard">Enter contact details to encode in the QR code</string>
-    <string name="instruction_app_store">Enter app store details to create a download link</string>
-    <string name="instruction_payment">Enter payment details to create a payment request</string>
-    <string name="instruction_crypto">Enter wallet details to create a cryptocurrency address QR</string>
+    <string name="instruction_url">QR 코드에 담을 웹사이트 주소를 입력하세요</string>
+    <string name="instruction_phone">QR 코드에 담을 전화번호를 입력하세요</string>
+    <string name="instruction_sms">QR 코드에 담을 전화번호를 입력하세요</string>
+    <string name="instruction_text">QR 코드에 담을 텍스트를 입력하세요</string>
+    <string name="instruction_email">QR 코드에 담을 이메일 정보를 입력하세요</string>
+    <string name="instruction_contact">QR 코드에 담을 연락처 정보를 입력하세요</string>
+    <string name="instruction_wifi">QR 코드에 담을 Wi-Fi 정보를 입력하세요</string>
+    <string name="instruction_calendar">QR 코드에 담을 일정 정보를 입력하세요</string>
+    <string name="instruction_location">QR 코드에 담을 좌표를 입력하세요</string>
+    <string name="instruction_mecard">QR 코드에 담을 연락처 정보를 입력하세요</string>
+    <string name="instruction_app_store">다운로드 링크를 만들 앱 스토어 정보를 입력하세요</string>
+    <string name="instruction_payment">결제 요청을 만들 결제 정보를 입력하세요</string>
+    <string name="instruction_crypto">주소 QR 코드를 만들 지갑 정보를 입력하세요</string>
 
     <!-- Validation Errors -->
-    <string name="error_invalid_url">Please enter a valid URL</string>
-    <string name="error_invalid_url_format">Invalid URL format</string>
-    <string name="error_invalid_phone">Please enter a valid phone number</string>
-    <string name="error_empty_phone">Please enter a phone number</string>
-    <string name="error_invalid_phone_format">Invalid phone number</string>
-    <string name="error_empty_text">Please enter some text</string>
-    <string name="error_empty_email">Please enter an email address</string>
-    <string name="error_invalid_email">Invalid email address</string>
-    <string name="error_create_qr">Error creating QR code: %1$s</string>
-    <string name="error_empty_name">Please enter at least a first or last name</string>
-    <string name="error_empty_ssid">Please enter the network name (SSID)</string>
-    <string name="error_empty_event_title">Please enter an event title</string>
-    <string name="error_invalid_date">Please enter a valid date (YYYY-MM-DD)</string>
-    <string name="error_empty_latitude">Please enter a latitude</string>
-    <string name="error_empty_longitude">Please enter a longitude</string>
-    <string name="error_invalid_latitude">Latitude must be between -90 and 90</string>
-    <string name="error_invalid_longitude">Longitude must be between -180 and 180</string>
-    <string name="error_empty_mecard_name">Please enter a name</string>
-    <string name="error_empty_app_id">Please enter an app ID or package name</string>
-    <string name="error_empty_payment_username">Please enter a username</string>
-    <string name="error_empty_crypto_address">Please enter a wallet address</string>
+    <string name="error_invalid_url">유효한 주소를 입력하세요</string>
+    <string name="error_invalid_url_format">주소 형식이 올바르지 않습니다</string>
+    <string name="error_invalid_phone">유효한 전화번호를 입력하세요</string>
+    <string name="error_empty_phone">전화번호를 입력하세요</string>
+    <string name="error_invalid_phone_format">전화번호가 올바르지 않습니다</string>
+    <string name="error_empty_text">텍스트를 입력하세요</string>
+    <string name="error_empty_email">이메일 주소를 입력하세요</string>
+    <string name="error_invalid_email">이메일 주소가 올바르지 않습니다</string>
+    <string name="error_create_qr">QR 코드를 만들지 못했습니다: %1$s</string>
+    <string name="error_empty_name">성 또는 이름을 입력하세요</string>
+    <string name="error_empty_ssid">네트워크 이름(SSID)을 입력하세요</string>
+    <!-- Calendar Event Errors -->
+    <string name="error_empty_event_title">일정 제목을 입력하세요</string>
+    <string name="error_invalid_date">유효한 날짜를 입력하세요(YYYY-MM-DD)</string>
+    <!-- Location Errors -->
+    <string name="error_empty_latitude">위도를 입력하세요</string>
+    <string name="error_empty_longitude">경도를 입력하세요</string>
+    <string name="error_invalid_latitude">위도는 -90에서 90 사이여야 합니다</string>
+    <string name="error_invalid_longitude">경도는 -180에서 180 사이여야 합니다</string>
+    <!-- MeCard Errors -->
+    <string name="error_empty_mecard_name">이름을 입력하세요</string>
+    <!-- App Store Errors -->
+    <string name="error_empty_app_id">앱 ID 또는 패키지 이름을 입력하세요</string>
+    <!-- Payment Errors -->
+    <string name="error_empty_payment_username">사용자 이름을 입력하세요</string>
+    <!-- Crypto Errors -->
+    <string name="error_empty_crypto_address">지갑 주소를 입력하세요</string>
 
     <!-- History Screen -->
-    <string name="history_empty">No QR codes yet.\nScan or create one to get started!</string>
-    <string name="history_type">Type: %1$s</string>
-    <string name="history_type_scanned">Scanned</string>
-    <string name="history_type_created">Created</string>
-    <string name="history_type_from_file">From File</string>
-    <string name="history_type_unknown">Unknown</string>
-    <string name="history_search">Search</string>
-    <string name="history_search_placeholder">Search QR codes...</string>
-    <string name="history_clear_search">Clear search</string>
-    <string name="history_no_results">No QR codes match your search</string>
+    <string name="history_empty">아직 QR 코드가 없습니다.\n스캔하거나 만들어 시작해 보세요!</string>
+    <string name="history_type">종류: %1$s</string>
+    <string name="history_type_scanned">스캔함</string>
+    <string name="history_type_created">만듦</string>
+    <string name="history_type_from_file">파일에서</string>
+    <string name="history_type_unknown">알 수 없음</string>
+    <string name="history_search">검색</string>
+    <string name="history_search_placeholder">QR 코드 검색…</string>
+    <string name="history_clear_search">검색어 지우기</string>
+    <string name="history_no_results">검색과 일치하는 QR 코드가 없습니다</string>
 
     <!-- Detail Screen -->
-    <string name="detail_content">Content</string>
-    <string name="detail_details">Details</string>
-    <string name="detail_type">Type</string>
-    <string name="detail_created">Created</string>
-    <string name="detail_share">Share</string>
-    <string name="detail_save">Save Image</string>
-    <string name="detail_save_to_file">Save to file</string>
-    <string name="detail_delete">Delete</string>
-    <string name="detail_no_item">No QR code selected</string>
-    <string name="detail_error">Error: %1$s</string>
-    <string name="detail_loading">Loading QR code...</string>
-    <string name="detail_no_data">No QR code data available</string>
-    <string name="detail_tap_fullscreen">Tap to view fullscreen</string>
-    <string name="detail_copy_clipboard">Copy to clipboard</string>
-    <string name="detail_origin_flag">Origin flag: %1$d</string>
+    <string name="detail_content">내용</string>
+    <string name="detail_details">정보</string>
+    <string name="detail_type">종류</string>
+    <string name="detail_created">만든 날짜</string>
+    <string name="detail_share">공유</string>
+    <string name="detail_save">이미지 저장</string>
+    <string name="detail_save_to_file">파일로 저장</string>
+    <string name="detail_delete">삭제</string>
+    <string name="detail_test_action">테스트</string>
+    <string name="detail_no_item">선택된 QR 코드가 없습니다</string>
+    <string name="detail_error">오류: %1$s</string>
+    <string name="detail_loading">QR 코드를 불러오는 중…</string>
+    <string name="detail_no_data">QR 코드 데이터가 없습니다</string>
+    <string name="detail_tap_fullscreen">탭하여 전체 화면으로 보기</string>
+    <string name="detail_copy_clipboard">클립보드에 복사</string>
+    <string name="detail_origin_flag">출처 플래그: %1$d</string>
 
     <!-- Feedback Messages -->
-    <string name="feedback_copied">Copied to clipboard</string>
-    <string name="feedback_saved">QR code saved to file</string>
-    <string name="feedback_save_error">Error saving QR code</string>
-    <string name="feedback_share_not_implemented">Share not yet implemented for cross-platform</string>
-    <string name="feedback_no_qr_in_image">No QR code found in image</string>
-    <string name="feedback_launch_error">Could not open content: %1$s</string>
-    <string name="feedback_no_app_found">No app found to handle this content</string>
+    <string name="feedback_copied">클립보드에 복사했습니다</string>
+    <string name="feedback_saved">QR 코드를 파일로 저장했습니다</string>
+    <string name="feedback_save_error">QR 코드를 저장하지 못했습니다</string>
+    <string name="feedback_share_not_implemented">공유는 아직 모든 플랫폼에서 지원되지 않습니다</string>
+    <string name="feedback_no_qr_in_image">이미지에서 QR 코드를 찾지 못했습니다</string>
+    <string name="feedback_launch_error">내용을 열지 못했습니다: %1$s</string>
+    <string name="feedback_no_app_found">이 내용을 열 수 있는 앱이 없습니다</string>
+    <string name="feedback_no_handler_available">이 작업을 수행할 앱이 없습니다</string>
 
     <!-- Permission Messages -->
-    <string name="permission_storage_required">Storage permission is required to save QR code</string>
-    <string name="permission_grant_settings">Please grant storage permission in app settings</string>
-    <string name="permission_camera_required">Camera Permission Required</string>
-    <string name="permission_camera_denied">Camera permission is required to scan QR codes. Please grant the permission to continue.</string>
-    <string name="permission_camera_permanently_denied">Camera permission has been permanently denied. Please enable it in your device settings to scan QR codes.</string>
-    <string name="permission_open_settings">Open Settings</string>
-    <string name="permission_grant">Grant Permission</string>
-    <string name="permission_ready_to_scan">Ready to Scan</string>
-    <string name="permission_start_scanning_hint">Tap the button below to start scanning QR codes with your camera.</string>
-    <string name="permission_start_scanning">Start Scanning</string>
+    <string name="permission_storage_required">QR 코드를 저장하려면 저장소 권한이 필요합니다</string>
+    <string name="permission_grant_settings">앱 설정에서 저장소 권한을 허용하세요</string>
+    <string name="permission_camera_required">카메라 권한 필요</string>
+    <string name="permission_camera_denied">QR 코드를 스캔하려면 카메라 권한이 필요합니다. 계속하려면 권한을 허용하세요.</string>
+    <string name="permission_camera_permanently_denied">카메라 권한이 영구적으로 거부되었습니다. QR 코드를 스캔하려면 기기 설정에서 권한을 켜세요.</string>
+    <string name="permission_open_settings">설정 열기</string>
+    <string name="permission_grant">권한 허용</string>
+    <string name="permission_ready_to_scan">스캔 준비 완료</string>
+    <string name="permission_start_scanning_hint">아래 버튼을 탭하면 카메라로 QR 코드를 스캔할 수 있습니다.</string>
+    <string name="permission_start_scanning">스캔 시작</string>
 
     <!-- Scan Screen -->
-    <string name="scan_title">Camera Scanning</string>
-    <string name="camera_starting">Starting camera...</string>
-    <string name="camera_not_available">Camera not available</string>
-    <string name="camera_simulator_hint">Running on simulator or device without camera.\nUse the button in the bottom right to scan from photo library.</string>
-    <string name="scan_message">QR code scanning requires platform-specific camera APIs.\n\nThis feature will be implemented using expect/actual declarations:\n• Android: CameraX\n• iOS: AVFoundation\n• Desktop: Webcam libraries</string>
-    <string name="scan_from_file">Scan from file</string>
-    <string name="scan_qr_detected">QR Code detected: %1$s</string>
+    <string name="scan_title">카메라 스캔</string>
+    <string name="camera_starting">카메라를 시작하는 중…</string>
+    <string name="camera_not_available">카메라를 사용할 수 없습니다</string>
+    <string name="camera_simulator_hint">시뮬레이터 또는 카메라가 없는 기기에서 실행 중입니다.\n오른쪽 아래 버튼으로 사진 보관함에서 스캔하세요.</string>
+    <string name="scan_message">QR 코드 스캔에는 플랫폼별 카메라 API가 필요합니다.\n\n이 기능은 expect/actual 선언으로 구현됩니다:\n• Android: CameraX\n• iOS: AVFoundation\n• 데스크톱: 웹캠 라이브러리</string>
+    <string name="scan_from_file">파일에서 스캔</string>
+    <string name="scan_qr_detected">QR 코드를 인식했습니다: %1$s</string>
 
     <!-- Common Actions -->
-    <string name="action_dismiss">Dismiss</string>
-    <string name="action_ok">OK</string>
-    <string name="action_undo">Undo</string>
+    <string name="action_dismiss">닫기</string>
+    <string name="action_ok">확인</string>
+    <string name="action_undo">실행 취소</string>
+    <string name="action_open">열기</string>
 
     <!-- Delete Feedback -->
-    <string name="detail_deleted">QR code deleted</string>
+    <string name="detail_deleted">QR 코드를 삭제했습니다</string>
+
+    <!-- WiFi Credentials Card -->
+    <string name="wifi_credentials_title">Wi-Fi 접속 정보</string>
+    <string name="wifi_credentials_ssid">네트워크 이름(SSID)</string>
+    <string name="wifi_credentials_password">비밀번호</string>
+    <string name="wifi_credentials_show">표시</string>
+    <string name="wifi_credentials_hide">숨기기</string>
+    <string name="wifi_credentials_close">닫기</string>
 
     <!-- Content Descriptions (for accessibility) -->
-    <string name="cd_qr_preview">QR Code Preview</string>
-    <string name="cd_qr_code">QR Code</string>
-    <string name="cd_qr_fullscreen">QR Code Fullscreen</string>
-    <string name="cd_back">Back</string>
-    <string name="cd_more">More</string>
-    <string name="cd_menu">Menu</string>
-    <string name="cd_share">Share</string>
-    <string name="cd_save">Save</string>
-    <string name="cd_delete">Delete</string>
-    <string name="cd_create">Create</string>
-    <string name="cd_launch">Launch</string>
-    <string name="cd_settings">Settings</string>
-    <string name="cd_warning">Warning</string>
-    <string name="cd_selected">Selected</string>
-    <string name="cd_show_password">Show password</string>
-    <string name="cd_hide_password">Hide password</string>
-    <string name="cd_torch_on">Torch on</string>
-    <string name="cd_torch_off">Torch off</string>
-    <string name="cd_camera">Camera</string>
+    <string name="cd_qr_preview">QR 코드 미리보기</string>
+    <string name="cd_qr_code">QR 코드</string>
+    <string name="cd_qr_fullscreen">QR 코드 전체 화면</string>
+    <string name="cd_back">뒤로</string>
+    <string name="cd_more">더 보기</string>
+    <string name="cd_menu">메뉴</string>
+    <string name="cd_share">공유</string>
+    <string name="cd_save">저장</string>
+    <string name="cd_delete">삭제</string>
+    <string name="cd_test_action">동작 테스트</string>
+    <string name="cd_wifi">Wi-Fi</string>
+    <string name="cd_create">만들기</string>
+    <string name="cd_launch">열기</string>
+    <string name="cd_settings">설정</string>
+    <string name="cd_warning">경고</string>
+    <string name="cd_selected">선택됨</string>
+    <string name="cd_show_password">비밀번호 표시</string>
+    <string name="cd_hide_password">비밀번호 숨기기</string>
+    <string name="cd_torch_on">플래시 켜기</string>
+    <string name="cd_torch_off">플래시 끄기</string>
+    <string name="cd_camera">카메라</string>
 
     <!-- Settings Screen -->
-    <string name="settings_title">Settings</string>
-    <string name="settings_section_appearance">Appearance</string>
-    <string name="settings_section_about">About</string>
-    <string name="settings_version">Version</string>
-    <string name="settings_build">Build</string>
-    <string name="settings_theme_system">System Default</string>
-    <string name="settings_theme_system_desc">Follow system theme</string>
-    <string name="settings_theme_light">Light</string>
-    <string name="settings_theme_light_desc">Always use light theme</string>
-    <string name="settings_theme_dark">Dark</string>
-    <string name="settings_theme_dark_desc">Always use dark theme</string>
+    <string name="settings_title">설정</string>
+    <string name="settings_section_appearance">화면</string>
+    <string name="settings_section_about">정보</string>
+    <string name="settings_version">버전</string>
+    <string name="settings_build">빌드</string>
+    <string name="settings_theme_system">시스템 기본값</string>
+    <string name="settings_theme_system_desc">시스템 테마를 따릅니다</string>
+    <string name="settings_theme_light">밝게</string>
+    <string name="settings_theme_light_desc">항상 밝은 테마 사용</string>
+    <string name="settings_theme_dark">어둡게</string>
+    <string name="settings_theme_dark_desc">항상 어두운 테마 사용</string>
 
     <!-- URL Warning Dialog -->
-    <string name="url_warning_dangerous">Dangerous Link Detected</string>
-    <string name="url_warning_suspicious">Suspicious Link</string>
-    <string name="url_warning_check">URL Check</string>
+    <string name="url_warning_dangerous">위험한 링크가 감지되었습니다</string>
+    <string name="url_warning_suspicious">의심스러운 링크</string>
+    <string name="url_warning_check">주소 확인</string>
     <string name="url_warning_url_prefix">URL:</string>
-    <string name="url_warning_warnings_label">Warnings:</string>
-    <string name="url_warning_dangerous_desc">Opening this link is not recommended as it may harm your device or compromise your data.</string>
-    <string name="url_warning_suspicious_desc">This link has some characteristics that may indicate a security risk. Proceed with caution.</string>
-    <string name="url_warning_safe_desc">No issues were detected with this URL.</string>
-    <string name="url_warning_open_anyway">Open Anyway</string>
-    <string name="url_warning_close">Close</string>
-    <string name="url_warning_cancel">Cancel</string>
+    <string name="url_warning_warnings_label">경고:</string>
+    <string name="url_warning_dangerous_desc">이 링크는 열지 않는 것이 좋습니다. 기기에 해를 끼치거나 데이터가 유출될 수 있습니다.</string>
+    <string name="url_warning_suspicious_desc">이 링크에는 보안 위험을 나타낼 수 있는 특징이 있습니다. 주의해서 진행하세요.</string>
+    <string name="url_warning_safe_desc">이 주소에서 문제가 발견되지 않았습니다.</string>
+    <string name="url_warning_open_anyway">그래도 열기</string>
+    <string name="url_warning_close">닫기</string>
+    <string name="url_warning_cancel">취소</string>
 
     <!-- Field Modifiers -->
-    <string name="label_optional_suffix"> (Optional)</string>
+    <string name="label_optional_suffix">(선택 사항)</string>
 </resources>

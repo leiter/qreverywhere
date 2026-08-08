@@ -160,30 +160,44 @@ shipped binary**. Bump `CFBundleVersion` in the Info.plist by hand for future bu
 plist reference `$(MARKETING_VERSION)` / `$(CURRENT_PROJECT_VERSION)` so the build settings become
 the single source of truth and fastlane starts working.
 
-## 4a. Localized screenshots are blocked on translation
+## 4a. Translations — done for all 22 storefronts
 
-**The app is not actually translated.** All 24 files under
-`core/base/src/commonMain/composeResources/values-*/strings.xml` are stubs carrying
-`<!-- TODO: Translate all strings to ... -->`; every one of their 279 strings is still the English
-original. Verified by diffing all 24 against `values/`: zero differing strings.
+The app is now genuinely translated. All 290 strings in 21 locales plus English, verified against
+`values/` for identical key sets, matching `%1$s` / `%1$d` placeholders, and no stray escapes:
 
-Consequence: a locale sweep today writes 20 folders of identical English screenshots. Proven, not
-assumed — a `ja` capture came out byte-identical to `en-US`, so only `en-US/` is committed.
+`ar de es fr he hi id it ja ko ms nl pl pt ru th tr uk vi zh-rCN zh-rTW`
 
-The capture side is done and waiting. When translations land, run the sweep and upload.
+`values-bn`, `values-fil` and `values-sw` are still stubs on purpose — they have no App Store
+storefront, and stubs fall back to English at runtime.
+
+The store description claim was corrected from "25 languages" to **22** in all 22 locales, which
+is what actually ships. Every language it names is now real.
+
+**These are unreviewed machine translations.** Structure is verified; wording is not. For the
+languages you cannot read, a native check before a marketing push is worth the money.
+
+**Careful with apostrophes.** Compose Resources does *not* process Android-style escaping: `\'`
+renders literally as `\'`, while a raw `'` passes through fine. Verified by patching a bundled
+`.cvr` and reading it back. Use raw apostrophes.
 
 Note the storefront/resource mapping is not one-to-one: App Store `pt-BR` → `values-pt`,
 `zh-Hans` → `values-zh-rCN`, `zh-Hant` → `values-zh-rTW`. The script's `LOCALES` list already
-carries the mapping. `values-bn`, `values-fil` and `values-sw` have no App Store storefront.
+carries the mapping.
 
-## 4b. RTL storefronts are excluded from capture
+Screenshots have **not** been re-captured since. Run the sweep and upload:
+`iosApp/scripts/capture_screenshots.sh` then `fastlane deliver_metadata`.
 
-`ar-SA` and `he` are deliberately **not** in the script's `LOCALES` list.
+## 4b. RTL layout does not mirror — blocks ar-SA and he
 
-Launching with `-AppleLanguages "(ar)"` produced a screenshot pixel-identical to English: the
-layout did **not** mirror. Shipping a left-to-right UI to RTL storefronts looks broken, so those
-two need `LayoutDirection` handled properly before they are captured. Add them back to `LOCALES`
-once the app mirrors.
+Arabic and Hebrew are now **translated**, but the layout still runs left-to-right, so those two
+storefronts would get Arabic and Hebrew text in a mirrored-wrong chrome. That is worse than
+English, so `ar-SA` and `he` remain out of the capture script's `LOCALES` list.
+
+Evidence: launching with `-AppleLanguages "(ar)"` produced a screenshot pixel-identical to the
+English one — no mirroring at all. Worth re-testing now that real Arabic strings exist, in case
+layout direction was only ever derived from the resolved resource locale.
+
+Fix `LayoutDirection` first, then add both back to `LOCALES` and capture.
 
 ## 4c. Fixed along the way — initial-route navigation crash
 

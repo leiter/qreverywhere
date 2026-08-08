@@ -1,341 +1,372 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Italian (Italiano) - Translation stub -->
-<!-- TODO: Translate all strings to Simplified Chinese -->
 <resources>
     <!-- App Title -->
     <string name="app_name">QR Everywhere</string>
 
     <!-- Bottom Navigation -->
-    <string name="nav_history">History</string>
-    <string name="nav_scan">Scan</string>
-    <string name="nav_create">Create</string>
+    <string name="nav_history">Cronologia</string>
+    <string name="nav_scan">Scansiona</string>
+    <string name="nav_create">Crea</string>
 
     <!-- Screen Titles -->
-    <string name="title_history">QR History</string>
-    <string name="title_scan">Scan or import QR</string>
-    <string name="title_create">Create QR Code</string>
-    <string name="title_detail">QR Details</string>
-    <string name="title_create_text">Create Text QR</string>
-    <string name="title_create_email">Create Email QR</string>
+    <string name="title_history">Cronologia QR</string>
+    <string name="title_scan">Scansiona o importa un QR</string>
+    <string name="title_create">Crea codice QR</string>
+    <string name="title_detail">Dettagli QR</string>
+    <string name="title_create_text">Crea QR di testo</string>
+    <string name="title_create_email">Crea QR e-mail</string>
 
     <!-- Create QR Type Titles -->
-    <string name="title_text_qr">Text QR Code</string>
-    <string name="title_url_qr">Web URL QR Code</string>
-    <string name="title_phone_qr">Phone QR Code</string>
-    <string name="title_sms_qr">SMS QR Code</string>
-    <string name="title_email_qr">Email QR Code</string>
-    <string name="title_contact_qr">Contact QR Code</string>
-    <string name="title_wifi_qr">WiFi QR Code</string>
-    <string name="title_calendar_qr">Calendar Event QR Code</string>
-    <string name="title_location_qr">Location QR Code</string>
-    <string name="title_mecard_qr">MeCard QR Code</string>
-    <string name="title_appstore_qr">App Store Link QR Code</string>
-    <string name="title_payment_qr">Payment QR Code</string>
-    <string name="title_crypto_qr">Cryptocurrency QR Code</string>
+    <string name="title_text_qr">Codice QR di testo</string>
+    <string name="title_url_qr">Codice QR con URL</string>
+    <string name="title_phone_qr">Codice QR telefono</string>
+    <string name="title_sms_qr">Codice QR SMS</string>
+    <string name="title_email_qr">Codice QR e-mail</string>
+    <string name="title_contact_qr">Codice QR contatto</string>
+    <string name="title_wifi_qr">Codice QR Wi-Fi</string>
+    <string name="title_calendar_qr">Codice QR evento</string>
+    <string name="title_location_qr">Codice QR posizione</string>
+    <string name="title_mecard_qr">Codice QR MeCard</string>
+    <string name="title_appstore_qr">Codice QR link allo store</string>
+    <string name="title_payment_qr">Codice QR di pagamento</string>
+    <string name="title_crypto_qr">Codice QR criptovaluta</string>
 
     <!-- Create QR Type Descriptions -->
-    <string name="desc_text_qr">Create a QR code with any text content</string>
-    <string name="desc_url_qr">Create a QR code with website URL</string>
-    <string name="desc_phone_qr">Create a QR code with phone number</string>
-    <string name="desc_sms_qr">Create a QR code with SMS message</string>
-    <string name="desc_email_qr">Create a QR code with email information</string>
-    <string name="desc_contact_qr">Create a QR code with contact information (vCard)</string>
-    <string name="desc_wifi_qr">Create a QR code with WiFi network credentials</string>
-    <string name="desc_calendar_qr">Create a QR code with calendar event (VEVENT)</string>
-    <string name="desc_location_qr">Create a QR code with GPS coordinates</string>
-    <string name="desc_mecard_qr">Create a QR code with contact (simple format)</string>
-    <string name="desc_appstore_qr">Create a QR code linking to an app store</string>
-    <string name="desc_payment_qr">Create a QR code for PayPal or Venmo payments</string>
-    <string name="desc_crypto_qr">Create a QR code for Bitcoin or Ethereum wallet</string>
+    <string name="desc_text_qr">Crea un codice QR con un testo qualsiasi</string>
+    <string name="desc_url_qr">Crea un codice QR con l'indirizzo di un sito web</string>
+    <string name="desc_phone_qr">Crea un codice QR con un numero di telefono</string>
+    <string name="desc_sms_qr">Crea un codice QR con un messaggio SMS</string>
+    <string name="desc_email_qr">Crea un codice QR con i dati di un'e-mail</string>
+    <string name="desc_contact_qr">Crea un codice QR con i dati di un contatto (vCard)</string>
+    <string name="desc_wifi_qr">Crea un codice QR con le credenziali Wi-Fi</string>
+    <string name="desc_calendar_qr">Crea un codice QR con un evento (VEVENT)</string>
+    <string name="desc_location_qr">Crea un codice QR con coordinate GPS</string>
+    <string name="desc_mecard_qr">Crea un codice QR contatto (formato semplice)</string>
+    <string name="desc_appstore_qr">Crea un codice QR con un link a uno store</string>
+    <string name="desc_payment_qr">Crea un codice QR per pagamenti PayPal o Venmo</string>
+    <string name="desc_crypto_qr">Crea un codice QR per un wallet Bitcoin o Ethereum</string>
 
     <!-- Create Screen -->
-    <string name="create_title">Create QR Code</string>
-    <string name="create_subtitle">Choose what type of QR code to create</string>
-    <string name="create_quick_text">Quick Text QR</string>
-    <string name="create_enter_text">Enter text</string>
-    <string name="create_placeholder">Type anything...</string>
-    <string name="create_button">Generate QR Code</string>
-    <string name="create_button_creating">Creating...</string>
-    <string name="create_more_types">More QR Types</string>
-    <string name="create_coming_soon">Coming soon:</string>
-    <string name="create_types_list">• Email QR Code\n• Phone QR Code\n• WiFi QR Code\n• vCard QR Code\n• URL QR Code</string>
+    <string name="create_title">Crea codice QR</string>
+    <string name="create_subtitle">Scegli che tipo di codice QR creare</string>
+    <string name="create_quick_text">QR di testo rapido</string>
+    <string name="create_enter_text">Inserisci il testo</string>
+    <string name="create_placeholder">Scrivi quello che vuoi…</string>
+    <string name="create_button">Genera codice QR</string>
+    <string name="create_button_creating">Creazione…</string>
+    <string name="create_more_types">Altri tipi di QR</string>
+    <string name="create_coming_soon">Prossimamente:</string>
+    <string name="create_types_list">• Codice QR e-mail\n• Codice QR telefono\n• Codice QR Wi-Fi\n• Codice QR vCard\n• Codice QR con URL</string>
 
     <!-- Create Text QR Screen -->
-    <string name="create_url_title">Create URL QR Code</string>
-    <string name="create_phone_title">Create Phone QR Code</string>
-    <string name="create_sms_title">Create SMS QR Code</string>
-    <string name="create_text_title">Create Text QR Code</string>
-    <string name="create_email_title">Create Email QR Code</string>
+    <string name="create_url_title">Crea codice QR con URL</string>
+    <string name="create_phone_title">Crea codice QR telefono</string>
+    <string name="create_sms_title">Crea codice QR SMS</string>
+    <string name="create_text_title">Crea codice QR di testo</string>
+    <string name="create_email_title">Crea codice QR e-mail</string>
 
     <!-- Field Labels -->
-    <string name="label_website_url">Website URL</string>
-    <string name="label_phone_number">Phone Number</string>
-    <string name="label_text_content">Text Content</string>
-    <string name="label_email_address">Email Address</string>
-    <string name="label_email_subject">Subject (Optional)</string>
-    <string name="label_email_message">Message (Optional)</string>
-    <string name="label_enter_url">Enter website URL</string>
-    <string name="label_enter_phone">Enter phone number</string>
-    <string name="label_enter_phone_message">Enter phone number and message</string>
-    <string name="label_first_name">First Name</string>
-    <string name="label_last_name">Last Name</string>
-    <string name="label_organization">Organization (Optional)</string>
-    <string name="label_job_title">Job Title (Optional)</string>
-    <string name="label_website">Website (Optional)</string>
-    <string name="label_network_name">Network Name (SSID)</string>
+    <string name="label_website_url">Indirizzo del sito web</string>
+    <string name="label_phone_number">Numero di telefono</string>
+    <string name="label_text_content">Contenuto testuale</string>
+    <string name="label_email_address">Indirizzo e-mail</string>
+    <string name="label_email_subject">Oggetto (facoltativo)</string>
+    <string name="label_email_message">Messaggio (facoltativo)</string>
+    <string name="label_enter_url">Inserisci l'indirizzo del sito web</string>
+    <string name="label_enter_phone">Inserisci il numero di telefono</string>
+    <string name="label_enter_phone_message">Inserisci numero e messaggio</string>
+    <!-- vCard Field Labels -->
+    <string name="label_first_name">Nome</string>
+    <string name="label_last_name">Cognome</string>
+    <string name="label_organization">Azienda (facoltativo)</string>
+    <string name="label_job_title">Ruolo (facoltativo)</string>
+    <string name="label_website">Sito web (facoltativo)</string>
+    <!-- WiFi Field Labels -->
+    <string name="label_network_name">Nome rete (SSID)</string>
     <string name="label_password">Password</string>
-    <string name="label_security_type">Security Type</string>
-    <string name="label_hidden_network">Hidden Network</string>
+    <string name="label_security_type">Tipo di sicurezza</string>
+    <string name="label_hidden_network">Rete nascosta</string>
 
     <!-- Field Placeholders -->
     <string name="placeholder_url">https://example.com</string>
-    <string name="placeholder_phone">+1234567890</string>
-    <string name="placeholder_sms">+1234567890:Hello</string>
-    <string name="placeholder_text">Enter any text</string>
-    <string name="placeholder_email">example@email.com</string>
-    <string name="placeholder_email_subject">Email subject</string>
-    <string name="placeholder_email_message">Email message</string>
-    <string name="placeholder_first_name">John</string>
-    <string name="placeholder_last_name">Doe</string>
-    <string name="placeholder_organization">Company Inc.</string>
-    <string name="placeholder_job_title">Software Engineer</string>
+    <string name="placeholder_phone">+393401234567</string>
+    <string name="placeholder_sms">+393401234567:Ciao</string>
+    <string name="placeholder_text">Inserisci un testo</string>
+    <string name="placeholder_email">esempio@email.com</string>
+    <string name="placeholder_email_subject">Oggetto dell'e-mail</string>
+    <string name="placeholder_email_message">Messaggio dell'e-mail</string>
+    <!-- vCard Placeholders -->
+    <string name="placeholder_first_name">Mario</string>
+    <string name="placeholder_last_name">Rossi</string>
+    <string name="placeholder_organization">Azienda S.r.l.</string>
+    <string name="placeholder_job_title">Ingegnere del software</string>
     <string name="placeholder_website">https://example.com</string>
-    <string name="placeholder_network_name">MyWiFi</string>
+    <!-- WiFi Placeholders -->
+    <string name="placeholder_network_name">MioWiFi</string>
     <string name="placeholder_password">password123</string>
+    <!-- WiFi Security Types -->
     <string name="security_wpa">WPA/WPA2</string>
     <string name="security_wep">WEP</string>
-    <string name="security_open">Open (No password)</string>
+    <string name="security_open">Aperta (senza password)</string>
 
     <!-- Calendar Event Labels -->
-    <string name="label_event_title">Event Title</string>
-    <string name="label_all_day_event">All Day Event</string>
-    <string name="label_start_date">Start Date</string>
-    <string name="label_start_time">Start Time</string>
-    <string name="label_end_date">End Date</string>
-    <string name="label_end_time">End Time</string>
-    <string name="label_event_location">Location (Optional)</string>
-    <string name="label_event_description">Description (Optional)</string>
-    <string name="placeholder_event_title">Team Meeting</string>
-    <string name="placeholder_date">YYYY-MM-DD</string>
+    <string name="label_event_title">Titolo dell'evento</string>
+    <string name="label_all_day_event">Tutto il giorno</string>
+    <string name="label_start_date">Data di inizio</string>
+    <string name="label_start_time">Ora di inizio</string>
+    <string name="label_end_date">Data di fine</string>
+    <string name="label_end_time">Ora di fine</string>
+    <string name="label_event_location">Luogo (facoltativo)</string>
+    <string name="label_event_description">Descrizione (facoltativo)</string>
+    <!-- Calendar Event Placeholders -->
+    <string name="placeholder_event_title">Riunione del team</string>
+    <string name="placeholder_date">AAAA-MM-GG</string>
     <string name="placeholder_time">HH:MM</string>
-    <string name="placeholder_event_location">Conference Room A</string>
-    <string name="placeholder_event_description">Discuss project updates</string>
-    <string name="hint_date_format">Format: YYYY-MM-DD (e.g., 2024-03-15)</string>
-    <string name="hint_time_format">Format: HH:MM (e.g., 14:30)</string>
+    <string name="placeholder_event_location">Sala riunioni A</string>
+    <string name="placeholder_event_description">Aggiornamenti sul progetto</string>
+    <!-- Calendar Event Hints -->
+    <string name="hint_date_format">Formato: AAAA-MM-GG (es. 2024-03-15)</string>
+    <string name="hint_time_format">Formato: HH:MM (es. 14:30)</string>
 
     <!-- Location Labels -->
-    <string name="label_latitude">Latitude</string>
-    <string name="label_longitude">Longitude</string>
-    <string name="label_location_label">Label (Optional)</string>
+    <string name="label_latitude">Latitudine</string>
+    <string name="label_longitude">Longitudine</string>
+    <string name="label_location_label">Etichetta (facoltativo)</string>
+    <!-- Location Placeholders -->
     <string name="placeholder_latitude">37.7749</string>
     <string name="placeholder_longitude">-122.4194</string>
     <string name="placeholder_location_label">San Francisco</string>
-    <string name="hint_latitude">Range: -90 to 90</string>
-    <string name="hint_longitude">Range: -180 to 180</string>
+    <!-- Location Hints -->
+    <string name="hint_latitude">Intervallo: da -90 a 90</string>
+    <string name="hint_longitude">Intervallo: da -180 a 180</string>
 
     <!-- MeCard Labels -->
-    <string name="label_mecard_name">Full Name</string>
-    <string name="label_mecard_address">Address (Optional)</string>
-    <string name="label_mecard_note">Note (Optional)</string>
-    <string name="placeholder_mecard_name">John Doe</string>
-    <string name="placeholder_mecard_address">123 Main St, City</string>
-    <string name="placeholder_mecard_note">Met at conference</string>
+    <string name="label_mecard_name">Nome completo</string>
+    <string name="label_mecard_address">Indirizzo (facoltativo)</string>
+    <string name="label_mecard_note">Nota (facoltativo)</string>
+    <!-- MeCard Placeholders -->
+    <string name="placeholder_mecard_name">Mario Rossi</string>
+    <string name="placeholder_mecard_address">Via Roma 123, Città</string>
+    <string name="placeholder_mecard_note">Conosciuto a una conferenza</string>
 
     <!-- App Store Labels -->
-    <string name="label_select_store">Select App Store</string>
-    <string name="label_apple_app_id">Apple App ID</string>
-    <string name="label_google_package_name">Google Play Package Name</string>
+    <string name="label_select_store">Seleziona lo store</string>
+    <string name="label_apple_app_id">ID app Apple</string>
+    <string name="label_google_package_name">Nome pacchetto Google Play</string>
     <string name="store_apple">Apple App Store</string>
     <string name="store_google">Google Play Store</string>
+    <!-- App Store Placeholders -->
     <string name="placeholder_apple_app_id">1234567890</string>
     <string name="placeholder_google_package_name">com.example.app</string>
-    <string name="hint_apple_app_id">Numeric ID from App Store URL</string>
-    <string name="hint_google_package_name">Package name from Play Store URL</string>
+    <!-- App Store Hints -->
+    <string name="hint_apple_app_id">ID numerico dall'URL dell'App Store</string>
+    <string name="hint_google_package_name">Nome pacchetto dall'URL del Play Store</string>
 
     <!-- Payment Labels -->
-    <string name="label_select_provider">Select Payment Provider</string>
-    <string name="label_payment_username">Username</string>
-    <string name="label_payment_amount">Amount (Optional)</string>
-    <string name="label_payment_note">Note (Optional)</string>
+    <string name="label_select_provider">Seleziona il servizio di pagamento</string>
+    <string name="label_payment_username">Nome utente</string>
+    <string name="label_payment_amount">Importo (facoltativo)</string>
+    <string name="label_payment_note">Nota (facoltativo)</string>
     <string name="provider_paypal">PayPal</string>
     <string name="provider_venmo">Venmo</string>
-    <string name="placeholder_paypal_username">yourpaypalusername</string>
-    <string name="placeholder_venmo_username">yourvenmo</string>
+    <!-- Payment Placeholders -->
+    <string name="placeholder_paypal_username">iltuonomepaypal</string>
+    <string name="placeholder_venmo_username">iltuovenmo</string>
     <string name="placeholder_payment_amount">10.00</string>
-    <string name="placeholder_payment_note">Payment for lunch</string>
+    <string name="placeholder_payment_note">Pagamento del pranzo</string>
 
     <!-- Crypto Labels -->
-    <string name="label_select_crypto">Select Cryptocurrency</string>
-    <string name="label_crypto_address">Wallet Address</string>
-    <string name="label_crypto_amount_btc">Amount in BTC (Optional)</string>
-    <string name="label_crypto_amount_eth">Amount in ETH (Optional)</string>
-    <string name="label_crypto_label">Label (Optional)</string>
-    <string name="label_crypto_message">Message (Optional)</string>
+    <string name="label_select_crypto">Seleziona la criptovaluta</string>
+    <string name="label_crypto_address">Indirizzo del wallet</string>
+    <string name="label_crypto_amount_btc">Importo in BTC (facoltativo)</string>
+    <string name="label_crypto_amount_eth">Importo in ETH (facoltativo)</string>
+    <string name="label_crypto_label">Etichetta (facoltativo)</string>
+    <string name="label_crypto_message">Messaggio (facoltativo)</string>
     <string name="crypto_bitcoin">Bitcoin (BTC)</string>
     <string name="crypto_ethereum">Ethereum (ETH)</string>
-    <string name="placeholder_bitcoin_address">bc1q...</string>
-    <string name="placeholder_ethereum_address">0x...</string>
+    <!-- Crypto Placeholders -->
+    <string name="placeholder_bitcoin_address">bc1q…</string>
+    <string name="placeholder_ethereum_address">0x…</string>
     <string name="placeholder_crypto_amount">0.001</string>
-    <string name="placeholder_crypto_label">Donation</string>
-    <string name="placeholder_crypto_message">Thank you for your support</string>
+    <string name="placeholder_crypto_label">Donazione</string>
+    <string name="placeholder_crypto_message">Grazie per il tuo sostegno</string>
 
     <!-- Field Hints -->
-    <string name="hint_url">The URL should start with http:// or https://</string>
-    <string name="hint_phone">Include country code (e.g., +1 for USA)</string>
-    <string name="hint_sms">Format: phone:message</string>
+    <string name="hint_url">L'URL deve iniziare con http:// o https://</string>
+    <string name="hint_phone">Includi il prefisso internazionale (es. +39 per l'Italia)</string>
+    <string name="hint_sms">Formato: telefono:messaggio</string>
 
     <!-- Instructions -->
-    <string name="instruction_url">Enter the Website URL to encode in the QR code</string>
-    <string name="instruction_phone">Enter the Phone Number to encode in the QR code</string>
-    <string name="instruction_sms">Enter the Phone Number to encode in the QR code</string>
-    <string name="instruction_text">Enter the Text Content to encode in the QR code</string>
-    <string name="instruction_email">Enter email details to encode in the QR code</string>
-    <string name="instruction_contact">Enter contact information to encode in the QR code</string>
-    <string name="instruction_wifi">Enter WiFi network details to encode in the QR code</string>
-    <string name="instruction_calendar">Enter event details to encode in the QR code</string>
-    <string name="instruction_location">Enter coordinates to encode in the QR code</string>
-    <string name="instruction_mecard">Enter contact details to encode in the QR code</string>
-    <string name="instruction_app_store">Enter app store details to create a download link</string>
-    <string name="instruction_payment">Enter payment details to create a payment request</string>
-    <string name="instruction_crypto">Enter wallet details to create a cryptocurrency address QR</string>
+    <string name="instruction_url">Inserisci l'indirizzo del sito da codificare nel QR</string>
+    <string name="instruction_phone">Inserisci il numero di telefono da codificare nel QR</string>
+    <string name="instruction_sms">Inserisci il numero di telefono da codificare nel QR</string>
+    <string name="instruction_text">Inserisci il testo da codificare nel QR</string>
+    <string name="instruction_email">Inserisci i dati e-mail da codificare nel QR</string>
+    <string name="instruction_contact">Inserisci i dati del contatto da codificare nel QR</string>
+    <string name="instruction_wifi">Inserisci i dati della rete Wi-Fi da codificare nel QR</string>
+    <string name="instruction_calendar">Inserisci i dati dell'evento da codificare nel QR</string>
+    <string name="instruction_location">Inserisci le coordinate da codificare nel QR</string>
+    <string name="instruction_mecard">Inserisci i dati del contatto da codificare nel QR</string>
+    <string name="instruction_app_store">Inserisci i dati dello store per creare un link di download</string>
+    <string name="instruction_payment">Inserisci i dati per creare una richiesta di pagamento</string>
+    <string name="instruction_crypto">Inserisci i dati del wallet per creare un QR con l'indirizzo</string>
 
     <!-- Validation Errors -->
-    <string name="error_invalid_url">Please enter a valid URL</string>
-    <string name="error_invalid_url_format">Invalid URL format</string>
-    <string name="error_invalid_phone">Please enter a valid phone number</string>
-    <string name="error_empty_phone">Please enter a phone number</string>
-    <string name="error_invalid_phone_format">Invalid phone number</string>
-    <string name="error_empty_text">Please enter some text</string>
-    <string name="error_empty_email">Please enter an email address</string>
-    <string name="error_invalid_email">Invalid email address</string>
-    <string name="error_create_qr">Error creating QR code: %1$s</string>
-    <string name="error_empty_name">Please enter at least a first or last name</string>
-    <string name="error_empty_ssid">Please enter the network name (SSID)</string>
-    <string name="error_empty_event_title">Please enter an event title</string>
-    <string name="error_invalid_date">Please enter a valid date (YYYY-MM-DD)</string>
-    <string name="error_empty_latitude">Please enter a latitude</string>
-    <string name="error_empty_longitude">Please enter a longitude</string>
-    <string name="error_invalid_latitude">Latitude must be between -90 and 90</string>
-    <string name="error_invalid_longitude">Longitude must be between -180 and 180</string>
-    <string name="error_empty_mecard_name">Please enter a name</string>
-    <string name="error_empty_app_id">Please enter an app ID or package name</string>
-    <string name="error_empty_payment_username">Please enter a username</string>
-    <string name="error_empty_crypto_address">Please enter a wallet address</string>
+    <string name="error_invalid_url">Inserisci un URL valido</string>
+    <string name="error_invalid_url_format">Formato URL non valido</string>
+    <string name="error_invalid_phone">Inserisci un numero di telefono valido</string>
+    <string name="error_empty_phone">Inserisci un numero di telefono</string>
+    <string name="error_invalid_phone_format">Numero di telefono non valido</string>
+    <string name="error_empty_text">Inserisci del testo</string>
+    <string name="error_empty_email">Inserisci un indirizzo e-mail</string>
+    <string name="error_invalid_email">Indirizzo e-mail non valido</string>
+    <string name="error_create_qr">Errore durante la creazione del codice QR: %1$s</string>
+    <string name="error_empty_name">Inserisci almeno un nome o un cognome</string>
+    <string name="error_empty_ssid">Inserisci il nome della rete (SSID)</string>
+    <!-- Calendar Event Errors -->
+    <string name="error_empty_event_title">Inserisci un titolo per l'evento</string>
+    <string name="error_invalid_date">Inserisci una data valida (AAAA-MM-GG)</string>
+    <!-- Location Errors -->
+    <string name="error_empty_latitude">Inserisci una latitudine</string>
+    <string name="error_empty_longitude">Inserisci una longitudine</string>
+    <string name="error_invalid_latitude">La latitudine deve essere compresa tra -90 e 90</string>
+    <string name="error_invalid_longitude">La longitudine deve essere compresa tra -180 e 180</string>
+    <!-- MeCard Errors -->
+    <string name="error_empty_mecard_name">Inserisci un nome</string>
+    <!-- App Store Errors -->
+    <string name="error_empty_app_id">Inserisci un ID app o un nome pacchetto</string>
+    <!-- Payment Errors -->
+    <string name="error_empty_payment_username">Inserisci un nome utente</string>
+    <!-- Crypto Errors -->
+    <string name="error_empty_crypto_address">Inserisci un indirizzo del wallet</string>
 
     <!-- History Screen -->
-    <string name="history_empty">No QR codes yet.\nScan or create one to get started!</string>
-    <string name="history_type">Type: %1$s</string>
-    <string name="history_type_scanned">Scanned</string>
-    <string name="history_type_created">Created</string>
-    <string name="history_type_from_file">From File</string>
-    <string name="history_type_unknown">Unknown</string>
-    <string name="history_search">Search</string>
-    <string name="history_search_placeholder">Search QR codes...</string>
-    <string name="history_clear_search">Clear search</string>
-    <string name="history_no_results">No QR codes match your search</string>
+    <string name="history_empty">Ancora nessun codice QR.\nScansionane uno o creane uno per iniziare!</string>
+    <string name="history_type">Tipo: %1$s</string>
+    <string name="history_type_scanned">Scansionato</string>
+    <string name="history_type_created">Creato</string>
+    <string name="history_type_from_file">Da file</string>
+    <string name="history_type_unknown">Sconosciuto</string>
+    <string name="history_search">Cerca</string>
+    <string name="history_search_placeholder">Cerca codici QR…</string>
+    <string name="history_clear_search">Cancella la ricerca</string>
+    <string name="history_no_results">Nessun codice QR corrisponde alla ricerca</string>
 
     <!-- Detail Screen -->
-    <string name="detail_content">Content</string>
-    <string name="detail_details">Details</string>
-    <string name="detail_type">Type</string>
-    <string name="detail_created">Created</string>
-    <string name="detail_share">Share</string>
-    <string name="detail_save">Save Image</string>
-    <string name="detail_save_to_file">Save to file</string>
-    <string name="detail_delete">Delete</string>
-    <string name="detail_no_item">No QR code selected</string>
-    <string name="detail_error">Error: %1$s</string>
-    <string name="detail_loading">Loading QR code...</string>
-    <string name="detail_no_data">No QR code data available</string>
-    <string name="detail_tap_fullscreen">Tap to view fullscreen</string>
-    <string name="detail_copy_clipboard">Copy to clipboard</string>
-    <string name="detail_origin_flag">Origin flag: %1$d</string>
+    <string name="detail_content">Contenuto</string>
+    <string name="detail_details">Dettagli</string>
+    <string name="detail_type">Tipo</string>
+    <string name="detail_created">Creato</string>
+    <string name="detail_share">Condividi</string>
+    <string name="detail_save">Salva immagine</string>
+    <string name="detail_save_to_file">Salva su file</string>
+    <string name="detail_delete">Elimina</string>
+    <string name="detail_test_action">Prova</string>
+    <string name="detail_no_item">Nessun codice QR selezionato</string>
+    <string name="detail_error">Errore: %1$s</string>
+    <string name="detail_loading">Caricamento del codice QR…</string>
+    <string name="detail_no_data">Nessun dato del codice QR disponibile</string>
+    <string name="detail_tap_fullscreen">Tocca per vedere a schermo intero</string>
+    <string name="detail_copy_clipboard">Copia negli appunti</string>
+    <string name="detail_origin_flag">Flag di origine: %1$d</string>
 
     <!-- Feedback Messages -->
-    <string name="feedback_copied">Copied to clipboard</string>
-    <string name="feedback_saved">QR code saved to file</string>
-    <string name="feedback_save_error">Error saving QR code</string>
-    <string name="feedback_share_not_implemented">Share not yet implemented for cross-platform</string>
-    <string name="feedback_no_qr_in_image">No QR code found in image</string>
-    <string name="feedback_launch_error">Could not open content: %1$s</string>
-    <string name="feedback_no_app_found">No app found to handle this content</string>
+    <string name="feedback_copied">Copiato negli appunti</string>
+    <string name="feedback_saved">Codice QR salvato su file</string>
+    <string name="feedback_save_error">Errore durante il salvataggio del codice QR</string>
+    <string name="feedback_share_not_implemented">La condivisione multipiattaforma non è ancora disponibile</string>
+    <string name="feedback_no_qr_in_image">Nessun codice QR trovato nell'immagine</string>
+    <string name="feedback_launch_error">Impossibile aprire il contenuto: %1$s</string>
+    <string name="feedback_no_app_found">Nessuna app trovata per aprire questo contenuto</string>
+    <string name="feedback_no_handler_available">Nessuna app disponibile per questa azione</string>
 
     <!-- Permission Messages -->
-    <string name="permission_storage_required">Storage permission is required to save QR code</string>
-    <string name="permission_grant_settings">Please grant storage permission in app settings</string>
-    <string name="permission_camera_required">Camera Permission Required</string>
-    <string name="permission_camera_denied">Camera permission is required to scan QR codes. Please grant the permission to continue.</string>
-    <string name="permission_camera_permanently_denied">Camera permission has been permanently denied. Please enable it in your device settings to scan QR codes.</string>
-    <string name="permission_open_settings">Open Settings</string>
-    <string name="permission_grant">Grant Permission</string>
-    <string name="permission_ready_to_scan">Ready to Scan</string>
-    <string name="permission_start_scanning_hint">Tap the button below to start scanning QR codes with your camera.</string>
-    <string name="permission_start_scanning">Start Scanning</string>
+    <string name="permission_storage_required">Per salvare il codice QR serve l'autorizzazione allo spazio di archiviazione</string>
+    <string name="permission_grant_settings">Concedi l'autorizzazione allo spazio di archiviazione nelle impostazioni</string>
+    <string name="permission_camera_required">Autorizzazione fotocamera necessaria</string>
+    <string name="permission_camera_denied">Per scansionare i codici QR serve la fotocamera. Concedi l'autorizzazione per continuare.</string>
+    <string name="permission_camera_permanently_denied">L'autorizzazione alla fotocamera è stata negata definitivamente. Attivala nelle impostazioni del dispositivo per scansionare i codici QR.</string>
+    <string name="permission_open_settings">Apri Impostazioni</string>
+    <string name="permission_grant">Concedi autorizzazione</string>
+    <string name="permission_ready_to_scan">Pronto a scansionare</string>
+    <string name="permission_start_scanning_hint">Tocca il pulsante qui sotto per scansionare i codici QR con la fotocamera.</string>
+    <string name="permission_start_scanning">Inizia a scansionare</string>
 
     <!-- Scan Screen -->
-    <string name="scan_title">Camera Scanning</string>
-    <string name="camera_starting">Starting camera...</string>
-    <string name="camera_not_available">Camera not available</string>
-    <string name="camera_simulator_hint">Running on simulator or device without camera.\nUse the button in the bottom right to scan from photo library.</string>
-    <string name="scan_message">QR code scanning requires platform-specific camera APIs.\n\nThis feature will be implemented using expect/actual declarations:\n• Android: CameraX\n• iOS: AVFoundation\n• Desktop: Webcam libraries</string>
-    <string name="scan_from_file">Scan from file</string>
-    <string name="scan_qr_detected">QR Code detected: %1$s</string>
+    <string name="scan_title">Scansione con fotocamera</string>
+    <string name="camera_starting">Avvio della fotocamera…</string>
+    <string name="camera_not_available">Fotocamera non disponibile</string>
+    <string name="camera_simulator_hint">In esecuzione su simulatore o su un dispositivo senza fotocamera.\nUsa il pulsante in basso a destra per scansionare dalla libreria foto.</string>
+    <string name="scan_message">La scansione dei codici QR richiede API della fotocamera specifiche per piattaforma.\n\nQuesta funzione sarà implementata con dichiarazioni expect/actual:\n• Android: CameraX\n• iOS: AVFoundation\n• Desktop: librerie webcam</string>
+    <string name="scan_from_file">Scansiona da file</string>
+    <string name="scan_qr_detected">Codice QR rilevato: %1$s</string>
 
     <!-- Common Actions -->
-    <string name="action_dismiss">Dismiss</string>
+    <string name="action_dismiss">Ignora</string>
     <string name="action_ok">OK</string>
-    <string name="action_undo">Undo</string>
+    <string name="action_undo">Annulla</string>
+    <string name="action_open">Apri</string>
 
     <!-- Delete Feedback -->
-    <string name="detail_deleted">QR code deleted</string>
+    <string name="detail_deleted">Codice QR eliminato</string>
+
+    <!-- WiFi Credentials Card -->
+    <string name="wifi_credentials_title">Credenziali Wi-Fi</string>
+    <string name="wifi_credentials_ssid">Nome rete (SSID)</string>
+    <string name="wifi_credentials_password">Password</string>
+    <string name="wifi_credentials_show">Mostra</string>
+    <string name="wifi_credentials_hide">Nascondi</string>
+    <string name="wifi_credentials_close">Chiudi</string>
 
     <!-- Content Descriptions (for accessibility) -->
-    <string name="cd_qr_preview">QR Code Preview</string>
-    <string name="cd_qr_code">QR Code</string>
-    <string name="cd_qr_fullscreen">QR Code Fullscreen</string>
-    <string name="cd_back">Back</string>
-    <string name="cd_more">More</string>
+    <string name="cd_qr_preview">Anteprima del codice QR</string>
+    <string name="cd_qr_code">Codice QR</string>
+    <string name="cd_qr_fullscreen">Codice QR a schermo intero</string>
+    <string name="cd_back">Indietro</string>
+    <string name="cd_more">Altro</string>
     <string name="cd_menu">Menu</string>
-    <string name="cd_share">Share</string>
-    <string name="cd_save">Save</string>
-    <string name="cd_delete">Delete</string>
-    <string name="cd_create">Create</string>
-    <string name="cd_launch">Launch</string>
-    <string name="cd_settings">Settings</string>
-    <string name="cd_warning">Warning</string>
-    <string name="cd_selected">Selected</string>
-    <string name="cd_show_password">Show password</string>
-    <string name="cd_hide_password">Hide password</string>
-    <string name="cd_torch_on">Torch on</string>
-    <string name="cd_torch_off">Torch off</string>
-    <string name="cd_camera">Camera</string>
+    <string name="cd_share">Condividi</string>
+    <string name="cd_save">Salva</string>
+    <string name="cd_delete">Elimina</string>
+    <string name="cd_test_action">Prova azione</string>
+    <string name="cd_wifi">Wi-Fi</string>
+    <string name="cd_create">Crea</string>
+    <string name="cd_launch">Apri</string>
+    <string name="cd_settings">Impostazioni</string>
+    <string name="cd_warning">Avviso</string>
+    <string name="cd_selected">Selezionato</string>
+    <string name="cd_show_password">Mostra la password</string>
+    <string name="cd_hide_password">Nascondi la password</string>
+    <string name="cd_torch_on">Torcia accesa</string>
+    <string name="cd_torch_off">Torcia spenta</string>
+    <string name="cd_camera">Fotocamera</string>
 
     <!-- Settings Screen -->
-    <string name="settings_title">Settings</string>
-    <string name="settings_section_appearance">Appearance</string>
-    <string name="settings_section_about">About</string>
-    <string name="settings_version">Version</string>
+    <string name="settings_title">Impostazioni</string>
+    <string name="settings_section_appearance">Aspetto</string>
+    <string name="settings_section_about">Informazioni</string>
+    <string name="settings_version">Versione</string>
     <string name="settings_build">Build</string>
-    <string name="settings_theme_system">System Default</string>
-    <string name="settings_theme_system_desc">Follow system theme</string>
-    <string name="settings_theme_light">Light</string>
-    <string name="settings_theme_light_desc">Always use light theme</string>
-    <string name="settings_theme_dark">Dark</string>
-    <string name="settings_theme_dark_desc">Always use dark theme</string>
+    <string name="settings_theme_system">Predefinito di sistema</string>
+    <string name="settings_theme_system_desc">Segui il tema di sistema</string>
+    <string name="settings_theme_light">Chiaro</string>
+    <string name="settings_theme_light_desc">Usa sempre il tema chiaro</string>
+    <string name="settings_theme_dark">Scuro</string>
+    <string name="settings_theme_dark_desc">Usa sempre il tema scuro</string>
 
     <!-- URL Warning Dialog -->
-    <string name="url_warning_dangerous">Dangerous Link Detected</string>
-    <string name="url_warning_suspicious">Suspicious Link</string>
-    <string name="url_warning_check">URL Check</string>
+    <string name="url_warning_dangerous">Rilevato link pericoloso</string>
+    <string name="url_warning_suspicious">Link sospetto</string>
+    <string name="url_warning_check">Controllo dell'URL</string>
     <string name="url_warning_url_prefix">URL:</string>
-    <string name="url_warning_warnings_label">Warnings:</string>
-    <string name="url_warning_dangerous_desc">Opening this link is not recommended as it may harm your device or compromise your data.</string>
-    <string name="url_warning_suspicious_desc">This link has some characteristics that may indicate a security risk. Proceed with caution.</string>
-    <string name="url_warning_safe_desc">No issues were detected with this URL.</string>
-    <string name="url_warning_open_anyway">Open Anyway</string>
-    <string name="url_warning_close">Close</string>
-    <string name="url_warning_cancel">Cancel</string>
+    <string name="url_warning_warnings_label">Avvisi:</string>
+    <string name="url_warning_dangerous_desc">Non è consigliabile aprire questo link: potrebbe danneggiare il dispositivo o compromettere i tuoi dati.</string>
+    <string name="url_warning_suspicious_desc">Questo link presenta caratteristiche che possono indicare un rischio per la sicurezza. Procedi con cautela.</string>
+    <string name="url_warning_safe_desc">Nessun problema rilevato con questo URL.</string>
+    <string name="url_warning_open_anyway">Apri comunque</string>
+    <string name="url_warning_close">Chiudi</string>
+    <string name="url_warning_cancel">Annulla</string>
 
     <!-- Field Modifiers -->
-    <string name="label_optional_suffix"> (Optional)</string>
+    <string name="label_optional_suffix"> (facoltativo)</string>
 </resources>

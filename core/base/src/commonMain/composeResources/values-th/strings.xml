@@ -1,341 +1,372 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Thai (ภาษาไทย) - Translation stub -->
-<!-- TODO: Translate all strings to Simplified Chinese -->
 <resources>
     <!-- App Title -->
     <string name="app_name">QR Everywhere</string>
 
     <!-- Bottom Navigation -->
-    <string name="nav_history">History</string>
-    <string name="nav_scan">Scan</string>
-    <string name="nav_create">Create</string>
+    <string name="nav_history">ประวัติ</string>
+    <string name="nav_scan">สแกน</string>
+    <string name="nav_create">สร้าง</string>
 
     <!-- Screen Titles -->
-    <string name="title_history">QR History</string>
-    <string name="title_scan">Scan or import QR</string>
-    <string name="title_create">Create QR Code</string>
-    <string name="title_detail">QR Details</string>
-    <string name="title_create_text">Create Text QR</string>
-    <string name="title_create_email">Create Email QR</string>
+    <string name="title_history">ประวัติคิวอาร์โค้ด</string>
+    <string name="title_scan">สแกนหรือนำเข้าคิวอาร์โค้ด</string>
+    <string name="title_create">สร้างคิวอาร์โค้ด</string>
+    <string name="title_detail">รายละเอียดคิวอาร์โค้ด</string>
+    <string name="title_create_text">สร้างคิวอาร์โค้ดข้อความ</string>
+    <string name="title_create_email">สร้างคิวอาร์โค้ดอีเมล</string>
 
     <!-- Create QR Type Titles -->
-    <string name="title_text_qr">Text QR Code</string>
-    <string name="title_url_qr">Web URL QR Code</string>
-    <string name="title_phone_qr">Phone QR Code</string>
-    <string name="title_sms_qr">SMS QR Code</string>
-    <string name="title_email_qr">Email QR Code</string>
-    <string name="title_contact_qr">Contact QR Code</string>
-    <string name="title_wifi_qr">WiFi QR Code</string>
-    <string name="title_calendar_qr">Calendar Event QR Code</string>
-    <string name="title_location_qr">Location QR Code</string>
-    <string name="title_mecard_qr">MeCard QR Code</string>
-    <string name="title_appstore_qr">App Store Link QR Code</string>
-    <string name="title_payment_qr">Payment QR Code</string>
-    <string name="title_crypto_qr">Cryptocurrency QR Code</string>
+    <string name="title_text_qr">คิวอาร์โค้ดข้อความ</string>
+    <string name="title_url_qr">คิวอาร์โค้ดลิงก์เว็บไซต์</string>
+    <string name="title_phone_qr">คิวอาร์โค้ดเบอร์โทร</string>
+    <string name="title_sms_qr">คิวอาร์โค้ด SMS</string>
+    <string name="title_email_qr">คิวอาร์โค้ดอีเมล</string>
+    <string name="title_contact_qr">คิวอาร์โค้ดผู้ติดต่อ</string>
+    <string name="title_wifi_qr">คิวอาร์โค้ด Wi-Fi</string>
+    <string name="title_calendar_qr">คิวอาร์โค้ดกิจกรรม</string>
+    <string name="title_location_qr">คิวอาร์โค้ดตำแหน่ง</string>
+    <string name="title_mecard_qr">คิวอาร์โค้ด MeCard</string>
+    <string name="title_appstore_qr">คิวอาร์โค้ดลิงก์แอปสโตร์</string>
+    <string name="title_payment_qr">คิวอาร์โค้ดชำระเงิน</string>
+    <string name="title_crypto_qr">คิวอาร์โค้ดคริปโท</string>
 
     <!-- Create QR Type Descriptions -->
-    <string name="desc_text_qr">Create a QR code with any text content</string>
-    <string name="desc_url_qr">Create a QR code with website URL</string>
-    <string name="desc_phone_qr">Create a QR code with phone number</string>
-    <string name="desc_sms_qr">Create a QR code with SMS message</string>
-    <string name="desc_email_qr">Create a QR code with email information</string>
-    <string name="desc_contact_qr">Create a QR code with contact information (vCard)</string>
-    <string name="desc_wifi_qr">Create a QR code with WiFi network credentials</string>
-    <string name="desc_calendar_qr">Create a QR code with calendar event (VEVENT)</string>
-    <string name="desc_location_qr">Create a QR code with GPS coordinates</string>
-    <string name="desc_mecard_qr">Create a QR code with contact (simple format)</string>
-    <string name="desc_appstore_qr">Create a QR code linking to an app store</string>
-    <string name="desc_payment_qr">Create a QR code for PayPal or Venmo payments</string>
-    <string name="desc_crypto_qr">Create a QR code for Bitcoin or Ethereum wallet</string>
+    <string name="desc_text_qr">สร้างคิวอาร์โค้ดจากข้อความใดก็ได้</string>
+    <string name="desc_url_qr">สร้างคิวอาร์โค้ดจากที่อยู่เว็บไซต์</string>
+    <string name="desc_phone_qr">สร้างคิวอาร์โค้ดจากหมายเลขโทรศัพท์</string>
+    <string name="desc_sms_qr">สร้างคิวอาร์โค้ดจากข้อความ SMS</string>
+    <string name="desc_email_qr">สร้างคิวอาร์โค้ดจากข้อมูลอีเมล</string>
+    <string name="desc_contact_qr">สร้างคิวอาร์โค้ดจากข้อมูลผู้ติดต่อ (vCard)</string>
+    <string name="desc_wifi_qr">สร้างคิวอาร์โค้ดจากข้อมูลเครือข่าย Wi-Fi</string>
+    <string name="desc_calendar_qr">สร้างคิวอาร์โค้ดจากกิจกรรมในปฏิทิน (VEVENT)</string>
+    <string name="desc_location_qr">สร้างคิวอาร์โค้ดจากพิกัด GPS</string>
+    <string name="desc_mecard_qr">สร้างคิวอาร์โค้ดผู้ติดต่อ (รูปแบบอย่างง่าย)</string>
+    <string name="desc_appstore_qr">สร้างคิวอาร์โค้ดลิงก์ไปยังแอปสโตร์</string>
+    <string name="desc_payment_qr">สร้างคิวอาร์โค้ดสำหรับชำระเงินผ่าน PayPal หรือ Venmo</string>
+    <string name="desc_crypto_qr">สร้างคิวอาร์โค้ดสำหรับกระเป๋าเงิน Bitcoin หรือ Ethereum</string>
 
     <!-- Create Screen -->
-    <string name="create_title">Create QR Code</string>
-    <string name="create_subtitle">Choose what type of QR code to create</string>
-    <string name="create_quick_text">Quick Text QR</string>
-    <string name="create_enter_text">Enter text</string>
-    <string name="create_placeholder">Type anything...</string>
-    <string name="create_button">Generate QR Code</string>
-    <string name="create_button_creating">Creating...</string>
-    <string name="create_more_types">More QR Types</string>
-    <string name="create_coming_soon">Coming soon:</string>
-    <string name="create_types_list">• Email QR Code\n• Phone QR Code\n• WiFi QR Code\n• vCard QR Code\n• URL QR Code</string>
+    <string name="create_title">สร้างคิวอาร์โค้ด</string>
+    <string name="create_subtitle">เลือกประเภทคิวอาร์โค้ดที่ต้องการสร้าง</string>
+    <string name="create_quick_text">คิวอาร์โค้ดข้อความด่วน</string>
+    <string name="create_enter_text">ป้อนข้อความ</string>
+    <string name="create_placeholder">พิมพ์อะไรก็ได้…</string>
+    <string name="create_button">สร้างคิวอาร์โค้ด</string>
+    <string name="create_button_creating">กำลังสร้าง…</string>
+    <string name="create_more_types">คิวอาร์โค้ดประเภทอื่น</string>
+    <string name="create_coming_soon">เร็ว ๆ นี้:</string>
+    <string name="create_types_list">• คิวอาร์โค้ดอีเมล\n• คิวอาร์โค้ดเบอร์โทร\n• คิวอาร์โค้ด Wi-Fi\n• คิวอาร์โค้ด vCard\n• คิวอาร์โค้ดลิงก์เว็บไซต์</string>
 
     <!-- Create Text QR Screen -->
-    <string name="create_url_title">Create URL QR Code</string>
-    <string name="create_phone_title">Create Phone QR Code</string>
-    <string name="create_sms_title">Create SMS QR Code</string>
-    <string name="create_text_title">Create Text QR Code</string>
-    <string name="create_email_title">Create Email QR Code</string>
+    <string name="create_url_title">สร้างคิวอาร์โค้ดลิงก์เว็บไซต์</string>
+    <string name="create_phone_title">สร้างคิวอาร์โค้ดเบอร์โทร</string>
+    <string name="create_sms_title">สร้างคิวอาร์โค้ด SMS</string>
+    <string name="create_text_title">สร้างคิวอาร์โค้ดข้อความ</string>
+    <string name="create_email_title">สร้างคิวอาร์โค้ดอีเมล</string>
 
     <!-- Field Labels -->
-    <string name="label_website_url">Website URL</string>
-    <string name="label_phone_number">Phone Number</string>
-    <string name="label_text_content">Text Content</string>
-    <string name="label_email_address">Email Address</string>
-    <string name="label_email_subject">Subject (Optional)</string>
-    <string name="label_email_message">Message (Optional)</string>
-    <string name="label_enter_url">Enter website URL</string>
-    <string name="label_enter_phone">Enter phone number</string>
-    <string name="label_enter_phone_message">Enter phone number and message</string>
-    <string name="label_first_name">First Name</string>
-    <string name="label_last_name">Last Name</string>
-    <string name="label_organization">Organization (Optional)</string>
-    <string name="label_job_title">Job Title (Optional)</string>
-    <string name="label_website">Website (Optional)</string>
-    <string name="label_network_name">Network Name (SSID)</string>
-    <string name="label_password">Password</string>
-    <string name="label_security_type">Security Type</string>
-    <string name="label_hidden_network">Hidden Network</string>
+    <string name="label_website_url">ที่อยู่เว็บไซต์</string>
+    <string name="label_phone_number">หมายเลขโทรศัพท์</string>
+    <string name="label_text_content">เนื้อหาข้อความ</string>
+    <string name="label_email_address">ที่อยู่อีเมล</string>
+    <string name="label_email_subject">หัวเรื่อง (ไม่บังคับ)</string>
+    <string name="label_email_message">ข้อความ (ไม่บังคับ)</string>
+    <string name="label_enter_url">ป้อนที่อยู่เว็บไซต์</string>
+    <string name="label_enter_phone">ป้อนหมายเลขโทรศัพท์</string>
+    <string name="label_enter_phone_message">ป้อนหมายเลขโทรศัพท์และข้อความ</string>
+    <!-- vCard Field Labels -->
+    <string name="label_first_name">ชื่อ</string>
+    <string name="label_last_name">นามสกุล</string>
+    <string name="label_organization">บริษัท (ไม่บังคับ)</string>
+    <string name="label_job_title">ตำแหน่ง (ไม่บังคับ)</string>
+    <string name="label_website">เว็บไซต์ (ไม่บังคับ)</string>
+    <!-- WiFi Field Labels -->
+    <string name="label_network_name">ชื่อเครือข่าย (SSID)</string>
+    <string name="label_password">รหัสผ่าน</string>
+    <string name="label_security_type">ประเภทการเข้ารหัส</string>
+    <string name="label_hidden_network">เครือข่ายที่ซ่อนอยู่</string>
 
     <!-- Field Placeholders -->
     <string name="placeholder_url">https://example.com</string>
-    <string name="placeholder_phone">+1234567890</string>
-    <string name="placeholder_sms">+1234567890:Hello</string>
-    <string name="placeholder_text">Enter any text</string>
+    <string name="placeholder_phone">+66812345678</string>
+    <string name="placeholder_sms">+66812345678:สวัสดี</string>
+    <string name="placeholder_text">ป้อนข้อความใดก็ได้</string>
     <string name="placeholder_email">example@email.com</string>
-    <string name="placeholder_email_subject">Email subject</string>
-    <string name="placeholder_email_message">Email message</string>
-    <string name="placeholder_first_name">John</string>
-    <string name="placeholder_last_name">Doe</string>
-    <string name="placeholder_organization">Company Inc.</string>
-    <string name="placeholder_job_title">Software Engineer</string>
+    <string name="placeholder_email_subject">หัวเรื่องอีเมล</string>
+    <string name="placeholder_email_message">เนื้อหาอีเมล</string>
+    <!-- vCard Placeholders -->
+    <string name="placeholder_first_name">สมชาย</string>
+    <string name="placeholder_last_name">ใจดี</string>
+    <string name="placeholder_organization">บริษัท ตัวอย่าง จำกัด</string>
+    <string name="placeholder_job_title">วิศวกรซอฟต์แวร์</string>
     <string name="placeholder_website">https://example.com</string>
+    <!-- WiFi Placeholders -->
     <string name="placeholder_network_name">MyWiFi</string>
     <string name="placeholder_password">password123</string>
+    <!-- WiFi Security Types -->
     <string name="security_wpa">WPA/WPA2</string>
     <string name="security_wep">WEP</string>
-    <string name="security_open">Open (No password)</string>
+    <string name="security_open">เปิด (ไม่มีรหัสผ่าน)</string>
 
     <!-- Calendar Event Labels -->
-    <string name="label_event_title">Event Title</string>
-    <string name="label_all_day_event">All Day Event</string>
-    <string name="label_start_date">Start Date</string>
-    <string name="label_start_time">Start Time</string>
-    <string name="label_end_date">End Date</string>
-    <string name="label_end_time">End Time</string>
-    <string name="label_event_location">Location (Optional)</string>
-    <string name="label_event_description">Description (Optional)</string>
-    <string name="placeholder_event_title">Team Meeting</string>
-    <string name="placeholder_date">YYYY-MM-DD</string>
-    <string name="placeholder_time">HH:MM</string>
-    <string name="placeholder_event_location">Conference Room A</string>
-    <string name="placeholder_event_description">Discuss project updates</string>
-    <string name="hint_date_format">Format: YYYY-MM-DD (e.g., 2024-03-15)</string>
-    <string name="hint_time_format">Format: HH:MM (e.g., 14:30)</string>
+    <string name="label_event_title">ชื่อกิจกรรม</string>
+    <string name="label_all_day_event">กิจกรรมตลอดวัน</string>
+    <string name="label_start_date">วันที่เริ่ม</string>
+    <string name="label_start_time">เวลาเริ่ม</string>
+    <string name="label_end_date">วันที่สิ้นสุด</string>
+    <string name="label_end_time">เวลาสิ้นสุด</string>
+    <string name="label_event_location">สถานที่ (ไม่บังคับ)</string>
+    <string name="label_event_description">รายละเอียด (ไม่บังคับ)</string>
+    <!-- Calendar Event Placeholders -->
+    <string name="placeholder_event_title">ประชุมทีม</string>
+    <string name="placeholder_date">ปปปป-ดด-วว</string>
+    <string name="placeholder_time">ชช:นน</string>
+    <string name="placeholder_event_location">ห้องประชุม A</string>
+    <string name="placeholder_event_description">พูดคุยความคืบหน้าของโครงการ</string>
+    <!-- Calendar Event Hints -->
+    <string name="hint_date_format">รูปแบบ: ปปปป-ดด-วว (เช่น 2024-03-15)</string>
+    <string name="hint_time_format">รูปแบบ: ชช:นน (เช่น 14:30)</string>
 
     <!-- Location Labels -->
-    <string name="label_latitude">Latitude</string>
-    <string name="label_longitude">Longitude</string>
-    <string name="label_location_label">Label (Optional)</string>
+    <string name="label_latitude">ละติจูด</string>
+    <string name="label_longitude">ลองจิจูด</string>
+    <string name="label_location_label">ป้ายกำกับ (ไม่บังคับ)</string>
+    <!-- Location Placeholders -->
     <string name="placeholder_latitude">37.7749</string>
     <string name="placeholder_longitude">-122.4194</string>
-    <string name="placeholder_location_label">San Francisco</string>
-    <string name="hint_latitude">Range: -90 to 90</string>
-    <string name="hint_longitude">Range: -180 to 180</string>
+    <string name="placeholder_location_label">ซานฟรานซิสโก</string>
+    <!-- Location Hints -->
+    <string name="hint_latitude">ช่วง: -90 ถึง 90</string>
+    <string name="hint_longitude">ช่วง: -180 ถึง 180</string>
 
     <!-- MeCard Labels -->
-    <string name="label_mecard_name">Full Name</string>
-    <string name="label_mecard_address">Address (Optional)</string>
-    <string name="label_mecard_note">Note (Optional)</string>
-    <string name="placeholder_mecard_name">John Doe</string>
-    <string name="placeholder_mecard_address">123 Main St, City</string>
-    <string name="placeholder_mecard_note">Met at conference</string>
+    <string name="label_mecard_name">ชื่อ-นามสกุล</string>
+    <string name="label_mecard_address">ที่อยู่ (ไม่บังคับ)</string>
+    <string name="label_mecard_note">บันทึก (ไม่บังคับ)</string>
+    <!-- MeCard Placeholders -->
+    <string name="placeholder_mecard_name">สมชาย ใจดี</string>
+    <string name="placeholder_mecard_address">123 ถนนหลัก เมือง</string>
+    <string name="placeholder_mecard_note">พบกันที่งานประชุม</string>
 
     <!-- App Store Labels -->
-    <string name="label_select_store">Select App Store</string>
+    <string name="label_select_store">เลือกแอปสโตร์</string>
     <string name="label_apple_app_id">Apple App ID</string>
-    <string name="label_google_package_name">Google Play Package Name</string>
+    <string name="label_google_package_name">ชื่อแพ็กเกจ Google Play</string>
     <string name="store_apple">Apple App Store</string>
     <string name="store_google">Google Play Store</string>
+    <!-- App Store Placeholders -->
     <string name="placeholder_apple_app_id">1234567890</string>
     <string name="placeholder_google_package_name">com.example.app</string>
-    <string name="hint_apple_app_id">Numeric ID from App Store URL</string>
-    <string name="hint_google_package_name">Package name from Play Store URL</string>
+    <!-- App Store Hints -->
+    <string name="hint_apple_app_id">รหัสตัวเลขจาก URL ของ App Store</string>
+    <string name="hint_google_package_name">ชื่อแพ็กเกจจาก URL ของ Play Store</string>
 
     <!-- Payment Labels -->
-    <string name="label_select_provider">Select Payment Provider</string>
-    <string name="label_payment_username">Username</string>
-    <string name="label_payment_amount">Amount (Optional)</string>
-    <string name="label_payment_note">Note (Optional)</string>
+    <string name="label_select_provider">เลือกผู้ให้บริการชำระเงิน</string>
+    <string name="label_payment_username">ชื่อผู้ใช้</string>
+    <string name="label_payment_amount">จำนวนเงิน (ไม่บังคับ)</string>
+    <string name="label_payment_note">บันทึก (ไม่บังคับ)</string>
     <string name="provider_paypal">PayPal</string>
     <string name="provider_venmo">Venmo</string>
+    <!-- Payment Placeholders -->
     <string name="placeholder_paypal_username">yourpaypalusername</string>
     <string name="placeholder_venmo_username">yourvenmo</string>
     <string name="placeholder_payment_amount">10.00</string>
-    <string name="placeholder_payment_note">Payment for lunch</string>
+    <string name="placeholder_payment_note">ค่าอาหารกลางวัน</string>
 
     <!-- Crypto Labels -->
-    <string name="label_select_crypto">Select Cryptocurrency</string>
-    <string name="label_crypto_address">Wallet Address</string>
-    <string name="label_crypto_amount_btc">Amount in BTC (Optional)</string>
-    <string name="label_crypto_amount_eth">Amount in ETH (Optional)</string>
-    <string name="label_crypto_label">Label (Optional)</string>
-    <string name="label_crypto_message">Message (Optional)</string>
+    <string name="label_select_crypto">เลือกสกุลเงินคริปโท</string>
+    <string name="label_crypto_address">ที่อยู่กระเป๋าเงิน</string>
+    <string name="label_crypto_amount_btc">จำนวนเป็น BTC (ไม่บังคับ)</string>
+    <string name="label_crypto_amount_eth">จำนวนเป็น ETH (ไม่บังคับ)</string>
+    <string name="label_crypto_label">ป้ายกำกับ (ไม่บังคับ)</string>
+    <string name="label_crypto_message">ข้อความ (ไม่บังคับ)</string>
     <string name="crypto_bitcoin">Bitcoin (BTC)</string>
     <string name="crypto_ethereum">Ethereum (ETH)</string>
-    <string name="placeholder_bitcoin_address">bc1q...</string>
-    <string name="placeholder_ethereum_address">0x...</string>
+    <!-- Crypto Placeholders -->
+    <string name="placeholder_bitcoin_address">bc1q…</string>
+    <string name="placeholder_ethereum_address">0x…</string>
     <string name="placeholder_crypto_amount">0.001</string>
-    <string name="placeholder_crypto_label">Donation</string>
-    <string name="placeholder_crypto_message">Thank you for your support</string>
+    <string name="placeholder_crypto_label">บริจาค</string>
+    <string name="placeholder_crypto_message">ขอบคุณสำหรับการสนับสนุน</string>
 
     <!-- Field Hints -->
-    <string name="hint_url">The URL should start with http:// or https://</string>
-    <string name="hint_phone">Include country code (e.g., +1 for USA)</string>
-    <string name="hint_sms">Format: phone:message</string>
+    <string name="hint_url">ที่อยู่ต้องขึ้นต้นด้วย http:// หรือ https://</string>
+    <string name="hint_phone">ใส่รหัสประเทศด้วย (เช่น +66 สำหรับประเทศไทย)</string>
+    <string name="hint_sms">รูปแบบ: เบอร์โทร:ข้อความ</string>
 
     <!-- Instructions -->
-    <string name="instruction_url">Enter the Website URL to encode in the QR code</string>
-    <string name="instruction_phone">Enter the Phone Number to encode in the QR code</string>
-    <string name="instruction_sms">Enter the Phone Number to encode in the QR code</string>
-    <string name="instruction_text">Enter the Text Content to encode in the QR code</string>
-    <string name="instruction_email">Enter email details to encode in the QR code</string>
-    <string name="instruction_contact">Enter contact information to encode in the QR code</string>
-    <string name="instruction_wifi">Enter WiFi network details to encode in the QR code</string>
-    <string name="instruction_calendar">Enter event details to encode in the QR code</string>
-    <string name="instruction_location">Enter coordinates to encode in the QR code</string>
-    <string name="instruction_mecard">Enter contact details to encode in the QR code</string>
-    <string name="instruction_app_store">Enter app store details to create a download link</string>
-    <string name="instruction_payment">Enter payment details to create a payment request</string>
-    <string name="instruction_crypto">Enter wallet details to create a cryptocurrency address QR</string>
+    <string name="instruction_url">ป้อนที่อยู่เว็บไซต์ที่จะเข้ารหัสในคิวอาร์โค้ด</string>
+    <string name="instruction_phone">ป้อนหมายเลขโทรศัพท์ที่จะเข้ารหัสในคิวอาร์โค้ด</string>
+    <string name="instruction_sms">ป้อนหมายเลขโทรศัพท์ที่จะเข้ารหัสในคิวอาร์โค้ด</string>
+    <string name="instruction_text">ป้อนข้อความที่จะเข้ารหัสในคิวอาร์โค้ด</string>
+    <string name="instruction_email">ป้อนข้อมูลอีเมลที่จะเข้ารหัสในคิวอาร์โค้ด</string>
+    <string name="instruction_contact">ป้อนข้อมูลผู้ติดต่อที่จะเข้ารหัสในคิวอาร์โค้ด</string>
+    <string name="instruction_wifi">ป้อนข้อมูลเครือข่าย Wi-Fi ที่จะเข้ารหัสในคิวอาร์โค้ด</string>
+    <string name="instruction_calendar">ป้อนรายละเอียดกิจกรรมที่จะเข้ารหัสในคิวอาร์โค้ด</string>
+    <string name="instruction_location">ป้อนพิกัดที่จะเข้ารหัสในคิวอาร์โค้ด</string>
+    <string name="instruction_mecard">ป้อนรายละเอียดผู้ติดต่อที่จะเข้ารหัสในคิวอาร์โค้ด</string>
+    <string name="instruction_app_store">ป้อนข้อมูลแอปสโตร์เพื่อสร้างลิงก์ดาวน์โหลด</string>
+    <string name="instruction_payment">ป้อนข้อมูลการชำระเงินเพื่อสร้างคำขอชำระเงิน</string>
+    <string name="instruction_crypto">ป้อนข้อมูลกระเป๋าเงินเพื่อสร้างคิวอาร์โค้ดที่อยู่คริปโท</string>
 
     <!-- Validation Errors -->
-    <string name="error_invalid_url">Please enter a valid URL</string>
-    <string name="error_invalid_url_format">Invalid URL format</string>
-    <string name="error_invalid_phone">Please enter a valid phone number</string>
-    <string name="error_empty_phone">Please enter a phone number</string>
-    <string name="error_invalid_phone_format">Invalid phone number</string>
-    <string name="error_empty_text">Please enter some text</string>
-    <string name="error_empty_email">Please enter an email address</string>
-    <string name="error_invalid_email">Invalid email address</string>
-    <string name="error_create_qr">Error creating QR code: %1$s</string>
-    <string name="error_empty_name">Please enter at least a first or last name</string>
-    <string name="error_empty_ssid">Please enter the network name (SSID)</string>
-    <string name="error_empty_event_title">Please enter an event title</string>
-    <string name="error_invalid_date">Please enter a valid date (YYYY-MM-DD)</string>
-    <string name="error_empty_latitude">Please enter a latitude</string>
-    <string name="error_empty_longitude">Please enter a longitude</string>
-    <string name="error_invalid_latitude">Latitude must be between -90 and 90</string>
-    <string name="error_invalid_longitude">Longitude must be between -180 and 180</string>
-    <string name="error_empty_mecard_name">Please enter a name</string>
-    <string name="error_empty_app_id">Please enter an app ID or package name</string>
-    <string name="error_empty_payment_username">Please enter a username</string>
-    <string name="error_empty_crypto_address">Please enter a wallet address</string>
+    <string name="error_invalid_url">โปรดป้อนที่อยู่ที่ถูกต้อง</string>
+    <string name="error_invalid_url_format">รูปแบบที่อยู่ไม่ถูกต้อง</string>
+    <string name="error_invalid_phone">โปรดป้อนหมายเลขโทรศัพท์ที่ถูกต้อง</string>
+    <string name="error_empty_phone">โปรดป้อนหมายเลขโทรศัพท์</string>
+    <string name="error_invalid_phone_format">หมายเลขโทรศัพท์ไม่ถูกต้อง</string>
+    <string name="error_empty_text">โปรดป้อนข้อความ</string>
+    <string name="error_empty_email">โปรดป้อนที่อยู่อีเมล</string>
+    <string name="error_invalid_email">ที่อยู่อีเมลไม่ถูกต้อง</string>
+    <string name="error_create_qr">สร้างคิวอาร์โค้ดไม่สำเร็จ: %1$s</string>
+    <string name="error_empty_name">โปรดป้อนชื่อหรือนามสกุลอย่างน้อยหนึ่งอย่าง</string>
+    <string name="error_empty_ssid">โปรดป้อนชื่อเครือข่าย (SSID)</string>
+    <!-- Calendar Event Errors -->
+    <string name="error_empty_event_title">โปรดป้อนชื่อกิจกรรม</string>
+    <string name="error_invalid_date">โปรดป้อนวันที่ที่ถูกต้อง (ปปปป-ดด-วว)</string>
+    <!-- Location Errors -->
+    <string name="error_empty_latitude">โปรดป้อนละติจูด</string>
+    <string name="error_empty_longitude">โปรดป้อนลองจิจูด</string>
+    <string name="error_invalid_latitude">ละติจูดต้องอยู่ระหว่าง -90 ถึง 90</string>
+    <string name="error_invalid_longitude">ลองจิจูดต้องอยู่ระหว่าง -180 ถึง 180</string>
+    <!-- MeCard Errors -->
+    <string name="error_empty_mecard_name">โปรดป้อนชื่อ</string>
+    <!-- App Store Errors -->
+    <string name="error_empty_app_id">โปรดป้อน App ID หรือชื่อแพ็กเกจ</string>
+    <!-- Payment Errors -->
+    <string name="error_empty_payment_username">โปรดป้อนชื่อผู้ใช้</string>
+    <!-- Crypto Errors -->
+    <string name="error_empty_crypto_address">โปรดป้อนที่อยู่กระเป๋าเงิน</string>
 
     <!-- History Screen -->
-    <string name="history_empty">No QR codes yet.\nScan or create one to get started!</string>
-    <string name="history_type">Type: %1$s</string>
-    <string name="history_type_scanned">Scanned</string>
-    <string name="history_type_created">Created</string>
-    <string name="history_type_from_file">From File</string>
-    <string name="history_type_unknown">Unknown</string>
-    <string name="history_search">Search</string>
-    <string name="history_search_placeholder">Search QR codes...</string>
-    <string name="history_clear_search">Clear search</string>
-    <string name="history_no_results">No QR codes match your search</string>
+    <string name="history_empty">ยังไม่มีคิวอาร์โค้ด\nสแกนหรือสร้างสักอันเพื่อเริ่มต้น!</string>
+    <string name="history_type">ประเภท: %1$s</string>
+    <string name="history_type_scanned">สแกนแล้ว</string>
+    <string name="history_type_created">สร้างแล้ว</string>
+    <string name="history_type_from_file">จากไฟล์</string>
+    <string name="history_type_unknown">ไม่ทราบ</string>
+    <string name="history_search">ค้นหา</string>
+    <string name="history_search_placeholder">ค้นหาคิวอาร์โค้ด…</string>
+    <string name="history_clear_search">ล้างการค้นหา</string>
+    <string name="history_no_results">ไม่พบคิวอาร์โค้ดที่ตรงกัน</string>
 
     <!-- Detail Screen -->
-    <string name="detail_content">Content</string>
-    <string name="detail_details">Details</string>
-    <string name="detail_type">Type</string>
-    <string name="detail_created">Created</string>
-    <string name="detail_share">Share</string>
-    <string name="detail_save">Save Image</string>
-    <string name="detail_save_to_file">Save to file</string>
-    <string name="detail_delete">Delete</string>
-    <string name="detail_no_item">No QR code selected</string>
-    <string name="detail_error">Error: %1$s</string>
-    <string name="detail_loading">Loading QR code...</string>
-    <string name="detail_no_data">No QR code data available</string>
-    <string name="detail_tap_fullscreen">Tap to view fullscreen</string>
-    <string name="detail_copy_clipboard">Copy to clipboard</string>
-    <string name="detail_origin_flag">Origin flag: %1$d</string>
+    <string name="detail_content">เนื้อหา</string>
+    <string name="detail_details">รายละเอียด</string>
+    <string name="detail_type">ประเภท</string>
+    <string name="detail_created">สร้างเมื่อ</string>
+    <string name="detail_share">แชร์</string>
+    <string name="detail_save">บันทึกรูปภาพ</string>
+    <string name="detail_save_to_file">บันทึกลงไฟล์</string>
+    <string name="detail_delete">ลบ</string>
+    <string name="detail_test_action">ทดสอบ</string>
+    <string name="detail_no_item">ยังไม่ได้เลือกคิวอาร์โค้ด</string>
+    <string name="detail_error">ข้อผิดพลาด: %1$s</string>
+    <string name="detail_loading">กำลังโหลดคิวอาร์โค้ด…</string>
+    <string name="detail_no_data">ไม่มีข้อมูลคิวอาร์โค้ด</string>
+    <string name="detail_tap_fullscreen">แตะเพื่อดูแบบเต็มหน้าจอ</string>
+    <string name="detail_copy_clipboard">คัดลอกไปยังคลิปบอร์ด</string>
+    <string name="detail_origin_flag">แฟล็กต้นทาง: %1$d</string>
 
     <!-- Feedback Messages -->
-    <string name="feedback_copied">Copied to clipboard</string>
-    <string name="feedback_saved">QR code saved to file</string>
-    <string name="feedback_save_error">Error saving QR code</string>
-    <string name="feedback_share_not_implemented">Share not yet implemented for cross-platform</string>
-    <string name="feedback_no_qr_in_image">No QR code found in image</string>
-    <string name="feedback_launch_error">Could not open content: %1$s</string>
-    <string name="feedback_no_app_found">No app found to handle this content</string>
+    <string name="feedback_copied">คัดลอกไปยังคลิปบอร์ดแล้ว</string>
+    <string name="feedback_saved">บันทึกคิวอาร์โค้ดลงไฟล์แล้ว</string>
+    <string name="feedback_save_error">บันทึกคิวอาร์โค้ดไม่สำเร็จ</string>
+    <string name="feedback_share_not_implemented">ยังไม่รองรับการแชร์บนทุกแพลตฟอร์ม</string>
+    <string name="feedback_no_qr_in_image">ไม่พบคิวอาร์โค้ดในรูปภาพ</string>
+    <string name="feedback_launch_error">เปิดเนื้อหาไม่ได้: %1$s</string>
+    <string name="feedback_no_app_found">ไม่พบแอปที่เปิดเนื้อหานี้ได้</string>
+    <string name="feedback_no_handler_available">ไม่มีแอปสำหรับการทำงานนี้</string>
 
     <!-- Permission Messages -->
-    <string name="permission_storage_required">Storage permission is required to save QR code</string>
-    <string name="permission_grant_settings">Please grant storage permission in app settings</string>
-    <string name="permission_camera_required">Camera Permission Required</string>
-    <string name="permission_camera_denied">Camera permission is required to scan QR codes. Please grant the permission to continue.</string>
-    <string name="permission_camera_permanently_denied">Camera permission has been permanently denied. Please enable it in your device settings to scan QR codes.</string>
-    <string name="permission_open_settings">Open Settings</string>
-    <string name="permission_grant">Grant Permission</string>
-    <string name="permission_ready_to_scan">Ready to Scan</string>
-    <string name="permission_start_scanning_hint">Tap the button below to start scanning QR codes with your camera.</string>
-    <string name="permission_start_scanning">Start Scanning</string>
+    <string name="permission_storage_required">ต้องมีสิทธิ์เข้าถึงที่เก็บข้อมูลเพื่อบันทึกคิวอาร์โค้ด</string>
+    <string name="permission_grant_settings">โปรดอนุญาตสิทธิ์ที่เก็บข้อมูลในการตั้งค่าแอป</string>
+    <string name="permission_camera_required">ต้องมีสิทธิ์เข้าถึงกล้อง</string>
+    <string name="permission_camera_denied">ต้องใช้กล้องเพื่อสแกนคิวอาร์โค้ด โปรดอนุญาตสิทธิ์เพื่อดำเนินการต่อ</string>
+    <string name="permission_camera_permanently_denied">สิทธิ์เข้าถึงกล้องถูกปฏิเสธถาวร โปรดเปิดใช้งานในการตั้งค่าอุปกรณ์เพื่อสแกนคิวอาร์โค้ด</string>
+    <string name="permission_open_settings">เปิดการตั้งค่า</string>
+    <string name="permission_grant">อนุญาตสิทธิ์</string>
+    <string name="permission_ready_to_scan">พร้อมสแกนแล้ว</string>
+    <string name="permission_start_scanning_hint">แตะปุ่มด้านล่างเพื่อสแกนคิวอาร์โค้ดด้วยกล้อง</string>
+    <string name="permission_start_scanning">เริ่มสแกน</string>
 
     <!-- Scan Screen -->
-    <string name="scan_title">Camera Scanning</string>
-    <string name="camera_starting">Starting camera...</string>
-    <string name="camera_not_available">Camera not available</string>
-    <string name="camera_simulator_hint">Running on simulator or device without camera.\nUse the button in the bottom right to scan from photo library.</string>
-    <string name="scan_message">QR code scanning requires platform-specific camera APIs.\n\nThis feature will be implemented using expect/actual declarations:\n• Android: CameraX\n• iOS: AVFoundation\n• Desktop: Webcam libraries</string>
-    <string name="scan_from_file">Scan from file</string>
-    <string name="scan_qr_detected">QR Code detected: %1$s</string>
+    <string name="scan_title">สแกนด้วยกล้อง</string>
+    <string name="camera_starting">กำลังเปิดกล้อง…</string>
+    <string name="camera_not_available">ใช้กล้องไม่ได้</string>
+    <string name="camera_simulator_hint">กำลังทำงานบนซิมูเลเตอร์หรืออุปกรณ์ที่ไม่มีกล้อง\nใช้ปุ่มมุมขวาล่างเพื่อสแกนจากคลังรูปภาพ</string>
+    <string name="scan_message">การสแกนคิวอาร์โค้ดต้องใช้ API กล้องเฉพาะของแต่ละแพลตฟอร์ม\n\nฟีเจอร์นี้จะพัฒนาด้วยการประกาศ expect/actual:\n• Android: CameraX\n• iOS: AVFoundation\n• เดสก์ท็อป: ไลบรารีเว็บแคม</string>
+    <string name="scan_from_file">สแกนจากไฟล์</string>
+    <string name="scan_qr_detected">พบคิวอาร์โค้ด: %1$s</string>
 
     <!-- Common Actions -->
-    <string name="action_dismiss">Dismiss</string>
-    <string name="action_ok">OK</string>
-    <string name="action_undo">Undo</string>
+    <string name="action_dismiss">ปิด</string>
+    <string name="action_ok">ตกลง</string>
+    <string name="action_undo">เลิกทำ</string>
+    <string name="action_open">เปิด</string>
 
     <!-- Delete Feedback -->
-    <string name="detail_deleted">QR code deleted</string>
+    <string name="detail_deleted">ลบคิวอาร์โค้ดแล้ว</string>
+
+    <!-- WiFi Credentials Card -->
+    <string name="wifi_credentials_title">ข้อมูล Wi-Fi</string>
+    <string name="wifi_credentials_ssid">ชื่อเครือข่าย (SSID)</string>
+    <string name="wifi_credentials_password">รหัสผ่าน</string>
+    <string name="wifi_credentials_show">แสดง</string>
+    <string name="wifi_credentials_hide">ซ่อน</string>
+    <string name="wifi_credentials_close">ปิด</string>
 
     <!-- Content Descriptions (for accessibility) -->
-    <string name="cd_qr_preview">QR Code Preview</string>
-    <string name="cd_qr_code">QR Code</string>
-    <string name="cd_qr_fullscreen">QR Code Fullscreen</string>
-    <string name="cd_back">Back</string>
-    <string name="cd_more">More</string>
-    <string name="cd_menu">Menu</string>
-    <string name="cd_share">Share</string>
-    <string name="cd_save">Save</string>
-    <string name="cd_delete">Delete</string>
-    <string name="cd_create">Create</string>
-    <string name="cd_launch">Launch</string>
-    <string name="cd_settings">Settings</string>
-    <string name="cd_warning">Warning</string>
-    <string name="cd_selected">Selected</string>
-    <string name="cd_show_password">Show password</string>
-    <string name="cd_hide_password">Hide password</string>
-    <string name="cd_torch_on">Torch on</string>
-    <string name="cd_torch_off">Torch off</string>
-    <string name="cd_camera">Camera</string>
+    <string name="cd_qr_preview">ตัวอย่างคิวอาร์โค้ด</string>
+    <string name="cd_qr_code">คิวอาร์โค้ด</string>
+    <string name="cd_qr_fullscreen">คิวอาร์โค้ดแบบเต็มหน้าจอ</string>
+    <string name="cd_back">ย้อนกลับ</string>
+    <string name="cd_more">เพิ่มเติม</string>
+    <string name="cd_menu">เมนู</string>
+    <string name="cd_share">แชร์</string>
+    <string name="cd_save">บันทึก</string>
+    <string name="cd_delete">ลบ</string>
+    <string name="cd_test_action">ทดสอบการทำงาน</string>
+    <string name="cd_wifi">Wi-Fi</string>
+    <string name="cd_create">สร้าง</string>
+    <string name="cd_launch">เปิด</string>
+    <string name="cd_settings">การตั้งค่า</string>
+    <string name="cd_warning">คำเตือน</string>
+    <string name="cd_selected">เลือกอยู่</string>
+    <string name="cd_show_password">แสดงรหัสผ่าน</string>
+    <string name="cd_hide_password">ซ่อนรหัสผ่าน</string>
+    <string name="cd_torch_on">เปิดไฟฉาย</string>
+    <string name="cd_torch_off">ปิดไฟฉาย</string>
+    <string name="cd_camera">กล้อง</string>
 
     <!-- Settings Screen -->
-    <string name="settings_title">Settings</string>
-    <string name="settings_section_appearance">Appearance</string>
-    <string name="settings_section_about">About</string>
-    <string name="settings_version">Version</string>
-    <string name="settings_build">Build</string>
-    <string name="settings_theme_system">System Default</string>
-    <string name="settings_theme_system_desc">Follow system theme</string>
-    <string name="settings_theme_light">Light</string>
-    <string name="settings_theme_light_desc">Always use light theme</string>
-    <string name="settings_theme_dark">Dark</string>
-    <string name="settings_theme_dark_desc">Always use dark theme</string>
+    <string name="settings_title">การตั้งค่า</string>
+    <string name="settings_section_appearance">การแสดงผล</string>
+    <string name="settings_section_about">เกี่ยวกับ</string>
+    <string name="settings_version">เวอร์ชัน</string>
+    <string name="settings_build">บิลด์</string>
+    <string name="settings_theme_system">ค่าเริ่มต้นของระบบ</string>
+    <string name="settings_theme_system_desc">ใช้ธีมตามระบบ</string>
+    <string name="settings_theme_light">สว่าง</string>
+    <string name="settings_theme_light_desc">ใช้ธีมสว่างเสมอ</string>
+    <string name="settings_theme_dark">มืด</string>
+    <string name="settings_theme_dark_desc">ใช้ธีมมืดเสมอ</string>
 
     <!-- URL Warning Dialog -->
-    <string name="url_warning_dangerous">Dangerous Link Detected</string>
-    <string name="url_warning_suspicious">Suspicious Link</string>
-    <string name="url_warning_check">URL Check</string>
-    <string name="url_warning_url_prefix">URL:</string>
-    <string name="url_warning_warnings_label">Warnings:</string>
-    <string name="url_warning_dangerous_desc">Opening this link is not recommended as it may harm your device or compromise your data.</string>
-    <string name="url_warning_suspicious_desc">This link has some characteristics that may indicate a security risk. Proceed with caution.</string>
-    <string name="url_warning_safe_desc">No issues were detected with this URL.</string>
-    <string name="url_warning_open_anyway">Open Anyway</string>
-    <string name="url_warning_close">Close</string>
-    <string name="url_warning_cancel">Cancel</string>
+    <string name="url_warning_dangerous">พบลิงก์อันตราย</string>
+    <string name="url_warning_suspicious">ลิงก์น่าสงสัย</string>
+    <string name="url_warning_check">การตรวจสอบลิงก์</string>
+    <string name="url_warning_url_prefix">ลิงก์:</string>
+    <string name="url_warning_warnings_label">คำเตือน:</string>
+    <string name="url_warning_dangerous_desc">ไม่แนะนำให้เปิดลิงก์นี้ เพราะอาจเป็นอันตรายต่ออุปกรณ์หรือทำให้ข้อมูลของคุณรั่วไหล</string>
+    <string name="url_warning_suspicious_desc">ลิงก์นี้มีลักษณะที่อาจบ่งชี้ถึงความเสี่ยงด้านความปลอดภัย โปรดใช้ความระมัดระวัง</string>
+    <string name="url_warning_safe_desc">ไม่พบปัญหากับลิงก์นี้</string>
+    <string name="url_warning_open_anyway">เปิดต่อไป</string>
+    <string name="url_warning_close">ปิด</string>
+    <string name="url_warning_cancel">ยกเลิก</string>
 
     <!-- Field Modifiers -->
-    <string name="label_optional_suffix"> (Optional)</string>
+    <string name="label_optional_suffix"> (ไม่บังคับ)</string>
 </resources>

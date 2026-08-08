@@ -1,341 +1,372 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Ukrainian (Українська) - Translation stub -->
-<!-- TODO: Translate all strings to Simplified Chinese -->
 <resources>
     <!-- App Title -->
     <string name="app_name">QR Everywhere</string>
 
     <!-- Bottom Navigation -->
-    <string name="nav_history">History</string>
-    <string name="nav_scan">Scan</string>
-    <string name="nav_create">Create</string>
+    <string name="nav_history">Історія</string>
+    <string name="nav_scan">Сканер</string>
+    <string name="nav_create">Створити</string>
 
     <!-- Screen Titles -->
-    <string name="title_history">QR History</string>
-    <string name="title_scan">Scan or import QR</string>
-    <string name="title_create">Create QR Code</string>
-    <string name="title_detail">QR Details</string>
-    <string name="title_create_text">Create Text QR</string>
-    <string name="title_create_email">Create Email QR</string>
+    <string name="title_history">Історія QR-кодів</string>
+    <string name="title_scan">Сканувати або імпортувати QR</string>
+    <string name="title_create">Створити QR-код</string>
+    <string name="title_detail">Відомості про QR-код</string>
+    <string name="title_create_text">Створити текстовий QR</string>
+    <string name="title_create_email">Створити QR для електронної пошти</string>
 
     <!-- Create QR Type Titles -->
-    <string name="title_text_qr">Text QR Code</string>
-    <string name="title_url_qr">Web URL QR Code</string>
-    <string name="title_phone_qr">Phone QR Code</string>
-    <string name="title_sms_qr">SMS QR Code</string>
-    <string name="title_email_qr">Email QR Code</string>
-    <string name="title_contact_qr">Contact QR Code</string>
-    <string name="title_wifi_qr">WiFi QR Code</string>
-    <string name="title_calendar_qr">Calendar Event QR Code</string>
-    <string name="title_location_qr">Location QR Code</string>
-    <string name="title_mecard_qr">MeCard QR Code</string>
-    <string name="title_appstore_qr">App Store Link QR Code</string>
-    <string name="title_payment_qr">Payment QR Code</string>
-    <string name="title_crypto_qr">Cryptocurrency QR Code</string>
+    <string name="title_text_qr">Текстовий QR-код</string>
+    <string name="title_url_qr">QR-код з посиланням</string>
+    <string name="title_phone_qr">QR-код із телефоном</string>
+    <string name="title_sms_qr">QR-код із SMS</string>
+    <string name="title_email_qr">QR-код з електронною поштою</string>
+    <string name="title_contact_qr">QR-код із контактом</string>
+    <string name="title_wifi_qr">QR-код для Wi-Fi</string>
+    <string name="title_calendar_qr">QR-код із подією</string>
+    <string name="title_location_qr">QR-код із місцем</string>
+    <string name="title_mecard_qr">QR-код MeCard</string>
+    <string name="title_appstore_qr">QR-код із посиланням на крамницю</string>
+    <string name="title_payment_qr">QR-код для оплати</string>
+    <string name="title_crypto_qr">QR-код для криптовалюти</string>
 
     <!-- Create QR Type Descriptions -->
-    <string name="desc_text_qr">Create a QR code with any text content</string>
-    <string name="desc_url_qr">Create a QR code with website URL</string>
-    <string name="desc_phone_qr">Create a QR code with phone number</string>
-    <string name="desc_sms_qr">Create a QR code with SMS message</string>
-    <string name="desc_email_qr">Create a QR code with email information</string>
-    <string name="desc_contact_qr">Create a QR code with contact information (vCard)</string>
-    <string name="desc_wifi_qr">Create a QR code with WiFi network credentials</string>
-    <string name="desc_calendar_qr">Create a QR code with calendar event (VEVENT)</string>
-    <string name="desc_location_qr">Create a QR code with GPS coordinates</string>
-    <string name="desc_mecard_qr">Create a QR code with contact (simple format)</string>
-    <string name="desc_appstore_qr">Create a QR code linking to an app store</string>
-    <string name="desc_payment_qr">Create a QR code for PayPal or Venmo payments</string>
-    <string name="desc_crypto_qr">Create a QR code for Bitcoin or Ethereum wallet</string>
+    <string name="desc_text_qr">Створити QR-код із будь-яким текстом</string>
+    <string name="desc_url_qr">Створити QR-код з адресою сайту</string>
+    <string name="desc_phone_qr">Створити QR-код із номером телефону</string>
+    <string name="desc_sms_qr">Створити QR-код із SMS-повідомленням</string>
+    <string name="desc_email_qr">Створити QR-код із даними електронної пошти</string>
+    <string name="desc_contact_qr">Створити QR-код із контактними даними (vCard)</string>
+    <string name="desc_wifi_qr">Створити QR-код із даними мережі Wi-Fi</string>
+    <string name="desc_calendar_qr">Створити QR-код із подією (VEVENT)</string>
+    <string name="desc_location_qr">Створити QR-код із координатами GPS</string>
+    <string name="desc_mecard_qr">Створити QR-код із контактом (простий формат)</string>
+    <string name="desc_appstore_qr">Створити QR-код із посиланням на крамницю застосунків</string>
+    <string name="desc_payment_qr">Створити QR-код для оплати через PayPal або Venmo</string>
+    <string name="desc_crypto_qr">Створити QR-код для гаманця Bitcoin або Ethereum</string>
 
     <!-- Create Screen -->
-    <string name="create_title">Create QR Code</string>
-    <string name="create_subtitle">Choose what type of QR code to create</string>
-    <string name="create_quick_text">Quick Text QR</string>
-    <string name="create_enter_text">Enter text</string>
-    <string name="create_placeholder">Type anything...</string>
-    <string name="create_button">Generate QR Code</string>
-    <string name="create_button_creating">Creating...</string>
-    <string name="create_more_types">More QR Types</string>
-    <string name="create_coming_soon">Coming soon:</string>
-    <string name="create_types_list">• Email QR Code\n• Phone QR Code\n• WiFi QR Code\n• vCard QR Code\n• URL QR Code</string>
+    <string name="create_title">Створити QR-код</string>
+    <string name="create_subtitle">Виберіть тип QR-коду</string>
+    <string name="create_quick_text">Швидкий текстовий QR</string>
+    <string name="create_enter_text">Введіть текст</string>
+    <string name="create_placeholder">Введіть будь-що…</string>
+    <string name="create_button">Створити QR-код</string>
+    <string name="create_button_creating">Створення…</string>
+    <string name="create_more_types">Інші типи QR-кодів</string>
+    <string name="create_coming_soon">Незабаром:</string>
+    <string name="create_types_list">• QR-код з електронною поштою\n• QR-код із телефоном\n• QR-код для Wi-Fi\n• QR-код vCard\n• QR-код із посиланням</string>
 
     <!-- Create Text QR Screen -->
-    <string name="create_url_title">Create URL QR Code</string>
-    <string name="create_phone_title">Create Phone QR Code</string>
-    <string name="create_sms_title">Create SMS QR Code</string>
-    <string name="create_text_title">Create Text QR Code</string>
-    <string name="create_email_title">Create Email QR Code</string>
+    <string name="create_url_title">Створити QR-код із посиланням</string>
+    <string name="create_phone_title">Створити QR-код із телефоном</string>
+    <string name="create_sms_title">Створити QR-код із SMS</string>
+    <string name="create_text_title">Створити текстовий QR-код</string>
+    <string name="create_email_title">Створити QR-код з електронною поштою</string>
 
     <!-- Field Labels -->
-    <string name="label_website_url">Website URL</string>
-    <string name="label_phone_number">Phone Number</string>
-    <string name="label_text_content">Text Content</string>
-    <string name="label_email_address">Email Address</string>
-    <string name="label_email_subject">Subject (Optional)</string>
-    <string name="label_email_message">Message (Optional)</string>
-    <string name="label_enter_url">Enter website URL</string>
-    <string name="label_enter_phone">Enter phone number</string>
-    <string name="label_enter_phone_message">Enter phone number and message</string>
-    <string name="label_first_name">First Name</string>
-    <string name="label_last_name">Last Name</string>
-    <string name="label_organization">Organization (Optional)</string>
-    <string name="label_job_title">Job Title (Optional)</string>
-    <string name="label_website">Website (Optional)</string>
-    <string name="label_network_name">Network Name (SSID)</string>
-    <string name="label_password">Password</string>
-    <string name="label_security_type">Security Type</string>
-    <string name="label_hidden_network">Hidden Network</string>
+    <string name="label_website_url">Адреса сайту</string>
+    <string name="label_phone_number">Номер телефону</string>
+    <string name="label_text_content">Текст</string>
+    <string name="label_email_address">Адреса електронної пошти</string>
+    <string name="label_email_subject">Тема (необов’язково)</string>
+    <string name="label_email_message">Повідомлення (необов’язково)</string>
+    <string name="label_enter_url">Введіть адресу сайту</string>
+    <string name="label_enter_phone">Введіть номер телефону</string>
+    <string name="label_enter_phone_message">Введіть номер телефону й повідомлення</string>
+    <!-- vCard Field Labels -->
+    <string name="label_first_name">Ім’я</string>
+    <string name="label_last_name">Прізвище</string>
+    <string name="label_organization">Компанія (необов’язково)</string>
+    <string name="label_job_title">Посада (необов’язково)</string>
+    <string name="label_website">Сайт (необов’язково)</string>
+    <!-- WiFi Field Labels -->
+    <string name="label_network_name">Назва мережі (SSID)</string>
+    <string name="label_password">Пароль</string>
+    <string name="label_security_type">Тип захисту</string>
+    <string name="label_hidden_network">Прихована мережа</string>
 
     <!-- Field Placeholders -->
     <string name="placeholder_url">https://example.com</string>
-    <string name="placeholder_phone">+1234567890</string>
-    <string name="placeholder_sms">+1234567890:Hello</string>
-    <string name="placeholder_text">Enter any text</string>
-    <string name="placeholder_email">example@email.com</string>
-    <string name="placeholder_email_subject">Email subject</string>
-    <string name="placeholder_email_message">Email message</string>
-    <string name="placeholder_first_name">John</string>
-    <string name="placeholder_last_name">Doe</string>
-    <string name="placeholder_organization">Company Inc.</string>
-    <string name="placeholder_job_title">Software Engineer</string>
+    <string name="placeholder_phone">+380671234567</string>
+    <string name="placeholder_sms">+380671234567:Привіт</string>
+    <string name="placeholder_text">Введіть будь-який текст</string>
+    <string name="placeholder_email">pryklad@email.com</string>
+    <string name="placeholder_email_subject">Тема листа</string>
+    <string name="placeholder_email_message">Текст листа</string>
+    <!-- vCard Placeholders -->
+    <string name="placeholder_first_name">Іван</string>
+    <string name="placeholder_last_name">Шевченко</string>
+    <string name="placeholder_organization">ТОВ «Приклад»</string>
+    <string name="placeholder_job_title">Інженер-програміст</string>
     <string name="placeholder_website">https://example.com</string>
-    <string name="placeholder_network_name">MyWiFi</string>
-    <string name="placeholder_password">password123</string>
+    <!-- WiFi Placeholders -->
+    <string name="placeholder_network_name">МояМережа</string>
+    <string name="placeholder_password">parol123</string>
+    <!-- WiFi Security Types -->
     <string name="security_wpa">WPA/WPA2</string>
     <string name="security_wep">WEP</string>
-    <string name="security_open">Open (No password)</string>
+    <string name="security_open">Відкрита (без пароля)</string>
 
     <!-- Calendar Event Labels -->
-    <string name="label_event_title">Event Title</string>
-    <string name="label_all_day_event">All Day Event</string>
-    <string name="label_start_date">Start Date</string>
-    <string name="label_start_time">Start Time</string>
-    <string name="label_end_date">End Date</string>
-    <string name="label_end_time">End Time</string>
-    <string name="label_event_location">Location (Optional)</string>
-    <string name="label_event_description">Description (Optional)</string>
-    <string name="placeholder_event_title">Team Meeting</string>
-    <string name="placeholder_date">YYYY-MM-DD</string>
-    <string name="placeholder_time">HH:MM</string>
-    <string name="placeholder_event_location">Conference Room A</string>
-    <string name="placeholder_event_description">Discuss project updates</string>
-    <string name="hint_date_format">Format: YYYY-MM-DD (e.g., 2024-03-15)</string>
-    <string name="hint_time_format">Format: HH:MM (e.g., 14:30)</string>
+    <string name="label_event_title">Назва події</string>
+    <string name="label_all_day_event">Подія на весь день</string>
+    <string name="label_start_date">Дата початку</string>
+    <string name="label_start_time">Час початку</string>
+    <string name="label_end_date">Дата завершення</string>
+    <string name="label_end_time">Час завершення</string>
+    <string name="label_event_location">Місце (необов’язково)</string>
+    <string name="label_event_description">Опис (необов’язково)</string>
+    <!-- Calendar Event Placeholders -->
+    <string name="placeholder_event_title">Зустріч команди</string>
+    <string name="placeholder_date">РРРР-ММ-ДД</string>
+    <string name="placeholder_time">ГГ:ХХ</string>
+    <string name="placeholder_event_location">Переговорна А</string>
+    <string name="placeholder_event_description">Обговорити стан проєкту</string>
+    <!-- Calendar Event Hints -->
+    <string name="hint_date_format">Формат: РРРР-ММ-ДД (напр. 2024-03-15)</string>
+    <string name="hint_time_format">Формат: ГГ:ХХ (напр. 14:30)</string>
 
     <!-- Location Labels -->
-    <string name="label_latitude">Latitude</string>
-    <string name="label_longitude">Longitude</string>
-    <string name="label_location_label">Label (Optional)</string>
+    <string name="label_latitude">Широта</string>
+    <string name="label_longitude">Довгота</string>
+    <string name="label_location_label">Підпис (необов’язково)</string>
+    <!-- Location Placeholders -->
     <string name="placeholder_latitude">37.7749</string>
     <string name="placeholder_longitude">-122.4194</string>
-    <string name="placeholder_location_label">San Francisco</string>
-    <string name="hint_latitude">Range: -90 to 90</string>
-    <string name="hint_longitude">Range: -180 to 180</string>
+    <string name="placeholder_location_label">Сан-Франциско</string>
+    <!-- Location Hints -->
+    <string name="hint_latitude">Діапазон: від -90 до 90</string>
+    <string name="hint_longitude">Діапазон: від -180 до 180</string>
 
     <!-- MeCard Labels -->
-    <string name="label_mecard_name">Full Name</string>
-    <string name="label_mecard_address">Address (Optional)</string>
-    <string name="label_mecard_note">Note (Optional)</string>
-    <string name="placeholder_mecard_name">John Doe</string>
-    <string name="placeholder_mecard_address">123 Main St, City</string>
-    <string name="placeholder_mecard_note">Met at conference</string>
+    <string name="label_mecard_name">Повне ім’я</string>
+    <string name="label_mecard_address">Адреса (необов’язково)</string>
+    <string name="label_mecard_note">Нотатка (необов’язково)</string>
+    <!-- MeCard Placeholders -->
+    <string name="placeholder_mecard_name">Іван Шевченко</string>
+    <string name="placeholder_mecard_address">вул. Головна, 123, місто</string>
+    <string name="placeholder_mecard_note">Познайомилися на конференції</string>
 
     <!-- App Store Labels -->
-    <string name="label_select_store">Select App Store</string>
-    <string name="label_apple_app_id">Apple App ID</string>
-    <string name="label_google_package_name">Google Play Package Name</string>
+    <string name="label_select_store">Виберіть крамницю застосунків</string>
+    <string name="label_apple_app_id">Ідентифікатор застосунку Apple</string>
+    <string name="label_google_package_name">Назва пакета Google Play</string>
     <string name="store_apple">Apple App Store</string>
     <string name="store_google">Google Play Store</string>
+    <!-- App Store Placeholders -->
     <string name="placeholder_apple_app_id">1234567890</string>
     <string name="placeholder_google_package_name">com.example.app</string>
-    <string name="hint_apple_app_id">Numeric ID from App Store URL</string>
-    <string name="hint_google_package_name">Package name from Play Store URL</string>
+    <!-- App Store Hints -->
+    <string name="hint_apple_app_id">Числовий ідентифікатор із посилання App Store</string>
+    <string name="hint_google_package_name">Назва пакета з посилання Play Store</string>
 
     <!-- Payment Labels -->
-    <string name="label_select_provider">Select Payment Provider</string>
-    <string name="label_payment_username">Username</string>
-    <string name="label_payment_amount">Amount (Optional)</string>
-    <string name="label_payment_note">Note (Optional)</string>
+    <string name="label_select_provider">Виберіть платіжний сервіс</string>
+    <string name="label_payment_username">Ім’я користувача</string>
+    <string name="label_payment_amount">Сума (необов’язково)</string>
+    <string name="label_payment_note">Нотатка (необов’язково)</string>
     <string name="provider_paypal">PayPal</string>
     <string name="provider_venmo">Venmo</string>
-    <string name="placeholder_paypal_username">yourpaypalusername</string>
-    <string name="placeholder_venmo_username">yourvenmo</string>
+    <!-- Payment Placeholders -->
+    <string name="placeholder_paypal_username">vashpaypal</string>
+    <string name="placeholder_venmo_username">vashvenmo</string>
     <string name="placeholder_payment_amount">10.00</string>
-    <string name="placeholder_payment_note">Payment for lunch</string>
+    <string name="placeholder_payment_note">Оплата обіду</string>
 
     <!-- Crypto Labels -->
-    <string name="label_select_crypto">Select Cryptocurrency</string>
-    <string name="label_crypto_address">Wallet Address</string>
-    <string name="label_crypto_amount_btc">Amount in BTC (Optional)</string>
-    <string name="label_crypto_amount_eth">Amount in ETH (Optional)</string>
-    <string name="label_crypto_label">Label (Optional)</string>
-    <string name="label_crypto_message">Message (Optional)</string>
+    <string name="label_select_crypto">Виберіть криптовалюту</string>
+    <string name="label_crypto_address">Адреса гаманця</string>
+    <string name="label_crypto_amount_btc">Сума в BTC (необов’язково)</string>
+    <string name="label_crypto_amount_eth">Сума в ETH (необов’язково)</string>
+    <string name="label_crypto_label">Підпис (необов’язково)</string>
+    <string name="label_crypto_message">Повідомлення (необов’язково)</string>
     <string name="crypto_bitcoin">Bitcoin (BTC)</string>
     <string name="crypto_ethereum">Ethereum (ETH)</string>
-    <string name="placeholder_bitcoin_address">bc1q...</string>
-    <string name="placeholder_ethereum_address">0x...</string>
+    <!-- Crypto Placeholders -->
+    <string name="placeholder_bitcoin_address">bc1q…</string>
+    <string name="placeholder_ethereum_address">0x…</string>
     <string name="placeholder_crypto_amount">0.001</string>
-    <string name="placeholder_crypto_label">Donation</string>
-    <string name="placeholder_crypto_message">Thank you for your support</string>
+    <string name="placeholder_crypto_label">Пожертва</string>
+    <string name="placeholder_crypto_message">Дякуємо за підтримку</string>
 
     <!-- Field Hints -->
-    <string name="hint_url">The URL should start with http:// or https://</string>
-    <string name="hint_phone">Include country code (e.g., +1 for USA)</string>
-    <string name="hint_sms">Format: phone:message</string>
+    <string name="hint_url">Посилання має починатися з http:// або https://</string>
+    <string name="hint_phone">Вкажіть код країни (напр. +380 для України)</string>
+    <string name="hint_sms">Формат: телефон:повідомлення</string>
 
     <!-- Instructions -->
-    <string name="instruction_url">Enter the Website URL to encode in the QR code</string>
-    <string name="instruction_phone">Enter the Phone Number to encode in the QR code</string>
-    <string name="instruction_sms">Enter the Phone Number to encode in the QR code</string>
-    <string name="instruction_text">Enter the Text Content to encode in the QR code</string>
-    <string name="instruction_email">Enter email details to encode in the QR code</string>
-    <string name="instruction_contact">Enter contact information to encode in the QR code</string>
-    <string name="instruction_wifi">Enter WiFi network details to encode in the QR code</string>
-    <string name="instruction_calendar">Enter event details to encode in the QR code</string>
-    <string name="instruction_location">Enter coordinates to encode in the QR code</string>
-    <string name="instruction_mecard">Enter contact details to encode in the QR code</string>
-    <string name="instruction_app_store">Enter app store details to create a download link</string>
-    <string name="instruction_payment">Enter payment details to create a payment request</string>
-    <string name="instruction_crypto">Enter wallet details to create a cryptocurrency address QR</string>
+    <string name="instruction_url">Введіть адресу сайту для QR-коду</string>
+    <string name="instruction_phone">Введіть номер телефону для QR-коду</string>
+    <string name="instruction_sms">Введіть номер телефону для QR-коду</string>
+    <string name="instruction_text">Введіть текст для QR-коду</string>
+    <string name="instruction_email">Введіть дані електронної пошти для QR-коду</string>
+    <string name="instruction_contact">Введіть контактні дані для QR-коду</string>
+    <string name="instruction_wifi">Введіть дані мережі Wi-Fi для QR-коду</string>
+    <string name="instruction_calendar">Введіть дані події для QR-коду</string>
+    <string name="instruction_location">Введіть координати для QR-коду</string>
+    <string name="instruction_mecard">Введіть контактні дані для QR-коду</string>
+    <string name="instruction_app_store">Введіть дані крамниці, щоб створити посилання для завантаження</string>
+    <string name="instruction_payment">Введіть дані, щоб створити запит на оплату</string>
+    <string name="instruction_crypto">Введіть дані гаманця, щоб створити QR-код з адресою</string>
 
     <!-- Validation Errors -->
-    <string name="error_invalid_url">Please enter a valid URL</string>
-    <string name="error_invalid_url_format">Invalid URL format</string>
-    <string name="error_invalid_phone">Please enter a valid phone number</string>
-    <string name="error_empty_phone">Please enter a phone number</string>
-    <string name="error_invalid_phone_format">Invalid phone number</string>
-    <string name="error_empty_text">Please enter some text</string>
-    <string name="error_empty_email">Please enter an email address</string>
-    <string name="error_invalid_email">Invalid email address</string>
-    <string name="error_create_qr">Error creating QR code: %1$s</string>
-    <string name="error_empty_name">Please enter at least a first or last name</string>
-    <string name="error_empty_ssid">Please enter the network name (SSID)</string>
-    <string name="error_empty_event_title">Please enter an event title</string>
-    <string name="error_invalid_date">Please enter a valid date (YYYY-MM-DD)</string>
-    <string name="error_empty_latitude">Please enter a latitude</string>
-    <string name="error_empty_longitude">Please enter a longitude</string>
-    <string name="error_invalid_latitude">Latitude must be between -90 and 90</string>
-    <string name="error_invalid_longitude">Longitude must be between -180 and 180</string>
-    <string name="error_empty_mecard_name">Please enter a name</string>
-    <string name="error_empty_app_id">Please enter an app ID or package name</string>
-    <string name="error_empty_payment_username">Please enter a username</string>
-    <string name="error_empty_crypto_address">Please enter a wallet address</string>
+    <string name="error_invalid_url">Введіть коректне посилання</string>
+    <string name="error_invalid_url_format">Неправильний формат посилання</string>
+    <string name="error_invalid_phone">Введіть коректний номер телефону</string>
+    <string name="error_empty_phone">Введіть номер телефону</string>
+    <string name="error_invalid_phone_format">Неправильний номер телефону</string>
+    <string name="error_empty_text">Введіть текст</string>
+    <string name="error_empty_email">Введіть адресу електронної пошти</string>
+    <string name="error_invalid_email">Неправильна адреса електронної пошти</string>
+    <string name="error_create_qr">Не вдалося створити QR-код: %1$s</string>
+    <string name="error_empty_name">Введіть принаймні ім’я або прізвище</string>
+    <string name="error_empty_ssid">Введіть назву мережі (SSID)</string>
+    <!-- Calendar Event Errors -->
+    <string name="error_empty_event_title">Введіть назву події</string>
+    <string name="error_invalid_date">Введіть коректну дату (РРРР-ММ-ДД)</string>
+    <!-- Location Errors -->
+    <string name="error_empty_latitude">Введіть широту</string>
+    <string name="error_empty_longitude">Введіть довготу</string>
+    <string name="error_invalid_latitude">Широта має бути від -90 до 90</string>
+    <string name="error_invalid_longitude">Довгота має бути від -180 до 180</string>
+    <!-- MeCard Errors -->
+    <string name="error_empty_mecard_name">Введіть ім’я</string>
+    <!-- App Store Errors -->
+    <string name="error_empty_app_id">Введіть ідентифікатор застосунку або назву пакета</string>
+    <!-- Payment Errors -->
+    <string name="error_empty_payment_username">Введіть ім’я користувача</string>
+    <!-- Crypto Errors -->
+    <string name="error_empty_crypto_address">Введіть адресу гаманця</string>
 
     <!-- History Screen -->
-    <string name="history_empty">No QR codes yet.\nScan or create one to get started!</string>
-    <string name="history_type">Type: %1$s</string>
-    <string name="history_type_scanned">Scanned</string>
-    <string name="history_type_created">Created</string>
-    <string name="history_type_from_file">From File</string>
-    <string name="history_type_unknown">Unknown</string>
-    <string name="history_search">Search</string>
-    <string name="history_search_placeholder">Search QR codes...</string>
-    <string name="history_clear_search">Clear search</string>
-    <string name="history_no_results">No QR codes match your search</string>
+    <string name="history_empty">QR-кодів ще немає.\nВідскануйте або створіть перший!</string>
+    <string name="history_type">Тип: %1$s</string>
+    <string name="history_type_scanned">Відскановано</string>
+    <string name="history_type_created">Створено</string>
+    <string name="history_type_from_file">З файлу</string>
+    <string name="history_type_unknown">Невідомо</string>
+    <string name="history_search">Пошук</string>
+    <string name="history_search_placeholder">Пошук QR-кодів…</string>
+    <string name="history_clear_search">Очистити пошук</string>
+    <string name="history_no_results">Нічого не знайдено</string>
 
     <!-- Detail Screen -->
-    <string name="detail_content">Content</string>
-    <string name="detail_details">Details</string>
-    <string name="detail_type">Type</string>
-    <string name="detail_created">Created</string>
-    <string name="detail_share">Share</string>
-    <string name="detail_save">Save Image</string>
-    <string name="detail_save_to_file">Save to file</string>
-    <string name="detail_delete">Delete</string>
-    <string name="detail_no_item">No QR code selected</string>
-    <string name="detail_error">Error: %1$s</string>
-    <string name="detail_loading">Loading QR code...</string>
-    <string name="detail_no_data">No QR code data available</string>
-    <string name="detail_tap_fullscreen">Tap to view fullscreen</string>
-    <string name="detail_copy_clipboard">Copy to clipboard</string>
-    <string name="detail_origin_flag">Origin flag: %1$d</string>
+    <string name="detail_content">Вміст</string>
+    <string name="detail_details">Відомості</string>
+    <string name="detail_type">Тип</string>
+    <string name="detail_created">Створено</string>
+    <string name="detail_share">Поділитися</string>
+    <string name="detail_save">Зберегти зображення</string>
+    <string name="detail_save_to_file">Зберегти у файл</string>
+    <string name="detail_delete">Видалити</string>
+    <string name="detail_test_action">Перевірити</string>
+    <string name="detail_no_item">QR-код не вибрано</string>
+    <string name="detail_error">Помилка: %1$s</string>
+    <string name="detail_loading">Завантаження QR-коду…</string>
+    <string name="detail_no_data">Немає даних QR-коду</string>
+    <string name="detail_tap_fullscreen">Торкніться, щоб відкрити на весь екран</string>
+    <string name="detail_copy_clipboard">Скопіювати в буфер обміну</string>
+    <string name="detail_origin_flag">Позначка джерела: %1$d</string>
 
     <!-- Feedback Messages -->
-    <string name="feedback_copied">Copied to clipboard</string>
-    <string name="feedback_saved">QR code saved to file</string>
-    <string name="feedback_save_error">Error saving QR code</string>
-    <string name="feedback_share_not_implemented">Share not yet implemented for cross-platform</string>
-    <string name="feedback_no_qr_in_image">No QR code found in image</string>
-    <string name="feedback_launch_error">Could not open content: %1$s</string>
-    <string name="feedback_no_app_found">No app found to handle this content</string>
+    <string name="feedback_copied">Скопійовано в буфер обміну</string>
+    <string name="feedback_saved">QR-код збережено у файл</string>
+    <string name="feedback_save_error">Не вдалося зберегти QR-код</string>
+    <string name="feedback_share_not_implemented">Надсилання ще недоступне на всіх платформах</string>
+    <string name="feedback_no_qr_in_image">На зображенні немає QR-коду</string>
+    <string name="feedback_launch_error">Не вдалося відкрити вміст: %1$s</string>
+    <string name="feedback_no_app_found">Не знайдено застосунок для цього вмісту</string>
+    <string name="feedback_no_handler_available">Немає застосунку для цієї дії</string>
 
     <!-- Permission Messages -->
-    <string name="permission_storage_required">Storage permission is required to save QR code</string>
-    <string name="permission_grant_settings">Please grant storage permission in app settings</string>
-    <string name="permission_camera_required">Camera Permission Required</string>
-    <string name="permission_camera_denied">Camera permission is required to scan QR codes. Please grant the permission to continue.</string>
-    <string name="permission_camera_permanently_denied">Camera permission has been permanently denied. Please enable it in your device settings to scan QR codes.</string>
-    <string name="permission_open_settings">Open Settings</string>
-    <string name="permission_grant">Grant Permission</string>
-    <string name="permission_ready_to_scan">Ready to Scan</string>
-    <string name="permission_start_scanning_hint">Tap the button below to start scanning QR codes with your camera.</string>
-    <string name="permission_start_scanning">Start Scanning</string>
+    <string name="permission_storage_required">Щоб зберегти QR-код, потрібен доступ до сховища</string>
+    <string name="permission_grant_settings">Надайте доступ до сховища в налаштуваннях застосунку</string>
+    <string name="permission_camera_required">Потрібен доступ до камери</string>
+    <string name="permission_camera_denied">Щоб сканувати QR-коди, потрібен доступ до камери. Надайте дозвіл, щоб продовжити.</string>
+    <string name="permission_camera_permanently_denied">Доступ до камери заборонено назавжди. Увімкніть його в налаштуваннях пристрою, щоб сканувати QR-коди.</string>
+    <string name="permission_open_settings">Відкрити налаштування</string>
+    <string name="permission_grant">Надати дозвіл</string>
+    <string name="permission_ready_to_scan">Готово до сканування</string>
+    <string name="permission_start_scanning_hint">Торкніться кнопки нижче, щоб сканувати QR-коди камерою.</string>
+    <string name="permission_start_scanning">Почати сканування</string>
 
     <!-- Scan Screen -->
-    <string name="scan_title">Camera Scanning</string>
-    <string name="camera_starting">Starting camera...</string>
-    <string name="camera_not_available">Camera not available</string>
-    <string name="camera_simulator_hint">Running on simulator or device without camera.\nUse the button in the bottom right to scan from photo library.</string>
-    <string name="scan_message">QR code scanning requires platform-specific camera APIs.\n\nThis feature will be implemented using expect/actual declarations:\n• Android: CameraX\n• iOS: AVFoundation\n• Desktop: Webcam libraries</string>
-    <string name="scan_from_file">Scan from file</string>
-    <string name="scan_qr_detected">QR Code detected: %1$s</string>
+    <string name="scan_title">Сканування камерою</string>
+    <string name="camera_starting">Запуск камери…</string>
+    <string name="camera_not_available">Камера недоступна</string>
+    <string name="camera_simulator_hint">Запущено в симуляторі або на пристрої без камери.\nСкористайтеся кнопкою праворуч унизу, щоб сканувати з медіатеки.</string>
+    <string name="scan_message">Для сканування QR-кодів потрібні власні API камери для кожної платформи.\n\nЦю функцію буде реалізовано через оголошення expect/actual:\n• Android: CameraX\n• iOS: AVFoundation\n• Комп’ютер: бібліотеки для вебкамери</string>
+    <string name="scan_from_file">Сканувати з файлу</string>
+    <string name="scan_qr_detected">Розпізнано QR-код: %1$s</string>
 
     <!-- Common Actions -->
-    <string name="action_dismiss">Dismiss</string>
-    <string name="action_ok">OK</string>
-    <string name="action_undo">Undo</string>
+    <string name="action_dismiss">Закрити</string>
+    <string name="action_ok">ОК</string>
+    <string name="action_undo">Скасувати</string>
+    <string name="action_open">Відкрити</string>
 
     <!-- Delete Feedback -->
-    <string name="detail_deleted">QR code deleted</string>
+    <string name="detail_deleted">QR-код видалено</string>
+
+    <!-- WiFi Credentials Card -->
+    <string name="wifi_credentials_title">Дані Wi-Fi</string>
+    <string name="wifi_credentials_ssid">Назва мережі (SSID)</string>
+    <string name="wifi_credentials_password">Пароль</string>
+    <string name="wifi_credentials_show">Показати</string>
+    <string name="wifi_credentials_hide">Сховати</string>
+    <string name="wifi_credentials_close">Закрити</string>
 
     <!-- Content Descriptions (for accessibility) -->
-    <string name="cd_qr_preview">QR Code Preview</string>
-    <string name="cd_qr_code">QR Code</string>
-    <string name="cd_qr_fullscreen">QR Code Fullscreen</string>
-    <string name="cd_back">Back</string>
-    <string name="cd_more">More</string>
-    <string name="cd_menu">Menu</string>
-    <string name="cd_share">Share</string>
-    <string name="cd_save">Save</string>
-    <string name="cd_delete">Delete</string>
-    <string name="cd_create">Create</string>
-    <string name="cd_launch">Launch</string>
-    <string name="cd_settings">Settings</string>
-    <string name="cd_warning">Warning</string>
-    <string name="cd_selected">Selected</string>
-    <string name="cd_show_password">Show password</string>
-    <string name="cd_hide_password">Hide password</string>
-    <string name="cd_torch_on">Torch on</string>
-    <string name="cd_torch_off">Torch off</string>
-    <string name="cd_camera">Camera</string>
+    <string name="cd_qr_preview">Перегляд QR-коду</string>
+    <string name="cd_qr_code">QR-код</string>
+    <string name="cd_qr_fullscreen">QR-код на весь екран</string>
+    <string name="cd_back">Назад</string>
+    <string name="cd_more">Ще</string>
+    <string name="cd_menu">Меню</string>
+    <string name="cd_share">Поділитися</string>
+    <string name="cd_save">Зберегти</string>
+    <string name="cd_delete">Видалити</string>
+    <string name="cd_test_action">Перевірити дію</string>
+    <string name="cd_wifi">Wi-Fi</string>
+    <string name="cd_create">Створити</string>
+    <string name="cd_launch">Відкрити</string>
+    <string name="cd_settings">Налаштування</string>
+    <string name="cd_warning">Попередження</string>
+    <string name="cd_selected">Вибрано</string>
+    <string name="cd_show_password">Показати пароль</string>
+    <string name="cd_hide_password">Сховати пароль</string>
+    <string name="cd_torch_on">Ліхтарик увімкнено</string>
+    <string name="cd_torch_off">Ліхтарик вимкнено</string>
+    <string name="cd_camera">Камера</string>
 
     <!-- Settings Screen -->
-    <string name="settings_title">Settings</string>
-    <string name="settings_section_appearance">Appearance</string>
-    <string name="settings_section_about">About</string>
-    <string name="settings_version">Version</string>
-    <string name="settings_build">Build</string>
-    <string name="settings_theme_system">System Default</string>
-    <string name="settings_theme_system_desc">Follow system theme</string>
-    <string name="settings_theme_light">Light</string>
-    <string name="settings_theme_light_desc">Always use light theme</string>
-    <string name="settings_theme_dark">Dark</string>
-    <string name="settings_theme_dark_desc">Always use dark theme</string>
+    <string name="settings_title">Налаштування</string>
+    <string name="settings_section_appearance">Вигляд</string>
+    <string name="settings_section_about">Про застосунок</string>
+    <string name="settings_version">Версія</string>
+    <string name="settings_build">Збірка</string>
+    <string name="settings_theme_system">Як у системі</string>
+    <string name="settings_theme_system_desc">Використовувати системну тему</string>
+    <string name="settings_theme_light">Світла</string>
+    <string name="settings_theme_light_desc">Завжди використовувати світлу тему</string>
+    <string name="settings_theme_dark">Темна</string>
+    <string name="settings_theme_dark_desc">Завжди використовувати темну тему</string>
 
     <!-- URL Warning Dialog -->
-    <string name="url_warning_dangerous">Dangerous Link Detected</string>
-    <string name="url_warning_suspicious">Suspicious Link</string>
-    <string name="url_warning_check">URL Check</string>
-    <string name="url_warning_url_prefix">URL:</string>
-    <string name="url_warning_warnings_label">Warnings:</string>
-    <string name="url_warning_dangerous_desc">Opening this link is not recommended as it may harm your device or compromise your data.</string>
-    <string name="url_warning_suspicious_desc">This link has some characteristics that may indicate a security risk. Proceed with caution.</string>
-    <string name="url_warning_safe_desc">No issues were detected with this URL.</string>
-    <string name="url_warning_open_anyway">Open Anyway</string>
-    <string name="url_warning_close">Close</string>
-    <string name="url_warning_cancel">Cancel</string>
+    <string name="url_warning_dangerous">Виявлено небезпечне посилання</string>
+    <string name="url_warning_suspicious">Підозріле посилання</string>
+    <string name="url_warning_check">Перевірка посилання</string>
+    <string name="url_warning_url_prefix">Посилання:</string>
+    <string name="url_warning_warnings_label">Попередження:</string>
+    <string name="url_warning_dangerous_desc">Відкривати це посилання не рекомендовано: воно може зашкодити пристрою або розкрити ваші дані.</string>
+    <string name="url_warning_suspicious_desc">Це посилання має ознаки, які можуть указувати на загрозу безпеці. Будьте обережні.</string>
+    <string name="url_warning_safe_desc">Проблем із цим посиланням не виявлено.</string>
+    <string name="url_warning_open_anyway">Усе одно відкрити</string>
+    <string name="url_warning_close">Закрити</string>
+    <string name="url_warning_cancel">Скасувати</string>
 
     <!-- Field Modifiers -->
-    <string name="label_optional_suffix"> (Optional)</string>
+    <string name="label_optional_suffix"> (необов’язково)</string>
 </resources>

@@ -1,341 +1,372 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Indonesian (Bahasa Indonesia) - Translation stub -->
-<!-- TODO: Translate all strings to Simplified Chinese -->
 <resources>
     <!-- App Title -->
     <string name="app_name">QR Everywhere</string>
 
     <!-- Bottom Navigation -->
-    <string name="nav_history">History</string>
-    <string name="nav_scan">Scan</string>
-    <string name="nav_create">Create</string>
+    <string name="nav_history">Riwayat</string>
+    <string name="nav_scan">Pindai</string>
+    <string name="nav_create">Buat</string>
 
     <!-- Screen Titles -->
-    <string name="title_history">QR History</string>
-    <string name="title_scan">Scan or import QR</string>
-    <string name="title_create">Create QR Code</string>
-    <string name="title_detail">QR Details</string>
-    <string name="title_create_text">Create Text QR</string>
-    <string name="title_create_email">Create Email QR</string>
+    <string name="title_history">Riwayat QR</string>
+    <string name="title_scan">Pindai atau impor QR</string>
+    <string name="title_create">Buat kode QR</string>
+    <string name="title_detail">Detail QR</string>
+    <string name="title_create_text">Buat QR teks</string>
+    <string name="title_create_email">Buat QR email</string>
 
     <!-- Create QR Type Titles -->
-    <string name="title_text_qr">Text QR Code</string>
-    <string name="title_url_qr">Web URL QR Code</string>
-    <string name="title_phone_qr">Phone QR Code</string>
-    <string name="title_sms_qr">SMS QR Code</string>
-    <string name="title_email_qr">Email QR Code</string>
-    <string name="title_contact_qr">Contact QR Code</string>
-    <string name="title_wifi_qr">WiFi QR Code</string>
-    <string name="title_calendar_qr">Calendar Event QR Code</string>
-    <string name="title_location_qr">Location QR Code</string>
-    <string name="title_mecard_qr">MeCard QR Code</string>
-    <string name="title_appstore_qr">App Store Link QR Code</string>
-    <string name="title_payment_qr">Payment QR Code</string>
-    <string name="title_crypto_qr">Cryptocurrency QR Code</string>
+    <string name="title_text_qr">Kode QR teks</string>
+    <string name="title_url_qr">Kode QR URL</string>
+    <string name="title_phone_qr">Kode QR telepon</string>
+    <string name="title_sms_qr">Kode QR SMS</string>
+    <string name="title_email_qr">Kode QR email</string>
+    <string name="title_contact_qr">Kode QR kontak</string>
+    <string name="title_wifi_qr">Kode QR Wi-Fi</string>
+    <string name="title_calendar_qr">Kode QR acara</string>
+    <string name="title_location_qr">Kode QR lokasi</string>
+    <string name="title_mecard_qr">Kode QR MeCard</string>
+    <string name="title_appstore_qr">Kode QR tautan toko aplikasi</string>
+    <string name="title_payment_qr">Kode QR pembayaran</string>
+    <string name="title_crypto_qr">Kode QR kripto</string>
 
     <!-- Create QR Type Descriptions -->
-    <string name="desc_text_qr">Create a QR code with any text content</string>
-    <string name="desc_url_qr">Create a QR code with website URL</string>
-    <string name="desc_phone_qr">Create a QR code with phone number</string>
-    <string name="desc_sms_qr">Create a QR code with SMS message</string>
-    <string name="desc_email_qr">Create a QR code with email information</string>
-    <string name="desc_contact_qr">Create a QR code with contact information (vCard)</string>
-    <string name="desc_wifi_qr">Create a QR code with WiFi network credentials</string>
-    <string name="desc_calendar_qr">Create a QR code with calendar event (VEVENT)</string>
-    <string name="desc_location_qr">Create a QR code with GPS coordinates</string>
-    <string name="desc_mecard_qr">Create a QR code with contact (simple format)</string>
-    <string name="desc_appstore_qr">Create a QR code linking to an app store</string>
-    <string name="desc_payment_qr">Create a QR code for PayPal or Venmo payments</string>
-    <string name="desc_crypto_qr">Create a QR code for Bitcoin or Ethereum wallet</string>
+    <string name="desc_text_qr">Buat kode QR dengan teks apa pun</string>
+    <string name="desc_url_qr">Buat kode QR dengan alamat situs web</string>
+    <string name="desc_phone_qr">Buat kode QR dengan nomor telepon</string>
+    <string name="desc_sms_qr">Buat kode QR dengan pesan SMS</string>
+    <string name="desc_email_qr">Buat kode QR dengan data email</string>
+    <string name="desc_contact_qr">Buat kode QR dengan data kontak (vCard)</string>
+    <string name="desc_wifi_qr">Buat kode QR dengan kredensial Wi-Fi</string>
+    <string name="desc_calendar_qr">Buat kode QR dengan acara kalender (VEVENT)</string>
+    <string name="desc_location_qr">Buat kode QR dengan koordinat GPS</string>
+    <string name="desc_mecard_qr">Buat kode QR kontak (format sederhana)</string>
+    <string name="desc_appstore_qr">Buat kode QR dengan tautan ke toko aplikasi</string>
+    <string name="desc_payment_qr">Buat kode QR untuk pembayaran PayPal atau Venmo</string>
+    <string name="desc_crypto_qr">Buat kode QR untuk dompet Bitcoin atau Ethereum</string>
 
     <!-- Create Screen -->
-    <string name="create_title">Create QR Code</string>
-    <string name="create_subtitle">Choose what type of QR code to create</string>
-    <string name="create_quick_text">Quick Text QR</string>
-    <string name="create_enter_text">Enter text</string>
-    <string name="create_placeholder">Type anything...</string>
-    <string name="create_button">Generate QR Code</string>
-    <string name="create_button_creating">Creating...</string>
-    <string name="create_more_types">More QR Types</string>
-    <string name="create_coming_soon">Coming soon:</string>
-    <string name="create_types_list">• Email QR Code\n• Phone QR Code\n• WiFi QR Code\n• vCard QR Code\n• URL QR Code</string>
+    <string name="create_title">Buat kode QR</string>
+    <string name="create_subtitle">Pilih jenis kode QR yang ingin dibuat</string>
+    <string name="create_quick_text">QR teks cepat</string>
+    <string name="create_enter_text">Masukkan teks</string>
+    <string name="create_placeholder">Ketik apa saja…</string>
+    <string name="create_button">Buat kode QR</string>
+    <string name="create_button_creating">Membuat…</string>
+    <string name="create_more_types">Jenis QR lainnya</string>
+    <string name="create_coming_soon">Segera hadir:</string>
+    <string name="create_types_list">• Kode QR email\n• Kode QR telepon\n• Kode QR Wi-Fi\n• Kode QR vCard\n• Kode QR URL</string>
 
     <!-- Create Text QR Screen -->
-    <string name="create_url_title">Create URL QR Code</string>
-    <string name="create_phone_title">Create Phone QR Code</string>
-    <string name="create_sms_title">Create SMS QR Code</string>
-    <string name="create_text_title">Create Text QR Code</string>
-    <string name="create_email_title">Create Email QR Code</string>
+    <string name="create_url_title">Buat kode QR URL</string>
+    <string name="create_phone_title">Buat kode QR telepon</string>
+    <string name="create_sms_title">Buat kode QR SMS</string>
+    <string name="create_text_title">Buat kode QR teks</string>
+    <string name="create_email_title">Buat kode QR email</string>
 
     <!-- Field Labels -->
-    <string name="label_website_url">Website URL</string>
-    <string name="label_phone_number">Phone Number</string>
-    <string name="label_text_content">Text Content</string>
-    <string name="label_email_address">Email Address</string>
-    <string name="label_email_subject">Subject (Optional)</string>
-    <string name="label_email_message">Message (Optional)</string>
-    <string name="label_enter_url">Enter website URL</string>
-    <string name="label_enter_phone">Enter phone number</string>
-    <string name="label_enter_phone_message">Enter phone number and message</string>
-    <string name="label_first_name">First Name</string>
-    <string name="label_last_name">Last Name</string>
-    <string name="label_organization">Organization (Optional)</string>
-    <string name="label_job_title">Job Title (Optional)</string>
-    <string name="label_website">Website (Optional)</string>
-    <string name="label_network_name">Network Name (SSID)</string>
-    <string name="label_password">Password</string>
-    <string name="label_security_type">Security Type</string>
-    <string name="label_hidden_network">Hidden Network</string>
+    <string name="label_website_url">Alamat situs web</string>
+    <string name="label_phone_number">Nomor telepon</string>
+    <string name="label_text_content">Isi teks</string>
+    <string name="label_email_address">Alamat email</string>
+    <string name="label_email_subject">Subjek (opsional)</string>
+    <string name="label_email_message">Pesan (opsional)</string>
+    <string name="label_enter_url">Masukkan alamat situs web</string>
+    <string name="label_enter_phone">Masukkan nomor telepon</string>
+    <string name="label_enter_phone_message">Masukkan nomor telepon dan pesan</string>
+    <!-- vCard Field Labels -->
+    <string name="label_first_name">Nama depan</string>
+    <string name="label_last_name">Nama belakang</string>
+    <string name="label_organization">Perusahaan (opsional)</string>
+    <string name="label_job_title">Jabatan (opsional)</string>
+    <string name="label_website">Situs web (opsional)</string>
+    <!-- WiFi Field Labels -->
+    <string name="label_network_name">Nama jaringan (SSID)</string>
+    <string name="label_password">Kata sandi</string>
+    <string name="label_security_type">Jenis keamanan</string>
+    <string name="label_hidden_network">Jaringan tersembunyi</string>
 
     <!-- Field Placeholders -->
     <string name="placeholder_url">https://example.com</string>
-    <string name="placeholder_phone">+1234567890</string>
-    <string name="placeholder_sms">+1234567890:Hello</string>
-    <string name="placeholder_text">Enter any text</string>
-    <string name="placeholder_email">example@email.com</string>
-    <string name="placeholder_email_subject">Email subject</string>
-    <string name="placeholder_email_message">Email message</string>
-    <string name="placeholder_first_name">John</string>
-    <string name="placeholder_last_name">Doe</string>
-    <string name="placeholder_organization">Company Inc.</string>
-    <string name="placeholder_job_title">Software Engineer</string>
+    <string name="placeholder_phone">+628123456789</string>
+    <string name="placeholder_sms">+628123456789:Halo</string>
+    <string name="placeholder_text">Masukkan teks apa saja</string>
+    <string name="placeholder_email">contoh@email.com</string>
+    <string name="placeholder_email_subject">Subjek email</string>
+    <string name="placeholder_email_message">Isi email</string>
+    <!-- vCard Placeholders -->
+    <string name="placeholder_first_name">Budi</string>
+    <string name="placeholder_last_name">Santoso</string>
+    <string name="placeholder_organization">PT Contoh</string>
+    <string name="placeholder_job_title">Insinyur perangkat lunak</string>
     <string name="placeholder_website">https://example.com</string>
-    <string name="placeholder_network_name">MyWiFi</string>
-    <string name="placeholder_password">password123</string>
+    <!-- WiFi Placeholders -->
+    <string name="placeholder_network_name">WiFiSaya</string>
+    <string name="placeholder_password">katasandi123</string>
+    <!-- WiFi Security Types -->
     <string name="security_wpa">WPA/WPA2</string>
     <string name="security_wep">WEP</string>
-    <string name="security_open">Open (No password)</string>
+    <string name="security_open">Terbuka (tanpa kata sandi)</string>
 
     <!-- Calendar Event Labels -->
-    <string name="label_event_title">Event Title</string>
-    <string name="label_all_day_event">All Day Event</string>
-    <string name="label_start_date">Start Date</string>
-    <string name="label_start_time">Start Time</string>
-    <string name="label_end_date">End Date</string>
-    <string name="label_end_time">End Time</string>
-    <string name="label_event_location">Location (Optional)</string>
-    <string name="label_event_description">Description (Optional)</string>
-    <string name="placeholder_event_title">Team Meeting</string>
-    <string name="placeholder_date">YYYY-MM-DD</string>
-    <string name="placeholder_time">HH:MM</string>
-    <string name="placeholder_event_location">Conference Room A</string>
-    <string name="placeholder_event_description">Discuss project updates</string>
-    <string name="hint_date_format">Format: YYYY-MM-DD (e.g., 2024-03-15)</string>
-    <string name="hint_time_format">Format: HH:MM (e.g., 14:30)</string>
+    <string name="label_event_title">Judul acara</string>
+    <string name="label_all_day_event">Acara sepanjang hari</string>
+    <string name="label_start_date">Tanggal mulai</string>
+    <string name="label_start_time">Waktu mulai</string>
+    <string name="label_end_date">Tanggal selesai</string>
+    <string name="label_end_time">Waktu selesai</string>
+    <string name="label_event_location">Lokasi (opsional)</string>
+    <string name="label_event_description">Deskripsi (opsional)</string>
+    <!-- Calendar Event Placeholders -->
+    <string name="placeholder_event_title">Rapat tim</string>
+    <string name="placeholder_date">TTTT-BB-HH</string>
+    <string name="placeholder_time">JJ:MM</string>
+    <string name="placeholder_event_location">Ruang rapat A</string>
+    <string name="placeholder_event_description">Membahas perkembangan proyek</string>
+    <!-- Calendar Event Hints -->
+    <string name="hint_date_format">Format: TTTT-BB-HH (mis. 2024-03-15)</string>
+    <string name="hint_time_format">Format: JJ:MM (mis. 14:30)</string>
 
     <!-- Location Labels -->
-    <string name="label_latitude">Latitude</string>
-    <string name="label_longitude">Longitude</string>
-    <string name="label_location_label">Label (Optional)</string>
+    <string name="label_latitude">Lintang</string>
+    <string name="label_longitude">Bujur</string>
+    <string name="label_location_label">Label (opsional)</string>
+    <!-- Location Placeholders -->
     <string name="placeholder_latitude">37.7749</string>
     <string name="placeholder_longitude">-122.4194</string>
     <string name="placeholder_location_label">San Francisco</string>
-    <string name="hint_latitude">Range: -90 to 90</string>
-    <string name="hint_longitude">Range: -180 to 180</string>
+    <!-- Location Hints -->
+    <string name="hint_latitude">Rentang: -90 sampai 90</string>
+    <string name="hint_longitude">Rentang: -180 sampai 180</string>
 
     <!-- MeCard Labels -->
-    <string name="label_mecard_name">Full Name</string>
-    <string name="label_mecard_address">Address (Optional)</string>
-    <string name="label_mecard_note">Note (Optional)</string>
-    <string name="placeholder_mecard_name">John Doe</string>
-    <string name="placeholder_mecard_address">123 Main St, City</string>
-    <string name="placeholder_mecard_note">Met at conference</string>
+    <string name="label_mecard_name">Nama lengkap</string>
+    <string name="label_mecard_address">Alamat (opsional)</string>
+    <string name="label_mecard_note">Catatan (opsional)</string>
+    <!-- MeCard Placeholders -->
+    <string name="placeholder_mecard_name">Budi Santoso</string>
+    <string name="placeholder_mecard_address">Jl. Utama 123, Kota</string>
+    <string name="placeholder_mecard_note">Bertemu di konferensi</string>
 
     <!-- App Store Labels -->
-    <string name="label_select_store">Select App Store</string>
-    <string name="label_apple_app_id">Apple App ID</string>
-    <string name="label_google_package_name">Google Play Package Name</string>
+    <string name="label_select_store">Pilih toko aplikasi</string>
+    <string name="label_apple_app_id">ID aplikasi Apple</string>
+    <string name="label_google_package_name">Nama paket Google Play</string>
     <string name="store_apple">Apple App Store</string>
     <string name="store_google">Google Play Store</string>
+    <!-- App Store Placeholders -->
     <string name="placeholder_apple_app_id">1234567890</string>
     <string name="placeholder_google_package_name">com.example.app</string>
-    <string name="hint_apple_app_id">Numeric ID from App Store URL</string>
-    <string name="hint_google_package_name">Package name from Play Store URL</string>
+    <!-- App Store Hints -->
+    <string name="hint_apple_app_id">ID numerik dari URL App Store</string>
+    <string name="hint_google_package_name">Nama paket dari URL Play Store</string>
 
     <!-- Payment Labels -->
-    <string name="label_select_provider">Select Payment Provider</string>
-    <string name="label_payment_username">Username</string>
-    <string name="label_payment_amount">Amount (Optional)</string>
-    <string name="label_payment_note">Note (Optional)</string>
+    <string name="label_select_provider">Pilih penyedia pembayaran</string>
+    <string name="label_payment_username">Nama pengguna</string>
+    <string name="label_payment_amount">Jumlah (opsional)</string>
+    <string name="label_payment_note">Catatan (opsional)</string>
     <string name="provider_paypal">PayPal</string>
     <string name="provider_venmo">Venmo</string>
-    <string name="placeholder_paypal_username">yourpaypalusername</string>
-    <string name="placeholder_venmo_username">yourvenmo</string>
+    <!-- Payment Placeholders -->
+    <string name="placeholder_paypal_username">namapaypalanda</string>
+    <string name="placeholder_venmo_username">venmoanda</string>
     <string name="placeholder_payment_amount">10.00</string>
-    <string name="placeholder_payment_note">Payment for lunch</string>
+    <string name="placeholder_payment_note">Pembayaran makan siang</string>
 
     <!-- Crypto Labels -->
-    <string name="label_select_crypto">Select Cryptocurrency</string>
-    <string name="label_crypto_address">Wallet Address</string>
-    <string name="label_crypto_amount_btc">Amount in BTC (Optional)</string>
-    <string name="label_crypto_amount_eth">Amount in ETH (Optional)</string>
-    <string name="label_crypto_label">Label (Optional)</string>
-    <string name="label_crypto_message">Message (Optional)</string>
+    <string name="label_select_crypto">Pilih mata uang kripto</string>
+    <string name="label_crypto_address">Alamat dompet</string>
+    <string name="label_crypto_amount_btc">Jumlah dalam BTC (opsional)</string>
+    <string name="label_crypto_amount_eth">Jumlah dalam ETH (opsional)</string>
+    <string name="label_crypto_label">Label (opsional)</string>
+    <string name="label_crypto_message">Pesan (opsional)</string>
     <string name="crypto_bitcoin">Bitcoin (BTC)</string>
     <string name="crypto_ethereum">Ethereum (ETH)</string>
-    <string name="placeholder_bitcoin_address">bc1q...</string>
-    <string name="placeholder_ethereum_address">0x...</string>
+    <!-- Crypto Placeholders -->
+    <string name="placeholder_bitcoin_address">bc1q…</string>
+    <string name="placeholder_ethereum_address">0x…</string>
     <string name="placeholder_crypto_amount">0.001</string>
-    <string name="placeholder_crypto_label">Donation</string>
-    <string name="placeholder_crypto_message">Thank you for your support</string>
+    <string name="placeholder_crypto_label">Donasi</string>
+    <string name="placeholder_crypto_message">Terima kasih atas dukungan Anda</string>
 
     <!-- Field Hints -->
-    <string name="hint_url">The URL should start with http:// or https://</string>
-    <string name="hint_phone">Include country code (e.g., +1 for USA)</string>
-    <string name="hint_sms">Format: phone:message</string>
+    <string name="hint_url">URL harus diawali http:// atau https://</string>
+    <string name="hint_phone">Sertakan kode negara (mis. +62 untuk Indonesia)</string>
+    <string name="hint_sms">Format: telepon:pesan</string>
 
     <!-- Instructions -->
-    <string name="instruction_url">Enter the Website URL to encode in the QR code</string>
-    <string name="instruction_phone">Enter the Phone Number to encode in the QR code</string>
-    <string name="instruction_sms">Enter the Phone Number to encode in the QR code</string>
-    <string name="instruction_text">Enter the Text Content to encode in the QR code</string>
-    <string name="instruction_email">Enter email details to encode in the QR code</string>
-    <string name="instruction_contact">Enter contact information to encode in the QR code</string>
-    <string name="instruction_wifi">Enter WiFi network details to encode in the QR code</string>
-    <string name="instruction_calendar">Enter event details to encode in the QR code</string>
-    <string name="instruction_location">Enter coordinates to encode in the QR code</string>
-    <string name="instruction_mecard">Enter contact details to encode in the QR code</string>
-    <string name="instruction_app_store">Enter app store details to create a download link</string>
-    <string name="instruction_payment">Enter payment details to create a payment request</string>
-    <string name="instruction_crypto">Enter wallet details to create a cryptocurrency address QR</string>
+    <string name="instruction_url">Masukkan alamat situs web untuk dikodekan ke dalam QR</string>
+    <string name="instruction_phone">Masukkan nomor telepon untuk dikodekan ke dalam QR</string>
+    <string name="instruction_sms">Masukkan nomor telepon untuk dikodekan ke dalam QR</string>
+    <string name="instruction_text">Masukkan teks untuk dikodekan ke dalam QR</string>
+    <string name="instruction_email">Masukkan data email untuk dikodekan ke dalam QR</string>
+    <string name="instruction_contact">Masukkan data kontak untuk dikodekan ke dalam QR</string>
+    <string name="instruction_wifi">Masukkan data jaringan Wi-Fi untuk dikodekan ke dalam QR</string>
+    <string name="instruction_calendar">Masukkan detail acara untuk dikodekan ke dalam QR</string>
+    <string name="instruction_location">Masukkan koordinat untuk dikodekan ke dalam QR</string>
+    <string name="instruction_mecard">Masukkan detail kontak untuk dikodekan ke dalam QR</string>
+    <string name="instruction_app_store">Masukkan detail toko aplikasi untuk membuat tautan unduhan</string>
+    <string name="instruction_payment">Masukkan detail pembayaran untuk membuat permintaan pembayaran</string>
+    <string name="instruction_crypto">Masukkan detail dompet untuk membuat QR alamat kripto</string>
 
     <!-- Validation Errors -->
-    <string name="error_invalid_url">Please enter a valid URL</string>
-    <string name="error_invalid_url_format">Invalid URL format</string>
-    <string name="error_invalid_phone">Please enter a valid phone number</string>
-    <string name="error_empty_phone">Please enter a phone number</string>
-    <string name="error_invalid_phone_format">Invalid phone number</string>
-    <string name="error_empty_text">Please enter some text</string>
-    <string name="error_empty_email">Please enter an email address</string>
-    <string name="error_invalid_email">Invalid email address</string>
-    <string name="error_create_qr">Error creating QR code: %1$s</string>
-    <string name="error_empty_name">Please enter at least a first or last name</string>
-    <string name="error_empty_ssid">Please enter the network name (SSID)</string>
-    <string name="error_empty_event_title">Please enter an event title</string>
-    <string name="error_invalid_date">Please enter a valid date (YYYY-MM-DD)</string>
-    <string name="error_empty_latitude">Please enter a latitude</string>
-    <string name="error_empty_longitude">Please enter a longitude</string>
-    <string name="error_invalid_latitude">Latitude must be between -90 and 90</string>
-    <string name="error_invalid_longitude">Longitude must be between -180 and 180</string>
-    <string name="error_empty_mecard_name">Please enter a name</string>
-    <string name="error_empty_app_id">Please enter an app ID or package name</string>
-    <string name="error_empty_payment_username">Please enter a username</string>
-    <string name="error_empty_crypto_address">Please enter a wallet address</string>
+    <string name="error_invalid_url">Masukkan URL yang valid</string>
+    <string name="error_invalid_url_format">Format URL tidak valid</string>
+    <string name="error_invalid_phone">Masukkan nomor telepon yang valid</string>
+    <string name="error_empty_phone">Masukkan nomor telepon</string>
+    <string name="error_invalid_phone_format">Nomor telepon tidak valid</string>
+    <string name="error_empty_text">Masukkan teks</string>
+    <string name="error_empty_email">Masukkan alamat email</string>
+    <string name="error_invalid_email">Alamat email tidak valid</string>
+    <string name="error_create_qr">Gagal membuat kode QR: %1$s</string>
+    <string name="error_empty_name">Masukkan setidaknya nama depan atau nama belakang</string>
+    <string name="error_empty_ssid">Masukkan nama jaringan (SSID)</string>
+    <!-- Calendar Event Errors -->
+    <string name="error_empty_event_title">Masukkan judul acara</string>
+    <string name="error_invalid_date">Masukkan tanggal yang valid (TTTT-BB-HH)</string>
+    <!-- Location Errors -->
+    <string name="error_empty_latitude">Masukkan lintang</string>
+    <string name="error_empty_longitude">Masukkan bujur</string>
+    <string name="error_invalid_latitude">Lintang harus antara -90 dan 90</string>
+    <string name="error_invalid_longitude">Bujur harus antara -180 dan 180</string>
+    <!-- MeCard Errors -->
+    <string name="error_empty_mecard_name">Masukkan nama</string>
+    <!-- App Store Errors -->
+    <string name="error_empty_app_id">Masukkan ID aplikasi atau nama paket</string>
+    <!-- Payment Errors -->
+    <string name="error_empty_payment_username">Masukkan nama pengguna</string>
+    <!-- Crypto Errors -->
+    <string name="error_empty_crypto_address">Masukkan alamat dompet</string>
 
     <!-- History Screen -->
-    <string name="history_empty">No QR codes yet.\nScan or create one to get started!</string>
-    <string name="history_type">Type: %1$s</string>
-    <string name="history_type_scanned">Scanned</string>
-    <string name="history_type_created">Created</string>
-    <string name="history_type_from_file">From File</string>
-    <string name="history_type_unknown">Unknown</string>
-    <string name="history_search">Search</string>
-    <string name="history_search_placeholder">Search QR codes...</string>
-    <string name="history_clear_search">Clear search</string>
-    <string name="history_no_results">No QR codes match your search</string>
+    <string name="history_empty">Belum ada kode QR.\nPindai atau buat satu untuk memulai!</string>
+    <string name="history_type">Jenis: %1$s</string>
+    <string name="history_type_scanned">Dipindai</string>
+    <string name="history_type_created">Dibuat</string>
+    <string name="history_type_from_file">Dari berkas</string>
+    <string name="history_type_unknown">Tidak diketahui</string>
+    <string name="history_search">Cari</string>
+    <string name="history_search_placeholder">Cari kode QR…</string>
+    <string name="history_clear_search">Hapus pencarian</string>
+    <string name="history_no_results">Tidak ada kode QR yang cocok</string>
 
     <!-- Detail Screen -->
-    <string name="detail_content">Content</string>
-    <string name="detail_details">Details</string>
-    <string name="detail_type">Type</string>
-    <string name="detail_created">Created</string>
-    <string name="detail_share">Share</string>
-    <string name="detail_save">Save Image</string>
-    <string name="detail_save_to_file">Save to file</string>
-    <string name="detail_delete">Delete</string>
-    <string name="detail_no_item">No QR code selected</string>
-    <string name="detail_error">Error: %1$s</string>
-    <string name="detail_loading">Loading QR code...</string>
-    <string name="detail_no_data">No QR code data available</string>
-    <string name="detail_tap_fullscreen">Tap to view fullscreen</string>
-    <string name="detail_copy_clipboard">Copy to clipboard</string>
-    <string name="detail_origin_flag">Origin flag: %1$d</string>
+    <string name="detail_content">Isi</string>
+    <string name="detail_details">Detail</string>
+    <string name="detail_type">Jenis</string>
+    <string name="detail_created">Dibuat</string>
+    <string name="detail_share">Bagikan</string>
+    <string name="detail_save">Simpan gambar</string>
+    <string name="detail_save_to_file">Simpan ke berkas</string>
+    <string name="detail_delete">Hapus</string>
+    <string name="detail_test_action">Uji</string>
+    <string name="detail_no_item">Tidak ada kode QR yang dipilih</string>
+    <string name="detail_error">Kesalahan: %1$s</string>
+    <string name="detail_loading">Memuat kode QR…</string>
+    <string name="detail_no_data">Tidak ada data kode QR</string>
+    <string name="detail_tap_fullscreen">Ketuk untuk layar penuh</string>
+    <string name="detail_copy_clipboard">Salin ke papan klip</string>
+    <string name="detail_origin_flag">Penanda asal: %1$d</string>
 
     <!-- Feedback Messages -->
-    <string name="feedback_copied">Copied to clipboard</string>
-    <string name="feedback_saved">QR code saved to file</string>
-    <string name="feedback_save_error">Error saving QR code</string>
-    <string name="feedback_share_not_implemented">Share not yet implemented for cross-platform</string>
-    <string name="feedback_no_qr_in_image">No QR code found in image</string>
-    <string name="feedback_launch_error">Could not open content: %1$s</string>
-    <string name="feedback_no_app_found">No app found to handle this content</string>
+    <string name="feedback_copied">Disalin ke papan klip</string>
+    <string name="feedback_saved">Kode QR disimpan ke berkas</string>
+    <string name="feedback_save_error">Gagal menyimpan kode QR</string>
+    <string name="feedback_share_not_implemented">Berbagi belum tersedia di semua platform</string>
+    <string name="feedback_no_qr_in_image">Tidak ada kode QR di gambar</string>
+    <string name="feedback_launch_error">Tidak dapat membuka konten: %1$s</string>
+    <string name="feedback_no_app_found">Tidak ada aplikasi untuk membuka konten ini</string>
+    <string name="feedback_no_handler_available">Tidak ada aplikasi untuk tindakan ini</string>
 
     <!-- Permission Messages -->
-    <string name="permission_storage_required">Storage permission is required to save QR code</string>
-    <string name="permission_grant_settings">Please grant storage permission in app settings</string>
-    <string name="permission_camera_required">Camera Permission Required</string>
-    <string name="permission_camera_denied">Camera permission is required to scan QR codes. Please grant the permission to continue.</string>
-    <string name="permission_camera_permanently_denied">Camera permission has been permanently denied. Please enable it in your device settings to scan QR codes.</string>
-    <string name="permission_open_settings">Open Settings</string>
-    <string name="permission_grant">Grant Permission</string>
-    <string name="permission_ready_to_scan">Ready to Scan</string>
-    <string name="permission_start_scanning_hint">Tap the button below to start scanning QR codes with your camera.</string>
-    <string name="permission_start_scanning">Start Scanning</string>
+    <string name="permission_storage_required">Izin penyimpanan diperlukan untuk menyimpan kode QR</string>
+    <string name="permission_grant_settings">Berikan izin penyimpanan di pengaturan aplikasi</string>
+    <string name="permission_camera_required">Izin kamera diperlukan</string>
+    <string name="permission_camera_denied">Izin kamera diperlukan untuk memindai kode QR. Berikan izin untuk melanjutkan.</string>
+    <string name="permission_camera_permanently_denied">Izin kamera ditolak secara permanen. Aktifkan di pengaturan perangkat untuk memindai kode QR.</string>
+    <string name="permission_open_settings">Buka pengaturan</string>
+    <string name="permission_grant">Berikan izin</string>
+    <string name="permission_ready_to_scan">Siap memindai</string>
+    <string name="permission_start_scanning_hint">Ketuk tombol di bawah untuk memindai kode QR dengan kamera.</string>
+    <string name="permission_start_scanning">Mulai memindai</string>
 
     <!-- Scan Screen -->
-    <string name="scan_title">Camera Scanning</string>
-    <string name="camera_starting">Starting camera...</string>
-    <string name="camera_not_available">Camera not available</string>
-    <string name="camera_simulator_hint">Running on simulator or device without camera.\nUse the button in the bottom right to scan from photo library.</string>
-    <string name="scan_message">QR code scanning requires platform-specific camera APIs.\n\nThis feature will be implemented using expect/actual declarations:\n• Android: CameraX\n• iOS: AVFoundation\n• Desktop: Webcam libraries</string>
-    <string name="scan_from_file">Scan from file</string>
-    <string name="scan_qr_detected">QR Code detected: %1$s</string>
+    <string name="scan_title">Pemindaian kamera</string>
+    <string name="camera_starting">Memulai kamera…</string>
+    <string name="camera_not_available">Kamera tidak tersedia</string>
+    <string name="camera_simulator_hint">Berjalan di simulator atau perangkat tanpa kamera.\nGunakan tombol di kanan bawah untuk memindai dari pustaka foto.</string>
+    <string name="scan_message">Pemindaian kode QR memerlukan API kamera khusus per platform.\n\nFitur ini akan diterapkan dengan deklarasi expect/actual:\n• Android: CameraX\n• iOS: AVFoundation\n• Desktop: pustaka webcam</string>
+    <string name="scan_from_file">Pindai dari berkas</string>
+    <string name="scan_qr_detected">Kode QR terdeteksi: %1$s</string>
 
     <!-- Common Actions -->
-    <string name="action_dismiss">Dismiss</string>
+    <string name="action_dismiss">Tutup</string>
     <string name="action_ok">OK</string>
-    <string name="action_undo">Undo</string>
+    <string name="action_undo">Urungkan</string>
+    <string name="action_open">Buka</string>
 
     <!-- Delete Feedback -->
-    <string name="detail_deleted">QR code deleted</string>
+    <string name="detail_deleted">Kode QR dihapus</string>
+
+    <!-- WiFi Credentials Card -->
+    <string name="wifi_credentials_title">Kredensial Wi-Fi</string>
+    <string name="wifi_credentials_ssid">Nama jaringan (SSID)</string>
+    <string name="wifi_credentials_password">Kata sandi</string>
+    <string name="wifi_credentials_show">Tampilkan</string>
+    <string name="wifi_credentials_hide">Sembunyikan</string>
+    <string name="wifi_credentials_close">Tutup</string>
 
     <!-- Content Descriptions (for accessibility) -->
-    <string name="cd_qr_preview">QR Code Preview</string>
-    <string name="cd_qr_code">QR Code</string>
-    <string name="cd_qr_fullscreen">QR Code Fullscreen</string>
-    <string name="cd_back">Back</string>
-    <string name="cd_more">More</string>
+    <string name="cd_qr_preview">Pratinjau kode QR</string>
+    <string name="cd_qr_code">Kode QR</string>
+    <string name="cd_qr_fullscreen">Kode QR layar penuh</string>
+    <string name="cd_back">Kembali</string>
+    <string name="cd_more">Lainnya</string>
     <string name="cd_menu">Menu</string>
-    <string name="cd_share">Share</string>
-    <string name="cd_save">Save</string>
-    <string name="cd_delete">Delete</string>
-    <string name="cd_create">Create</string>
-    <string name="cd_launch">Launch</string>
-    <string name="cd_settings">Settings</string>
-    <string name="cd_warning">Warning</string>
-    <string name="cd_selected">Selected</string>
-    <string name="cd_show_password">Show password</string>
-    <string name="cd_hide_password">Hide password</string>
-    <string name="cd_torch_on">Torch on</string>
-    <string name="cd_torch_off">Torch off</string>
-    <string name="cd_camera">Camera</string>
+    <string name="cd_share">Bagikan</string>
+    <string name="cd_save">Simpan</string>
+    <string name="cd_delete">Hapus</string>
+    <string name="cd_test_action">Uji tindakan</string>
+    <string name="cd_wifi">Wi-Fi</string>
+    <string name="cd_create">Buat</string>
+    <string name="cd_launch">Buka</string>
+    <string name="cd_settings">Pengaturan</string>
+    <string name="cd_warning">Peringatan</string>
+    <string name="cd_selected">Dipilih</string>
+    <string name="cd_show_password">Tampilkan kata sandi</string>
+    <string name="cd_hide_password">Sembunyikan kata sandi</string>
+    <string name="cd_torch_on">Senter menyala</string>
+    <string name="cd_torch_off">Senter mati</string>
+    <string name="cd_camera">Kamera</string>
 
     <!-- Settings Screen -->
-    <string name="settings_title">Settings</string>
-    <string name="settings_section_appearance">Appearance</string>
-    <string name="settings_section_about">About</string>
-    <string name="settings_version">Version</string>
+    <string name="settings_title">Pengaturan</string>
+    <string name="settings_section_appearance">Tampilan</string>
+    <string name="settings_section_about">Tentang</string>
+    <string name="settings_version">Versi</string>
     <string name="settings_build">Build</string>
-    <string name="settings_theme_system">System Default</string>
-    <string name="settings_theme_system_desc">Follow system theme</string>
-    <string name="settings_theme_light">Light</string>
-    <string name="settings_theme_light_desc">Always use light theme</string>
-    <string name="settings_theme_dark">Dark</string>
-    <string name="settings_theme_dark_desc">Always use dark theme</string>
+    <string name="settings_theme_system">Bawaan sistem</string>
+    <string name="settings_theme_system_desc">Ikuti tema sistem</string>
+    <string name="settings_theme_light">Terang</string>
+    <string name="settings_theme_light_desc">Selalu gunakan tema terang</string>
+    <string name="settings_theme_dark">Gelap</string>
+    <string name="settings_theme_dark_desc">Selalu gunakan tema gelap</string>
 
     <!-- URL Warning Dialog -->
-    <string name="url_warning_dangerous">Dangerous Link Detected</string>
-    <string name="url_warning_suspicious">Suspicious Link</string>
-    <string name="url_warning_check">URL Check</string>
+    <string name="url_warning_dangerous">Tautan berbahaya terdeteksi</string>
+    <string name="url_warning_suspicious">Tautan mencurigakan</string>
+    <string name="url_warning_check">Pemeriksaan URL</string>
     <string name="url_warning_url_prefix">URL:</string>
-    <string name="url_warning_warnings_label">Warnings:</string>
-    <string name="url_warning_dangerous_desc">Opening this link is not recommended as it may harm your device or compromise your data.</string>
-    <string name="url_warning_suspicious_desc">This link has some characteristics that may indicate a security risk. Proceed with caution.</string>
-    <string name="url_warning_safe_desc">No issues were detected with this URL.</string>
-    <string name="url_warning_open_anyway">Open Anyway</string>
-    <string name="url_warning_close">Close</string>
-    <string name="url_warning_cancel">Cancel</string>
+    <string name="url_warning_warnings_label">Peringatan:</string>
+    <string name="url_warning_dangerous_desc">Membuka tautan ini tidak disarankan karena dapat merusak perangkat atau membahayakan data Anda.</string>
+    <string name="url_warning_suspicious_desc">Tautan ini memiliki ciri yang dapat menandakan risiko keamanan. Lanjutkan dengan hati-hati.</string>
+    <string name="url_warning_safe_desc">Tidak ditemukan masalah pada URL ini.</string>
+    <string name="url_warning_open_anyway">Tetap buka</string>
+    <string name="url_warning_close">Tutup</string>
+    <string name="url_warning_cancel">Batal</string>
 
     <!-- Field Modifiers -->
-    <string name="label_optional_suffix"> (Optional)</string>
+    <string name="label_optional_suffix"> (opsional)</string>
 </resources>

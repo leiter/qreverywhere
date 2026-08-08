@@ -1,341 +1,372 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Turkish (Türkçe) - Translation stub -->
-<!-- TODO: Translate all strings to Simplified Chinese -->
 <resources>
     <!-- App Title -->
     <string name="app_name">QR Everywhere</string>
 
     <!-- Bottom Navigation -->
-    <string name="nav_history">History</string>
-    <string name="nav_scan">Scan</string>
-    <string name="nav_create">Create</string>
+    <string name="nav_history">Geçmiş</string>
+    <string name="nav_scan">Tara</string>
+    <string name="nav_create">Oluştur</string>
 
     <!-- Screen Titles -->
-    <string name="title_history">QR History</string>
-    <string name="title_scan">Scan or import QR</string>
-    <string name="title_create">Create QR Code</string>
-    <string name="title_detail">QR Details</string>
-    <string name="title_create_text">Create Text QR</string>
-    <string name="title_create_email">Create Email QR</string>
+    <string name="title_history">QR geçmişi</string>
+    <string name="title_scan">QR tara veya içe aktar</string>
+    <string name="title_create">QR kodu oluştur</string>
+    <string name="title_detail">QR ayrıntıları</string>
+    <string name="title_create_text">Metin QR kodu oluştur</string>
+    <string name="title_create_email">E-posta QR kodu oluştur</string>
 
     <!-- Create QR Type Titles -->
-    <string name="title_text_qr">Text QR Code</string>
-    <string name="title_url_qr">Web URL QR Code</string>
-    <string name="title_phone_qr">Phone QR Code</string>
-    <string name="title_sms_qr">SMS QR Code</string>
-    <string name="title_email_qr">Email QR Code</string>
-    <string name="title_contact_qr">Contact QR Code</string>
-    <string name="title_wifi_qr">WiFi QR Code</string>
-    <string name="title_calendar_qr">Calendar Event QR Code</string>
-    <string name="title_location_qr">Location QR Code</string>
-    <string name="title_mecard_qr">MeCard QR Code</string>
-    <string name="title_appstore_qr">App Store Link QR Code</string>
-    <string name="title_payment_qr">Payment QR Code</string>
-    <string name="title_crypto_qr">Cryptocurrency QR Code</string>
+    <string name="title_text_qr">Metin QR kodu</string>
+    <string name="title_url_qr">Web adresi QR kodu</string>
+    <string name="title_phone_qr">Telefon QR kodu</string>
+    <string name="title_sms_qr">SMS QR kodu</string>
+    <string name="title_email_qr">E-posta QR kodu</string>
+    <string name="title_contact_qr">Kişi QR kodu</string>
+    <string name="title_wifi_qr">Wi-Fi QR kodu</string>
+    <string name="title_calendar_qr">Etkinlik QR kodu</string>
+    <string name="title_location_qr">Konum QR kodu</string>
+    <string name="title_mecard_qr">MeCard QR kodu</string>
+    <string name="title_appstore_qr">Uygulama mağazası bağlantısı QR kodu</string>
+    <string name="title_payment_qr">Ödeme QR kodu</string>
+    <string name="title_crypto_qr">Kripto para QR kodu</string>
 
     <!-- Create QR Type Descriptions -->
-    <string name="desc_text_qr">Create a QR code with any text content</string>
-    <string name="desc_url_qr">Create a QR code with website URL</string>
-    <string name="desc_phone_qr">Create a QR code with phone number</string>
-    <string name="desc_sms_qr">Create a QR code with SMS message</string>
-    <string name="desc_email_qr">Create a QR code with email information</string>
-    <string name="desc_contact_qr">Create a QR code with contact information (vCard)</string>
-    <string name="desc_wifi_qr">Create a QR code with WiFi network credentials</string>
-    <string name="desc_calendar_qr">Create a QR code with calendar event (VEVENT)</string>
-    <string name="desc_location_qr">Create a QR code with GPS coordinates</string>
-    <string name="desc_mecard_qr">Create a QR code with contact (simple format)</string>
-    <string name="desc_appstore_qr">Create a QR code linking to an app store</string>
-    <string name="desc_payment_qr">Create a QR code for PayPal or Venmo payments</string>
-    <string name="desc_crypto_qr">Create a QR code for Bitcoin or Ethereum wallet</string>
+    <string name="desc_text_qr">Herhangi bir metinle QR kodu oluştur</string>
+    <string name="desc_url_qr">Web sitesi adresiyle QR kodu oluştur</string>
+    <string name="desc_phone_qr">Telefon numarasıyla QR kodu oluştur</string>
+    <string name="desc_sms_qr">SMS mesajıyla QR kodu oluştur</string>
+    <string name="desc_email_qr">E-posta bilgileriyle QR kodu oluştur</string>
+    <string name="desc_contact_qr">Kişi bilgileriyle QR kodu oluştur (vCard)</string>
+    <string name="desc_wifi_qr">Wi-Fi bilgileriyle QR kodu oluştur</string>
+    <string name="desc_calendar_qr">Takvim etkinliğiyle QR kodu oluştur (VEVENT)</string>
+    <string name="desc_location_qr">GPS koordinatlarıyla QR kodu oluştur</string>
+    <string name="desc_mecard_qr">Kişiyle QR kodu oluştur (basit biçim)</string>
+    <string name="desc_appstore_qr">Uygulama mağazasına bağlantı veren QR kodu oluştur</string>
+    <string name="desc_payment_qr">PayPal veya Venmo ödemeleri için QR kodu oluştur</string>
+    <string name="desc_crypto_qr">Bitcoin veya Ethereum cüzdanı için QR kodu oluştur</string>
 
     <!-- Create Screen -->
-    <string name="create_title">Create QR Code</string>
-    <string name="create_subtitle">Choose what type of QR code to create</string>
-    <string name="create_quick_text">Quick Text QR</string>
-    <string name="create_enter_text">Enter text</string>
-    <string name="create_placeholder">Type anything...</string>
-    <string name="create_button">Generate QR Code</string>
-    <string name="create_button_creating">Creating...</string>
-    <string name="create_more_types">More QR Types</string>
-    <string name="create_coming_soon">Coming soon:</string>
-    <string name="create_types_list">• Email QR Code\n• Phone QR Code\n• WiFi QR Code\n• vCard QR Code\n• URL QR Code</string>
+    <string name="create_title">QR kodu oluştur</string>
+    <string name="create_subtitle">Hangi tür QR kodu oluşturacağınızı seçin</string>
+    <string name="create_quick_text">Hızlı metin QR kodu</string>
+    <string name="create_enter_text">Metin girin</string>
+    <string name="create_placeholder">İstediğiniz her şeyi yazın…</string>
+    <string name="create_button">QR kodu oluştur</string>
+    <string name="create_button_creating">Oluşturuluyor…</string>
+    <string name="create_more_types">Diğer QR türleri</string>
+    <string name="create_coming_soon">Yakında:</string>
+    <string name="create_types_list">• E-posta QR kodu\n• Telefon QR kodu\n• Wi-Fi QR kodu\n• vCard QR kodu\n• Web adresi QR kodu</string>
 
     <!-- Create Text QR Screen -->
-    <string name="create_url_title">Create URL QR Code</string>
-    <string name="create_phone_title">Create Phone QR Code</string>
-    <string name="create_sms_title">Create SMS QR Code</string>
-    <string name="create_text_title">Create Text QR Code</string>
-    <string name="create_email_title">Create Email QR Code</string>
+    <string name="create_url_title">Web adresi QR kodu oluştur</string>
+    <string name="create_phone_title">Telefon QR kodu oluştur</string>
+    <string name="create_sms_title">SMS QR kodu oluştur</string>
+    <string name="create_text_title">Metin QR kodu oluştur</string>
+    <string name="create_email_title">E-posta QR kodu oluştur</string>
 
     <!-- Field Labels -->
-    <string name="label_website_url">Website URL</string>
-    <string name="label_phone_number">Phone Number</string>
-    <string name="label_text_content">Text Content</string>
-    <string name="label_email_address">Email Address</string>
-    <string name="label_email_subject">Subject (Optional)</string>
-    <string name="label_email_message">Message (Optional)</string>
-    <string name="label_enter_url">Enter website URL</string>
-    <string name="label_enter_phone">Enter phone number</string>
-    <string name="label_enter_phone_message">Enter phone number and message</string>
-    <string name="label_first_name">First Name</string>
-    <string name="label_last_name">Last Name</string>
-    <string name="label_organization">Organization (Optional)</string>
-    <string name="label_job_title">Job Title (Optional)</string>
-    <string name="label_website">Website (Optional)</string>
-    <string name="label_network_name">Network Name (SSID)</string>
-    <string name="label_password">Password</string>
-    <string name="label_security_type">Security Type</string>
-    <string name="label_hidden_network">Hidden Network</string>
+    <string name="label_website_url">Web sitesi adresi</string>
+    <string name="label_phone_number">Telefon numarası</string>
+    <string name="label_text_content">Metin içeriği</string>
+    <string name="label_email_address">E-posta adresi</string>
+    <string name="label_email_subject">Konu (isteğe bağlı)</string>
+    <string name="label_email_message">Mesaj (isteğe bağlı)</string>
+    <string name="label_enter_url">Web sitesi adresini girin</string>
+    <string name="label_enter_phone">Telefon numarasını girin</string>
+    <string name="label_enter_phone_message">Telefon numarası ve mesajı girin</string>
+    <!-- vCard Field Labels -->
+    <string name="label_first_name">Ad</string>
+    <string name="label_last_name">Soyad</string>
+    <string name="label_organization">Şirket (isteğe bağlı)</string>
+    <string name="label_job_title">Unvan (isteğe bağlı)</string>
+    <string name="label_website">Web sitesi (isteğe bağlı)</string>
+    <!-- WiFi Field Labels -->
+    <string name="label_network_name">Ağ adı (SSID)</string>
+    <string name="label_password">Parola</string>
+    <string name="label_security_type">Güvenlik türü</string>
+    <string name="label_hidden_network">Gizli ağ</string>
 
     <!-- Field Placeholders -->
     <string name="placeholder_url">https://example.com</string>
-    <string name="placeholder_phone">+1234567890</string>
-    <string name="placeholder_sms">+1234567890:Hello</string>
-    <string name="placeholder_text">Enter any text</string>
-    <string name="placeholder_email">example@email.com</string>
-    <string name="placeholder_email_subject">Email subject</string>
-    <string name="placeholder_email_message">Email message</string>
-    <string name="placeholder_first_name">John</string>
-    <string name="placeholder_last_name">Doe</string>
-    <string name="placeholder_organization">Company Inc.</string>
-    <string name="placeholder_job_title">Software Engineer</string>
+    <string name="placeholder_phone">+905321234567</string>
+    <string name="placeholder_sms">+905321234567:Merhaba</string>
+    <string name="placeholder_text">Herhangi bir metin girin</string>
+    <string name="placeholder_email">ornek@email.com</string>
+    <string name="placeholder_email_subject">E-posta konusu</string>
+    <string name="placeholder_email_message">E-posta mesajı</string>
+    <!-- vCard Placeholders -->
+    <string name="placeholder_first_name">Ahmet</string>
+    <string name="placeholder_last_name">Yılmaz</string>
+    <string name="placeholder_organization">Örnek A.Ş.</string>
+    <string name="placeholder_job_title">Yazılım mühendisi</string>
     <string name="placeholder_website">https://example.com</string>
-    <string name="placeholder_network_name">MyWiFi</string>
-    <string name="placeholder_password">password123</string>
+    <!-- WiFi Placeholders -->
+    <string name="placeholder_network_name">BenimWiFi</string>
+    <string name="placeholder_password">parola123</string>
+    <!-- WiFi Security Types -->
     <string name="security_wpa">WPA/WPA2</string>
     <string name="security_wep">WEP</string>
-    <string name="security_open">Open (No password)</string>
+    <string name="security_open">Açık (parolasız)</string>
 
     <!-- Calendar Event Labels -->
-    <string name="label_event_title">Event Title</string>
-    <string name="label_all_day_event">All Day Event</string>
-    <string name="label_start_date">Start Date</string>
-    <string name="label_start_time">Start Time</string>
-    <string name="label_end_date">End Date</string>
-    <string name="label_end_time">End Time</string>
-    <string name="label_event_location">Location (Optional)</string>
-    <string name="label_event_description">Description (Optional)</string>
-    <string name="placeholder_event_title">Team Meeting</string>
-    <string name="placeholder_date">YYYY-MM-DD</string>
-    <string name="placeholder_time">HH:MM</string>
-    <string name="placeholder_event_location">Conference Room A</string>
-    <string name="placeholder_event_description">Discuss project updates</string>
-    <string name="hint_date_format">Format: YYYY-MM-DD (e.g., 2024-03-15)</string>
-    <string name="hint_time_format">Format: HH:MM (e.g., 14:30)</string>
+    <string name="label_event_title">Etkinlik başlığı</string>
+    <string name="label_all_day_event">Tüm gün süren etkinlik</string>
+    <string name="label_start_date">Başlangıç tarihi</string>
+    <string name="label_start_time">Başlangıç saati</string>
+    <string name="label_end_date">Bitiş tarihi</string>
+    <string name="label_end_time">Bitiş saati</string>
+    <string name="label_event_location">Yer (isteğe bağlı)</string>
+    <string name="label_event_description">Açıklama (isteğe bağlı)</string>
+    <!-- Calendar Event Placeholders -->
+    <string name="placeholder_event_title">Ekip toplantısı</string>
+    <string name="placeholder_date">YYYY-AA-GG</string>
+    <string name="placeholder_time">SS:DD</string>
+    <string name="placeholder_event_location">A toplantı odası</string>
+    <string name="placeholder_event_description">Proje durumunu görüşme</string>
+    <!-- Calendar Event Hints -->
+    <string name="hint_date_format">Biçim: YYYY-AA-GG (örn. 2024-03-15)</string>
+    <string name="hint_time_format">Biçim: SS:DD (örn. 14:30)</string>
 
     <!-- Location Labels -->
-    <string name="label_latitude">Latitude</string>
-    <string name="label_longitude">Longitude</string>
-    <string name="label_location_label">Label (Optional)</string>
+    <string name="label_latitude">Enlem</string>
+    <string name="label_longitude">Boylam</string>
+    <string name="label_location_label">Etiket (isteğe bağlı)</string>
+    <!-- Location Placeholders -->
     <string name="placeholder_latitude">37.7749</string>
     <string name="placeholder_longitude">-122.4194</string>
     <string name="placeholder_location_label">San Francisco</string>
-    <string name="hint_latitude">Range: -90 to 90</string>
-    <string name="hint_longitude">Range: -180 to 180</string>
+    <!-- Location Hints -->
+    <string name="hint_latitude">Aralık: -90 ile 90</string>
+    <string name="hint_longitude">Aralık: -180 ile 180</string>
 
     <!-- MeCard Labels -->
-    <string name="label_mecard_name">Full Name</string>
-    <string name="label_mecard_address">Address (Optional)</string>
-    <string name="label_mecard_note">Note (Optional)</string>
-    <string name="placeholder_mecard_name">John Doe</string>
-    <string name="placeholder_mecard_address">123 Main St, City</string>
-    <string name="placeholder_mecard_note">Met at conference</string>
+    <string name="label_mecard_name">Ad soyad</string>
+    <string name="label_mecard_address">Adres (isteğe bağlı)</string>
+    <string name="label_mecard_note">Not (isteğe bağlı)</string>
+    <!-- MeCard Placeholders -->
+    <string name="placeholder_mecard_name">Ahmet Yılmaz</string>
+    <string name="placeholder_mecard_address">Ana Cadde 123, Şehir</string>
+    <string name="placeholder_mecard_note">Konferansta tanışıldı</string>
 
     <!-- App Store Labels -->
-    <string name="label_select_store">Select App Store</string>
-    <string name="label_apple_app_id">Apple App ID</string>
-    <string name="label_google_package_name">Google Play Package Name</string>
+    <string name="label_select_store">Uygulama mağazasını seçin</string>
+    <string name="label_apple_app_id">Apple uygulama kimliği</string>
+    <string name="label_google_package_name">Google Play paket adı</string>
     <string name="store_apple">Apple App Store</string>
     <string name="store_google">Google Play Store</string>
+    <!-- App Store Placeholders -->
     <string name="placeholder_apple_app_id">1234567890</string>
     <string name="placeholder_google_package_name">com.example.app</string>
-    <string name="hint_apple_app_id">Numeric ID from App Store URL</string>
-    <string name="hint_google_package_name">Package name from Play Store URL</string>
+    <!-- App Store Hints -->
+    <string name="hint_apple_app_id">App Store adresindeki sayısal kimlik</string>
+    <string name="hint_google_package_name">Play Store adresindeki paket adı</string>
 
     <!-- Payment Labels -->
-    <string name="label_select_provider">Select Payment Provider</string>
-    <string name="label_payment_username">Username</string>
-    <string name="label_payment_amount">Amount (Optional)</string>
-    <string name="label_payment_note">Note (Optional)</string>
+    <string name="label_select_provider">Ödeme sağlayıcısını seçin</string>
+    <string name="label_payment_username">Kullanıcı adı</string>
+    <string name="label_payment_amount">Tutar (isteğe bağlı)</string>
+    <string name="label_payment_note">Not (isteğe bağlı)</string>
     <string name="provider_paypal">PayPal</string>
     <string name="provider_venmo">Venmo</string>
-    <string name="placeholder_paypal_username">yourpaypalusername</string>
-    <string name="placeholder_venmo_username">yourvenmo</string>
+    <!-- Payment Placeholders -->
+    <string name="placeholder_paypal_username">paypaladiniz</string>
+    <string name="placeholder_venmo_username">venmoadiniz</string>
     <string name="placeholder_payment_amount">10.00</string>
-    <string name="placeholder_payment_note">Payment for lunch</string>
+    <string name="placeholder_payment_note">Öğle yemeği ödemesi</string>
 
     <!-- Crypto Labels -->
-    <string name="label_select_crypto">Select Cryptocurrency</string>
-    <string name="label_crypto_address">Wallet Address</string>
-    <string name="label_crypto_amount_btc">Amount in BTC (Optional)</string>
-    <string name="label_crypto_amount_eth">Amount in ETH (Optional)</string>
-    <string name="label_crypto_label">Label (Optional)</string>
-    <string name="label_crypto_message">Message (Optional)</string>
+    <string name="label_select_crypto">Kripto parayı seçin</string>
+    <string name="label_crypto_address">Cüzdan adresi</string>
+    <string name="label_crypto_amount_btc">BTC cinsinden tutar (isteğe bağlı)</string>
+    <string name="label_crypto_amount_eth">ETH cinsinden tutar (isteğe bağlı)</string>
+    <string name="label_crypto_label">Etiket (isteğe bağlı)</string>
+    <string name="label_crypto_message">Mesaj (isteğe bağlı)</string>
     <string name="crypto_bitcoin">Bitcoin (BTC)</string>
     <string name="crypto_ethereum">Ethereum (ETH)</string>
-    <string name="placeholder_bitcoin_address">bc1q...</string>
-    <string name="placeholder_ethereum_address">0x...</string>
+    <!-- Crypto Placeholders -->
+    <string name="placeholder_bitcoin_address">bc1q…</string>
+    <string name="placeholder_ethereum_address">0x…</string>
     <string name="placeholder_crypto_amount">0.001</string>
-    <string name="placeholder_crypto_label">Donation</string>
-    <string name="placeholder_crypto_message">Thank you for your support</string>
+    <string name="placeholder_crypto_label">Bağış</string>
+    <string name="placeholder_crypto_message">Desteğiniz için teşekkürler</string>
 
     <!-- Field Hints -->
-    <string name="hint_url">The URL should start with http:// or https://</string>
-    <string name="hint_phone">Include country code (e.g., +1 for USA)</string>
-    <string name="hint_sms">Format: phone:message</string>
+    <string name="hint_url">Adres http:// veya https:// ile başlamalıdır</string>
+    <string name="hint_phone">Ülke kodunu ekleyin (örn. Türkiye için +90)</string>
+    <string name="hint_sms">Biçim: telefon:mesaj</string>
 
     <!-- Instructions -->
-    <string name="instruction_url">Enter the Website URL to encode in the QR code</string>
-    <string name="instruction_phone">Enter the Phone Number to encode in the QR code</string>
-    <string name="instruction_sms">Enter the Phone Number to encode in the QR code</string>
-    <string name="instruction_text">Enter the Text Content to encode in the QR code</string>
-    <string name="instruction_email">Enter email details to encode in the QR code</string>
-    <string name="instruction_contact">Enter contact information to encode in the QR code</string>
-    <string name="instruction_wifi">Enter WiFi network details to encode in the QR code</string>
-    <string name="instruction_calendar">Enter event details to encode in the QR code</string>
-    <string name="instruction_location">Enter coordinates to encode in the QR code</string>
-    <string name="instruction_mecard">Enter contact details to encode in the QR code</string>
-    <string name="instruction_app_store">Enter app store details to create a download link</string>
-    <string name="instruction_payment">Enter payment details to create a payment request</string>
-    <string name="instruction_crypto">Enter wallet details to create a cryptocurrency address QR</string>
+    <string name="instruction_url">QR koduna eklenecek web adresini girin</string>
+    <string name="instruction_phone">QR koduna eklenecek telefon numarasını girin</string>
+    <string name="instruction_sms">QR koduna eklenecek telefon numarasını girin</string>
+    <string name="instruction_text">QR koduna eklenecek metni girin</string>
+    <string name="instruction_email">QR kodu için e-posta bilgilerini girin</string>
+    <string name="instruction_contact">QR kodu için kişi bilgilerini girin</string>
+    <string name="instruction_wifi">QR kodu için Wi-Fi bilgilerini girin</string>
+    <string name="instruction_calendar">QR kodu için etkinlik bilgilerini girin</string>
+    <string name="instruction_location">QR kodu için koordinatları girin</string>
+    <string name="instruction_mecard">QR kodu için kişi bilgilerini girin</string>
+    <string name="instruction_app_store">İndirme bağlantısı oluşturmak için mağaza bilgilerini girin</string>
+    <string name="instruction_payment">Ödeme isteği oluşturmak için ödeme bilgilerini girin</string>
+    <string name="instruction_crypto">Adres QR kodu oluşturmak için cüzdan bilgilerini girin</string>
 
     <!-- Validation Errors -->
-    <string name="error_invalid_url">Please enter a valid URL</string>
-    <string name="error_invalid_url_format">Invalid URL format</string>
-    <string name="error_invalid_phone">Please enter a valid phone number</string>
-    <string name="error_empty_phone">Please enter a phone number</string>
-    <string name="error_invalid_phone_format">Invalid phone number</string>
-    <string name="error_empty_text">Please enter some text</string>
-    <string name="error_empty_email">Please enter an email address</string>
-    <string name="error_invalid_email">Invalid email address</string>
-    <string name="error_create_qr">Error creating QR code: %1$s</string>
-    <string name="error_empty_name">Please enter at least a first or last name</string>
-    <string name="error_empty_ssid">Please enter the network name (SSID)</string>
-    <string name="error_empty_event_title">Please enter an event title</string>
-    <string name="error_invalid_date">Please enter a valid date (YYYY-MM-DD)</string>
-    <string name="error_empty_latitude">Please enter a latitude</string>
-    <string name="error_empty_longitude">Please enter a longitude</string>
-    <string name="error_invalid_latitude">Latitude must be between -90 and 90</string>
-    <string name="error_invalid_longitude">Longitude must be between -180 and 180</string>
-    <string name="error_empty_mecard_name">Please enter a name</string>
-    <string name="error_empty_app_id">Please enter an app ID or package name</string>
-    <string name="error_empty_payment_username">Please enter a username</string>
-    <string name="error_empty_crypto_address">Please enter a wallet address</string>
+    <string name="error_invalid_url">Lütfen geçerli bir adres girin</string>
+    <string name="error_invalid_url_format">Geçersiz adres biçimi</string>
+    <string name="error_invalid_phone">Lütfen geçerli bir telefon numarası girin</string>
+    <string name="error_empty_phone">Lütfen bir telefon numarası girin</string>
+    <string name="error_invalid_phone_format">Geçersiz telefon numarası</string>
+    <string name="error_empty_text">Lütfen bir metin girin</string>
+    <string name="error_empty_email">Lütfen bir e-posta adresi girin</string>
+    <string name="error_invalid_email">Geçersiz e-posta adresi</string>
+    <string name="error_create_qr">QR kodu oluşturulurken hata: %1$s</string>
+    <string name="error_empty_name">Lütfen en az ad veya soyad girin</string>
+    <string name="error_empty_ssid">Lütfen ağ adını (SSID) girin</string>
+    <!-- Calendar Event Errors -->
+    <string name="error_empty_event_title">Lütfen bir etkinlik başlığı girin</string>
+    <string name="error_invalid_date">Lütfen geçerli bir tarih girin (YYYY-AA-GG)</string>
+    <!-- Location Errors -->
+    <string name="error_empty_latitude">Lütfen bir enlem girin</string>
+    <string name="error_empty_longitude">Lütfen bir boylam girin</string>
+    <string name="error_invalid_latitude">Enlem -90 ile 90 arasında olmalıdır</string>
+    <string name="error_invalid_longitude">Boylam -180 ile 180 arasında olmalıdır</string>
+    <!-- MeCard Errors -->
+    <string name="error_empty_mecard_name">Lütfen bir ad girin</string>
+    <!-- App Store Errors -->
+    <string name="error_empty_app_id">Lütfen bir uygulama kimliği veya paket adı girin</string>
+    <!-- Payment Errors -->
+    <string name="error_empty_payment_username">Lütfen bir kullanıcı adı girin</string>
+    <!-- Crypto Errors -->
+    <string name="error_empty_crypto_address">Lütfen bir cüzdan adresi girin</string>
 
     <!-- History Screen -->
-    <string name="history_empty">No QR codes yet.\nScan or create one to get started!</string>
-    <string name="history_type">Type: %1$s</string>
-    <string name="history_type_scanned">Scanned</string>
-    <string name="history_type_created">Created</string>
-    <string name="history_type_from_file">From File</string>
-    <string name="history_type_unknown">Unknown</string>
-    <string name="history_search">Search</string>
-    <string name="history_search_placeholder">Search QR codes...</string>
-    <string name="history_clear_search">Clear search</string>
-    <string name="history_no_results">No QR codes match your search</string>
+    <string name="history_empty">Henüz QR kodu yok.\nBaşlamak için bir tane tarayın ya da oluşturun!</string>
+    <string name="history_type">Tür: %1$s</string>
+    <string name="history_type_scanned">Tarandı</string>
+    <string name="history_type_created">Oluşturuldu</string>
+    <string name="history_type_from_file">Dosyadan</string>
+    <string name="history_type_unknown">Bilinmiyor</string>
+    <string name="history_search">Ara</string>
+    <string name="history_search_placeholder">QR kodlarında ara…</string>
+    <string name="history_clear_search">Aramayı temizle</string>
+    <string name="history_no_results">Aramanızla eşleşen QR kodu yok</string>
 
     <!-- Detail Screen -->
-    <string name="detail_content">Content</string>
-    <string name="detail_details">Details</string>
-    <string name="detail_type">Type</string>
-    <string name="detail_created">Created</string>
-    <string name="detail_share">Share</string>
-    <string name="detail_save">Save Image</string>
-    <string name="detail_save_to_file">Save to file</string>
-    <string name="detail_delete">Delete</string>
-    <string name="detail_no_item">No QR code selected</string>
-    <string name="detail_error">Error: %1$s</string>
-    <string name="detail_loading">Loading QR code...</string>
-    <string name="detail_no_data">No QR code data available</string>
-    <string name="detail_tap_fullscreen">Tap to view fullscreen</string>
-    <string name="detail_copy_clipboard">Copy to clipboard</string>
-    <string name="detail_origin_flag">Origin flag: %1$d</string>
+    <string name="detail_content">İçerik</string>
+    <string name="detail_details">Ayrıntılar</string>
+    <string name="detail_type">Tür</string>
+    <string name="detail_created">Oluşturulma</string>
+    <string name="detail_share">Paylaş</string>
+    <string name="detail_save">Görüntüyü kaydet</string>
+    <string name="detail_save_to_file">Dosyaya kaydet</string>
+    <string name="detail_delete">Sil</string>
+    <string name="detail_test_action">Dene</string>
+    <string name="detail_no_item">Seçili QR kodu yok</string>
+    <string name="detail_error">Hata: %1$s</string>
+    <string name="detail_loading">QR kodu yükleniyor…</string>
+    <string name="detail_no_data">QR kodu verisi yok</string>
+    <string name="detail_tap_fullscreen">Tam ekran görmek için dokunun</string>
+    <string name="detail_copy_clipboard">Panoya kopyala</string>
+    <string name="detail_origin_flag">Kaynak işareti: %1$d</string>
 
     <!-- Feedback Messages -->
-    <string name="feedback_copied">Copied to clipboard</string>
-    <string name="feedback_saved">QR code saved to file</string>
-    <string name="feedback_save_error">Error saving QR code</string>
-    <string name="feedback_share_not_implemented">Share not yet implemented for cross-platform</string>
-    <string name="feedback_no_qr_in_image">No QR code found in image</string>
-    <string name="feedback_launch_error">Could not open content: %1$s</string>
-    <string name="feedback_no_app_found">No app found to handle this content</string>
+    <string name="feedback_copied">Panoya kopyalandı</string>
+    <string name="feedback_saved">QR kodu dosyaya kaydedildi</string>
+    <string name="feedback_save_error">QR kodu kaydedilirken hata oluştu</string>
+    <string name="feedback_share_not_implemented">Paylaşım henüz tüm platformlarda kullanılamıyor</string>
+    <string name="feedback_no_qr_in_image">Görüntüde QR kodu bulunamadı</string>
+    <string name="feedback_launch_error">İçerik açılamadı: %1$s</string>
+    <string name="feedback_no_app_found">Bu içeriği açacak uygulama bulunamadı</string>
+    <string name="feedback_no_handler_available">Bu işlem için uygulama yok</string>
 
     <!-- Permission Messages -->
-    <string name="permission_storage_required">Storage permission is required to save QR code</string>
-    <string name="permission_grant_settings">Please grant storage permission in app settings</string>
-    <string name="permission_camera_required">Camera Permission Required</string>
-    <string name="permission_camera_denied">Camera permission is required to scan QR codes. Please grant the permission to continue.</string>
-    <string name="permission_camera_permanently_denied">Camera permission has been permanently denied. Please enable it in your device settings to scan QR codes.</string>
-    <string name="permission_open_settings">Open Settings</string>
-    <string name="permission_grant">Grant Permission</string>
-    <string name="permission_ready_to_scan">Ready to Scan</string>
-    <string name="permission_start_scanning_hint">Tap the button below to start scanning QR codes with your camera.</string>
-    <string name="permission_start_scanning">Start Scanning</string>
+    <string name="permission_storage_required">QR kodunu kaydetmek için depolama izni gerekiyor</string>
+    <string name="permission_grant_settings">Lütfen uygulama ayarlarından depolama iznini verin</string>
+    <string name="permission_camera_required">Kamera izni gerekiyor</string>
+    <string name="permission_camera_denied">QR kodlarını taramak için kamera izni gerekiyor. Devam etmek için izin verin.</string>
+    <string name="permission_camera_permanently_denied">Kamera izni kalıcı olarak reddedildi. QR kodlarını taramak için cihaz ayarlarından etkinleştirin.</string>
+    <string name="permission_open_settings">Ayarları aç</string>
+    <string name="permission_grant">İzin ver</string>
+    <string name="permission_ready_to_scan">Taramaya hazır</string>
+    <string name="permission_start_scanning_hint">Kamerayla QR kodu taramak için aşağıdaki düğmeye dokunun.</string>
+    <string name="permission_start_scanning">Taramayı başlat</string>
 
     <!-- Scan Screen -->
-    <string name="scan_title">Camera Scanning</string>
-    <string name="camera_starting">Starting camera...</string>
-    <string name="camera_not_available">Camera not available</string>
-    <string name="camera_simulator_hint">Running on simulator or device without camera.\nUse the button in the bottom right to scan from photo library.</string>
-    <string name="scan_message">QR code scanning requires platform-specific camera APIs.\n\nThis feature will be implemented using expect/actual declarations:\n• Android: CameraX\n• iOS: AVFoundation\n• Desktop: Webcam libraries</string>
-    <string name="scan_from_file">Scan from file</string>
-    <string name="scan_qr_detected">QR Code detected: %1$s</string>
+    <string name="scan_title">Kamerayla tarama</string>
+    <string name="camera_starting">Kamera başlatılıyor…</string>
+    <string name="camera_not_available">Kamera kullanılamıyor</string>
+    <string name="camera_simulator_hint">Simülatörde veya kamerası olmayan bir cihazda çalışıyor.\nFotoğraf kitaplığından taramak için sağ alttaki düğmeyi kullanın.</string>
+    <string name="scan_message">QR kodu taramak için platforma özgü kamera API leri gerekir.\n\nBu özellik expect/actual bildirimleriyle geliştirilecek:\n• Android: CameraX\n• iOS: AVFoundation\n• Masaüstü: web kamerası kitaplıkları</string>
+    <string name="scan_from_file">Dosyadan tara</string>
+    <string name="scan_qr_detected">QR kodu algılandı: %1$s</string>
 
     <!-- Common Actions -->
-    <string name="action_dismiss">Dismiss</string>
-    <string name="action_ok">OK</string>
-    <string name="action_undo">Undo</string>
+    <string name="action_dismiss">Kapat</string>
+    <string name="action_ok">Tamam</string>
+    <string name="action_undo">Geri al</string>
+    <string name="action_open">Aç</string>
 
     <!-- Delete Feedback -->
-    <string name="detail_deleted">QR code deleted</string>
+    <string name="detail_deleted">QR kodu silindi</string>
+
+    <!-- WiFi Credentials Card -->
+    <string name="wifi_credentials_title">Wi-Fi bilgileri</string>
+    <string name="wifi_credentials_ssid">Ağ adı (SSID)</string>
+    <string name="wifi_credentials_password">Parola</string>
+    <string name="wifi_credentials_show">Göster</string>
+    <string name="wifi_credentials_hide">Gizle</string>
+    <string name="wifi_credentials_close">Kapat</string>
 
     <!-- Content Descriptions (for accessibility) -->
-    <string name="cd_qr_preview">QR Code Preview</string>
-    <string name="cd_qr_code">QR Code</string>
-    <string name="cd_qr_fullscreen">QR Code Fullscreen</string>
-    <string name="cd_back">Back</string>
-    <string name="cd_more">More</string>
-    <string name="cd_menu">Menu</string>
-    <string name="cd_share">Share</string>
-    <string name="cd_save">Save</string>
-    <string name="cd_delete">Delete</string>
-    <string name="cd_create">Create</string>
-    <string name="cd_launch">Launch</string>
-    <string name="cd_settings">Settings</string>
-    <string name="cd_warning">Warning</string>
-    <string name="cd_selected">Selected</string>
-    <string name="cd_show_password">Show password</string>
-    <string name="cd_hide_password">Hide password</string>
-    <string name="cd_torch_on">Torch on</string>
-    <string name="cd_torch_off">Torch off</string>
-    <string name="cd_camera">Camera</string>
+    <string name="cd_qr_preview">QR kodu önizlemesi</string>
+    <string name="cd_qr_code">QR kodu</string>
+    <string name="cd_qr_fullscreen">Tam ekran QR kodu</string>
+    <string name="cd_back">Geri</string>
+    <string name="cd_more">Daha fazla</string>
+    <string name="cd_menu">Menü</string>
+    <string name="cd_share">Paylaş</string>
+    <string name="cd_save">Kaydet</string>
+    <string name="cd_delete">Sil</string>
+    <string name="cd_test_action">İşlemi dene</string>
+    <string name="cd_wifi">Wi-Fi</string>
+    <string name="cd_create">Oluştur</string>
+    <string name="cd_launch">Aç</string>
+    <string name="cd_settings">Ayarlar</string>
+    <string name="cd_warning">Uyarı</string>
+    <string name="cd_selected">Seçildi</string>
+    <string name="cd_show_password">Parolayı göster</string>
+    <string name="cd_hide_password">Parolayı gizle</string>
+    <string name="cd_torch_on">Fener açık</string>
+    <string name="cd_torch_off">Fener kapalı</string>
+    <string name="cd_camera">Kamera</string>
 
     <!-- Settings Screen -->
-    <string name="settings_title">Settings</string>
-    <string name="settings_section_appearance">Appearance</string>
-    <string name="settings_section_about">About</string>
-    <string name="settings_version">Version</string>
-    <string name="settings_build">Build</string>
-    <string name="settings_theme_system">System Default</string>
-    <string name="settings_theme_system_desc">Follow system theme</string>
-    <string name="settings_theme_light">Light</string>
-    <string name="settings_theme_light_desc">Always use light theme</string>
-    <string name="settings_theme_dark">Dark</string>
-    <string name="settings_theme_dark_desc">Always use dark theme</string>
+    <string name="settings_title">Ayarlar</string>
+    <string name="settings_section_appearance">Görünüm</string>
+    <string name="settings_section_about">Hakkında</string>
+    <string name="settings_version">Sürüm</string>
+    <string name="settings_build">Derleme</string>
+    <string name="settings_theme_system">Sistem varsayılanı</string>
+    <string name="settings_theme_system_desc">Sistem temasını izle</string>
+    <string name="settings_theme_light">Açık</string>
+    <string name="settings_theme_light_desc">Her zaman açık temayı kullan</string>
+    <string name="settings_theme_dark">Koyu</string>
+    <string name="settings_theme_dark_desc">Her zaman koyu temayı kullan</string>
 
     <!-- URL Warning Dialog -->
-    <string name="url_warning_dangerous">Dangerous Link Detected</string>
-    <string name="url_warning_suspicious">Suspicious Link</string>
-    <string name="url_warning_check">URL Check</string>
-    <string name="url_warning_url_prefix">URL:</string>
-    <string name="url_warning_warnings_label">Warnings:</string>
-    <string name="url_warning_dangerous_desc">Opening this link is not recommended as it may harm your device or compromise your data.</string>
-    <string name="url_warning_suspicious_desc">This link has some characteristics that may indicate a security risk. Proceed with caution.</string>
-    <string name="url_warning_safe_desc">No issues were detected with this URL.</string>
-    <string name="url_warning_open_anyway">Open Anyway</string>
-    <string name="url_warning_close">Close</string>
-    <string name="url_warning_cancel">Cancel</string>
+    <string name="url_warning_dangerous">Tehlikeli bağlantı algılandı</string>
+    <string name="url_warning_suspicious">Şüpheli bağlantı</string>
+    <string name="url_warning_check">Adres denetimi</string>
+    <string name="url_warning_url_prefix">Adres:</string>
+    <string name="url_warning_warnings_label">Uyarılar:</string>
+    <string name="url_warning_dangerous_desc">Bu bağlantıyı açmanız önerilmez; cihazınıza zarar verebilir veya verilerinizi tehlikeye atabilir.</string>
+    <string name="url_warning_suspicious_desc">Bu bağlantı güvenlik riski gösterebilecek özellikler taşıyor. Dikkatli ilerleyin.</string>
+    <string name="url_warning_safe_desc">Bu adreste bir sorun bulunamadı.</string>
+    <string name="url_warning_open_anyway">Yine de aç</string>
+    <string name="url_warning_close">Kapat</string>
+    <string name="url_warning_cancel">İptal</string>
 
     <!-- Field Modifiers -->
-    <string name="label_optional_suffix"> (Optional)</string>
+    <string name="label_optional_suffix"> (isteğe bağlı)</string>
 </resources>

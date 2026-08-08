@@ -1,341 +1,372 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Hindi (हिन्दी) - Translation stub -->
-<!-- TODO: Translate all strings to Hindi (हिन्दी) -->
 <resources>
     <!-- App Title -->
     <string name="app_name">QR Everywhere</string>
 
     <!-- Bottom Navigation -->
-    <string name="nav_history">History</string>
-    <string name="nav_scan">Scan</string>
-    <string name="nav_create">Create</string>
+    <string name="nav_history">इतिहास</string>
+    <string name="nav_scan">स्कैन</string>
+    <string name="nav_create">बनाएँ</string>
 
     <!-- Screen Titles -->
-    <string name="title_history">QR History</string>
-    <string name="title_scan">Scan or import QR</string>
-    <string name="title_create">Create QR Code</string>
-    <string name="title_detail">QR Details</string>
-    <string name="title_create_text">Create Text QR</string>
-    <string name="title_create_email">Create Email QR</string>
+    <string name="title_history">QR इतिहास</string>
+    <string name="title_scan">QR स्कैन या आयात करें</string>
+    <string name="title_create">QR कोड बनाएँ</string>
+    <string name="title_detail">QR विवरण</string>
+    <string name="title_create_text">टेक्स्ट QR बनाएँ</string>
+    <string name="title_create_email">ईमेल QR बनाएँ</string>
 
     <!-- Create QR Type Titles -->
-    <string name="title_text_qr">Text QR Code</string>
-    <string name="title_url_qr">Web URL QR Code</string>
-    <string name="title_phone_qr">Phone QR Code</string>
-    <string name="title_sms_qr">SMS QR Code</string>
-    <string name="title_email_qr">Email QR Code</string>
-    <string name="title_contact_qr">Contact QR Code</string>
-    <string name="title_wifi_qr">WiFi QR Code</string>
-    <string name="title_calendar_qr">Calendar Event QR Code</string>
-    <string name="title_location_qr">Location QR Code</string>
-    <string name="title_mecard_qr">MeCard QR Code</string>
-    <string name="title_appstore_qr">App Store Link QR Code</string>
-    <string name="title_payment_qr">Payment QR Code</string>
-    <string name="title_crypto_qr">Cryptocurrency QR Code</string>
+    <string name="title_text_qr">टेक्स्ट QR कोड</string>
+    <string name="title_url_qr">वेब लिंक QR कोड</string>
+    <string name="title_phone_qr">फ़ोन QR कोड</string>
+    <string name="title_sms_qr">SMS QR कोड</string>
+    <string name="title_email_qr">ईमेल QR कोड</string>
+    <string name="title_contact_qr">संपर्क QR कोड</string>
+    <string name="title_wifi_qr">Wi-Fi QR कोड</string>
+    <string name="title_calendar_qr">कैलेंडर QR कोड</string>
+    <string name="title_location_qr">स्थान QR कोड</string>
+    <string name="title_mecard_qr">MeCard QR कोड</string>
+    <string name="title_appstore_qr">ऐप स्टोर लिंक QR कोड</string>
+    <string name="title_payment_qr">भुगतान QR कोड</string>
+    <string name="title_crypto_qr">क्रिप्टो QR कोड</string>
 
     <!-- Create QR Type Descriptions -->
-    <string name="desc_text_qr">Create a QR code with any text content</string>
-    <string name="desc_url_qr">Create a QR code with website URL</string>
-    <string name="desc_phone_qr">Create a QR code with phone number</string>
-    <string name="desc_sms_qr">Create a QR code with SMS message</string>
-    <string name="desc_email_qr">Create a QR code with email information</string>
-    <string name="desc_contact_qr">Create a QR code with contact information (vCard)</string>
-    <string name="desc_wifi_qr">Create a QR code with WiFi network credentials</string>
-    <string name="desc_calendar_qr">Create a QR code with calendar event (VEVENT)</string>
-    <string name="desc_location_qr">Create a QR code with GPS coordinates</string>
-    <string name="desc_mecard_qr">Create a QR code with contact (simple format)</string>
-    <string name="desc_appstore_qr">Create a QR code linking to an app store</string>
-    <string name="desc_payment_qr">Create a QR code for PayPal or Venmo payments</string>
-    <string name="desc_crypto_qr">Create a QR code for Bitcoin or Ethereum wallet</string>
+    <string name="desc_text_qr">किसी भी टेक्स्ट से QR कोड बनाएँ</string>
+    <string name="desc_url_qr">वेबसाइट के पते से QR कोड बनाएँ</string>
+    <string name="desc_phone_qr">फ़ोन नंबर से QR कोड बनाएँ</string>
+    <string name="desc_sms_qr">SMS संदेश से QR कोड बनाएँ</string>
+    <string name="desc_email_qr">ईमेल जानकारी से QR कोड बनाएँ</string>
+    <string name="desc_contact_qr">संपर्क जानकारी से QR कोड बनाएँ (vCard)</string>
+    <string name="desc_wifi_qr">Wi-Fi लॉगिन जानकारी से QR कोड बनाएँ</string>
+    <string name="desc_calendar_qr">कैलेंडर इवेंट से QR कोड बनाएँ (VEVENT)</string>
+    <string name="desc_location_qr">GPS निर्देशांक से QR कोड बनाएँ</string>
+    <string name="desc_mecard_qr">संपर्क से QR कोड बनाएँ (सरल फ़ॉर्मैट)</string>
+    <string name="desc_appstore_qr">ऐप स्टोर के लिंक वाला QR कोड बनाएँ</string>
+    <string name="desc_payment_qr">PayPal या Venmo भुगतान के लिए QR कोड बनाएँ</string>
+    <string name="desc_crypto_qr">Bitcoin या Ethereum वॉलेट के लिए QR कोड बनाएँ</string>
 
     <!-- Create Screen -->
-    <string name="create_title">Create QR Code</string>
-    <string name="create_subtitle">Choose what type of QR code to create</string>
-    <string name="create_quick_text">Quick Text QR</string>
-    <string name="create_enter_text">Enter text</string>
-    <string name="create_placeholder">Type anything...</string>
-    <string name="create_button">Generate QR Code</string>
-    <string name="create_button_creating">Creating...</string>
-    <string name="create_more_types">More QR Types</string>
-    <string name="create_coming_soon">Coming soon:</string>
-    <string name="create_types_list">• Email QR Code\n• Phone QR Code\n• WiFi QR Code\n• vCard QR Code\n• URL QR Code</string>
+    <string name="create_title">QR कोड बनाएँ</string>
+    <string name="create_subtitle">चुनें कि किस प्रकार का QR कोड बनाना है</string>
+    <string name="create_quick_text">झटपट टेक्स्ट QR</string>
+    <string name="create_enter_text">टेक्स्ट डालें</string>
+    <string name="create_placeholder">कुछ भी लिखें…</string>
+    <string name="create_button">QR कोड बनाएँ</string>
+    <string name="create_button_creating">बन रहा है…</string>
+    <string name="create_more_types">और QR प्रकार</string>
+    <string name="create_coming_soon">जल्द आ रहा है:</string>
+    <string name="create_types_list">• ईमेल QR कोड\n• फ़ोन QR कोड\n• Wi-Fi QR कोड\n• vCard QR कोड\n• वेब लिंक QR कोड</string>
 
     <!-- Create Text QR Screen -->
-    <string name="create_url_title">Create URL QR Code</string>
-    <string name="create_phone_title">Create Phone QR Code</string>
-    <string name="create_sms_title">Create SMS QR Code</string>
-    <string name="create_text_title">Create Text QR Code</string>
-    <string name="create_email_title">Create Email QR Code</string>
+    <string name="create_url_title">वेब लिंक QR कोड बनाएँ</string>
+    <string name="create_phone_title">फ़ोन QR कोड बनाएँ</string>
+    <string name="create_sms_title">SMS QR कोड बनाएँ</string>
+    <string name="create_text_title">टेक्स्ट QR कोड बनाएँ</string>
+    <string name="create_email_title">ईमेल QR कोड बनाएँ</string>
 
     <!-- Field Labels -->
-    <string name="label_website_url">Website URL</string>
-    <string name="label_phone_number">Phone Number</string>
-    <string name="label_text_content">Text Content</string>
-    <string name="label_email_address">Email Address</string>
-    <string name="label_email_subject">Subject (Optional)</string>
-    <string name="label_email_message">Message (Optional)</string>
-    <string name="label_enter_url">Enter website URL</string>
-    <string name="label_enter_phone">Enter phone number</string>
-    <string name="label_enter_phone_message">Enter phone number and message</string>
-    <string name="label_first_name">First Name</string>
-    <string name="label_last_name">Last Name</string>
-    <string name="label_organization">Organization (Optional)</string>
-    <string name="label_job_title">Job Title (Optional)</string>
-    <string name="label_website">Website (Optional)</string>
-    <string name="label_network_name">Network Name (SSID)</string>
-    <string name="label_password">Password</string>
-    <string name="label_security_type">Security Type</string>
-    <string name="label_hidden_network">Hidden Network</string>
+    <string name="label_website_url">वेबसाइट का पता</string>
+    <string name="label_phone_number">फ़ोन नंबर</string>
+    <string name="label_text_content">टेक्स्ट सामग्री</string>
+    <string name="label_email_address">ईमेल पता</string>
+    <string name="label_email_subject">विषय (वैकल्पिक)</string>
+    <string name="label_email_message">संदेश (वैकल्पिक)</string>
+    <string name="label_enter_url">वेबसाइट का पता डालें</string>
+    <string name="label_enter_phone">फ़ोन नंबर डालें</string>
+    <string name="label_enter_phone_message">फ़ोन नंबर और संदेश डालें</string>
+    <!-- vCard Field Labels -->
+    <string name="label_first_name">पहला नाम</string>
+    <string name="label_last_name">अंतिम नाम</string>
+    <string name="label_organization">कंपनी (वैकल्पिक)</string>
+    <string name="label_job_title">पद (वैकल्पिक)</string>
+    <string name="label_website">वेबसाइट (वैकल्पिक)</string>
+    <!-- WiFi Field Labels -->
+    <string name="label_network_name">नेटवर्क का नाम (SSID)</string>
+    <string name="label_password">पासवर्ड</string>
+    <string name="label_security_type">सुरक्षा का प्रकार</string>
+    <string name="label_hidden_network">छिपा हुआ नेटवर्क</string>
 
     <!-- Field Placeholders -->
     <string name="placeholder_url">https://example.com</string>
-    <string name="placeholder_phone">+1234567890</string>
-    <string name="placeholder_sms">+1234567890:Hello</string>
-    <string name="placeholder_text">Enter any text</string>
+    <string name="placeholder_phone">+919876543210</string>
+    <string name="placeholder_sms">+919876543210:नमस्ते</string>
+    <string name="placeholder_text">कोई भी टेक्स्ट डालें</string>
     <string name="placeholder_email">example@email.com</string>
-    <string name="placeholder_email_subject">Email subject</string>
-    <string name="placeholder_email_message">Email message</string>
-    <string name="placeholder_first_name">John</string>
-    <string name="placeholder_last_name">Doe</string>
-    <string name="placeholder_organization">Company Inc.</string>
-    <string name="placeholder_job_title">Software Engineer</string>
+    <string name="placeholder_email_subject">ईमेल का विषय</string>
+    <string name="placeholder_email_message">ईमेल का संदेश</string>
+    <!-- vCard Placeholders -->
+    <string name="placeholder_first_name">राहुल</string>
+    <string name="placeholder_last_name">शर्मा</string>
+    <string name="placeholder_organization">उदाहरण प्रा. लि.</string>
+    <string name="placeholder_job_title">सॉफ़्टवेयर इंजीनियर</string>
     <string name="placeholder_website">https://example.com</string>
+    <!-- WiFi Placeholders -->
     <string name="placeholder_network_name">MyWiFi</string>
     <string name="placeholder_password">password123</string>
+    <!-- WiFi Security Types -->
     <string name="security_wpa">WPA/WPA2</string>
     <string name="security_wep">WEP</string>
-    <string name="security_open">Open (No password)</string>
+    <string name="security_open">खुला (पासवर्ड नहीं)</string>
 
     <!-- Calendar Event Labels -->
-    <string name="label_event_title">Event Title</string>
-    <string name="label_all_day_event">All Day Event</string>
-    <string name="label_start_date">Start Date</string>
-    <string name="label_start_time">Start Time</string>
-    <string name="label_end_date">End Date</string>
-    <string name="label_end_time">End Time</string>
-    <string name="label_event_location">Location (Optional)</string>
-    <string name="label_event_description">Description (Optional)</string>
-    <string name="placeholder_event_title">Team Meeting</string>
+    <string name="label_event_title">इवेंट का शीर्षक</string>
+    <string name="label_all_day_event">पूरे दिन का इवेंट</string>
+    <string name="label_start_date">शुरू होने की तारीख</string>
+    <string name="label_start_time">शुरू होने का समय</string>
+    <string name="label_end_date">खत्म होने की तारीख</string>
+    <string name="label_end_time">खत्म होने का समय</string>
+    <string name="label_event_location">स्थान (वैकल्पिक)</string>
+    <string name="label_event_description">विवरण (वैकल्पिक)</string>
+    <!-- Calendar Event Placeholders -->
+    <string name="placeholder_event_title">टीम मीटिंग</string>
     <string name="placeholder_date">YYYY-MM-DD</string>
     <string name="placeholder_time">HH:MM</string>
-    <string name="placeholder_event_location">Conference Room A</string>
-    <string name="placeholder_event_description">Discuss project updates</string>
-    <string name="hint_date_format">Format: YYYY-MM-DD (e.g., 2024-03-15)</string>
-    <string name="hint_time_format">Format: HH:MM (e.g., 14:30)</string>
+    <string name="placeholder_event_location">बैठक कक्ष A</string>
+    <string name="placeholder_event_description">प्रोजेक्ट की प्रगति पर चर्चा</string>
+    <!-- Calendar Event Hints -->
+    <string name="hint_date_format">फ़ॉर्मैट: YYYY-MM-DD (जैसे 2024-03-15)</string>
+    <string name="hint_time_format">फ़ॉर्मैट: HH:MM (जैसे 14:30)</string>
 
     <!-- Location Labels -->
-    <string name="label_latitude">Latitude</string>
-    <string name="label_longitude">Longitude</string>
-    <string name="label_location_label">Label (Optional)</string>
+    <string name="label_latitude">अक्षांश</string>
+    <string name="label_longitude">देशांतर</string>
+    <string name="label_location_label">लेबल (वैकल्पिक)</string>
+    <!-- Location Placeholders -->
     <string name="placeholder_latitude">37.7749</string>
     <string name="placeholder_longitude">-122.4194</string>
-    <string name="placeholder_location_label">San Francisco</string>
-    <string name="hint_latitude">Range: -90 to 90</string>
-    <string name="hint_longitude">Range: -180 to 180</string>
+    <string name="placeholder_location_label">सैन फ़्रांसिस्को</string>
+    <!-- Location Hints -->
+    <string name="hint_latitude">सीमा: -90 से 90</string>
+    <string name="hint_longitude">सीमा: -180 से 180</string>
 
     <!-- MeCard Labels -->
-    <string name="label_mecard_name">Full Name</string>
-    <string name="label_mecard_address">Address (Optional)</string>
-    <string name="label_mecard_note">Note (Optional)</string>
-    <string name="placeholder_mecard_name">John Doe</string>
-    <string name="placeholder_mecard_address">123 Main St, City</string>
-    <string name="placeholder_mecard_note">Met at conference</string>
+    <string name="label_mecard_name">पूरा नाम</string>
+    <string name="label_mecard_address">पता (वैकल्पिक)</string>
+    <string name="label_mecard_note">टिप्पणी (वैकल्पिक)</string>
+    <!-- MeCard Placeholders -->
+    <string name="placeholder_mecard_name">राहुल शर्मा</string>
+    <string name="placeholder_mecard_address">123 मुख्य मार्ग, शहर</string>
+    <string name="placeholder_mecard_note">सम्मेलन में मुलाकात हुई</string>
 
     <!-- App Store Labels -->
-    <string name="label_select_store">Select App Store</string>
-    <string name="label_apple_app_id">Apple App ID</string>
-    <string name="label_google_package_name">Google Play Package Name</string>
+    <string name="label_select_store">ऐप स्टोर चुनें</string>
+    <string name="label_apple_app_id">Apple ऐप ID</string>
+    <string name="label_google_package_name">Google Play पैकेज नाम</string>
     <string name="store_apple">Apple App Store</string>
     <string name="store_google">Google Play Store</string>
+    <!-- App Store Placeholders -->
     <string name="placeholder_apple_app_id">1234567890</string>
     <string name="placeholder_google_package_name">com.example.app</string>
-    <string name="hint_apple_app_id">Numeric ID from App Store URL</string>
-    <string name="hint_google_package_name">Package name from Play Store URL</string>
+    <!-- App Store Hints -->
+    <string name="hint_apple_app_id">App Store के लिंक में मौजूद संख्यात्मक ID</string>
+    <string name="hint_google_package_name">Play Store के लिंक में मौजूद पैकेज नाम</string>
 
     <!-- Payment Labels -->
-    <string name="label_select_provider">Select Payment Provider</string>
-    <string name="label_payment_username">Username</string>
-    <string name="label_payment_amount">Amount (Optional)</string>
-    <string name="label_payment_note">Note (Optional)</string>
+    <string name="label_select_provider">भुगतान सेवा चुनें</string>
+    <string name="label_payment_username">उपयोगकर्ता नाम</string>
+    <string name="label_payment_amount">राशि (वैकल्पिक)</string>
+    <string name="label_payment_note">टिप्पणी (वैकल्पिक)</string>
     <string name="provider_paypal">PayPal</string>
     <string name="provider_venmo">Venmo</string>
+    <!-- Payment Placeholders -->
     <string name="placeholder_paypal_username">yourpaypalusername</string>
     <string name="placeholder_venmo_username">yourvenmo</string>
     <string name="placeholder_payment_amount">10.00</string>
-    <string name="placeholder_payment_note">Payment for lunch</string>
+    <string name="placeholder_payment_note">दोपहर के भोजन का भुगतान</string>
 
     <!-- Crypto Labels -->
-    <string name="label_select_crypto">Select Cryptocurrency</string>
-    <string name="label_crypto_address">Wallet Address</string>
-    <string name="label_crypto_amount_btc">Amount in BTC (Optional)</string>
-    <string name="label_crypto_amount_eth">Amount in ETH (Optional)</string>
-    <string name="label_crypto_label">Label (Optional)</string>
-    <string name="label_crypto_message">Message (Optional)</string>
+    <string name="label_select_crypto">क्रिप्टोकरेंसी चुनें</string>
+    <string name="label_crypto_address">वॉलेट का पता</string>
+    <string name="label_crypto_amount_btc">BTC में राशि (वैकल्पिक)</string>
+    <string name="label_crypto_amount_eth">ETH में राशि (वैकल्पिक)</string>
+    <string name="label_crypto_label">लेबल (वैकल्पिक)</string>
+    <string name="label_crypto_message">संदेश (वैकल्पिक)</string>
     <string name="crypto_bitcoin">Bitcoin (BTC)</string>
     <string name="crypto_ethereum">Ethereum (ETH)</string>
-    <string name="placeholder_bitcoin_address">bc1q...</string>
-    <string name="placeholder_ethereum_address">0x...</string>
+    <!-- Crypto Placeholders -->
+    <string name="placeholder_bitcoin_address">bc1q…</string>
+    <string name="placeholder_ethereum_address">0x…</string>
     <string name="placeholder_crypto_amount">0.001</string>
-    <string name="placeholder_crypto_label">Donation</string>
-    <string name="placeholder_crypto_message">Thank you for your support</string>
+    <string name="placeholder_crypto_label">दान</string>
+    <string name="placeholder_crypto_message">आपके सहयोग के लिए धन्यवाद</string>
 
     <!-- Field Hints -->
-    <string name="hint_url">The URL should start with http:// or https://</string>
-    <string name="hint_phone">Include country code (e.g., +1 for USA)</string>
-    <string name="hint_sms">Format: phone:message</string>
+    <string name="hint_url">पता http:// या https:// से शुरू होना चाहिए</string>
+    <string name="hint_phone">देश का कोड शामिल करें (जैसे भारत के लिए +91)</string>
+    <string name="hint_sms">फ़ॉर्मैट: फ़ोन:संदेश</string>
 
     <!-- Instructions -->
-    <string name="instruction_url">Enter the Website URL to encode in the QR code</string>
-    <string name="instruction_phone">Enter the Phone Number to encode in the QR code</string>
-    <string name="instruction_sms">Enter the Phone Number to encode in the QR code</string>
-    <string name="instruction_text">Enter the Text Content to encode in the QR code</string>
-    <string name="instruction_email">Enter email details to encode in the QR code</string>
-    <string name="instruction_contact">Enter contact information to encode in the QR code</string>
-    <string name="instruction_wifi">Enter WiFi network details to encode in the QR code</string>
-    <string name="instruction_calendar">Enter event details to encode in the QR code</string>
-    <string name="instruction_location">Enter coordinates to encode in the QR code</string>
-    <string name="instruction_mecard">Enter contact details to encode in the QR code</string>
-    <string name="instruction_app_store">Enter app store details to create a download link</string>
-    <string name="instruction_payment">Enter payment details to create a payment request</string>
-    <string name="instruction_crypto">Enter wallet details to create a cryptocurrency address QR</string>
+    <string name="instruction_url">QR कोड में डालने के लिए वेबसाइट का पता लिखें</string>
+    <string name="instruction_phone">QR कोड में डालने के लिए फ़ोन नंबर लिखें</string>
+    <string name="instruction_sms">QR कोड में डालने के लिए फ़ोन नंबर लिखें</string>
+    <string name="instruction_text">QR कोड में डालने के लिए टेक्स्ट लिखें</string>
+    <string name="instruction_email">QR कोड के लिए ईमेल की जानकारी लिखें</string>
+    <string name="instruction_contact">QR कोड के लिए संपर्क की जानकारी लिखें</string>
+    <string name="instruction_wifi">QR कोड के लिए Wi-Fi की जानकारी लिखें</string>
+    <string name="instruction_calendar">QR कोड के लिए इवेंट की जानकारी लिखें</string>
+    <string name="instruction_location">QR कोड के लिए निर्देशांक लिखें</string>
+    <string name="instruction_mecard">QR कोड के लिए संपर्क की जानकारी लिखें</string>
+    <string name="instruction_app_store">डाउनलोड लिंक बनाने के लिए ऐप स्टोर की जानकारी लिखें</string>
+    <string name="instruction_payment">भुगतान अनुरोध बनाने के लिए भुगतान की जानकारी लिखें</string>
+    <string name="instruction_crypto">पते का QR बनाने के लिए वॉलेट की जानकारी लिखें</string>
 
     <!-- Validation Errors -->
-    <string name="error_invalid_url">Please enter a valid URL</string>
-    <string name="error_invalid_url_format">Invalid URL format</string>
-    <string name="error_invalid_phone">Please enter a valid phone number</string>
-    <string name="error_empty_phone">Please enter a phone number</string>
-    <string name="error_invalid_phone_format">Invalid phone number</string>
-    <string name="error_empty_text">Please enter some text</string>
-    <string name="error_empty_email">Please enter an email address</string>
-    <string name="error_invalid_email">Invalid email address</string>
-    <string name="error_create_qr">Error creating QR code: %1$s</string>
-    <string name="error_empty_name">Please enter at least a first or last name</string>
-    <string name="error_empty_ssid">Please enter the network name (SSID)</string>
-    <string name="error_empty_event_title">Please enter an event title</string>
-    <string name="error_invalid_date">Please enter a valid date (YYYY-MM-DD)</string>
-    <string name="error_empty_latitude">Please enter a latitude</string>
-    <string name="error_empty_longitude">Please enter a longitude</string>
-    <string name="error_invalid_latitude">Latitude must be between -90 and 90</string>
-    <string name="error_invalid_longitude">Longitude must be between -180 and 180</string>
-    <string name="error_empty_mecard_name">Please enter a name</string>
-    <string name="error_empty_app_id">Please enter an app ID or package name</string>
-    <string name="error_empty_payment_username">Please enter a username</string>
-    <string name="error_empty_crypto_address">Please enter a wallet address</string>
+    <string name="error_invalid_url">कृपया एक मान्य पता डालें</string>
+    <string name="error_invalid_url_format">पते का फ़ॉर्मैट अमान्य है</string>
+    <string name="error_invalid_phone">कृपया एक मान्य फ़ोन नंबर डालें</string>
+    <string name="error_empty_phone">कृपया फ़ोन नंबर डालें</string>
+    <string name="error_invalid_phone_format">फ़ोन नंबर अमान्य है</string>
+    <string name="error_empty_text">कृपया कुछ टेक्स्ट डालें</string>
+    <string name="error_empty_email">कृपया ईमेल पता डालें</string>
+    <string name="error_invalid_email">ईमेल पता अमान्य है</string>
+    <string name="error_create_qr">QR कोड बनाने में त्रुटि: %1$s</string>
+    <string name="error_empty_name">कृपया कम से कम पहला या अंतिम नाम डालें</string>
+    <string name="error_empty_ssid">कृपया नेटवर्क का नाम (SSID) डालें</string>
+    <!-- Calendar Event Errors -->
+    <string name="error_empty_event_title">कृपया इवेंट का शीर्षक डालें</string>
+    <string name="error_invalid_date">कृपया मान्य तारीख डालें (YYYY-MM-DD)</string>
+    <!-- Location Errors -->
+    <string name="error_empty_latitude">कृपया अक्षांश डालें</string>
+    <string name="error_empty_longitude">कृपया देशांतर डालें</string>
+    <string name="error_invalid_latitude">अक्षांश -90 और 90 के बीच होना चाहिए</string>
+    <string name="error_invalid_longitude">देशांतर -180 और 180 के बीच होना चाहिए</string>
+    <!-- MeCard Errors -->
+    <string name="error_empty_mecard_name">कृपया नाम डालें</string>
+    <!-- App Store Errors -->
+    <string name="error_empty_app_id">कृपया ऐप ID या पैकेज नाम डालें</string>
+    <!-- Payment Errors -->
+    <string name="error_empty_payment_username">कृपया उपयोगकर्ता नाम डालें</string>
+    <!-- Crypto Errors -->
+    <string name="error_empty_crypto_address">कृपया वॉलेट का पता डालें</string>
 
     <!-- History Screen -->
-    <string name="history_empty">No QR codes yet.\nScan or create one to get started!</string>
-    <string name="history_type">Type: %1$s</string>
-    <string name="history_type_scanned">Scanned</string>
-    <string name="history_type_created">Created</string>
-    <string name="history_type_from_file">From File</string>
-    <string name="history_type_unknown">Unknown</string>
-    <string name="history_search">Search</string>
-    <string name="history_search_placeholder">Search QR codes...</string>
-    <string name="history_clear_search">Clear search</string>
-    <string name="history_no_results">No QR codes match your search</string>
+    <string name="history_empty">अभी तक कोई QR कोड नहीं है।\nशुरू करने के लिए कोई स्कैन करें या बनाएँ!</string>
+    <string name="history_type">प्रकार: %1$s</string>
+    <string name="history_type_scanned">स्कैन किया</string>
+    <string name="history_type_created">बनाया</string>
+    <string name="history_type_from_file">फ़ाइल से</string>
+    <string name="history_type_unknown">अज्ञात</string>
+    <string name="history_search">खोजें</string>
+    <string name="history_search_placeholder">QR कोड खोजें…</string>
+    <string name="history_clear_search">खोज हटाएँ</string>
+    <string name="history_no_results">आपकी खोज से कोई QR कोड मेल नहीं खाता</string>
 
     <!-- Detail Screen -->
-    <string name="detail_content">Content</string>
-    <string name="detail_details">Details</string>
-    <string name="detail_type">Type</string>
-    <string name="detail_created">Created</string>
-    <string name="detail_share">Share</string>
-    <string name="detail_save">Save Image</string>
-    <string name="detail_save_to_file">Save to file</string>
-    <string name="detail_delete">Delete</string>
-    <string name="detail_no_item">No QR code selected</string>
-    <string name="detail_error">Error: %1$s</string>
-    <string name="detail_loading">Loading QR code...</string>
-    <string name="detail_no_data">No QR code data available</string>
-    <string name="detail_tap_fullscreen">Tap to view fullscreen</string>
-    <string name="detail_copy_clipboard">Copy to clipboard</string>
-    <string name="detail_origin_flag">Origin flag: %1$d</string>
+    <string name="detail_content">सामग्री</string>
+    <string name="detail_details">विवरण</string>
+    <string name="detail_type">प्रकार</string>
+    <string name="detail_created">बनाया गया</string>
+    <string name="detail_share">साझा करें</string>
+    <string name="detail_save">छवि सहेजें</string>
+    <string name="detail_save_to_file">फ़ाइल में सहेजें</string>
+    <string name="detail_delete">हटाएँ</string>
+    <string name="detail_test_action">जाँचें</string>
+    <string name="detail_no_item">कोई QR कोड नहीं चुना गया</string>
+    <string name="detail_error">त्रुटि: %1$s</string>
+    <string name="detail_loading">QR कोड लोड हो रहा है…</string>
+    <string name="detail_no_data">QR कोड का कोई डेटा नहीं है</string>
+    <string name="detail_tap_fullscreen">पूर्ण स्क्रीन में देखने के लिए टैप करें</string>
+    <string name="detail_copy_clipboard">क्लिपबोर्ड पर कॉपी करें</string>
+    <string name="detail_origin_flag">स्रोत फ़्लैग: %1$d</string>
 
     <!-- Feedback Messages -->
-    <string name="feedback_copied">Copied to clipboard</string>
-    <string name="feedback_saved">QR code saved to file</string>
-    <string name="feedback_save_error">Error saving QR code</string>
-    <string name="feedback_share_not_implemented">Share not yet implemented for cross-platform</string>
-    <string name="feedback_no_qr_in_image">No QR code found in image</string>
-    <string name="feedback_launch_error">Could not open content: %1$s</string>
-    <string name="feedback_no_app_found">No app found to handle this content</string>
+    <string name="feedback_copied">क्लिपबोर्ड पर कॉपी हो गया</string>
+    <string name="feedback_saved">QR कोड फ़ाइल में सहेजा गया</string>
+    <string name="feedback_save_error">QR कोड सहेजने में त्रुटि</string>
+    <string name="feedback_share_not_implemented">साझा करना अभी सभी प्लैटफ़ॉर्म पर उपलब्ध नहीं है</string>
+    <string name="feedback_no_qr_in_image">छवि में कोई QR कोड नहीं मिला</string>
+    <string name="feedback_launch_error">सामग्री नहीं खुल सकी: %1$s</string>
+    <string name="feedback_no_app_found">इस सामग्री को खोलने वाला कोई ऐप नहीं मिला</string>
+    <string name="feedback_no_handler_available">इस क्रिया के लिए कोई ऐप उपलब्ध नहीं है</string>
 
     <!-- Permission Messages -->
-    <string name="permission_storage_required">Storage permission is required to save QR code</string>
-    <string name="permission_grant_settings">Please grant storage permission in app settings</string>
-    <string name="permission_camera_required">Camera Permission Required</string>
-    <string name="permission_camera_denied">Camera permission is required to scan QR codes. Please grant the permission to continue.</string>
-    <string name="permission_camera_permanently_denied">Camera permission has been permanently denied. Please enable it in your device settings to scan QR codes.</string>
-    <string name="permission_open_settings">Open Settings</string>
-    <string name="permission_grant">Grant Permission</string>
-    <string name="permission_ready_to_scan">Ready to Scan</string>
-    <string name="permission_start_scanning_hint">Tap the button below to start scanning QR codes with your camera.</string>
-    <string name="permission_start_scanning">Start Scanning</string>
+    <string name="permission_storage_required">QR कोड सहेजने के लिए स्टोरेज की अनुमति चाहिए</string>
+    <string name="permission_grant_settings">कृपया ऐप सेटिंग में स्टोरेज की अनुमति दें</string>
+    <string name="permission_camera_required">कैमरे की अनुमति चाहिए</string>
+    <string name="permission_camera_denied">QR कोड स्कैन करने के लिए कैमरे की अनुमति चाहिए। जारी रखने के लिए अनुमति दें।</string>
+    <string name="permission_camera_permanently_denied">कैमरे की अनुमति स्थायी रूप से अस्वीकार कर दी गई है। QR कोड स्कैन करने के लिए इसे डिवाइस सेटिंग में चालू करें।</string>
+    <string name="permission_open_settings">सेटिंग खोलें</string>
+    <string name="permission_grant">अनुमति दें</string>
+    <string name="permission_ready_to_scan">स्कैन के लिए तैयार</string>
+    <string name="permission_start_scanning_hint">कैमरे से QR कोड स्कैन करने के लिए नीचे दिए बटन पर टैप करें।</string>
+    <string name="permission_start_scanning">स्कैन शुरू करें</string>
 
     <!-- Scan Screen -->
-    <string name="scan_title">Camera Scanning</string>
-    <string name="camera_starting">Starting camera...</string>
-    <string name="camera_not_available">Camera not available</string>
-    <string name="camera_simulator_hint">Running on simulator or device without camera.\nUse the button in the bottom right to scan from photo library.</string>
-    <string name="scan_message">QR code scanning requires platform-specific camera APIs.\n\nThis feature will be implemented using expect/actual declarations:\n• Android: CameraX\n• iOS: AVFoundation\n• Desktop: Webcam libraries</string>
-    <string name="scan_from_file">Scan from file</string>
-    <string name="scan_qr_detected">QR Code detected: %1$s</string>
+    <string name="scan_title">कैमरा स्कैन</string>
+    <string name="camera_starting">कैमरा शुरू हो रहा है…</string>
+    <string name="camera_not_available">कैमरा उपलब्ध नहीं है</string>
+    <string name="camera_simulator_hint">सिम्युलेटर या बिना कैमरे वाले डिवाइस पर चल रहा है।\nफ़ोटो लाइब्रेरी से स्कैन करने के लिए नीचे दाईं ओर के बटन का उपयोग करें।</string>
+    <string name="scan_message">QR कोड स्कैन करने के लिए हर प्लैटफ़ॉर्म के अपने कैमरा API चाहिए।\n\nयह सुविधा expect/actual घोषणाओं से बनाई जाएगी:\n• Android: CameraX\n• iOS: AVFoundation\n• डेस्कटॉप: वेबकैम लाइब्रेरी</string>
+    <string name="scan_from_file">फ़ाइल से स्कैन करें</string>
+    <string name="scan_qr_detected">QR कोड मिला: %1$s</string>
 
     <!-- Common Actions -->
-    <string name="action_dismiss">Dismiss</string>
-    <string name="action_ok">OK</string>
-    <string name="action_undo">Undo</string>
+    <string name="action_dismiss">बंद करें</string>
+    <string name="action_ok">ठीक है</string>
+    <string name="action_undo">पहले जैसा करें</string>
+    <string name="action_open">खोलें</string>
 
     <!-- Delete Feedback -->
-    <string name="detail_deleted">QR code deleted</string>
+    <string name="detail_deleted">QR कोड हटाया गया</string>
+
+    <!-- WiFi Credentials Card -->
+    <string name="wifi_credentials_title">Wi-Fi की जानकारी</string>
+    <string name="wifi_credentials_ssid">नेटवर्क का नाम (SSID)</string>
+    <string name="wifi_credentials_password">पासवर्ड</string>
+    <string name="wifi_credentials_show">दिखाएँ</string>
+    <string name="wifi_credentials_hide">छिपाएँ</string>
+    <string name="wifi_credentials_close">बंद करें</string>
 
     <!-- Content Descriptions (for accessibility) -->
-    <string name="cd_qr_preview">QR Code Preview</string>
-    <string name="cd_qr_code">QR Code</string>
-    <string name="cd_qr_fullscreen">QR Code Fullscreen</string>
-    <string name="cd_back">Back</string>
-    <string name="cd_more">More</string>
-    <string name="cd_menu">Menu</string>
-    <string name="cd_share">Share</string>
-    <string name="cd_save">Save</string>
-    <string name="cd_delete">Delete</string>
-    <string name="cd_create">Create</string>
-    <string name="cd_launch">Launch</string>
-    <string name="cd_settings">Settings</string>
-    <string name="cd_warning">Warning</string>
-    <string name="cd_selected">Selected</string>
-    <string name="cd_show_password">Show password</string>
-    <string name="cd_hide_password">Hide password</string>
-    <string name="cd_torch_on">Torch on</string>
-    <string name="cd_torch_off">Torch off</string>
-    <string name="cd_camera">Camera</string>
+    <string name="cd_qr_preview">QR कोड की झलक</string>
+    <string name="cd_qr_code">QR कोड</string>
+    <string name="cd_qr_fullscreen">पूर्ण स्क्रीन QR कोड</string>
+    <string name="cd_back">वापस</string>
+    <string name="cd_more">और</string>
+    <string name="cd_menu">मेन्यू</string>
+    <string name="cd_share">साझा करें</string>
+    <string name="cd_save">सहेजें</string>
+    <string name="cd_delete">हटाएँ</string>
+    <string name="cd_test_action">क्रिया जाँचें</string>
+    <string name="cd_wifi">Wi-Fi</string>
+    <string name="cd_create">बनाएँ</string>
+    <string name="cd_launch">खोलें</string>
+    <string name="cd_settings">सेटिंग</string>
+    <string name="cd_warning">चेतावनी</string>
+    <string name="cd_selected">चुना गया</string>
+    <string name="cd_show_password">पासवर्ड दिखाएँ</string>
+    <string name="cd_hide_password">पासवर्ड छिपाएँ</string>
+    <string name="cd_torch_on">टॉर्च चालू</string>
+    <string name="cd_torch_off">टॉर्च बंद</string>
+    <string name="cd_camera">कैमरा</string>
 
     <!-- Settings Screen -->
-    <string name="settings_title">Settings</string>
-    <string name="settings_section_appearance">Appearance</string>
-    <string name="settings_section_about">About</string>
-    <string name="settings_version">Version</string>
-    <string name="settings_build">Build</string>
-    <string name="settings_theme_system">System Default</string>
-    <string name="settings_theme_system_desc">Follow system theme</string>
-    <string name="settings_theme_light">Light</string>
-    <string name="settings_theme_light_desc">Always use light theme</string>
-    <string name="settings_theme_dark">Dark</string>
-    <string name="settings_theme_dark_desc">Always use dark theme</string>
+    <string name="settings_title">सेटिंग</string>
+    <string name="settings_section_appearance">रूप</string>
+    <string name="settings_section_about">ऐप के बारे में</string>
+    <string name="settings_version">वर्शन</string>
+    <string name="settings_build">बिल्ड</string>
+    <string name="settings_theme_system">सिस्टम डिफ़ॉल्ट</string>
+    <string name="settings_theme_system_desc">सिस्टम थीम के अनुसार</string>
+    <string name="settings_theme_light">हल्का</string>
+    <string name="settings_theme_light_desc">हमेशा हल्की थीम इस्तेमाल करें</string>
+    <string name="settings_theme_dark">गहरा</string>
+    <string name="settings_theme_dark_desc">हमेशा गहरी थीम इस्तेमाल करें</string>
 
     <!-- URL Warning Dialog -->
-    <string name="url_warning_dangerous">Dangerous Link Detected</string>
-    <string name="url_warning_suspicious">Suspicious Link</string>
-    <string name="url_warning_check">URL Check</string>
-    <string name="url_warning_url_prefix">URL:</string>
-    <string name="url_warning_warnings_label">Warnings:</string>
-    <string name="url_warning_dangerous_desc">Opening this link is not recommended as it may harm your device or compromise your data.</string>
-    <string name="url_warning_suspicious_desc">This link has some characteristics that may indicate a security risk. Proceed with caution.</string>
-    <string name="url_warning_safe_desc">No issues were detected with this URL.</string>
-    <string name="url_warning_open_anyway">Open Anyway</string>
-    <string name="url_warning_close">Close</string>
-    <string name="url_warning_cancel">Cancel</string>
+    <string name="url_warning_dangerous">खतरनाक लिंक मिला</string>
+    <string name="url_warning_suspicious">संदिग्ध लिंक</string>
+    <string name="url_warning_check">लिंक की जाँच</string>
+    <string name="url_warning_url_prefix">लिंक:</string>
+    <string name="url_warning_warnings_label">चेतावनियाँ:</string>
+    <string name="url_warning_dangerous_desc">इस लिंक को खोलना ठीक नहीं है, यह आपके डिवाइस को नुकसान पहुँचा सकता है या आपका डेटा जोखिम में डाल सकता है।</string>
+    <string name="url_warning_suspicious_desc">इस लिंक में कुछ ऐसी बातें हैं जो सुरक्षा जोखिम का संकेत दे सकती हैं। सावधानी से आगे बढ़ें।</string>
+    <string name="url_warning_safe_desc">इस लिंक में कोई समस्या नहीं मिली।</string>
+    <string name="url_warning_open_anyway">फिर भी खोलें</string>
+    <string name="url_warning_close">बंद करें</string>
+    <string name="url_warning_cancel">रद्द करें</string>
 
     <!-- Field Modifiers -->
-    <string name="label_optional_suffix"> (Optional)</string>
+    <string name="label_optional_suffix"> (वैकल्पिक)</string>
 </resources>
