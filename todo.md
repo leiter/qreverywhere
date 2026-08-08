@@ -234,10 +234,13 @@ crashed the app on launch the same way. Worth a manual check of the widget deep-
 is separately dead on iOS — `iOSApp.swift` posts `NSNotification`s that nothing observes, and
 `MainViewController()` never forwards `initialRoute`/`initialDetailId`.
 
-## 5. Copyright name
+## 5. Copyright name — confirmed
 
-`iosApp/fastlane/metadata/copyright.txt` currently reads `2026 Marco Leiter`. It must match the
-legal entity name on the developer account.
+`iosApp/fastlane/metadata/copyright.txt` reads `2026 Marco Leiter`, and App Store Connect holds the
+same value. Confirmed as the right holder, so nothing to change.
+
+The leading year is the expected format (year + holder), and fastlane precheck has a rule for it.
+Bump the year when a release crosses into a new one.
 
 ---
 
