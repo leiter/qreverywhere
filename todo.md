@@ -187,17 +187,21 @@ carries the mapping.
 Screenshots have **not** been re-captured since. Run the sweep and upload:
 `iosApp/scripts/capture_screenshots.sh` then `fastlane deliver_metadata`.
 
-## 4b. RTL layout does not mirror — blocks ar-SA and he
+## 4b. RTL — fixed
 
-Arabic and Hebrew are now **translated**, but the layout still runs left-to-right, so those two
-storefronts would get Arabic and Hebrew text in a mirrored-wrong chrome. That is worse than
-English, so `ar-SA` and `he` remain out of the capture script's `LOCALES` list.
+Arabic and Hebrew now mirror correctly and are back in the capture script's `LOCALES`.
 
-Evidence: launching with `-AppleLanguages "(ar)"` produced a screenshot pixel-identical to the
-English one — no mirroring at all. Worth re-testing now that real Arabic strings exist, in case
-layout direction was only ever derived from the resolved resource locale.
+**The cause was not layout code.** `iosApp/Info.plist` declared no `CFBundleLocalizations` and the
+project has no `.lproj` directories, so iOS treated the app as English-only and kept the interface
+layout direction left-to-right whatever `-AppleLanguages` said. Compose resolves its own resources
+separately — which is why text localised correctly while nothing mirrored.
 
-Fix `LayoutDirection` first, then add both back to `LOCALES` and capture.
+Declaring all 22 languages in `CFBundleLocalizations` fixed it with no Compose changes: verified on
+the simulator under `ar` and `he`, with the settings icon, QR thumbnails, search field and tab
+order all flipped. It also makes the App Store product page list the languages instead of just
+English.
+
+Keep `CFBundleLocalizations` in sync when adding a locale to `composeResources/values-*`.
 
 ## 4c. Fixed along the way — initial-route navigation crash
 

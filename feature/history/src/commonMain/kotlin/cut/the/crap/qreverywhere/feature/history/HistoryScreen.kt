@@ -41,6 +41,7 @@ import cut.the.crap.qreverywhere.core.base.generated.resources.history_search_pl
 import cut.the.crap.qreverywhere.core.base.generated.resources.history_type
 import cut.the.crap.qreverywhere.shared.domain.model.QrItem
 import cut.the.crap.qreverywhere.shared.utils.toImagePainter
+import cut.the.crap.qreverywhere.shared.utils.localizedLabel
 import org.jetbrains.compose.resources.stringResource
 
 @Composable
@@ -166,7 +167,7 @@ private fun QrHistoryCard(
                     maxLines = 2
                 )
                 Text(
-                    text = stringResource(Res.string.history_type, qrItem.acquireType.name),
+                    text = stringResource(Res.string.history_type, qrItem.acquireType.localizedLabel()),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(top = 4.dp)

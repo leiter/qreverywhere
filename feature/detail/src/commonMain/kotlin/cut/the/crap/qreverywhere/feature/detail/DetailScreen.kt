@@ -66,6 +66,7 @@ import cut.the.crap.qreverywhere.shared.presentation.components.WifiCredentialsC
 import cut.the.crap.qreverywhere.shared.presentation.state.State
 import cut.the.crap.qreverywhere.shared.utils.toImagePainter
 import cut.the.crap.qreverywhere.shared.utils.toReadableString
+import cut.the.crap.qreverywhere.shared.utils.localizedLabel
 import kotlinx.coroutines.launch
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -293,7 +294,7 @@ fun DetailScreen(
                                         color = MaterialTheme.colorScheme.primary
                                     )
 
-                                    DetailRow(stringResource(Res.string.detail_type), qrItem.acquireType.name)
+                                    DetailRow(stringResource(Res.string.detail_type), qrItem.acquireType.localizedLabel())
                                     DetailRow(stringResource(Res.string.detail_created), qrItem.timestamp.toReadableString())
                                 }
                             }

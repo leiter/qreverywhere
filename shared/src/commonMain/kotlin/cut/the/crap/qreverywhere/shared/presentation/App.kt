@@ -40,6 +40,7 @@ import cut.the.crap.qreverywhere.shared.presentation.navigation.Screen
 import cut.the.crap.qreverywhere.shared.utils.DeviceOrientation
 import cut.the.crap.qreverywhere.shared.utils.getDeviceOrientation
 import cut.the.crap.qreverywhere.shared.utils.toReadableString
+import cut.the.crap.qreverywhere.shared.utils.localizedLabel
 import org.jetbrains.compose.resources.stringResource
 import cut.the.crap.qreverywhere.core.base.generated.resources.Res
 import cut.the.crap.qreverywhere.core.base.generated.resources.*
@@ -142,7 +143,7 @@ fun App(
             currentRoute == Screen.History.route -> stringResource(Res.string.title_history)
             currentRoute == Screen.Create.route -> stringResource(Res.string.title_create)
             currentRoute.startsWith("detail/") -> stringResource(Res.string.title_detail)
-            currentRoute.startsWith("fullscreen/") -> detailItem?.let { "${it.acquireType.name} • ${it.timestamp.toReadableString()}" } ?: stringResource(Res.string.title_detail)
+            currentRoute.startsWith("fullscreen/") -> detailItem?.let { "${it.acquireType.localizedLabel()} • ${it.timestamp.toReadableString()}" } ?: stringResource(Res.string.title_detail)
             currentRoute == Screen.CreateEmail.route -> stringResource(Res.string.title_email_qr)
             currentRoute == Screen.CreateVcard.route -> stringResource(Res.string.title_contact_qr)
             currentRoute == Screen.CreateWiFi.route -> stringResource(Res.string.title_wifi_qr)

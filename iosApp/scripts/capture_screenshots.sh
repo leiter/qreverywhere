@@ -25,17 +25,16 @@ APP_PATH="$DERIVED/Build/Products/Debug-iphonesimulator/QR Everywhere.app"
 # the seeding coroutine and the navigation animation.
 SETTLE="${SETTLE:-6}"
 
-# Storefront locale -> value for -AppleLanguages.
-#
-# Right-to-left storefronts (ar-SA, he) are deliberately absent: the app does
-# not mirror its layout yet, so a capture would ship a left-to-right UI to RTL
-# users. See todo.md before adding them back.
+# Storefront locale -> value for -AppleLanguages. All 22 storefronts, including
+# the right-to-left ones: the app mirrors correctly now that Info.plist declares
+# CFBundleLocalizations.
 LOCALES=(
   "en-US:en"      "de-DE:de"      "es-ES:es"      "fr-FR:fr"
   "it:it"         "nl-NL:nl"      "pl:pl"         "pt-BR:pt"
   "ru:ru"         "tr:tr"         "uk:uk"         "id:id"
   "ms:ms"         "vi:vi"         "th:th"         "hi:hi"
   "ja:ja"         "ko:ko"         "zh-Hans:zh-Hans" "zh-Hant:zh-Hant"
+  "ar-SA:ar"      "he:he"
 )
 
 # Device slot -> simulator name. Both slots are required for a universal app.
