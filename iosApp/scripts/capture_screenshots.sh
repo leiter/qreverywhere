@@ -33,7 +33,10 @@ LOCALES=(
   "it:it"         "nl-NL:nl"      "pl:pl"         "pt-BR:pt"
   "ru:ru"         "tr:tr"         "uk:uk"         "id:id"
   "ms:ms"         "vi:vi"         "th:th"         "hi:hi"
-  "ja:ja"         "ko:ko"         "zh-Hans:zh-Hans" "zh-Hant:zh-Hant"
+  "ja:ja"         "ko:ko"
+  # Chinese needs a region: Compose matches values-zh-rCN / -rTW on
+  # RegionQualifier, and a script-only "zh-Hans" resolves to no region at all.
+  "zh-Hans:zh-Hans-CN"            "zh-Hant:zh-Hant-TW"
   "ar-SA:ar"      "he:he"
 )
 

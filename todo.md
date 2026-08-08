@@ -184,8 +184,28 @@ Note the storefront/resource mapping is not one-to-one: App Store `pt-BR` → `v
 `zh-Hans` → `values-zh-rCN`, `zh-Hant` → `values-zh-rTW`. The script's `LOCALES` list already
 carries the mapping.
 
-Screenshots have **not** been re-captured since. Run the sweep and upload:
-`iosApp/scripts/capture_screenshots.sh` then `fastlane deliver_metadata`.
+### Chinese needs a region qualifier
+
+Compose has no script qualifier. It generates only
+`LanguageQualifier("zh") + RegionQualifier("CN"|"TW")`, so a locale carrying a script but no
+region — `zh-Hans`, `zh-Hant`, bare `zh` — matched nothing and **fell back to English**. The first
+full sweep caught it: the Chinese screenshots came out byte-identical to en-US.
+
+Covered by adding region-less `values-zh` (Simplified, the sensible default) plus `values-zh-rHK`
+and `values-zh-rMO` (Traditional, as those regions use it). Verified on the simulator that
+`zh-Hans`, `zh-Hant`, `zh-Hans-SG`, `zh-Hant-HK`, `zh-Hans-CN` and `zh-Hant-TW` all now render
+Chinese. The capture script passes `zh-Hans-CN` / `zh-Hant-TW`.
+
+One imperfection left: a **region-less `zh-Hant`** falls to `values-zh` and so shows Simplified
+text. Chinese rather than English, but the wrong script. Add a script-aware mapping if Compose
+ever gains a script qualifier.
+
+### Screenshots — captured
+
+All 220 are committed: 22 locales × 2 device slots × 5 screens, verified as 110 × 1320×2868 and
+110 × 2064×2752, with all 22 locales rendering distinctly (no silent English fallbacks).
+
+Upload with `cd iosApp && fastlane deliver_metadata`. **Not uploaded yet.**
 
 ## 4b. RTL — fixed
 
