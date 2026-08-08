@@ -210,9 +210,40 @@ and `values-zh-rMO` (Traditional, as those regions use it). Verified on the simu
 `zh-Hans`, `zh-Hant`, `zh-Hans-SG`, `zh-Hant-HK`, `zh-Hans-CN` and `zh-Hant-TW` all now render
 Chinese. The capture script passes `zh-Hans-CN` / `zh-Hant-TW`.
 
-One imperfection left: a **region-less `zh-Hant`** falls to `values-zh` and so shows Simplified
-text. Chinese rather than English, but the wrong script. Add a script-aware mapping if Compose
-ever gains a script qualifier.
+### Known limitation: Traditional Chinese outside TW/HK/MO gets Simplified
+
+Accepted, not fixable at Compose Multiplatform 1.10.3. Decided deliberately — don't "fix" it by
+flipping the default without reading this.
+
+Measured on the simulator:
+
+| device language | region | renders |
+|---|---|---|
+| `zh-Hant` | TW, HK, MO | Traditional ✅ |
+| `zh-Hant` | any other region (DE, US, …) | **Simplified** ⚠️ |
+| `zh-Hant` | none | **Simplified** ⚠️ |
+| `zh-Hans` | any | Simplified ✅ |
+
+So it affects every Traditional speaker whose device region is not TW/HK/MO, not merely the
+region-less case an earlier note described.
+
+**Why folders cannot fix it.** Compose matches on `Locale.current.language` + `.region` only —
+`Qualifier.kt` defines `LanguageQualifier` and `RegionQualifier`, and nothing else. The script
+never reaches the runtime value: `zh-Hant-HK` matched `values-zh-rHK`, which is only possible if
+the language qualifier is plain `zh`. No folder name can match a script that is never present.
+The override hook (`LocalComposeEnvironment`, `ResourceEnvironment`'s constructor) is `internal`,
+so the API route is closed too.
+
+**Why not flip `values-zh` to Traditional.** It just mirrors the bug onto Simplified speakers
+living abroad, and that group is larger. Region alone cannot separate them — the US has both.
+Enumerating regions fails for the same reason. Keeping `values-zh` Simplified minimises harm.
+
+Affected users see Simplified Chinese, not English, so the app stays usable.
+
+**Revisit when** Compose Multiplatform exposes a script qualifier or makes `ComposeEnvironment`
+public. The other option, rewriting the `AppleLanguages` region subtag to `TW` in `NSUserDefaults`
+at launch, was rejected: it persistently overrides the app's language resolution, and the capture
+harness cannot test it honestly because launch arguments outrank the persistent domain.
 
 ### Screenshots — captured
 
