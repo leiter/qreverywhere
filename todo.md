@@ -153,12 +153,26 @@ Version is **1.0**, build **10**, set consistently in both places:
 - `iosApp/iosApp/Info.plist`: `CFBundleShortVersionString = 1.0`, `CFBundleVersion = 10`
 - `iosApp.xcodeproj/project.pbxproj`: `MARKETING_VERSION = 1.0`, `CURRENT_PROJECT_VERSION = 10`
 
-**Still unresolved (low priority):** because the target uses `INFOPLIST_FILE`, only the Info.plist
-values actually ship — the build settings are inert. They now agree, so nothing is wrong today, but
-fastlane's `increment_build_number` edits the pbxproj and therefore still has **no effect on the
-shipped binary**. Bump `CFBundleVersion` in the Info.plist by hand for future builds, or make the
-plist reference `$(MARKETING_VERSION)` / `$(CURRENT_PROJECT_VERSION)` so the build settings become
-the single source of truth and fastlane starts working.
+**Resolved.** The build settings are now the single source of truth: `Info.plist` carries
+`$(MARKETING_VERSION)` and `$(CURRENT_PROJECT_VERSION)` instead of literals, and
+`VERSIONING_SYSTEM = "apple-generic"` is set on both configurations.
+
+The plist change alone was not enough. `increment_build_number` and `increment_version_number`
+drive **agvtool**, which rewrites those keys straight back into literals — the log even says "Also
+setting CFBundleVersion key (assuming it exists)". Every bump would have quietly restored the two
+sources of truth. So the lanes now edit the pbxproj directly through the `xcodeproj` gem
+(`bump_build_number` / `bump_marketing_version` at the top of the Fastfile); no lane calls agvtool
+any more.
+
+Verified end to end by building and reading the **product's** Info.plist, not the source:
+
+- `fastlane bump_build` → pbxproj 11 → 12, plist stays `$(CURRENT_PROJECT_VERSION)`, built app
+  reports `CFBundleVersion = 12`
+- `fastlane bump_version type:patch|minor|patch` → 1.0 → 1.0.1 → 1.1.0 → 2.0.0; an unknown type
+  fails loudly
+- Restored to the shipped `1.0` / `11` afterwards, reconfirmed against a fresh build
+
+Next release just runs a bump lane; nothing needs editing by hand.
 
 ## 4a. Translations — done for all 22 storefronts
 

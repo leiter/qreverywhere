@@ -79,7 +79,7 @@ Increment build number
 [bundle exec] fastlane ios bump_version
 ```
 
-Increment version number
+Increment the marketing version (major|minor|patch, default patch)
 
 ### ios submit_review
 

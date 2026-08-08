@@ -18,6 +18,47 @@ def api_key
   )
 end
 
+# Version numbers live in the build settings, and Info.plist derives them via
+# $(MARKETING_VERSION) / $(CURRENT_PROJECT_VERSION).
+#
+# These edit the pbxproj directly instead of using increment_build_number and
+# increment_version_number. Those drive agvtool, which rewrites the Info.plist
+# keys back into literals ("Also setting CFBundleVersion key") and so recreates
+# the two-sources-of-truth problem on every bump.
+XCODEPROJ = "iosApp.xcodeproj"
+
+def each_build_setting(key)
+  require 'xcodeproj'
+  project = Xcodeproj::Project.open(File.expand_path(XCODEPROJ, __dir__ + "/.."))
+  value = nil
+  project.targets.each do |target|
+    target.build_configurations.each do |config|
+      value = yield(config.build_settings[key])
+      config.build_settings[key] = value
+    end
+  end
+  project.save
+  value
+end
+
+def bump_build_number
+  each_build_setting("CURRENT_PROJECT_VERSION") { |current| (current.to_i + 1).to_s }
+end
+
+def bump_marketing_version(type)
+  each_build_setting("MARKETING_VERSION") do |current|
+    major, minor, patch = current.to_s.split(".").map(&:to_i)
+    minor ||= 0
+    patch ||= 0
+    case type
+    when "major" then "#{major + 1}.0.0"
+    when "minor" then "#{major}.#{minor + 1}.0"
+    when "patch" then "#{major}.#{minor}.#{patch + 1}"
+    else UI.user_error!("bump_version type must be major, minor or patch (got #{type.inspect})")
+    end
+  end
+end
+
 platform :ios do
   desc "Run tests"
   lane :test do
@@ -30,9 +71,7 @@ platform :ios do
   desc "Build iOS app for simulator"
   lane :build_simulator do
     # Increment build number
-    increment_build_number(
-      xcodeproj: "iosApp.xcodeproj"
-    )
+    bump_build_number
 
     build_app(
       scheme: "iosApp",
@@ -45,9 +84,7 @@ platform :ios do
   desc "Build iOS app for device (requires signing)"
   lane :build do
     # Increment build number
-    increment_build_number(
-      xcodeproj: "iosApp.xcodeproj"
-    )
+    bump_build_number
 
     # Download provisioning profile
     sigh(
@@ -66,9 +103,7 @@ platform :ios do
   desc "Submit a new Beta Build to TestFlight"
   lane :beta do
     # Increment build number
-    increment_build_number(
-      xcodeproj: "iosApp.xcodeproj"
-    )
+    bump_build_number
 
     # Download provisioning profile
     sigh(
@@ -94,9 +129,7 @@ platform :ios do
   desc "Deploy a new version to the App Store"
   lane :deploy do
     # Increment build number
-    increment_build_number(
-      xcodeproj: "iosApp.xcodeproj"
-    )
+    bump_build_number
 
     # Download provisioning profile
     sigh(
@@ -136,16 +169,13 @@ platform :ios do
 
   desc "Increment build number"
   lane :bump_build do
-    increment_build_number(
-      xcodeproj: "iosApp.xcodeproj"
-    )
+    bump_build_number
   end
 
-  desc "Increment version number"
+  desc "Increment the marketing version (major|minor|patch, default patch)"
   lane :bump_version do |options|
-    increment_version_number(
-      bump_type: options[:type] || "patch"
-    )
+    version = bump_marketing_version(options[:type] || "patch")
+    UI.success("Marketing version is now #{version}")
   end
 
   desc "Submit the current App Store version for review (uploads nothing)"
