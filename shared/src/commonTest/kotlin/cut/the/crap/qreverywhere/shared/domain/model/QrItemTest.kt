@@ -1,6 +1,6 @@
 package cut.the.crap.qreverywhere.shared.domain.model
 
-import kotlinx.datetime.Clock
+import kotlin.time.Clock
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
