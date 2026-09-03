@@ -3,8 +3,10 @@ package cut.the.crap.qreverywhere.shared.presentation.navigation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import cut.the.crap.qreverywhere.feature.create.CreateAppStoreLinkScreen
 import cut.the.crap.qreverywhere.feature.create.CreateCalendarScreen
 import cut.the.crap.qreverywhere.feature.create.CreateCryptoScreen
@@ -130,8 +132,19 @@ fun AppNavHost(
             )
         }
 
-        composable(Screen.CreateText.route) { backStackEntry ->
-            val qrType = backStackEntry.destination.route?.substringAfterLast("/") ?: "text"
+        composable(
+            Screen.CreateText.route,
+            arguments = listOf(
+                navArgument("qrType") {
+                    type = NavType.StringType
+                    defaultValue = "text"
+                }
+            )
+        ) { backStackEntry ->
+            // Read the filled-in path argument, not destination.route - the latter is the
+            // uninterpolated pattern ("create/text/{qrType}"), so substringAfterLast("/")
+            // yielded the literal "{qrType}" and collapsed url/phone/sms into plain text.
+            val qrType = backStackEntry.arguments?.getString("qrType") ?: "text"
             CreateTextScreen(
                 qrType = qrType,
                 viewModel = createViewModel,

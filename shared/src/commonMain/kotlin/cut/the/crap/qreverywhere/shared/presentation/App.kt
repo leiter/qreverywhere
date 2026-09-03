@@ -35,6 +35,7 @@ import cut.the.crap.qreverywhere.feature.detail.DetailViewModel
 import cut.the.crap.qreverywhere.feature.history.HistoryViewModel
 import cut.the.crap.qreverywhere.shared.domain.usecase.ThemePreference
 import cut.the.crap.qreverywhere.shared.domain.usecase.UserPreferences
+import cut.the.crap.qreverywhere.shared.presentation.modifier.dismissKeyboardOnTap
 import cut.the.crap.qreverywhere.shared.presentation.navigation.AppNavHost
 import cut.the.crap.qreverywhere.shared.presentation.navigation.Screen
 import cut.the.crap.qreverywhere.shared.utils.DeviceOrientation
@@ -155,7 +156,7 @@ fun App(
             currentRoute == Screen.CreateCrypto.route -> stringResource(Res.string.title_crypto_qr)
             currentRoute == Screen.Settings.route -> stringResource(Res.string.settings_title)
             currentRoute.startsWith("create/text/") -> {
-                val qrType = navBackStackEntry?.destination?.route?.substringAfterLast("/") ?: "text"
+                val qrType = navBackStackEntry?.arguments?.getString("qrType") ?: "text"
                 when (qrType) {
                     "text" -> stringResource(Res.string.title_text_qr)
                     "url" -> stringResource(Res.string.title_url_qr)
@@ -294,6 +295,7 @@ fun App(
             userPreferences = userPreferences,
             modifier = Modifier
                 .fillMaxSize()
+                .dismissKeyboardOnTap()
                 .padding(adjustedPadding),
             onShareText = onShareText,
             onCopyToClipboard = onCopyToClipboard,
