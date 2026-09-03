@@ -53,8 +53,8 @@ android {
 
     buildTypes {
         getByName("debug") {
-            isMinifyEnabled = true // Enable R8 for code shrinking/obfuscation
-            isShrinkResources = true
+//            isMinifyEnabled = true // Enable R8 for code shrinking/obfuscation
+//            isShrinkResources = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
         getByName("release") {
@@ -75,11 +75,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
     }
-
-    // REMOVE THIS BLOCK - it's deprecated
-    // kotlinOptions {
-    //     jvmTarget = "21"
-    // }
 
     buildFeatures {
         compose = true
