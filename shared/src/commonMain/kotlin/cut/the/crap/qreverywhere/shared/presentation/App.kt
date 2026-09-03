@@ -1,6 +1,7 @@
 package cut.the.crap.qreverywhere.shared.presentation
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -296,7 +297,12 @@ fun App(
             modifier = Modifier
                 .fillMaxSize()
                 .dismissKeyboardOnTap()
-                .padding(adjustedPadding),
+                .padding(adjustedPadding)
+                // Mark the bottom-bar / system-bar inset as already consumed, so a
+                // screen's imePadding() lifts content only by the part of the keyboard
+                // that actually overlaps the nav host - not the full keyboard height,
+                // which would leave a bottom-bar-sized gap above the keyboard (iOS).
+                .consumeWindowInsets(adjustedPadding),
             onShareText = onShareText,
             onCopyToClipboard = onCopyToClipboard,
             onThemeChanged = onThemeChanged
