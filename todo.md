@@ -298,3 +298,30 @@ cd iosApp && fastlane deliver_metadata   # metadata + screenshots, no binary
 ```
 
 `Deliverfile` already has `submit_for_review(false)`, so nothing is submitted automatically.
+
+---
+
+## CI — activate the build workflow
+
+Outside the App Store scope, but currently unguarded: `ci/build.yml.template` has never been
+installed. There is no `.github/workflows/`, so nothing runs on push.
+
+This is not theoretical. The 1.0.1 TestFlight build failed in `build_app` because `af8521b` used
+the Android `Bundle` API (`arguments?.getString(...)`) in `commonMain`, which does not exist on
+Kotlin/Native. It compiled for Android and broke only on iOS. An active workflow would have caught
+it on push instead of at release time.
+
+- [ ] **Activate the workflow.** Copy `ci/build.yml.template` to `.github/workflows/build.yml`.
+      The `build-ios-framework` job already carries the iOS link steps added in `d999b25` —
+      `linkDebugFrameworkIosArm64` and `linkDebugFrameworkIosSimulatorArm64`. Those are the ones
+      that matter: missing transitive deps and Kotlin/Native ABI mismatches compile clean and fail
+      only at link time. Budget ~4-5 min for that job; the link tasks took 4m23s cold locally.
+
+- [ ] **Fix the stale branch names.** The template still triggers on `migrate_to_kmp`, which no
+      longer exists — the project is on `main`. Appears in both `on.push.branches` and
+      `on.pull_request.branches` at the top of the file. Decide whether `feature/**` is still
+      wanted while editing.
+
+- [ ] **Decide on `ci/release.yml.template` too.** Same situation, not yet reviewed. Known to use
+      the deprecated `actions/create-release@v1` and `actions/upload-release-asset@v1`; replace
+      with `softprops/action-gh-release` or `gh release upload` before activating.
