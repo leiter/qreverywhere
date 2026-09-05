@@ -26,6 +26,7 @@ end
 # keys back into literals ("Also setting CFBundleVersion key") and so recreates
 # the two-sources-of-truth problem on every bump.
 XCODEPROJ = "iosApp.xcodeproj"
+PBXPROJ = "iosApp.xcodeproj/project.pbxproj"
 
 def each_build_setting(key)
   require 'xcodeproj'
@@ -57,6 +58,41 @@ def bump_marketing_version(type)
     else UI.user_error!("bump_version type must be major, minor or patch (got #{type.inspect})")
     end
   end
+end
+
+def current_build_setting(key)
+  require 'xcodeproj'
+  project = Xcodeproj::Project.open(File.expand_path(XCODEPROJ, __dir__ + "/.."))
+  project.targets.each do |target|
+    target.build_configurations.each do |config|
+      value = config.build_settings[key]
+      return value if value
+    end
+  end
+  nil
+end
+
+# Records what was actually shipped: commits the build-number bump the lane made
+# at its start, then tags it.
+#
+# Called only AFTER a successful upload, deliberately. bump_build_number runs
+# first in the lane, so a run that dies in build_app or upload burns a build
+# number without shipping anything (1.0.1 went through builds 12 and 13 that way).
+# Tagging at bump time would leave tags pointing at builds that never existed.
+#
+# Tags are platform-prefixed because iOS and Android version independently -
+# androidApp/build.gradle.kts carries its own versionName/versionCode.
+def tag_release(channel, push: true)
+  version = current_build_setting("MARKETING_VERSION")
+  build = current_build_setting("CURRENT_PROJECT_VERSION")
+  tag = "ios/#{version}+#{build}"
+
+  git_commit(path: [PBXPROJ], message: "iOS #{channel} #{version} (build #{build})")
+  add_git_tag(tag: tag)
+  push_to_git_remote(tags: true) if push
+
+  UI.success("Tagged #{tag}#{push ? ' and pushed' : ' (local only)'}")
+  tag
 end
 
 platform :ios do
@@ -101,7 +137,12 @@ platform :ios do
   end
 
   desc "Submit a new Beta Build to TestFlight"
-  lane :beta do
+  lane :beta do |options|
+    # A tag is only meaningful if the build came from committed source. Without
+    # this, a lane can archive a dirty working tree and then tag a commit that
+    # does not contain what shipped.
+    ensure_git_status_clean
+
     # Increment build number
     bump_build_number
 
@@ -124,10 +165,19 @@ platform :ios do
       api_key: api_key,
       skip_waiting_for_build_processing: true
     )
+
+    # skip_waiting_for_build_processing means this returns before Apple finishes
+    # processing, so the tag marks what was submitted, not what went live.
+    tag_release("beta", push: options.fetch(:push, true))
   end
 
   desc "Deploy a new version to the App Store"
-  lane :deploy do
+  lane :deploy do |options|
+    # A tag is only meaningful if the build came from committed source. Without
+    # this, a lane can archive a dirty working tree and then tag a commit that
+    # does not contain what shipped.
+    ensure_git_status_clean
+
     # Increment build number
     bump_build_number
 
@@ -152,6 +202,8 @@ platform :ios do
       submit_for_review: false,
       automatic_release: false
     )
+
+    tag_release("release", push: options.fetch(:push, true))
   end
 
   desc "Upload metadata and screenshots only (no binary)"
