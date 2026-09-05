@@ -31,6 +31,7 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import kotlinx.coroutines.flow.first
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.savedstate.read
 import cut.the.crap.qreverywhere.feature.create.CreateViewModel
 import cut.the.crap.qreverywhere.feature.detail.DetailViewModel
 import cut.the.crap.qreverywhere.feature.history.HistoryViewModel
@@ -157,7 +158,7 @@ fun App(
             currentRoute == Screen.CreateCrypto.route -> stringResource(Res.string.title_crypto_qr)
             currentRoute == Screen.Settings.route -> stringResource(Res.string.settings_title)
             currentRoute.startsWith("create/text/") -> {
-                val qrType = navBackStackEntry?.arguments?.getString("qrType") ?: "text"
+                val qrType = navBackStackEntry?.arguments?.read { getStringOrNull("qrType") } ?: "text"
                 when (qrType) {
                     "text" -> stringResource(Res.string.title_text_qr)
                     "url" -> stringResource(Res.string.title_url_qr)

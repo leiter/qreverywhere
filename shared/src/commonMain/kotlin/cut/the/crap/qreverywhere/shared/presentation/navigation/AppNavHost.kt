@@ -7,6 +7,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import androidx.savedstate.read
 import cut.the.crap.qreverywhere.feature.create.CreateAppStoreLinkScreen
 import cut.the.crap.qreverywhere.feature.create.CreateCalendarScreen
 import cut.the.crap.qreverywhere.feature.create.CreateCryptoScreen
@@ -144,7 +145,7 @@ fun AppNavHost(
             // Read the filled-in path argument, not destination.route - the latter is the
             // uninterpolated pattern ("create/text/{qrType}"), so substringAfterLast("/")
             // yielded the literal "{qrType}" and collapsed url/phone/sms into plain text.
-            val qrType = backStackEntry.arguments?.getString("qrType") ?: "text"
+            val qrType = backStackEntry.arguments?.read { getStringOrNull("qrType") } ?: "text"
             CreateTextScreen(
                 qrType = qrType,
                 viewModel = createViewModel,
