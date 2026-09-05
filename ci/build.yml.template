@@ -165,11 +165,22 @@ jobs:
         with:
           gradle-version: wrapper
 
-      - name: Build iOS Framework (Arm64)
+      - name: Compile iOS Framework (Arm64)
         run: ./gradlew :shared:compileKotlinIosArm64 --no-daemon
 
-      - name: Build iOS Framework (Simulator Arm64)
+      - name: Compile iOS Framework (Simulator Arm64)
         run: ./gradlew :shared:compileKotlinIosSimulatorArm64 --no-daemon
+
+      # The link steps are the ones that catch what a JVM/Android build cannot.
+      # Missing transitive deps and Kotlin/Native ABI mismatches compile clean and
+      # only fail at link time, so a green Android build says nothing about whether
+      # the iOS framework actually links. Keep these even though they re-run the
+      # compile above - the separate compile steps just localise the failure faster.
+      - name: Link iOS Framework (Arm64)
+        run: ./gradlew :shared:linkDebugFrameworkIosArm64 --no-daemon
+
+      - name: Link iOS Framework (Simulator Arm64)
+        run: ./gradlew :shared:linkDebugFrameworkIosSimulatorArm64 --no-daemon
 
   # Code quality checks
   lint:
