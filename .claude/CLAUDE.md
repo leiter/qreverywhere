@@ -144,6 +144,27 @@ QrEveryWhere/
 <path android:fillColor="#000000" .../>
 ```
 
+### Keyboard Insets on iOS: `consumeWindowInsets` Does Not Reach `imePadding()`
+**Problem:** On iOS (skiko), `Modifier.imePadding()` is a separate legacy implementation
+(`_InsetsPaddingModifier`) that reads a *private* `ModifierLocal` and never sees the node-based
+`Modifier.consumeWindowInsets(...)`. Only Android honours that consumption (CMP-8998). So padding
+the nav host by the bottom bar and then calling `imePadding()` inside a screen stacks both on iOS,
+leaving a 114pt gap (80dp NavigationBar + 34pt safe area) between the content and the keyboard.
+
+**Solution:** Do the arithmetic on raw values in one place - the keyboard and the bottom bar occupy
+the same edge, so inset the nav host by whichever is taller, and use no `imePadding()` in screens:
+
+```kotlin
+// App.kt, inside the Scaffold content lambda
+val imeBottom = WindowInsets.ime.asPaddingValues().calculateBottomPadding()
+val bottomInset = maxOf(innerPadding.calculateBottomPadding(), imeBottom)
+```
+
+Same result Android already computed, so its behaviour is unchanged. Note the corollary: on iOS
+*none* of the skiko `windowInsetsPadding` family (`navigationBarsPadding()`, `systemBarsPadding()`,
+...) respects `consumeWindowInsets`; `Scaffold`'s own inset handling does, because Material3 is
+common code.
+
 ### Multiple ADB Devices
 Use `-d` for physical device, `-e` for emulator:
 ```bash
