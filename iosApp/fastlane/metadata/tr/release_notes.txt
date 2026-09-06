@@ -1,0 +1,6 @@
+• QR Everywhere artık sizin dilinizi konuşuyor: uygulama 22 dile tamamen çevrildi, Arapça ve İbranice için sağdan sola düzenle birlikte.
+• Her oluşturma ekranında yeni Test düğmesi: kodu kaydetmeden veya paylaşmadan önce beklediğiniz işi yapıp yapmadığını kontrol edin.
+• Taranan kodlar artık doğrudan kullanılabiliyor: ayrıntılar ekranından bağlantı açın, numarayı arayın veya e-posta yazın.
+• Klavye artık yazdığınız alanı kapatmıyor ve beklendiği gibi kapanıyor.
+• Web sitesi, telefon ve SMS kodu oluşturma sorunları giderildi.
+• İçerik türleri iç etiketler yerine okunabilir adlarla gösteriliyor.

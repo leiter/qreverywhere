@@ -1,0 +1,6 @@
+• QR Everywhere giờ đã nói ngôn ngữ của bạn: ứng dụng được dịch đầy đủ sang 22 ngôn ngữ, với bố cục phải-sang-trái chuẩn cho tiếng Ả Rập và tiếng Do Thái.
+• Nút Thử mới trên mọi màn hình tạo mã, giúp bạn kiểm tra mã hoạt động đúng ý trước khi lưu hoặc chia sẻ.
+• Mã đã quét giờ dùng được ngay: mở liên kết, gọi số hoặc soạn email ngay từ màn hình chi tiết.
+• Bàn phím không còn che ô bạn đang nhập và đóng lại đúng như mong đợi.
+• Đã sửa lỗi tạo mã trang web, số điện thoại và SMS.
+• Loại nội dung giờ hiển thị tên dễ đọc thay vì nhãn nội bộ.

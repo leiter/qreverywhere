@@ -1,0 +1,6 @@
+• QR Everywhere mówi teraz w Twoim języku: aplikacja jest w pełni przetłumaczona na 22 języki, z poprawnym układem od prawej do lewej dla arabskiego i hebrajskiego.
+• Nowy przycisk Testuj na każdym ekranie tworzenia, aby sprawdzić, czy kod działa zgodnie z oczekiwaniami, zanim go zapiszesz lub udostępnisz.
+• Zeskanowane kody można teraz od razu wykorzystać: otwórz link, zadzwoń pod numer lub napisz e-mail prosto z ekranu szczegółów.
+• Klawiatura nie zasłania już edytowanego pola i zamyka się zgodnie z oczekiwaniami.
+• Naprawiono tworzenie kodów strony internetowej, telefonu i SMS.
+• Typy treści pokazują teraz czytelne nazwy zamiast wewnętrznych etykiet.

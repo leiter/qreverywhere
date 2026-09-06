@@ -1,0 +1,6 @@
+• QR Everywhere kini bertutur dalam bahasa anda: aplikasi diterjemahkan sepenuhnya ke dalam 22 bahasa, dengan susun atur kanan-ke-kiri yang betul untuk bahasa Arab dan Ibrani.
+• Butang Uji baharu pada setiap skrin penciptaan, untuk memastikan kod berfungsi seperti yang anda jangkakan sebelum disimpan atau dikongsi.
+• Kod yang diimbas kini boleh terus digunakan: buka pautan, dail nombor atau tulis e-mel terus dari skrin butiran.
+• Papan kekunci tidak lagi menutupi medan yang sedang anda taip, dan ia ditutup seperti yang dijangka.
+• Pembaikan penciptaan kod laman web, nombor telefon dan SMS.
+• Jenis kandungan kini memaparkan nama yang mudah dibaca, bukan label dalaman.

@@ -1,0 +1,6 @@
+• QR Everywhere spreekt nu jouw taal: de app is volledig vertaald in 22 talen, met een correcte rechts-naar-links-indeling voor Arabisch en Hebreeuws.
+• Nieuwe knop Testen op elk aanmaakscherm, zodat je kunt controleren of een code doet wat je verwacht voordat je hem opslaat of deelt.
+• Gescande codes zijn nu direct bruikbaar: open een link, bel een nummer of stel een e-mail op vanuit het detailscherm.
+• Het toetsenbord bedekt niet langer het veld waarin je typt en sluit zoals verwacht.
+• Het aanmaken van website-, telefoon- en sms-codes is hersteld.
+• Inhoudstypen tonen nu leesbare namen in plaats van interne labels.
