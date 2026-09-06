@@ -43,6 +43,7 @@
         <activity
             android:name=".compose.ComposeMainActivity"
             android:exported="true"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/Theme.QrEveryWhere.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

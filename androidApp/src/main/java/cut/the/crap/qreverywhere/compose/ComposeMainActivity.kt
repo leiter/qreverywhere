@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.platform.LocalContext
 import org.jetbrains.compose.resources.stringResource as kmpStringResource
@@ -32,6 +33,16 @@ class ComposeMainActivity : ComponentActivity() {
     private val initialDetailId = mutableStateOf<Int?>(null)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // Draw behind the system bars on every API level. Android 15+ forces this for
+        // targetSdk 35+ anyway; calling it explicitly makes API <= 34 behave the same,
+        // so the window is never resized for the keyboard and WindowInsets.ime stays the
+        // single source of truth for the keyboard height (App.kt insets the nav host by
+        // it). Together with android:windowSoftInputMode="adjustResize" in the manifest
+        // this also stops the system from panning the whole window on focus - without it
+        // the undeclared adjustUnspecified resolves to adjustPan for a Compose window,
+        // which scrolls the top bar off screen and adds the bottom bar's height back as
+        // a gap above the keyboard.
+        enableEdgeToEdge()
         super.onCreate(savedInstanceState)
 
         // Handle initial intent (shortcuts, widgets)
