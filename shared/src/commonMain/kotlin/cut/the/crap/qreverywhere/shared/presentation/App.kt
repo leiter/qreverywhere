@@ -1,8 +1,11 @@
 package cut.the.crap.qreverywhere.shared.presentation
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
@@ -278,16 +281,21 @@ fun App(
     ) { innerPadding ->
         // Navigation host with proper padding for safe areas
         val layoutDirection = LocalLayoutDirection.current
-        val adjustedPadding = if (shouldHideTopBar) {
-            PaddingValues(
-                top = 0.dp,
-                bottom = innerPadding.calculateBottomPadding(),
-                start = innerPadding.calculateLeftPadding(layoutDirection),
-                end = innerPadding.calculateRightPadding(layoutDirection)
-            )
-        } else {
-            innerPadding
-        }
+
+        // The keyboard and the bottom navigation bar occupy the same edge, so the nav
+        // host is inset by whichever is taller instead of by both. Screens therefore
+        // must NOT add imePadding() of their own - on iOS that would stack, because
+        // Compose Multiplatform's skiko imePadding() reads a private ModifierLocal and
+        // ignores the node-based consumeWindowInsets() below (CMP-8998); only Android
+        // honours it. Doing the arithmetic on raw values keeps both platforms identical.
+        val imeBottom = WindowInsets.ime.asPaddingValues().calculateBottomPadding()
+        val bottomInset = maxOf(innerPadding.calculateBottomPadding(), imeBottom)
+        val adjustedPadding = PaddingValues(
+            top = if (shouldHideTopBar) 0.dp else innerPadding.calculateTopPadding(),
+            bottom = bottomInset,
+            start = innerPadding.calculateLeftPadding(layoutDirection),
+            end = innerPadding.calculateRightPadding(layoutDirection)
+        )
 
         AppNavHost(
             navController = navController,
@@ -299,10 +307,8 @@ fun App(
                 .fillMaxSize()
                 .dismissKeyboardOnTap()
                 .padding(adjustedPadding)
-                // Mark the bottom-bar / system-bar inset as already consumed, so a
-                // screen's imePadding() lifts content only by the part of the keyboard
-                // that actually overlaps the nav host - not the full keyboard height,
-                // which would leave a bottom-bar-sized gap above the keyboard (iOS).
+                // Tell nested Scaffolds their system-bar insets are already applied, so
+                // they don't pad for them a second time.
                 .consumeWindowInsets(adjustedPadding),
             onShareText = onShareText,
             onCopyToClipboard = onCopyToClipboard,
